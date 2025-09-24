@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an NFL coaching data analysis project that collects, processes, and analyzes coaching career data from Pro Football Reference. The system tracks coaching progression through various roles (Head Coach, Coordinators, Position coaches) across NFL and college careers, creating a comprehensive dataset for analyzing coaching career trajectories and performance.
+This is an NFL coaching tree analysis project that models coaching relationships as a genetic tree. The system analyzes how coaching philosophies and play-calling patterns ("genes") propagate through the NFL coaching network. It combines coaching career data from Pro Football Reference with play-by-play data (via nfl_data_py) to understand how coaching strategies evolve and spread through mentor-protege relationships.
 
 ## Architecture
 
@@ -16,6 +16,12 @@ This is an NFL coaching data analysis project that collects, processes, and anal
 5. **Analysis** (`analysis/`): Statistical analysis and modeling (to be implemented)
 
 ### Key Components
+
+- **Coaching Tree Framework** (`scripts/build_coaching_tree.py`)
+  - `Coach` class: Represents individual coaches with complete career timelines
+  - `CoachingTree` class: Manages all coach relationships and builds the network
+  - Creates parent-child relationships between coaches based on team assignments
+  - Distinguishes between offensive/defensive/special teams coaching branches
 
 - **Data Scrapers** (`crawlers/PFR/`)
   - `coach_scraping.py`: Scrapes individual coach career histories, results, and rankings
@@ -31,8 +37,15 @@ This is an NFL coaching data analysis project that collects, processes, and anal
 - **Constants** (`crawlers/utils/data_constants.py`)
   - Contains all team abbreviation mappings, franchise histories, and configuration constants
   - Critical for handling team relocations and name changes throughout NFL history
+  - Defines role classifications and exclusion rules (e.g., interim positions)
 
 ## Common Commands
+
+### Build Coaching Tree
+```bash
+# Build the coaching tree with all relationships
+python scripts/build_coaching_tree.py
+```
 
 ### Data Collection
 ```bash
@@ -67,8 +80,9 @@ python scripts/svd_imputation.py --input data/processed/coaching_data.csv --outp
 ## Dependencies
 
 Required Python packages:
-- pandas
+- pandas (<2.0, for compatibility with nfl_data_py)
 - numpy
+- nfl_data_py (for play-by-play data from 1999 onwards)
 - requests
 - beautifulsoup4
 - lxml
@@ -91,10 +105,25 @@ Required Python packages:
   - `league_opponent_data.csv`: Defensive statistics (opponent performance)
   - `*_normalized.csv`: Z-score normalized versions
 - `Coaching/`: Processed coaching datasets with features and outcomes
+- `coaching_tree/`: Coaching tree relationship data
+  - `coaches.json`: All coaches with complete career timelines
+  - `relationships.csv`: Parent-child relationships between coaches
+  - `team_rosters.json`: Team coaching staffs by year
 
 ## Key Features Tracked
 
-The system tracks comprehensive coaching features including:
+### Coaching Tree Relationships
+- **Parent-child relationships** between coaches based on team assignments
+- **Three relationship types**:
+  - Position coach → Coordinator (931 relationships)
+  - Position coach → Head Coach (2,353 relationships)  
+  - Coordinator → Head Coach (1,552 relationships)
+- **Role classifications**:
+  - Head Coach (HC)
+  - Offensive/Defensive/Special Teams Coordinator (OC/DC/STC)
+  - Position coaches (classified by side of ball)
+
+### Career Data
 - Years of experience at different levels (NFL/College) and roles
 - Previous performance metrics (win percentages, team rankings)
 - Career progression patterns
@@ -103,6 +132,14 @@ The system tracks comprehensive coaching features including:
 
 ## Important Notes
 
+### Coaching Tree Framework
+- The `build_coaching_tree.py` script creates a complete network of coaching relationships
+- Covers 536 coaches across 104 years of NFL history (1922-2025)
+- Generates 4,836 documented relationships between coaches
+- Parent assignments based on start-of-year positions (excludes interim roles)
+- Handles team franchise mappings for accurate historical tracking
+
+### Data Processing
 - The `CoachingDataProcessor` class in `create_data.py` is the core processing engine that:
   - Classifies coaching roles and levels
   - Tracks career progression
@@ -114,6 +151,8 @@ The system tracks comprehensive coaching features including:
   - Name changes (e.g., Houston Oilers/Tennessee Titans)
   - Historical teams no longer in existence
 
-- Data spans from 1920 to present, requiring careful handling of rule changes and statistical availability across eras
-
-- Excluded instances and special cases (fired coaches, interim roles) are handled via configuration in `data_constants.py`
+### Future Integration
+- Play-by-play data (via nfl_data_py) will be used to generate coaching "genes"
+- These genes will represent play-calling patterns and strategic tendencies
+- Analysis will track how these genes propagate through the coaching tree
+- Available play-by-play data covers 1999 onwards only
