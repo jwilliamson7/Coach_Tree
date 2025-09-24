@@ -1,0 +1,59 @@
+Year,Lg,Tm,W,L,T,Div. Finish,Playoffs,PF,PA,PD,Coaches,AV,Passer,Rusher,Receiver,Pts,Yds,Pts Def Rank,Yds_1,T/G,Pts±,Yds±,out of,MoV,SoS,SRS,OSRS,DSRS
+2024,NFL,New Orleans Saints,5,12,0,4th of 4,,338,398,-60,"Rizzi,Allen",Kamara,Carr,Kamara,Johnson,24,21,19,30,16,22,29,32,-3.5,-0.6,-4.1,-3.6,-0.5
+2023,NFL,New Orleans Saints,9,8,0,2nd of 4,,402,327,75,Allen,Davis,Carr,Kamara,Olave,9,14,8,13,3,7,14,32,4.4,-2.2,2.2,1.7,0.5
+2022,NFL,New Orleans Saints,7,10,0,3rd of 4,,330,345,-15,Allen,Davis,Dalton,Kamara,Olave,22,19,9,5,31,17,10,32,-0.9,-0.3,-1.2,-2.8,1.7
+2021,NFL,New Orleans Saints,9,8,0,2nd of 4,,364,335,29,Payton,Davis,Winston,Kamara,Callaway,19,28,4,7,8,14,21,32,1.7,0.3,2.0,-1.5,3.6
+2020,NFL,New Orleans Saints*,12,4,0,1st of 4,Lost Div,482,337,145,Payton,Kamara,Brees,Kamara,Kamara,5,12,5,4,3,2,2,32,9.1,0.5,9.6,5.1,4.5
+2019,NFL,New Orleans Saints*,13,3,0,1st of 4,Lost WC,458,341,117,Payton,Thomas,Brees,Kamara,Thomas,3,9,13,11,2,5,7,32,7.3,0.0,7.4,5.0,2.3
+2018,NFL,New Orleans Saints*,13,3,0,1st of 4,Lost Conf,504,353,151,Payton,Brees,Brees,Kamara,Thomas,3,8,14,14,7,1,10,32,9.4,0.6,10.1,7.9,2.2
+2017,NFL,New Orleans Saints*,11,5,0,1st of 4,Lost Div,448,326,122,Payton,Jordan,Brees,Ingram,Thomas,4,2,10,17,9,6,5,32,7.6,1.5,9.2,7.0,2.2
+2016,NFL,New Orleans Saints,7,9,0,3rd of 4,,469,454,15,Payton,Brees,Brees,Ingram,Cooks,2,1,31,27,23,17,3,32,0.9,0.6,1.5,6.8,-5.3
+2015,NFL,New Orleans Saints,7,9,0,3rd of 4,,408,476,-68,Payton,Brees,Brees,Ingram,Cooks,8,2,32,31,15,22,18,32,-4.3,-2.3,-6.6,1.1,-7.6
+2014,NFL,New Orleans Saints,7,9,0,2nd of 4,,401,424,-23,Payton,Brees,Brees,Ingram,Stills,9,1,28,31,31,20,9,32,-1.4,-1.5,-2.9,1.9,-4.8
+2013,NFL,New Orleans Saints*,11,5,0,2nd of 4,Lost Div,414,304,110,Payton,Brees,Brees,Thomas,Graham,10,4,4,4,14,7,2,32,6.9,1.9,8.8,3.8,5.0
+2012,NFL,New Orleans Saints,7,9,0,3rd of 4,,461,454,7,"Vitt,Kromer",Evans,Brees,Ingram,Colston,3,2,31,32,14,15,26,32,0.4,1.0,1.4,6.5,-5.1
+2011,NFL,New Orleans Saints*,13,3,0,1st of 4,Lost Div,547,339,208,Payton,Brees,Brees,Sproles,Graham,2,1,13,24,19,1,2,32,13.0,-1.6,11.4,10.6,0.8
+2010,NFL,New Orleans Saints*,11,5,0,2nd of 4,Lost WC,384,307,77,Payton,Evans,Brees,Ivory,Colston,11,6,7,4,23,7,4,32,4.8,-2.5,2.3,1.5,0.8
+2009,NFL,New Orleans Saints*,13,3,0,1st of 4,Won SB,510,341,169,Payton,Evans,Brees,Thomas,Colston,1,1,20,25,3,1,9,32,10.6,0.2,10.8,11.2,-0.5
+2008,NFL,New Orleans Saints,8,8,0,4th of 4,,463,393,70,Payton,Brees,Brees,Thomas,Moore,1,1,26,23,22,10,3,32,4.4,-0.3,4.0,6.8,-2.8
+2007,NFL,New Orleans Saints,7,9,0,3rd of 4,,379,388,-9,Payton,Brees,Brees,Bush,Colston,12,4,25,26,22,19,14,32,-0.6,-2.0,-2.5,1.9,-4.5
+2006,NFL,New Orleans Saints*,10,6,0,1st of 4,Lost Conf,413,322,91,Payton,Brees,Brees,McAllister,Colston,5,1,13,11,22,6,1,32,5.7,-1.6,4.0,4.9,-0.9
+2005,NFL,New Orleans Saints,3,13,0,4th of 4,,235,398,-163,Haslett,Brooks,Brooks,Smith,Stallworth,31,20,28,14,31,30,19,32,-10.2,-0.9,-11.1,-6.2,-4.9
+2004,NFL,New Orleans Saints,8,8,0,2nd of 4,,348,405,-57,Haslett,Brooks,Brooks,McAllister,Horn,14,15,27,32,10,24,31,32,-3.6,-2.0,-5.6,-1.2,-4.3
+2003,NFL,New Orleans Saints,8,8,0,2nd of 4,,340,326,14,Haslett,McAllister,Brooks,McAllister,Horn,14,11,14,18,18,17,15,32,0.9,-1.1,-0.3,0.1,-0.4
+2002,NFL,New Orleans Saints,9,7,0,3rd of 4,,432,388,44,Haslett,Brooks,Brooks,McAllister,Horn,3,19,26,27,9,10,25,32,2.8,-0.3,2.4,5.8,-3.3
+2001,NFL,New Orleans Saints,7,9,0,3rd of 5,,333,409,-76,Haslett,Brooks,Brooks,Williams,Horn,13,10,27,16,21,24,13,31,-4.8,-0.1,-4.8,-0.1,-4.7
+2000,NFL,New Orleans Saints*,10,6,0,1st of 5,Lost Div,354,305,49,Haslett,Glover,Blake,Williams,Horn,10,10,10,8,8,12,10,31,3.1,-2.2,0.9,-1.2,2.1
+1999,NFL,New Orleans Saints,3,13,0,5th of 5,,260,434,-174,Ditka,Roaf,Tolliver,Williams,Kennison,29,19,28,20,19,29,24,31,-10.9,-1.3,-12.1,-5.3,-6.9
+1998,NFL,New Orleans Saints,6,10,0,3rd of 5,,305,359,-54,Ditka,Glover,Tolliver,Smith,Dawkins,21,28,21,26,16,19,30,30,-3.4,3.5,0.1,-1.5,1.6
+1997,NFL,New Orleans Saints,6,10,0,4th of 5,,237,327,-90,Ditka,Tubbs,Shuler,Zellars,Hill,30,30,16,4,30,25,27,30,-5.6,-1.8,-7.4,-6.8,-0.6
+1996,NFL,New Orleans Saints,3,13,0,5th of 5,,229,339,-110,"Mora,Venturi",Martin,Everett,Bates,Haynes,29,29,20,13,28,28,27,30,-6.9,-1.2,-8.1,-7.1,-1.0
+1995,NFL,New Orleans Saints,7,9,0,5th of 5,,319,348,-29,Mora,Roaf,Everett,Bates,Early,20,19,18,22,7,20,20,30,-1.8,-0.3,-2.2,-1.7,-0.4
+1994,NFL,New Orleans Saints,7,9,0,2nd of 4,,348,407,-59,Mora,Roaf,Everett,Bates,Haynes,9,12,27,25,15,22,17,28,-3.7,0.1,-3.6,1.0,-4.6
+1993,NFL,New Orleans Saints,8,8,0,2nd of 4,,317,343,-26,Mora,Turnbull,Wilson,Brown,Martin,11,21,22,7,20,20,15,28,-1.6,0.3,-1.3,0.7,-2.1
+1992,NFL,New Orleans Saints*,12,4,0,2nd of 4,Lost WC,330,202,128,Mora,Swilling,Hebert,Dunbar,Martin,10,14,1,2,5,3,7,28,8.0,-0.2,7.8,0.7,7.1
+1991,NFL,New Orleans Saints*,11,5,0,1st of 4,Lost WC,341,211,130,Mora,Swilling,Hebert,McAfee,Turner,8,15,1,2,1,5,4,28,8.1,0.9,9.0,2.8,6.3
+1990,NFL,New Orleans Saints*,8,8,0,2nd of 4,Lost WC,274,275,-1,Mora,Swilling,Walsh,Heyward,Martin,22,23,8,15,26,16,18,28,-0.1,-1.2,-1.3,-4.7,3.4
+1989,NFL,New Orleans Saints,9,7,0,3rd of 4,,386,301,85,Mora,Hilliard,Hebert,Hilliard,Martin,5,11,11,12,7,6,15,28,5.3,-0.7,4.6,2.3,2.2
+1988,NFL,New Orleans Saints,10,6,0,3rd of 4,,312,283,29,Mora,Mills,Hebert,Hilliard,Martin,18,16,4,12,15,11,13,28,1.8,-0.3,1.5,-1.0,2.6
+1987,NFL,New Orleans Saints*,12,3,0,2nd of 4,Lost WC,422,283,139,Mora,Waymer,Hebert,Mayes,Martin,2,14,5,4,1,3,7,28,9.3,0.8,10.1,6.8,3.3
+1986,NFL,New Orleans Saints,7,9,0,4th of 4,,288,287,1,Mora,Jackson,Wilson,Mayes,Martin,19,21,7,14,14,15,19,28,0.1,0.0,0.0,-2.5,2.5
+1985,NFL,New Orleans Saints,5,11,0,3rd of 4,,294,401,-107,"Phillips,Phillips",Wilson,Wilson,Wilson,Brenner,21,27,22,24,11,23,26,28,-6.7,-0.1,-6.8,-3.0,-3.9
+1984,NFL,New Orleans Saints,7,9,0,3rd of 4,,298,361,-63,Phillips,Jackson,Todd,Rogers,Young,20,20,19,4,28,22,15,28,-3.9,1.0,-2.9,-1.7,-1.2
+1983,NFL,New Orleans Saints,8,8,0,3rd of 4,,319,337,-18,Phillips,Jackson,Stabler,Rogers,Groth,17,23,12,2,20,16,10,28,-1.1,1.1,0.0,-1.1,1.1
+1982,NFL,New Orleans Saints,4,5,0,2nd of 4,,129,160,-31,Phillips,Winston,Stabler,Rogers,Groth,26,20,8,5,19,21,13,28,-3.4,-0.3,-3.8,-5.7,1.9
+1981,NFL,New Orleans Saints,4,12,0,4th of 4,,207,378,-171,Phillips,Rogers,Manning,Rogers,Merkens,28,25,24,11,22,27,23,28,-10.7,1.2,-9.5,-7.2,-2.3
+1980,NFL,New Orleans Saints,1,15,0,4th of 4,,291,487,-196,"Stanfel,Nolan",Manning,Manning,Rogers,Chandler,21,17,28,28,27,28,27,28,-12.3,1.8,-10.4,-1.1,-9.4
+1979,NFL,New Orleans Saints,8,8,0,2nd of 4,,370,360,10,Nolan,Manning,Manning,Muncie,Chandler,6,4,22,22,8,14,14,28,0.6,-1.8,-1.2,2.3,-3.5
+1978,NFL,New Orleans Saints,7,9,0,3rd of 4,,281,298,-17,Nolan,Manning,Manning,Galbreath,Childs,16,8,16,15,2,16,9,28,-1.1,-0.6,-1.7,-0.5,-1.2
+1977,NFL,New Orleans Saints,3,11,0,4th of 4,,232,336,-104,Stram,Muncie,Manning,Muncie,Childs,15,21,26,25,21,24,25,28,-7.4,-1.7,-9.2,0.3,-9.4
+1976,NFL,New Orleans Saints,4,10,0,4th of 5,,253,346,-93,Stram,Galbreath,Douglass,Muncie,Herrmann,17,21,23,19,7,22,23,28,-6.6,0.5,-6.1,-0.6,-5.5
+1975,NFL,New Orleans Saints,2,12,0,4th of 4,,165,360,-195,"North,Hefferle",Pollard,Manning,Strachan,Seal,26,26,23,13,15,26,24,26,-13.9,-0.1,-14.1,-8.2,-5.9
+1974,NFL,New Orleans Saints,5,9,0,3rd of 4,,166,263,-97,North,Newsome,Manning,Maxson,Newland,24,17,14,7,11,22,15,26,-6.9,-0.4,-7.3,-5.7,-1.7
+1973,NFL,New Orleans Saints,5,9,0,4th of 4,,163,312,-149,North,Manning,Manning,Phillips,Newland,26,22,18,23,19,24,24,26,-10.6,1.9,-8.8,-7.0,-1.7
+1972,NFL,New Orleans Saints,2,11,1,4th of 4,,215,361,-146,Roberts,Manning,Manning,Gresham,Abramowicz,22,20,23,21,21,23,22,26,-10.4,0.2,-10.2,-5.3,-5.0
+1971,NFL,New Orleans Saints,4,8,2,4th of 4,,266,347,-81,Roberts,Abramowicz,Hargett,Strong,Abramowicz,15,19,24,22,1,20,22,26,-5.8,3.0,-2.7,1.4,-4.1
+1970,NFL,New Orleans Saints,2,11,1,4th of 4,,172,347,-175,"Roberts,Fears",Abramowicz,Kilmer,Baker,Abramowicz,25,21,24,26,14,25,25,26,-12.5,4.6,-7.9,-4.6,-3.3
+1969,NFL,New Orleans Saints,5,9,0,3rd of 4,,311,393,-82,Fears,Abramowicz,Kilmer,Livingston,Abramowicz,6,3,15,15,12,13,12,16,-5.9,-1.5,-7.3,0.1,-7.4
+1968,NFL,New Orleans Saints,4,9,1,3rd of 4,,246,327,-81,Fears,Atkins,Kilmer,McCall,Abramowicz,12,12,11,9,8,11,12,16,-5.8,-0.7,-6.5,-3.9,-2.6
+1967,NFL,New Orleans Saints,3,11,0,4th of 4,,233,379,-146,Fears,Whitsell,Cuozzo,Taylor,Abramowicz,14,12,13,13,10,15,15,16,-10.4,-0.4,-10.8,-6.7,-4.1

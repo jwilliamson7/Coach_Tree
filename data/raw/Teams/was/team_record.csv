@@ -1,0 +1,94 @@
+Year,Lg,Tm,W,L,T,Div. Finish,Playoffs,PF,PA,PD,Coaches,AV,Passer,Rusher,Receiver,Pts,Yds,Pts Def Rank,Yds_1,T/G,Pts±,Yds±,out of,MoV,SoS,SRS,OSRS,DSRS
+2024,NFL,Washington Commanders*,12,5,0,2nd of 4,Lost Conf,485,391,94,Quinn,Daniels,Daniels,Daniels,McLaurin,5,7,18,13,15,10,7,32,5.5,-1.8,3.7,4.9,-1.2
+2023,NFL,Washington Commanders,4,13,0,4th of 4,,329,518,-189,Rivera,Howell,Howell,Robinson,McLaurin,25,24,32,32,32,32,31,32,-11.1,0.0,-11.1,-2.8,-8.4
+2022,NFL,Washington Commanders,8,8,1,4th of 4,,321,343,-22,Rivera,Payne,Heinicke,Robinson,McLaurin,24,20,7,3,26,21,6,32,-1.3,0.4,-0.9,-3.5,2.6
+2021,NFL,Washington Football Team,7,10,0,3rd of 4,,335,434,-99,Rivera,Heinicke,Heinicke,Gibson,McLaurin,23,21,25,22,24,25,24,32,-5.8,1.6,-4.2,-2.7,-1.5
+2020,NFL,Washington Football Team*,7,9,0,1st of 4,Lost WC,335,329,6,Rivera,Young,Smith,Gibson,McLaurin,25,30,4,2,23,14,13,32,0.4,-1.2,-0.8,-4.1,3.2
+2019,NFL,Washington Redskins,3,13,0,4th of 4,,266,435,-169,"Callahan,Gruden",Allen,Keenum,Peterson,McLaurin,32,31,27,27,13,31,32,32,-10.6,-0.2,-10.8,-6.3,-4.5
+2018,NFL,Washington Redskins,7,9,0,3rd of 4,,281,359,-78,Gruden,Kerrigan,Smith,Peterson,Reed,29,28,15,17,8,25,28,32,-4.9,-0.1,-4.9,-5.6,0.6
+2017,NFL,Washington Redskins,7,9,0,3rd of 4,,342,388,-46,Gruden,Cousins,Cousins,Perine,Crowder,16,16,27,21,23,17,22,32,-2.9,1.6,-1.3,0.5,-1.8
+2016,NFL,Washington Redskins,8,7,1,3rd of 4,,396,383,13,Gruden,Cousins,Cousins,Kelley,Garcon,12,3,19,28,17,18,9,32,0.8,1.2,2.0,3.3,-1.3
+2015,NFL,Washington Redskins*,9,7,0,1st of 4,Lost WC,388,379,9,Gruden,Williams,Cousins,Morris,Reed,10,17,17,28,10,14,23,32,0.6,-2.5,-1.9,-0.2,-1.8
+2014,NFL,Washington Redskins,4,12,0,4th of 4,,301,438,-137,Gruden,Williams,Cousins,Morris,Jackson,26,13,29,20,30,29,17,32,-8.6,-0.2,-8.7,-4.0,-4.7
+2013,NFL,Washington Redskins,3,13,0,4th of 4,,334,478,-144,Shanahan,Orakpo,Griffin,Morris,Garcon,23,9,30,18,25,30,11,32,-9.0,-0.3,-9.3,-3.9,-5.4
+2012,NFL,Washington Redskins*,10,6,0,1st of 4,Lost WC,436,388,48,Shanahan,Griffin,Griffin,Morris,Garcon,4,5,22,28,3,12,13,32,3.0,0.4,3.4,4.6,-1.2
+2011,NFL,Washington Redskins,5,11,0,4th of 4,,288,367,-79,Shanahan,Fletcher,Grossman,Helu,Gaffney,26,16,21,13,30,24,16,32,-4.9,0.8,-4.1,-4.3,0.2
+2010,NFL,Washington Redskins,6,10,0,4th of 4,,302,377,-75,Shanahan,Hall,McNabb,Torain,Moss,25,18,21,31,19,27,26,32,-4.7,0.9,-3.8,-3.4,-0.5
+2009,NFL,Washington Redskins,4,12,0,4th of 4,,266,336,-70,Zorn,Campbell,Campbell,Portis,Moss,26,22,18,10,28,24,18,32,-4.4,-0.2,-4.6,-5.5,1.0
+2008,NFL,Washington Redskins,8,8,0,4th of 4,,265,296,-31,Zorn,Portis,Campbell,Portis,Moss,28,19,6,4,17,22,12,32,-1.9,0.2,-1.8,-5.8,4.1
+2007,NFL,Washington Redskins*,9,7,0,3rd of 4,Lost WC,334,310,24,Gibbs,Portis,Campbell,Portis,Moss,18,15,11,8,21,12,9,32,1.5,3.0,4.5,0.2,4.3
+2006,NFL,Washington Redskins,5,11,0,4th of 4,,307,376,-69,Gibbs,Betts,Brunell,Betts,Moss,20,13,27,31,23,24,23,32,-4.3,0.3,-4.0,-2.1,-2.0
+2005,NFL,Washington Redskins*,10,6,0,2nd of 4,Lost Div,359,293,66,Gibbs,Moss,Brunell,Portis,Moss,13,11,9,9,14,11,9,32,4.1,1.9,6.0,2.6,3.4
+2004,NFL,Washington Redskins,6,10,0,4th of 4,,240,265,-25,Gibbs,Washington,Ramsey,Portis,Coles,31,30,5,3,20,19,14,32,-1.6,-1.8,-3.4,-7.4,4.0
+2003,NFL,Washington Redskins,5,11,0,3rd of 4,,287,372,-85,Spurrier,Arrington,Ramsey,Canidate,Coles,22,23,24,25,10,25,27,32,-5.3,-0.4,-5.7,-1.9,-3.8
+2002,NFL,Washington Redskins,7,9,0,3rd of 4,,307,365,-58,Spurrier,Arrington,Ramsey,Davis,Gardner,25,20,21,5,29,26,14,32,-3.6,-0.8,-4.5,-2.2,-2.2
+2001,NFL,Washington Redskins,8,8,0,2nd of 5,,256,303,-47,Schottenheimer,Arrington,Banks,Davis,Gardner,28,28,13,10,11,20,23,31,-2.9,-0.7,-3.7,-4.0,0.4
+2000,NFL,Washington Redskins,8,8,0,3rd of 5,,281,269,12,"Turner,Robiskie",Bailey,Johnson,Davis,Connell,24,11,7,4,16,16,6,31,0.8,0.2,1.0,-2.9,3.8
+1999,NFL,Washington Redskins*,10,6,0,1st of 5,Lost Div,443,377,66,Turner,Johnson,Johnson,Davis,Westbrook,2,2,24,30,4,8,11,31,4.1,-1.3,2.9,6.8,-3.9
+1998,NFL,Washington Redskins,6,10,0,4th of 5,,319,421,-102,Turner,Green,Green,Allen,Westbrook,17,15,28,24,24,27,19,30,-6.4,-1.1,-7.5,-1.5,-6.0
+1997,NFL,Washington Redskins,8,7,1,2nd of 5,,327,289,38,Turner,Dishman,Frerotte,Allen,Shepherd,15,16,8,16,14,11,13,30,2.4,-1.1,1.3,-0.6,1.8
+1996,NFL,Washington Redskins,9,7,0,3rd of 5,,364,312,52,Turner,Frerotte,Frerotte,Allen,Ellard,8,9,13,28,4,8,23,30,3.3,-1.4,1.8,2.3,-0.4
+1995,NFL,Washington Redskins,6,10,0,3rd of 5,,326,359,-33,Turner,Harvey,Frerotte,Allen,Ellard,18,18,21,18,6,21,18,30,-2.1,0.1,-1.9,-0.8,-1.2
+1994,NFL,Washington Redskins,3,13,0,5th of 5,,320,412,-92,Turner,Ellard,Shuler,Ervins,Ellard,13,17,28,26,27,25,27,28,-5.8,-0.3,-6.1,0.3,-6.4
+1993,NFL,Washington Redskins,4,12,0,5th of 5,,230,345,-115,Petitbon,Brooks,Rypien,Brooks,Sanders,25,26,23,26,14,24,28,28,-7.2,0.7,-6.5,-3.8,-2.7
+1992,NFL,Washington Redskins*,9,7,0,3rd of 5,Lost Div,300,255,45,Gibbs,Marshall,Rypien,Byner,Clark,14,12,8,7,3,12,9,28,2.8,1.6,4.4,0.7,3.8
+1991,NFL,Washington Redskins*,14,2,0,1st of 5,Won SB,485,224,261,Gibbs,Lachey,Rypien,Byner,Clark,1,4,2,3,1,1,1,28,16.3,0.3,16.6,11.7,4.9
+1990,NFL,Washington Redskins*,10,6,0,3rd of 5,Lost Div,381,301,80,Gibbs,Lachey,Rypien,Byner,Clark,4,4,13,14,6,8,4,28,5.0,0.4,5.4,4.6,0.8
+1989,NFL,Washington Redskins,10,6,0,3rd of 5,,386,308,78,Gibbs,Lachey,Rypien,Riggs,Clark,5,2,13,9,12,9,2,28,4.9,-0.9,4.0,3.8,0.2
+1988,NFL,Washington Redskins,7,9,0,3rd of 5,,345,387,-42,Gibbs,May,Williams,Bryant,Sanders,10,6,26,16,28,17,8,28,-2.6,0.4,-2.2,1.2,-3.4
+1987,NFL,Washington Redskins*,11,4,0,1st of 5,Won SB,379,285,94,Gibbs,Wilburn,Schroeder,Rogers,Clark,4,3,6,18,16,4,8,28,6.3,-2.5,3.8,1.8,2.0
+1986,NFL,Washington Redskins*,12,4,0,2nd of 5,Lost Conf,368,296,72,Gibbs,Manley,Schroeder,Rogers,Clark,9,5,9,21,17,8,8,28,4.5,1.0,5.5,3.5,2.1
+1985,NFL,Washington Redskins,10,6,0,3rd of 5,,297,312,-15,Gibbs,Grimm,Theismann,Rogers,Monk,20,14,11,3,21,17,4,28,-0.9,-1.0,-1.9,-3.4,1.5
+1984,NFL,Washington Redskins*,11,5,0,1st of 5,Lost Div,426,310,116,Gibbs,Jacoby,Theismann,Riggins,Monk,3,9,11,18,4,4,17,28,7.3,-0.9,6.4,5.0,1.3
+1983,NFL,Washington Redskins*,14,2,0,1st of 5,Lost SB,541,332,209,Gibbs,Theismann,Theismann,Riggins,Brown,1,3,11,12,1,1,3,28,13.1,0.9,13.9,11.7,2.2
+1982,NFL,Washington Redskins*,8,1,0,1st of 5,Won SB,190,128,62,Gibbs,Theismann,Theismann,Riggins,Brown,12,7,1,4,2,5,6,28,6.9,0.5,7.4,2.2,5.2
+1981,NFL,Washington Redskins,8,8,0,4th of 5,,347,349,-2,Gibbs,Theismann,Theismann,Washington,Monk,10,9,16,10,16,16,12,28,-0.1,1.1,1.0,2.2,-1.2
+1980,NFL,Washington Redskins,6,10,0,3rd of 5,,261,293,-32,Pardee,Parrish,Theismann,Jackson,Monk,25,23,8,7,4,17,11,28,-2.0,0.9,-1.1,-4.4,3.3
+1979,NFL,Washington Redskins,10,6,0,3rd of 5,,348,295,53,Pardee,Parrish,Theismann,Riggins,Buggs,10,18,10,17,1,8,18,28,3.3,-0.8,2.5,0.9,1.5
+1978,NFL,Washington Redskins,8,8,0,3rd of 5,,273,283,-10,Pardee,Houston,Theismann,Riggins,McDaniel,17,19,10,17,22,11,19,28,-0.6,0.2,-0.4,-1.1,0.7
+1977,NFL,Washington Redskins,9,5,0,2nd of 5,,196,189,7,Allen,Houston,Kilmer,Thomas,Fugett,21,20,4,19,11,13,20,28,0.5,-1.0,-0.5,-3.1,2.6
+1976,NFL,Washington Redskins*,10,4,0,2nd of 5,Lost Div,291,217,74,Allen,Thomas,Kilmer,Thomas,Grant,11,17,9,13,11,11,14,28,5.3,-2.3,3.0,1.2,1.8
+1975,NFL,Washington Redskins,8,6,0,3rd of 5,,325,276,49,Allen,Hanburger,Kilmer,Thomas,Grant,10,8,11,15,18,12,12,26,3.5,-0.7,2.8,2.6,0.3
+1974,NFL,Washington Redskins*,10,4,0,2nd of 5,Lost Div,320,196,124,Allen,Bass,Kilmer,Brown,Taylor,4,12,4,2,1,2,3,26,8.9,1.4,10.2,5.7,4.5
+1973,NFL,Washington Redskins*,10,4,0,2nd of 5,Lost Div,325,198,127,Allen,Hanburger,Kilmer,Brown,Taylor,6,18,6,9,4,6,12,26,9.1,-1.7,7.4,1.2,6.2
+1972,NFL,Washington Redskins*,11,3,0,1st of 5,Lost SB,336,218,118,Allen,Brown,Kilmer,Brown,Taylor,7,11,3,4,7,3,5,26,8.4,-2.1,6.3,2.7,3.7
+1971,NFL,Washington Redskins*,9,4,1,2nd of 5,Lost Div,276,190,86,Allen,Bass,Kilmer,Brown,Jefferson,12,13,4,4,9,6,6,26,6.1,-1.0,5.1,-0.6,5.8
+1970,NFL,Washington Redskins,6,8,0,4th of 5,,297,314,-17,Austin,Brown,Jurgensen,Brown,Taylor,11,9,21,24,9,17,17,26,-1.2,4.2,3.0,3.6,-0.6
+1969,NFL,Washington Redskins,7,5,2,2nd of 4,,307,319,-12,Lombardi,Jurgensen,Jurgensen,Brown,Taylor,7,8,10,12,8,9,9,16,-0.9,-2.1,-3.0,-1.0,-2.0
+1968,NFL,Washington Redskins,5,9,0,3rd of 4,,249,358,-109,Graham,Hanburger,Jurgensen,Allen,Taylor,11,13,14,14,10,13,15,16,-7.8,-0.5,-8.3,-3.1,-5.2
+1967,NFL,Washington Redskins,5,6,3,3rd of 4,,347,353,-6,Graham,Jurgensen,Jurgensen,Whitfield,Taylor,5,2,11,15,5,8,11,16,-0.4,-1.7,-2.1,1.3,-3.4
+1966,NFL,Washington Redskins,7,7,0,5th of 8,,351,355,-4,Graham,Taylor,Jurgensen,Whitfield,Taylor,3,6,13,13,4,7,10,15,-0.3,-1.8,-2.0,1.7,-3.8
+1965,NFL,Washington Redskins,6,8,0,4th of 7,,257,301,-44,McPeak,Krause,Jurgensen,Taylor,Mitchell,12,11,6,2,7,11,10,14,-3.1,-5.8,-9.0,-7.4,-1.6
+1964,NFL,Washington Redskins,6,8,0,3rd of 7,,307,305,2,McPeak,Taylor,Jurgensen,Taylor,Mitchell,7,11,7,4,1,7,8,14,0.1,-2.6,-2.5,-1.9,-0.6
+1963,NFL,Washington Redskins,3,11,0,6th of 7,,279,398,-119,McPeak,Mitchell,Snead,James,Mitchell,11,7,14,12,14,11,9,14,-8.5,0.7,-7.8,-2.1,-5.8
+1962,NFL,Washington Redskins,5,7,2,4th of 7,,305,376,-71,McPeak,Mitchell,Snead,Barnes,Mitchell,7,10,12,14,3,10,12,14,-5.1,-3.3,-8.4,-2.6,-5.8
+1961,NFL,Washington Redskins,1,12,1,7th of 7,,174,392,-218,McPeak,Toneff,Snead,James,Dugan,14,14,13,12,6,14,13,14,-15.6,-0.1,-15.7,-9.2,-6.5
+1960,NFL,Washington Redskins,1,9,2,6th of 6,,178,309,-131,Nixon,Toneff,Guglielmi,Bosseler,Anderson,12,13,12,10,9,12,13,13,-10.9,2.9,-8.0,-6.1,-1.9
+1959,NFL,Washington Redskins,3,9,0,5th of 6,,185,350,-165,Nixon,,LeBaron,Bosseler,Anderson,12,9,12,12,9,12,12,12,-13.8,0.9,-12.9,-5.7,-7.2
+1958,NFL,Washington Redskins,4,7,1,4th of 6,,214,268,-54,Kuharich,,LeBaron,Olszewski,Walton,11,8,6,10,4,8,10,12,-4.5,-0.7,-5.2,-5.1,-0.2
+1957,NFL,Washington Redskins,5,6,1,4th of 6,,251,230,21,Kuharich,,LeBaron,Bosseler,Carson,6,7,5,7,8,5,8,12,1.8,-0.3,1.4,2.3,-0.9
+1956,NFL,Washington Redskins,6,6,0,3rd of 6,,183,225,-42,Kuharich,,Dorow,Elter,Carson,10,11,6,4,8,8,9,12,-3.5,-0.2,-3.7,-3.7,-0.1
+1955,NFL,Washington Redskins,8,4,0,2nd of 6,,246,222,24,Kuharich,,LeBaron,Janowicz,Carson,7,11,2,3,7,5,5,12,2.0,2.3,4.3,1.0,3.3
+1954,NFL,Washington Redskins,3,9,0,5th of 6,,207,432,-225,Kuharich,,Dorow,Wells,Taylor,10,11,12,12,12,12,12,12,-18.8,-0.9,-19.7,-3.6,-16.1
+1953,NFL,Washington Redskins,6,5,1,3rd of 6,,208,215,-7,Lambeau,,LeBaron,Justice,Taylor,8,8,3,7,8,6,7,12,-0.6,-0.4,-1.0,-4.3,3.2
+1952,NFL,Washington Redskins,4,8,0,5th of 6,,240,287,-47,Lambeau,,LeBaron,Heath,Taylor,9,6,9,7,9,9,7,12,-3.9,1.1,-2.8,-0.8,-2.0
+1951,NFL,Washington Redskins,5,7,0,3rd of 6,,183,296,-113,"Todd,Ball",,Baugh,Goode,Taylor,11,9,10,10,11,10,10,12,-9.4,1.6,-7.8,-5.1,-2.7
+1950,NFL,Washington Redskins,3,9,0,6th of 6,,232,326,-94,Ball,,Baugh,Goode,Taylor,10,7,10,8,12,11,9,13,-7.8,2.8,-5.0,-0.1,-4.8
+1949,NFL,Washington Redskins,4,7,1,4th of 5,,268,339,-71,"Whelchel,Ball",,Baugh,Goode,Taylor,6,4,9,10,9,8,6,10,-5.9,0.4,-5.5,0.5,-6.1
+1948,NFL,Washington Redskins,7,5,0,2nd of 5,,291,287,4,Edwards,,Baugh,Castiglia,Crisler,6,4,6,6,6,5,5,10,0.3,-2.0,-1.6,0.5,-2.2
+1947,NFL,Washington Redskins,4,8,0,4th of 5,,295,367,-72,Edwards,,Baugh,Castiglia,Saenz,4,2,10,8,9,7,2,10,-6.0,-1.7,-7.7,2.7,-10.4
+1946,NFL,Washington Redskins,5,5,1,3rd of 5,,171,191,-20,Edwards,,Baugh,Todd,Bagarus,7,4,4,1,9,8,2,10,-1.8,-0.3,-2.2,-2.8,0.6
+1945,NFL,Washington Redskins*,8,2,0,1st of 5,Lost Champ,209,121,88,DeGroot,,Baugh,Akins,Bagarus,4,1,1,2,3,3,1,10,8.8,-4.8,4.0,0.3,3.8
+1944,NFL,Washington Redskins,6,3,1,3rd of 5,,169,180,-11,DeGroot,,Filchock,Seymour,Moore,7,3,7,6,7,6,4,11,-1.1,-1.7,-2.8,-0.9,-1.9
+1943,NFL,Washington Redskins*,6,3,1,1st of 5,Lost Champ,229,137,92,Bergman,,Baugh,Farkas,Moore,3,3,1,3,3,2,4,10,9.2,-2.6,6.6,2.2,4.4
+1942,NFL,Washington Redskins*,10,1,0,1st of 5,Won Champ,227,102,125,Flaherty,,Baugh,Farkas,Todd,3,3,2,2,7,2,2,10,11.4,-3.8,7.6,4.9,2.7
+1941,NFL,Washington Redskins,6,5,0,3rd of 5,,176,174,2,Flaherty,,Baugh,Filchock,Millner,4,5,5,3,7,5,4,10,0.2,-1.5,-1.4,-1.6,0.2
+1940,NFL,Washington Redskins*,9,2,0,1st of 5,Lost Champ,245,142,103,Flaherty,,Baugh,Todd,Todd,1,2,3,9,8,1,3,10,9.4,-2.9,6.5,7.3,-0.8
+1939,NFL,Washington Redskins,8,2,1,2nd of 5,,242,94,148,Flaherty,,Filchock,Farkas,Farkas,2,2,2,1,4,1,2,10,13.5,-4.5,9.0,5.6,3.4
+1938,NFL,Washington Redskins,6,3,2,2nd of 5,,148,154,-6,Flaherty,,Baugh,Farkas,Malone,5,2,5,3,9,5,1,10,-0.5,-0.5,-1.1,0.1,-1.1
+1937,NFL,Washington Redskins*,8,3,0,1st of 5,Won Champ,195,120,75,Flaherty,,Baugh,Battles,Malone,3,2,4,1,5,3,2,10,6.8,-3.8,3.0,3.5,-0.6
+1936,NFL,Boston Redskins*,7,5,0,1st of 5,Lost Champ,149,110,39,Flaherty,,Britt,Battles,Millner,4,6,3,1,3,4,3,9,3.3,-3.0,0.3,-1.0,1.3
+1935,NFL,Boston Redskins,2,8,1,4th of 5,,65,123,-58,Casey,,Shepherd,Shepherd,Malone,8,5,6,5,8,7,5,9,-5.3,-0.8,-6.1,-6.1,0.0
+1934,NFL,Boston Redskins,6,6,0,2nd of 5,,107,94,13,Dietz,,Hokuf,Battles,Malone,7,8,5,6,8,6,7,11,1.1,-0.8,0.2,-1.7,2.0
+1933,NFL,Boston Redskins,5,5,2,3rd of 5,,103,97,6,Dietz,,Musick,Musick,Battles,6,2,5,7,7,6,6,10,0.5,1.4,1.9,-0.8,2.7
+1932,NFL,Boston Braves,4,4,2,4th of 8,,55,79,-24,Wray,,Hughes,Battles,Battles,7,7,4,1,8,5,7,8,-2.4,-1.6,-4.0,-4.0,-0.1

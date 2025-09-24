@@ -1,0 +1,101 @@
+Year,Lg,Tm,W,L,T,Div. Finish,Playoffs,PF,PA,PD,Coaches,AV,Passer,Rusher,Receiver,Pts,Yds,Pts Def Rank,Yds_1,T/G,Pts±,Yds±,out of,MoV,SoS,SRS,OSRS,DSRS
+2024,NFL,New York Giants,3,14,0,4th of 4,,273,415,-142,Daboll,Nabers,Jones,Tracy,Nabers,31,30,21,24,26,29,28,32,-8.4,0.3,-8.0,-7.5,-0.5
+2023,NFL,New York Giants,6,11,0,3rd of 4,,266,407,-141,Daboll,Lawrence,Taylor,Barkley,Slayton,30,29,26,27,1,30,32,32,-8.3,0.4,-7.9,-6.9,-1.0
+2022,NFL,New York Giants*,9,7,1,3rd of 4,Lost Div,365,371,-6,Daboll,Jones,Jones,Barkley,Slayton,15,18,17,25,11,16,24,32,-0.4,0.0,-0.4,-0.8,0.4
+2021,NFL,New York Giants,4,13,0,4th of 4,,258,416,-158,Judge,Williams,Jones,Barkley,Golladay,31,31,23,21,26,29,30,32,-9.3,1.0,-8.3,-7.7,-0.6
+2020,NFL,New York Giants,6,10,0,2nd of 4,,280,357,-77,Judge,Bradberry,Jones,Gallman,Slayton,31,31,9,12,17,24,28,32,-4.8,0.4,-4.4,-6.7,2.3
+2019,NFL,New York Giants,4,12,0,3rd of 4,,341,451,-110,Shurmur,Barkley,Jones,Barkley,Slayton,18,23,30,25,31,28,26,32,-6.9,-1.0,-7.9,-1.8,-6.1
+2018,NFL,New York Giants,5,11,0,4th of 4,,369,412,-43,Shurmur,Barkley,Manning,Barkley,Beckham,16,17,23,24,13,22,24,32,-2.7,0.5,-2.2,0.8,-2.9
+2017,NFL,New York Giants,3,13,0,4th of 4,,246,388,-142,"McAdoo,Spagnuolo",Collins,Manning,Darkwa,Shepard,31,21,27,31,20,31,31,32,-8.9,1.3,-7.6,-6.4,-1.2
+2016,NFL,New York Giants*,11,5,0,2nd of 4,Lost WC,310,284,26,McAdoo,Harrison,Manning,Jennings,Beckham,26,25,2,10,21,12,22,32,1.6,0.5,2.1,-3.2,5.4
+2015,NFL,New York Giants,6,10,0,3rd of 4,,420,442,-22,Coughlin,Manning,Manning,Jennings,Beckham,6,8,30,32,5,16,29,32,-1.4,-2.2,-3.6,2.5,-6.1
+2014,NFL,New York Giants,6,10,0,3rd of 4,,380,400,-20,Coughlin,Manning,Manning,Williams,Beckham,13,10,22,29,19,19,20,32,-1.3,-0.4,-1.7,0.8,-2.5
+2013,NFL,New York Giants,7,9,0,3rd of 4,,294,383,-89,Coughlin,Rolle,Manning,Brown,Cruz,28,28,18,8,31,23,22,32,-5.6,0.2,-5.4,-6.2,0.8
+2012,NFL,New York Giants,9,7,0,2nd of 4,,429,344,85,Coughlin,Manning,Manning,Bradshaw,Cruz,6,14,12,31,4,8,24,32,5.3,0.9,6.2,4.0,2.2
+2011,NFL,New York Giants*,9,7,0,1st of 4,Won SB,394,400,-6,Coughlin,Manning,Manning,Bradshaw,Cruz,9,8,25,27,7,19,12,32,-0.4,2.0,1.6,3.1,-1.5
+2010,NFL,New York Giants,10,6,0,2nd of 4,,394,347,47,Coughlin,Tuck,Manning,Bradshaw,Nicks,7,5,17,7,18,11,3,32,2.9,-0.8,2.1,1.7,0.4
+2009,NFL,New York Giants,8,8,0,3rd of 4,,402,427,-25,Coughlin,Manning,Manning,Jacobs,Smith,8,8,30,13,24,19,10,32,-1.6,1.6,0.1,4.6,-4.5
+2008,NFL,New York Giants*,12,4,0,1st of 4,Lost Div,427,294,133,Coughlin,Tuck,Manning,Jacobs,Hixon,3,7,5,5,4,3,4,32,8.3,0.1,8.4,5.5,2.8
+2007,NFL,New York Giants*,10,6,0,2nd of 4,Won SB,373,351,22,Coughlin,Umenyiora,Manning,Jacobs,Burress,14,16,17,7,26,13,11,32,1.4,1.9,3.3,2.8,0.4
+2006,NFL,New York Giants*,8,8,0,3rd of 4,Lost WC,355,362,-7,Coughlin,Barber,Manning,Barber,Burress,11,14,24,25,17,16,19,32,-0.4,0.5,0.1,1.2,-1.1
+2005,NFL,New York Giants*,11,5,0,1st of 4,Lost WC,422,314,108,Coughlin,Barber,Manning,Barber,Burress,3,4,14,24,4,6,8,32,6.8,0.7,7.5,5.8,1.7
+2004,NFL,New York Giants,6,10,0,2nd of 4,,303,347,-44,Coughlin,Barber,Warner,Barber,Toomer,22,23,17,13,14,22,24,32,-2.8,-1.2,-3.9,-2.3,-1.6
+2003,NFL,New York Giants,4,12,0,4th of 4,,243,387,-144,Fassel,Strahan,Collins,Barber,Toomer,30,20,29,22,31,31,23,32,-9.0,0.4,-8.6,-4.8,-3.7
+2002,NFL,New York Giants*,10,6,0,2nd of 4,Lost WC,320,279,41,Fassel,Barber,Collins,Barber,Toomer,22,6,3,9,18,12,5,32,2.6,-1.7,0.8,-2.2,3.0
+2001,NFL,New York Giants,7,9,0,3rd of 5,,294,321,-27,Fassel,Strahan,Collins,Barber,Toomer,21,9,16,14,16,18,7,31,-1.7,-0.1,-1.8,-1.8,0.0
+2000,NFL,New York Giants*,12,4,0,1st of 5,Lost SB,328,246,82,Fassel,Barber,Collins,Barber,Toomer,15,13,5,5,9,9,8,31,5.1,-2.7,2.4,-1.3,3.8
+1999,NFL,New York Giants,7,9,0,3rd of 5,,299,358,-59,Fassel,Armstead,Collins,Montgomery,Toomer,20,17,23,13,25,23,15,31,-3.7,0.7,-3.0,-1.8,-1.2
+1998,NFL,New York Giants,8,8,0,3rd of 5,,287,309,-22,Fassel,Strahan,Kanell,Brown,Calloway,23,29,8,19,13,15,23,30,-1.4,-1.9,-3.2,-4.3,1.1
+1997,NFL,New York Giants*,10,5,1,1st of 5,Lost WC,307,265,42,Fassel,Strahan,Kanell,Way,Calloway,21,27,3,18,1,10,25,30,2.6,-1.1,1.5,-1.8,3.3
+1996,NFL,New York Giants,6,10,0,5th of 5,,242,297,-55,Reeves,Armstead,Brown,Hampton,Calloway,28,30,10,14,14,20,29,30,-3.4,-0.7,-4.1,-5.7,1.5
+1995,NFL,New York Giants,5,11,0,4th of 5,,290,340,-50,Reeves,Brown,Brown,Hampton,Calloway,24,29,16,17,9,23,26,30,-3.1,1.6,-1.5,-2.6,1.1
+1994,NFL,New York Giants,9,7,0,2nd of 5,,279,305,-26,Reeves,Howard,Brown,Hampton,Sherrard,22,28,8,11,8,16,24,28,-1.6,-0.1,-1.7,-2.7,1.0
+1993,NFL,New York Giants*,11,5,0,2nd of 5,Lost Div,288,205,83,Reeves,Brooks,Simms,Hampton,Jackson,18,10,1,5,3,6,7,28,5.2,-0.5,4.6,-0.8,5.4
+1992,NFL,New York Giants,6,10,0,4th of 5,,306,367,-61,Handley,Hampton,Hostetler,Hampton,McCaffrey,13,22,26,18,12,17,21,28,-3.8,2.0,-1.8,1.6,-3.4
+1991,NFL,New York Giants,8,8,0,4th of 5,,281,297,-16,Handley,Oates,Hostetler,Hampton,Ingram,19,16,12,7,17,19,11,28,-1.0,2.0,1.0,-0.6,1.5
+1990,NFL,New York Giants*,13,3,0,1st of 5,Won SB,335,211,124,Parcells,Johnson,Simms,Anderson,Baker,15,17,1,2,2,2,6,28,7.8,-0.1,7.7,0.0,7.6
+1989,NFL,New York Giants*,12,4,0,1st of 5,Lost Div,348,252,96,Parcells,Taylor,Simms,Anderson,Manuel,12,20,2,5,9,4,11,28,6.0,0.4,6.4,1.9,4.6
+1988,NFL,New York Giants,10,6,0,2nd of 5,,359,304,55,Parcells,Taylor,Simms,Morris,Manuel,8,20,9,11,7,9,16,28,3.4,-1.3,2.2,1.5,0.7
+1987,NFL,New York Giants,6,9,0,5th of 5,,280,312,-32,Parcells,Banks,Simms,Morris,Bavaro,22,18,13,7,23,18,12,28,-2.1,1.4,-0.7,-2.9,2.2
+1986,NFL,New York Giants*,14,2,0,1st of 5,Won SB,371,236,135,Parcells,Taylor,Simms,Morris,Bavaro,8,10,2,2,6,2,5,28,8.4,0.6,9.0,3.2,5.8
+1985,NFL,New York Giants*,10,6,0,2nd of 5,Lost Div,399,283,116,Parcells,Taylor,Simms,Morris,Manuel,6,5,5,2,14,4,2,28,7.3,-3.3,3.9,2.1,1.8
+1984,NFL,New York Giants*,9,7,0,2nd of 5,Lost Div,299,301,-2,Parcells,Haynes,Simms,Carpenter,Johnson,19,13,8,11,5,15,14,28,-0.1,1.0,0.8,-2.2,3.1
+1983,NFL,New York Giants,3,12,1,5th of 5,,267,347,-80,Parcells,Taylor,Brunner,Woolfolk,Gray,25,15,16,5,27,23,8,28,-5.0,2.9,-2.1,-5.5,3.4
+1982,NFL,New York Giants,4,5,0,4th of 5,,164,160,4,Perkins,Taylor,Brunner,Woolfolk,Perkins,17,16,8,7,16,11,14,28,0.4,0.5,1.0,-1.9,2.9
+1981,NFL,New York Giants*,9,7,0,3rd of 5,Lost Div,295,257,38,Perkins,Taylor,Simms,Carpenter,Perkins,22,28,3,3,16,13,22,28,2.4,1.0,3.4,-2.2,5.5
+1980,NFL,New York Giants,4,12,0,5th of 5,,249,425,-176,Perkins,Van Pelt,Simms,Taylor,Gray,26,27,27,24,14,27,28,28,-11.0,1.3,-9.7,-4.3,-5.5
+1979,NFL,New York Giants,6,10,0,4th of 5,,237,323,-86,Perkins,Carson,Simms,Taylor,Gray,27,28,14,19,15,25,28,28,-5.4,-0.8,-6.1,-5.4,-0.8
+1978,NFL,New York Giants,6,10,0,5th of 5,,264,298,-34,McVay,Carson,Pisarcik,Kotar,Robinson,19,23,16,22,13,22,24,28,-2.1,-0.4,-2.5,-1.1,-1.3
+1977,NFL,New York Giants,5,9,0,5th of 5,,181,265,-84,McVay,Archer,Pisarcik,Hammond,Robinson,24,24,21,12,13,21,23,28,-6.0,-0.2,-6.2,-4.0,-2.2
+1976,NFL,New York Giants,3,11,0,5th of 5,,170,250,-80,"McVay,Arnsparger",Van Pelt,Morton,Kotar,Tucker,25,22,14,16,24,19,19,28,-5.7,2.3,-3.4,-5.5,2.1
+1975,NFL,New York Giants,5,9,0,4th of 5,,216,306,-90,Arnsparger,Morton,Morton,Dawkins,Gillette,23,22,17,21,21,20,22,26,-6.4,-0.4,-6.8,-6.2,-0.6
+1974,NFL,New York Giants,2,12,0,5th of 5,,195,299,-104,Arnsparger,Dawkins,Morton,Dawkins,Tucker,22,18,23,24,23,23,23,26,-7.4,1.8,-5.6,-3.5,-2.1
+1973,NFL,New York Giants,2,11,1,5th of 5,,226,362,-136,Webster,Johnson,Snead,Johnson,Tucker,20,14,22,15,20,22,15,26,-9.7,2.2,-7.5,-2.8,-4.7
+1972,NFL,New York Giants,8,6,0,3rd of 5,,331,247,84,Webster,Johnson,Snead,Johnson,Tucker,8,4,7,18,5,6,12,26,6.0,-0.1,5.9,3.5,2.4
+1971,NFL,New York Giants,4,10,0,5th of 5,,228,362,-134,Webster,Tarkenton,Tarkenton,Duhon,Tucker,21,10,25,21,25,25,16,26,-9.6,1.6,-8.0,-1.7,-6.3
+1970,NFL,New York Giants,9,5,0,2nd of 5,,301,270,31,Webster,Johnson,Tarkenton,Johnson,McNeil,8,5,15,17,9,10,8,26,2.2,-0.2,2.0,1.9,0.1
+1969,NFL,New York Giants,6,8,0,2nd of 4,,264,298,-34,Webster,Tarkenton,Tarkenton,Morrison,Jones,13,6,8,8,5,10,6,16,-2.4,-2.0,-4.5,-3.8,-0.7
+1968,NFL,New York Giants,7,7,0,2nd of 4,,294,325,-31,Sherman,Tarkenton,Tarkenton,Frederickson,Jones,7,5,10,10,3,9,8,16,-2.2,-0.1,-2.4,0.0,-2.4
+1967,NFL,New York Giants,7,7,0,2nd of 4,,369,379,-10,Sherman,Tarkenton,Tarkenton,Koy,Jones,3,3,13,11,7,9,5,16,-0.7,-0.9,-1.6,4.3,-5.9
+1966,NFL,New York Giants,1,12,1,8th of 8,,263,501,-238,Sherman,Jones,Wood,Mercein,Jones,12,9,15,14,15,15,14,15,-17.0,0.2,-16.8,-3.0,-13.7
+1965,NFL,New York Giants,7,7,0,2nd of 7,,270,338,-68,Sherman,Morrall,Morrall,Frederickson,Jones,10,9,10,14,4,13,13,14,-4.9,-5.4,-10.3,-6.8,-3.5
+1964,NFL,New York Giants,2,10,2,7th of 7,,241,399,-158,Sherman,Barnes,Tittle,Wheelwright,Thomas,13,13,14,11,13,14,14,14,-11.3,-1.3,-12.6,-5.4,-7.2
+1963,NFL,New York Giants*,11,3,0,1st of 7,Lost Champ,448,280,168,Sherman,Tittle,Tittle,King,Shofner,1,1,5,3,2,1,1,14,12.0,-2.1,10.0,8.9,1.1
+1962,NFL,New York Giants*,12,2,0,1st of 7,Lost Champ,398,283,115,Sherman,Tittle,Tittle,Webster,Shofner,2,1,4,6,5,3,4,14,8.2,-3.8,4.4,4.0,0.5
+1961,NFL,New York Giants*,10,3,1,1st of 7,Lost Champ,368,220,148,Sherman,Barnes,Tittle,Webster,Shofner,2,5,1,4,2,2,4,14,10.6,-3.1,7.5,3.4,4.1
+1960,NFL,New York Giants,6,4,2,3rd of 6,,271,261,10,Howell,Robustelli,Shaw,Triplett,Rote,6,7,8,3,11,7,3,13,0.8,1.1,1.9,1.6,0.3
+1959,NFL,New York Giants*,10,2,0,1st of 6,Lost Champ,284,170,114,Howell,,Conerly,Gifford,Gifford,2,3,1,1,5,2,1,12,9.5,-3.4,6.1,0.1,6.0
+1958,NFL,New York Giants*,9,3,0,1st of 6,Lost Champ,246,183,63,Howell,,Conerly,Gifford,Schnelker,9,10,1,4,2,5,7,12,5.3,-1.1,4.1,-2.9,7.0
+1957,NFL,New York Giants,7,5,0,2nd of 6,,254,211,43,Howell,,Conerly,Gifford,Gifford,5,4,3,4,7,3,3,12,3.6,-1.4,2.2,1.4,0.8
+1956,NFL,New York Giants*,8,3,1,1st of 6,Won Champ,264,197,67,Howell,,Conerly,Gifford,Gifford,5,7,4,1,3,3,3,12,5.6,-1.4,4.2,2.7,1.4
+1955,NFL,New York Giants,6,5,1,3rd of 6,,267,223,44,Howell,,Conerly,Webster,Rote,3,10,3,5,3,2,9,12,3.7,2.2,5.9,2.9,3.0
+1954,NFL,New York Giants,7,5,0,3rd of 6,,293,184,109,Howell,,Conerly,Price,Rote,6,6,2,3,1,3,6,12,9.1,-5.0,4.1,-0.1,4.2
+1953,NFL,New York Giants,3,9,0,5th of 6,,179,277,-98,Owen,,Conerly,Grandelius,Rote,12,11,9,8,10,9,10,12,-8.2,2.6,-5.5,-5.2,-0.3
+1952,NFL,New York Giants,7,5,0,2nd of 6,,234,231,3,Owen,,Conerly,Price,McChesney,10,10,5,8,2,6,9,12,0.3,-1.1,-0.8,-2.9,2.1
+1951,NFL,New York Giants,9,2,1,2nd of 6,,254,161,93,Owen,,Conerly,Price,Scott,6,12,2,1,2,3,7,12,7.8,-2.0,5.7,-1.6,7.3
+1950,NFL,New York Giants*,10,2,0,1st of 6,Lost Div,268,150,118,Owen,,Conerly,Price,McChesney,6,11,3,2,1,3,5,13,9.8,2.7,12.6,1.4,11.2
+1949,NFL,New York Giants,6,6,0,3rd of 5,,287,298,-11,Owen,,Conerly,Roberts,Roberts,5,8,6,6,3,6,8,10,-0.9,-1.0,-2.0,1.7,-3.7
+1948,NFL,New York Giants,4,8,0,3rd of 5,,297,388,-91,Owen,,Conerly,Roberts,Swiacki,5,6,9,9,2,7,8,10,-7.6,1.1,-6.5,3.4,-9.9
+1947,NFL,New York Giants,2,8,2,5th of 5,,190,309,-119,Owen,,Governali,Roberts,Poole,9,9,9,5,6,10,8,10,-9.9,-1.5,-11.4,-6.7,-4.7
+1946,NFL,New York Giants*,7,3,1,1st of 5,Lost Champ,236,162,74,Owen,,Filchock,Filchock,Liebel,4,5,3,7,3,2,7,10,6.7,-0.2,6.5,2.3,4.3
+1945,NFL,New York Giants,3,6,1,3rd of 5,,179,198,-19,Owen,,Herber,Paschal,Liebel,7,7,6,9,3,6,8,10,-1.9,0.2,-1.7,-0.1,-1.6
+1944,NFL,New York Giants*,8,1,1,1st of 5,Lost Champ,206,75,131,Owen,,Herber,Paschal,Adams,5,7,1,3,1,2,5,11,13.1,-3.2,9.9,1.2,8.7
+1943,NFL,New York Giants*,6,3,1,1st of 5,Lost Div,197,170,27,Owen,,Nix,Paschal,Walls,5,5,3,5,2,4,5,10,2.7,-1.6,1.2,-0.4,1.6
+1942,NFL,New York Giants,5,5,1,3rd of 5,,155,139,16,Owen,,Leemans,Hapes,Cuff,5,9,4,5,2,5,8,10,1.5,1.6,3.0,-1.3,4.4
+1941,NFL,New York Giants*,8,3,0,1st of 5,Lost Champ,238,114,124,Owen,,Leemans,Leemans,Cuff,3,6,1,1,3,3,6,10,11.3,-6.5,4.8,3.3,1.5
+1940,NFL,New York Giants,6,4,1,3rd of 5,,131,133,-2,Owen,,Miller,Leemans,Howell,8,7,2,1,4,5,4,10,-0.2,-1.0,-1.1,-4.1,3.0
+1939,NFL,New York Giants*,9,1,1,1st of 5,Lost Champ,168,85,83,Owen,,Danowski,Leemans,Leemans,5,7,1,2,1,3,6,10,7.5,-3.2,4.4,-1.8,6.2
+1938,NFL,New York Giants*,8,2,1,1st of 5,Won Champ,194,79,115,Owen,,Danowski,Leemans,Soar,2,4,1,1,1,1,3,10,10.5,-2.9,7.6,2.4,5.2
+1937,NFL,New York Giants,6,3,2,2nd of 5,,128,109,19,Owen,,Danowski,Soar,Leemans,6,5,3,3,1,5,5,10,1.7,-1.1,0.7,-2.1,2.8
+1936,NFL,New York Giants,5,6,1,3rd of 5,,115,163,-48,Owen,,Danowski,Leemans,Burnett,5,4,7,6,6,5,6,9,-4.0,-0.7,-4.7,-2.6,-2.1
+1935,NFL,New York Giants*,9,3,0,1st of 5,Lost Champ,180,96,84,Owen,,Danowski,Richards,Goodwin,4,4,1,2,5,3,4,9,7.0,-3.1,3.9,2.9,1.0
+1934,NFL,New York Giants*,8,5,0,1st of 5,Won Champ,147,107,40,Owen,,Newman,Newman,Badgro,5,5,6,5,3,5,3,11,3.1,0.8,3.9,0.9,2.9
+1933,NFL,New York Giants*,11,3,0,1st of 5,Lost Champ,244,101,143,Owen,,Newman,Newman,Burnett,1,5,3,5,1,1,5,10,10.2,-0.2,10.0,7.3,2.6
+1932,NFL,New York Giants,4,6,2,5th of 8,,93,113,-20,Owen,,McBride,McBride,Flaherty,4,2,5,1,5,4,2,8,-1.7,0.2,-1.5,0.0,-1.5
+1931,NFL,New York Giants,7,6,1,5th of 10,,154,100,54,Owen,,,,,5,1,4,1,1,4,1,10,3.9,0.0,3.8,1.4,2.5
+1930,NFL,New York Giants,13,4,0,2nd of 11,,308,98,210,"Andrews,Owen,Friedman",,,,,1,1,3,1,1,1,1,11,12.4,-0.6,11.7,7.8,3.9
+1929,NFL,New York Giants,13,1,1,2nd of 12,,312,86,226,Andrews,,,,,1,1,2,1,1,1,1,12,15.1,-1.2,13.9,12.2,1.7
+1928,NFL,New York Giants,4,7,2,6th of 10,,79,136,-57,Potteiger,,,,,8,1,6,1,1,6,1,10,-4.4,2.9,-1.5,-2.7,1.2
+1927,NFL,New York Giants,11,1,1,1st of 12,Won Champ,197,20,177,Potteiger,,,,,2,1,1,1,1,1,1,12,13.6,-1.7,11.9,4.8,7.0
+1926,NFL,New York Giants,8,4,1,6th of 22,,147,51,96,Alexander,,,,,4,1,3,1,1,4,1,22,7.4,-0.9,6.5,3.0,3.5
+1925,NFL,New York Giants,8,4,0,4th of 20,,122,67,55,Folwell,,,,,5,1,5,1,1,4,1,20,4.6,-4.6,0.0,-0.7,0.7
