@@ -332,6 +332,92 @@ def get_fourth_down_predictor_features() -> List[str]:
     
     return sorted(fourth_down_features)
 
+def get_run_pass_predictor_features() -> List[str]:
+    """
+    Get features specifically for run vs pass play type prediction.
+    Only includes pre-play context available before the coaching decision is made.
+    
+    This excludes formation fields like 'shotgun' and 'no_huddle' since these
+    are outcomes of the coaching decision we're trying to predict.
+    
+    Returns:
+        List of field names for run vs pass prediction
+    """
+    # Core context for run vs pass decisions  
+    run_pass_features = [
+        # Game situation
+        "season", "week", "season_type", "qtr", 
+        "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
+        "game_half", 
+        
+        # Score situation  
+        "posteam_score", "defteam_score", "score_differential",
+        
+        # Team context
+        "posteam", "defteam", "posteam_type",
+        
+        # Field position and down/distance  
+        "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
+        
+        # Timeouts and clock management
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining", "timeout",
+        
+        # Drive context (known at start of play)
+        "drive", "series", "drive_play_count", "drive_first_downs",
+        "drive_quarter_start", "ydsnet",
+        
+        # Game environment
+        "location", "roof", "surface", "temp", "wind", "div_game",
+        
+        # Vegas context  
+        "spread_line", "total_line", "home_opening_kickoff",
+    ]
+    
+    return sorted(run_pass_features)
+
+def get_pass_target_predictor_features() -> List[str]:
+    """
+    Get features specifically for pass target prediction (behind vs ahead of first down marker).
+    Only includes pre-play context available before the coaching decision is made.
+    
+    This excludes formation fields like 'shotgun' and 'no_huddle' since these
+    are outcomes of the coaching decision we're trying to predict.
+    
+    Returns:
+        List of field names for pass target prediction
+    """
+    # Core context for pass target decisions  
+    pass_target_features = [
+        # Game situation
+        "season", "week", "season_type", "qtr", 
+        "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
+        "game_half", 
+        
+        # Score situation  
+        "posteam_score", "defteam_score", "score_differential",
+        
+        # Team context
+        "posteam", "defteam", "posteam_type",
+        
+        # Field position and down/distance  
+        "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
+        
+        # Timeouts and clock management
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining", "timeout",
+        
+        # Drive context (known at start of play)
+        "drive", "series", "drive_play_count", "drive_first_downs",
+        "drive_quarter_start", "ydsnet",
+        
+        # Game environment
+        "location", "roof", "surface", "temp", "wind", "div_game",
+        
+        # Vegas context  
+        "spread_line", "total_line", "home_opening_kickoff",
+    ]
+    
+    return sorted(pass_target_features)
+
 def get_target_features() -> List[str]:
     """
     Get features suitable as targets (Y variables) - outcomes and analytics.
