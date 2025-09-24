@@ -1,0 +1,66 @@
+Year,Lg,Tm,W,L,T,Div. Finish,Playoffs,PF,PA,PD,Coaches,AV,Passer,Rusher,Receiver,Pts,Yds,Pts Def Rank,Yds_1,T/G,Pts±,Yds±,out of,MoV,SoS,SRS,OSRS,DSRS
+2024,NFL,Dallas Cowboys,7,10,0,3rd of 4,,350,468,-118,McCarthy,Lamb,Prescott,Dowdle,Lamb,21,17,31,28,23,26,24,32,-6.9,0.6,-6.3,-2.6,-3.7
+2023,NFL,Dallas Cowboys*,12,5,0,1st of 4,Lost WC,509,315,194,McCarthy,Lamb,Prescott,Pollard,Lamb,1,5,5,5,5,2,3,32,11.4,-2.2,9.2,6.5,2.7
+2022,NFL,Dallas Cowboys*,12,5,0,2nd of 4,Lost Div,467,342,125,McCarthy,Parsons,Prescott,Pollard,Lamb,4,11,5,12,2,5,8,32,7.4,-0.8,6.5,5.3,1.3
+2021,NFL,Dallas Cowboys*,12,5,0,1st of 4,Lost WC,530,358,172,McCarthy,Parsons,Prescott,Elliott,Lamb,1,1,7,19,1,2,4,32,10.1,-0.2,9.9,8.2,1.7
+2020,NFL,Dallas Cowboys,6,10,0,3rd of 4,,395,473,-78,McCarthy,Lamb,Dalton,Elliott,Cooper,17,14,28,23,21,25,21,32,-4.9,-0.2,-5.1,1.0,-6.1
+2019,NFL,Dallas Cowboys,8,8,0,2nd of 4,,434,321,113,Garrett,Martin,Prescott,Elliott,Cooper,6,1,11,9,18,6,2,32,7.1,-1.8,5.3,3.8,1.5
+2018,NFL,Dallas Cowboys*,10,6,0,1st of 4,Lost Div,339,324,15,Garrett,Elliott,Prescott,Elliott,Cooper,22,22,6,7,12,14,15,32,0.9,0.2,1.1,-1.9,2.9
+2017,NFL,Dallas Cowboys,9,7,0,2nd of 4,,354,332,22,Garrett,Lawrence,Prescott,Elliott,Bryant,14,14,13,8,16,15,11,32,1.4,0.2,1.6,0.4,1.2
+2016,NFL,Dallas Cowboys*,13,3,0,1st of 4,Lost Div,421,306,115,Garrett,Lee,Prescott,Elliott,Beasley,5,5,5,14,9,3,6,32,7.2,-0.2,7.0,4.1,2.9
+2015,NFL,Dallas Cowboys,4,12,0,4th of 4,,275,374,-99,Garrett,Lee,Cassel,McFadden,Williams,31,22,16,17,32,29,20,32,-6.2,-0.7,-6.9,-7.0,0.1
+2014,NFL,Dallas Cowboys*,12,4,0,1st of 4,Lost Div,467,352,115,Garrett,Murray,Romo,Murray,Bryant,5,7,15,19,9,5,7,32,7.2,-1.8,5.4,5.3,0.1
+2013,NFL,Dallas Cowboys,8,8,0,2nd of 4,,439,432,7,Garrett,Smith,Romo,Murray,Bryant,5,16,26,32,9,15,31,32,0.4,-1.1,-0.7,2.7,-3.4
+2012,NFL,Dallas Cowboys,8,8,0,3rd of 4,,376,400,-24,Garrett,Romo,Romo,Murray,Bryant,15,6,24,19,27,19,10,32,-1.5,1.8,0.3,1.4,-1.2
+2011,NFL,Dallas Cowboys,8,8,0,3rd of 4,,369,347,22,Garrett,Ware,Romo,Murray,Witten,15,11,16,14,10,12,8,32,1.4,0.3,1.6,0.7,0.9
+2010,NFL,Dallas Cowboys,6,10,0,3rd of 4,,394,436,-42,"Garrett,Phillips",Ware,Kitna,Jones,Austin,7,7,31,23,13,21,12,32,-2.6,0.5,-2.2,2.5,-4.7
+2009,NFL,Dallas Cowboys*,11,5,0,1st of 4,Lost Div,361,250,111,Phillips,Ratliff,Romo,Barber,Austin,14,2,2,9,13,8,2,32,6.9,0.2,7.1,0.4,6.7
+2008,NFL,Dallas Cowboys,9,7,0,3rd of 4,,362,365,-3,Phillips,Ware,Romo,Barber,Owens,18,13,20,8,30,19,7,32,-0.2,0.8,0.6,1.7,-1.2
+2007,NFL,Dallas Cowboys*,13,3,0,1st of 4,Lost Div,455,325,130,Phillips,Romo,Romo,Barber,Owens,2,3,13,9,8,4,4,32,8.1,1.3,9.5,7.8,1.7
+2006,NFL,Dallas Cowboys*,9,7,0,2nd of 4,Lost WC,425,350,75,Parcells,Adams,Romo,Jones,Owens,4,5,20,13,15,7,9,32,4.7,-1.0,3.7,5.0,-1.3
+2005,NFL,Dallas Cowboys,9,7,0,3rd of 4,,325,308,17,Parcells,Williams,Bledsoe,Jones,Glenn,15,13,12,10,19,15,13,32,1.1,2.1,3.2,-0.1,3.2
+2004,NFL,Dallas Cowboys,6,10,0,3rd of 4,,293,405,-112,Parcells,Allen,Testaverde,Jones,Johnson,25,14,27,16,28,29,16,32,-7.0,-0.8,-7.8,-3.0,-4.8
+2003,NFL,Dallas Cowboys*,10,6,0,2nd of 4,Lost WC,289,260,29,Parcells,Glover,Carter,Hambrick,Glenn,21,15,2,1,22,15,2,32,1.8,-2.3,-0.5,-3.2,2.7
+2002,NFL,Dallas Cowboys,5,11,0,4th of 4,,217,329,-112,Campo,Glover,Hutchinson,Smith,Galloway,31,30,13,18,20,28,28,32,-7.0,-1.5,-8.5,-8.2,-0.3
+2001,NFL,Dallas Cowboys,5,11,0,5th of 5,,246,338,-92,Campo,Allen,Carter,Smith,Ismail,30,29,20,4,24,27,19,31,-5.8,-0.2,-6.0,-4.5,-1.5
+2000,NFL,Dallas Cowboys,5,11,0,4th of 5,,294,361,-67,Campo,Allen,Aikman,Smith,McKnight,23,25,22,19,28,24,25,31,-4.2,-0.4,-4.6,-1.5,-3.0
+1999,NFL,Dallas Cowboys*,8,8,0,2nd of 5,Lost WC,352,276,76,Gailey,Sanders,Aikman,Smith,Ismail,11,16,5,9,6,5,9,31,4.8,-1.6,3.1,-0.3,3.4
+1998,NFL,Dallas Cowboys*,10,6,0,1st of 5,Lost WC,381,275,106,Gailey,Sanders,Aikman,Smith,Irvin,9,8,3,18,3,6,11,30,6.6,-3.1,3.5,0.9,2.6
+1997,NFL,Dallas Cowboys,6,10,0,4th of 5,,304,314,-10,Switzer,Sanders,Aikman,Smith,Irvin,22,20,13,2,22,17,8,30,-0.6,-0.1,-0.8,-1.7,1.0
+1996,NFL,Dallas Cowboys*,10,6,0,1st of 5,Lost Div,286,250,36,Switzer,Sanders,Aikman,Smith,Irvin,25,24,3,3,9,10,10,30,2.3,0.1,2.4,-2.9,5.3
+1995,NFL,Dallas Cowboys*,12,4,0,1st of 5,Won SB,435,291,144,Switzer,Smith,Aikman,Smith,Irvin,3,5,3,9,11,2,4,30,9.0,0.7,9.7,6.2,3.5
+1994,NFL,Dallas Cowboys*,12,4,0,1st of 5,Lost Conf,414,248,166,Switzer,Smith,Aikman,Smith,Irvin,2,8,3,1,8,2,3,28,10.4,-0.3,10.1,5.6,4.5
+1993,NFL,Dallas Cowboys*,12,4,0,1st of 5,Won SB,376,229,147,Johnson,Smith,Aikman,Smith,Irvin,2,4,2,10,8,2,2,28,9.2,0.4,9.6,4.9,4.7
+1992,NFL,Dallas Cowboys*,13,3,0,1st of 5,Won SB,409,243,166,Johnson,Smith,Aikman,Smith,Irvin,2,4,5,1,7,2,1,28,10.4,-0.4,10.0,6.4,3.6
+1991,NFL,Dallas Cowboys*,11,5,0,2nd of 5,Lost Div,342,310,32,Johnson,Irvin,Aikman,Smith,Irvin,7,9,17,17,14,10,13,28,2.0,2.4,4.4,3.7,0.8
+1990,NFL,Dallas Cowboys,7,9,0,4th of 5,,244,308,-64,Johnson,Stubbs,Aikman,Smith,Martin,26,28,15,10,16,21,20,28,-4.0,0.3,-3.7,-4.8,1.1
+1989,NFL,Dallas Cowboys,1,15,0,5th of 5,,204,393,-189,Johnson,Lockhart,Aikman,Palmer,Martin,28,27,24,20,28,28,26,28,-11.8,1.4,-10.4,-7.6,-2.8
+1988,NFL,Dallas Cowboys,3,13,0,5th of 5,,265,381,-116,Landry,Walker,Pelluer,Walker,Alexander,21,9,25,20,27,28,11,28,-7.3,1.2,-6.1,-3.8,-2.3
+1987,NFL,Dallas Cowboys,7,8,0,2nd of 5,,340,348,-8,Landry,Walker,White,Walker,Walker,11,11,18,20,13,15,13,28,-0.5,-1.5,-2.0,-0.2,-1.8
+1986,NFL,Dallas Cowboys,7,9,0,3rd of 5,,346,337,9,Landry,Walker,Pelluer,Dorsett,Walker,14,6,18,10,18,14,7,28,0.6,1.5,2.1,3.0,-0.9
+1985,NFL,Dallas Cowboys*,10,6,0,1st of 5,Lost Div,357,333,24,Landry,White,White,Dorsett,Hill,11,8,14,20,5,12,15,28,1.5,-1.3,0.2,0.6,-0.3
+1984,NFL,Dallas Cowboys,9,7,0,4th of 5,,308,308,0,Landry,White,Hogeboom,Dorsett,Hill,18,11,9,7,12,13,8,28,0.0,1.0,1.0,-1.4,2.4
+1983,NFL,Dallas Cowboys*,12,4,0,2nd of 5,Lost WC,479,360,119,Landry,White,White,Dorsett,Hill,2,5,20,17,7,4,6,28,7.4,1.1,8.5,8.6,-0.1
+1982,NFL,Dallas Cowboys*,6,3,0,2nd of 5,Lost Conf,226,145,81,Landry,Jones,White,Dorsett,Hill,5,5,3,11,16,1,5,28,9.0,-0.8,8.2,5.2,3.0
+1981,NFL,Dallas Cowboys*,12,4,0,1st of 5,Lost Conf,367,277,90,Landry,White,White,Dorsett,Hill,6,5,7,20,2,4,11,28,5.6,0.5,6.1,2.9,3.2
+1980,NFL,Dallas Cowboys*,12,4,0,2nd of 5,Lost Conf,454,311,143,Landry,Scott,White,Dorsett,Hill,1,9,13,17,6,2,10,28,8.9,-1.0,8.0,7.8,0.1
+1979,NFL,Dallas Cowboys*,11,5,0,1st of 5,Lost Div,371,313,58,Landry,Staubach,Staubach,Dorsett,Hill,5,2,12,8,25,5,2,28,3.6,-0.3,3.3,3.0,0.3
+1978,NFL,Dallas Cowboys*,12,4,0,1st of 5,Lost SB,384,208,176,Landry,Staubach,Staubach,Dorsett,Hill,1,2,3,2,11,1,1,28,11.0,0.0,11.0,5.8,5.2
+1977,NFL,Dallas Cowboys*,12,2,0,1st of 5,Won SB,345,212,133,Landry,Staubach,Staubach,Dorsett,Pearson,2,1,8,1,6,2,1,28,9.5,-1.7,7.8,7.6,0.2
+1976,NFL,Dallas Cowboys*,11,3,0,1st of 5,Lost Div,296,194,102,Landry,Staubach,Staubach,Dennison,Pearson,10,4,5,7,16,9,4,28,7.3,-2.8,4.5,0.5,4.0
+1975,NFL,Dallas Cowboys*,10,4,0,2nd of 5,Lost SB,350,268,82,Landry,Staubach,Staubach,Newhouse,Pearson,8,3,9,5,6,8,3,26,5.9,-1.7,4.1,4.0,0.1
+1974,NFL,Dallas Cowboys,8,6,0,3rd of 5,,297,235,62,Landry,Staubach,Staubach,Hill,Pearson,8,1,10,4,19,8,1,26,4.4,1.5,5.9,4.0,1.9
+1973,NFL,Dallas Cowboys*,10,4,0,1st of 5,Lost Conf,382,203,179,Landry,Hill,Staubach,Hill,DuPree,2,4,7,5,3,3,3,26,12.8,0.0,12.8,6.8,6.0
+1972,NFL,Dallas Cowboys*,10,4,0,2nd of 5,Lost Conf,319,240,79,Landry,Wright,Morton,Hill,Sellers,10,6,6,6,18,7,4,26,5.6,0.5,6.1,3.4,2.7
+1971,NFL,Dallas Cowboys*,11,3,0,1st of 5,Won SB,406,222,184,Landry,Wright,Staubach,Thomas,Hayes,1,1,7,3,2,1,1,26,13.1,-3.3,9.9,8.3,1.6
+1970,NFL,Dallas Cowboys*,10,4,0,1st of 5,Lost SB,299,221,78,Landry,Howley,Morton,Thomas,Hayes,10,4,4,4,6,7,2,26,5.6,1.4,7.0,2.5,4.5
+1969,NFL,Dallas Cowboys*,11,2,1,1st of 4,Lost Div,369,223,146,Landry,Andrie,Morton,Hill,Rentzel,2,1,4,3,7,2,1,16,10.4,-3.5,6.9,2.5,4.4
+1968,NFL,Dallas Cowboys*,12,2,0,1st of 4,Lost Div,431,186,245,Landry,Howley,Meredith,Perkins,Rentzel,1,1,2,4,4,2,1,16,17.5,-3.7,13.8,8.4,5.5
+1967,NFL,Dallas Cowboys*,9,5,0,1st of 4,Lost Conf,342,268,74,Landry,Green,Meredith,Perkins,Hayes,6,5,6,7,4,4,4,16,5.3,-2.4,2.9,0.1,2.9
+1966,NFL,Dallas Cowboys*,10,3,1,1st of 8,Lost Conf,445,239,206,Landry,Meredith,Meredith,Reeves,Hayes,1,1,4,2,5,1,1,15,14.7,-4.0,10.7,7.0,3.7
+1965,NFL,Dallas Cowboys,7,7,0,2nd of 7,,325,280,45,Landry,Lilly,Meredith,Perkins,Hayes,7,10,3,6,6,4,8,14,3.2,-6.5,-3.3,-3.1,-0.2
+1964,NFL,Dallas Cowboys,5,8,1,5th of 7,,250,289,-39,Landry,Lilly,Meredith,Perkins,Clarke,12,14,4,2,9,9,6,14,-2.8,-2.7,-5.4,-6.2,0.8
+1963,NFL,Dallas Cowboys,4,10,0,5th of 7,,305,378,-73,Landry,Meredith,Meredith,Perkins,Clarke,9,9,10,13,6,9,12,14,-5.2,0.2,-5.0,-0.5,-4.5
+1962,NFL,Dallas Cowboys,5,8,1,5th of 7,,398,402,-4,Landry,Marsh,Meredith,Perkins,Clarke,2,2,13,13,9,7,9,14,-0.3,-3.7,-4.0,4.5,-8.5
+1961,NFL,Dallas Cowboys,4,9,1,6th of 7,,236,380,-144,Landry,Bishop,LeBaron,Perkins,Clarke,13,8,12,10,10,13,10,14,-10.3,-2.1,-12.4,-5.9,-6.4
+1960,NFL,Dallas Cowboys,0,11,1,7th of 7,,177,369,-192,Landry,Doran,LeBaron,Dupre,Doran,13,12,13,13,13,13,12,13,-16.0,1.2,-14.8,-6.1,-8.7

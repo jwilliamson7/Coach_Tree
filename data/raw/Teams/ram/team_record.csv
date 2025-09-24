@@ -1,0 +1,88 @@
+Year,Lg,Tm,W,L,T,Div. Finish,Playoffs,PF,PA,PD,Coaches,AV,Passer,Rusher,Receiver,Pts,Yds,Pts Def Rank,Yds_1,T/G,Pts±,Yds±,out of,MoV,SoS,SRS,OSRS,DSRS
+2024,NFL,Los Angeles Rams*,10,7,0,1st of 4,Lost Div,367,386,-19,McVay,Stafford,Stafford,Williams,Nacua,20,15,17,26,10,17,22,32,-1.1,1.1,-0.1,-0.6,0.6
+2023,NFL,Los Angeles Rams*,10,7,0,2nd of 4,Lost WC,404,377,27,McVay,Donald,Stafford,Williams,Nacua,8,7,19,20,21,11,9,32,1.6,1.4,3.0,2.0,1.0
+2022,NFL,Los Angeles Rams,5,12,0,3rd of 4,,307,384,-77,McVay,Wagner,Stafford,Akers,Kupp,27,32,21,19,16,28,30,32,-4.5,0.5,-4.0,-4.1,0.0
+2021,NFL,Los Angeles Rams*,12,5,0,1st of 4,Won SB,460,372,88,McVay,Kupp,Stafford,Michel,Kupp,7,9,15,17,13,6,12,32,5.2,0.1,5.3,4.2,1.1
+2020,NFL,Los Angeles Rams*,10,6,0,2nd of 4,Lost Div,372,296,76,McVay,Donald,Goff,Akers,Kupp,22,11,1,1,21,10,1,32,4.8,0.7,5.4,-0.8,6.2
+2019,NFL,Los Angeles Rams,9,7,0,3rd of 4,,394,364,30,McVay,Donald,Goff,Gurley,Kupp,11,7,17,13,15,12,8,32,1.9,2.0,3.9,2.2,1.7
+2018,NFL,Los Angeles Rams*,13,3,0,1st of 4,Lost SB,527,384,143,McVay,Goff,Goff,Gurley,Woods,2,2,20,19,4,3,3,32,8.9,-0.4,8.5,9.5,-1.1
+2017,NFL,Los Angeles Rams*,11,5,0,1st of 4,Lost WC,478,329,149,McVay,Gurley,Goff,Gurley,Kupp,1,10,12,19,9,3,10,32,9.3,-0.2,9.2,8.2,1.0
+2016,NFL,Los Angeles Rams,4,12,0,3rd of 4,,224,394,-170,"Fisher,Fassel",Donald,Keenum,Gurley,Britt,32,32,23,9,28,30,30,32,-10.6,-0.5,-11.1,-9.5,-1.6
+2015,NFL,St. Louis Rams,7,9,0,3rd of 4,,280,330,-50,Fisher,Donald,Foles,Gurley,Britt,29,32,13,23,14,19,31,32,-3.1,3.0,-0.2,-3.8,3.6
+2014,NFL,St. Louis Rams,6,10,0,4th of 4,,324,354,-30,Fisher,Quinn,Davis,Mason,Britt,21,28,16,17,19,21,25,32,-1.9,1.0,-0.8,-1.2,0.4
+2013,NFL,St. Louis Rams,7,9,0,4th of 4,,348,364,-16,Fisher,Quinn,Bradford,Stacy,Cook,21,30,13,15,9,17,27,32,-1.0,3.2,2.2,0.4,1.8
+2012,NFL,St. Louis Rams,7,8,1,3rd of 4,,299,348,-49,Fisher,Bradford,Bradford,Jackson,Givens,25,23,14,14,17,22,20,32,-3.1,3.4,0.4,-2.1,2.4
+2011,NFL,St. Louis Rams,2,14,0,4th of 4,,193,407,-214,Spagnuolo,Laurinaitis,Bradford,Jackson,Lloyd,32,31,26,22,23,32,30,32,-13.4,2.9,-10.4,-8.4,-2.1
+2010,NFL,St. Louis Rams,7,9,0,2nd of 4,,289,328,-39,Spagnuolo,Jackson,Bradford,Jackson,Amendola,26,26,12,19,10,19,24,32,-2.4,-4.2,-6.7,-6.3,-0.4
+2009,NFL,St. Louis Rams,1,15,0,4th of 4,,175,436,-261,Spagnuolo,Jackson,Bulger,Jackson,Avery,32,29,31,29,30,32,30,32,-16.3,-1.1,-17.4,-11.7,-5.8
+2008,NFL,St. Louis Rams,2,14,0,4th of 4,,232,465,-233,"Haslett,Linehan",Jackson,Bulger,Jackson,Holt,30,27,31,28,23,31,28,32,-14.6,-0.5,-15.1,-8.1,-7.0
+2007,NFL,St. Louis Rams,3,13,0,4th of 4,,263,438,-175,Linehan,Holt,Bulger,Jackson,Holt,28,24,31,21,27,32,25,32,-10.9,-2.0,-13.0,-6.5,-6.5
+2006,NFL,St. Louis Rams,8,8,0,2nd of 4,,367,381,-14,Linehan,Jackson,Bulger,Jackson,Holt,10,6,28,23,2,18,11,32,-0.9,-3.1,-4.0,0.8,-4.7
+2005,NFL,St. Louis Rams,6,10,0,2nd of 4,,363,429,-66,"Vitt,Martz",Holt,Bulger,Jackson,Holt,11,9,31,30,28,21,22,32,-4.1,-1.0,-5.1,1.3,-6.4
+2004,NFL,St. Louis Rams*,8,8,0,2nd of 4,Lost Div,319,392,-73,Martz,Bulger,Bulger,Faulk,Holt,19,6,25,17,32,25,8,32,-4.6,-1.4,-6.0,-2.2,-3.8
+2003,NFL,St. Louis Rams*,12,4,0,1st of 4,Lost Div,447,328,119,Martz,Pace,Bulger,Faulk,Holt,2,9,17,16,7,3,12,32,7.4,-1.6,5.9,6.0,-0.2
+2002,NFL,St. Louis Rams,7,9,0,2nd of 4,,316,369,-53,Martz,Little,Bulger,Faulk,Holt,23,13,23,13,32,25,11,32,-3.3,0.0,-3.3,-1.6,-1.8
+2001,NFL,St. Louis Rams*,14,2,0,1st of 5,Lost SB,503,273,230,Martz,Faulk,Warner,Faulk,Holt,1,1,7,3,26,1,1,31,14.4,-1.0,13.4,10.4,2.9
+2000,NFL,St. Louis Rams*,10,6,0,2nd of 5,Lost WC,540,471,69,Martz,Pace,Warner,Faulk,Holt,1,1,31,23,26,10,1,31,4.3,-1.2,3.1,12.6,-9.5
+1999,NFL,St. Louis Rams*,13,3,0,1st of 5,Won SB,526,242,284,Vermeil,Faulk,Warner,Faulk,Bruce,1,1,4,6,9,1,1,31,17.8,-5.9,11.9,8.7,3.2
+1998,NFL,St. Louis Rams,4,12,0,5th of 5,,285,378,-93,Vermeil,Jones,Banks,Henley,Proehl,24,27,24,10,27,25,22,30,-5.8,3.5,-2.3,-2.3,0.0
+1997,NFL,St. Louis Rams,5,11,0,5th of 5,,299,359,-60,Vermeil,Banks,Banks,Phillips,Lee,23,21,19,17,6,23,19,30,-3.8,-0.2,-4.0,-1.8,-2.2
+1996,NFL,St. Louis Rams,6,10,0,3rd of 5,,303,409,-106,Brooks,Bruce,Banks,Phillips,Bruce,20,27,27,26,21,27,30,30,-6.6,0.3,-6.3,-1.7,-4.6
+1995,NFL,St. Louis Rams,7,9,0,3rd of 5,,309,418,-109,Brooks,Bruce,Miller,Bettis,Bruce,22,15,29,12,19,27,15,30,-6.8,0.4,-6.4,-1.8,-4.6
+1994,NFL,Los Angeles Rams,4,12,0,4th of 4,,286,365,-79,Knox,Anderson,Miller,Bettis,Anderson,21,21,23,16,25,24,20,28,-4.9,-0.3,-5.3,-3.2,-2.1
+1993,NFL,Los Angeles Rams,5,11,0,4th of 4,,221,367,-146,Knox,Bettis,Everett,Bettis,Ellard,26,18,25,24,23,27,22,28,-9.1,0.7,-8.4,-5.0,-3.4
+1992,NFL,Los Angeles Rams,6,10,0,4th of 4,,313,383,-70,Knox,Everett,Everett,Gary,Ellard,12,13,27,27,19,20,22,28,-4.4,1.5,-2.9,1.1,-4.0
+1991,NFL,Los Angeles Rams,3,13,0,4th of 4,,234,390,-156,Robinson,Everett,Everett,Delpino,Ellard,24,18,27,23,28,25,21,28,-9.8,3.7,-6.0,-2.6,-3.4
+1990,NFL,Los Angeles Rams,5,11,0,3rd of 4,,345,412,-67,Robinson,Everett,Everett,Gary,Ellard,12,5,25,21,10,22,14,28,-4.2,-0.1,-4.2,2.3,-6.5
+1989,NFL,Los Angeles Rams*,11,5,0,2nd of 4,Lost Conf,426,344,82,Robinson,Newberry,Everett,Bell,Ellard,2,4,17,21,9,7,8,28,5.1,-0.5,4.6,5.7,-1.1
+1988,NFL,Los Angeles Rams*,10,6,0,2nd of 4,Lost WC,407,293,114,Robinson,Everett,Everett,Bell,Ellard,3,3,7,9,10,3,5,28,7.1,-0.6,6.5,5.6,0.9
+1987,NFL,Los Angeles Rams,6,9,0,3rd of 4,,317,361,-44,Robinson,White,Everett,White,Ellard,16,19,22,21,21,21,23,28,-2.9,1.1,-1.8,-0.6,-1.2
+1986,NFL,Los Angeles Rams*,10,6,0,2nd of 4,Lost WC,309,267,42,Robinson,Irvin,Everett,Dickerson,Ellard,17,23,4,5,9,10,18,28,2.6,-0.8,1.9,-1.1,2.9
+1985,NFL,Los Angeles Rams*,11,5,0,1st of 4,Lost Conf,340,277,63,Robinson,Irvin,Brock,Dickerson,Ellard,15,26,4,5,3,7,17,28,3.9,-1.3,2.6,-1.0,3.6
+1984,NFL,Los Angeles Rams*,10,6,0,2nd of 4,Lost WC,346,316,30,Robinson,Dickerson,Kemp,Dickerson,Ellard,12,21,13,14,8,11,20,28,1.9,0.4,2.3,1.0,1.3
+1983,NFL,Los Angeles Rams*,9,7,0,2nd of 4,Lost Div,361,344,17,Robinson,Dickerson,Ferragamo,Dickerson,Barber,11,12,15,15,18,10,16,28,1.1,1.8,2.9,2.0,0.9
+1982,NFL,Los Angeles Rams,2,7,0,4th of 4,,200,250,-50,Malavasi,Tyler,Ferragamo,Tyler,Dennard,9,6,28,27,24,25,23,28,-5.6,-1.4,-6.9,0.9,-7.9
+1981,NFL,Los Angeles Rams,6,10,0,3rd of 4,,303,351,-48,Malavasi,Cromwell,Haden,Tyler,Dennard,21,24,17,8,24,19,20,28,-3.0,0.6,-2.4,-1.4,-1.0
+1980,NFL,Los Angeles Rams*,11,5,0,2nd of 4,Lost WC,424,289,135,Malavasi,Hill,Ferragamo,Bryant,Waddy,3,2,7,4,9,3,2,28,8.4,-1.9,6.5,4.4,2.1
+1979,NFL,Los Angeles Rams*,9,7,0,1st of 4,Lost SB,323,309,14,Malavasi,Youngblood,Haden,Tyler,Dennard,15,13,11,7,21,13,6,28,0.9,-1.5,-0.6,-1.2,0.6
+1978,NFL,Los Angeles Rams*,12,4,0,1st of 4,Lost Conf,316,245,71,Malavasi,Youngblood,Haden,Bryant,Miller,9,6,4,1,15,6,3,28,4.4,-1.2,3.2,1.3,1.9
+1977,NFL,Los Angeles Rams*,10,4,0,1st of 4,Lost Div,302,146,156,Knox,McCutcheon,Haden,McCutcheon,Jackson,4,5,2,4,4,1,2,28,11.1,-2.7,8.5,3.8,4.6
+1976,NFL,Los Angeles Rams*,10,3,1,1st of 5,Lost Conf,351,190,161,Knox,Jackson,Harris,McCutcheon,Jessie,3,5,3,4,4,3,2,28,11.5,-1.0,10.5,5.9,4.5
+1975,NFL,Los Angeles Rams*,12,2,0,1st of 4,Lost Conf,312,135,177,Knox,Youngblood,Harris,McCutcheon,Jackson,11,9,1,2,3,3,4,26,12.6,-3.5,9.1,0.5,8.7
+1974,NFL,Los Angeles Rams*,10,4,0,1st of 4,Lost Conf,263,181,82,Knox,McCutcheon,Harris,McCutcheon,Jackson,13,9,1,3,16,6,4,26,5.9,-1.9,3.9,-0.1,4.0
+1973,NFL,Los Angeles Rams*,12,2,0,1st of 4,Lost Div,388,178,210,Knox,McCutcheon,Hadl,McCutcheon,Jackson,1,1,4,1,1,1,1,26,15.0,-1.6,13.4,8.2,5.2
+1972,NFL,Los Angeles Rams,6,7,1,3rd of 4,,291,286,5,Prothro,Mack,Gabriel,Ellison,Snow,14,7,16,11,17,15,9,26,0.4,-0.9,-0.5,0.1,-0.6
+1971,NFL,Los Angeles Rams,8,5,1,2nd of 4,,313,260,53,Prothro,Ellison,Gabriel,Ellison,Snow,5,8,8,14,10,10,10,26,3.8,2.8,6.6,4.2,2.4
+1970,NFL,Los Angeles Rams,9,4,1,2nd of 4,,325,202,123,Allen,Olsen,Gabriel,Josephson,Snow,4,6,2,3,8,3,3,26,8.8,0.8,9.6,4.4,5.3
+1969,NFL,Los Angeles Rams*,11,3,0,1st of 4,Lost Div,320,243,77,Allen,Gabriel,Gabriel,Smith,Snow,4,12,5,6,1,3,8,16,5.5,1.6,7.1,3.2,3.9
+1968,NFL,Los Angeles Rams,10,3,1,2nd of 4,,312,200,112,Allen,Jones,Gabriel,Ellison,Casey,5,8,3,1,2,4,3,16,8.0,0.7,8.7,2.0,6.7
+1967,NFL,Los Angeles Rams*,11,1,2,1st of 4,Lost Div,398,196,202,Allen,Jones,Gabriel,Josephson,Casey,1,6,1,3,1,1,2,16,14.4,-0.9,13.6,6.6,7.0
+1966,NFL,Los Angeles Rams,8,6,0,3rd of 7,,289,212,77,Allen,Jones,Gabriel,Bass,McDonald,10,7,2,4,3,5,6,15,5.5,0.5,6.0,-0.5,6.5
+1965,NFL,Los Angeles Rams,4,10,0,7th of 7,,269,328,-59,Svare,Jones,Munson,Bass,McDonald,11,8,9,4,13,12,7,14,-4.2,7.1,2.9,-1.1,4.0
+1964,NFL,Los Angeles Rams,5,7,2,5th of 7,,283,339,-56,Svare,Jones,Munson,Wilson,Pope,8,12,12,6,10,10,11,14,-4.0,3.1,-0.9,0.2,-1.0
+1963,NFL,Los Angeles Rams,5,9,0,6th of 7,,210,350,-140,Svare,Pardee,Gabriel,Bass,Phillips,13,13,9,8,12,13,13,14,-10.0,1.0,-9.0,-6.0,-3.0
+1962,NFL,Los Angeles Rams,1,12,1,7th of 7,,220,334,-114,"Waterfield,Svare",Olsen,Bratkowski,Bass,Phillips,14,14,8,10,7,13,14,14,-8.1,4.1,-4.0,-4.6,0.6
+1961,NFL,Los Angeles Rams,4,10,0,6th of 7,,263,333,-70,Waterfield,Phillips,Bratkowski,Arnett,Phillips,12,10,11,11,3,11,11,14,-5.0,3.5,-1.5,-1.2,-0.3
+1960,NFL,Los Angeles Rams,4,7,1,6th of 7,,265,297,-32,Waterfield,Phillips,Wade,Arnett,Phillips,7,10,10,11,5,9,11,13,-2.7,-0.5,-3.2,1.2,-4.4
+1959,NFL,Los Angeles Rams,2,10,0,6th of 6,,242,315,-73,Gillman,,Wade,Matson,Shofner,9,2,10,7,11,10,3,12,-6.1,3.0,-3.0,0.7,-3.8
+1958,NFL,Los Angeles Rams,8,4,0,2nd of 6,,344,278,66,Gillman,,Wade,Arnett,Shofner,2,2,8,6,8,4,3,12,5.5,0.5,6.0,5.7,0.3
+1957,NFL,Los Angeles Rams,6,6,0,4th of 6,,307,278,29,Gillman,,Van Brocklin,Wilson,Boyd,1,1,10,9,10,4,5,12,2.4,0.3,2.7,6.1,-3.4
+1956,NFL,Los Angeles Rams,4,8,0,5th of 6,,291,307,-16,Gillman,,Wade,Waller,Clarke,3,2,10,9,12,6,4,12,-1.3,0.7,-0.7,3.1,-3.7
+1955,NFL,Los Angeles Rams*,8,3,1,1st of 6,Lost Champ,260,231,29,Gillman,,Van Brocklin,Waller,Fears,4,2,4,8,1,4,6,12,2.4,-3.8,-1.3,-1.2,-0.2
+1954,NFL,Los Angeles Rams,6,5,1,4th of 6,,314,285,29,Pool,,Van Brocklin,Younger,Boyd,3,1,10,8,11,6,3,12,2.4,2.3,4.8,6.3,-1.5
+1953,NFL,Los Angeles Rams,8,3,1,3rd of 6,,366,236,130,Pool,,Van Brocklin,Towler,Hirsch,2,2,5,4,4,4,2,12,10.8,-3.3,7.5,7.5,0.0
+1952,NFL,Los Angeles Rams*,9,3,0,2nd of 6,Lost Div,349,234,115,"Pool,Stydahar",,Van Brocklin,Towler,Fears,1,2,6,9,3,2,4,12,9.6,-0.8,8.7,5.4,3.3
+1951,NFL,Los Angeles Rams*,8,4,0,1st of 6,Won Champ,392,261,131,Stydahar,,Van Brocklin,Towler,Hirsch,1,1,6,8,9,2,1,12,10.9,-1.8,9.1,9.2,-0.1
+1950,NFL,Los Angeles Rams*,9,3,0,1st of 7,Lost Champ,466,309,157,Stydahar,,Van Brocklin,Davis,Fears,1,1,9,10,6,2,1,13,13.1,-5.3,7.8,13.3,-5.5
+1949,NFL,Los Angeles Rams*,8,2,2,1st of 5,Lost Champ,360,239,121,Shaughnessy,,Waterfield,Hoerner,Fears,2,3,4,4,5,2,3,10,10.1,-0.8,9.3,7.7,1.6
+1948,NFL,Los Angeles Rams,6,5,1,3rd of 5,,327,269,58,Shaughnessy,,Hardy,Hoerner,Fears,4,3,5,4,5,4,3,10,4.8,1.4,6.2,5.0,1.3
+1947,NFL,Los Angeles Rams,6,6,0,4th of 5,,259,214,45,Snyder,,Waterfield,Washington,Benton,6,5,2,3,5,5,5,10,3.8,2.1,5.9,0.9,5.0
+1946,NFL,Los Angeles Rams,6,4,1,2nd of 5,,277,257,20,Walsh,,Waterfield,Gehrke,Benton,2,1,8,8,7,4,5,10,1.8,-0.1,1.8,5.9,-4.1
+1945,NFL,Cleveland Rams*,9,1,0,1st of 5,Won Champ,244,136,108,Walsh,,Waterfield,Gehrke,Benton,3,2,3,3,2,2,2,10,10.8,0.6,11.4,5.3,6.1
+1944,NFL,Cleveland Rams,4,6,0,4th of 5,,188,224,-36,Donelli,,Reisz,West,Benton,6,6,8,9,5,7,7,11,-3.6,1.9,-1.7,0.1,-1.8
+1942,NFL,Cleveland Rams,5,6,0,3rd of 5,,150,207,-57,Clark,,Hall,Magnani,Benton,6,7,6,10,6,6,10,10,-5.2,0.3,-4.9,-3.3,-1.6
+1941,NFL,Cleveland Rams,2,9,0,5th of 5,,116,244,-128,Clark,,Hall,Drake,Hickey,9,7,9,9,9,9,7,10,-11.6,4.4,-7.2,-4.6,-2.6
+1940,NFL,Cleveland Rams,4,6,1,4th of 5,,171,191,-20,Clark,,Hall,Drake,Benton,5,5,8,10,6,7,7,10,-1.8,1.5,-0.3,1.0,-1.3
+1939,NFL,Cleveland Rams,5,5,1,4th of 5,,195,164,31,Clark,,Hall,Hall,Benton,4,5,6,5,5,5,5,10,2.8,-0.6,2.2,1.5,0.8
+1938,NFL,Cleveland Rams,4,7,0,4th of 5,,131,215,-84,"Lewis,Bezdek",,Snyder,Davis,Benton,6,9,10,9,7,9,9,10,-7.6,2.5,-5.2,0.2,-5.3
+1937,NFL,Cleveland Rams,1,10,0,5th of 5,,75,207,-132,Bezdek,,Snyder,Drake,Drake,10,9,10,8,9,10,9,10,-12.0,3.5,-8.5,-5.0,-3.5
