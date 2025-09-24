@@ -51,23 +51,10 @@ SITUATIONAL_FIELDS = [
     "kickoff_attempt", "punt_attempt",
 ]
 
-# Play Type and Formation Fields
-PLAY_TYPE_FIELDS = [
-    # Play classification
-    "play_type", "pass_attempt", "rush_attempt", "special_teams_play",
-    "pass", "rush", "special", "play",
-    
-    # Formation and pre-snap
-    "shotgun", "no_huddle", "qb_dropback", "qb_kneel", "qb_spike", "qb_scramble",
-    
-    # Pass characteristics
-    "pass_length", "pass_location", "air_yards", "yards_after_catch",
-    
-    # Rush characteristics  
-    "run_location", "run_gap",
-    
-    # Kicking characteristics
-    "kick_distance", "field_goal_result", "extra_point_result", "two_point_conv_result",
+# Pre-Play Formation Fields (only what's known before the play starts)
+FORMATION_FIELDS = [
+    # Formation and pre-snap (observable before play outcome)
+    "shotgun", "no_huddle",
 ]
 
 # Outcome Fields
@@ -208,7 +195,7 @@ def get_all_model_features() -> List[str]:
         List of field names for model features
     """
     all_features = (
-        GAME_CONTEXT_FIELDS + SITUATIONAL_FIELDS + PLAY_TYPE_FIELDS + 
+        GAME_CONTEXT_FIELDS + SITUATIONAL_FIELDS + FORMATION_FIELDS + 
         OUTCOME_FIELDS + ANALYTICS_FIELDS + BETTING_FIELDS
     )
     return sorted(list(set(all_features)))
@@ -223,7 +210,7 @@ def get_feature_groups() -> Dict[str, List[str]]:
     return {
         "game_context": GAME_CONTEXT_FIELDS,
         "situational": SITUATIONAL_FIELDS, 
-        "play_type": PLAY_TYPE_FIELDS,
+        "formation": FORMATION_FIELDS,
         "outcomes": OUTCOME_FIELDS,
         "analytics": ANALYTICS_FIELDS,
         "betting": BETTING_FIELDS,
@@ -257,15 +244,93 @@ def get_categorical_features() -> Set[str]:
 def get_predictor_features() -> List[str]:
     """
     Get features suitable as predictors (X variables) - excludes outcomes.
+    Only includes pre-play context available to coaches when making decisions.
     
     Returns:
         List of field names suitable as predictor variables
     """
     predictors = (
-        GAME_CONTEXT_FIELDS + SITUATIONAL_FIELDS + PLAY_TYPE_FIELDS + 
+        GAME_CONTEXT_FIELDS + SITUATIONAL_FIELDS + FORMATION_FIELDS + 
         BETTING_FIELDS
     )
     return sorted(list(set(predictors)))
+
+def get_basic_predictor_features() -> List[str]:
+    """
+    Get basic predictor features excluding advanced analytics to avoid confounding.
+    
+    Use this for coaching pattern analysis where you want to identify decision-making
+    from raw game context rather than derived metrics.
+    
+    Returns:
+        List of basic field names for predictor variables
+    """
+    return get_predictor_features()  # Already excludes analytics
+
+def get_enhanced_predictor_features() -> List[str]:
+    """
+    Get enhanced predictor features including selected advanced analytics.
+    
+    Use this for performance prediction where analytical context is valuable.
+    Excludes post-play outcomes but includes pre-play probabilities and context.
+    
+    Returns:
+        List of enhanced field names for predictor variables
+    """
+    # Safe analytics that don't leak outcome information
+    safe_analytics = [
+        # Pre-play probabilities (available before play outcome)
+        "no_score_prob", "opp_fg_prob", "opp_safety_prob", "opp_td_prob",
+        "fg_prob", "safety_prob", "td_prob", "extra_point_prob", "two_point_conversion_prob",
+        "cp", "xpass", "xyac_success", "xyac_fd",
+        
+        # Pre-play context (not dependent on current play outcome) 
+        "wp", "def_wp", "vegas_wp",
+        "xyac_mean_yardage", "xyac_median_yardage",
+    ]
+    
+    basic_features = get_predictor_features()
+    return sorted(list(set(basic_features + safe_analytics)))
+
+def get_fourth_down_predictor_features() -> List[str]:
+    """
+    Get features specifically for 4th down decision modeling.
+    Only includes context available before the coaching decision is made.
+    
+    Returns:
+        List of field names for 4th down decision prediction
+    """
+    # Core context for 4th down decisions
+    fourth_down_features = [
+        # Game situation
+        "season", "week", "season_type", "qtr", 
+        "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
+        "game_half", 
+        
+        # Score situation  
+        "posteam_score", "defteam_score", "score_differential",
+        
+        # Team context
+        "posteam", "defteam", "posteam_type",
+        
+        # Field position and down/distance
+        "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
+        
+        # Timeouts and clock management
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining", "timeout",
+        
+        # Drive context (known at start of play)
+        "drive", "series", "drive_play_count", "drive_first_downs",
+        "drive_quarter_start", "ydsnet",
+        
+        # Game environment
+        "location", "roof", "surface", "temp", "wind", "div_game",
+        
+        # Vegas context
+        "spread_line", "total_line", "home_opening_kickoff",
+    ]
+    
+    return sorted(fourth_down_features)
 
 def get_target_features() -> List[str]:
     """
@@ -309,11 +374,15 @@ if __name__ == "__main__":
     predictors = get_predictor_features()
     targets = get_target_features()
     
+    basic_predictors = get_basic_predictor_features()
+    enhanced_predictors = get_enhanced_predictor_features()
+    
     print("NFL PLAY-BY-PLAY MODEL FEATURES")
     print("=" * 50)
     print(f"Total features: {len(features)}")
     print(f"Categorical features: {len(categorical)}")
-    print(f"Predictor features: {len(predictors)}")
+    print(f"Basic predictor features: {len(basic_predictors)}")
+    print(f"Enhanced predictor features: {len(enhanced_predictors)}")
     print(f"Target features: {len(targets)}")
     print()
     
