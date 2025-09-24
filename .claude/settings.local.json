@@ -4,7 +4,8 @@
       "Bash(python:*)",
       "Bash(pip install:*)",
       "Bash(powershell:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []
