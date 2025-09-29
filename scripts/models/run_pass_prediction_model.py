@@ -81,6 +81,12 @@ class RunPassDataProcessor:
         
         pbp_files.sort()  # Process in chronological order
         
+        # Get feature columns we need plus key columns for filtering
+        from utils.model_features import get_run_pass_predictor_features
+        needed_features = get_run_pass_predictor_features()
+        key_columns = ['play_type', 'down', 'qb_scramble', 'punt_attempt', 'field_goal_attempt', 'desc']
+        columns_to_keep = list(set(needed_features + key_columns))
+        
         for file_path in pbp_files:
             year = file_path.stem.split('_')[-1]
             logger.info(f"Processing {year} season data...")
@@ -90,7 +96,11 @@ class RunPassDataProcessor:
                 chunk_size = 50000
                 season_run_pass = []
                 
-                for chunk in pd.read_csv(file_path, chunksize=chunk_size):
+                # First read just the header to see available columns
+                header_df = pd.read_csv(file_path, nrows=0)
+                available_cols = [col for col in columns_to_keep if col in header_df.columns]
+                
+                for chunk in pd.read_csv(file_path, usecols=available_cols, chunksize=chunk_size, low_memory=False):
                     # Filter for run/pass plays
                     # Include downs 1-3 and non-special teams 4th downs
                     run_pass_chunk = chunk[
@@ -129,8 +139,8 @@ class RunPassDataProcessor:
         Create binary target variable for run vs pass decision.
         
         Target:
-        - 0: Run play (play_type="run")
-        - 1: Pass play (play_type="pass" OR qb_scramble=1)
+        - 0: Run play (play_type="run" or identified from no_play description)
+        - 1: Pass play (play_type="pass", qb_scramble=1, or identified from no_play description)
         
         Args:
             df: DataFrame with play-by-play data
@@ -140,7 +150,8 @@ class RunPassDataProcessor:
         """
         logger.info("Creating target variable for run vs pass classification...")
         
-        df = df.copy()
+        # Work with the original dataframe to avoid unnecessary copy
+        # We'll only copy at the end after filtering
         
         # Initialize as unknown (-1)
         df['is_pass'] = -1
@@ -158,16 +169,65 @@ class RunPassDataProcessor:
         )
         df.loc[run_conditions, 'is_pass'] = 0
         
+        # Process no_play plays with penalty descriptions
+        if 'desc' in df.columns:
+            no_play_mask = (df['play_type'] == 'no_play') & (df['is_pass'] == -1)
+            no_play_count = no_play_mask.sum()
+            
+            if no_play_count > 0:
+                logger.info(f"Processing {no_play_count:,} no_play plays for run/pass classification...")
+                
+                # Define pass play keywords - be specific to avoid false positives
+                pass_keywords = [
+                    ' pass ', ' passes ', ' passed ', ' passing ',
+                    'incomplete', 'complete pass', 'sacked', ' sack ',
+                    'scrambles', 'scrambled', 'throw', 'throws',
+                    'intercepted', 'interception'
+                ]
+                
+                # Define run play keywords
+                run_keywords = [
+                    ' run ', ' runs ', ' ran ', ' rush ', ' rushes ', ' rushed ',
+                    'up the middle', 'left end', 'right end', 
+                    'left tackle', 'right tackle', 'left guard', 'right guard'
+                ]
+                
+                # Convert descriptions to lowercase for case-insensitive matching
+                desc_lower = df.loc[no_play_mask, 'desc'].str.lower()
+                
+                # Check for pass keywords
+                pass_pattern = '|'.join(pass_keywords)
+                pass_matches = desc_lower.str.contains(pass_pattern, na=False, regex=True)
+                
+                # Check for run keywords  
+                run_pattern = '|'.join(run_keywords)
+                run_matches = desc_lower.str.contains(run_pattern, na=False, regex=True)
+                
+                # Set is_pass based on keyword matches
+                # Use the indices from the original mask
+                pass_indices = df.index[no_play_mask][pass_matches]
+                run_indices = df.index[no_play_mask][run_matches & ~pass_matches]
+                
+                df.loc[pass_indices, 'is_pass'] = 1
+                df.loc[run_indices, 'is_pass'] = 0
+                
+                # Log how many no_play plays were classified
+                classified_count = len(pass_indices) + len(run_indices)
+                logger.info(f"  Classified {classified_count:,} no_play plays ({classified_count/no_play_count*100:.1f}%)")
+                logger.info(f"    - {len(pass_indices):,} as pass plays")
+                logger.info(f"    - {len(run_indices):,} as run plays")
+        
         # Remove plays that are neither clear runs nor passes
-        df = df[df['is_pass'] != -1].copy()
+        # Now make a copy with only the rows we need
+        df_filtered = df[df['is_pass'] != -1].copy()
         
         # Log distribution
-        target_counts = df['is_pass'].value_counts().sort_index()
+        target_counts = df_filtered['is_pass'].value_counts().sort_index()
         logger.info(f"Target distribution:")
-        logger.info(f"  Run (0): {target_counts.get(0, 0):,} ({target_counts.get(0, 0)/len(df)*100:.1f}%)")
-        logger.info(f"  Pass (1): {target_counts.get(1, 0):,} ({target_counts.get(1, 0)/len(df)*100:.1f}%)")
+        logger.info(f"  Run (0): {target_counts.get(0, 0):,} ({target_counts.get(0, 0)/len(df_filtered)*100:.1f}%)")
+        logger.info(f"  Pass (1): {target_counts.get(1, 0):,} ({target_counts.get(1, 0)/len(df_filtered)*100:.1f}%)")
         
-        return df
+        return df_filtered
     
     def prepare_features(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, List[str]]:
         """

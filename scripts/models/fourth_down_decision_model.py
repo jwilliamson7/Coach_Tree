@@ -89,6 +89,11 @@ class FourthDownDataProcessor:
                     # Filter for 4th down plays only
                     fourth_down_chunk = chunk[chunk['down'] == 4].copy()
                     
+                    # Remove kickoffs, extra points, and QB kneels (not decision plays)
+                    fourth_down_chunk = fourth_down_chunk[
+                        ~fourth_down_chunk['play_type'].isin(['kickoff', 'extra_point', 'qb_kneel'])
+                    ]
+                    
                     if not fourth_down_chunk.empty:
                         season_fourth_downs.append(fourth_down_chunk)
                 
@@ -140,6 +145,36 @@ class FourthDownDataProcessor:
         )
         
         df.loc[punt_fg_conditions, 'go_for_it'] = 0
+        
+        # Handle no_play situations by analyzing the description
+        if 'desc' in df.columns:
+            no_play_mask = df['play_type'] == 'no_play'
+            if no_play_mask.any():
+                logger.info(f"Processing {no_play_mask.sum()} no_play situations...")
+                
+                # Get the indices of no_play rows
+                no_play_indices = df[no_play_mask].index
+                
+                # Check descriptions for punt/FG attempts that were nullified
+                desc_lower = df.loc[no_play_indices, 'desc'].str.lower()
+                
+                # Identify punt attempts in no_play situations
+                punt_patterns = ['punt', 'punts']
+                is_punt_attempt = desc_lower.str.contains('|'.join(punt_patterns), na=False)
+                
+                # Identify field goal attempts in no_play situations  
+                fg_patterns = ['field goal', 'fg ']
+                is_fg_attempt = desc_lower.str.contains('|'.join(fg_patterns), na=False)
+                
+                # Update go_for_it for no_play situations using the indices
+                punt_indices = no_play_indices[is_punt_attempt]
+                fg_indices = no_play_indices[is_fg_attempt]
+                
+                df.loc[punt_indices, 'go_for_it'] = 0
+                df.loc[fg_indices, 'go_for_it'] = 0
+                
+                logger.info(f"  - {len(punt_indices)} identified as punt attempts")
+                logger.info(f"  - {len(fg_indices)} identified as field goal attempts")
         
         # Log distribution
         target_counts = df['go_for_it'].value_counts().sort_index()

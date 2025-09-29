@@ -34,6 +34,22 @@ This is an NFL coaching tree analysis project that models coaching relationships
   - `extract_head_coaches.py`: Extracts and maps head coaching records
   - `svd_imputation.py`: Handles missing data imputation using SVD
 
+- **Predictive Models** (`scripts/models/`)
+  - `fourth_down_prediction_model.py`: XGBoost model predicting 4th down go/no-go decisions
+  - `run_pass_prediction_model.py`: XGBoost model predicting run vs pass play calls
+  - `pass_target_prediction_model.py`: XGBoost model predicting pass targets behind vs ahead of first down marker
+
+- **Coaching Gene Analysis** (`scripts/calculate_aggression_gene.py`)
+  - Calculates "aggression gene" for NFL coaches based on play-calling tendencies
+  - Compares actual decisions to model predictions to measure deviation from expected behavior
+  - Three aggression components:
+    - **4th Down Aggression**: Going for it on 4th down more/less than predicted
+    - **Pass-Heavy Aggression**: Passing more/less than predicted in neutral situations
+    - **Deep Pass Aggression**: Targeting beyond the sticks more/less than predicted
+  - Generates composite aggression score combining all three dimensions
+  - Handles team abbreviation mapping between different data sources
+  - Processes ~900K plays per full run (2006-2024)
+
 - **Constants** (`crawlers/utils/data_constants.py`)
   - Contains all team abbreviation mappings, franchise histories, and configuration constants
   - Critical for handling team relocations and name changes throughout NFL history
@@ -71,6 +87,30 @@ python scripts/create_yearly_coach_performance_data.py --input_dir data/raw/Coac
 python scripts/extract_head_coaches.py --input_dir data/raw/Coaches --output_dir data/processed/Coaching
 ```
 
+### Predictive Modeling
+```bash
+# Train 4th down decision prediction model
+python "scripts/models/fourth_down_prediction_model.py"
+
+# Train run vs pass play type prediction model
+python "scripts/models/run_pass_prediction_model.py"
+
+# Train pass target prediction model (behind vs ahead of first down marker)
+python "scripts/models/pass_target_prediction_model.py"
+```
+
+### Coaching Gene Analysis
+```bash
+# Calculate aggression gene for all coaches (2006-2024 by default)
+python scripts/calculate_aggression_gene.py
+
+# Specify custom year range
+python scripts/calculate_aggression_gene.py --start_year 2010 --end_year 2023
+
+# Custom output directory
+python scripts/calculate_aggression_gene.py --output_dir data/processed/custom_genes
+```
+
 ### Missing Data Handling
 ```bash
 # Impute missing values using SVD
@@ -88,6 +128,7 @@ Required Python packages:
 - lxml
 - scipy
 - scikit-learn
+- xgboost (for predictive modeling)
 - pathlib
 
 ## Data Structure
@@ -105,10 +146,28 @@ Required Python packages:
   - `league_opponent_data.csv`: Defensive statistics (opponent performance)
   - `*_normalized.csv`: Z-score normalized versions
 - `Coaching/`: Processed coaching datasets with features and outcomes
+  - `team_year_head_coaches.csv`: Mapping of teams and years to head coaches
 - `coaching_tree/`: Coaching tree relationship data
   - `coaches.json`: All coaches with complete career timelines
   - `relationships.csv`: Parent-child relationships between coaches
   - `team_rosters.json`: Team coaching staffs by year
+- `coaching_genes/`: Coaching behavioral analysis outputs
+  - `aggression_gene_YYYYMMDD.csv`: Full aggression metrics for all coaches
+  - `aggression_gene_summary_YYYYMMDD.json`: Summary statistics and rankings
+
+### Models (`models/`)
+- `fourth_down/`: 4th down decision prediction model files
+  - `fourth_down_prediction_model.json`: Trained XGBoost model
+  - `fourth_down_prediction_model_metadata.json`: Model metadata and parameters
+  - `fourth_down_prediction_model_encoders.pkl`: Label encoders for categorical features
+- `run_pass/`: Run vs pass prediction model files
+  - `run_pass_prediction_model.json`: Trained XGBoost model
+  - `run_pass_prediction_model_metadata.json`: Model metadata and parameters
+  - `run_pass_prediction_model_encoders.pkl`: Label encoders for categorical features
+- `pass_target/`: Pass target prediction model files
+  - `pass_target_prediction_model.json`: Trained XGBoost model
+  - `pass_target_prediction_model_metadata.json`: Model metadata and parameters
+  - `pass_target_prediction_model_encoders.pkl`: Label encoders for categorical features
 
 ## Key Features Tracked
 
@@ -130,7 +189,19 @@ Required Python packages:
 - Hiring team context (recent performance, needs)
 - Tenure classification (short/medium/long term success)
 
+### Predictive Models
+- **4th Down Decisions**: Predicts go/no-go decisions on 4th down using game context (score, field position, time)
+- **Run vs Pass**: Predicts play-calling tendencies based on situational factors
+- **Pass Target Strategy**: Predicts whether passes target behind or ahead of the first down marker
+
 ## Important Notes
+
+### Team Abbreviation Mapping
+- **Critical**: Play-by-play data and coach mapping data use different team abbreviations
+- The `calculate_aggression_gene.py` script includes a `normalize_team_abbr()` function to handle this
+- Key mappings include: GB→GNB, KC→KAN, LA→LAR, SF→SFO, TB→TAM, etc.
+- Without proper mapping, only ~55% of plays can be attributed to coaches
+- With mapping, coverage increases to ~93% (remaining gaps are special plays without possession)
 
 ### Coaching Tree Framework
 - The `build_coaching_tree.py` script creates a complete network of coaching relationships
@@ -151,8 +222,16 @@ Required Python packages:
   - Name changes (e.g., Houston Oilers/Tennessee Titans)
   - Historical teams no longer in existence
 
+### Predictive Modeling Framework
+- XGBoost models use only pre-play context features to avoid data leakage
+- SVD-based imputation handles missing values in large datasets
+- RandomizedSearchCV with stratified cross-validation for hyperparameter tuning
+- Models saved in XGBoost native JSON format for optimal performance
+- Label encoders preserve categorical feature mappings
+
 ### Future Integration
 - Play-by-play data (via nfl_data_py) will be used to generate coaching "genes"
 - These genes will represent play-calling patterns and strategic tendencies
 - Analysis will track how these genes propagate through the coaching tree
-- Available play-by-play data covers 1999 onwards only
+- Current models establish baseline coaching decision patterns
+- Available play-by-play data covers 1999 onwards only (air_yards from 2006+)
