@@ -27,6 +27,7 @@ import sys
 import warnings
 import pickle
 import json
+import gc  # For garbage collection
 warnings.filterwarnings('ignore')
 
 # ML imports
@@ -92,8 +93,8 @@ class RunPassDataProcessor:
             logger.info(f"Processing {year} season data...")
             
             try:
-                # Read file in chunks to handle memory efficiently
-                chunk_size = 50000
+                # Read file in smaller chunks to handle memory efficiently
+                chunk_size = 25000  # Reduced chunk size
                 season_run_pass = []
                 
                 # First read just the header to see available columns
@@ -118,6 +119,10 @@ class RunPassDataProcessor:
                     season_data = pd.concat(season_run_pass, ignore_index=True)
                     logger.info(f"Found {len(season_data):,} run/pass plays in {year}")
                     run_pass_data.append(season_data)
+                    
+                    # Clear intermediate data to save memory
+                    del season_run_pass
+                    del season_data
                 else:
                     logger.warning(f"No run/pass plays found in {year}")
                     
@@ -131,6 +136,10 @@ class RunPassDataProcessor:
         # Combine all seasons
         combined_data = pd.concat(run_pass_data, ignore_index=True)
         logger.info(f"Total run/pass plays across all seasons: {len(combined_data):,}")
+        
+        # Clear the list to free memory
+        del run_pass_data
+        gc.collect()
         
         return combined_data
     
@@ -527,8 +536,8 @@ def main():
                        help='Test set size (default: 0.2)')
     parser.add_argument('--random_state', type=int, default=42,
                        help='Random state for reproducibility (default: 42)')
-    parser.add_argument('--n_iter', type=int, default=50,
-                       help='Number of hyperparameter combinations to try (default: 50)')
+    parser.add_argument('--n_iter', type=int, default=20,
+                       help='Number of hyperparameter combinations to try (default: 20)')
     parser.add_argument('--cv_folds', type=int, default=3,
                        help='Number of CV folds (default: 3)')
     

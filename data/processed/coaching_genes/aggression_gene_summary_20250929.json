@@ -1,42 +1,42 @@
 {
-  "generated_date": "2025-09-29T14:20:35.532864",
-  "num_coaches": 116,
+  "generated_date": "2025-09-29T14:52:37.089752",
+  "num_coaches": 138,
   "metrics": {
     "fourth_down_aggression": {
-      "mean": 0.0030264966696571306,
-      "std": 0.013532160077836926
+      "mean": 0.002118346713836574,
+      "std": 0.01593174093284206
     },
     "pass_heavy_aggression": {
-      "mean": -0.11900546957599814,
-      "std": 0.02589833555582833
+      "mean": 2.0917245391488457e-17,
+      "std": 0.030135091857232548
     },
     "deep_pass_aggression": {
-      "mean": 0.008148247489327293,
-      "std": 0.021569414898305442
+      "mean": 0.009860033214135842,
+      "std": 0.024168900600869223
     }
   },
   "most_aggressive_coaches": [
+    "Gregg Williams",
     "Rob Chudzinski",
     "Freddie Kitchens",
+    "Brandon Staley",
     "Kevin O'Connell",
     "Dirk Koetter",
-    "Brandon Staley",
     "Brian Flores",
     "Bill Parcells",
     "Sean McDermott",
-    "Dave Canales",
-    "Mike McDaniel"
+    "Dave Canales"
   ],
   "least_aggressive_coaches": [
-    "Jon Gruden",
-    "Todd Haley",
-    "John Fox",
-    "David Culley",
-    "Bobby Petrino",
-    "Eric Mangini",
     "Rex Ryan",
-    "Romeo Crennel",
     "Dick Jauron",
-    "Brad Childress"
+    "Jon Gruden",
+    "Dennis Green",
+    "Bobby Petrino",
+    "Brad Childress",
+    "Mel Tucker",
+    "Lane Kiffin",
+    "Perry Fewell",
+    "Jeff Saturday"
   ]
 }
