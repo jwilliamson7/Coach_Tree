@@ -162,7 +162,7 @@ class AggressionCalculator:
             'NO': 'NOR',      # New Orleans Saints
             'NE': 'NWE',      # New England Patriots
             'TEN': 'OTI',     # Tennessee Titans (was OTI for Oilers/Titans)
-            'ARI': 'PHO',     # Arizona Cardinals (Phoenix/Arizona)
+            'ARI': 'CRD',     # Arizona Cardinals (uses CRD in coach data)
             'LAC': 'SDG',     # Los Angeles Chargers (was San Diego)
             'SF': 'SFO',      # San Francisco 49ers
             'TB': 'TAM',      # Tampa Bay Buccaneers
@@ -219,6 +219,7 @@ class AggressionCalculator:
                     ['play_type', 'punt_attempt', 'field_goal_attempt', 'air_yards', 
                      'qb_scramble',  # Need this for proper pass classification
                      'posteam', 'season',  # Need these for coach mapping
+                     'home_team', 'away_team', 'home_coach', 'away_coach',  # Need actual coach names
                      'desc',  # Need for analyzing no_play situations
                      'game_id', 'play_id']
                 ))
@@ -239,15 +240,30 @@ class AggressionCalculator:
             
         combined = pd.concat(all_plays, ignore_index=True)
         
-        # Map posteam and season to head coach using our mapping
-        # First normalize team abbreviations to match coach mapping format
-        combined['offensive_coach'] = combined.apply(
-            lambda row: self.coach_dict.get(
-                (self.normalize_team_abbr(row['posteam']), int(row['season'])), np.nan
-            ) if pd.notna(row['posteam']) and pd.notna(row['season'])
-              else np.nan,
-            axis=1
-        )
+        # Map posteam to the actual coach for that play
+        # Use home_coach/away_coach fields which correctly handle interim coaches
+        def get_offensive_coach(row):
+            if pd.isna(row['posteam']):
+                return np.nan
+            
+            # Check if we have coach data in the play-by-play
+            # This gives us exact coach attribution for each play, handling interim coaches
+            if all(col in row.index for col in ['home_coach', 'away_coach', 'home_team', 'away_team']):
+                if pd.notna(row['home_coach']) and row['posteam'] == row['home_team']:
+                    return row['home_coach']
+                elif pd.notna(row['away_coach']) and row['posteam'] == row['away_team']:
+                    return row['away_coach']
+            
+            # Fallback to team-year mapping if coach fields not available
+            # (for older data or missing fields)
+            if pd.notna(row.get('season')):
+                return self.coach_dict.get(
+                    (self.normalize_team_abbr(row['posteam']), int(row['season'])), np.nan
+                )
+            
+            return np.nan
+        
+        combined['offensive_coach'] = combined.apply(get_offensive_coach, axis=1)
         
         # Log how many plays we could map to coaches
         mapped_count = combined['offensive_coach'].notna().sum()
@@ -403,14 +419,32 @@ class AggressionCalculator:
         """
         logger.info("Calculating pass-heavy aggression...")
         
-        # Start with clear run/pass plays
+        # Filter for run/pass decision plays (match model training data)
+        # Include downs 1-3 and non-special teams 4th downs
         run_pass_plays = plays[
-            plays['play_type'].isin(['run', 'pass'])
+            (plays['play_type'].isin(['run', 'pass'])) &
+            (
+                (plays['down'].isin([1, 2, 3])) |  # All 1st-3rd downs
+                ((plays['down'] == 4) & 
+                 (plays.get('punt_attempt', 0) != 1) &      # Not punts
+                 (plays.get('field_goal_attempt', 0) != 1)  # Not field goals
+                )
+            )
         ].copy()
         
         # Process no_play plays to identify runs/passes from penalties
+        # Apply same down/situation filter as above
         if 'desc' in plays.columns:
-            no_play_plays = plays[plays['play_type'] == 'no_play'].copy()
+            no_play_plays = plays[
+                (plays['play_type'] == 'no_play') &
+                (
+                    (plays['down'].isin([1, 2, 3])) |  # All 1st-3rd downs
+                    ((plays['down'] == 4) & 
+                     (plays.get('punt_attempt', 0) != 1) &      # Not punts
+                     (plays.get('field_goal_attempt', 0) != 1)  # Not field goals
+                    )
+                )
+            ].copy()
             
             if len(no_play_plays) > 0:
                 logger.info(f"Processing {len(no_play_plays):,} no_play plays for run/pass classification...")
