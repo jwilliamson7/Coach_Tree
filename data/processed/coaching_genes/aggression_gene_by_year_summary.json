@@ -1,60 +1,60 @@
 {
-  "generated_date": "2025-09-30T10:25:13.790197",
-  "num_coaches": 32,
+  "generated_date": "2025-09-30T15:53:14.919411",
+  "num_coaches": 641,
   "metrics": {
     "fourth_down_aggression": {
-      "mean": 0.03174705746350783,
-      "std": 0.026348031523997464
+      "mean": -0.00031170096737665376,
+      "std": 0.02706314496918828
     },
     "pass_heavy_aggression": {
-      "mean": 0.021071793289351805,
-      "std": 0.04147239568945336
+      "mean": 0.01922064576357647,
+      "std": 0.039180154042074936
     },
     "deep_pass_aggression": {
-      "mean": -0.014496434431047539,
-      "std": 0.029712924137002876
+      "mean": -0.006821219760292033,
+      "std": 0.03637844044321903
     }
   },
   "most_aggressive_coach_years": [
     [
-      "Robert Saleh",
-      2024
+      "Bill Parcells",
+      2006
     ],
     [
-      "Matt Eberflus",
-      2024
+      "Rod Marinelli",
+      2006
     ],
     [
-      "Kevin Stefanski",
-      2024
+      "Jim Mora",
+      2006
     ],
     [
-      "Zac Taylor",
-      2024
+      "Nick Saban",
+      2006
     ],
     [
-      "Brian Daboll",
-      2024
+      "Andy Reid",
+      2006
     ],
     [
-      "Doug Pederson",
-      2024
+      "Bill Cowher",
+      2006
     ],
     [
-      "DeMeco Ryans",
-      2024
+      "Bill Belichick",
+      2006
     ],
     [
-      "Kevin O'Connell",
-      2024
+      "Tony Dungy",
+      2006
     ],
     [
-      "Shane Steichen",
-      2024
+      "Mike Holmgren",
+      2006
     ],
     [
-      "Dan Quinn",
-      2024
+      "Scott Linehan",
+      2006
     ]
   ],
   "least_aggressive_coach_years": [
@@ -99,6 +99,6 @@
       2024
     ]
   ],
-  "unique_coaches": 32,
-  "years_covered": "2024-2024"
+  "unique_coaches": 138,
+  "years_covered": "2006-2024"
 }
