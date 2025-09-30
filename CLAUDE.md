@@ -17,7 +17,7 @@ This is an NFL coaching tree analysis project that models coaching relationships
 
 ### Key Components
 
-- **Coaching Tree Framework** (`scripts/build_coaching_tree.py`)
+- **Coaching Tree Framework** (`scripts/data_processing/build_coaching_tree.py`)
   - `Coach` class: Represents individual coaches with complete career timelines
   - `CoachingTree` class: Manages all coach relationships and builds the network
   - Creates parent-child relationships between coaches based on team assignments
@@ -27,12 +27,12 @@ This is an NFL coaching tree analysis project that models coaching relationships
   - `coach_scraping.py`: Scrapes individual coach career histories, results, and rankings
   - `team_data_scraping.py`: Scrapes team performance statistics by year
 
-- **Processing Scripts** (`scripts/`)
+- **Data Processing Scripts** (`scripts/data_processing/`)
   - `create_data.py`: Main processing pipeline that creates master coaching dataset with engineered features
   - `transform_team_data.py`: Transforms individual team data into league-wide yearly datasets
   - `create_yearly_coach_performance_data.py`: Generates yearly coaching performance metrics
   - `extract_head_coaches.py`: Extracts and maps head coaching records
-  - `svd_imputation.py`: Handles missing data imputation using SVD
+  - `build_coaching_tree.py`: Creates coaching tree relationships and network structure
 
 - **Predictive Models** (`scripts/models/`)
   - `fourth_down_decision_model.py`: XGBoost model predicting 4th down go/no-go decisions
@@ -40,8 +40,9 @@ This is an NFL coaching tree analysis project that models coaching relationships
   - `pass_target_prediction_model.py`: XGBoost model predicting pass targets behind vs ahead of first down marker
   - `two_point_conversion_model.py`: XGBoost model predicting two-point conversion vs extra point decisions
 
-- **Coaching Gene Analysis** (`scripts/calculate_aggression_gene.py`)
-  - Calculates "aggression gene" for NFL coaches based on play-calling tendencies
+- **Coaching Gene Analysis** (`scripts/analysis/`)
+  - `calculate_aggression_gene.py`: Calculates "aggression gene" for NFL coaches based on play-calling tendencies
+  - `calculate_shotgun_gene.py`: Analyzes shotgun formation usage patterns
   - Compares actual decisions to model predictions to measure deviation from expected behavior
   - Four aggression components:
     - **4th Down Aggression**: Going for it on 4th down more/less than predicted
@@ -51,6 +52,15 @@ This is an NFL coaching tree analysis project that models coaching relationships
   - Generates composite aggression score combining all four dimensions
   - Handles team abbreviation mapping between different data sources
   - Processes ~900K plays per full run (2006-2024)
+
+- **Visualization Tools** (`scripts/visualization/`)
+  - `visualize_coaching_tree_aggression.py`: Interactive coaching tree with aggression gene overlay
+  - `visualize_aggression_propagation.py`: Analysis of how aggression genes propagate through lineages
+  - `visualize_coaching_tree_nx.py`: NetworkX-based coaching tree visualization with multiple layout options
+
+- **Utilities** (`scripts/utils/`)
+  - `svd_imputation.py`: Handles missing data imputation using SVD
+  - `test_no_play_classification.py`: Testing utilities for play classification
 
 - **Constants** (`crawlers/utils/data_constants.py`)
   - Contains all team abbreviation mappings, franchise histories, and configuration constants
@@ -62,7 +72,7 @@ This is an NFL coaching tree analysis project that models coaching relationships
 ### Build Coaching Tree
 ```bash
 # Build the coaching tree with all relationships
-python scripts/build_coaching_tree.py
+python scripts/data_processing/build_coaching_tree.py
 ```
 
 ### Data Collection
@@ -77,16 +87,16 @@ python crawlers/PFR/team_data_scraping.py
 ### Data Processing
 ```bash
 # Create master coaching dataset
-python scripts/create_data.py
+python scripts/data_processing/create_data.py
 
 # Transform team data to league format
-python scripts/transform_team_data.py
+python scripts/data_processing/transform_team_data.py
 
 # Generate yearly coach performance data
-python scripts/create_yearly_coach_performance_data.py --input_dir data/raw/Coaches --output_dir data/processed/Coaching
+python scripts/data_processing/create_yearly_coach_performance_data.py --input_dir data/raw/Coaches --output_dir data/processed/Coaching
 
 # Extract head coach mappings
-python scripts/extract_head_coaches.py --input_dir data/raw/Coaches --output_dir data/processed/Coaching
+python scripts/data_processing/extract_head_coaches.py --input_dir data/raw/Coaches --output_dir data/processed/Coaching
 ```
 
 ### Predictive Modeling
@@ -107,19 +117,31 @@ python "scripts/models/two_point_conversion_model.py"
 ### Coaching Gene Analysis
 ```bash
 # Calculate aggression gene for all coaches (2006-2024 by default)
-python scripts/calculate_aggression_gene.py
+python scripts/analysis/calculate_aggression_gene.py
 
 # Specify custom year range
-python scripts/calculate_aggression_gene.py --start_year 2010 --end_year 2023
+python scripts/analysis/calculate_aggression_gene.py --start_year 2010 --end_year 2023
 
 # Custom output directory
-python scripts/calculate_aggression_gene.py --output_dir data/processed/custom_genes
+python scripts/analysis/calculate_aggression_gene.py --output_dir data/processed/custom_genes
+```
+
+### Visualization
+```bash
+# Create coaching tree visualization with aggression gene overlay
+python scripts/visualization/visualize_coaching_tree_aggression.py
+
+# Create aggression gene propagation analysis
+python scripts/visualization/visualize_aggression_propagation.py
+
+# Create NetworkX-based coaching tree visualization
+python scripts/visualization/visualize_coaching_tree_nx.py --layout kamada --color_by pagerank
 ```
 
 ### Missing Data Handling
 ```bash
 # Impute missing values using SVD
-python scripts/svd_imputation.py --input data/processed/coaching_data.csv --output data/processed/coaching_data_imputed.csv
+python scripts/utils/svd_imputation.py --input data/processed/coaching_data.csv --output data/processed/coaching_data_imputed.csv
 ```
 
 ## Dependencies
