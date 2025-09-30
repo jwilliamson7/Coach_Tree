@@ -1,0 +1,205 @@
+{
+  "generated_date": "2025-09-30T10:29:58.807862",
+  "num_coaches": 35,
+  "metrics": {
+    "shotgun_gene": {
+      "mean": 0.11500221783503023,
+      "std": 0.07259778954188131,
+      "min": -0.03152953219798005,
+      "max": 0.23614862489612176
+    },
+    "actual_shotgun_rate": {
+      "mean": 0.7214761150196747,
+      "std": 0.10970096919954184,
+      "min": 0.551789077212806,
+      "max": 0.9402597402597402
+    }
+  },
+  "most_shotgun_heavy_coach_years": [
+    {
+      "head_coach": "Shane Steichen",
+      "season": 2023,
+      "shotgun_gene": 0.23614862489612176,
+      "actual_shotgun": 0.911275415896488
+    },
+    {
+      "head_coach": "Frank Reich",
+      "season": 2023,
+      "shotgun_gene": 0.232254402219087,
+      "actual_shotgun": 0.9025069637883009
+    },
+    {
+      "head_coach": "Matt Eberflus",
+      "season": 2023,
+      "shotgun_gene": 0.2076410209528312,
+      "actual_shotgun": 0.7751152073732719
+    },
+    {
+      "head_coach": "Zac Taylor",
+      "season": 2023,
+      "shotgun_gene": 0.20306151723769195,
+      "actual_shotgun": 0.8545101842870999
+    },
+    {
+      "head_coach": "Arthur Smith",
+      "season": 2023,
+      "shotgun_gene": 0.20246087952384917,
+      "actual_shotgun": 0.7747914735866543
+    },
+    {
+      "head_coach": "Nick Sirianni",
+      "season": 2023,
+      "shotgun_gene": 0.18838046541461695,
+      "actual_shotgun": 0.9402597402597402
+    },
+    {
+      "head_coach": "Giff Smith",
+      "season": 2023,
+      "shotgun_gene": 0.17840920179938347,
+      "actual_shotgun": 0.8454106280193237
+    },
+    {
+      "head_coach": "Andy Reid",
+      "season": 2023,
+      "shotgun_gene": 0.17840692416724613,
+      "actual_shotgun": 0.8304314912944739
+    },
+    {
+      "head_coach": "Ron Rivera",
+      "season": 2023,
+      "shotgun_gene": 0.1772517309044347,
+      "actual_shotgun": 0.8172348484848485
+    },
+    {
+      "head_coach": "Doug Pederson",
+      "season": 2023,
+      "shotgun_gene": 0.17546754118299834,
+      "actual_shotgun": 0.8129562043795621
+    }
+  ],
+  "most_traditional_coach_years": [
+    {
+      "head_coach": "Jonathan Gannon",
+      "season": 2023,
+      "shotgun_gene": 0.06515795589056184,
+      "actual_shotgun": 0.7176581680830972
+    },
+    {
+      "head_coach": "Antonio Pierce",
+      "season": 2023,
+      "shotgun_gene": 0.06013095909677768,
+      "actual_shotgun": 0.5565862708719852
+    },
+    {
+      "head_coach": "Bill Belichick",
+      "season": 2023,
+      "shotgun_gene": 0.04250531718575745,
+      "actual_shotgun": 0.6568047337278107
+    },
+    {
+      "head_coach": "Mike McCarthy",
+      "season": 2023,
+      "shotgun_gene": 0.038200379421413966,
+      "actual_shotgun": 0.6607744107744108
+    },
+    {
+      "head_coach": "Kyle Shanahan",
+      "season": 2023,
+      "shotgun_gene": 0.02894531360408603,
+      "actual_shotgun": 0.6098993288590604
+    },
+    {
+      "head_coach": "DeMeco Ryans",
+      "season": 2023,
+      "shotgun_gene": 0.02415671800744945,
+      "actual_shotgun": 0.6137931034482759
+    },
+    {
+      "head_coach": "Josh McDaniels",
+      "season": 2023,
+      "shotgun_gene": 0.023574057129511217,
+      "actual_shotgun": 0.5704845814977973
+    },
+    {
+      "head_coach": "Sean Payton",
+      "season": 2023,
+      "shotgun_gene": 0.009445796899460124,
+      "actual_shotgun": 0.5819095477386935
+    },
+    {
+      "head_coach": "Kevin O'Connell",
+      "season": 2023,
+      "shotgun_gene": -0.03022160918474648,
+      "actual_shotgun": 0.551789077212806
+    },
+    {
+      "head_coach": "Dan Campbell",
+      "season": 2023,
+      "shotgun_gene": -0.03152953219798005,
+      "actual_shotgun": 0.5602455871066769
+    }
+  ],
+  "unique_coaches": 35,
+  "years_covered": "2023-2023",
+  "era_analysis": {
+    "Current (2020-2024)": {
+      "avg_shotgun_rate": 0.7220781417376106,
+      "total_plays": 35474,
+      "num_coaches": 35,
+      "top_genes": [
+        {
+          "head_coach": "Shane Steichen",
+          "shotgun_gene": 0.23614862489612176,
+          "era_shotgun_rate": 0.911275415896488
+        },
+        {
+          "head_coach": "Frank Reich",
+          "shotgun_gene": 0.232254402219087,
+          "era_shotgun_rate": 0.9025069637883009
+        },
+        {
+          "head_coach": "Matt Eberflus",
+          "shotgun_gene": 0.2076410209528312,
+          "era_shotgun_rate": 0.7751152073732719
+        },
+        {
+          "head_coach": "Zac Taylor",
+          "shotgun_gene": 0.20306151723769195,
+          "era_shotgun_rate": 0.8545101842870999
+        },
+        {
+          "head_coach": "Arthur Smith",
+          "shotgun_gene": 0.20246087952384917,
+          "era_shotgun_rate": 0.7747914735866543
+        }
+      ],
+      "bottom_genes": [
+        {
+          "head_coach": "Dan Campbell",
+          "shotgun_gene": -0.03152953219798005,
+          "era_shotgun_rate": 0.5602455871066769
+        },
+        {
+          "head_coach": "Kevin O'Connell",
+          "shotgun_gene": -0.03022160918474648,
+          "era_shotgun_rate": 0.551789077212806
+        },
+        {
+          "head_coach": "Sean Payton",
+          "shotgun_gene": 0.009445796899460124,
+          "era_shotgun_rate": 0.5819095477386935
+        },
+        {
+          "head_coach": "Josh McDaniels",
+          "shotgun_gene": 0.023574057129511217,
+          "era_shotgun_rate": 0.5704845814977973
+        },
+        {
+          "head_coach": "DeMeco Ryans",
+          "shotgun_gene": 0.02415671800744945,
+          "era_shotgun_rate": 0.6137931034482759
+        }
+      ]
+    }
+  }
+}

@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 """
-Calculate Coaching Shotgun Gene
+Calculate Coaching Shotgun Gene by Coach-Year
 
-This script calculates a "shotgun gene" for NFL coaches based on their tendency
+This script calculates a "shotgun gene" for NFL head coaches based on their tendency
 to use shotgun formation relative to model predictions. The shotgun score measures
 whether a coach uses shotgun formation more or less than expected given the 
 game context (down, distance, score, time, etc.).
 
 A positive shotgun gene indicates a coach who uses shotgun more than expected,
 while a negative gene indicates a more traditional, under-center approach.
+
+For each coach-year, we calculate the difference between actual and predicted 
+shotgun usage rates. This enables temporal analysis of how coaching formation 
+preferences evolve over time.
 
 Usage:
     python calculate_shotgun_gene.py [--start_year 1999] [--end_year 2024]
@@ -53,8 +57,16 @@ class ShotgunGeneCalculator:
         self.shotgun_model = None
         self.shotgun_encoders = None
         
-        # Feature lists
-        self.shotgun_features = get_shotgun_predictor_features()
+        # Feature lists - use only features the existing model was trained on
+        # TODO: Retrain shotgun model with environmental factors later
+        self.shotgun_features = [
+            "defteam_score", "defteam_timeouts_remaining", "div_game", "down",
+            "drive_first_downs", "drive_play_count", "game_half", "game_seconds_remaining",
+            "goal_to_go", "half_seconds_remaining", "location", "posteam_score",
+            "posteam_timeouts_remaining", "qtr", "quarter_seconds_remaining",
+            "score_differential", "side_of_field", "spread_line", "total_line",
+            "yardline_100", "ydsnet", "ydstogo"
+        ]
         self.categorical_features = get_categorical_features()
         
         # Coach mapping
@@ -210,7 +222,7 @@ class ShotgunGeneCalculator:
         
         # Map posteam to the actual coach for that play
         # Use home_coach/away_coach fields which correctly handle interim coaches
-        def get_offensive_coach(row):
+        def get_head_coach(row):
             if pd.isna(row['posteam']):
                 return np.nan
             
@@ -231,10 +243,10 @@ class ShotgunGeneCalculator:
             
             return np.nan
         
-        combined['offensive_coach'] = combined.apply(get_offensive_coach, axis=1)
+        combined['head_coach'] = combined.apply(get_head_coach, axis=1)
         
         # Log how many plays we could map to coaches
-        mapped_count = combined['offensive_coach'].notna().sum()
+        mapped_count = combined['head_coach'].notna().sum()
         total_with_posteam = combined['posteam'].notna().sum()
         logger.info(f"Total plays loaded: {len(combined):,}")
         logger.info(f"Mapped {mapped_count:,}/{total_with_posteam:,} plays to coaches ({mapped_count/total_with_posteam*100:.1f}%)")
@@ -270,10 +282,21 @@ class ShotgunGeneCalculator:
                     
                     df_features[col] = le.transform(df_features[col])
         
-        # Handle missing values with median imputation
+        # Handle missing values with median imputation for numerical columns only
         from sklearn.impute import SimpleImputer
-        imputer = SimpleImputer(strategy='median')
-        features_imputed = imputer.fit_transform(df_features)
+        
+        # Separate numeric and categorical columns after encoding
+        numeric_cols = []
+        for col in df_features.columns:
+            if df_features[col].dtype in ['int64', 'float64']:
+                numeric_cols.append(col)
+        
+        if numeric_cols:
+            # Apply median imputation only to numeric columns
+            imputer = SimpleImputer(strategy='median')
+            df_features[numeric_cols] = imputer.fit_transform(df_features[numeric_cols])
+        
+        features_imputed = df_features.values
         
         return features_imputed
     
@@ -305,8 +328,8 @@ class ShotgunGeneCalculator:
         # Actual shotgun usage
         plays['actual_shotgun'] = plays['shotgun'].astype(int)
         
-        # Group by coach and calculate gene
-        coach_shotgun = plays.groupby('offensive_coach').agg({
+        # Group by coach and season for coach-year analysis
+        coach_shotgun = plays.groupby(['head_coach', 'season']).agg({
             'actual_shotgun': 'mean',  # Actual shotgun rate
             'predicted_shotgun_rate': 'mean',  # Expected shotgun rate
             'play_id': 'count'  # Number of plays
@@ -317,26 +340,18 @@ class ShotgunGeneCalculator:
             coach_shotgun['actual_shotgun'] - coach_shotgun['predicted_shotgun_rate']
         )
         
-        # Add year range for each coach
-        coach_years = plays.groupby('offensive_coach')['season'].agg(['min', 'max'])
-        coach_years.columns = ['first_year', 'last_year']
-        coach_shotgun = coach_shotgun.merge(coach_years, left_index=True, right_index=True)
-        
-        # Add teams coached
-        coach_teams = plays.groupby('offensive_coach')['posteam'].apply(
-            lambda x: ', '.join(sorted(x.unique()))
-        ).rename('teams')
-        coach_shotgun = coach_shotgun.merge(coach_teams, left_index=True, right_index=True)
+        # Reset index to make head_coach and season regular columns
+        coach_shotgun = coach_shotgun.reset_index()
         
         # Calculate z-score for better interpretation
         mean_gene = coach_shotgun['shotgun_gene'].mean()
         std_gene = coach_shotgun['shotgun_gene'].std()
         coach_shotgun['shotgun_gene_zscore'] = (coach_shotgun['shotgun_gene'] - mean_gene) / std_gene
         
-        # Sort by shotgun gene
-        coach_shotgun = coach_shotgun.sort_values('shotgun_gene', ascending=False)
+        # Sort by season, then shotgun gene
+        coach_shotgun = coach_shotgun.sort_values(['season', 'shotgun_gene'], ascending=[True, False])
         
-        return coach_shotgun.reset_index()
+        return coach_shotgun
     
     def analyze_by_era(self, plays: pd.DataFrame, coach_shotgun: pd.DataFrame) -> Dict:
         """
@@ -366,27 +381,28 @@ class ShotgunGeneCalculator:
             
             if len(era_plays) > 0:
                 # Get coaches active in this era
-                era_coaches = era_plays.groupby('offensive_coach').agg({
+                era_coaches = era_plays.groupby('head_coach').agg({
                     'shotgun': 'mean',
                     'play_id': 'count'
                 }).rename(columns={'shotgun': 'era_shotgun_rate', 'play_id': 'era_plays'})
                 
-                # Merge with overall gene
+                # For era analysis, we'll use the average gene across years for each coach
+                avg_coach_genes = coach_shotgun.groupby('head_coach')[['shotgun_gene', 'shotgun_gene_zscore']].mean()
                 era_coaches = era_coaches.merge(
-                    coach_shotgun[['offensive_coach', 'shotgun_gene', 'shotgun_gene_zscore']],
+                    avg_coach_genes,
                     left_index=True,
-                    right_on='offensive_coach'
-                )
+                    right_index=True
+                ).reset_index()  # Reset index to make head_coach a column
                 
                 era_analysis[era_name] = {
                     'avg_shotgun_rate': float(era_plays['shotgun'].mean()),
                     'total_plays': len(era_plays),
                     'num_coaches': len(era_coaches),
                     'top_genes': era_coaches.nlargest(5, 'shotgun_gene')[
-                        ['offensive_coach', 'shotgun_gene', 'era_shotgun_rate']
+                        ['head_coach', 'shotgun_gene', 'era_shotgun_rate']
                     ].to_dict('records'),
                     'bottom_genes': era_coaches.nsmallest(5, 'shotgun_gene')[
-                        ['offensive_coach', 'shotgun_gene', 'era_shotgun_rate']
+                        ['head_coach', 'shotgun_gene', 'era_shotgun_rate']
                     ].to_dict('records')
                 }
         
@@ -406,7 +422,7 @@ class ShotgunGeneCalculator:
         output_path.mkdir(parents=True, exist_ok=True)
         
         # Save full results as CSV
-        csv_path = output_path / f"shotgun_gene_{datetime.now().strftime('%Y%m%d')}.csv"
+        csv_path = output_path / "shotgun_gene.csv"
         coach_shotgun.to_csv(csv_path, index=False)
         logger.info(f"Saved shotgun gene data to {csv_path}")
         
@@ -428,16 +444,18 @@ class ShotgunGeneCalculator:
                     'max': float(coach_shotgun['actual_shotgun'].max())
                 }
             },
-            'most_shotgun_heavy_coaches': coach_shotgun.head(10)[
-                ['offensive_coach', 'shotgun_gene', 'actual_shotgun', 'teams', 'first_year', 'last_year']
+            'most_shotgun_heavy_coach_years': coach_shotgun.head(10)[
+                ['head_coach', 'season', 'shotgun_gene', 'actual_shotgun']
             ].to_dict('records'),
-            'most_traditional_coaches': coach_shotgun.tail(10)[
-                ['offensive_coach', 'shotgun_gene', 'actual_shotgun', 'teams', 'first_year', 'last_year']
+            'most_traditional_coach_years': coach_shotgun.tail(10)[
+                ['head_coach', 'season', 'shotgun_gene', 'actual_shotgun']
             ].to_dict('records'),
+            'unique_coaches': int(coach_shotgun['head_coach'].nunique()),
+            'years_covered': f"{int(coach_shotgun['season'].min())}-{int(coach_shotgun['season'].max())}",
             'era_analysis': era_analysis
         }
         
-        json_path = output_path / f"shotgun_gene_summary_{datetime.now().strftime('%Y%m%d')}.json"
+        json_path = output_path / "shotgun_gene_summary.json"
         with open(json_path, 'w') as f:
             json.dump(summary, f, indent=2, default=str)
         logger.info(f"Saved summary to {json_path}")
@@ -501,19 +519,19 @@ def main():
         print("\n" + "=" * 80)
         print("SHOTGUN GENE SUMMARY")
         print("=" * 80)
-        print(f"Total coaches analyzed: {len(coach_shotgun)}")
+        print(f"Total coach-years analyzed: {len(coach_shotgun)}")
+        print(f"Unique coaches: {coach_shotgun['head_coach'].nunique()}")
+        print(f"Years covered: {int(coach_shotgun['season'].min())} - {int(coach_shotgun['season'].max())}")
         
-        print("\nMost Shotgun-Heavy Coaches (Positive Gene):")
+        print("\nMost Shotgun-Heavy Coach-Years (Positive Gene):")
         for i, row in coach_shotgun.head(10).iterrows():
-            print(f"  {row['offensive_coach']:25} {row['shotgun_gene']:+.3f} "
-                  f"(Actual: {row['actual_shotgun']:.1%}, Expected: {row['predicted_shotgun_rate']:.1%}) "
-                  f"[{int(row['first_year'])}-{int(row['last_year'])}]")
+            print(f"  {row['head_coach']:25} ({int(row['season'])}) {row['shotgun_gene']:+.3f} "
+                  f"(Actual: {row['actual_shotgun']:.1%}, Expected: {row['predicted_shotgun_rate']:.1%})")
         
-        print("\nMost Traditional Coaches (Negative Gene):")
+        print("\nMost Traditional Coach-Years (Negative Gene):")
         for i, row in coach_shotgun.tail(10).iterrows():
-            print(f"  {row['offensive_coach']:25} {row['shotgun_gene']:+.3f} "
-                  f"(Actual: {row['actual_shotgun']:.1%}, Expected: {row['predicted_shotgun_rate']:.1%}) "
-                  f"[{int(row['first_year'])}-{int(row['last_year'])}]")
+            print(f"  {row['head_coach']:25} ({int(row['season'])}) {row['shotgun_gene']:+.3f} "
+                  f"(Actual: {row['actual_shotgun']:.1%}, Expected: {row['predicted_shotgun_rate']:.1%})")
         
         print("\nShotgun Gene Statistics:")
         print(f"  Mean: {coach_shotgun['shotgun_gene'].mean():.3f}")
@@ -524,8 +542,8 @@ def main():
         for era_name, era_data in era_analysis.items():
             print(f"\n{era_name}:")
             print(f"  Average shotgun rate: {era_data['avg_shotgun_rate']:.1%}")
-            print(f"  Top innovator: {era_data['top_genes'][0]['offensive_coach'] if era_data['top_genes'] else 'N/A'}")
-            print(f"  Most traditional: {era_data['bottom_genes'][0]['offensive_coach'] if era_data['bottom_genes'] else 'N/A'}")
+            print(f"  Top innovator: {era_data['top_genes'][0]['head_coach'] if era_data['top_genes'] else 'N/A'}")
+            print(f"  Most traditional: {era_data['bottom_genes'][0]['head_coach'] if era_data['bottom_genes'] else 'N/A'}")
         
         print("=" * 80)
         logger.info("Shotgun gene calculation completed successfully!")
