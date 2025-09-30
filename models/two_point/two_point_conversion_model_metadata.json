@@ -1,0 +1,42 @@
+{
+  "best_params": {
+    "subsample": 1.0,
+    "reg_lambda": 1,
+    "reg_alpha": 1,
+    "n_estimators": 100,
+    "min_child_weight": 5,
+    "max_depth": 4,
+    "learning_rate": 0.2,
+    "gamma": 0.2,
+    "colsample_bytree": 1.0
+  },
+  "feature_names": [
+    "defteam_score",
+    "defteam_timeouts_remaining",
+    "div_game",
+    "drive_first_downs",
+    "drive_play_count",
+    "game_half",
+    "game_seconds_remaining",
+    "half_seconds_remaining",
+    "location",
+    "posteam_score",
+    "posteam_timeouts_remaining",
+    "qtr",
+    "quarter_seconds_remaining",
+    "roof",
+    "score_differential",
+    "spread_line",
+    "surface",
+    "temp",
+    "total_line",
+    "wind",
+    "ydsnet"
+  ],
+  "n_features": 21,
+  "model_type": "XGBoost Two-Point Conversion Decision",
+  "target_encoding": {
+    "0": "Extra Point",
+    "1": "Two-Point Conversion"
+  }
+}

@@ -35,18 +35,20 @@ This is an NFL coaching tree analysis project that models coaching relationships
   - `svd_imputation.py`: Handles missing data imputation using SVD
 
 - **Predictive Models** (`scripts/models/`)
-  - `fourth_down_prediction_model.py`: XGBoost model predicting 4th down go/no-go decisions
+  - `fourth_down_decision_model.py`: XGBoost model predicting 4th down go/no-go decisions
   - `run_pass_prediction_model.py`: XGBoost model predicting run vs pass play calls
   - `pass_target_prediction_model.py`: XGBoost model predicting pass targets behind vs ahead of first down marker
+  - `two_point_conversion_model.py`: XGBoost model predicting two-point conversion vs extra point decisions
 
 - **Coaching Gene Analysis** (`scripts/calculate_aggression_gene.py`)
   - Calculates "aggression gene" for NFL coaches based on play-calling tendencies
   - Compares actual decisions to model predictions to measure deviation from expected behavior
-  - Three aggression components:
+  - Four aggression components:
     - **4th Down Aggression**: Going for it on 4th down more/less than predicted
     - **Pass-Heavy Aggression**: Passing more/less than predicted in neutral situations
     - **Deep Pass Aggression**: Targeting beyond the sticks more/less than predicted
-  - Generates composite aggression score combining all three dimensions
+    - **Two-Point Aggression**: Attempting two-point conversions more/less than predicted
+  - Generates composite aggression score combining all four dimensions
   - Handles team abbreviation mapping between different data sources
   - Processes ~900K plays per full run (2006-2024)
 
@@ -90,13 +92,16 @@ python scripts/extract_head_coaches.py --input_dir data/raw/Coaches --output_dir
 ### Predictive Modeling
 ```bash
 # Train 4th down decision prediction model
-python "scripts/models/fourth_down_prediction_model.py"
+python "scripts/models/fourth_down_decision_model.py"
 
 # Train run vs pass play type prediction model
 python "scripts/models/run_pass_prediction_model.py"
 
 # Train pass target prediction model (behind vs ahead of first down marker)
 python "scripts/models/pass_target_prediction_model.py"
+
+# Train two-point conversion decision model
+python "scripts/models/two_point_conversion_model.py"
 ```
 
 ### Coaching Gene Analysis
@@ -157,9 +162,9 @@ Required Python packages:
 
 ### Models (`models/`)
 - `fourth_down/`: 4th down decision prediction model files
-  - `fourth_down_prediction_model.json`: Trained XGBoost model
-  - `fourth_down_prediction_model_metadata.json`: Model metadata and parameters
-  - `fourth_down_prediction_model_encoders.pkl`: Label encoders for categorical features
+  - `fourth_down_decision_model.json`: Trained XGBoost model
+  - `fourth_down_decision_model_metadata.json`: Model metadata and parameters
+  - `fourth_down_decision_model_encoders.pkl`: Label encoders for categorical features
 - `run_pass/`: Run vs pass prediction model files
   - `run_pass_prediction_model.json`: Trained XGBoost model
   - `run_pass_prediction_model_metadata.json`: Model metadata and parameters
@@ -168,6 +173,10 @@ Required Python packages:
   - `pass_target_prediction_model.json`: Trained XGBoost model
   - `pass_target_prediction_model_metadata.json`: Model metadata and parameters
   - `pass_target_prediction_model_encoders.pkl`: Label encoders for categorical features
+- `two_point/`: Two-point conversion decision model files
+  - `two_point_conversion_model.json`: Trained XGBoost model
+  - `two_point_conversion_model_metadata.json`: Model metadata and parameters
+  - `two_point_conversion_model_encoders.pkl`: Label encoders for categorical features
 
 ## Key Features Tracked
 
@@ -193,6 +202,7 @@ Required Python packages:
 - **4th Down Decisions**: Predicts go/no-go decisions on 4th down using game context (score, field position, time)
 - **Run vs Pass**: Predicts play-calling tendencies based on situational factors
 - **Pass Target Strategy**: Predicts whether passes target behind or ahead of the first down marker
+- **Two-Point Conversions**: Predicts whether teams attempt two-point conversions vs extra points after touchdowns
 
 ## Important Notes
 
@@ -224,10 +234,17 @@ Required Python packages:
 
 ### Predictive Modeling Framework
 - XGBoost models use only pre-play context features to avoid data leakage
+- **Environmental factors included**: Weather (temperature, wind), field conditions (roof, surface), location (home/neutral)
+- **Temporal fields excluded**: Season and week removed to prevent confounding in gene analysis
 - SVD-based imputation handles missing values in large datasets
 - RandomizedSearchCV with stratified cross-validation for hyperparameter tuning
 - Models saved in XGBoost native JSON format for optimal performance
 - Label encoders preserve categorical feature mappings
+- Current model performance:
+  - 4th Down Decisions: AUC 0.968 (26 features)
+  - Run vs Pass: AUC 0.786 (26 features)
+  - Pass Target: AUC 0.732 (26 features)
+  - Two-Point Conversion: AUC 0.927 (21 features)
 
 ### Future Integration
 - Play-by-play data (via nfl_data_py) will be used to generate coaching "genes"

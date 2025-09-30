@@ -1,0 +1,42 @@
+{
+  "generated_date": "2025-09-30T10:04:12.390772",
+  "num_coaches": 138,
+  "metrics": {
+    "fourth_down_aggression": {
+      "mean": 0.0025844294448554707,
+      "std": 0.0231048333495736
+    },
+    "pass_heavy_aggression": {
+      "mean": 0.014301300326138067,
+      "std": 0.029225131517169003
+    },
+    "deep_pass_aggression": {
+      "mean": -0.005959766858686176,
+      "std": 0.02880881599130205
+    }
+  },
+  "most_aggressive_coaches": [
+    "Gregg Williams",
+    "Doug Pederson",
+    "Brandon Staley",
+    "DeMeco Ryans",
+    "Dirk Koetter",
+    "Rob Chudzinski",
+    "Bill Callahan",
+    "Kevin Stefanski",
+    "Freddie Kitchens",
+    "Matt LaFleur"
+  ],
+  "least_aggressive_coaches": [
+    "Mike McCoy",
+    "Dick Jauron",
+    "Lane Kiffin",
+    "Brad Childress",
+    "Emmitt Thomas",
+    "Jon Gruden",
+    "David Culley",
+    "Jim Zorn",
+    "Dennis Green",
+    "Eric Studesville"
+  ]
+}
