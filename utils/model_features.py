@@ -321,7 +321,7 @@ def get_fourth_down_predictor_features() -> List[str]:
         "drive_play_count", "drive_first_downs", "ydsnet",
         
         # Game environment
-        "location", "div_game",
+        "location", "div_game", "roof", "surface", "temp", "wind",
         
         # Vegas context
         "spread_line", "total_line",
@@ -361,7 +361,7 @@ def get_run_pass_predictor_features() -> List[str]:
         "drive_play_count", "drive_first_downs", "ydsnet",
         
         # Game environment
-        "location", "div_game",
+        "location", "div_game", "roof", "surface", "temp", "wind",
         
         # Vegas context  
         "spread_line", "total_line",
@@ -401,7 +401,7 @@ def get_pass_target_predictor_features() -> List[str]:
         "drive_play_count", "drive_first_downs", "ydsnet",
         
         # Game environment
-        "location", "div_game",
+        "location", "div_game", "roof", "surface", "temp", "wind",
         
         # Vegas context  
         "spread_line", "total_line",
@@ -440,13 +440,49 @@ def get_shotgun_predictor_features() -> List[str]:
         "drive_play_count", "drive_first_downs", "ydsnet",
         
         # Game environment
-        "location", "div_game",
+        "location", "div_game", "roof", "surface", "temp", "wind",
         
         # Vegas context  
         "spread_line", "total_line",
     ]
     
     return sorted(shotgun_features)
+
+def get_two_point_predictor_features() -> List[str]:
+    """
+    Get features specifically for two-point conversion decision prediction.
+    Only includes pre-play context available before the conversion decision is made.
+    
+    This predicts whether teams attempt a two-point conversion vs. extra point
+    after scoring a touchdown. Excludes temporal fields to focus on game context.
+    
+    Returns:
+        List of field names for two-point conversion decision prediction
+    """
+    # Core context for two-point conversion decisions - NO temporal fields
+    two_point_features = [
+        # Game situation (excluding season/week)
+        "qtr", 
+        "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
+        "game_half", 
+        
+        # Score situation (critical for conversion decisions)
+        "posteam_score", "defteam_score", "score_differential",
+        
+        # Timeouts and clock management
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining",
+        
+        # Drive context
+        "drive_play_count", "drive_first_downs", "ydsnet",
+        
+        # Game environment
+        "location", "div_game", "roof", "surface", "temp", "wind",
+        
+        # Vegas context (important for late-game decisions)
+        "spread_line", "total_line",
+    ]
+    
+    return sorted(two_point_features)
 
 def get_target_features() -> List[str]:
     """

@@ -1,25 +1,23 @@
 {
   "best_params": {
-    "subsample": 0.9,
-    "reg_lambda": 1.5,
-    "reg_alpha": 0.1,
+    "subsample": 1.0,
+    "reg_lambda": 1,
+    "reg_alpha": 1,
     "n_estimators": 100,
-    "min_child_weight": 1,
-    "max_depth": 8,
-    "learning_rate": 0.1,
-    "gamma": 0.5,
+    "min_child_weight": 5,
+    "max_depth": 4,
+    "learning_rate": 0.2,
+    "gamma": 0.2,
     "colsample_bytree": 1.0
   },
   "feature_names": [
     "defteam_score",
     "defteam_timeouts_remaining",
     "div_game",
-    "down",
     "drive_first_downs",
     "drive_play_count",
     "game_half",
     "game_seconds_remaining",
-    "goal_to_go",
     "half_seconds_remaining",
     "location",
     "posteam_score",
@@ -28,20 +26,17 @@
     "quarter_seconds_remaining",
     "roof",
     "score_differential",
-    "side_of_field",
     "spread_line",
     "surface",
     "temp",
     "total_line",
     "wind",
-    "yardline_100",
-    "ydsnet",
-    "ydstogo"
+    "ydsnet"
   ],
-  "n_features": 26,
-  "model_type": "XGBoost 4th Down Decision",
+  "n_features": 21,
+  "model_type": "XGBoost Two-Point Conversion Decision",
   "target_encoding": {
-    "0": "Punt/Field Goal",
-    "1": "Go for it"
+    "0": "Extra Point",
+    "1": "Two-Point Conversion"
   }
 }

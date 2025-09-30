@@ -37,6 +37,7 @@ from utils.model_features import (
     get_fourth_down_predictor_features,
     get_run_pass_predictor_features, 
     get_pass_target_predictor_features,
+    get_two_point_predictor_features,
     get_categorical_features
 )
 
@@ -61,16 +62,19 @@ class AggressionCalculator:
         self.fourth_down_model = None
         self.run_pass_model = None
         self.pass_target_model = None
+        self.two_point_model = None
         
         # Encoder containers
         self.fourth_down_encoders = None
         self.run_pass_encoders = None
         self.pass_target_encoders = None
+        self.two_point_encoders = None
         
         # Feature lists
         self.fourth_down_features = get_fourth_down_predictor_features()
         self.run_pass_features = get_run_pass_predictor_features()
         self.pass_target_features = get_pass_target_predictor_features()
+        self.two_point_features = get_two_point_predictor_features()
         self.categorical_features = get_categorical_features()
         
         # Coach mapping
@@ -124,6 +128,21 @@ class AggressionCalculator:
             logger.info("✓ Loaded pass target prediction model")
         else:
             logger.warning("Pass target model not found")
+            
+        # Load two-point conversion model
+        two_point_path = self.models_dir / "two_point" / "two_point_conversion_model.json"
+        if two_point_path.exists():
+            self.two_point_model = xgb.XGBClassifier()
+            self.two_point_model.load_model(str(two_point_path))
+            
+            # Load encoders
+            encoders_path = self.models_dir / "two_point" / "two_point_conversion_model_encoders.pkl"
+            if encoders_path.exists():
+                with open(encoders_path, 'rb') as f:
+                    self.two_point_encoders = pickle.load(f)
+            logger.info("✓ Loaded two-point conversion prediction model")
+        else:
+            logger.warning("Two-point conversion model not found")
     
     def load_coach_mappings(self) -> None:
         """Load the mapping of team-year to head coaches"""
@@ -216,8 +235,10 @@ class AggressionCalculator:
                     self.fourth_down_features + 
                     self.run_pass_features + 
                     self.pass_target_features +
+                    self.two_point_features +
                     ['play_type', 'punt_attempt', 'field_goal_attempt', 'air_yards', 
                      'qb_scramble',  # Need this for proper pass classification
+                     'extra_point_attempt', 'two_point_attempt',  # Need for conversion analysis
                      'posteam', 'season',  # Need these for coach mapping
                      'home_team', 'away_team', 'home_coach', 'away_coach',  # Need actual coach names
                      'desc',  # Need for analyzing no_play situations
@@ -587,6 +608,60 @@ class AggressionCalculator:
         
         return coach_aggression.reset_index()
     
+    def calculate_two_point_aggression(self, plays: pd.DataFrame) -> pd.DataFrame:
+        """
+        Calculate two-point conversion aggression for each coach.
+        
+        Args:
+            plays: DataFrame with play data
+            
+        Returns:
+            DataFrame with coach and their two-point aggression score
+        """
+        logger.info("Calculating two-point conversion aggression...")
+        
+        # Filter for conversion attempts (both extra point and two-point)
+        conversion_plays = plays[
+            (plays['extra_point_attempt'] == 1) |
+            (plays['two_point_attempt'] == 1)
+        ].copy()
+        
+        if len(conversion_plays) == 0:
+            logger.warning("No conversion attempts found")
+            return pd.DataFrame()
+        
+        logger.info(f"Found {len(conversion_plays):,} conversion attempts")
+        
+        # Prepare features for prediction
+        features = self.prepare_features_for_model(
+            conversion_plays,
+            self.two_point_features,
+            self.two_point_encoders
+        )
+        
+        # Generate predictions (probability of attempting two-point conversion)
+        predictions = self.two_point_model.predict_proba(features)[:, 1]
+        conversion_plays['predicted_two_point_rate'] = predictions
+        
+        # Actual decisions (1 = two-point attempt, 0 = extra point)
+        conversion_plays['actual_two_point'] = (
+            conversion_plays['two_point_attempt'] == 1
+        ).astype(int)
+        
+        # Group by coach and calculate aggression
+        coach_aggression = conversion_plays.groupby('offensive_coach').agg({
+            'actual_two_point': 'mean',  # Actual two-point rate
+            'predicted_two_point_rate': 'mean',  # Expected two-point rate
+            'play_id': 'count'  # Number of conversion attempts
+        }).rename(columns={'play_id': 'conversion_attempts'})
+        
+        # Calculate aggression score (actual - predicted)
+        coach_aggression['two_point_aggression'] = (
+            coach_aggression['actual_two_point'] - coach_aggression['predicted_two_point_rate']
+        )
+        
+        return coach_aggression.reset_index()
+    
     def calculate_composite_aggression(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
         Calculate composite aggression scores for all coaches.
@@ -603,6 +678,7 @@ class AggressionCalculator:
         fourth_down_agg = self.calculate_fourth_down_aggression(plays)
         pass_heavy_agg = self.calculate_pass_heavy_aggression(plays)
         deep_pass_agg = self.calculate_deep_pass_aggression(plays)
+        two_point_agg = self.calculate_two_point_aggression(plays)
         
         # Merge all components
         aggression_df = fourth_down_agg[['offensive_coach', 'fourth_down_aggression', 
@@ -625,7 +701,15 @@ class AggressionCalculator:
                 how='outer'
             )
         
-        # Calculate composite aggression score (average of three components)
+        if not two_point_agg.empty:
+            aggression_df = aggression_df.merge(
+                two_point_agg[['offensive_coach', 'two_point_aggression',
+                             'conversion_attempts', 'actual_two_point', 'predicted_two_point_rate']],
+                on='offensive_coach',
+                how='outer'
+            )
+        
+        # Calculate composite aggression score (average of four components)
         aggression_components = []
         if 'fourth_down_aggression' in aggression_df.columns:
             aggression_components.append('fourth_down_aggression')
@@ -633,6 +717,8 @@ class AggressionCalculator:
             aggression_components.append('pass_heavy_aggression')
         if 'deep_pass_aggression' in aggression_df.columns:
             aggression_components.append('deep_pass_aggression')
+        if 'two_point_aggression' in aggression_df.columns:
+            aggression_components.append('two_point_aggression')
         
         if aggression_components:
             aggression_df['composite_aggression'] = aggression_df[aggression_components].mean(axis=1)
@@ -645,7 +731,7 @@ class AggressionCalculator:
         
         # Add total plays coached
         aggression_df['total_plays'] = aggression_df[
-            [col for col in ['fourth_down_plays', 'run_pass_plays', 'pass_plays'] 
+            [col for col in ['fourth_down_plays', 'run_pass_plays', 'pass_plays', 'conversion_attempts'] 
              if col in aggression_df.columns]
         ].sum(axis=1)
         
@@ -736,7 +822,7 @@ def main():
         
         # Check if all models loaded
         if not all([calculator.fourth_down_model, calculator.run_pass_model, 
-                   calculator.pass_target_model]):
+                   calculator.pass_target_model, calculator.two_point_model]):
             logger.error("Not all models loaded. Please train all models first.")
             return
         
@@ -772,7 +858,7 @@ def main():
                 print(f"  {row['offensive_coach']}: {row['composite_aggression']:.3f}")
         
         print("\nAggression Components (mean ± std):")
-        for component in ['fourth_down_aggression', 'pass_heavy_aggression', 'deep_pass_aggression']:
+        for component in ['fourth_down_aggression', 'pass_heavy_aggression', 'deep_pass_aggression', 'two_point_aggression']:
             if component in aggression_df.columns:
                 mean_val = aggression_df[component].mean()
                 std_val = aggression_df[component].std()
