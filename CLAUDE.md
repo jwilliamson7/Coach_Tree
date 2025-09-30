@@ -11,9 +11,11 @@ This is an NFL coaching tree analysis project that models coaching relationships
 ### Data Pipeline Flow
 1. **Scraping** (`crawlers/PFR/`): Scrapes coach and team data from pro-football-reference.com
 2. **Raw Data Storage** (`data/raw/`): Stores individual coach and team data files  
-3. **Processing** (`scripts/`): Transforms raw data into feature-engineered datasets
+3. **Processing** (`scripts/data_processing/`): Transforms raw data into feature-engineered datasets
 4. **Processed Data** (`data/processed/`): Contains normalized league data and coaching performance metrics
-5. **Analysis** (`analysis/`): Statistical analysis and modeling (to be implemented)
+5. **Analysis** (`scripts/analysis/`): Gene calculations and behavioral analysis
+6. **Visualization** (`scripts/visualization/`): Interactive charts and network graphs
+7. **Generated Outputs** (`outputs/`): HTML visualizations, reports, and analysis results
 
 ### Key Components
 
@@ -181,6 +183,13 @@ Required Python packages:
 - `coaching_genes/`: Coaching behavioral analysis outputs
   - `aggression_gene_YYYYMMDD.csv`: Full aggression metrics for all coaches
   - `aggression_gene_summary_YYYYMMDD.json`: Summary statistics and rankings
+
+### Generated Outputs (`outputs/`)
+- `visualizations/`: Interactive HTML visualizations
+  - `coaching_tree_*.html`: Various coaching tree network visualizations
+  - `aggression_propagation.html`: Gene propagation analysis charts
+- `reports/`: Analysis reports and summaries (future)
+- `analysis/`: Detailed analysis outputs (future)
 
 ### Models (`models/`)
 - `fourth_down/`: 4th down decision prediction model files
