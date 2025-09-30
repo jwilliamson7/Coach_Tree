@@ -354,7 +354,7 @@ class SimpleCoachingTreeVisualizer:
 def main():
     """Main execution function"""
     parser = argparse.ArgumentParser(description='Visualize NFL coaching tree')
-    parser.add_argument('--output', type=str, default='coaching_tree.html',
+    parser.add_argument('--output', type=str, default='outputs/visualizations/coaching_tree_simple.html',
                        help='Output HTML file name')
     parser.add_argument('--filter_years', type=str, 
                        help='Year range filter (e.g., "2010-2024")')

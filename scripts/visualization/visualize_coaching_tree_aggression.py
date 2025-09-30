@@ -440,7 +440,7 @@ class AggressionGeneTreeVisualizer:
 def main():
     """Main execution function"""
     parser = argparse.ArgumentParser(description='Visualize coaching tree with aggression genes')
-    parser.add_argument('--output', type=str, default='coaching_tree_aggression.html',
+    parser.add_argument('--output', type=str, default='outputs/visualizations/coaching_tree_aggression.html',
                        help='Output HTML file name')
     parser.add_argument('--filter_years', type=str,
                        help='Year range filter (e.g., "2010-2024")')

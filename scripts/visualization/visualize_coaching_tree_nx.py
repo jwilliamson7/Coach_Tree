@@ -459,7 +459,7 @@ class NetworkXCoachingTreeVisualizer:
 def main():
     """Main execution function"""
     parser = argparse.ArgumentParser(description='Visualize NFL coaching tree with NetworkX')
-    parser.add_argument('--output', type=str, default='coaching_tree_nx.html',
+    parser.add_argument('--output', type=str, default='outputs/visualizations/coaching_tree_nx.html',
                        help='Output HTML file name')
     parser.add_argument('--layout', type=str, default='spring',
                        choices=['spring', 'hierarchical', 'kamada', 'circular', 'spectral'],

@@ -388,7 +388,7 @@ class AggressionPropagationAnalyzer:
 def main():
     """Main execution function"""
     parser = argparse.ArgumentParser(description='Visualize aggression gene propagation through lineages')
-    parser.add_argument('--output', type=str, default='aggression_propagation.html',
+    parser.add_argument('--output', type=str, default='outputs/visualizations/aggression_propagation.html',
                        help='Output HTML file name')
     parser.add_argument('--filter_years', type=str,
                        help='Year range filter (e.g., "2010-2024")')
