@@ -1,0 +1,43 @@
+{
+  "best_params": {
+    "subsample": 0.8,
+    "reg_lambda": 1,
+    "reg_alpha": 1,
+    "n_estimators": 500,
+    "min_child_weight": 1,
+    "max_depth": 8,
+    "learning_rate": 0.3,
+    "gamma": 0.2,
+    "colsample_bytree": 1.0
+  },
+  "feature_names": [
+    "defteam_score",
+    "defteam_timeouts_remaining",
+    "div_game",
+    "down",
+    "drive_first_downs",
+    "drive_play_count",
+    "game_half",
+    "game_seconds_remaining",
+    "goal_to_go",
+    "half_seconds_remaining",
+    "location",
+    "posteam_score",
+    "posteam_timeouts_remaining",
+    "qtr",
+    "quarter_seconds_remaining",
+    "score_differential",
+    "side_of_field",
+    "spread_line",
+    "total_line",
+    "yardline_100",
+    "ydsnet",
+    "ydstogo"
+  ],
+  "n_features": 22,
+  "model_type": "XGBoost Shotgun Formation Prediction",
+  "target_encoding": {
+    "0": "Not Shotgun",
+    "1": "Shotgun"
+  }
+}
