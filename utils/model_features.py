@@ -296,38 +296,35 @@ def get_fourth_down_predictor_features() -> List[str]:
     """
     Get features specifically for 4th down decision modeling.
     Only includes context available before the coaching decision is made.
+    Excludes temporal fields (season, week) to focus on pure game context.
     
     Returns:
         List of field names for 4th down decision prediction
     """
-    # Core context for 4th down decisions
+    # Core context for 4th down decisions - NO temporal fields
     fourth_down_features = [
-        # Game situation
-        "season", "week", "season_type", "qtr", 
+        # Game situation (excluding season/week)
+        "qtr", 
         "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
         "game_half", 
         
         # Score situation  
         "posteam_score", "defteam_score", "score_differential",
         
-        # Team context
-        "posteam", "defteam", "posteam_type",
-        
         # Field position and down/distance
         "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
         
         # Timeouts and clock management
-        "posteam_timeouts_remaining", "defteam_timeouts_remaining", "timeout",
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining",
         
         # Drive context (known at start of play)
-        "drive", "series", "drive_play_count", "drive_first_downs",
-        "drive_quarter_start", "ydsnet",
+        "drive_play_count", "drive_first_downs", "ydsnet",
         
         # Game environment
-        "location", "roof", "surface", "temp", "wind", "div_game",
+        "location", "div_game",
         
         # Vegas context
-        "spread_line", "total_line", "home_opening_kickoff",
+        "spread_line", "total_line",
     ]
     
     return sorted(fourth_down_features)
@@ -339,38 +336,35 @@ def get_run_pass_predictor_features() -> List[str]:
     
     This excludes formation fields like 'shotgun' and 'no_huddle' since these
     are outcomes of the coaching decision we're trying to predict.
+    Excludes temporal fields (season, week) to focus on pure game context.
     
     Returns:
         List of field names for run vs pass prediction
     """
-    # Core context for run vs pass decisions  
+    # Core context for run vs pass decisions - NO temporal fields
     run_pass_features = [
-        # Game situation
-        "season", "week", "season_type", "qtr", 
+        # Game situation (excluding season/week)
+        "qtr", 
         "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
         "game_half", 
         
         # Score situation  
         "posteam_score", "defteam_score", "score_differential",
         
-        # Team context
-        "posteam", "defteam", "posteam_type",
-        
         # Field position and down/distance  
         "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
         
         # Timeouts and clock management
-        "posteam_timeouts_remaining", "defteam_timeouts_remaining", "timeout",
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining",
         
         # Drive context (known at start of play)
-        "drive", "series", "drive_play_count", "drive_first_downs",
-        "drive_quarter_start", "ydsnet",
+        "drive_play_count", "drive_first_downs", "ydsnet",
         
         # Game environment
-        "location", "roof", "surface", "temp", "wind", "div_game",
+        "location", "div_game",
         
         # Vegas context  
-        "spread_line", "total_line", "home_opening_kickoff",
+        "spread_line", "total_line",
     ]
     
     return sorted(run_pass_features)
@@ -382,41 +376,77 @@ def get_pass_target_predictor_features() -> List[str]:
     
     This excludes formation fields like 'shotgun' and 'no_huddle' since these
     are outcomes of the coaching decision we're trying to predict.
+    Excludes temporal fields (season, week) to focus on pure game context.
     
     Returns:
         List of field names for pass target prediction
     """
-    # Core context for pass target decisions  
+    # Core context for pass target decisions - NO temporal fields
     pass_target_features = [
-        # Game situation
-        "season", "week", "season_type", "qtr", 
+        # Game situation (excluding season/week)
+        "qtr", 
         "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
         "game_half", 
         
         # Score situation  
         "posteam_score", "defteam_score", "score_differential",
         
-        # Team context
-        "posteam", "defteam", "posteam_type",
+        # Field position and down/distance  
+        "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
+        
+        # Timeouts and clock management
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining",
+        
+        # Drive context (known at start of play)
+        "drive_play_count", "drive_first_downs", "ydsnet",
+        
+        # Game environment
+        "location", "div_game",
+        
+        # Vegas context  
+        "spread_line", "total_line",
+    ]
+    
+    return sorted(pass_target_features)
+
+def get_shotgun_predictor_features() -> List[str]:
+    """
+    Get features specifically for shotgun formation prediction.
+    Only includes pre-play context available before the formation decision is made.
+    
+    This is similar to run/pass prediction but focuses on formation choice.
+    Excludes temporal fields (season, week) to focus on pure game context.
+    
+    Returns:
+        List of field names for shotgun formation prediction
+    """
+    # Core context for shotgun formation decisions - NO temporal fields
+    shotgun_features = [
+        # Game situation (excluding season/week)
+        "qtr", 
+        "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
+        "game_half", 
+        
+        # Score situation  
+        "posteam_score", "defteam_score", "score_differential",
         
         # Field position and down/distance  
         "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
         
         # Timeouts and clock management
-        "posteam_timeouts_remaining", "defteam_timeouts_remaining", "timeout",
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining",
         
         # Drive context (known at start of play)
-        "drive", "series", "drive_play_count", "drive_first_downs",
-        "drive_quarter_start", "ydsnet",
+        "drive_play_count", "drive_first_downs", "ydsnet",
         
         # Game environment
-        "location", "roof", "surface", "temp", "wind", "div_game",
+        "location", "div_game",
         
         # Vegas context  
-        "spread_line", "total_line", "home_opening_kickoff",
+        "spread_line", "total_line",
     ]
     
-    return sorted(pass_target_features)
+    return sorted(shotgun_features)
 
 def get_target_features() -> List[str]:
     """

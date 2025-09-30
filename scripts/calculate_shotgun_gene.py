@@ -1,0 +1,539 @@
+#!/usr/bin/env python3
+"""
+Calculate Coaching Shotgun Gene
+
+This script calculates a "shotgun gene" for NFL coaches based on their tendency
+to use shotgun formation relative to model predictions. The shotgun score measures
+whether a coach uses shotgun formation more or less than expected given the 
+game context (down, distance, score, time, etc.).
+
+A positive shotgun gene indicates a coach who uses shotgun more than expected,
+while a negative gene indicates a more traditional, under-center approach.
+
+Usage:
+    python calculate_shotgun_gene.py [--start_year 1999] [--end_year 2024]
+"""
+
+import argparse
+import pandas as pd
+import numpy as np
+import logging
+from pathlib import Path
+from typing import Dict, List, Tuple, Optional
+import sys
+import warnings
+import pickle
+import json
+import xgboost as xgb
+from datetime import datetime
+warnings.filterwarnings('ignore')
+
+# Add parent directory to path to import utils
+sys.path.append(str(Path(__file__).parent.parent))
+from utils.model_features import get_shotgun_predictor_features, get_categorical_features
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+
+class ShotgunGeneCalculator:
+    """Calculate shotgun formation gene for NFL coaches based on formation patterns"""
+    
+    def __init__(self, models_dir: str = "models", data_dir: str = "data/raw/play_by_play", 
+                 coaching_dir: str = "data/processed/Coaching"):
+        self.models_dir = Path(models_dir)
+        self.data_dir = Path(data_dir)
+        self.coaching_dir = Path(coaching_dir)
+        
+        # Model containers
+        self.shotgun_model = None
+        self.shotgun_encoders = None
+        
+        # Feature lists
+        self.shotgun_features = get_shotgun_predictor_features()
+        self.categorical_features = get_categorical_features()
+        
+        # Coach mapping
+        self.coach_mapping = None
+        
+    def load_model(self) -> None:
+        """Load the trained XGBoost shotgun model and its encoders"""
+        logger.info("Loading trained shotgun model...")
+        
+        # Load shotgun model
+        shotgun_path = self.models_dir / "shotgun" / "shotgun_prediction_model.json"
+        if shotgun_path.exists():
+            self.shotgun_model = xgb.XGBClassifier()
+            self.shotgun_model.load_model(str(shotgun_path))
+            
+            # Load encoders
+            encoders_path = self.models_dir / "shotgun" / "shotgun_prediction_model_encoders.pkl"
+            if encoders_path.exists():
+                with open(encoders_path, 'rb') as f:
+                    self.shotgun_encoders = pickle.load(f)
+            logger.info("✓ Loaded shotgun formation prediction model")
+        else:
+            raise FileNotFoundError(f"Shotgun model not found at {shotgun_path}")
+    
+    def load_coach_mappings(self) -> None:
+        """Load the mapping of team-year to head coaches"""
+        logger.info("Loading coach mappings...")
+        
+        coach_file = self.coaching_dir / "team_year_head_coaches.csv"
+        if coach_file.exists():
+            self.coach_mapping = pd.read_csv(coach_file)
+            # Create a dictionary for fast lookup: (team, year) -> coach
+            self.coach_dict = {}
+            for _, row in self.coach_mapping.iterrows():
+                # Use Primary_Coach as the main coach
+                self.coach_dict[(row['Team'], int(row['Year']))] = row['Primary_Coach']
+            logger.info(f"✓ Loaded coach mappings for {len(self.coach_dict)} team-years")
+        else:
+            logger.warning(f"Coach mapping file not found: {coach_file}")
+            self.coach_dict = {}
+    
+    def normalize_team_abbr(self, pbp_team: str) -> str:
+        """
+        Normalize team abbreviations from play-by-play data to match coach mapping format.
+        
+        Args:
+            pbp_team: Team abbreviation from play-by-play data
+            
+        Returns:
+            Normalized team abbreviation matching coach mapping format
+        """
+        # Mapping from play-by-play format to coach mapping format
+        team_mapping = {
+            # Current teams with different abbreviations
+            'GB': 'GNB',      # Green Bay Packers
+            'KC': 'KAN',      # Kansas City Chiefs
+            'LA': 'LAR',      # Los Angeles Rams
+            'LV': 'LVR',      # Las Vegas Raiders
+            'NO': 'NOR',      # New Orleans Saints
+            'NE': 'NWE',      # New England Patriots
+            'TEN': 'OTI',     # Tennessee Titans (was OTI for Oilers/Titans)
+            'ARI': 'CRD',     # Arizona Cardinals (uses CRD in coach data)
+            'LAC': 'SDG',     # Los Angeles Chargers (was San Diego)
+            'SF': 'SFO',      # San Francisco 49ers
+            'TB': 'TAM',      # Tampa Bay Buccaneers
+            'IND': 'CLT',     # Indianapolis Colts (was Baltimore Colts CLT)
+            'BAL': 'RAV',     # Baltimore Ravens
+            'HOU': 'HTX',     # Houston Texans
+            
+            # Historical teams (for older data if needed)
+            'OAK': 'RAI',     # Oakland Raiders (before Las Vegas)
+            'SD': 'SDG',      # San Diego Chargers (before LA)
+            'STL': 'STL',     # St. Louis Rams (before LA)
+            
+            # Teams that stay the same
+            'ATL': 'ATL', 'BUF': 'BUF', 'CAR': 'CAR', 'CHI': 'CHI',
+            'CIN': 'CIN', 'CLE': 'CLE', 'DAL': 'DAL', 'DEN': 'DEN',
+            'DET': 'DET', 'JAX': 'JAX', 'MIA': 'MIA', 'MIN': 'MIN',
+            'NYG': 'NYG', 'NYJ': 'NYJ', 'PHI': 'PHI', 'PIT': 'PIT',
+            'SEA': 'SEA', 'WAS': 'WAS'
+        }
+        
+        return team_mapping.get(pbp_team, pbp_team)
+    
+    def load_play_data(self, start_year: int = 1999, end_year: int = 2024) -> pd.DataFrame:
+        """
+        Load play-by-play data for the specified years with coach information.
+        
+        Args:
+            start_year: First year to include (default 1999 when shotgun data starts)
+            end_year: Last year to include
+            
+        Returns:
+            DataFrame with play-by-play data including coach columns
+        """
+        logger.info(f"Loading play-by-play data from {start_year} to {end_year}...")
+        
+        all_plays = []
+        
+        for year in range(start_year, end_year + 1):
+            file_path = self.data_dir / f"play_by_play_{year}.csv"
+            
+            if not file_path.exists():
+                logger.warning(f"No data found for {year}")
+                continue
+                
+            try:
+                # Read the CSV
+                df = pd.read_csv(file_path)
+                
+                # Check if shotgun column exists
+                if 'shotgun' not in df.columns:
+                    logger.warning(f"No 'shotgun' column in {year} data - skipping")
+                    continue
+                
+                # Keep only necessary columns to reduce memory
+                needed_cols = list(set(
+                    self.shotgun_features + 
+                    ['play_type', 'shotgun', 'punt_attempt', 'field_goal_attempt',
+                     'down', 'posteam', 'season',  # Need these for filtering and coach mapping
+                     'home_team', 'away_team', 'home_coach', 'away_coach',  # Need actual coach names
+                     'game_id', 'play_id']
+                ))
+                
+                # Keep only columns that exist
+                keep_cols = [col for col in needed_cols if col in df.columns]
+                df = df[keep_cols]
+                
+                # Filter for relevant plays (1st-3rd downs and non-special teams 4th downs)
+                df = df[
+                    (df['play_type'].isin(['run', 'pass'])) &  # Only offensive plays
+                    (
+                        (df['down'].isin([1, 2, 3])) |  # All 1st-3rd downs
+                        ((df['down'] == 4) & 
+                         (df.get('punt_attempt', 0) != 1) &      # Not punts
+                         (df.get('field_goal_attempt', 0) != 1)  # Not field goals
+                        )
+                    ) &
+                    (df['shotgun'].notna())  # Must have shotgun data
+                ]
+                
+                all_plays.append(df)
+                logger.info(f"Loaded {len(df):,} plays from {year}")
+                
+            except Exception as e:
+                logger.error(f"Error loading {year}: {e}")
+                continue
+        
+        if not all_plays:
+            raise ValueError("No play data loaded")
+            
+        combined = pd.concat(all_plays, ignore_index=True)
+        
+        # Map posteam to the actual coach for that play
+        # Use home_coach/away_coach fields which correctly handle interim coaches
+        def get_offensive_coach(row):
+            if pd.isna(row['posteam']):
+                return np.nan
+            
+            # Check if we have coach data in the play-by-play
+            # This gives us exact coach attribution for each play, handling interim coaches
+            if all(col in row.index for col in ['home_coach', 'away_coach', 'home_team', 'away_team']):
+                if pd.notna(row['home_coach']) and row['posteam'] == row['home_team']:
+                    return row['home_coach']
+                elif pd.notna(row['away_coach']) and row['posteam'] == row['away_team']:
+                    return row['away_coach']
+            
+            # Fallback to team-year mapping if coach fields not available
+            # (for older data or missing fields)
+            if pd.notna(row.get('season')):
+                return self.coach_dict.get(
+                    (self.normalize_team_abbr(row['posteam']), int(row['season'])), np.nan
+                )
+            
+            return np.nan
+        
+        combined['offensive_coach'] = combined.apply(get_offensive_coach, axis=1)
+        
+        # Log how many plays we could map to coaches
+        mapped_count = combined['offensive_coach'].notna().sum()
+        total_with_posteam = combined['posteam'].notna().sum()
+        logger.info(f"Total plays loaded: {len(combined):,}")
+        logger.info(f"Mapped {mapped_count:,}/{total_with_posteam:,} plays to coaches ({mapped_count/total_with_posteam*100:.1f}%)")
+        
+        return combined
+    
+    def prepare_features_for_model(self, df: pd.DataFrame) -> np.ndarray:
+        """
+        Prepare features for model prediction, handling missing values and encoding.
+        
+        Args:
+            df: DataFrame with raw features
+            
+        Returns:
+            Numpy array ready for model prediction
+        """
+        # Select features
+        df_features = df[self.shotgun_features].copy()
+        
+        # Encode categorical features
+        if self.shotgun_encoders:
+            for col in self.shotgun_features:
+                if col in self.shotgun_encoders and col in self.categorical_features:
+                    le = self.shotgun_encoders[col]
+                    # Handle missing/unseen categories
+                    df_features[col] = df_features[col].astype(str)
+                    mask = df_features[col].isin(le.classes_)
+                    df_features.loc[~mask, col] = 'nan'  # Use 'nan' as unknown category
+                    
+                    # Add 'nan' to encoder classes if not present
+                    if 'nan' not in le.classes_:
+                        le.classes_ = np.append(le.classes_, 'nan')
+                    
+                    df_features[col] = le.transform(df_features[col])
+        
+        # Handle missing values with median imputation
+        from sklearn.impute import SimpleImputer
+        imputer = SimpleImputer(strategy='median')
+        features_imputed = imputer.fit_transform(df_features)
+        
+        return features_imputed
+    
+    def calculate_shotgun_gene(self, plays: pd.DataFrame) -> pd.DataFrame:
+        """
+        Calculate shotgun formation gene for each coach.
+        
+        Args:
+            plays: DataFrame with play data
+            
+        Returns:
+            DataFrame with coach and their shotgun gene score
+        """
+        logger.info("Calculating shotgun formation gene...")
+        
+        if len(plays) == 0:
+            logger.warning("No plays found for shotgun analysis")
+            return pd.DataFrame()
+        
+        logger.info(f"Analyzing {len(plays):,} offensive plays with shotgun data")
+        
+        # Prepare features for prediction
+        features = self.prepare_features_for_model(plays)
+        
+        # Generate predictions (probability of using shotgun)
+        predictions = self.shotgun_model.predict_proba(features)[:, 1]
+        plays['predicted_shotgun_rate'] = predictions
+        
+        # Actual shotgun usage
+        plays['actual_shotgun'] = plays['shotgun'].astype(int)
+        
+        # Group by coach and calculate gene
+        coach_shotgun = plays.groupby('offensive_coach').agg({
+            'actual_shotgun': 'mean',  # Actual shotgun rate
+            'predicted_shotgun_rate': 'mean',  # Expected shotgun rate
+            'play_id': 'count'  # Number of plays
+        }).rename(columns={'play_id': 'total_plays'})
+        
+        # Calculate shotgun gene (actual - predicted)
+        coach_shotgun['shotgun_gene'] = (
+            coach_shotgun['actual_shotgun'] - coach_shotgun['predicted_shotgun_rate']
+        )
+        
+        # Add year range for each coach
+        coach_years = plays.groupby('offensive_coach')['season'].agg(['min', 'max'])
+        coach_years.columns = ['first_year', 'last_year']
+        coach_shotgun = coach_shotgun.merge(coach_years, left_index=True, right_index=True)
+        
+        # Add teams coached
+        coach_teams = plays.groupby('offensive_coach')['posteam'].apply(
+            lambda x: ', '.join(sorted(x.unique()))
+        ).rename('teams')
+        coach_shotgun = coach_shotgun.merge(coach_teams, left_index=True, right_index=True)
+        
+        # Calculate z-score for better interpretation
+        mean_gene = coach_shotgun['shotgun_gene'].mean()
+        std_gene = coach_shotgun['shotgun_gene'].std()
+        coach_shotgun['shotgun_gene_zscore'] = (coach_shotgun['shotgun_gene'] - mean_gene) / std_gene
+        
+        # Sort by shotgun gene
+        coach_shotgun = coach_shotgun.sort_values('shotgun_gene', ascending=False)
+        
+        return coach_shotgun.reset_index()
+    
+    def analyze_by_era(self, plays: pd.DataFrame, coach_shotgun: pd.DataFrame) -> Dict:
+        """
+        Analyze shotgun usage trends by era.
+        
+        Args:
+            plays: DataFrame with play data
+            coach_shotgun: DataFrame with coach shotgun genes
+            
+        Returns:
+            Dictionary with era-based analysis
+        """
+        logger.info("Analyzing shotgun usage by era...")
+        
+        # Define eras
+        eras = {
+            'Early (1999-2005)': (1999, 2005),
+            'Mid (2006-2012)': (2006, 2012),
+            'Modern (2013-2019)': (2013, 2019),
+            'Current (2020-2024)': (2020, 2024)
+        }
+        
+        era_analysis = {}
+        
+        for era_name, (start_year, end_year) in eras.items():
+            era_plays = plays[(plays['season'] >= start_year) & (plays['season'] <= end_year)]
+            
+            if len(era_plays) > 0:
+                # Get coaches active in this era
+                era_coaches = era_plays.groupby('offensive_coach').agg({
+                    'shotgun': 'mean',
+                    'play_id': 'count'
+                }).rename(columns={'shotgun': 'era_shotgun_rate', 'play_id': 'era_plays'})
+                
+                # Merge with overall gene
+                era_coaches = era_coaches.merge(
+                    coach_shotgun[['offensive_coach', 'shotgun_gene', 'shotgun_gene_zscore']],
+                    left_index=True,
+                    right_on='offensive_coach'
+                )
+                
+                era_analysis[era_name] = {
+                    'avg_shotgun_rate': float(era_plays['shotgun'].mean()),
+                    'total_plays': len(era_plays),
+                    'num_coaches': len(era_coaches),
+                    'top_genes': era_coaches.nlargest(5, 'shotgun_gene')[
+                        ['offensive_coach', 'shotgun_gene', 'era_shotgun_rate']
+                    ].to_dict('records'),
+                    'bottom_genes': era_coaches.nsmallest(5, 'shotgun_gene')[
+                        ['offensive_coach', 'shotgun_gene', 'era_shotgun_rate']
+                    ].to_dict('records')
+                }
+        
+        return era_analysis
+    
+    def save_results(self, coach_shotgun: pd.DataFrame, era_analysis: Dict, 
+                    output_dir: str = "data/processed/coaching_genes"):
+        """
+        Save shotgun gene results to files.
+        
+        Args:
+            coach_shotgun: DataFrame with shotgun genes
+            era_analysis: Dictionary with era-based analysis
+            output_dir: Directory to save results
+        """
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+        
+        # Save full results as CSV
+        csv_path = output_path / f"shotgun_gene_{datetime.now().strftime('%Y%m%d')}.csv"
+        coach_shotgun.to_csv(csv_path, index=False)
+        logger.info(f"Saved shotgun gene data to {csv_path}")
+        
+        # Save summary as JSON for easy access
+        summary = {
+            'generated_date': datetime.now().isoformat(),
+            'num_coaches': len(coach_shotgun),
+            'metrics': {
+                'shotgun_gene': {
+                    'mean': float(coach_shotgun['shotgun_gene'].mean()),
+                    'std': float(coach_shotgun['shotgun_gene'].std()),
+                    'min': float(coach_shotgun['shotgun_gene'].min()),
+                    'max': float(coach_shotgun['shotgun_gene'].max())
+                },
+                'actual_shotgun_rate': {
+                    'mean': float(coach_shotgun['actual_shotgun'].mean()),
+                    'std': float(coach_shotgun['actual_shotgun'].std()),
+                    'min': float(coach_shotgun['actual_shotgun'].min()),
+                    'max': float(coach_shotgun['actual_shotgun'].max())
+                }
+            },
+            'most_shotgun_heavy_coaches': coach_shotgun.head(10)[
+                ['offensive_coach', 'shotgun_gene', 'actual_shotgun', 'teams', 'first_year', 'last_year']
+            ].to_dict('records'),
+            'most_traditional_coaches': coach_shotgun.tail(10)[
+                ['offensive_coach', 'shotgun_gene', 'actual_shotgun', 'teams', 'first_year', 'last_year']
+            ].to_dict('records'),
+            'era_analysis': era_analysis
+        }
+        
+        json_path = output_path / f"shotgun_gene_summary_{datetime.now().strftime('%Y%m%d')}.json"
+        with open(json_path, 'w') as f:
+            json.dump(summary, f, indent=2, default=str)
+        logger.info(f"Saved summary to {json_path}")
+
+
+def main():
+    """Main execution function"""
+    parser = argparse.ArgumentParser(description='Calculate coaching shotgun formation genes')
+    parser.add_argument('--start_year', type=int, default=1999,
+                       help='Start year for analysis (default: 1999 when shotgun data begins)')
+    parser.add_argument('--end_year', type=int, default=2024,
+                       help='End year for analysis (default: 2024)')
+    parser.add_argument('--output_dir', type=str, default='data/processed/coaching_genes',
+                       help='Output directory for results')
+    parser.add_argument('--min_plays', type=int, default=100,
+                       help='Minimum plays required for a coach to be included (default: 100)')
+    
+    args = parser.parse_args()
+    
+    print("=" * 80)
+    print("COACHING SHOTGUN GENE CALCULATOR")
+    print("=" * 80)
+    print(f"Years: {args.start_year} - {args.end_year}")
+    print(f"Output directory: {args.output_dir}")
+    print(f"Minimum plays threshold: {args.min_plays}")
+    print("=" * 80 + "\n")
+    
+    try:
+        # Initialize calculator
+        calculator = ShotgunGeneCalculator()
+        
+        # Load model
+        logger.info("Step 1: Loading predictive model...")
+        calculator.load_model()
+        
+        # Load coach mappings
+        logger.info("Step 2: Loading coach mappings...")
+        calculator.load_coach_mappings()
+        
+        # Load play data
+        logger.info("Step 3: Loading play-by-play data...")
+        plays = calculator.load_play_data(args.start_year, args.end_year)
+        
+        # Calculate shotgun gene
+        logger.info("Step 4: Calculating shotgun gene...")
+        coach_shotgun = calculator.calculate_shotgun_gene(plays)
+        
+        # Filter by minimum plays
+        coach_shotgun = coach_shotgun[coach_shotgun['total_plays'] >= args.min_plays]
+        logger.info(f"Analyzing {len(coach_shotgun)} coaches with at least {args.min_plays} plays")
+        
+        # Analyze by era
+        logger.info("Step 5: Analyzing trends by era...")
+        era_analysis = calculator.analyze_by_era(plays, coach_shotgun)
+        
+        # Save results
+        logger.info("Step 6: Saving results...")
+        calculator.save_results(coach_shotgun, era_analysis, args.output_dir)
+        
+        # Print summary
+        print("\n" + "=" * 80)
+        print("SHOTGUN GENE SUMMARY")
+        print("=" * 80)
+        print(f"Total coaches analyzed: {len(coach_shotgun)}")
+        
+        print("\nMost Shotgun-Heavy Coaches (Positive Gene):")
+        for i, row in coach_shotgun.head(10).iterrows():
+            print(f"  {row['offensive_coach']:25} {row['shotgun_gene']:+.3f} "
+                  f"(Actual: {row['actual_shotgun']:.1%}, Expected: {row['predicted_shotgun_rate']:.1%}) "
+                  f"[{int(row['first_year'])}-{int(row['last_year'])}]")
+        
+        print("\nMost Traditional Coaches (Negative Gene):")
+        for i, row in coach_shotgun.tail(10).iterrows():
+            print(f"  {row['offensive_coach']:25} {row['shotgun_gene']:+.3f} "
+                  f"(Actual: {row['actual_shotgun']:.1%}, Expected: {row['predicted_shotgun_rate']:.1%}) "
+                  f"[{int(row['first_year'])}-{int(row['last_year'])}]")
+        
+        print("\nShotgun Gene Statistics:")
+        print(f"  Mean: {coach_shotgun['shotgun_gene'].mean():.3f}")
+        print(f"  Std Dev: {coach_shotgun['shotgun_gene'].std():.3f}")
+        print(f"  Range: [{coach_shotgun['shotgun_gene'].min():.3f}, {coach_shotgun['shotgun_gene'].max():.3f}]")
+        
+        print("\nEra Analysis:")
+        for era_name, era_data in era_analysis.items():
+            print(f"\n{era_name}:")
+            print(f"  Average shotgun rate: {era_data['avg_shotgun_rate']:.1%}")
+            print(f"  Top innovator: {era_data['top_genes'][0]['offensive_coach'] if era_data['top_genes'] else 'N/A'}")
+            print(f"  Most traditional: {era_data['bottom_genes'][0]['offensive_coach'] if era_data['bottom_genes'] else 'N/A'}")
+        
+        print("=" * 80)
+        logger.info("Shotgun gene calculation completed successfully!")
+        
+    except Exception as e:
+        logger.error(f"Error during shotgun gene calculation: {e}")
+        raise
+
+
+if __name__ == "__main__":
+    main()

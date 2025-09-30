@@ -1,0 +1,420 @@
+{
+  "generated_date": "2025-09-30T08:58:39.035043",
+  "num_coaches": 159,
+  "metrics": {
+    "shotgun_gene": {
+      "mean": -0.048225101710211445,
+      "std": 0.11379024998875589,
+      "min": -0.29509827494621277,
+      "max": 0.22797516034938103
+    },
+    "actual_shotgun_rate": {
+      "mean": 0.43564161321492473,
+      "std": 0.23667446593064578,
+      "min": 0.0,
+      "max": 0.9093419236079153
+    }
+  },
+  "most_shotgun_heavy_coaches": [
+    {
+      "offensive_coach": "Shane Steichen",
+      "shotgun_gene": 0.22797516034938103,
+      "actual_shotgun": 0.8967314069161535,
+      "teams": "IND",
+      "first_year": 2023,
+      "last_year": 2024
+    },
+    {
+      "offensive_coach": "Mike Macdonald",
+      "shotgun_gene": 0.1849255984639887,
+      "actual_shotgun": 0.7783251231527094,
+      "teams": "SEA",
+      "first_year": 2024,
+      "last_year": 2024
+    },
+    {
+      "offensive_coach": "Nick Sirianni",
+      "shotgun_gene": 0.16523384983717393,
+      "actual_shotgun": 0.8853891485470433,
+      "teams": "PHI",
+      "first_year": 2021,
+      "last_year": 2024
+    },
+    {
+      "offensive_coach": "Matt Nagy",
+      "shotgun_gene": 0.15398430456262502,
+      "actual_shotgun": 0.7228686772738067,
+      "teams": "CHI",
+      "first_year": 2018,
+      "last_year": 2021
+    },
+    {
+      "offensive_coach": "Matt Eberflus",
+      "shotgun_gene": 0.15126382558102325,
+      "actual_shotgun": 0.7215799614643545,
+      "teams": "CHI",
+      "first_year": 2022,
+      "last_year": 2024
+    },
+    {
+      "offensive_coach": "Brian Callahan",
+      "shotgun_gene": 0.15054763304559804,
+      "actual_shotgun": 0.7368421052631579,
+      "teams": "TEN",
+      "first_year": 2024,
+      "last_year": 2024
+    },
+    {
+      "offensive_coach": "Kliff Kingsbury",
+      "shotgun_gene": 0.15048884571942656,
+      "actual_shotgun": 0.9093419236079153,
+      "teams": "ARI",
+      "first_year": 2019,
+      "last_year": 2022
+    },
+    {
+      "offensive_coach": "Chip Kelly",
+      "shotgun_gene": 0.14538264874605933,
+      "actual_shotgun": 0.9062203228869895,
+      "teams": "PHI, SF",
+      "first_year": 2013,
+      "last_year": 2016
+    },
+    {
+      "offensive_coach": "Antonio Pierce",
+      "shotgun_gene": 0.12491823954305958,
+      "actual_shotgun": 0.6782115869017632,
+      "teams": "LV",
+      "first_year": 2023,
+      "last_year": 2024
+    },
+    {
+      "offensive_coach": "Ron Rivera",
+      "shotgun_gene": 0.12181348989050678,
+      "actual_shotgun": 0.7235475320581704,
+      "teams": "CAR, WAS",
+      "first_year": 2011,
+      "last_year": 2023
+    }
+  ],
+  "most_traditional_coaches": [
+    {
+      "offensive_coach": "Dennis Erickson",
+      "shotgun_gene": -0.2276729429036044,
+      "actual_shotgun": 0.0898876404494382,
+      "teams": "SF",
+      "first_year": 2003,
+      "last_year": 2004
+    },
+    {
+      "offensive_coach": "Marty Mornhinweg",
+      "shotgun_gene": -0.23226886805284488,
+      "actual_shotgun": 0.04957005563985837,
+      "teams": "DET",
+      "first_year": 2001,
+      "last_year": 2002
+    },
+    {
+      "offensive_coach": "Mike Martz",
+      "shotgun_gene": -0.24146971489563698,
+      "actual_shotgun": 0.06374978636130577,
+      "teams": "LA",
+      "first_year": 2000,
+      "last_year": 2005
+    },
+    {
+      "offensive_coach": "Steve Mariucci",
+      "shotgun_gene": -0.24847372341887458,
+      "actual_shotgun": 0.06340394448502557,
+      "teams": "DET, SF",
+      "first_year": 1999,
+      "last_year": 2005
+    },
+    {
+      "offensive_coach": "Mike Holmgren",
+      "shotgun_gene": -0.2667250641355356,
+      "actual_shotgun": 0.021463691376701968,
+      "teams": "SEA",
+      "first_year": 1999,
+      "last_year": 2008
+    },
+    {
+      "offensive_coach": "Bobby Ross",
+      "shotgun_gene": -0.2735606066233605,
+      "actual_shotgun": 0.01602787456445993,
+      "teams": "DET",
+      "first_year": 1999,
+      "last_year": 2000
+    },
+    {
+      "offensive_coach": "Al Groh",
+      "shotgun_gene": -0.2746015342076619,
+      "actual_shotgun": 0.04666666666666667,
+      "teams": "NYJ",
+      "first_year": 2000,
+      "last_year": 2000
+    },
+    {
+      "offensive_coach": "George Seifert",
+      "shotgun_gene": -0.2755076587200165,
+      "actual_shotgun": 0.0,
+      "teams": "CAR",
+      "first_year": 1999,
+      "last_year": 2001
+    },
+    {
+      "offensive_coach": "Dick Vermeil",
+      "shotgun_gene": -0.28026790706239846,
+      "actual_shotgun": 0.08244766505636071,
+      "teams": "KC, LA",
+      "first_year": 1999,
+      "last_year": 2005
+    },
+    {
+      "offensive_coach": "Gunther Cunningham",
+      "shotgun_gene": -0.29509827494621277,
+      "actual_shotgun": 0.0,
+      "teams": "KC",
+      "first_year": 1999,
+      "last_year": 2000
+    }
+  ],
+  "era_analysis": {
+    "Early (1999-2005)": {
+      "avg_shotgun_rate": 0.13687050830881003,
+      "total_plays": 229034,
+      "num_coaches": 62,
+      "top_genes": [
+        {
+          "offensive_coach": "Pete Carroll",
+          "shotgun_gene": 0.05426449214781337,
+          "era_shotgun_rate": 0.2112676056338028
+        },
+        {
+          "offensive_coach": "Andy Reid",
+          "shotgun_gene": -0.014150485295900128,
+          "era_shotgun_rate": 0.02850387495074215
+        },
+        {
+          "offensive_coach": "Nick Saban",
+          "shotgun_gene": -0.01839021362360621,
+          "era_shotgun_rate": 0.2924901185770751
+        },
+        {
+          "offensive_coach": "Chan Gailey",
+          "shotgun_gene": -0.03634368254509329,
+          "era_shotgun_rate": 0.17714285714285713
+        },
+        {
+          "offensive_coach": "Mike Mularkey",
+          "shotgun_gene": -0.037319091192771936,
+          "era_shotgun_rate": 0.2013815090329437
+        }
+      ],
+      "bottom_genes": [
+        {
+          "offensive_coach": "Gunther Cunningham",
+          "shotgun_gene": -0.29509827494621277,
+          "era_shotgun_rate": 0.0
+        },
+        {
+          "offensive_coach": "Dick Vermeil",
+          "shotgun_gene": -0.28026790706239846,
+          "era_shotgun_rate": 0.08244766505636071
+        },
+        {
+          "offensive_coach": "George Seifert",
+          "shotgun_gene": -0.2755076587200165,
+          "era_shotgun_rate": 0.0
+        },
+        {
+          "offensive_coach": "Al Groh",
+          "shotgun_gene": -0.2746015342076619,
+          "era_shotgun_rate": 0.04666666666666667
+        },
+        {
+          "offensive_coach": "Bobby Ross",
+          "shotgun_gene": -0.2735606066233605,
+          "era_shotgun_rate": 0.01602787456445993
+        }
+      ]
+    },
+    "Mid (2006-2012)": {
+      "avg_shotgun_rate": 0.34684894018020807,
+      "total_plays": 232398,
+      "num_coaches": 70,
+      "top_genes": [
+        {
+          "offensive_coach": "Ron Rivera",
+          "shotgun_gene": 0.12181348989050678,
+          "era_shotgun_rate": 0.6281202241467142
+        },
+        {
+          "offensive_coach": "Joe Philbin",
+          "shotgun_gene": 0.082704618484428,
+          "era_shotgun_rate": 0.47758081334723673
+        },
+        {
+          "offensive_coach": "Jim Tomsula",
+          "shotgun_gene": 0.07342893973743103,
+          "era_shotgun_rate": 0.32727272727272727
+        },
+        {
+          "offensive_coach": "Todd Bowles",
+          "shotgun_gene": 0.06629914571486117,
+          "era_shotgun_rate": 0.18232044198895028
+        },
+        {
+          "offensive_coach": "Pete Carroll",
+          "shotgun_gene": 0.05426449214781337,
+          "era_shotgun_rate": 0.38368771818470326
+        }
+      ],
+      "bottom_genes": [
+        {
+          "offensive_coach": "Mike Holmgren",
+          "shotgun_gene": -0.2667250641355356,
+          "era_shotgun_rate": 0.05560704355885079
+        },
+        {
+          "offensive_coach": "Rod Marinelli",
+          "shotgun_gene": -0.20799937109526018,
+          "era_shotgun_rate": 0.2380276693863072
+        },
+        {
+          "offensive_coach": "Marty Schottenheimer",
+          "shotgun_gene": -0.20141943459380848,
+          "era_shotgun_rate": 0.17100371747211895
+        },
+        {
+          "offensive_coach": "Joe Vitt",
+          "shotgun_gene": -0.19528317536434908,
+          "era_shotgun_rate": 0.5046153846153846
+        },
+        {
+          "offensive_coach": "Bill Parcells",
+          "shotgun_gene": -0.19509695473484662,
+          "era_shotgun_rate": 0.16116870876531575
+        }
+      ]
+    },
+    "Modern (2013-2019)": {
+      "avg_shotgun_rate": 0.6210398929959025,
+      "total_plays": 235505,
+      "num_coaches": 72,
+      "top_genes": [
+        {
+          "offensive_coach": "Matt Nagy",
+          "shotgun_gene": 0.15398430456262502,
+          "era_shotgun_rate": 0.7886847195357833
+        },
+        {
+          "offensive_coach": "Kliff Kingsbury",
+          "shotgun_gene": 0.15048884571942656,
+          "era_shotgun_rate": 0.8873096446700508
+        },
+        {
+          "offensive_coach": "Chip Kelly",
+          "shotgun_gene": 0.14538264874605933,
+          "era_shotgun_rate": 0.9062203228869895
+        },
+        {
+          "offensive_coach": "Ron Rivera",
+          "shotgun_gene": 0.12181348989050678,
+          "era_shotgun_rate": 0.7212707543469734
+        },
+        {
+          "offensive_coach": "Zac Taylor",
+          "shotgun_gene": 0.10315606720587656,
+          "era_shotgun_rate": 0.6943907156673114
+        }
+      ],
+      "bottom_genes": [
+        {
+          "offensive_coach": "Bill Callahan",
+          "shotgun_gene": -0.22502101858668971,
+          "era_shotgun_rate": 0.5785953177257525
+        },
+        {
+          "offensive_coach": "Mike Shanahan",
+          "shotgun_gene": -0.16522348821854269,
+          "era_shotgun_rate": 0.7257039055404177
+        },
+        {
+          "offensive_coach": "Gregg Williams",
+          "shotgun_gene": -0.16106520353599224,
+          "era_shotgun_rate": 0.6057906458797327
+        },
+        {
+          "offensive_coach": "Gary Kubiak",
+          "shotgun_gene": -0.15936595598932746,
+          "era_shotgun_rate": 0.528343949044586
+        },
+        {
+          "offensive_coach": "Jon Gruden",
+          "shotgun_gene": -0.1340480513100226,
+          "era_shotgun_rate": 0.5633946830265849
+        }
+      ]
+    },
+    "Current (2020-2024)": {
+      "avg_shotgun_rate": 0.6885344979958605,
+      "total_plays": 175387,
+      "num_coaches": 63,
+      "top_genes": [
+        {
+          "offensive_coach": "Shane Steichen",
+          "shotgun_gene": 0.22797516034938103,
+          "era_shotgun_rate": 0.8967314069161535
+        },
+        {
+          "offensive_coach": "Mike Macdonald",
+          "shotgun_gene": 0.1849255984639887,
+          "era_shotgun_rate": 0.7783251231527094
+        },
+        {
+          "offensive_coach": "Nick Sirianni",
+          "shotgun_gene": 0.16523384983717393,
+          "era_shotgun_rate": 0.8853891485470433
+        },
+        {
+          "offensive_coach": "Matt Nagy",
+          "shotgun_gene": 0.15398430456262502,
+          "era_shotgun_rate": 0.6593560429304713
+        },
+        {
+          "offensive_coach": "Matt Eberflus",
+          "shotgun_gene": 0.15126382558102325,
+          "era_shotgun_rate": 0.7215799614643545
+        }
+      ],
+      "bottom_genes": [
+        {
+          "offensive_coach": "Jon Gruden",
+          "shotgun_gene": -0.1340480513100226,
+          "era_shotgun_rate": 0.6073529411764705
+        },
+        {
+          "offensive_coach": "Romeo Crennel",
+          "shotgun_gene": -0.11648633068990955,
+          "era_shotgun_rate": 0.8328611898016998
+        },
+        {
+          "offensive_coach": "Lovie Smith",
+          "shotgun_gene": -0.11637127139134246,
+          "era_shotgun_rate": 0.6163021868787276
+        },
+        {
+          "offensive_coach": "Bill Belichick",
+          "shotgun_gene": -0.07256595637895219,
+          "era_shotgun_rate": 0.5848544647261964
+        },
+        {
+          "offensive_coach": "Bruce Arians",
+          "shotgun_gene": -0.06447191792264295,
+          "era_shotgun_rate": 0.5958466453674122
+        }
+      ]
+    }
+  }
+}

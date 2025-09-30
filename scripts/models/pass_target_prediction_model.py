@@ -89,10 +89,11 @@ class PassTargetDataProcessor:
                 season_pass = []
                 
                 for chunk in pd.read_csv(file_path, chunksize=chunk_size):
-                    # Filter for pass plays with valid air_yards
+                    # Filter for pass plays with valid air_yards and ydstogo
                     pass_chunk = chunk[
                         (chunk['play_type'] == 'pass') &  # Pass plays only
-                        (chunk['air_yards'].notna())      # Must have air_yards data
+                        (chunk['air_yards'].notna()) &    # Must have air_yards data
+                        (chunk['ydstogo'].notna())        # Must have ydstogo data for comparison
                     ].copy()
                     
                     if not pass_chunk.empty:
