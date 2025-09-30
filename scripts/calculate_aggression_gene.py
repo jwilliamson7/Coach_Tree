@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """
-Calculate Coaching Aggression Gene
+Calculate Coaching Aggression Gene by Coach-Year
 
 This script calculates an "aggression" gene for NFL coaches based on their tendency
 to make aggressive play-calling decisions relative to model predictions. The aggression
-score combines three dimensions:
+score combines four dimensions:
 
 1. 4th Down Aggression: Going for it on 4th down more than predicted
 2. Pass-Heavy Aggression: Passing more than predicted in run/pass situations  
 3. Deep Pass Aggression: Targeting beyond the sticks more than predicted
+4. Two-Point Aggression: Attempting two-point conversions more than predicted
 
-For each coach, we calculate the difference between actual and predicted rates
-for these three decision types to create a composite aggression profile.
+For each coach-year, we calculate the difference between actual and predicted rates
+for these four decision types to create a composite aggression profile. This enables
+temporal analysis of how coaching genes evolve over time.
 
 Usage:
     python calculate_aggression_gene.py [--start_year 2006] [--end_year 2024]
@@ -261,9 +263,9 @@ class AggressionCalculator:
             
         combined = pd.concat(all_plays, ignore_index=True)
         
-        # Map posteam to the actual coach for that play
+        # Map posteam to the actual head coach for that play
         # Use home_coach/away_coach fields which correctly handle interim coaches
-        def get_offensive_coach(row):
+        def get_head_coach(row):
             if pd.isna(row['posteam']):
                 return np.nan
             
@@ -284,10 +286,10 @@ class AggressionCalculator:
             
             return np.nan
         
-        combined['offensive_coach'] = combined.apply(get_offensive_coach, axis=1)
+        combined['head_coach'] = combined.apply(get_head_coach, axis=1)
         
         # Log how many plays we could map to coaches
-        mapped_count = combined['offensive_coach'].notna().sum()
+        mapped_count = combined['head_coach'].notna().sum()
         total_with_posteam = combined['posteam'].notna().sum()
         logger.info(f"Total plays loaded: {len(combined):,}")
         logger.info(f"Mapped {mapped_count:,}/{total_with_posteam:,} plays to coaches ({mapped_count/total_with_posteam*100:.1f}%)")
@@ -335,13 +337,13 @@ class AggressionCalculator:
     
     def calculate_fourth_down_aggression(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
-        Calculate 4th down aggression for each coach.
+        Calculate 4th down aggression for each coach-year.
         
         Args:
             plays: DataFrame with play data
             
         Returns:
-            DataFrame with coach and their 4th down aggression score
+            DataFrame with coach-year and their 4th down aggression score
         """
         logger.info("Calculating 4th down aggression...")
         
@@ -414,8 +416,8 @@ class AggressionCalculator:
                 
                 logger.info(f"Processed {no_play_mask.sum()} no_play situations using play descriptions")
         
-        # Group by coach and calculate aggression
-        coach_aggression = fourth_downs.groupby('offensive_coach').agg({
+        # Group by coach and season for coach-year analysis
+        coach_aggression = fourth_downs.groupby(['head_coach', 'season']).agg({
             'actual_decision': 'mean',  # Actual go-for-it rate
             'predicted_go_rate': 'mean',  # Expected go-for-it rate
             'play_id': 'count'  # Number of 4th down decisions
@@ -430,13 +432,13 @@ class AggressionCalculator:
     
     def calculate_pass_heavy_aggression(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
-        Calculate pass-heavy aggression for each coach.
+        Calculate pass-heavy aggression for each coach-year.
         
         Args:
             plays: DataFrame with play data
             
         Returns:
-            DataFrame with coach and their pass-heavy aggression score
+            DataFrame with coach-year and their pass-heavy aggression score
         """
         logger.info("Calculating pass-heavy aggression...")
         
@@ -539,8 +541,8 @@ class AggressionCalculator:
             (run_pass_plays.get('qb_scramble', 0) == 1)
         ).astype(int)
         
-        # Group by coach and calculate aggression
-        coach_aggression = run_pass_plays.groupby('offensive_coach').agg({
+        # Group by coach and season for coach-year analysis
+        coach_aggression = run_pass_plays.groupby(['head_coach', 'season']).agg({
             'actual_pass': 'mean',  # Actual pass rate
             'predicted_pass_rate': 'mean',  # Expected pass rate
             'play_id': 'count'  # Number of plays
@@ -555,13 +557,13 @@ class AggressionCalculator:
     
     def calculate_deep_pass_aggression(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
-        Calculate deep pass aggression for each coach.
+        Calculate deep pass aggression for each coach-year.
         
         Args:
             plays: DataFrame with play data
             
         Returns:
-            DataFrame with coach and their deep pass aggression score
+            DataFrame with coach-year and their deep pass aggression score
         """
         logger.info("Calculating deep pass aggression...")
         
@@ -594,8 +596,8 @@ class AggressionCalculator:
             pass_plays['air_yards'] > pass_plays['ydstogo']
         ).astype(int)
         
-        # Group by coach and calculate aggression
-        coach_aggression = pass_plays.groupby('offensive_coach').agg({
+        # Group by coach and season for coach-year analysis
+        coach_aggression = pass_plays.groupby(['head_coach', 'season']).agg({
             'actual_beyond': 'mean',  # Actual beyond-sticks rate
             'predicted_beyond_rate': 'mean',  # Expected beyond-sticks rate
             'play_id': 'count'  # Number of pass plays
@@ -610,13 +612,13 @@ class AggressionCalculator:
     
     def calculate_two_point_aggression(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
-        Calculate two-point conversion aggression for each coach.
+        Calculate two-point conversion aggression for each coach-year.
         
         Args:
             plays: DataFrame with play data
             
         Returns:
-            DataFrame with coach and their two-point aggression score
+            DataFrame with coach-year and their two-point aggression score
         """
         logger.info("Calculating two-point conversion aggression...")
         
@@ -648,8 +650,8 @@ class AggressionCalculator:
             conversion_plays['two_point_attempt'] == 1
         ).astype(int)
         
-        # Group by coach and calculate aggression
-        coach_aggression = conversion_plays.groupby('offensive_coach').agg({
+        # Group by coach and season for coach-year analysis
+        coach_aggression = conversion_plays.groupby(['head_coach', 'season']).agg({
             'actual_two_point': 'mean',  # Actual two-point rate
             'predicted_two_point_rate': 'mean',  # Expected two-point rate
             'play_id': 'count'  # Number of conversion attempts
@@ -664,13 +666,13 @@ class AggressionCalculator:
     
     def calculate_composite_aggression(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
-        Calculate composite aggression scores for all coaches.
+        Calculate composite aggression scores for all coach-years.
         
         Args:
             plays: DataFrame with play data
             
         Returns:
-            DataFrame with all aggression metrics for each coach
+            DataFrame with all aggression metrics for each coach-year
         """
         logger.info("Calculating composite aggression scores...")
         
@@ -680,32 +682,30 @@ class AggressionCalculator:
         deep_pass_agg = self.calculate_deep_pass_aggression(plays)
         two_point_agg = self.calculate_two_point_aggression(plays)
         
-        # Merge all components
-        aggression_df = fourth_down_agg[['offensive_coach', 'fourth_down_aggression', 
-                                        'fourth_down_plays', 'actual_decision', 
-                                        'predicted_go_rate']]
+        # Merge all components on coach and season
+        aggression_df = fourth_down_agg.reset_index()
         
         if not pass_heavy_agg.empty:
+            pass_heavy_reset = pass_heavy_agg.reset_index()
             aggression_df = aggression_df.merge(
-                pass_heavy_agg[['offensive_coach', 'pass_heavy_aggression', 
-                              'run_pass_plays', 'actual_pass', 'predicted_pass_rate']],
-                on='offensive_coach',
+                pass_heavy_reset,
+                on=['head_coach', 'season'],
                 how='outer'
             )
         
         if not deep_pass_agg.empty:
+            deep_pass_reset = deep_pass_agg.reset_index()
             aggression_df = aggression_df.merge(
-                deep_pass_agg[['offensive_coach', 'deep_pass_aggression',
-                             'pass_plays', 'actual_beyond', 'predicted_beyond_rate']],
-                on='offensive_coach',
+                deep_pass_reset,
+                on=['head_coach', 'season'],
                 how='outer'
             )
         
         if not two_point_agg.empty:
+            two_point_reset = two_point_agg.reset_index()
             aggression_df = aggression_df.merge(
-                two_point_agg[['offensive_coach', 'two_point_aggression',
-                             'conversion_attempts', 'actual_two_point', 'predicted_two_point_rate']],
-                on='offensive_coach',
+                two_point_reset,
+                on=['head_coach', 'season'],
                 how='outer'
             )
         
@@ -735,9 +735,11 @@ class AggressionCalculator:
              if col in aggression_df.columns]
         ].sum(axis=1)
         
-        # Sort by composite aggression
+        # Sort by season, then composite aggression
         if 'composite_aggression' in aggression_df.columns:
-            aggression_df = aggression_df.sort_values('composite_aggression', ascending=False)
+            aggression_df = aggression_df.sort_values(['season', 'composite_aggression'], ascending=[True, False])
+        else:
+            aggression_df = aggression_df.sort_values(['season', 'head_coach'])
         
         return aggression_df
     
@@ -753,9 +755,9 @@ class AggressionCalculator:
         output_path.mkdir(parents=True, exist_ok=True)
         
         # Save full results as CSV
-        csv_path = output_path / f"aggression_gene_{datetime.now().strftime('%Y%m%d')}.csv"
+        csv_path = output_path / "aggression_gene_by_year.csv"
         aggression_df.to_csv(csv_path, index=False)
-        logger.info(f"Saved aggression data to {csv_path}")
+        logger.info(f"Saved coach-year aggression data to {csv_path}")
         
         # Save summary as JSON for easy access
         summary = {
@@ -781,13 +783,17 @@ class AggressionCalculator:
                            if 'deep_pass_aggression' in aggression_df.columns else None,
                 }
             },
-            'most_aggressive_coaches': aggression_df.head(10)['offensive_coach'].tolist()
-                                      if 'offensive_coach' in aggression_df.columns else [],
-            'least_aggressive_coaches': aggression_df.tail(10)['offensive_coach'].tolist()
-                                       if 'offensive_coach' in aggression_df.columns else []
+            'most_aggressive_coach_years': [(row['head_coach'], int(row['season'])) 
+                                           for _, row in aggression_df.head(10).iterrows()]
+                                          if all(col in aggression_df.columns for col in ['head_coach', 'season']) else [],
+            'least_aggressive_coach_years': [(row['head_coach'], int(row['season'])) 
+                                            for _, row in aggression_df.tail(10).iterrows()]
+                                           if all(col in aggression_df.columns for col in ['head_coach', 'season']) else [],
+            'unique_coaches': int(aggression_df['head_coach'].nunique()) if 'head_coach' in aggression_df.columns else 0,
+            'years_covered': f"{int(aggression_df['season'].min())}-{int(aggression_df['season'].max())}" if 'season' in aggression_df.columns else None
         }
         
-        json_path = output_path / f"aggression_gene_summary_{datetime.now().strftime('%Y%m%d')}.json"
+        json_path = output_path / "aggression_gene_by_year_summary.json"
         with open(json_path, 'w') as f:
             json.dump(summary, f, indent=2)
         logger.info(f"Saved summary to {json_path}")
@@ -846,16 +852,18 @@ def main():
         print("\n" + "=" * 80)
         print("AGGRESSION GENE SUMMARY")
         print("=" * 80)
-        print(f"Total coaches analyzed: {len(aggression_df)}")
+        print(f"Total coach-years analyzed: {len(aggression_df)}")
+        print(f"Unique coaches: {aggression_df['head_coach'].nunique()}")
+        print(f"Years covered: {int(aggression_df['season'].min())} - {int(aggression_df['season'].max())}")
         
         if 'composite_aggression' in aggression_df.columns:
-            print("\nMost Aggressive Coaches (Composite Score):")
+            print("\nMost Aggressive Coach-Years (Composite Score):")
             for i, row in aggression_df.head(10).iterrows():
-                print(f"  {row['offensive_coach']}: {row['composite_aggression']:.3f}")
+                print(f"  {row['head_coach']} ({int(row['season'])}): {row['composite_aggression']:.3f}")
             
-            print("\nLeast Aggressive Coaches (Composite Score):")
+            print("\nLeast Aggressive Coach-Years (Composite Score):")
             for i, row in aggression_df.tail(10).iterrows():
-                print(f"  {row['offensive_coach']}: {row['composite_aggression']:.3f}")
+                print(f"  {row['head_coach']} ({int(row['season'])}): {row['composite_aggression']:.3f}")
         
         print("\nAggression Components (mean ± std):")
         for component in ['fourth_down_aggression', 'pass_heavy_aggression', 'deep_pass_aggression', 'two_point_aggression']:

@@ -1,0 +1,104 @@
+{
+  "generated_date": "2025-09-30T10:25:13.790197",
+  "num_coaches": 32,
+  "metrics": {
+    "fourth_down_aggression": {
+      "mean": 0.03174705746350783,
+      "std": 0.026348031523997464
+    },
+    "pass_heavy_aggression": {
+      "mean": 0.021071793289351805,
+      "std": 0.04147239568945336
+    },
+    "deep_pass_aggression": {
+      "mean": -0.014496434431047539,
+      "std": 0.029712924137002876
+    }
+  },
+  "most_aggressive_coach_years": [
+    [
+      "Robert Saleh",
+      2024
+    ],
+    [
+      "Matt Eberflus",
+      2024
+    ],
+    [
+      "Kevin Stefanski",
+      2024
+    ],
+    [
+      "Zac Taylor",
+      2024
+    ],
+    [
+      "Brian Daboll",
+      2024
+    ],
+    [
+      "Doug Pederson",
+      2024
+    ],
+    [
+      "DeMeco Ryans",
+      2024
+    ],
+    [
+      "Kevin O'Connell",
+      2024
+    ],
+    [
+      "Shane Steichen",
+      2024
+    ],
+    [
+      "Dan Quinn",
+      2024
+    ]
+  ],
+  "least_aggressive_coach_years": [
+    [
+      "Jonathan Gannon",
+      2024
+    ],
+    [
+      "Brian Callahan",
+      2024
+    ],
+    [
+      "Sean McVay",
+      2024
+    ],
+    [
+      "Jerod Mayo",
+      2024
+    ],
+    [
+      "Kyle Shanahan",
+      2024
+    ],
+    [
+      "Todd Bowles",
+      2024
+    ],
+    [
+      "John Harbaugh",
+      2024
+    ],
+    [
+      "Nick Sirianni",
+      2024
+    ],
+    [
+      "Dennis Allen",
+      2024
+    ],
+    [
+      "Mike Tomlin",
+      2024
+    ]
+  ],
+  "unique_coaches": 32,
+  "years_covered": "2024-2024"
+}
