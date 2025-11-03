@@ -9,7 +9,9 @@
       "Bash(del:*)",
       "Bash(rm:*)",
       "Bash(mv:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(findstr:*)",
+      "Bash(pdflatex:*)"
     ],
     "deny": [],
     "ask": []

@@ -32,8 +32,8 @@ import xgboost as xgb
 from datetime import datetime
 warnings.filterwarnings('ignore')
 
-# Add parent directory to path to import utils
-sys.path.append(str(Path(__file__).parent.parent))
+# Add project root to path to import utils
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from utils.model_features import get_shotgun_predictor_features, get_categorical_features
 
 # Configure logging
