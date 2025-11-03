@@ -253,10 +253,10 @@ class InheritanceByTypeAnalyzer:
         results = {}
 
         for coord_type in ['OC', 'DC']:
-            logger.info(f"\n{coord_type} → HC transitions:")
+            logger.info(f"\n{coord_type} mentors:")
             results[coord_type] = {}
 
-            coord_pairs = pairs_df[pairs_df['mentor_level'] == coord_type]
+            coord_pairs = pairs_df[pairs_df['mentor_coordinator_type'] == coord_type]
 
             if len(coord_pairs) < 10:
                 logger.info(f"  Insufficient data (n={len(coord_pairs)})")
