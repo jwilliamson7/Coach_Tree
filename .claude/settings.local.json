@@ -11,7 +11,8 @@
       "Bash(mv:*)",
       "Bash(git add:*)",
       "Bash(findstr:*)",
-      "Bash(pdflatex:*)"
+      "Bash(pdflatex:*)",
+      "Bash(/dev/null)"
     ],
     "deny": [],
     "ask": []
