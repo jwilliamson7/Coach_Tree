@@ -124,7 +124,8 @@ class AggressionInheritanceAnalyzer:
 
         logger.info("Creating inheritance visualization...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         df = self.inheritance_data
 
@@ -164,10 +165,8 @@ class AggressionInheritanceAnalyzer:
         ax.axhline(y=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
         ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
-        ax.set_xlabel('Mentor Aggression (POE)', fontsize=13, fontweight='bold')
-        ax.set_ylabel('Protégé Aggression (POE)', fontsize=13, fontweight='bold')
-        ax.set_title('Coaching Aggression Gene Inheritance: Do Aggressive Mentors Breed Aggressive Protégés?',
-                    fontsize=15, fontweight='bold', pad=20)
+        ax.set_xlabel('Mentor Aggression (POE)', fontsize=16, fontweight='bold')
+        ax.set_ylabel('Protégé Aggression (POE)', fontsize=16, fontweight='bold')
 
         def percent_formatter(x, pos):
             return f"{x*100:+.1f}%"
@@ -176,7 +175,7 @@ class AggressionInheritanceAnalyzer:
         ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
         ax.yaxis.set_major_formatter(FuncFormatter(percent_formatter))
 
-        ax.legend(loc='upper left', framealpha=0.95, fontsize=11)
+        ax.legend(loc='upper left', framealpha=0.95, fontsize=14)
         ax.grid(True, alpha=0.3, linestyle=':')
 
         stats_text = f"Overall: r = {overall_corr:.3f}, p = {overall_p:.4f}\n"
@@ -190,7 +189,7 @@ class AggressionInheritanceAnalyzer:
 
         ax.text(0.98, 0.02, stats_text,
                transform=ax.transAxes,
-               fontsize=10,
+               fontsize=13,
                verticalalignment='bottom',
                horizontalalignment='right',
                bbox=dict(boxstyle='round', facecolor='white', alpha=0.9, edgecolor='gray'))
@@ -210,7 +209,8 @@ class AggressionInheritanceAnalyzer:
 
         logger.info("Creating component-wise inheritance analysis...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         df = self.inheritance_data
 
@@ -222,8 +222,6 @@ class AggressionInheritanceAnalyzer:
         ]
 
         fig, axes = plt.subplots(2, 2, figsize=(14, 12))
-        fig.suptitle('Aggression Component Inheritance by Decision Type',
-                    fontsize=16, fontweight='bold', y=0.995)
 
         axes = axes.flatten()
 
@@ -251,16 +249,16 @@ class AggressionInheritanceAnalyzer:
             ax.axhline(y=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
             ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
-            ax.set_xlabel('Mentor POE', fontsize=11, fontweight='bold')
-            ax.set_ylabel('Protégé POE', fontsize=11, fontweight='bold')
-            ax.set_title(comp_label, fontsize=12, fontweight='bold', pad=10)
+            ax.set_xlabel('Mentor POE', fontsize=14, fontweight='bold')
+            ax.set_ylabel('Protégé POE', fontsize=14, fontweight='bold')
+            ax.set_title(comp_label, fontsize=15, fontweight='bold', pad=10)
 
             ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
             ax.yaxis.set_major_formatter(FuncFormatter(percent_formatter))
 
             ax.text(0.05, 0.95, f'r = {corr:.3f}\np = {p_val:.4f}\nn = {len(df)}',
                    transform=ax.transAxes,
-                   fontsize=10,
+                   fontsize=13,
                    verticalalignment='top',
                    bbox=dict(boxstyle='round', facecolor='white', alpha=0.9, edgecolor='gray'))
 

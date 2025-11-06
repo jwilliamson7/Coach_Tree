@@ -18,9 +18,8 @@ from pathlib import Path
 import logging
 from scipy import stats
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
+from matplotlib.ticker import FuncFormatter, MaxNLocator
 import json
-import glob
 import os
 
 logging.basicConfig(
@@ -36,116 +35,17 @@ class CoachBackgroundClassifier:
     def __init__(self):
         self.coach_backgrounds = None
 
-    def load_all_coaching_histories(self):
-        """Load all coaching history files"""
-        all_histories = []
-        coach_dirs = glob.glob('data/raw/Coaches/*')
+    def load_coach_backgrounds(self):
+        """Load pre-classified coach backgrounds from CSV"""
+        background_file = 'data/processed/Coaching/coach_backgrounds_from_history.csv'
 
-        logger.info(f"Found {len(coach_dirs)} coach directories")
+        if not os.path.exists(background_file):
+            raise FileNotFoundError(f"Coach backgrounds file not found: {background_file}")
 
-        for coach_dir in coach_dirs:
-            coach_name = os.path.basename(coach_dir)
-            history_file = os.path.join(coach_dir, 'all_coaching_history.csv')
+        logger.info(f"Loading pre-classified coach backgrounds...")
+        self.coach_backgrounds = pd.read_csv(background_file)
 
-            if os.path.exists(history_file):
-                try:
-                    history_df = pd.read_csv(history_file)
-                    history_df['Coach_Directory'] = coach_name
-                    all_histories.append(history_df)
-                except Exception as e:
-                    logger.warning(f"Error reading {history_file}: {e}")
-                    continue
-
-        if all_histories:
-            combined_histories = pd.concat(all_histories, ignore_index=True)
-            logger.info(f"Loaded coaching histories for {len(all_histories)} coaches")
-            return combined_histories
-        else:
-            raise ValueError("No coaching history files found!")
-
-    def classify_coach_background(self, coach_histories):
-        """Classify each coach's background based on coordinator experience"""
-        coaches = coach_histories['Coach_Directory'].unique()
-        coach_backgrounds = []
-
-        logger.info(f"Classifying {len(coaches)} coaches by background...")
-
-        for coach_dir in coaches:
-            coach_data = coach_histories[coach_histories['Coach_Directory'] == coach_dir]
-
-            # Convert directory name to coach name
-            coach_name = coach_dir.replace('_', ' ')
-
-            # Filter out head coach roles to focus on coordinator/position coach background
-            non_hc_roles = coach_data[~coach_data['Role'].str.contains('Head Coach', case=False, na=False)]
-
-            # Offensive patterns
-            offensive_patterns = [
-                'Offensive Coordinator', 'Off\\. Coordinator',
-                'Quarterbacks', 'QB Coach', 'Quarterback',
-                'Running Backs', 'RB Coach', 'Running Back',
-                'Wide Receivers', 'WR Coach', 'Wide Receiver', 'Receivers',
-                'Tight Ends', 'TE Coach', 'Tight End',
-                'Offensive Line', 'OL Coach', 'O-Line',
-                'Offensive Quality Control', 'Offensive Assistant',
-                'Offensive Backs', 'Passing Game Coordinator',
-                'Run Game Coordinator', 'Offensive Intern',
-                'Line Coach', 'Backfield', 'Offensive Backfield',
-                'Ends Coach', 'Centers', 'Guards',
-                'Tackles Coach', 'Receivers Coach', 'Backs Coach', 'Tackles',
-                'Offensive Coach', 'Play-Caller', 'Ends/Centers'
-            ]
-            offensive_pattern = '|'.join(offensive_patterns)
-            offensive_experience = non_hc_roles[non_hc_roles['Role'].str.contains(
-                offensive_pattern, case=False, na=False)]
-
-            # Defensive patterns
-            defensive_patterns = [
-                'Defensive Coordinator', 'Def\\. Coordinator',
-                'Linebackers', 'LB Coach', 'Linebacker',
-                'Defensive Backs', 'DB Coach', 'Secondary',
-                'Cornerbacks', 'CB Coach', 'Cornerback',
-                'Safeties', 'Safety',
-                'Defensive Line', 'DL Coach', 'D-Line',
-                'Defensive Ends', 'DE Coach',
-                'Defensive Tackles', 'DT Coach',
-                'Defensive Quality Control', 'Defensive Assistant',
-                'Pass Rush Specialist', 'Defensive Intern',
-                'Defensive Backfield', 'Defensive Coach'
-            ]
-            defensive_pattern = '|'.join(defensive_patterns)
-            defensive_experience = non_hc_roles[non_hc_roles['Role'].str.contains(
-                defensive_pattern, case=False, na=False)]
-
-            # Count years
-            offensive_years = len(offensive_experience)
-            defensive_years = len(defensive_experience)
-
-            # Classify
-            if offensive_years > 0 and defensive_years > 0:
-                if offensive_years > defensive_years:
-                    background = 'Offensive'
-                elif defensive_years > offensive_years:
-                    background = 'Defensive'
-                else:
-                    background = 'Both'
-            elif offensive_years > 0:
-                background = 'Offensive'
-            elif defensive_years > 0:
-                background = 'Defensive'
-            else:
-                background = 'Other'
-
-            coach_backgrounds.append({
-                'Coach_Directory': coach_dir,
-                'Coach_Name': coach_name,
-                'Background': background,
-                'Offensive_Years': offensive_years,
-                'Defensive_Years': defensive_years
-            })
-
-        self.coach_backgrounds = pd.DataFrame(coach_backgrounds)
-        logger.info(f"Classified {len(self.coach_backgrounds)} coaches")
+        logger.info(f"Loaded backgrounds for {len(self.coach_backgrounds)} coaches")
 
         # Print distribution
         logger.info("\nCoach Background Distribution:")
@@ -193,9 +93,6 @@ class CoachBackgroundClassifier:
 
         matched_df = pd.DataFrame(matched_data)
 
-        # Filter out "Both" category for cleaner analysis
-        matched_df = matched_df[matched_df['Background'] != 'Both']
-
         logger.info(f"\nMatching results:")
         logger.info(f"  Matched: {len(matched_df)} coach-year observations")
         logger.info(f"  Unmatched: {len(unmatched)} observations")
@@ -229,10 +126,9 @@ class AggressionByCoachTypeAnalyzer:
         aggression_data = pd.read_csv(data_file)
         logger.info(f"Loaded {len(aggression_data)} coach-year observations")
 
-        # Classify coaches by background
+        # Load pre-classified coach backgrounds
         classifier = CoachBackgroundClassifier()
-        coach_histories = classifier.load_all_coaching_histories()
-        classifier.classify_coach_background(coach_histories)
+        classifier.load_coach_backgrounds()
 
         # Match with aggression data
         self.data = classifier.match_with_aggression_data(aggression_data)
@@ -348,30 +244,48 @@ class AggressionByCoachTypeAnalyzer:
         """Create scatter plots by coach type"""
         logger.info("Creating visualization by coach type...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Aggression vs WAR by Coach Background Type',
-                    fontsize=16, fontweight='bold', y=0.995)
-
+        # Determine which coach types have sufficient data
         bg_types = ['Offensive', 'Defensive', 'Other']
-        colors = ['#FF6B35', '#004E89', '#808080']
+        colors_map = {'Offensive': '#FF6B35', 'Defensive': '#004E89', 'Other': '#808080'}
+
+        valid_types = []
+        for bg_type in bg_types:
+            bg_data = self.data[self.data['Background'] == bg_type].copy()
+            clean_data = bg_data[['composite_aggression', 'annual_war']].dropna()
+            if len(clean_data) >= 10:  # Require at least 10 observations
+                valid_types.append(bg_type)
+
+        if len(valid_types) == 0:
+            logger.warning("No coach types have sufficient data for visualization")
+            return
+
+        # Create subplot grid based on number of valid coach types
+        n_cols = len(valid_types)
+        fig, axes = plt.subplots(2, n_cols, figsize=(6 * n_cols, 12))
+
+        # Handle case where only 1 column exists (axes won't be 2D)
+        if n_cols == 1:
+            axes = axes.reshape(2, 1)
 
         def percent_formatter(x, pos):
             return f"{x*100:+.1f}%"
 
+        def war_formatter(x, pos):
+            return f"{x:+.1f}"
+
         # Row 1: Composite aggression
-        for idx, (bg_type, color) in enumerate(zip(bg_types, colors)):
+        for idx, bg_type in enumerate(valid_types):
             ax = axes[0, idx]
+            color = colors_map[bg_type]
 
             bg_data = self.data[self.data['Background'] == bg_type].copy()
             clean_data = bg_data[['composite_aggression', 'annual_war']].dropna()
 
-            if len(clean_data) == 0:
-                continue
-
             x = clean_data['composite_aggression']
-            y = clean_data['annual_war']
+            y = clean_data['annual_war'] * 16  # Convert from percentage to games
 
             # Scatter plot
             ax.scatter(x, y, c=color, alpha=0.5, s=60, edgecolors='black', linewidth=0.5)
@@ -387,12 +301,16 @@ class AggressionByCoachTypeAnalyzer:
             ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
             # Labels
-            ax.set_xlabel('Composite Aggression POE', fontsize=10, fontweight='bold')
-            ax.set_ylabel('Annual WAR', fontsize=10, fontweight='bold')
-            ax.set_title(f'{bg_type} Coaches', fontsize=11, fontweight='bold', pad=10)
+            ax.set_xlabel('Composite Aggression POE', fontsize=13, fontweight='bold')
+            ax.set_ylabel('Annual WAR (Games)', fontsize=13, fontweight='bold')
+            ax.set_title(f'{bg_type} Coaches', fontsize=14, fontweight='bold', pad=10)
 
             # Format x-axis
             ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
+            ax.xaxis.set_major_locator(MaxNLocator(nbins=5))
+
+            # Format y-axis
+            ax.yaxis.set_major_formatter(FuncFormatter(war_formatter))
 
             # Statistics box
             significance = "SIG" if p_val < 0.05 else "n.s."
@@ -400,24 +318,22 @@ class AggressionByCoachTypeAnalyzer:
 
             ax.text(0.05, 0.95, stats_text,
                    transform=ax.transAxes,
-                   fontsize=9,
+                   fontsize=12,
                    verticalalignment='top',
                    bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray'))
 
             ax.grid(True, alpha=0.3, linestyle=':')
 
         # Row 2: Pass-heavy aggression
-        for idx, (bg_type, color) in enumerate(zip(bg_types, colors)):
+        for idx, bg_type in enumerate(valid_types):
             ax = axes[1, idx]
+            color = colors_map[bg_type]
 
             bg_data = self.data[self.data['Background'] == bg_type].copy()
             clean_data = bg_data[['pass_heavy_aggression', 'annual_war']].dropna()
 
-            if len(clean_data) == 0:
-                continue
-
             x = clean_data['pass_heavy_aggression']
-            y = clean_data['annual_war']
+            y = clean_data['annual_war'] * 16  # Convert from percentage to games
 
             # Scatter plot
             ax.scatter(x, y, c=color, alpha=0.5, s=60, edgecolors='black', linewidth=0.5)
@@ -433,12 +349,16 @@ class AggressionByCoachTypeAnalyzer:
             ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
             # Labels
-            ax.set_xlabel('Pass-Heavy Aggression POE', fontsize=10, fontweight='bold')
-            ax.set_ylabel('Annual WAR', fontsize=10, fontweight='bold')
-            ax.set_title(f'{bg_type} Coaches', fontsize=11, fontweight='bold', pad=10)
+            ax.set_xlabel('Pass-Heavy Aggression POE', fontsize=13, fontweight='bold')
+            ax.set_ylabel('Annual WAR (Games)', fontsize=13, fontweight='bold')
+            ax.set_title(f'{bg_type} Coaches', fontsize=14, fontweight='bold', pad=10)
 
             # Format x-axis
             ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
+            ax.xaxis.set_major_locator(MaxNLocator(nbins=5))
+
+            # Format y-axis
+            ax.yaxis.set_major_formatter(FuncFormatter(war_formatter))
 
             # Statistics box
             significance = "SIG" if p_val < 0.05 else "n.s."
@@ -446,7 +366,7 @@ class AggressionByCoachTypeAnalyzer:
 
             ax.text(0.05, 0.95, stats_text,
                    transform=ax.transAxes,
-                   fontsize=9,
+                   fontsize=12,
                    verticalalignment='top',
                    bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray'))
 
@@ -468,11 +388,10 @@ class AggressionByCoachTypeAnalyzer:
         """Create visualization showing temporal trends by coach type"""
         logger.info("Creating temporal visualization by coach type...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('How Aggression-WAR Relationship Changed Over Time by Coach Type',
-                    fontsize=16, fontweight='bold', y=0.995)
 
         eras = ['Early (2006-2011)', 'Middle (2012-2017)', 'Late (2018-2024)']
         bg_types = ['Offensive', 'Defensive', 'Other']
@@ -498,16 +417,16 @@ class AggressionByCoachTypeAnalyzer:
                 # Add significance marker
                 if result['significant']:
                     ax.text(result['correlation'], bg_type, ' *',
-                           fontsize=14, fontweight='bold',
+                           fontsize=17, fontweight='bold',
                            verticalalignment='center')
 
             ax.axvline(x=0, color='black', linestyle='-', linewidth=1)
-            ax.set_xlabel('Correlation (r)', fontsize=10, fontweight='bold')
-            ax.set_title(f'{era}', fontsize=11, fontweight='bold', pad=10)
+            ax.set_xlabel('Correlation (r)', fontsize=13, fontweight='bold')
+            ax.set_title(f'{era}', fontsize=14, fontweight='bold', pad=10)
             ax.grid(True, alpha=0.3, linestyle=':', axis='x')
 
             if idx == 0:
-                ax.set_ylabel('Coach Type', fontsize=10, fontweight='bold')
+                ax.set_ylabel('Coach Type', fontsize=13, fontweight='bold')
 
         # Row 2: Pass-Heavy Aggression over time
         for idx, era in enumerate(eras):
@@ -529,22 +448,22 @@ class AggressionByCoachTypeAnalyzer:
                 # Add significance marker
                 if result['significant']:
                     ax.text(result['correlation'], bg_type, ' *',
-                           fontsize=14, fontweight='bold',
+                           fontsize=17, fontweight='bold',
                            verticalalignment='center')
 
             ax.axvline(x=0, color='black', linestyle='-', linewidth=1)
-            ax.set_xlabel('Correlation (r)', fontsize=10, fontweight='bold')
-            ax.set_title(f'{era}', fontsize=11, fontweight='bold', pad=10)
+            ax.set_xlabel('Correlation (r)', fontsize=13, fontweight='bold')
+            ax.set_title(f'{era}', fontsize=14, fontweight='bold', pad=10)
             ax.grid(True, alpha=0.3, linestyle=':', axis='x')
 
             if idx == 0:
-                ax.set_ylabel('Coach Type', fontsize=10, fontweight='bold')
+                ax.set_ylabel('Coach Type', fontsize=13, fontweight='bold')
 
         # Add row labels
         fig.text(0.01, 0.75, 'Composite Aggression', rotation=90,
-                fontsize=12, fontweight='bold', verticalalignment='center')
+                fontsize=15, fontweight='bold', verticalalignment='center')
         fig.text(0.01, 0.25, 'Pass-Heavy Aggression', rotation=90,
-                fontsize=12, fontweight='bold', verticalalignment='center')
+                fontsize=15, fontweight='bold', verticalalignment='center')
 
         plt.tight_layout(rect=[0.02, 0, 1, 0.99])
 

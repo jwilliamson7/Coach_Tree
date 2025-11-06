@@ -12,7 +12,14 @@
       "Bash(git add:*)",
       "Bash(findstr:*)",
       "Bash(pdflatex:*)",
-      "Bash(/dev/null)"
+      "Bash(/dev/null)",
+      "Bash(\"outputs/logs/aggression_war_relationship.log\")",
+      "Bash(\"outputs/logs/aggression_war_over_time.log\")",
+      "Bash(\"outputs/logs/aggression_persistence.log\")",
+      "Bash(\"outputs/logs/aggression_by_coach_type.log\")",
+      "Bash(\"outputs/logs/persistence_by_coach_type.log\")",
+      "Bash(\"outputs/logs/inheritance_by_coach_type.log\")",
+      "Bash(\"outputs/logs/aggression_variance.log\")"
     ],
     "deny": [],
     "ask": []

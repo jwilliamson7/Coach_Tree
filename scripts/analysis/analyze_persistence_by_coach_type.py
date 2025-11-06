@@ -166,7 +166,8 @@ class PersistenceByTypeAnalyzer:
         """Create visualization comparing persistence by coach type"""
         logger.info("\nCreating persistence comparison visualization...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         aggression_vars = [
             ('fourth_down_aggression', '4th Down'),
@@ -209,9 +210,9 @@ class PersistenceByTypeAnalyzer:
                                  zorder=5, edgecolors='black', linewidth=0.5)
 
             ax.axhline(y=0, color='gray', linestyle='--', linewidth=1, alpha=0.5)
-            ax.set_xlabel('Lag (Years)', fontsize=11, fontweight='bold')
-            ax.set_ylabel('Correlation (r)', fontsize=11, fontweight='bold')
-            ax.set_title(f'{label} Aggression', fontsize=12, fontweight='bold', pad=10)
+            ax.set_xlabel('Lag (Years)', fontsize=14, fontweight='bold')
+            ax.set_ylabel('Correlation (r)', fontsize=14, fontweight='bold')
+            ax.set_title(f'{label} Aggression', fontsize=15, fontweight='bold', pad=10)
             ax.set_xticks([1, 2, 3])
             ax.set_ylim(-0.1, 0.8)
             ax.grid(True, alpha=0.3, linestyle=':')
@@ -221,7 +222,7 @@ class PersistenceByTypeAnalyzer:
         axes[5].axis('off')
 
         fig.suptitle('Aggression Persistence by Coach Background Type\n(Stars indicate p<0.05)',
-                    fontsize=16, fontweight='bold', y=0.995)
+                    fontsize=19, fontweight='bold', y=0.995)
 
         plt.tight_layout(rect=[0, 0, 1, 0.985])
 
@@ -239,7 +240,8 @@ class PersistenceByTypeAnalyzer:
         """Create heatmap showing difference in persistence (Offensive - Defensive)"""
         logger.info("Creating difference heatmap...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         aggression_vars = [
             ('fourth_down_aggression', '4th Down'),
@@ -291,12 +293,12 @@ class PersistenceByTypeAnalyzer:
                     text = ax.text(j, i, f'{matrix[i, j]:+.3f}',
                                  ha='center', va='center',
                                  color='white' if abs(matrix[i, j]) > 0.08 else 'black',
-                                 fontsize=11, fontweight='bold')
+                                 fontsize=14, fontweight='bold')
 
-        ax.set_xlabel('Lag Period', fontsize=12, fontweight='bold')
-        ax.set_ylabel('Aggression Type', fontsize=12, fontweight='bold')
+        ax.set_xlabel('Lag Period', fontsize=15, fontweight='bold')
+        ax.set_ylabel('Aggression Type', fontsize=15, fontweight='bold')
         ax.set_title('Persistence Difference: Offensive vs Defensive Coaches\n(Positive = More Persistent for Offensive)',
-                    fontsize=13, fontweight='bold', pad=15)
+                    fontsize=16, fontweight='bold', pad=15)
 
         plt.tight_layout()
 

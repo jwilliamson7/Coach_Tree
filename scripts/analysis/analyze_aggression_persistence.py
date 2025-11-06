@@ -150,12 +150,11 @@ class AggressionPersistenceAnalyzer:
         """Create scatter plots showing year-to-year persistence"""
         logger.info("\nCreating persistence visualization...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         # Create 3x5 grid: 3 lags x 5 measures
         fig, axes = plt.subplots(3, 5, figsize=(20, 12))
-        fig.suptitle('Aggression Persistence: Is Aggression a Stable Coach Trait?\nYear N vs Year N+Lag',
-                    fontsize=16, fontweight='bold', y=0.995)
 
         measures = [
             ('composite', 'Composite', '#2E86AB'),
@@ -183,7 +182,7 @@ class AggressionPersistenceAnalyzer:
                     ax.text(0.5, 0.5, 'Insufficient data',
                            transform=ax.transAxes,
                            ha='center', va='center',
-                           fontsize=10, style='italic', color='gray')
+                           fontsize=13, style='italic', color='gray')
                     ax.set_xticks([])
                     ax.set_yticks([])
                     continue
@@ -212,32 +211,32 @@ class AggressionPersistenceAnalyzer:
 
                 # Labels
                 if lag_idx == 2:  # Bottom row
-                    ax.set_xlabel(f'Year N', fontsize=9, fontweight='bold')
+                    ax.set_xlabel(f'Year N', fontsize=12, fontweight='bold')
                 if measure_idx == 0:  # Left column
-                    ax.set_ylabel(f'Year N+{lag}', fontsize=9, fontweight='bold')
+                    ax.set_ylabel(f'Year N+{lag}', fontsize=12, fontweight='bold')
 
                 # Title on top row only
                 if lag_idx == 0:
-                    ax.set_title(label, fontsize=10, fontweight='bold', pad=8)
+                    ax.set_title(label, fontsize=13, fontweight='bold', pad=8)
 
                 # Format axes
                 ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
                 ax.yaxis.set_major_formatter(FuncFormatter(percent_formatter))
 
                 # Statistics box
-                significance = "SIG" if p_val < 0.05 else "n.s."
+                significance = "* SIG" if p_val < 0.05 else "n.s."
                 stats_text = f'r={corr:.2f}\n{significance}'
 
                 ax.text(0.05, 0.95, stats_text,
                        transform=ax.transAxes,
-                       fontsize=8,
+                       fontsize=11,
                        verticalalignment='top',
                        bbox=dict(boxstyle='round', facecolor='white', alpha=0.9, edgecolor='gray', linewidth=0.5))
 
                 # Add n to bottom right
                 ax.text(0.95, 0.05, f'n={len(clean_data)}',
                        transform=ax.transAxes,
-                       fontsize=7,
+                       fontsize=10,
                        horizontalalignment='right',
                        verticalalignment='bottom',
                        color='gray')
@@ -260,7 +259,8 @@ class AggressionPersistenceAnalyzer:
         """Create plot showing how persistence decays with lag"""
         logger.info("Creating persistence decay visualization...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         fig, ax = plt.subplots(figsize=(12, 8))
 
@@ -287,13 +287,11 @@ class AggressionPersistenceAnalyzer:
                        markersize=10, label=label, alpha=0.8)
 
         ax.axhline(y=0, color='gray', linestyle='--', linewidth=1, alpha=0.7)
-        ax.set_xlabel('Lag (Years)', fontsize=12, fontweight='bold')
-        ax.set_ylabel('Correlation Coefficient (r)', fontsize=12, fontweight='bold')
-        ax.set_title('Aggression Persistence Decay\nHow Stable Is a Coach\'s Aggression Over Time?',
-                    fontsize=14, fontweight='bold', pad=15)
+        ax.set_xlabel('Lag (Years)', fontsize=15, fontweight='bold')
+        ax.set_ylabel('Correlation Coefficient (r)', fontsize=15, fontweight='bold')
         ax.set_xticks([1, 2, 3])
         ax.set_xticklabels(['N -> N+1', 'N -> N+2', 'N -> N+3'])
-        ax.legend(loc='best', framealpha=0.95, fontsize=11)
+        ax.legend(loc='best', framealpha=0.95, fontsize=14)
         ax.grid(True, alpha=0.3, linestyle=':')
 
         # Add interpretation zones
@@ -301,9 +299,9 @@ class AggressionPersistenceAnalyzer:
         ax.axhspan(0.3, 0.7, alpha=0.05, color='yellow', zorder=0)
         ax.axhspan(0.0, 0.3, alpha=0.05, color='red', zorder=0)
 
-        ax.text(3.1, 0.85, 'Strong\nPersistence', fontsize=8, color='darkgreen', style='italic')
-        ax.text(3.1, 0.5, 'Moderate\nPersistence', fontsize=8, color='orange', style='italic')
-        ax.text(3.1, 0.15, 'Weak\nPersistence', fontsize=8, color='darkred', style='italic')
+        ax.text(3.1, 0.85, 'Strong\nPersistence', fontsize=11, color='darkgreen', style='italic')
+        ax.text(3.1, 0.5, 'Moderate\nPersistence', fontsize=11, color='orange', style='italic')
+        ax.text(3.1, 0.15, 'Weak\nPersistence', fontsize=11, color='darkred', style='italic')
 
         plt.tight_layout()
 

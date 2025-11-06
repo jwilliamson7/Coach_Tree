@@ -46,7 +46,8 @@ def main():
     import matplotlib.pyplot as plt
     from matplotlib.ticker import FuncFormatter
 
-    plt.rcParams['font.family'] = 'Cambria'
+    plt.rcParams['font.family'] = 'Helvetica'
+    plt.rcParams['font.size'] = 13  # Base font size
 
     fig, ax = plt.subplots(figsize=(12, 10))
 
@@ -73,10 +74,8 @@ def main():
     ax.axhline(y=0, color='gray', linestyle=':', linewidth=1.5, alpha=0.6)
     ax.axvline(x=0, color='gray', linestyle=':', linewidth=1.5, alpha=0.6)
 
-    ax.set_xlabel('Head Coach Aggression (POE)', fontsize=13, fontweight='bold')
-    ax.set_ylabel('Coordinator Aggression (POE)', fontsize=13, fontweight='bold')
-    ax.set_title('Coordinator → Head Coach: Aggression Gene Inheritance\nDo Aggressive Coordinators Become Aggressive Head Coaches?',
-                fontsize=15, fontweight='bold', pad=20)
+    ax.set_xlabel('Head Coach Aggression (POE)', fontsize=16, fontweight='bold')
+    ax.set_ylabel('Coordinator Aggression (POE)', fontsize=16, fontweight='bold')
 
     def percent_formatter(x, pos):
         return f"{x*100:+.1f}%"
@@ -92,13 +91,13 @@ def main():
 
     ax.text(0.02, 0.98, stats_text,
            transform=ax.transAxes,
-           fontsize=11,
+           fontsize=14,
            verticalalignment='top',
            horizontalalignment='left',
            bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray', linewidth=1.5),
-           family='Cambria')
+           family='Helvetica')
 
-    ax.legend(loc='lower right', framealpha=0.95, fontsize=11)
+    ax.legend(loc='lower right', framealpha=0.95, fontsize=14)
     ax.grid(True, alpha=0.3, linestyle=':')
 
     plt.tight_layout()

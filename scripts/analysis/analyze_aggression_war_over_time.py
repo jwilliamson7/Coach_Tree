@@ -19,7 +19,7 @@ from pathlib import Path
 import logging
 from scipy import stats
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
+from matplotlib.ticker import FuncFormatter, MaxNLocator
 import json
 
 logging.basicConfig(
@@ -152,17 +152,19 @@ class TemporalAggressionAnalyzer:
         """Create scatter plots by era"""
         logger.info("Creating era comparison visualization...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Aggression vs WAR: How the Relationship Changed Over Time',
-                    fontsize=16, fontweight='bold', y=0.995)
 
         eras = ['Early (2006-2011)', 'Middle (2012-2017)', 'Late (2018-2024)']
         colors = ['#3498db', '#e67e22', '#e74c3c']
 
         def percent_formatter(x, pos):
             return f"{x*100:+.1f}%"
+
+        def war_formatter(x, pos):
+            return f"{x:+.1f}"
 
         # Row 1: Composite aggression
         for idx, (era, color) in enumerate(zip(eras, colors)):
@@ -175,7 +177,7 @@ class TemporalAggressionAnalyzer:
                 continue
 
             x = clean_data['composite_aggression']
-            y = clean_data['annual_war']
+            y = clean_data['annual_war'] * 16  # Convert from percentage to games
 
             # Scatter plot
             ax.scatter(x, y, c=color, alpha=0.5, s=60, edgecolors='black', linewidth=0.5)
@@ -191,12 +193,15 @@ class TemporalAggressionAnalyzer:
             ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
             # Labels
-            ax.set_xlabel('Composite Aggression POE', fontsize=10, fontweight='bold')
-            ax.set_ylabel('Annual WAR', fontsize=10, fontweight='bold')
-            ax.set_title(f'{era}', fontsize=11, fontweight='bold', pad=10)
+            ax.set_xlabel('Composite Aggression POE', fontsize=13, fontweight='bold')
+            ax.set_ylabel('Annual WAR (Games)', fontsize=13, fontweight='bold')
+            ax.set_title(f'{era}', fontsize=14, fontweight='bold', pad=10)
 
             # Format x-axis
             ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
+
+            # Format y-axis
+            ax.yaxis.set_major_formatter(FuncFormatter(war_formatter))
 
             # Statistics box
             significance = "SIG" if p_val < 0.05 else "n.s."
@@ -204,7 +209,7 @@ class TemporalAggressionAnalyzer:
 
             ax.text(0.05, 0.95, stats_text,
                    transform=ax.transAxes,
-                   fontsize=9,
+                   fontsize=12,
                    verticalalignment='top',
                    bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray'))
 
@@ -221,7 +226,7 @@ class TemporalAggressionAnalyzer:
                 continue
 
             x = clean_data['pass_heavy_aggression']
-            y = clean_data['annual_war']
+            y = clean_data['annual_war'] * 16  # Convert from percentage to games
 
             # Scatter plot
             ax.scatter(x, y, c=color, alpha=0.5, s=60, edgecolors='black', linewidth=0.5)
@@ -237,12 +242,15 @@ class TemporalAggressionAnalyzer:
             ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
             # Labels
-            ax.set_xlabel('Pass-Heavy Aggression POE', fontsize=10, fontweight='bold')
-            ax.set_ylabel('Annual WAR', fontsize=10, fontweight='bold')
-            ax.set_title(f'{era}', fontsize=11, fontweight='bold', pad=10)
+            ax.set_xlabel('Pass-Heavy Aggression POE', fontsize=13, fontweight='bold')
+            ax.set_ylabel('Annual WAR (Games)', fontsize=13, fontweight='bold')
+            ax.set_title(f'{era}', fontsize=14, fontweight='bold', pad=10)
 
             # Format x-axis
             ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
+
+            # Format y-axis
+            ax.yaxis.set_major_formatter(FuncFormatter(war_formatter))
 
             # Statistics box
             significance = "SIG" if p_val < 0.05 else "n.s."
@@ -250,7 +258,7 @@ class TemporalAggressionAnalyzer:
 
             ax.text(0.05, 0.95, stats_text,
                    transform=ax.transAxes,
-                   fontsize=9,
+                   fontsize=12,
                    verticalalignment='top',
                    bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray'))
 
@@ -272,11 +280,10 @@ class TemporalAggressionAnalyzer:
         """Create plot showing how correlation changed over time"""
         logger.info("Creating rolling correlation visualization...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10))
-        fig.suptitle('How Has the Aggression-Performance Link Evolved?\nRolling 3-Year Correlation with WAR',
-                    fontsize=14, fontweight='bold', y=0.995)
 
         # Composite aggression
         comp_df = pd.DataFrame(rolling_results['composite'])
@@ -293,11 +300,12 @@ class TemporalAggressionAnalyzer:
                        label='Significant (p<0.05)')
 
         ax1.axhline(y=0, color='gray', linestyle='--', linewidth=1, alpha=0.7)
-        ax1.set_xlabel('Year (center of 3-year window)', fontsize=11, fontweight='bold')
-        ax1.set_ylabel('Correlation Coefficient (r)', fontsize=11, fontweight='bold')
-        ax1.set_title('Composite Aggression vs WAR', fontsize=12, fontweight='bold', pad=10)
+        ax1.set_xlabel('Year (center of 3-year window)', fontsize=14, fontweight='bold')
+        ax1.set_ylabel('Correlation Coefficient (r)', fontsize=14, fontweight='bold')
+        ax1.set_title('Composite Aggression vs WAR', fontsize=15, fontweight='bold', pad=10)
         ax1.legend(loc='best', framealpha=0.9)
         ax1.grid(True, alpha=0.3, linestyle=':')
+        ax1.xaxis.set_major_locator(MaxNLocator(integer=True))
 
         # Pass-heavy aggression
         pass_df = pd.DataFrame(rolling_results['pass_heavy'])
@@ -314,11 +322,12 @@ class TemporalAggressionAnalyzer:
                        label='Significant (p<0.05)')
 
         ax2.axhline(y=0, color='gray', linestyle='--', linewidth=1, alpha=0.7)
-        ax2.set_xlabel('Year (center of 3-year window)', fontsize=11, fontweight='bold')
-        ax2.set_ylabel('Correlation Coefficient (r)', fontsize=11, fontweight='bold')
-        ax2.set_title('Pass-Heavy Aggression vs WAR', fontsize=12, fontweight='bold', pad=10)
+        ax2.set_xlabel('Year (center of 3-year window)', fontsize=14, fontweight='bold')
+        ax2.set_ylabel('Correlation Coefficient (r)', fontsize=14, fontweight='bold')
+        ax2.set_title('Pass-Heavy Aggression vs WAR', fontsize=15, fontweight='bold', pad=10)
         ax2.legend(loc='best', framealpha=0.9)
         ax2.grid(True, alpha=0.3, linestyle=':')
+        ax2.xaxis.set_major_locator(MaxNLocator(integer=True))
 
         plt.tight_layout(rect=[0, 0, 1, 0.985])
 
