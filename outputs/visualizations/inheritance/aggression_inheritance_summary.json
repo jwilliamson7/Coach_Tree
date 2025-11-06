@@ -1,0 +1,50 @@
+{
+  "overall": {
+    "correlation": 0.06375609317989579,
+    "p_value": 0.09165414166038345,
+    "sample_size": 701,
+    "significant": false
+  },
+  "by_relationship_type": {
+    "position_to_coordinator": {
+      "correlation": 0.07340641782517776,
+      "p_value": 0.3329375452599334,
+      "sample_size": 176,
+      "significant": false
+    },
+    "position_to_hc": {
+      "correlation": 0.06448364403333055,
+      "p_value": 0.28573157803482263,
+      "sample_size": 276,
+      "significant": false
+    },
+    "coordinator_to_hc": {
+      "correlation": 0.05649806815607719,
+      "p_value": 0.3746763707237284,
+      "sample_size": 249,
+      "significant": false
+    }
+  },
+  "by_component": {
+    "4th Down": {
+      "correlation": 0.11051123431281747,
+      "p_value": 0.0033929324892200555,
+      "significant": true
+    },
+    "Pass-Heavy": {
+      "correlation": 0.002921619220829167,
+      "p_value": 0.9384516426951617,
+      "significant": false
+    },
+    "Deep Pass": {
+      "correlation": 0.05723315285834207,
+      "p_value": 0.13006011827862696,
+      "significant": false
+    },
+    "2-Point": {
+      "correlation": 0.050404757129252624,
+      "p_value": 0.1825309881662719,
+      "significant": false
+    }
+  }
+}

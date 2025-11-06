@@ -154,5 +154,4 @@ temp/
 tmp/
 
 # Generated outputs (HTML visualizations, reports, analysis files)
-outputs/
 *.html
