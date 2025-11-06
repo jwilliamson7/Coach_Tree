@@ -1,0 +1,127 @@
+{
+  "overall_by_type": {
+    "Offensive": {
+      "composite": {
+        "correlation": 0.09981392037573623,
+        "p_value": 0.07597223479903373,
+        "n": 317,
+        "slope": 0.6621481046812883,
+        "significant": false
+      },
+      "pass_heavy": {
+        "correlation": 0.1516665555672918,
+        "p_value": 0.006823322698798356,
+        "n": 317,
+        "slope": 0.5057799363554473,
+        "significant": true
+      }
+    },
+    "Defensive": {
+      "composite": {
+        "correlation": 0.08761606000229437,
+        "p_value": 0.1393872356222283,
+        "n": 286,
+        "slope": 0.645498961950878,
+        "significant": false
+      },
+      "pass_heavy": {
+        "correlation": 0.08736410857310767,
+        "p_value": 0.14053275587706743,
+        "n": 286,
+        "slope": 0.2560811986544523,
+        "significant": false
+      }
+    }
+  },
+  "by_type_and_era": {
+    "Offensive": {
+      "Early (2006-2011)": {
+        "composite": {
+          "correlation": 0.22656874936486163,
+          "p_value": 0.029871928071487724,
+          "n": 92,
+          "significant": true
+        },
+        "pass_heavy": {
+          "correlation": 0.20395841708929216,
+          "p_value": 0.05116376952913123,
+          "n": 92,
+          "significant": false
+        }
+      },
+      "Middle (2012-2017)": {
+        "composite": {
+          "correlation": -0.013841913944112428,
+          "p_value": 0.8940869152458163,
+          "n": 95,
+          "significant": false
+        },
+        "pass_heavy": {
+          "correlation": 0.01949837105910342,
+          "p_value": 0.8512305681517879,
+          "n": 95,
+          "significant": false
+        }
+      },
+      "Late (2018-2024)": {
+        "composite": {
+          "correlation": 0.019849529862361256,
+          "p_value": 0.8226361472395941,
+          "n": 130,
+          "significant": false
+        },
+        "pass_heavy": {
+          "correlation": 0.1510617757820344,
+          "p_value": 0.08623640236691402,
+          "n": 130,
+          "significant": false
+        }
+      }
+    },
+    "Defensive": {
+      "Early (2006-2011)": {
+        "composite": {
+          "correlation": 0.17274844244064116,
+          "p_value": 0.08894413505310426,
+          "n": 98,
+          "significant": false
+        },
+        "pass_heavy": {
+          "correlation": 0.0172584000669901,
+          "p_value": 0.8660563026785808,
+          "n": 98,
+          "significant": false
+        }
+      },
+      "Middle (2012-2017)": {
+        "composite": {
+          "correlation": 0.22226439968773815,
+          "p_value": 0.028660841818812916,
+          "n": 97,
+          "significant": true
+        },
+        "pass_heavy": {
+          "correlation": 0.21257944007767024,
+          "p_value": 0.036574691402593486,
+          "n": 97,
+          "significant": true
+        }
+      },
+      "Late (2018-2024)": {
+        "composite": {
+          "correlation": -0.09077277487253009,
+          "p_value": 0.392155317191827,
+          "n": 91,
+          "significant": false
+        },
+        "pass_heavy": {
+          "correlation": 0.02641714157505664,
+          "p_value": 0.8036986967576977,
+          "n": 91,
+          "significant": false
+        }
+      }
+    },
+    "Other": {}
+  }
+}

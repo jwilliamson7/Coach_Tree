@@ -1,0 +1,325 @@
+{
+  "by_type": {
+    "Offensive": {
+      "fourth_down_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.683572115399251,
+          "p_value": 1.969143325693483e-33,
+          "n_pairs": 233,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.6143014393811557,
+          "p_value": 2.7599948705541967e-18,
+          "n_pairs": 163,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.5419551291641461,
+          "p_value": 8.104193525179894e-10,
+          "n_pairs": 111,
+          "significant": true
+        }
+      ],
+      "pass_heavy_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.5426690913081067,
+          "p_value": 3.0402322831120805e-19,
+          "n_pairs": 233,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.42634452392338257,
+          "p_value": 1.3909364933132841e-08,
+          "n_pairs": 163,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.4362512464642343,
+          "p_value": 1.6998253310203871e-06,
+          "n_pairs": 111,
+          "significant": true
+        }
+      ],
+      "deep_pass_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.49941165068047927,
+          "p_value": 4.213587016860957e-16,
+          "n_pairs": 233,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.4287541694872361,
+          "p_value": 1.1294199155955543e-08,
+          "n_pairs": 163,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.31805516797667693,
+          "p_value": 0.000669510192882488,
+          "n_pairs": 111,
+          "significant": true
+        }
+      ],
+      "two_point_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.41737780449619216,
+          "p_value": 3.086716118799622e-11,
+          "n_pairs": 233,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.4043486331114202,
+          "p_value": 8.649424868521686e-08,
+          "n_pairs": 163,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.48093320152473423,
+          "p_value": 9.158668597832908e-08,
+          "n_pairs": 111,
+          "significant": true
+        }
+      ],
+      "composite_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.5166646029124886,
+          "p_value": 2.6603257765338335e-17,
+          "n_pairs": 233,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.4486796655883449,
+          "p_value": 1.8932763076746342e-09,
+          "n_pairs": 163,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.33956419753630535,
+          "p_value": 0.00026636874824662564,
+          "n_pairs": 111,
+          "significant": true
+        }
+      ]
+    },
+    "Defensive": {
+      "fourth_down_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.36615246369339455,
+          "p_value": 1.7611100487202128e-08,
+          "n_pairs": 223,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.28261257307316007,
+          "p_value": 0.00015786169829262115,
+          "n_pairs": 174,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.2772716332524998,
+          "p_value": 0.0012879129463238914,
+          "n_pairs": 132,
+          "significant": true
+        }
+      ],
+      "pass_heavy_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.40952410167034453,
+          "p_value": 1.98674814868674e-10,
+          "n_pairs": 223,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.23159045233542536,
+          "p_value": 0.002106567025303209,
+          "n_pairs": 174,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.16505087801266952,
+          "p_value": 0.05859144327622861,
+          "n_pairs": 132,
+          "significant": false
+        }
+      ],
+      "deep_pass_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.4046406819862981,
+          "p_value": 3.402526864698164e-10,
+          "n_pairs": 223,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.24612296227782074,
+          "p_value": 0.0010615248752126375,
+          "n_pairs": 174,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.2940681328144841,
+          "p_value": 0.0006206008527122244,
+          "n_pairs": 132,
+          "significant": true
+        }
+      ],
+      "two_point_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.41123621727964343,
+          "p_value": 1.641815522897699e-10,
+          "n_pairs": 223,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.20346818696891797,
+          "p_value": 0.007085209306168419,
+          "n_pairs": 174,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.1938462881330334,
+          "p_value": 0.02593986835683279,
+          "n_pairs": 132,
+          "significant": true
+        }
+      ],
+      "composite_aggression": [
+        {
+          "lag": 1,
+          "correlation": 0.36419726232930083,
+          "p_value": 2.12347402398274e-08,
+          "n_pairs": 223,
+          "significant": true
+        },
+        {
+          "lag": 2,
+          "correlation": 0.37302258768275737,
+          "p_value": 3.99463823627141e-07,
+          "n_pairs": 174,
+          "significant": true
+        },
+        {
+          "lag": 3,
+          "correlation": 0.3284571281260461,
+          "p_value": 0.00012053676465857134,
+          "n_pairs": 132,
+          "significant": true
+        }
+      ]
+    }
+  },
+  "comparison": {
+    "fourth_down_aggression": {
+      "lag_1": {
+        "offensive_corr": 0.683572115399251,
+        "defensive_corr": 0.36615246369339455,
+        "difference": 0.31741965170585645
+      },
+      "lag_2": {
+        "offensive_corr": 0.6143014393811557,
+        "defensive_corr": 0.28261257307316007,
+        "difference": 0.3316888663079956
+      },
+      "lag_3": {
+        "offensive_corr": 0.5419551291641461,
+        "defensive_corr": 0.2772716332524998,
+        "difference": 0.2646834959116463
+      }
+    },
+    "pass_heavy_aggression": {
+      "lag_1": {
+        "offensive_corr": 0.5426690913081067,
+        "defensive_corr": 0.40952410167034453,
+        "difference": 0.13314498963776217
+      },
+      "lag_2": {
+        "offensive_corr": 0.42634452392338257,
+        "defensive_corr": 0.23159045233542536,
+        "difference": 0.1947540715879572
+      },
+      "lag_3": {
+        "offensive_corr": 0.4362512464642343,
+        "defensive_corr": 0.16505087801266952,
+        "difference": 0.2712003684515648
+      }
+    },
+    "deep_pass_aggression": {
+      "lag_1": {
+        "offensive_corr": 0.49941165068047927,
+        "defensive_corr": 0.4046406819862981,
+        "difference": 0.09477096869418117
+      },
+      "lag_2": {
+        "offensive_corr": 0.4287541694872361,
+        "defensive_corr": 0.24612296227782074,
+        "difference": 0.18263120720941536
+      },
+      "lag_3": {
+        "offensive_corr": 0.31805516797667693,
+        "defensive_corr": 0.2940681328144841,
+        "difference": 0.02398703516219286
+      }
+    },
+    "two_point_aggression": {
+      "lag_1": {
+        "offensive_corr": 0.41737780449619216,
+        "defensive_corr": 0.41123621727964343,
+        "difference": 0.006141587216548727
+      },
+      "lag_2": {
+        "offensive_corr": 0.4043486331114202,
+        "defensive_corr": 0.20346818696891797,
+        "difference": 0.20088044614250225
+      },
+      "lag_3": {
+        "offensive_corr": 0.48093320152473423,
+        "defensive_corr": 0.1938462881330334,
+        "difference": 0.28708691339170084
+      }
+    },
+    "composite_aggression": {
+      "lag_1": {
+        "offensive_corr": 0.5166646029124886,
+        "defensive_corr": 0.36419726232930083,
+        "difference": 0.15246734058318778
+      },
+      "lag_2": {
+        "offensive_corr": 0.4486796655883449,
+        "defensive_corr": 0.37302258768275737,
+        "difference": 0.07565707790558751
+      },
+      "lag_3": {
+        "offensive_corr": 0.33956419753630535,
+        "defensive_corr": 0.3284571281260461,
+        "difference": 0.01110706941025924
+      }
+    }
+  }
+}

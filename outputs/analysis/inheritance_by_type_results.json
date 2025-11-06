@@ -1,0 +1,134 @@
+{
+  "by_mentor_background": {
+    "Offensive": {
+      "fourth_down": {
+        "correlation": 0.2324451637067273,
+        "p_value": 7.029958508902611e-05,
+        "n": 287,
+        "significant": true
+      },
+      "pass_heavy": {
+        "correlation": 0.036515522459070464,
+        "p_value": 0.5378166562433284,
+        "n": 287,
+        "significant": false
+      },
+      "deep_pass": {
+        "correlation": -0.015819452418391458,
+        "p_value": 0.7895880180050703,
+        "n": 287,
+        "significant": false
+      },
+      "two_point": {
+        "correlation": 0.08901091492450262,
+        "p_value": 0.1324920071974006,
+        "n": 287,
+        "significant": false
+      },
+      "composite": {
+        "correlation": 0.06723089564786494,
+        "p_value": 0.2562588914210548,
+        "n": 287,
+        "significant": false
+      }
+    },
+    "Defensive": {
+      "fourth_down": {
+        "correlation": 0.053940086812751344,
+        "p_value": 0.4238645997885025,
+        "n": 222,
+        "significant": false
+      },
+      "pass_heavy": {
+        "correlation": -0.026914080322303056,
+        "p_value": 0.6900264201818863,
+        "n": 222,
+        "significant": false
+      },
+      "deep_pass": {
+        "correlation": 0.08227153790223045,
+        "p_value": 0.22209769683657316,
+        "n": 222,
+        "significant": false
+      },
+      "two_point": {
+        "correlation": 0.0828866746990593,
+        "p_value": 0.218648551477253,
+        "n": 222,
+        "significant": false
+      },
+      "composite": {
+        "correlation": 0.05113653077199876,
+        "p_value": 0.44838388686151054,
+        "n": 222,
+        "significant": false
+      }
+    }
+  },
+  "by_coordinator_type": {
+    "OC": {
+      "fourth_down": {
+        "correlation": 0.20081021273669072,
+        "p_value": 0.00397784361715443,
+        "n": 204,
+        "significant": true
+      },
+      "pass_heavy": {
+        "correlation": 0.23914723021762996,
+        "p_value": 0.0005713996158532364,
+        "n": 204,
+        "significant": true
+      },
+      "deep_pass": {
+        "correlation": -0.0005645248706823555,
+        "p_value": 0.9936062342377021,
+        "n": 204,
+        "significant": false
+      },
+      "two_point": {
+        "correlation": 0.11851009142871959,
+        "p_value": 0.09136975273391262,
+        "n": 204,
+        "significant": false
+      },
+      "composite": {
+        "correlation": 0.10327540377175895,
+        "p_value": 0.1415787623096479,
+        "n": 204,
+        "significant": false
+      }
+    },
+    "DC": {
+      "fourth_down": {
+        "correlation": 0.02515349846576137,
+        "p_value": 0.7183687078706538,
+        "n": 208,
+        "significant": false
+      },
+      "pass_heavy": {
+        "correlation": -0.021903299674207993,
+        "p_value": 0.7534998562603875,
+        "n": 208,
+        "significant": false
+      },
+      "deep_pass": {
+        "correlation": 0.08561778553272104,
+        "p_value": 0.2188412589121155,
+        "n": 208,
+        "significant": false
+      },
+      "two_point": {
+        "correlation": 0.09587909864151614,
+        "p_value": 0.16831730532257871,
+        "n": 208,
+        "significant": false
+      },
+      "composite": {
+        "correlation": 0.052245411915174955,
+        "p_value": 0.4535768034382074,
+        "n": 208,
+        "significant": false
+      }
+    }
+  }
+}

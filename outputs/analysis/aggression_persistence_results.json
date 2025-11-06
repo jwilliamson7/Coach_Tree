@@ -1,0 +1,143 @@
+{
+  "lag_1": {
+    "composite": {
+      "correlation": 0.4579054090304292,
+      "p_value": 1.3908961892911222e-25,
+      "slope": 0.46830134514302696,
+      "intercept": 0.0029603827954626455,
+      "r_squared": 0.2096773636193245,
+      "n": 467,
+      "significant": true
+    },
+    "fourth_down": {
+      "correlation": 0.5559038446534121,
+      "p_value": 3.128392041816221e-39,
+      "slope": 0.542157237266955,
+      "intercept": 0.00034856715729850683,
+      "r_squared": 0.3090290845004451,
+      "n": 467,
+      "significant": true
+    },
+    "pass_heavy": {
+      "correlation": 0.47275012449251536,
+      "p_value": 2.23365642436595e-27,
+      "slope": 0.4670056336803099,
+      "intercept": 0.01277594160396846,
+      "r_squared": 0.22349268020768862,
+      "n": 467,
+      "significant": true
+    },
+    "deep_pass": {
+      "correlation": 0.4550212472666155,
+      "p_value": 3.0326847198779977e-25,
+      "slope": 0.4331492659741214,
+      "intercept": -0.004283948414459553,
+      "r_squared": 0.2070443354640663,
+      "n": 467,
+      "significant": true
+    },
+    "two_point": {
+      "correlation": 0.39254677727598264,
+      "p_value": 1.1793346211875953e-18,
+      "slope": 0.4148493429436439,
+      "intercept": 0.0028164485950452098,
+      "r_squared": 0.15409297234975997,
+      "n": 467,
+      "significant": true
+    }
+  },
+  "lag_2": {
+    "composite": {
+      "correlation": 0.39943189018310665,
+      "p_value": 1.3141709128668655e-14,
+      "slope": 0.43007081448604956,
+      "intercept": 0.0032239176633192656,
+      "r_squared": 0.15954583489524923,
+      "n": 344,
+      "significant": true
+    },
+    "fourth_down": {
+      "correlation": 0.43751888699077784,
+      "p_value": 1.6173748788529168e-17,
+      "slope": 0.4293932523143467,
+      "intercept": -0.00023618606764583272,
+      "r_squared": 0.19142277647364914,
+      "n": 344,
+      "significant": true
+    },
+    "pass_heavy": {
+      "correlation": 0.32524320061476014,
+      "p_value": 6.442307784742972e-10,
+      "slope": 0.32418816323856486,
+      "intercept": 0.016818811910313355,
+      "r_squared": 0.10578313954613315,
+      "n": 344,
+      "significant": true
+    },
+    "deep_pass": {
+      "correlation": 0.3368312136410576,
+      "p_value": 1.427732874447121e-10,
+      "slope": 0.30430376693848477,
+      "intercept": -0.0066606045577283024,
+      "r_squared": 0.1134552664829078,
+      "n": 344,
+      "significant": true
+    },
+    "two_point": {
+      "correlation": 0.22905023898997584,
+      "p_value": 1.7871073276920914e-05,
+      "slope": 0.26609841682714847,
+      "intercept": 0.0034663404997272475,
+      "r_squared": 0.052464011981365063,
+      "n": 344,
+      "significant": true
+    }
+  },
+  "lag_3": {
+    "composite": {
+      "correlation": 0.3315663578057613,
+      "p_value": 9.488532498308482e-08,
+      "slope": 0.367004858121978,
+      "intercept": 0.003725249127689439,
+      "r_squared": 0.10993624962857822,
+      "n": 247,
+      "significant": true
+    },
+    "fourth_down": {
+      "correlation": 0.40137226892422495,
+      "p_value": 5.61259451801118e-11,
+      "slope": 0.3880238663717817,
+      "intercept": -0.0008732139023983915,
+      "r_squared": 0.16109969826138035,
+      "n": 247,
+      "significant": true
+    },
+    "pass_heavy": {
+      "correlation": 0.275359204414083,
+      "p_value": 1.1291511674337178e-05,
+      "slope": 0.2880395166277941,
+      "intercept": 0.018366258807334713,
+      "r_squared": 0.07582269145555678,
+      "n": 247,
+      "significant": true
+    },
+    "deep_pass": {
+      "correlation": 0.3090872280493282,
+      "p_value": 7.236495644534468e-07,
+      "slope": 0.27779624137829023,
+      "intercept": -0.006347362923114091,
+      "r_squared": 0.09553491454321746,
+      "n": 247,
+      "significant": true
+    },
+    "two_point": {
+      "correlation": 0.28908168120610167,
+      "p_value": 3.851634932567417e-06,
+      "slope": 0.32446885299671824,
+      "intercept": 0.004554606668729702,
+      "r_squared": 0.0835682184089462,
+      "n": 247,
+      "significant": true
+    }
+  }
+}

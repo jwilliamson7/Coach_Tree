@@ -1,0 +1,52 @@
+{
+  "Composite Aggression": {
+    "correlation": 0.08738182917045637,
+    "p_value": 0.031495272925128104,
+    "slope": 0.6037381657985021,
+    "intercept": 0.009813713224758254,
+    "r_squared": 0.007635584069174819,
+    "std_err": 0.28005583237087983,
+    "n": 606,
+    "significant": true
+  },
+  "4th Down Aggression": {
+    "correlation": 0.05569721605995453,
+    "p_value": 0.17089479030865412,
+    "slope": 0.26000544336443554,
+    "intercept": 0.012031060493088755,
+    "r_squared": 0.0031021798768292533,
+    "std_err": 0.18965129212280088,
+    "n": 606,
+    "significant": false
+  },
+  "Pass-Heavy Aggression": {
+    "correlation": 0.11466779773225466,
+    "p_value": 0.004709142697581461,
+    "slope": 0.3574261671981607,
+    "intercept": 0.004810858388286405,
+    "r_squared": 0.013148703836765264,
+    "std_err": 0.12599469542012282,
+    "n": 606,
+    "significant": true
+  },
+  "Deep Pass Aggression": {
+    "correlation": 0.01277028061453839,
+    "p_value": 0.7537256676960148,
+    "slope": 0.043569565657678756,
+    "intercept": 0.012224130243939261,
+    "r_squared": 0.00016308006697405512,
+    "std_err": 0.13881260530334538,
+    "n": 606,
+    "significant": false
+  },
+  "2-Point Aggression": {
+    "correlation": -0.00579833717195843,
+    "p_value": 0.8867288776639207,
+    "slope": -0.01795336694061706,
+    "intercept": 0.011937697651079162,
+    "r_squared": 3.3620713959714835e-05,
+    "std_err": 0.12598437080851585,
+    "n": 606,
+    "significant": false
+  }
+}
