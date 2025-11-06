@@ -255,6 +255,17 @@ class AggressionTrendVisualizer:
             ax.xaxis.set_major_locator(MultipleLocator(2))
             ax.xaxis.set_minor_locator(MultipleLocator(1))
 
+            # Fix grey axes issue - explicitly set all colors to black
+            ax.spines['bottom'].set_color('black')
+            ax.spines['top'].set_color('black')
+            ax.spines['left'].set_color('black')
+            ax.spines['right'].set_color('black')
+            ax.tick_params(axis='x', colors='black')
+            ax.tick_params(axis='y', colors='black')
+            ax.xaxis.label.set_color('black')
+            ax.yaxis.label.set_color('black')
+            ax.title.set_color('black')
+
         def percent_formatter(x, pos):
             """Format y-axis as +/-XX.X%"""
             return f"{x*100:+.1f}%"
