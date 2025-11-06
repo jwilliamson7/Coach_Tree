@@ -177,12 +177,6 @@ class AggressionTrendVisualizer:
         fig.update_yaxes(title_text="Component Score", row=2, col=1)
 
         fig.update_layout(
-            title={
-                'text': 'NFL Coaching Aggression Genes: Trends Over Time',
-                'x': 0.5,
-                'xanchor': 'center',
-                'font': {'size': 20, 'color': '#1a1a1a'}
-            },
             hovermode='x unified',
             template='plotly_white',
             height=900,
@@ -212,13 +206,12 @@ class AggressionTrendVisualizer:
 
         logger.info("Creating Matplotlib visualization...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         df = self.yearly_trends
 
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
-        fig.suptitle('NFL Coaching Aggression Genes: Trends Over Time',
-                    fontsize=16, fontweight='bold', y=0.99, family='Cambria')
 
         ax1.plot(df['season'], df['composite_aggression_mean'],
                 color='#2E86AB', linewidth=2.5, marker='o', markersize=5,
@@ -232,8 +225,8 @@ class AggressionTrendVisualizer:
         )
 
         ax1.axhline(y=0, color='gray', linestyle='--', linewidth=1, alpha=0.5, zorder=1)
-        ax1.set_ylabel('POE (Percent over Expected)', fontsize=12, fontweight='bold')
-        ax1.set_title('Composite Aggression Gene Over Time', fontsize=13, pad=15)
+        ax1.set_ylabel('POE (Percent over Expected)', fontsize=15, fontweight='bold')
+        ax1.set_title('Composite Aggression Gene Over Time', fontsize=16, pad=15)
         ax1.legend(loc='upper left', framealpha=0.9)
         ax1.grid(True, alpha=0.3, linestyle=':')
         ax1.set_xlim(df['season'].min() - 0.5, df['season'].max() + 0.5)
@@ -251,9 +244,9 @@ class AggressionTrendVisualizer:
                     label=label, alpha=0.85)
 
         ax2.axhline(y=0, color='gray', linestyle='--', linewidth=1, alpha=0.5, zorder=1)
-        ax2.set_xlabel('Season', fontsize=12, fontweight='bold')
-        ax2.set_ylabel('POE (Percent over Expected)', fontsize=12, fontweight='bold')
-        ax2.set_title('Aggression Components Over Time', fontsize=13, pad=10)
+        ax2.set_xlabel('Season', fontsize=15, fontweight='bold')
+        ax2.set_ylabel('POE (Percent over Expected)', fontsize=15, fontweight='bold')
+        ax2.set_title('Aggression Components Over Time', fontsize=16, pad=10)
         ax2.legend(loc='best', framealpha=0.9, ncol=2)
         ax2.grid(True, alpha=0.3, linestyle=':')
         ax2.set_xlim(df['season'].min() - 0.5, df['season'].max() + 0.5)

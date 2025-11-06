@@ -289,7 +289,8 @@ class InheritanceByTypeAnalyzer:
         """Create scatter plots by mentor type"""
         logger.info("\nCreating visualization by mentor type...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         aggression_types = [
             ('fourth_down', '4th Down'),
@@ -339,9 +340,9 @@ class InheritanceByTypeAnalyzer:
             ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
             # Labels
-            ax.set_xlabel('Mentor Aggression POE', fontsize=10, fontweight='bold')
-            ax.set_ylabel('Protégé Aggression POE', fontsize=10, fontweight='bold')
-            ax.set_title(f'{label} Aggression', fontsize=11, fontweight='bold', pad=10)
+            ax.set_xlabel('Mentor Aggression POE', fontsize=13, fontweight='bold')
+            ax.set_ylabel('Protégé Aggression POE', fontsize=13, fontweight='bold')
+            ax.set_title(f'{label} Aggression', fontsize=14, fontweight='bold', pad=10)
 
             # Format axes
             ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
@@ -358,7 +359,7 @@ class InheritanceByTypeAnalyzer:
             if stats_text:
                 ax.text(0.05, 0.95, '\n'.join(stats_text),
                        transform=ax.transAxes,
-                       fontsize=9,
+                       fontsize=12,
                        verticalalignment='top',
                        bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray'))
 
@@ -368,10 +369,7 @@ class InheritanceByTypeAnalyzer:
         # Hide extra subplot
         axes[5].axis('off')
 
-        fig.suptitle('Aggression Inheritance by Mentor Background Type\n(Coordinator → Head Coach)',
-                    fontsize=16, fontweight='bold', y=0.995)
-
-        plt.tight_layout(rect=[0, 0, 1, 0.985])
+        plt.tight_layout()
 
         # Save
         output_dir = Path("outputs/visualizations/inheritance")
@@ -387,7 +385,8 @@ class InheritanceByTypeAnalyzer:
         """Create bar chart comparing inheritance strength"""
         logger.info("Creating comparison bar chart...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
 
@@ -417,16 +416,16 @@ class InheritanceByTypeAnalyzer:
             if 'Offensive' in mentor_type_results and var in mentor_type_results['Offensive']:
                 if mentor_type_results['Offensive'][var]['significant']:
                     ax1.text(i - width/2, off_corrs[i], '*', ha='center', va='bottom',
-                            fontsize=16, fontweight='bold')
+                            fontsize=19, fontweight='bold')
             if 'Defensive' in mentor_type_results and var in mentor_type_results['Defensive']:
                 if mentor_type_results['Defensive'][var]['significant']:
                     ax1.text(i + width/2, def_corrs[i], '*', ha='center', va='bottom',
-                            fontsize=16, fontweight='bold')
+                            fontsize=19, fontweight='bold')
 
         ax1.axhline(y=0, color='gray', linestyle='-', linewidth=1)
-        ax1.set_xlabel('Aggression Type', fontsize=11, fontweight='bold')
-        ax1.set_ylabel('Mentor-Protégé Correlation (r)', fontsize=11, fontweight='bold')
-        ax1.set_title('By Mentor Background Type', fontsize=12, fontweight='bold', pad=10)
+        ax1.set_xlabel('Aggression Type', fontsize=14, fontweight='bold')
+        ax1.set_ylabel('Mentor-Protégé Correlation (r)', fontsize=14, fontweight='bold')
+        ax1.set_title('By Mentor Background Type', fontsize=15, fontweight='bold', pad=10)
         ax1.set_xticks(x)
         ax1.set_xticklabels(labels, rotation=45, ha='right')
         ax1.legend(loc='best', framealpha=0.95)
@@ -453,26 +452,23 @@ class InheritanceByTypeAnalyzer:
             if 'OC' in coord_type_results and var in coord_type_results['OC']:
                 if coord_type_results['OC'][var]['significant']:
                     ax2.text(i - width/2, oc_corrs[i], '*', ha='center', va='bottom',
-                            fontsize=16, fontweight='bold')
+                            fontsize=19, fontweight='bold')
             if 'DC' in coord_type_results and var in coord_type_results['DC']:
                 if coord_type_results['DC'][var]['significant']:
                     ax2.text(i + width/2, dc_corrs[i], '*', ha='center', va='bottom',
-                            fontsize=16, fontweight='bold')
+                            fontsize=19, fontweight='bold')
 
         ax2.axhline(y=0, color='gray', linestyle='-', linewidth=1)
-        ax2.set_xlabel('Aggression Type', fontsize=11, fontweight='bold')
-        ax2.set_ylabel('Mentor-Protégé Correlation (r)', fontsize=11, fontweight='bold')
-        ax2.set_title('By Coordinator Type', fontsize=12, fontweight='bold', pad=10)
+        ax2.set_xlabel('Aggression Type', fontsize=14, fontweight='bold')
+        ax2.set_ylabel('Mentor-Protégé Correlation (r)', fontsize=14, fontweight='bold')
+        ax2.set_title('By Coordinator Type', fontsize=15, fontweight='bold', pad=10)
         ax2.set_xticks(x)
         ax2.set_xticklabels(labels, rotation=45, ha='right')
         ax2.legend(loc='best', framealpha=0.95)
         ax2.grid(True, alpha=0.3, linestyle=':', axis='y')
         ax2.set_ylim(-0.05, 0.35)
 
-        fig.suptitle('Aggression Inheritance Strength by Coach Type\n(Stars indicate p<0.05)',
-                    fontsize=14, fontweight='bold', y=0.98)
-
-        plt.tight_layout(rect=[0, 0, 1, 0.96])
+        plt.tight_layout()
 
         # Save
         output_dir = Path("outputs/visualizations/inheritance")

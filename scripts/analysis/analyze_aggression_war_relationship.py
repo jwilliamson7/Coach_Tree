@@ -106,7 +106,7 @@ class AggressionWARAnalyzer:
                 continue
 
             x = clean_data[col]
-            y = clean_data['annual_war']
+            y = clean_data['annual_war'] * 16  # Convert from percentage to games
 
             # Pearson correlation
             corr, p_val = stats.pearsonr(x, y)
@@ -134,12 +134,11 @@ class AggressionWARAnalyzer:
         """Create scatter plots with regression lines for each aggression measure"""
         logger.info("Creating visualizations...")
 
-        plt.rcParams['font.family'] = 'Cambria'
+        plt.rcParams['font.family'] = 'Helvetica'
+        plt.rcParams['font.size'] = 13  # Base font size
 
         # Create 2x3 subplot grid (5 aggression measures + 1 for win pct)
         fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Coaching Aggression vs Performance (WAR)',
-                    fontsize=16, fontweight='bold', y=0.995)
 
         axes = axes.flatten()
 
@@ -155,6 +154,9 @@ class AggressionWARAnalyzer:
         def percent_formatter(x, pos):
             return f"{x*100:+.1f}%"
 
+        def war_formatter(x, pos):
+            return f"{x:+.1f}"
+
         for idx, (col, label, color) in enumerate(measures):
             ax = axes[idx]
 
@@ -165,18 +167,18 @@ class AggressionWARAnalyzer:
                 clean_data = self.merged_data[[col, y_col]].dropna()
             else:
                 y_col = 'annual_war'
-                y_label = 'Annual WAR'
+                y_label = 'Annual WAR (Games)'
                 clean_data = self.merged_data[[col, y_col]].dropna()
 
             if len(clean_data) == 0:
                 ax.text(0.5, 0.5, 'No data available',
                        transform=ax.transAxes,
                        ha='center', va='center',
-                       fontsize=12, style='italic', color='gray')
+                       fontsize=15, style='italic', color='gray')
                 continue
 
             x = clean_data[col]
-            y = clean_data[y_col]
+            y = clean_data[y_col] * 16 if idx != 5 else clean_data[y_col]  # Convert WAR to games
 
             # Scatter plot
             ax.scatter(x, y, c=color, alpha=0.5, s=60, edgecolors='black', linewidth=0.5)
@@ -195,9 +197,9 @@ class AggressionWARAnalyzer:
             ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
             # Labels
-            ax.set_xlabel('Aggression POE', fontsize=10, fontweight='bold')
-            ax.set_ylabel(y_label, fontsize=10, fontweight='bold')
-            ax.set_title(label, fontsize=11, fontweight='bold', pad=10)
+            ax.set_xlabel('Aggression POE', fontsize=13, fontweight='bold')
+            ax.set_ylabel(y_label, fontsize=13, fontweight='bold')
+            ax.set_title(label, fontsize=14, fontweight='bold', pad=10)
 
             # Format x-axis as percentage
             ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
@@ -205,14 +207,16 @@ class AggressionWARAnalyzer:
             # Format y-axis (win pct is already 0-1, WAR is not)
             if idx == 5:
                 ax.yaxis.set_major_formatter(FuncFormatter(lambda x, pos: f"{x*100:.0f}%"))
+            else:
+                ax.yaxis.set_major_formatter(FuncFormatter(war_formatter))
 
             # Statistics box
-            significance = "✓ SIG" if p_val < 0.05 else "n.s."
+            significance = "* SIG" if p_val < 0.05 else "n.s."
             stats_text = f'r = {corr:.3f}\np = {p_val:.4f}\n{significance}\nn = {len(clean_data)}'
 
             ax.text(0.05, 0.95, stats_text,
                    transform=ax.transAxes,
-                   fontsize=9,
+                   fontsize=12,
                    verticalalignment='top',
                    bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray'))
 
@@ -275,8 +279,8 @@ class AggressionWARAnalyzer:
 
             if stats['significant']:
                 # Interpret the slope
-                war_per_10pct = stats['slope'] * 0.1  # WAR change per 10% aggression increase
-                print(f"  Impact: +10% aggression -> {war_per_10pct:+.3f} WAR per year")
+                games_per_10pct = stats['slope'] * 0.1  # Games change per 10% aggression increase
+                print(f"  Impact: +10% aggression -> {games_per_10pct:+.3f} games per year")
 
         print("\n" + "="*80)
 

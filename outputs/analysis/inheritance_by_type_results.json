@@ -2,65 +2,65 @@
   "by_mentor_background": {
     "Offensive": {
       "fourth_down": {
-        "correlation": 0.2324451637067273,
-        "p_value": 7.029958508902611e-05,
-        "n": 287,
+        "correlation": 0.231852491852713,
+        "p_value": 8.017093884505416e-05,
+        "n": 284,
         "significant": true
       },
       "pass_heavy": {
-        "correlation": 0.036515522459070464,
-        "p_value": 0.5378166562433284,
-        "n": 287,
+        "correlation": 0.04932222473144339,
+        "p_value": 0.40765286301500253,
+        "n": 284,
         "significant": false
       },
       "deep_pass": {
-        "correlation": -0.015819452418391458,
-        "p_value": 0.7895880180050703,
-        "n": 287,
+        "correlation": -0.01507727012748198,
+        "p_value": 0.8002833258566429,
+        "n": 284,
         "significant": false
       },
       "two_point": {
-        "correlation": 0.08901091492450262,
-        "p_value": 0.1324920071974006,
-        "n": 287,
+        "correlation": 0.08807830733359838,
+        "p_value": 0.13869862081985151,
+        "n": 284,
         "significant": false
       },
       "composite": {
-        "correlation": 0.06723089564786494,
-        "p_value": 0.2562588914210548,
-        "n": 287,
+        "correlation": 0.06831662648701212,
+        "p_value": 0.25115197277069257,
+        "n": 284,
         "significant": false
       }
     },
     "Defensive": {
       "fourth_down": {
-        "correlation": 0.053940086812751344,
-        "p_value": 0.4238645997885025,
-        "n": 222,
+        "correlation": 0.024026417025483738,
+        "p_value": 0.7343013416457123,
+        "n": 202,
         "significant": false
       },
       "pass_heavy": {
-        "correlation": -0.026914080322303056,
-        "p_value": 0.6900264201818863,
-        "n": 222,
+        "correlation": -0.025742784445573028,
+        "p_value": 0.7161093408316189,
+        "n": 202,
         "significant": false
       },
       "deep_pass": {
-        "correlation": 0.08227153790223045,
-        "p_value": 0.22209769683657316,
-        "n": 222,
+        "correlation": 0.0965225536506841,
+        "p_value": 0.1717749653068494,
+        "n": 202,
         "significant": false
       },
       "two_point": {
-        "correlation": 0.0828866746990593,
-        "p_value": 0.218648551477253,
-        "n": 222,
+        "correlation": 0.09948183193885661,
+        "p_value": 0.1589461437962705,
+        "n": 202,
         "significant": false
       },
       "composite": {
-        "correlation": 0.05113653077199876,
-        "p_value": 0.44838388686151054,
-        "n": 222,
+        "correlation": 0.0511428055315845,
+        "p_value": 0.46977929830584164,
+        "n": 202,
         "significant": false
       }
     }

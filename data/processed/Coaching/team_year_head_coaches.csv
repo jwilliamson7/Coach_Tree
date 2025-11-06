@@ -33,9 +33,9 @@ ATL,2000,Dan Reeves,Dan Reeves,1
 ATL,2001,Dan Reeves,Dan Reeves,1
 ATL,2002,Dan Reeves,Dan Reeves,1
 ATL,2003,Dan Reeves,Dan Reeves / Wade Phillips,2
-ATL,2004,Jim Mora,Jim Mora,1
-ATL,2005,Jim Mora,Jim Mora,1
-ATL,2006,Jim Mora,Jim Mora,1
+ATL,2004,Jim Mora Jr,Jim Mora Jr,1
+ATL,2005,Jim Mora Jr,Jim Mora Jr,1
+ATL,2006,Jim Mora Jr,Jim Mora Jr,1
 ATL,2007,Bobby Petrino,Bobby Petrino / Emmitt Thomas,2
 ATL,2008,Mike Smith,Mike Smith,1
 ATL,2009,Mike Smith,Mike Smith,1
@@ -54,7 +54,6 @@ ATL,2021,Arthur Smith,Arthur Smith,1
 ATL,2022,Arthur Smith,Arthur Smith,1
 ATL,2023,Arthur Smith,Arthur Smith,1
 ATL,2024,Raheem Morris,Raheem Morris,1
-BOS,1970,Clive Rush,Clive Rush / John Mazur,2
 BUF,1970,John Rauch,John Rauch,1
 BUF,1971,Harvey Johnson,Harvey Johnson,1
 BUF,1972,Lou Saban,Lou Saban,1
@@ -138,7 +137,7 @@ CAR,2019,Ron Rivera,Perry Fewell / Ron Rivera,2
 CAR,2020,Matt Rhule,Matt Rhule,1
 CAR,2021,Matt Rhule,Matt Rhule,1
 CAR,2022,Matt Rhule,Matt Rhule / Steve Wilks,2
-CAR,2023,Chris Tabor,Chris Tabor / Frank Reich,2
+CAR,2023,Frank Reich,Chris Tabor / Frank Reich,2
 CAR,2024,Dave Canales,Dave Canales,1
 CHI,1970,Jim Dooley,Jim Dooley,1
 CHI,1971,Jim Dooley,Jim Dooley,1
@@ -302,6 +301,20 @@ CLE,2021,Kevin Stefanski,Kevin Stefanski,1
 CLE,2022,Kevin Stefanski,Kevin Stefanski,1
 CLE,2023,Kevin Stefanski,Kevin Stefanski,1
 CLE,2024,Kevin Stefanski,Kevin Stefanski,1
+CLT,1970,Don McCafferty,Don McCafferty,1
+CLT,1971,Don McCafferty,Don McCafferty,1
+CLT,1972,Don McCafferty,Don McCafferty / John Sandusky,2
+CLT,1973,Howard Schnellenberger,Howard Schnellenberger,1
+CLT,1974,Howard Schnellenberger,Howard Schnellenberger / Joe Thomas,2
+CLT,1975,Ted Marchibroda,Ted Marchibroda,1
+CLT,1976,Ted Marchibroda,Ted Marchibroda,1
+CLT,1977,Ted Marchibroda,Ted Marchibroda,1
+CLT,1978,Ted Marchibroda,Ted Marchibroda,1
+CLT,1979,Ted Marchibroda,Ted Marchibroda,1
+CLT,1980,Mike McCormack,Mike McCormack,1
+CLT,1981,Mike McCormack,Mike McCormack,1
+CLT,1982,Frank Kush,Frank Kush,1
+CLT,1983,Frank Kush,Frank Kush,1
 CLT,1984,Frank Kush,Frank Kush / Hal Hunter,2
 CLT,1985,Rod Dowhower,Rod Dowhower,1
 CLT,1986,Rod Dowhower,Rod Dowhower / Ron Meyer,2
@@ -316,6 +329,10 @@ CLT,1994,Ted Marchibroda,Ted Marchibroda,1
 CLT,1995,Ted Marchibroda,Ted Marchibroda,1
 CLT,1996,Lindy Infante,Lindy Infante,1
 CLT,1997,Lindy Infante,Lindy Infante,1
+CLT,1998,Jim Mora Sr,Jim Mora Sr,1
+CLT,1999,Jim Mora Sr,Jim Mora Sr,1
+CLT,2000,Jim Mora Sr,Jim Mora Sr,1
+CLT,2001,Jim Mora Sr,Jim Mora Sr,1
 CLT,2002,Tony Dungy,Tony Dungy,1
 CLT,2003,Tony Dungy,Tony Dungy,1
 CLT,2004,Tony Dungy,Tony Dungy,1
@@ -339,6 +356,30 @@ CLT,2021,Frank Reich,Frank Reich,1
 CLT,2022,Frank Reich,Frank Reich / Jeff Saturday,2
 CLT,2023,Shane Steichen,Shane Steichen,1
 CLT,2024,Shane Steichen,Shane Steichen,1
+CRD,1970,Charley Winner,Charley Winner,1
+CRD,1971,Bob Hollway,Bob Hollway,1
+CRD,1972,Bob Hollway,Bob Hollway,1
+CRD,1973,Don Coryell,Don Coryell,1
+CRD,1974,Don Coryell,Don Coryell,1
+CRD,1975,Don Coryell,Don Coryell,1
+CRD,1976,Don Coryell,Don Coryell,1
+CRD,1977,Don Coryell,Don Coryell,1
+CRD,1978,Bud Wilkinson,Bud Wilkinson,1
+CRD,1979,Bud Wilkinson,Bud Wilkinson / Larry Wilson,2
+CRD,1980,Jim Hanifan,Jim Hanifan,1
+CRD,1981,Jim Hanifan,Jim Hanifan,1
+CRD,1982,Jim Hanifan,Jim Hanifan,1
+CRD,1983,Jim Hanifan,Jim Hanifan,1
+CRD,1984,Jim Hanifan,Jim Hanifan,1
+CRD,1985,Jim Hanifan,Jim Hanifan,1
+CRD,1986,Gene Stallings,Gene Stallings,1
+CRD,1987,Gene Stallings,Gene Stallings,1
+CRD,1988,Gene Stallings,Gene Stallings,1
+CRD,1989,Gene Stallings,Gene Stallings / Hank Kuhlmann,2
+CRD,1990,Joe Bugel,Joe Bugel,1
+CRD,1991,Joe Bugel,Joe Bugel,1
+CRD,1992,Joe Bugel,Joe Bugel,1
+CRD,1993,Joe Bugel,Joe Bugel,1
 CRD,1994,Buddy Ryan,Buddy Ryan,1
 CRD,1995,Buddy Ryan,Buddy Ryan,1
 CRD,1996,Vince Tobin,Vince Tobin,1
@@ -477,7 +518,7 @@ DEN,2018,Vance Joseph,Vance Joseph,1
 DEN,2019,Vic Fangio,Vic Fangio,1
 DEN,2020,Vic Fangio,Vic Fangio,1
 DEN,2021,Vic Fangio,Vic Fangio,1
-DEN,2022,Jerry Rosburg,Jerry Rosburg / Nathaniel Hackett,2
+DEN,2022,Nathaniel Hackett,Jerry Rosburg / Nathaniel Hackett,2
 DEN,2023,Sean Payton,Sean Payton,1
 DEN,2024,Sean Payton,Sean Payton,1
 DET,1970,Joe Schmidt,Joe Schmidt,1
@@ -590,33 +631,6 @@ GNB,2021,Matt LaFleur,Matt LaFleur,1
 GNB,2022,Matt LaFleur,Matt LaFleur,1
 GNB,2023,Matt LaFleur,Matt LaFleur,1
 GNB,2024,Matt LaFleur,Matt LaFleur,1
-HTX,1970,Wally Lemm,Wally Lemm,1
-HTX,1971,Ed Hughes,Ed Hughes,1
-HTX,1972,Bill Peterson,Bill Peterson,1
-HTX,1973,Bill Peterson,Bill Peterson / Sid Gillman,2
-HTX,1974,Sid Gillman,Sid Gillman,1
-HTX,1975,Bum Phillips,Bum Phillips,1
-HTX,1976,Bum Phillips,Bum Phillips,1
-HTX,1977,Bum Phillips,Bum Phillips,1
-HTX,1978,Bum Phillips,Bum Phillips,1
-HTX,1979,Bum Phillips,Bum Phillips,1
-HTX,1980,Bum Phillips,Bum Phillips,1
-HTX,1981,Ed Biles,Ed Biles,1
-HTX,1982,Ed Biles,Ed Biles,1
-HTX,1983,Ed Biles,Chuck Studley / Ed Biles,2
-HTX,1984,Hugh Campbell,Hugh Campbell,1
-HTX,1985,Hugh Campbell,Hugh Campbell / Jerry Glanville,2
-HTX,1986,Jerry Glanville,Jerry Glanville,1
-HTX,1987,Jerry Glanville,Jerry Glanville,1
-HTX,1988,Jerry Glanville,Jerry Glanville,1
-HTX,1989,Jerry Glanville,Jerry Glanville,1
-HTX,1990,Jack Pardee,Jack Pardee,1
-HTX,1991,Jack Pardee,Jack Pardee,1
-HTX,1992,Jack Pardee,Jack Pardee,1
-HTX,1993,Jack Pardee,Jack Pardee,1
-HTX,1994,Jack Pardee,Jack Pardee / Jeff Fisher,2
-HTX,1995,Jeff Fisher,Jeff Fisher,1
-HTX,1996,Jeff Fisher,Jeff Fisher,1
 HTX,2002,Dom Capers,Dom Capers,1
 HTX,2003,Dom Capers,Dom Capers,1
 HTX,2004,Dom Capers,Dom Capers,1
@@ -666,7 +680,7 @@ JAX,2017,Doug Marrone,Doug Marrone,1
 JAX,2018,Doug Marrone,Doug Marrone,1
 JAX,2019,Doug Marrone,Doug Marrone,1
 JAX,2020,Doug Marrone,Doug Marrone,1
-JAX,2021,Darrell Bevell,Darrell Bevell / Urban Meyer,2
+JAX,2021,Urban Meyer,Darrell Bevell / Urban Meyer,2
 JAX,2022,Doug Pederson,Doug Pederson,1
 JAX,2023,Doug Pederson,Doug Pederson,1
 JAX,2024,Doug Pederson,Doug Pederson,1
@@ -725,20 +739,6 @@ KAN,2021,Andy Reid,Andy Reid,1
 KAN,2022,Andy Reid,Andy Reid,1
 KAN,2023,Andy Reid,Andy Reid,1
 KAN,2024,Andy Reid,Andy Reid,1
-LAR,2016,Jeff Fisher,Jeff Fisher / John Fassel,2
-LAR,2017,Sean McVay,Sean McVay,1
-LAR,2018,Sean McVay,Sean McVay,1
-LAR,2019,Sean McVay,Sean McVay,1
-LAR,2020,Sean McVay,Sean McVay,1
-LAR,2021,Sean McVay,Sean McVay,1
-LAR,2022,Sean McVay,Sean McVay,1
-LAR,2023,Sean McVay,Sean McVay,1
-LAR,2024,Sean McVay,Sean McVay,1
-LVR,2020,Jon Gruden,Jon Gruden,1
-LVR,2021,Jon Gruden,Jon Gruden / Rich Bisaccia,2
-LVR,2022,Josh McDaniels,Josh McDaniels,1
-LVR,2023,Josh McDaniels,Antonio Pierce / Josh McDaniels,2
-LVR,2024,Antonio Pierce,Antonio Pierce,1
 MIA,1970,Don Shula,Don Shula,1
 MIA,1971,Don Shula,Don Shula,1
 MIA,1972,Don Shula,Don Shula,1
@@ -865,7 +865,17 @@ NOR,1982,Bum Phillips,Bum Phillips,1
 NOR,1983,Bum Phillips,Bum Phillips,1
 NOR,1984,Bum Phillips,Bum Phillips,1
 NOR,1985,Bum Phillips,Bum Phillips / Wade Phillips,2
-NOR,1996,Rick Venturi,Rick Venturi,1
+NOR,1986,Jim Mora Sr,Jim Mora Sr,1
+NOR,1987,Jim Mora Sr,Jim Mora Sr,1
+NOR,1988,Jim Mora Sr,Jim Mora Sr,1
+NOR,1989,Jim Mora Sr,Jim Mora Sr,1
+NOR,1990,Jim Mora Sr,Jim Mora Sr,1
+NOR,1991,Jim Mora Sr,Jim Mora Sr,1
+NOR,1992,Jim Mora Sr,Jim Mora Sr,1
+NOR,1993,Jim Mora Sr,Jim Mora Sr,1
+NOR,1994,Jim Mora Sr,Jim Mora Sr,1
+NOR,1995,Jim Mora Sr,Jim Mora Sr,1
+NOR,1996,Jim Mora Sr,Jim Mora Sr / Rick Venturi,2
 NOR,1997,Mike Ditka,Mike Ditka,1
 NOR,1998,Mike Ditka,Mike Ditka,1
 NOR,1999,Mike Ditka,Mike Ditka,1
@@ -881,7 +891,7 @@ NOR,2008,Sean Payton,Sean Payton,1
 NOR,2009,Sean Payton,Sean Payton,1
 NOR,2010,Sean Payton,Sean Payton,1
 NOR,2011,Sean Payton,Sean Payton,1
-NOR,2012,Aaron Kromer,Aaron Kromer / Joe Vitt,2
+NOR,2012,Joe Vitt,Aaron Kromer / Joe Vitt,2
 NOR,2013,Sean Payton,Sean Payton,1
 NOR,2014,Sean Payton,Sean Payton,1
 NOR,2015,Sean Payton,Sean Payton,1
@@ -894,6 +904,7 @@ NOR,2021,Sean Payton,Sean Payton,1
 NOR,2022,Dennis Allen,Dennis Allen,1
 NOR,2023,Dennis Allen,Dennis Allen,1
 NOR,2024,Dennis Allen,Darren Rizzi / Dennis Allen,2
+NWE,1970,Clive Rush,Clive Rush / John Mazur,2
 NWE,1971,John Mazur,John Mazur,1
 NWE,1972,John Mazur,John Mazur / Phil Bengtson,2
 NWE,1973,Chuck Fairbanks,Chuck Fairbanks,1
@@ -952,7 +963,9 @@ NYG,1970,Alex Webster,Alex Webster,1
 NYG,1971,Alex Webster,Alex Webster,1
 NYG,1972,Alex Webster,Alex Webster,1
 NYG,1973,Alex Webster,Alex Webster,1
-NYG,1976,John McVay,John McVay,1
+NYG,1974,Bill Arnsparger,Bill Arnsparger,1
+NYG,1975,Bill Arnsparger,Bill Arnsparger,1
+NYG,1976,Bill Arnsparger,Bill Arnsparger / John McVay,2
 NYG,1977,John McVay,John McVay,1
 NYG,1978,John McVay,John McVay,1
 NYG,1979,Ray Perkins,Ray Perkins,1
@@ -1056,6 +1069,33 @@ NYJ,2021,Robert Saleh,Robert Saleh,1
 NYJ,2022,Robert Saleh,Robert Saleh,1
 NYJ,2023,Robert Saleh,Robert Saleh,1
 NYJ,2024,Robert Saleh,Jeff Ulbrich / Robert Saleh,2
+OTI,1970,Wally Lemm,Wally Lemm,1
+OTI,1971,Ed Hughes,Ed Hughes,1
+OTI,1972,Bill Peterson,Bill Peterson,1
+OTI,1973,Bill Peterson,Bill Peterson / Sid Gillman,2
+OTI,1974,Sid Gillman,Sid Gillman,1
+OTI,1975,Bum Phillips,Bum Phillips,1
+OTI,1976,Bum Phillips,Bum Phillips,1
+OTI,1977,Bum Phillips,Bum Phillips,1
+OTI,1978,Bum Phillips,Bum Phillips,1
+OTI,1979,Bum Phillips,Bum Phillips,1
+OTI,1980,Bum Phillips,Bum Phillips,1
+OTI,1981,Ed Biles,Ed Biles,1
+OTI,1982,Ed Biles,Ed Biles,1
+OTI,1983,Ed Biles,Chuck Studley / Ed Biles,2
+OTI,1984,Hugh Campbell,Hugh Campbell,1
+OTI,1985,Hugh Campbell,Hugh Campbell / Jerry Glanville,2
+OTI,1986,Jerry Glanville,Jerry Glanville,1
+OTI,1987,Jerry Glanville,Jerry Glanville,1
+OTI,1988,Jerry Glanville,Jerry Glanville,1
+OTI,1989,Jerry Glanville,Jerry Glanville,1
+OTI,1990,Jack Pardee,Jack Pardee,1
+OTI,1991,Jack Pardee,Jack Pardee,1
+OTI,1992,Jack Pardee,Jack Pardee,1
+OTI,1993,Jack Pardee,Jack Pardee,1
+OTI,1994,Jack Pardee,Jack Pardee / Jeff Fisher,2
+OTI,1995,Jeff Fisher,Jeff Fisher,1
+OTI,1996,Jeff Fisher,Jeff Fisher,1
 OTI,1997,Jeff Fisher,Jeff Fisher,1
 OTI,1998,Jeff Fisher,Jeff Fisher,1
 OTI,1999,Jeff Fisher,Jeff Fisher,1
@@ -1139,12 +1179,6 @@ PHI,2021,Nick Sirianni,Nick Sirianni,1
 PHI,2022,Nick Sirianni,Nick Sirianni,1
 PHI,2023,Nick Sirianni,Nick Sirianni,1
 PHI,2024,Nick Sirianni,Nick Sirianni,1
-PHO,1988,Gene Stallings,Gene Stallings,1
-PHO,1989,Gene Stallings,Gene Stallings / Hank Kuhlmann,2
-PHO,1990,Joe Bugel,Joe Bugel,1
-PHO,1991,Joe Bugel,Joe Bugel,1
-PHO,1992,Joe Bugel,Joe Bugel,1
-PHO,1993,Joe Bugel,Joe Bugel,1
 PIT,1970,Chuck Noll,Chuck Noll,1
 PIT,1971,Chuck Noll,Chuck Noll,1
 PIT,1972,Chuck Noll,Chuck Noll,1
@@ -1250,6 +1284,11 @@ RAI,2016,Jack Del Rio,Jack Del Rio,1
 RAI,2017,Jack Del Rio,Jack Del Rio,1
 RAI,2018,Jon Gruden,Jon Gruden,1
 RAI,2019,Jon Gruden,Jon Gruden,1
+RAI,2020,Jon Gruden,Jon Gruden,1
+RAI,2021,Jon Gruden,Jon Gruden / Rich Bisaccia,2
+RAI,2022,Josh McDaniels,Josh McDaniels,1
+RAI,2023,Josh McDaniels,Antonio Pierce / Josh McDaniels,2
+RAI,2024,Antonio Pierce,Antonio Pierce,1
 RAM,1970,George Allen,George Allen,1
 RAM,1971,Tommy Prothro,Tommy Prothro,1
 RAM,1972,Tommy Prothro,Tommy Prothro,1
@@ -1275,20 +1314,36 @@ RAM,1991,John Robinson,John Robinson,1
 RAM,1992,Chuck Knox,Chuck Knox,1
 RAM,1993,Chuck Knox,Chuck Knox,1
 RAM,1994,Chuck Knox,Chuck Knox,1
-RAV,1970,Don McCafferty,Don McCafferty,1
-RAV,1971,Don McCafferty,Don McCafferty,1
-RAV,1972,Don McCafferty,Don McCafferty / John Sandusky,2
-RAV,1973,Howard Schnellenberger,Howard Schnellenberger,1
-RAV,1974,Howard Schnellenberger,Howard Schnellenberger / Joe Thomas,2
-RAV,1975,Ted Marchibroda,Ted Marchibroda,1
-RAV,1976,Ted Marchibroda,Ted Marchibroda,1
-RAV,1977,Ted Marchibroda,Ted Marchibroda,1
-RAV,1978,Ted Marchibroda,Ted Marchibroda,1
-RAV,1979,Ted Marchibroda,Ted Marchibroda,1
-RAV,1980,Mike McCormack,Mike McCormack,1
-RAV,1981,Mike McCormack,Mike McCormack,1
-RAV,1982,Frank Kush,Frank Kush,1
-RAV,1983,Frank Kush,Frank Kush,1
+RAM,1995,Rich Brooks,Rich Brooks,1
+RAM,1996,Rich Brooks,Rich Brooks,1
+RAM,1997,Dick Vermeil,Dick Vermeil,1
+RAM,1998,Dick Vermeil,Dick Vermeil,1
+RAM,1999,Dick Vermeil,Dick Vermeil,1
+RAM,2000,Mike Martz,Mike Martz,1
+RAM,2001,Mike Martz,Mike Martz,1
+RAM,2002,Mike Martz,Mike Martz,1
+RAM,2003,Mike Martz,Mike Martz,1
+RAM,2004,Mike Martz,Mike Martz,1
+RAM,2005,Mike Martz,Joe Vitt / Mike Martz,2
+RAM,2006,Scott Linehan,Scott Linehan,1
+RAM,2007,Scott Linehan,Scott Linehan,1
+RAM,2008,Scott Linehan,Jim Haslett / Scott Linehan,2
+RAM,2009,Steve Spagnuolo,Steve Spagnuolo,1
+RAM,2010,Steve Spagnuolo,Steve Spagnuolo,1
+RAM,2011,Steve Spagnuolo,Steve Spagnuolo,1
+RAM,2012,Jeff Fisher,Jeff Fisher,1
+RAM,2013,Jeff Fisher,Jeff Fisher,1
+RAM,2014,Jeff Fisher,Jeff Fisher,1
+RAM,2015,Jeff Fisher,Jeff Fisher,1
+RAM,2016,Jeff Fisher,Jeff Fisher / John Fassel,2
+RAM,2017,Sean McVay,Sean McVay,1
+RAM,2018,Sean McVay,Sean McVay,1
+RAM,2019,Sean McVay,Sean McVay,1
+RAM,2020,Sean McVay,Sean McVay,1
+RAM,2021,Sean McVay,Sean McVay,1
+RAM,2022,Sean McVay,Sean McVay,1
+RAM,2023,Sean McVay,Sean McVay,1
+RAM,2024,Sean McVay,Sean McVay,1
 RAV,1996,Ted Marchibroda,Ted Marchibroda,1
 RAV,1997,Ted Marchibroda,Ted Marchibroda,1
 RAV,1998,Ted Marchibroda,Ted Marchibroda,1
@@ -1319,7 +1374,7 @@ RAV,2022,John Harbaugh,John Harbaugh,1
 RAV,2023,John Harbaugh,John Harbaugh,1
 RAV,2024,John Harbaugh,John Harbaugh,1
 SDG,1970,Charlie Waller,Charlie Waller,1
-SDG,1971,Harland Svare,Harland Svare / Sid Gillman,2
+SDG,1971,Sid Gillman,Harland Svare / Sid Gillman,2
 SDG,1972,Harland Svare,Harland Svare,1
 SDG,1973,Harland Svare,Harland Svare / Ron Waller,2
 SDG,1974,Tommy Prothro,Tommy Prothro,1
@@ -1406,7 +1461,7 @@ SEA,2005,Mike Holmgren,Mike Holmgren,1
 SEA,2006,Mike Holmgren,Mike Holmgren,1
 SEA,2007,Mike Holmgren,Mike Holmgren,1
 SEA,2008,Mike Holmgren,Mike Holmgren,1
-SEA,2009,Jim Mora,Jim Mora,1
+SEA,2009,Jim Mora Jr,Jim Mora Jr,1
 SEA,2010,Pete Carroll,Pete Carroll,1
 SEA,2011,Pete Carroll,Pete Carroll,1
 SEA,2012,Pete Carroll,Pete Carroll,1
@@ -1430,7 +1485,7 @@ SFO,1974,Dick Nolan,Dick Nolan,1
 SFO,1975,Dick Nolan,Dick Nolan,1
 SFO,1976,Monte Clark,Monte Clark,1
 SFO,1977,Ken Meyer,Ken Meyer,1
-SFO,1978,Fred O'Connor,Fred O'Connor / Pete McCulley,2
+SFO,1978,Pete McCulley,Fred O'Connor / Pete McCulley,2
 SFO,1979,Bill Walsh,Bill Walsh,1
 SFO,1980,Bill Walsh,Bill Walsh,1
 SFO,1981,Bill Walsh,Bill Walsh,1
@@ -1477,45 +1532,6 @@ SFO,2021,Kyle Shanahan,Kyle Shanahan,1
 SFO,2022,Kyle Shanahan,Kyle Shanahan,1
 SFO,2023,Kyle Shanahan,Kyle Shanahan,1
 SFO,2024,Kyle Shanahan,Kyle Shanahan,1
-STL,1970,Charley Winner,Charley Winner,1
-STL,1971,Bob Hollway,Bob Hollway,1
-STL,1972,Bob Hollway,Bob Hollway,1
-STL,1973,Don Coryell,Don Coryell,1
-STL,1974,Don Coryell,Don Coryell,1
-STL,1975,Don Coryell,Don Coryell,1
-STL,1976,Don Coryell,Don Coryell,1
-STL,1977,Don Coryell,Don Coryell,1
-STL,1978,Bud Wilkinson,Bud Wilkinson,1
-STL,1979,Bud Wilkinson,Bud Wilkinson / Larry Wilson,2
-STL,1980,Jim Hanifan,Jim Hanifan,1
-STL,1981,Jim Hanifan,Jim Hanifan,1
-STL,1982,Jim Hanifan,Jim Hanifan,1
-STL,1983,Jim Hanifan,Jim Hanifan,1
-STL,1984,Jim Hanifan,Jim Hanifan,1
-STL,1985,Jim Hanifan,Jim Hanifan,1
-STL,1986,Gene Stallings,Gene Stallings,1
-STL,1987,Gene Stallings,Gene Stallings,1
-STL,1995,Rich Brooks,Rich Brooks,1
-STL,1996,Rich Brooks,Rich Brooks,1
-STL,1997,Dick Vermeil,Dick Vermeil,1
-STL,1998,Dick Vermeil,Dick Vermeil,1
-STL,1999,Dick Vermeil,Dick Vermeil,1
-STL,2000,Mike Martz,Mike Martz,1
-STL,2001,Mike Martz,Mike Martz,1
-STL,2002,Mike Martz,Mike Martz,1
-STL,2003,Mike Martz,Mike Martz,1
-STL,2004,Mike Martz,Mike Martz,1
-STL,2005,Mike Martz,Joe Vitt / Mike Martz,2
-STL,2006,Scott Linehan,Scott Linehan,1
-STL,2007,Scott Linehan,Scott Linehan,1
-STL,2008,Scott Linehan,Jim Haslett / Scott Linehan,2
-STL,2009,Steve Spagnuolo,Steve Spagnuolo,1
-STL,2010,Steve Spagnuolo,Steve Spagnuolo,1
-STL,2011,Steve Spagnuolo,Steve Spagnuolo,1
-STL,2012,Jeff Fisher,Jeff Fisher,1
-STL,2013,Jeff Fisher,Jeff Fisher,1
-STL,2014,Jeff Fisher,Jeff Fisher,1
-STL,2015,Jeff Fisher,Jeff Fisher,1
 TAM,1976,John McKay,John McKay,1
 TAM,1977,John McKay,John McKay,1
 TAM,1978,John McKay,John McKay,1

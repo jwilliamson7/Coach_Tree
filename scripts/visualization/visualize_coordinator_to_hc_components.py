@@ -46,7 +46,8 @@ def main():
     import matplotlib.pyplot as plt
     from matplotlib.ticker import FuncFormatter
 
-    plt.rcParams['font.family'] = 'Cambria'
+    plt.rcParams['font.family'] = 'Helvetica'
+    plt.rcParams['font.size'] = 13  # Base font size
 
     components = [
         ('fourth_down', '4th Down Aggression', '#A23B72'),
@@ -56,8 +57,6 @@ def main():
     ]
 
     fig, axes = plt.subplots(2, 2, figsize=(14, 12))
-    fig.suptitle('Coordinator → Head Coach: Component Inheritance Analysis',
-                fontsize=16, fontweight='bold', y=0.995)
 
     axes = axes.flatten()
 
@@ -86,19 +85,19 @@ def main():
         ax.axhline(y=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
         ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
 
-        ax.set_xlabel('Head Coach POE', fontsize=11, fontweight='bold')
-        ax.set_ylabel('Coordinator POE', fontsize=11, fontweight='bold')
-        ax.set_title(comp_label, fontsize=12, fontweight='bold', pad=10)
+        ax.set_xlabel('Head Coach POE', fontsize=14, fontweight='bold')
+        ax.set_ylabel('Coordinator POE', fontsize=14, fontweight='bold')
+        ax.set_title(comp_label, fontsize=15, fontweight='bold', pad=10)
 
         ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
         ax.yaxis.set_major_formatter(FuncFormatter(percent_formatter))
 
-        significance = "✓ SIG" if p_val < 0.05 else "n.s."
+        significance = "* SIG" if p_val < 0.05 else "n.s."
         stats_text = f'r = {corr:.3f}\np = {p_val:.4f}\n{significance}\nn = {len(coord_df)}'
 
         ax.text(0.05, 0.95, stats_text,
                transform=ax.transAxes,
-               fontsize=10,
+               fontsize=13,
                verticalalignment='top',
                bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray'))
 

@@ -47,7 +47,8 @@ def main():
     import matplotlib.pyplot as plt
     from matplotlib.ticker import FuncFormatter
 
-    plt.rcParams['font.family'] = 'Cambria'
+    plt.rcParams['font.family'] = 'Helvetica'
+    plt.rcParams['font.size'] = 13  # Base font size
 
     fig, ax = plt.subplots(figsize=(12, 7))
 
@@ -66,11 +67,9 @@ def main():
 
     ax.yaxis.set_major_formatter(FuncFormatter(percent_formatter))
 
-    # Labels and title
-    ax.set_xlabel('Season', fontsize=12, fontweight='bold')
-    ax.set_ylabel('POE (Percent over Expected)', fontsize=12, fontweight='bold')
-    ax.set_title('Shotgun Formation Gene Over Time\nHow Much More/Less Do Coaches Use Shotgun Than Expected?',
-                fontsize=14, fontweight='bold', pad=15)
+    # Labels
+    ax.set_xlabel('Season', fontsize=15, fontweight='bold')
+    ax.set_ylabel('POE (Percent over Expected)', fontsize=15, fontweight='bold')
 
     # Set x-axis to show every other year
     years = yearly['season'].astype(int)
@@ -78,7 +77,7 @@ def main():
     ax.set_xticklabels(years[::2])
 
     # Legend and grid
-    ax.legend(loc='upper left', framealpha=0.9, fontsize=11)
+    ax.legend(loc='upper left', framealpha=0.9, fontsize=14)
     ax.grid(True, alpha=0.3, linestyle=':')
 
     # Add sample size annotation
@@ -86,7 +85,7 @@ def main():
     max_coaches = yearly['num_coaches'].max()
     ax.text(0.98, 0.02, f'Sample size: {min_coaches}-{max_coaches} coaches per season',
             transform=ax.transAxes,
-            fontsize=9,
+            fontsize=12,
             horizontalalignment='right',
             verticalalignment='bottom',
             style='italic',
