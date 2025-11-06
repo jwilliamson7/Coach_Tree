@@ -19,7 +19,8 @@
       "Bash(\"outputs/logs/aggression_by_coach_type.log\")",
       "Bash(\"outputs/logs/persistence_by_coach_type.log\")",
       "Bash(\"outputs/logs/inheritance_by_coach_type.log\")",
-      "Bash(\"outputs/logs/aggression_variance.log\")"
+      "Bash(\"outputs/logs/aggression_variance.log\")",
+      "Bash(copy \"JQAS_LaTeX-Template-for-Authors\\dgruyter.xdy\" \"outputs\\reports\"\")"
     ],
     "deny": [],
     "ask": []
