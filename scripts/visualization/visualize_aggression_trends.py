@@ -226,7 +226,7 @@ class AggressionTrendVisualizer:
 
         ax1.axhline(y=0, color='gray', linestyle='--', linewidth=1, alpha=0.5, zorder=1)
         ax1.set_ylabel('POE (Percent over Expected)', fontsize=15, fontweight='bold')
-        ax1.set_title('Composite Aggression Gene Over Time', fontsize=16, pad=15)
+        ax1.set_title('Composite Aggression Over Time', fontsize=16, pad=15)
         ax1.legend(loc='upper left', framealpha=0.9)
         ax1.grid(True, alpha=0.3, linestyle=':')
         ax1.set_xlim(df['season'].min() - 0.5, df['season'].max() + 0.5)

@@ -1,0 +1,99 @@
+{
+  "linear_trend": {
+    "slope": 0.00125161718702251,
+    "slope_percent_per_year": 0.12516171870225098,
+    "intercept": -2.518620696664342,
+    "r": 0.9104175777187813,
+    "r_squared": 0.8288601658193332,
+    "p_value": 6.309075466757983e-08,
+    "std_err": 0.000137937381284649,
+    "n_years": 19,
+    "year_range": "2006-2024",
+    "significant": true,
+    "interpretation": "Significant increasing linear trend: average aggression changed by +2.25% over the 19-year period (p=0.0000)."
+  },
+  "era_comparison": {
+    "anova": {
+      "f_statistic": 43.748751276021146,
+      "p_value": 3.262277493242122e-07,
+      "significant": true
+    },
+    "era_statistics": {
+      "Early (2006-2011)": {
+        "mean": -0.003531372559082076,
+        "std": 0.0025915171438699643,
+        "n_years": 6,
+        "year_range": "2006-2011"
+      },
+      "Middle (2012-2017)": {
+        "mean": -5.60358214678056e-05,
+        "std": 0.0031947256994977564,
+        "n_years": 6,
+        "year_range": "2012-2017"
+      },
+      "Late (2018-2024)": {
+        "mean": 0.012270745545369607,
+        "std": 0.003695311629184462,
+        "n_years": 7,
+        "year_range": "2018-2024"
+      }
+    },
+    "interpretation": "Significant differences across eras (p=0.0000): Early mean=-0.003531, Middle mean=-0.000056, Late mean=0.012271. Overall increase from Early to Late: +1.58%."
+  },
+  "pairwise_comparisons": {
+    "Early (2006-2011) vs Middle (2012-2017)": {
+      "mean_difference": 0.0034753367376142703,
+      "mean_difference_percent": 0.347533673761427,
+      "t_test": {
+        "t_statistic": -2.069396337262771,
+        "p_value": 0.06534988403415087,
+        "significant": false
+      },
+      "mann_whitney": {
+        "u_statistic": 7.0,
+        "p_value": 0.09307359307359307,
+        "significant": false
+      },
+      "effect_size": {
+        "cohens_d": 1.308801161472066,
+        "interpretation": "large"
+      }
+    },
+    "Early (2006-2011) vs Late (2018-2024)": {
+      "mean_difference": 0.015802118104451684,
+      "mean_difference_percent": 1.5802118104451683,
+      "t_test": {
+        "t_statistic": -8.764991285022507,
+        "p_value": 2.7134737531382946e-06,
+        "significant": true
+      },
+      "mann_whitney": {
+        "u_statistic": 0.0,
+        "p_value": 0.0011655011655011655,
+        "significant": true
+      },
+      "effect_size": {
+        "cohens_d": 5.372694833656447,
+        "interpretation": "large"
+      }
+    },
+    "Middle (2012-2017) vs Late (2018-2024)": {
+      "mean_difference": 0.012326781366837413,
+      "mean_difference_percent": 1.2326781366837414,
+      "t_test": {
+        "t_statistic": -6.372840714928023,
+        "p_value": 5.275140198084174e-05,
+        "significant": true
+      },
+      "mann_whitney": {
+        "u_statistic": 0.0,
+        "p_value": 0.0011655011655011655,
+        "significant": true
+      },
+      "effect_size": {
+        "cohens_d": 3.87778520924546,
+        "interpretation": "large"
+      }
+    }
+  }
+}
