@@ -1,0 +1,306 @@
+{
+  "one_way": {
+    "pooled": {
+      "n": 585,
+      "n_coaches": 102,
+      "aggression_coef": 0.5786749539586994,
+      "aggression_se": 0.39872503700362405,
+      "aggression_t": 1.4513133118185397,
+      "aggression_p": 0.1498225735558696,
+      "r_squared": 0.005187831046813085,
+      "significant": false
+    },
+    "stratified": {
+      "Early (2006-2011)": {
+        "n": 175,
+        "n_coaches": 45,
+        "aggression_coef": 1.5205680791219984,
+        "aggression_se": 0.9225447636981271,
+        "aggression_t": 1.6482323015163252,
+        "aggression_p": 0.10659378107345074,
+        "r_squared": 0.023026210420516446,
+        "significant": false
+      },
+      "Middle (2012-2017)": {
+        "n": 180,
+        "n_coaches": 47,
+        "aggression_coef": 0.5623582752972991,
+        "aggression_se": 0.6131807816558327,
+        "aggression_t": 0.917116602674186,
+        "aggression_p": 0.3639708049765349,
+        "r_squared": 0.005186129639026094,
+        "significant": false
+      },
+      "Late (2018-2024)": {
+        "n": 207,
+        "n_coaches": 50,
+        "aggression_coef": 0.45737897874771055,
+        "aggression_se": 0.5585788926869893,
+        "aggression_t": 0.8188261044872883,
+        "aggression_p": 0.4169325160457702,
+        "r_squared": 0.003759131753038547,
+        "significant": false
+      }
+    },
+    "coefficient_comparisons": {
+      "Early (2006-2011) vs Middle (2012-2017)": {
+        "coef_diff": 0.9582098038246993,
+        "se_diff": 1.1077362104846493,
+        "z_statistic": 0.8650162328858689,
+        "p_value": 0.38702987919626297,
+        "significant": false
+      },
+      "Early (2006-2011) vs Late (2018-2024)": {
+        "coef_diff": 1.063189100374288,
+        "se_diff": 1.0784707786408756,
+        "z_statistic": 0.9858302342824289,
+        "p_value": 0.3242164266154939,
+        "significant": false
+      },
+      "Middle (2012-2017) vs Late (2018-2024)": {
+        "coef_diff": 0.10497929654958854,
+        "se_diff": 0.8294582872860341,
+        "z_statistic": 0.12656368398352866,
+        "p_value": 0.8992857417172087,
+        "significant": false
+      }
+    }
+  },
+  "two_way": {
+    "pooled": {
+      "n": 585,
+      "n_coaches": 102,
+      "aggression_coef": 0.9360407192597588,
+      "aggression_se": 0.37176772176978506,
+      "aggression_t": 2.5178106232670636,
+      "aggression_p": 0.013396042000632713,
+      "r_squared": 0.01560212825048013,
+      "significant": true
+    },
+    "stratified": {
+      "Early (2006-2011)": {
+        "n": 175,
+        "n_coaches": 45,
+        "aggression_coef": 1.770087497283369,
+        "aggression_se": 0.9316000670670507,
+        "aggression_t": 1.900050847845172,
+        "aggression_p": 0.06414545629631418,
+        "r_squared": 0.030740434756048263,
+        "significant": false
+      },
+      "Middle (2012-2017)": {
+        "n": 180,
+        "n_coaches": 47,
+        "aggression_coef": 0.6746814013076431,
+        "aggression_se": 0.6475332077859319,
+        "aggression_t": 1.041925561801745,
+        "aggression_p": 0.3030117655311739,
+        "r_squared": 0.007357030403874365,
+        "significant": false
+      },
+      "Late (2018-2024)": {
+        "n": 207,
+        "n_coaches": 50,
+        "aggression_coef": 0.47457155000754275,
+        "aggression_se": 0.5879797585096969,
+        "aggression_t": 0.807122257423282,
+        "aggression_p": 0.42357754985081186,
+        "r_squared": 0.004024364890304,
+        "significant": false
+      }
+    },
+    "coefficient_comparisons": {
+      "Early (2006-2011) vs Middle (2012-2017)": {
+        "coef_diff": 1.0954060959757257,
+        "se_diff": 1.134538646386659,
+        "z_statistic": 0.9655079617291445,
+        "p_value": 0.33429045011803793,
+        "significant": false
+      },
+      "Early (2006-2011) vs Late (2018-2024)": {
+        "coef_diff": 1.2955159472758262,
+        "se_diff": 1.1016346406029789,
+        "z_statistic": 1.1759941994622887,
+        "p_value": 0.23959719398816826,
+        "significant": false
+      },
+      "Middle (2012-2017) vs Late (2018-2024)": {
+        "coef_diff": 0.20010985130010034,
+        "se_diff": 0.8746539038972274,
+        "z_statistic": 0.22878746714381945,
+        "p_value": 0.8190341082303956,
+        "significant": false
+      }
+    }
+  },
+  "component_analysis": {
+    "fourth_down": {
+      "pooled": {
+        "n": 585,
+        "n_coaches": 102,
+        "aggression_coef": 0.26457683281087807,
+        "aggression_se": 0.27522947294587374,
+        "aggression_t": 0.9612954237023497,
+        "aggression_p": 0.3387223191830009,
+        "r_squared": 0.0021911265816535463,
+        "significant": false
+      },
+      "Early (2006-2011)": {
+        "n": 175,
+        "n_coaches": 45,
+        "aggression_coef": 0.6054453817003845,
+        "aggression_se": 0.4701098666931073,
+        "aggression_t": 1.287880609609978,
+        "aggression_p": 0.20467549715051137,
+        "r_squared": 0.00921913543294861,
+        "significant": false
+      },
+      "Middle (2012-2017)": {
+        "n": 180,
+        "n_coaches": 47,
+        "aggression_coef": -0.27421309632298907,
+        "aggression_se": 0.6044425250299131,
+        "aggression_t": -0.4536628132003429,
+        "aggression_p": 0.6522518759584086,
+        "r_squared": 0.0017439645702714834,
+        "significant": false
+      },
+      "Late (2018-2024)": {
+        "n": 207,
+        "n_coaches": 50,
+        "aggression_coef": 0.6227808572686406,
+        "aggression_se": 0.3836326512032193,
+        "aggression_t": 1.623378133522683,
+        "aggression_p": 0.11105875367012086,
+        "r_squared": 0.014090701386556659,
+        "significant": false
+      }
+    },
+    "pass_heavy": {
+      "pooled": {
+        "n": 585,
+        "n_coaches": 102,
+        "aggression_coef": 0.21061880232889163,
+        "aggression_se": 0.16073211673676366,
+        "aggression_t": 1.3103716083937913,
+        "aggression_p": 0.1930719415294968,
+        "r_squared": 0.003736883183107942,
+        "significant": false
+      },
+      "Early (2006-2011)": {
+        "n": 175,
+        "n_coaches": 45,
+        "aggression_coef": 0.32516793095878843,
+        "aggression_se": 0.29153230577412415,
+        "aggression_t": 1.1153752929554392,
+        "aggression_p": 0.2708844804765169,
+        "r_squared": 0.008850317305325928,
+        "significant": false
+      },
+      "Middle (2012-2017)": {
+        "n": 180,
+        "n_coaches": 47,
+        "aggression_coef": 0.008089090793224356,
+        "aggression_se": 0.27254814618160933,
+        "aggression_t": 0.029679492987027267,
+        "aggression_p": 0.9764539089951081,
+        "r_squared": 5.162059005359154e-06,
+        "significant": false
+      },
+      "Late (2018-2024)": {
+        "n": 207,
+        "n_coaches": 50,
+        "aggression_coef": 0.2805271474499519,
+        "aggression_se": 0.27751566107395825,
+        "aggression_t": 1.010851590733076,
+        "aggression_p": 0.31715611032203794,
+        "r_squared": 0.007065563257526275,
+        "significant": false
+      }
+    },
+    "deep_pass": {
+      "pooled": {
+        "n": 585,
+        "n_coaches": 102,
+        "aggression_coef": 0.14370099601778016,
+        "aggression_se": 0.1727523341579236,
+        "aggression_t": 0.8318324421967821,
+        "aggression_p": 0.4074855169599618,
+        "r_squared": 0.0014701046678821106,
+        "significant": false
+      },
+      "Early (2006-2011)": {
+        "n": 175,
+        "n_coaches": 45,
+        "aggression_coef": -0.008311417795127903,
+        "aggression_se": 0.26738251445098593,
+        "aggression_t": -0.031084372933636518,
+        "aggression_p": 0.9753460862765411,
+        "r_squared": 4.833162848827399e-06,
+        "significant": false
+      },
+      "Middle (2012-2017)": {
+        "n": 180,
+        "n_coaches": 47,
+        "aggression_coef": 0.6407528297523782,
+        "aggression_se": 0.2645242587324632,
+        "aggression_t": 2.4222838117861554,
+        "aggression_p": 0.019513181154616754,
+        "r_squared": 0.03242909204471511,
+        "significant": true
+      },
+      "Late (2018-2024)": {
+        "n": 207,
+        "n_coaches": 50,
+        "aggression_coef": -0.2504355737445082,
+        "aggression_se": 0.3331056030511642,
+        "aggression_t": -0.751820358020342,
+        "aggression_p": 0.4558299026730559,
+        "r_squared": 0.004022135624861423,
+        "significant": false
+      }
+    },
+    "two_point": {
+      "pooled": {
+        "n": 585,
+        "n_coaches": 102,
+        "aggression_coef": -0.004642991440375528,
+        "aggression_se": 0.16021378269515058,
+        "aggression_t": -0.028979975144897842,
+        "aggression_p": 0.9769383191215577,
+        "r_squared": 1.830547259329407e-06,
+        "significant": false
+      },
+      "Early (2006-2011)": {
+        "n": 175,
+        "n_coaches": 45,
+        "aggression_coef": 0.5571685933339672,
+        "aggression_se": 0.38406757605312086,
+        "aggression_t": 1.450704584489331,
+        "aggression_p": 0.15411838229163832,
+        "r_squared": 0.010424317155776186,
+        "significant": false
+      },
+      "Middle (2012-2017)": {
+        "n": 180,
+        "n_coaches": 47,
+        "aggression_coef": -0.08571195286076362,
+        "aggression_se": 0.32372276533027566,
+        "aggression_t": -0.2647696178343116,
+        "aggression_p": 0.7923959635375317,
+        "r_squared": 0.0006857596742806393,
+        "significant": false
+      },
+      "Late (2018-2024)": {
+        "n": 207,
+        "n_coaches": 50,
+        "aggression_coef": 0.01077987656027673,
+        "aggression_se": 0.24022658001532435,
+        "aggression_t": 0.044873787736515534,
+        "aggression_p": 0.9643940779862676,
+        "r_squared": 1.2114311268018874e-05,
+        "significant": false
+      }
+    }
+  }
+}

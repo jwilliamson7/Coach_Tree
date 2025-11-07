@@ -1,32 +1,36 @@
-\BOOKMARK [0][-]{section*.1}{The Rise and Fall of Aggressive Coaching: A Quantitative Analysis of NFL Play-Calling Evolution}{}% 1
+\BOOKMARK [0][-]{section*.1}{Coaching Aggression, Performance, and Knowledge Transmission in the NFL}{}% 1
 \BOOKMARK [1][-]{section.1}{1 Introduction}{section*.1}% 2
 \BOOKMARK [2][-]{subsection.1.1}{1.1 Defining Coaching Aggression}{section.1}% 3
-\BOOKMARK [2][-]{subsection.1.2}{1.2 The Competitve Dynamics Puzzle}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.2}{1.2 The Competitive Dynamics Puzzle}{section.1}% 4
 \BOOKMARK [2][-]{subsection.1.3}{1.3 The Coaching Tree Framework}{section.1}% 5
 \BOOKMARK [2][-]{subsection.1.4}{1.4 WAR as the Measure of Coaching Success}{section.1}% 6
 \BOOKMARK [2][-]{subsection.1.5}{1.5 Research Questions}{section.1}% 7
-\BOOKMARK [1][-]{section.2}{2 Lierature Review}{section*.1}% 8
-\BOOKMARK [1][-]{section.3}{3 Data}{section*.1}% 9
-\BOOKMARK [1][-]{section.4}{4 Methodology}{section*.1}% 10
-\BOOKMARK [2][-]{subsection.4.1}{4.1 Measuring Aggression}{section.4}% 11
-\BOOKMARK [2][-]{subsection.4.2}{4.2 Performance Analysis}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.3}{4.3 Persistence Analysis}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.4}{4.4 Inheritance Analysis}{section.4}% 14
-\BOOKMARK [1][-]{section.5}{5 Results}{section*.1}% 15
-\BOOKMARK [2][-]{subsection.5.1}{5.1 The Transformation of NFL Strategy}{section.5}% 16
-\BOOKMARK [2][-]{subsection.5.2}{5.2 Aggression and Performance: A Disappearing Advantage}{section.5}% 17
-\BOOKMARK [3][-]{subsubsection.5.2.1}{5.2.1 Diffusion and Increased Variance}{subsection.5.2}% 18
-\BOOKMARK [3][-]{subsubsection.5.2.2}{5.2.2 Offensive vs. Defensive Coaches}{subsection.5.2}% 19
-\BOOKMARK [2][-]{subsection.5.3}{5.3 Aggression as Trait and State}{section.5}% 20
-\BOOKMARK [3][-]{subsubsection.5.3.1}{5.3.1 Offensive vs. Defensive Coaches}{subsection.5.3}% 21
-\BOOKMARK [2][-]{subsection.5.4}{5.4 The Myth of Coaching Trees}{section.5}% 22
-\BOOKMARK [3][-]{subsubsection.5.4.1}{5.4.1 Offensive vs. Defensive Mentors}{subsection.5.4}% 23
-\BOOKMARK [1][-]{section.6}{6 Discussion}{section*.1}% 24
-\BOOKMARK [2][-]{subsection.6.1}{6.1 The Complete Collapse of a Competitive Advantage}{section.6}% 25
-\BOOKMARK [2][-]{subsection.6.2}{6.2 Causality: Which Direction Does It Run?}{section.6}% 26
-\BOOKMARK [2][-]{subsection.6.3}{6.3 The Pass-Heavy Puzzle}{section.6}% 27
-\BOOKMARK [2][-]{subsection.6.4}{6.4 Why Fourth Down Philosophy Transfers}{section.6}% 28
-\BOOKMARK [2][-]{subsection.6.5}{6.5 Challenging the Coaching Tree Narrative}{section.6}% 29
-\BOOKMARK [2][-]{subsection.6.6}{6.6 Where Has the Advantage Moved?}{section.6}% 30
-\BOOKMARK [2][-]{subsection.6.7}{6.7 Limitations}{section.6}% 31
-\BOOKMARK [1][-]{section.7}{7 Conclusion}{section*.1}% 32
+\BOOKMARK [1][-]{section.2}{2 Literature Review}{section*.1}% 8
+\BOOKMARK [1][-]{section.3}{3 Methods}{section*.1}% 9
+\BOOKMARK [2][-]{subsection.3.1}{3.1 Data}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{3.2 Measuring Aggression}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.3}{3.3 Performance Analysis}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.4}{3.4 Era Classification}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.5}{3.5 Persistence Analysis}{section.3}% 14
+\BOOKMARK [2][-]{subsection.3.6}{3.6 Inheritance Analysis}{section.3}% 15
+\BOOKMARK [2][-]{subsection.3.7}{3.7 Multiple Comparison Correction}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.8}{3.8 Within-Coach Fixed Effects}{section.3}% 17
+\BOOKMARK [1][-]{section.4}{4 Results}{section*.1}% 18
+\BOOKMARK [2][-]{subsection.4.1}{4.1 Aggression and Performance: A Disappearing Advantage}{section.4}% 19
+\BOOKMARK [3][-]{subsubsection.4.1.1}{4.1.1 Temporal Robustness}{subsection.4.1}% 20
+\BOOKMARK [3][-]{subsubsection.4.1.2}{4.1.2 Diffusion and Increased Variance}{subsection.4.1}% 21
+\BOOKMARK [3][-]{subsubsection.4.1.3}{4.1.3 Offensive vs. Defensive Coaches}{subsection.4.1}% 22
+\BOOKMARK [3][-]{subsubsection.4.1.4}{4.1.4 Within-Coach Fixed Effects: Causal Evidence}{subsection.4.1}% 23
+\BOOKMARK [2][-]{subsection.4.2}{4.2 Aggression as Trait and State}{section.4}% 24
+\BOOKMARK [3][-]{subsubsection.4.2.1}{4.2.1 Offensive vs. Defensive Coaches}{subsection.4.2}% 25
+\BOOKMARK [2][-]{subsection.4.3}{4.3 Testing the Theory of Coaching Trees}{section.4}% 26
+\BOOKMARK [3][-]{subsubsection.4.3.1}{4.3.1 Offensive vs. Defensive Mentors}{subsection.4.3}% 27
+\BOOKMARK [3][-]{subsubsection.4.3.2}{4.3.2 The Null Findings: Deep Pass and Two-Point Aggression}{subsection.4.3}% 28
+\BOOKMARK [1][-]{section.5}{5 Discussion}{section*.1}% 29
+\BOOKMARK [2][-]{subsection.5.1}{5.1 The Erosion of a Competitive Advantage}{section.5}% 30
+\BOOKMARK [2][-]{subsection.5.2}{5.2 Causality: Evidence from Within-Coach Variation}{section.5}% 31
+\BOOKMARK [2][-]{subsection.5.3}{5.3 Why Fourth Down Philosophy Transfers}{section.5}% 32
+\BOOKMARK [2][-]{subsection.5.4}{5.4 Challenging the Coaching Tree Narrative}{section.5}% 33
+\BOOKMARK [2][-]{subsection.5.5}{5.5 Where Has the Advantage Moved?}{section.5}% 34
+\BOOKMARK [2][-]{subsection.5.6}{5.6 Limitations}{section.5}% 35
+\BOOKMARK [1][-]{section.6}{6 Conclusion}{section*.1}% 36
