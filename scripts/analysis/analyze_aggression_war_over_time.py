@@ -152,8 +152,10 @@ class TemporalAggressionAnalyzer:
         """Create scatter plots by era"""
         logger.info("Creating era comparison visualization...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         fig, axes = plt.subplots(2, 3, figsize=(18, 12))
 
@@ -280,8 +282,10 @@ class TemporalAggressionAnalyzer:
         """Create plot showing how correlation changed over time"""
         logger.info("Creating rolling correlation visualization...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10))
 

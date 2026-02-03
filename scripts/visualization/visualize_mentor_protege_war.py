@@ -39,8 +39,8 @@ def create_visualization():
     logger.info(f"Loaded {len(df)} mentor-protégé pairs")
 
     # Set up matplotlib style
-    plt.rcParams['font.family'] = 'Helvetica'
-    plt.rcParams['font.size'] = 13
+    from plot_config import configure_plots
+    configure_plots()
 
     # Create figure
     fig, ax = plt.subplots(figsize=(12, 9))
@@ -205,8 +205,8 @@ def create_by_era_visualization(df):
     )
 
     # Set up matplotlib style
-    plt.rcParams['font.family'] = 'Helvetica'
-    plt.rcParams['font.size'] = 11
+    from plot_config import configure_plots
+    configure_plots()
 
     # Create subplots
     eras = ['Pre-2000', '2000-2009', '2010-2019', '2020+']

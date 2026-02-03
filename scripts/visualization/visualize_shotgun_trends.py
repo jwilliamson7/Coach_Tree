@@ -47,8 +47,8 @@ def main():
     import matplotlib.pyplot as plt
     from matplotlib.ticker import FuncFormatter
 
-    plt.rcParams['font.family'] = 'Helvetica'
-    plt.rcParams['font.size'] = 13  # Base font size
+    from plot_config import configure_plots
+    configure_plots()
 
     fig, ax = plt.subplots(figsize=(12, 7))
 

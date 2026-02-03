@@ -166,8 +166,10 @@ class PersistenceByTypeAnalyzer:
         """Create visualization comparing persistence by coach type"""
         logger.info("\nCreating persistence comparison visualization...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         aggression_vars = [
             ('fourth_down_aggression', '4th Down'),
@@ -240,8 +242,10 @@ class PersistenceByTypeAnalyzer:
         """Create heatmap showing difference in persistence (Offensive - Defensive)"""
         logger.info("Creating difference heatmap...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         aggression_vars = [
             ('fourth_down_aggression', '4th Down'),

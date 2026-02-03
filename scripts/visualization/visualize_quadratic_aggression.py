@@ -20,8 +20,11 @@ merged_data['era'] = pd.cut(
     labels=['Early (2006-2011)', 'Middle (2012-2017)', 'Late (2018-2024)']
 )
 
-plt.rcParams['font.family'] = 'Helvetica'
-plt.rcParams['font.size'] = 13  # Base font size
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from plot_config import configure_plots
+configure_plots()
 
 fig, axes = plt.subplots(1, 3, figsize=(22, 7))
 

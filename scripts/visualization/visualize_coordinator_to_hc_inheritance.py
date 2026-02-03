@@ -46,8 +46,8 @@ def main():
     import matplotlib.pyplot as plt
     from matplotlib.ticker import FuncFormatter
 
-    plt.rcParams['font.family'] = 'Helvetica'
-    plt.rcParams['font.size'] = 13  # Base font size
+    from plot_config import configure_plots
+    configure_plots()
 
     fig, ax = plt.subplots(figsize=(12, 10))
 
@@ -95,7 +95,7 @@ def main():
            verticalalignment='top',
            horizontalalignment='left',
            bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray', linewidth=1.5),
-           family='Helvetica')
+           family='serif')
 
     ax.legend(loc='lower right', framealpha=0.95, fontsize=14)
     ax.grid(True, alpha=0.3, linestyle=':')

@@ -124,8 +124,8 @@ class AggressionInheritanceAnalyzer:
 
         logger.info("Creating inheritance visualization...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        from plot_config import configure_plots
+        configure_plots()
 
         df = self.inheritance_data
 
@@ -209,8 +209,8 @@ class AggressionInheritanceAnalyzer:
 
         logger.info("Creating component-wise inheritance analysis...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        from plot_config import configure_plots
+        configure_plots()
 
         df = self.inheritance_data
 

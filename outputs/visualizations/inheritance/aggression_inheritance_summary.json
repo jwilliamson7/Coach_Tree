@@ -1,49 +1,49 @@
 {
   "overall": {
-    "correlation": 0.06375609317989579,
-    "p_value": 0.09165414166038345,
+    "correlation": 0.06375609317989574,
+    "p_value": 0.09165414166038424,
     "sample_size": 701,
     "significant": false
   },
   "by_relationship_type": {
     "position_to_coordinator": {
       "correlation": 0.07340641782517776,
-      "p_value": 0.3329375452599334,
+      "p_value": 0.33293754525993174,
       "sample_size": 176,
       "significant": false
     },
     "position_to_hc": {
-      "correlation": 0.06448364403333055,
-      "p_value": 0.28573157803482263,
+      "correlation": 0.06448364403333051,
+      "p_value": 0.285731578034822,
       "sample_size": 276,
       "significant": false
     },
     "coordinator_to_hc": {
-      "correlation": 0.05649806815607719,
-      "p_value": 0.3746763707237284,
+      "correlation": 0.056498068156077205,
+      "p_value": 0.3746763707237253,
       "sample_size": 249,
       "significant": false
     }
   },
   "by_component": {
     "4th Down": {
-      "correlation": 0.11051123431281747,
-      "p_value": 0.0033929324892200555,
+      "correlation": 0.11051123431281748,
+      "p_value": 0.003392932489220023,
       "significant": true
     },
     "Pass-Heavy": {
-      "correlation": 0.002921619220829167,
-      "p_value": 0.9384516426951617,
+      "correlation": 0.002921619220829172,
+      "p_value": 0.9384516426951618,
       "significant": false
     },
     "Deep Pass": {
-      "correlation": 0.05723315285834207,
-      "p_value": 0.13006011827862696,
+      "correlation": 0.057233152858342067,
+      "p_value": 0.13006011827862754,
       "significant": false
     },
     "2-Point": {
-      "correlation": 0.050404757129252624,
-      "p_value": 0.1825309881662719,
+      "correlation": 0.0504047571292526,
+      "p_value": 0.1825309881662722,
       "significant": false
     }
   }

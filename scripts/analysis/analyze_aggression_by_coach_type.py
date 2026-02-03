@@ -244,8 +244,10 @@ class AggressionByCoachTypeAnalyzer:
         """Create scatter plots by coach type"""
         logger.info("Creating visualization by coach type...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         # Determine which coach types have sufficient data
         bg_types = ['Offensive', 'Defensive', 'Other']
@@ -388,8 +390,10 @@ class AggressionByCoachTypeAnalyzer:
         """Create visualization showing temporal trends by coach type"""
         logger.info("Creating temporal visualization by coach type...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         fig, axes = plt.subplots(2, 3, figsize=(18, 12))
 

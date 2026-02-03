@@ -289,8 +289,10 @@ class InheritanceByTypeAnalyzer:
         """Create scatter plots by mentor type"""
         logger.info("\nCreating visualization by mentor type...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         aggression_types = [
             ('fourth_down', '4th Down'),
@@ -385,8 +387,10 @@ class InheritanceByTypeAnalyzer:
         """Create bar chart comparing inheritance strength"""
         logger.info("Creating comparison bar chart...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
 
