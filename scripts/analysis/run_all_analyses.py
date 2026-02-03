@@ -97,6 +97,21 @@ def main():
             'log': 'aggression_variance.log',
             'description': 'Aggression Variance Over Time Analysis'
         },
+        {
+            'path': Path("scripts/analysis/analyze_temporal_robustness.py"),
+            'log': 'temporal_robustness.log',
+            'description': 'Temporal Robustness Analysis'
+        },
+        {
+            'path': Path("scripts/analysis/calculate_effect_sizes_and_power.py"),
+            'log': 'effect_sizes_and_power.log',
+            'description': 'Effect Sizes and Statistical Power Analysis'
+        },
+        {
+            'path': Path("scripts/analysis/analyze_mentor_war_protege_war.py"),
+            'log': 'mentor_war_protege_war.log',
+            'description': 'Mentor-Protégé WAR Relationship Analysis'
+        },
         # Visualization scripts (non-HTML)
         {
             'path': Path("scripts/visualization/visualize_aggression_trends.py"),
@@ -132,6 +147,11 @@ def main():
             'path': Path("scripts/visualization/visualize_quintile_comparison.py"),
             'log': 'viz_quintile_comparison.log',
             'description': 'Quintile Comparison Visualization'
+        },
+        {
+            'path': Path("scripts/visualization/visualize_mentor_protege_war.py"),
+            'log': 'viz_mentor_protege_war.log',
+            'description': 'Mentor-Protégé WAR Visualization'
         }
     ]
 

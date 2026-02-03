@@ -150,8 +150,10 @@ class AggressionPersistenceAnalyzer:
         """Create scatter plots showing year-to-year persistence"""
         logger.info("\nCreating persistence visualization...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         # Create 3x5 grid: 3 lags x 5 measures
         fig, axes = plt.subplots(3, 5, figsize=(20, 12))
@@ -259,8 +261,10 @@ class AggressionPersistenceAnalyzer:
         """Create plot showing how persistence decays with lag"""
         logger.info("Creating persistence decay visualization...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         fig, ax = plt.subplots(figsize=(12, 8))
 

@@ -206,8 +206,8 @@ class AggressionTrendVisualizer:
 
         logger.info("Creating Matplotlib visualization...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        from plot_config import configure_plots
+        configure_plots()
 
         df = self.yearly_trends
 

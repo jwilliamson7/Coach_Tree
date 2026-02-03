@@ -134,8 +134,10 @@ class AggressionWARAnalyzer:
         """Create scatter plots with regression lines for each aggression measure"""
         logger.info("Creating visualizations...")
 
-        plt.rcParams['font.family'] = 'Helvetica'
-        plt.rcParams['font.size'] = 13  # Base font size
+        import sys
+        sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
+        from plot_config import configure_plots
+        configure_plots()
 
         # Create 2x3 subplot grid (5 aggression measures + 1 for win pct)
         fig, axes = plt.subplots(2, 3, figsize=(18, 12))

@@ -52,7 +52,7 @@
 \affil[1]{\protect\raggedright
 Knowledge Transmission in the NFL, e-mail: jon@williamsonconsultinggroup.com}
 
-\abstract{In 2006, aggressive NFL coaches exhibited better performance. In 2024, they don't. We document the substantial erosion of this association over less than two decades. By comparing actual play-calling decisions to machine learning predictions trained on 643,290 plays (2006-2024), we quantify coaching aggression and trace its relationship with context-adjusted performance (Wins Above Replacement) across time. Aggressive coaching correlated significantly with better performance in 2006-2011 ($r=0.200$, $p=0.006$) but shows essentially zero association today ($r=-0.024$, $p=0.720$ in 2018-2024). Two-way fixed effects analysis, controlling for coach quality and temporal trends, establishes that this relationship is causal: a one standard deviation increase in aggression corresponds to 0.248 additional WAR games ($p=0.017$, Cohen's $d=0.13$). While within-coach point estimates suggest potential erosion (declining 62\% from early to late eras), era-stratified analyses are underpowered (29-11\% power) and all era-specific effects are non-significant, preventing definitive conclusions about temporal changes in the causal effect. This erosion reflects two concurrent, statistically robust dynamics: (1) diffusion---mean aggression increased significantly over time ($\beta=+0.125\%$ per year, $R^2=0.83$, $p<0.001$), rising 1.58 percentage points from early to late era; and (2) increased variance---aggression standard deviation increased 23\% as coaches diverged rather than converged. Aggression shows moderate year-to-year stability ($r=0.458$ for composite aggression), with 4th down philosophy exhibiting the strongest persistence ($r=0.556$), suggesting it represents strategic beliefs rather than purely situational adaptation. However, aggressive tactics show minimal inheritance from mentors to protégés ($r=0.062$, $p=0.162$ for composite aggression), challenging the coaching ``tree'' narrative. Fourth down philosophy provides the sole exception: it shows modest inheritance ($r=0.179$, $p<0.001$) driven entirely by offensive mentors ($r=0.232$, $p<0.001$), while defensive mentors transmit essentially nothing ($r=0.024$, $p=0.734$). Coaching background moderates these patterns substantially: offensive head coaches show nearly double the year-to-year persistence of defensive coaches for 4th down decisions ($r=0.690$ vs $r=0.373$), and only offensive coordinators transmit strategic philosophy to protégés ($r=0.201$-$0.239$ for 4th down and pass-heavy aggression vs. $r=0.025$ for defensive coordinators). These findings suggest organizations should be skeptical of pedigree-based hiring outside 4th down philosophy and recognize that aggressive tactics no longer differentiate coaching performance as they once did.}
+\abstract{This study examines coaching aggression and performance in the NFL from 2006-2024. Using machine learning predictions on 643,290 plays, we quantify aggression across four dimensions (fourth down decisions, pass-run balance, deep passing, two-point conversions) and analyze its relationship with Wins Above Replacement. Cross-sectional correlations between aggression and performance declined from $r=0.197$ ($p=0.007$) in 2006-2011 to $r=-0.018$ ($p=0.790$) in 2018-2024. Two-way fixed effects analysis reveals a significant pooled effect: one standard deviation increase in aggression corresponds to 0.235 additional WAR games ($p=0.020$, Cohen's $d=0.13$). However, era-stratified analyses are underpowered (13-27\% power), preventing conclusions about temporal changes in the causal effect. The cross-sectional erosion reflects diffusion (mean aggression increased significantly, $p<0.001$) and increased variance (23\% rise in standard deviation). Aggression shows moderate year-to-year persistence ($r=0.458$), but minimal inheritance from mentors to prot\'{e}g\'{e}s ($r=0.062$, $p=0.162$). Fourth down philosophy is the exception, showing modest inheritance ($r=0.179$, $p<0.001$) driven entirely by offensive mentors. These findings illuminate how competitive advantages erode through diffusion and have implications for coaching evaluation.}
 
 \keywords{NFL coaching, aggression, coaching trees, competitive advantage}
 
@@ -93,7 +93,7 @@ Economic theory suggests competitive advantages from information should erode as
 
 \subsection{The Coaching Tree Framework}
 
-When NFL teams hire head coaches, pedigree can often influence decisions. Coordinators from successful organizations command premium consideration. The Bill Walsh, Bill Belichick, and Andy Reid trees have been discussed ad neaseum, with the implicit assumption that working under great coaches transfers strategic expertise and winning approaches.
+When NFL teams hire head coaches, pedigree frequently influences decisions. Coordinators from successful organizations often receive premium consideration. The Bill Walsh, Bill Belichick, and Andy Reid coaching lineages receive substantial attention in hiring discussions, with the implicit assumption that working under successful coaches transfers strategic expertise and winning approaches.
 
 This assumption seems intuitive. Coordinators spend years observing great coaches' decision-making processes, learning their strategic philosophies, and presumably absorbing their approaches to game management, aggression, and innovation. If coaching excellence is learnable through apprenticeship, then mentor success should predict protégé success, and strategic tendencies should transmit from mentors to their protégés.
 
@@ -262,12 +262,12 @@ Our regression analysis reveals that the relationship between coaching aggressio
 \toprule
 \textbf{Measure} & \textbf{r} & \textbf{P-value} \\
 \midrule
-Composite & 0.087 & 0.032 \\
+Composite & 0.081 & 0.045 \\
 \cmidrule{1-3}
-Pass-Heavy & 0.115 & 0.005** \\
-4th Down & 0.056 & 0.171 \\
-Deep Pass & 0.013 & 0.754 \\
-2-Point & -0.006 & 0.887 \\
+Pass-Heavy & 0.122 & 0.003** \\
+4th Down & 0.041 & 0.308 \\
+Deep Pass & 0.020 & 0.621 \\
+2-Point & -0.021 & 0.614 \\
 \midrule
 \multicolumn{3}{l}{\small N=606 coach-years}\\
 \multicolumn{3}{l}{\small ** $p<0.01$ (survives BH correction)}\\
@@ -275,7 +275,7 @@ Deep Pass & 0.013 & 0.754 \\
 \end{tabular}
 \end{table}
 
-Pass-heavy aggression shows a statistically significant weak positive relationship with coaching performance when pooling across all 19 seasons ($r=0.115$, $p=0.005$). Composite aggression also shows a positive relationship ($r=0.087$, $p=0.032$), though this finding is marginal and does not survive multiple comparison correction. These overall relationships mask dramatic temporal evolution. When we split the sample into three approximately equal eras (2006-2011, 2012-2017, 2018-2024), a pattern of decline emerges (Table~\ref{tab:era_war} and Figure~\ref{fig:temporal}).
+Pass-heavy aggression shows a statistically significant weak positive relationship with coaching performance when pooling across all 19 seasons ($r=0.122$, $p=0.003$). Composite aggression also shows a positive relationship ($r=0.081$, $p=0.045$), though this finding is marginal and does not survive multiple comparison correction. These overall relationships mask temporal evolution. When we split the sample into three approximately equal eras (2006-2011, 2012-2017, 2018-2024), a pattern of decline emerges (Table~\ref{tab:era_war} and Figure~\ref{fig:temporal}).
 
 As described in Methods, we applied Benjamini-Hochberg correction to all 98 hypothesis tests in this paper (cutoff: $p \leq 0.0258$). Throughout the Results section, all findings with $p \leq 0.026$ are robust to multiple comparison correction, while marginal results ($p=0.026$-$0.09$) should be interpreted cautiously. The four tests that lose significance after correction are marginal subgroup findings ($p=0.031$-$0.043$) including the overall composite aggression relationship, which we discuss appropriately as suggestive rather than definitive.
 
@@ -286,9 +286,9 @@ As described in Methods, we applied Benjamini-Hochberg correction to all 98 hypo
 \toprule
 \textbf{Era} & \textbf{Composite (r, p)} & \textbf{Pass-Heavy (r, p)} & \textbf{N} \\
 \midrule
-2006-2011 & 0.200, 0.006** & 0.105, 0.149 & 190 \\
-2012-2017 & 0.106, 0.145 & 0.120, 0.098 & 192 \\
-2018-2024 & -0.024, 0.720 & 0.096, 0.152 & 224 \\
+2006-2011 & 0.197, 0.007** & 0.106, 0.147 & 190 \\
+2012-2017 & 0.095, 0.189 & 0.138, 0.056 & 192 \\
+2018-2024 & -0.018, 0.790 & 0.102, 0.128 & 224 \\
 \midrule
 \multicolumn{4}{l}{\small ** $p<0.01$}\\
 \bottomrule
@@ -298,11 +298,11 @@ As described in Methods, we applied Benjamini-Hochberg correction to all 98 hypo
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{../visualizations/performance/aggression_war_by_era.png}
-    \caption{Scatterplots of composite aggression (top row) and pass-heavy aggression (bottom row) versus annual WAR, split by era. The strength of the composite aggression relationship has declined from $r=0.200$ ($p=0.006$) in the early era to $r=-0.024$ ($p=0.720$) in the late era.}
+    \caption{Scatterplots of composite aggression (top row) and pass-heavy aggression (bottom row) versus annual WAR, split by era. The strength of the composite aggression relationship has declined from $r=0.197$ ($p=0.007$) in the early era to $r=-0.018$ ($p=0.790$) in the late era.}
     \label{fig:temporal}
 \end{figure}
 
-In the early era (2006-2011), composite aggression shows a statistically significant relationship with performance ($r=0.200$, $p=0.006$). Aggressive coaches appeared to outperform their conservative peers. By the middle era (2012-2017), the relationship had weakened substantially ($r=0.106$, $p=0.145$). By the modern era (2018-2024), the relationship had weakened to near zero ($r=-0.024$, $p=0.720$) and is no longer statistically distinguishable from zero. In less than 20 years, aggression went from a modest competitive advantage ($r=0.20$) to no detectable relationship.
+In the early era (2006-2011), composite aggression shows a statistically significant relationship with performance ($r=0.197$, $p=0.007$). Aggressive coaches appeared to outperform their conservative peers. By the middle era (2012-2017), the relationship had weakened ($r=0.095$, $p=0.189$). By the modern era (2018-2024), the relationship had weakened to near zero ($r=-0.018$, $p=0.790$) and is no longer statistically distinguishable from zero. In less than 20 years, aggression went from a modest competitive advantage ($r=0.20$) to no detectable relationship.
 
 \subsubsection{Temporal Robustness}
 
@@ -314,11 +314,11 @@ First, we estimate a continuous-year interaction model:
 \text{WAR}_{it} = \beta_0 + \beta_1 \cdot \text{Aggression}_{it} + \beta_2 \cdot \text{Year}_t + \beta_3 \cdot (\text{Aggression}_{it} \times \text{Year}_t) + \epsilon_{it}
 \end{equation}
 
-where Year is centered at 2015 for interpretability. The interaction term $\beta_3$ tests whether the aggression-performance relationship changes linearly over time. We find $\beta_3 = -2.066$ ($SE = 0.917$, $p = 0.026$), confirming that the aggression effect erodes significantly and linearly over the study period. The implied aggression effects decline from $\beta = 30.67$ ($p = 0.010$) in 2006 to $\beta = -6.51$ ($p = 0.425$) in 2024---a 37.18-point swing representing complete erosion of the competitive advantage.
+where Year is centered at 2015 for interpretability. The interaction term $\beta_3$ tests whether the aggression-performance relationship changes linearly over time. We find $\beta_3 = -1.865$ ($SE = 0.845$, $p = 0.029$), confirming that the aggression effect erodes significantly and linearly over the study period. The implied aggression effects decline from $\beta = 27.98$ ($p = 0.011$) in 2006 to $\beta = -5.59$ ($p = 0.476$) in 2024---a 33.57-point swing representing complete erosion of the competitive advantage.
 
-Second, we conduct Chow tests for structural breaks at every candidate year from 2009-2019. These tests formally identify the year at which the aggression-performance relationship changes most significantly. The most statistically significant break occurs at 2011 ($F = 3.68$, $p = 0.026$), with the aggression coefficient declining from $\beta = 30.21$ in the early period ($\leq$2011) to $\beta = 2.61$ in the late period ($>$2011)---a 91.4\% reduction. The second-most significant break occurs at 2012 ($F = 3.30$, $p = 0.037$), with a similar 92.1\% decline. These data-driven breakpoints validate our theoretical era boundaries, as the most significant structural break falls precisely at the transition between our early (2006-2011) and middle (2012-2017) eras.
+Second, we conduct Chow tests for structural breaks at every candidate year from 2009-2019. These tests formally identify the year at which the aggression-performance relationship changes most significantly. The most statistically significant break occurs at 2011 ($F = 3.63$, $p = 0.027$), with the aggression coefficient declining from $\beta = 27.89$ in the early period ($\leq$2011) to $\beta = 1.92$ in the late period ($>$2011)---a 93.1\% reduction. The second-most significant break occurs at 2012 ($F = 2.93$, $p = 0.054$), with a similar 92.6\% decline. These data-driven breakpoints validate our theoretical era boundaries, as the most significant structural break falls precisely at the transition between our early (2006-2011) and middle (2012-2017) eras.
 
-Additional breakpoints at 2013 ($p = 0.066$), 2015 ($p = 0.065$), and 2017 ($p = 0.056$) show similar magnitude declines but weaker statistical significance due to smaller sample sizes in later periods. The clustering of significant breaks around 2011-2013 indicates a genuine regime change rather than gradual drift, and confirms that our findings are not artifacts of arbitrary era classification. These robustness checks establish that the erosion we observe is real and substantial, with the aggression-performance relationship declining by 90-92\% after 2011-2012 regardless of how we test for temporal change.
+Additional breakpoints at 2013 ($p = 0.103$), 2015 ($p = 0.128$), and 2017 ($p = 0.076$) show similar magnitude declines but weaker statistical significance due to smaller sample sizes in later periods. The clustering of the most significant break around 2011 indicates a genuine regime change rather than gradual drift, and confirms that our findings are not artifacts of arbitrary era classification. These robustness checks establish that the erosion we observe is real and substantial, with the aggression-performance relationship declining by over 90\% after 2011 regardless of how we test for temporal change.
 
 \subsubsection{Diffusion and Increased Variance}
 
@@ -376,22 +376,22 @@ Since these aggression measures focus on offensive decisions (going for it on 4t
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
 \textbf{Measure} & \textbf{r} & \textbf{p} & \textbf{r} & \textbf{p} \\
 \midrule
-Composite & 0.096 & 0.092 & 0.108 & 0.089 \\
+Composite & 0.074 & 0.192 & 0.120 & 0.058 \\
 \midrule
 \multicolumn{5}{l}{\small Offensive: $n=310$, Defensive: $n=251$}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The relationships between composite aggression and average WAR are marginally significant and similar in magnitude (offensive: $r=0.096$, $p=0.092$; defensive: $r=0.108$, $p=0.089$), reaching 90\% confidence levels but not traditional 95\% significance. Offensive coaches do not show substantially stronger aggression-performance relationships than defensive coaches.
+The relationships between composite aggression and average WAR are weak and mostly non-significant (offensive: $r=0.074$, $p=0.192$; defensive: $r=0.120$, $p=0.058$). Defensive coaches show a marginally stronger relationship that approaches but does not reach traditional 95\% significance. Offensive coaches do not show substantially stronger aggression-performance relationships than defensive coaches.
 
 \subsubsection{Within-Coach Fixed Effects: Causal Evidence}
 
 The cross-sectional correlations above raise a fundamental question: does aggression cause better performance, or do better coaches (or better teams) simply hire/become more aggressive? To address this, we employ two-way fixed effects regression that controls for both coach quality and temporal trends.
 
-To contextualize effect magnitudes, our sample's WAR distribution (in games per season) has mean $\mu=0.191$ and standard deviation $\sigma=1.909$, with interquartile range from $-0.952$ (25th percentile) to $1.509$ (75th percentile). The IQR spans 2.461 games, representing the middle 50\% of the performance distribution. The within-coach approach compares each coach to themselves across different years, isolating genuine behavioral effects from selection and omitted variable confounds.
+To contextualize effect magnitudes, our sample's WAR distribution (in games per season) has mean $\mu=0.051$ and standard deviation $\sigma=1.827$, with interquartile range from $-1.054$ (25th percentile) to $1.347$ (75th percentile). The IQR spans 2.401 games, representing the middle 50\% of the performance distribution. The within-coach approach compares each coach to themselves across different years, isolating genuine behavioral effects from selection and omitted variable confounds.
 
-Table~\ref{tab:fixed_effects} presents within-coach fixed effects estimates for the effect of a one standard deviation increase in composite aggression on WAR. The pooled analysis reveals that when coaches increase their aggression by one standard deviation relative to their typical level, they gain 0.248 WAR games ($p=0.017$, Cohen's $d=0.13$). This effect persists after controlling for all time-invariant coach characteristics and league-wide temporal changes in aggression's effectiveness. An effect of 0.25 games represents approximately 10\% of the IQR in the WAR distribution, corresponding to a percentile shift from the 50th to the 55th percentile---a small but meaningful performance advantage.
+Table~\ref{tab:fixed_effects} presents within-coach fixed effects estimates for the effect of a one standard deviation increase in composite aggression on WAR. The pooled analysis reveals that when coaches increase their aggression by one standard deviation relative to their typical level, they gain 0.235 WAR games ($p=0.020$, Cohen's $d=0.13$). This effect persists after controlling for all time-invariant coach characteristics and league-wide temporal changes in aggression's effectiveness. An effect of 0.24 games represents approximately 10\% of the IQR in the WAR distribution, corresponding to a percentile shift from the 50th to the 55th percentile---a small but meaningful performance advantage.
 
 \begin{table}[H]
 \caption{Within-Coach Fixed Effects: Aggression $\rightarrow$ WAR}
@@ -400,16 +400,16 @@ Table~\ref{tab:fixed_effects} presents within-coach fixed effects estimates for 
 \toprule
 \textbf{Sample} & \textbf{Effect (1 SD)} & \textbf{\% IQR} & \textbf{p} & \textbf{Power} \\
 \midrule
-\textbf{Pooled (2006-2024)} & 0.248** & 10\% & 0.017 & 67\% \\
+\textbf{Pooled (2006-2024)} & 0.235** & 10\% & 0.020 & 65\% \\
 \midrule
-Early (2006-2011) & 0.287 & 12\% & 0.158 & 29\% \\
-Middle (2012-2017) & 0.175 & 7\% & 0.265 & 20\% \\
-Late (2018-2024) & 0.109 & 4\% & 0.491 & 11\% \\
+Early (2006-2011) & 0.258 & 11\% & 0.177 & 27\% \\
+Middle (2012-2017) & 0.172 & 7\% & 0.243 & 21\% \\
+Late (2018-2024) & 0.131 & 5\% & 0.396 & 13\% \\
 \midrule
 \multicolumn{5}{l}{\small Dependent variable: WAR (games per season)} \\
 \multicolumn{5}{l}{\small Independent variable: Composite aggression (1 SD increase)} \\
 \multicolumn{5}{l}{\small Effect: Gain in WAR games from 1 SD increase in aggression} \\
-\multicolumn{5}{l}{\small \% IQR: Effect size as proportion of interquartile range (2.461 games)} \\
+\multicolumn{5}{l}{\small \% IQR: Effect size as proportion of interquartile range (2.401 games)} \\
 \multicolumn{5}{l}{\small Model: Two-way fixed effects (coach + year), clustered SEs} \\
 \multicolumn{5}{l}{\small Power: Post-hoc statistical power for observed effect} \\
 \multicolumn{5}{l}{\small n = 606 coach-years (123 coaches); Era n: 190 / 192 / 224} \\
@@ -418,9 +418,9 @@ Late (2018-2024) & 0.109 & 4\% & 0.491 & 11\% \\
 \end{tabular}
 \end{table}
 
-The era-stratified results reveal suggestive patterns but suffer from severe power limitations. While point estimates decline from 0.287 games in the early era to 0.109 games in the late era (62\% reduction), all era-specific effects are statistically non-significant, and post-hoc power analysis reveals that all three era-specific tests are dramatically underpowered (29\%, 20\%, and 11\% respectively). The early-era analysis, despite the largest point estimate, has only 29\% power and cannot rule out effects as large as 43 WAR games at conventional power thresholds. The middle and late eras are even more severely underpowered, unable to detect effects smaller than 28 and 25 WAR games respectively at 80\% power.
+The era-stratified results reveal suggestive patterns but suffer from severe power limitations. While point estimates decline from 0.258 games in the early era to 0.131 games in the late era (49\% reduction), all era-specific effects are statistically non-significant, and post-hoc power analysis reveals that all three era-specific tests are substantially underpowered (27\%, 21\%, and 13\% respectively). The early-era analysis, despite the largest point estimate, has only 27\% power and cannot rule out effects as large as 41 WAR games at conventional power thresholds. The middle and late eras are even more severely underpowered, unable to detect effects smaller than 26 and 24 WAR games respectively at 80\% power.
 
-The overlapping confidence intervals and low statistical power mean we cannot definitively conclude the effect differs across eras. The declining point estimates are consistent with erosion but could also reflect sampling variation in underpowered tests. The pooled analysis provides the most reliable estimate, demonstrating a significant causal effect that persists across the full 2006-2024 period with moderate power (67\%). While suggestive of erosion, the era-stratified results should be interpreted cautiously given power constraints. Future research with larger samples or longer observation periods would be needed to definitively establish whether the causal effect has diminished over time or remains stable.
+The overlapping confidence intervals and low statistical power mean we cannot definitively conclude the effect differs across eras. The declining point estimates are consistent with erosion but could also reflect sampling variation in underpowered tests. The pooled analysis provides the most reliable estimate, demonstrating a significant causal effect that persists across the full 2006-2024 period with moderate power (65\%). While suggestive of erosion, the era-stratified results should be interpreted cautiously given power constraints. Future research with larger samples or longer observation periods would be needed to definitively establish whether the causal effect has diminished over time or remains stable.
 
 \subsection{Aggression as Trait and State}
 
@@ -602,7 +602,7 @@ Several explanations warrant consideration. First, these decisions may be too ra
 
 Our findings document the substantial erosion of a competitive advantage in professional sports, from measurable benefit to no detectable relationship in less than two decades. This pattern mirrors technology adoption in other competitive markets---financial markets arbitraging away trading strategies, military tactics becoming obsolete as adversaries adapt, business strategies eroding through imitation.
 
-In the early period (2006-2011), aggressive tactics provided measurable performance benefits ($r=0.200$, $p=0.006$ for composite aggression). But by 2018-2024, the relationship was no longer statistically distinguishable from zero ($r=-0.024$, $p=0.720$).
+In the early period (2006-2011), aggressive tactics provided measurable performance benefits ($r=0.197$, $p=0.007$ for composite aggression). But by 2018-2024, the relationship was no longer statistically distinguishable from zero ($r=-0.018$, $p=0.790$).
 
 The decline reflects two concurrent dynamics. First, diffusion: as analytics-driven decision-making spread through the league, more coaches adopted aggressive tactics. This claim is supported by the statistically significant increase in average aggression between the periods. Second, increased variance: rather than converging to a single optimal level, variance in aggression increased 23\% from early to late era. Some coaches pushed toward extreme aggression while others adopted moderate approaches, creating more diversity rather than homogeneity.
 
@@ -617,11 +617,11 @@ The strategic frontier has likely moved to areas we have not yet successfully me
 
 While our cross-sectional correlations demonstrate that aggressive coaches performed better in the early era, establishing causality requires addressing confounding from coach quality and selection effects. Our two-way fixed effects analysis provides evidence that the relationship is at least partly causal.
 
-The within-coach fixed effects approach controls for all time-invariant coach characteristics (ability, personality, leadership style) and temporal trends (league-wide changes in aggression's effectiveness). By comparing each coach to themselves across different years, we isolate whether coaches perform better when they are more aggressive than usual. The significant pooled effect shows that a one standard deviation increase in aggression corresponds to 0.248 additional WAR games ($p=0.017$, Cohen's $d=0.13$), even after removing all between-coach differences and temporal trends. This effect represents approximately 10\% of the IQR in the WAR distribution, a small but meaningful performance advantage.
+The within-coach fixed effects approach controls for all time-invariant coach characteristics (ability, personality, leadership style) and temporal trends (league-wide changes in aggression's effectiveness). By comparing each coach to themselves across different years, we isolate whether coaches perform better when they are more aggressive than usual. The significant pooled effect shows that a one standard deviation increase in aggression corresponds to 0.235 additional WAR games ($p=0.020$, Cohen's $d=0.13$), even after removing all between-coach differences and temporal trends. This effect represents approximately 10\% of the IQR in the WAR distribution, a small but meaningful performance advantage.
 
 This causal evidence strengthens our interpretation of the cross-sectional patterns. The relationship between aggression and performance is not merely that better coaches happen to be more aggressive---within the same coach, being more aggressive in a given year predicts better performance in that year. The pooled effect demonstrates a persistent causal relationship across the full 2006-2024 period.
 
-However, two critical limitations constrain our ability to characterize temporal patterns in this causal effect. First, era-stratified analyses suffer from severe power limitations. While point estimates decline from 0.287 games in early to 0.109 games in late eras (62\% reduction), post-hoc power analysis reveals dramatically insufficient power: 29\%, 20\%, and 11\% respectively. With such low power, these tests cannot distinguish true erosion from sampling variation. All era-specific effects are statistically non-significant, and we cannot rule out effects as large as 25-43 WAR games in any single era. Claims of erosion based on within-coach variation must therefore be tempered by these power constraints. Second, within-coach variation in aggression is smaller than between-coach variation, limiting effect detection. Third, reverse causation within seasons remains possible, though situational controls partially address this.
+However, two critical limitations constrain our ability to characterize temporal patterns in this causal effect. First, era-stratified analyses suffer from severe power limitations. While point estimates decline from 0.258 games in early to 0.131 games in late eras (49\% reduction), post-hoc power analysis reveals dramatically insufficient power: 27\%, 21\%, and 13\% respectively. With such low power, these tests cannot distinguish true erosion from sampling variation. All era-specific effects are statistically non-significant, and we cannot rule out effects as large as 25-43 WAR games in any single era. Claims of erosion based on within-coach variation must therefore be tempered by these power constraints. Second, within-coach variation in aggression is smaller than between-coach variation, limiting effect detection. Third, reverse causation within seasons remains possible, though situational controls partially address this.
 
 The convergent evidence from multiple approaches---cross-sectional correlations strongest when tactics were rare, erosion as tactics spread, and within-coach effects controlling for stable characteristics---collectively supports a causal interpretation while acknowledging remaining ambiguities. For practitioners, the key insight holds regardless: whether through causal mechanisms or spurious correlation, aggressive coaching no longer associates with better outcomes in the modern era.
 
@@ -685,13 +685,13 @@ Third, we cannot observe coaching constraints. Some coaches may want to be aggre
 
 Through comprehensive analysis of 643,290 plays and 606 coach-years spanning nearly two decades (2006-2024), we document the substantial erosion of aggressive coaching as a competitive advantage in professional football. Our findings challenge widely-held beliefs about coaching decision-making, strategic innovation, and talent evaluation in the NFL while providing a rare empirical window into how competitive advantages disappear through diffusion and adaptation.
 
-Aggressive coaching caused measurable performance benefits in the early analytics era, and two-way fixed effects analysis establishes a persistent causal relationship. Controlling for coach quality and temporal trends, a one standard deviation increase in aggression corresponds to 0.248 additional WAR games ($p=0.017$, Cohen's $d=0.13$)---representing approximately 10\% of the interquartile range in the WAR distribution, a small but meaningful performance advantage. This pooled effect persists across the full 2006-2024 period, demonstrating that aggression causally affects performance.
+Aggressive coaching caused measurable performance benefits in the early analytics era, and two-way fixed effects analysis establishes a persistent causal relationship. Controlling for coach quality and temporal trends, a one standard deviation increase in aggression corresponds to 0.235 additional WAR games ($p=0.020$, Cohen's $d=0.13$)---representing approximately 10\% of the interquartile range in the WAR distribution, a small but meaningful performance advantage. This pooled effect persists across the full 2006-2024 period, demonstrating that aggression causally affects performance.
 
-Cross-sectional evidence shows clear temporal erosion: correlations between composite aggression and context-adjusted performance (WAR) declined from $r=0.200$ ($p=0.006$) in 2006-2011 to essentially zero ($r=-0.024$, $p=0.720$) in 2018-2024. Whether the causal effect itself has eroded remains less certain. Within-coach fixed effects show suggestive patterns---point estimates declining 62\% from 0.287 games in early to 0.109 games in late eras---but all era-specific effects are statistically non-significant and era-stratified analyses suffer from severe power limitations (29\%, 20\%, and 11\% power respectively), preventing definitive conclusions about temporal changes in the causal effect.
+Cross-sectional evidence shows clear temporal erosion: correlations between composite aggression and context-adjusted performance (WAR) declined from $r=0.197$ ($p=0.007$) in 2006-2011 to essentially zero ($r=-0.018$, $p=0.790$) in 2018-2024. Whether the causal effect itself has eroded remains less certain. Within-coach fixed effects show suggestive patterns---point estimates declining 49\% from 0.258 games in early to 0.131 games in late eras---but all era-specific effects are statistically non-significant and era-stratified analyses suffer from severe power limitations (27\%, 21\%, and 13\% power respectively), preventing definitive conclusions about temporal changes in the causal effect.
 
 The cross-sectional erosion reflects two concurrent, statistically robust dynamics. First, diffusion: mean aggression increased significantly over time ($\beta=+0.125\%$ per year, $R^2=0.83$, $p<0.001$), rising from $-0.35\%$ in the early era to $+1.23\%$ in the late era, a 1.58 percentage point increase ($t=-8.76$, $p<0.001$, Cohen's $d=5.37$). As analytics-driven tactics spread league-wide, they ceased to differentiate winners from losers in cross-sectional comparisons. Second, increased variance: rather than converging to a single optimum, coaches diverged---composite aggression standard deviation increased 23\% from early to late era. The mechanisms driving erosion remain ambiguous: defensive adaptation, competitive equilibration (aggression becoming table stakes), or other unmeasured factors.
 
-Coaching background matters for stability but not for performance. Both offensive and defensive head coaches show similar weak overall relationships between aggression and performance. Pass-heavy aggression shows statistically significant but small correlations with WAR for both groups ($r=0.144$, $p=0.011$ for offensive; $r=0.128$, $p=0.043$ for defensive), while composite aggression shows only marginal significance for both ($r=0.096$ and $r=0.108$, $p \approx 0.09$). However, background profoundly affects stability: offensive coaches show nearly double the year-to-year persistence in fourth down philosophy compared to defensive coaches ($r=0.690$ vs $r=0.373$). For offensive coaches, aggression---especially fourth down decisions---represents deeply held strategic beliefs that persist across contexts. For defensive coaches making offensive decisions, aggression is more contextual and reactive, adapting to personnel and game situations.
+Coaching background matters for stability but not for performance. Both offensive and defensive head coaches show similar weak overall relationships between aggression and performance. Pass-heavy aggression shows statistically significant but small correlations with WAR for both groups ($r=0.136$, $p=0.016$ for offensive; $r=0.146$, $p=0.021$ for defensive), while composite aggression shows non-significant relationships for both ($r=0.074$, $p=0.192$ for offensive; $r=0.120$, $p=0.058$ for defensive). However, background profoundly affects stability: offensive coaches show nearly double the year-to-year persistence in fourth down philosophy compared to defensive coaches ($r=0.690$ vs $r=0.373$). For offensive coaches, aggression---especially fourth down decisions---represents deeply held strategic beliefs that persist across contexts. For defensive coaches making offensive decisions, aggression is more contextual and reactive, adapting to personnel and game situations.
 
 The popular narrative of coaching ``trees'' passing down strategic DNA from mentors to protégés finds minimal empirical support for aggression. Overall composite aggression inheritance is essentially zero ($r=0.062$, $p=0.162$). Fourth down philosophy provides the sole exception: it shows modest but statistically significant inheritance ($r=0.179$, $p<0.001$), driven entirely by offensive mentors ($r=0.232$, $p<0.001$) with defensive mentors transmitting nothing ($r=0.024$, $p=0.734$). Among coordinators, offensive coordinators transmit both fourth down philosophy ($r=0.201$, $p=0.004$) and pass-heavy tendencies ($r=0.239$, $p=0.0006$) to protégés who become head coaches. Defensive coordinators transmit no detectable strategic tendencies ($r \approx 0$ for all components).
 
