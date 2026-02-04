@@ -117,19 +117,19 @@
     },
     {
       "analysis": "Inheritance: position_to_coordinator",
-      "n": 454,
+      "n": 338,
       "unit": "unique mentor-protege pairs",
       "adequate": true
     },
     {
       "analysis": "Inheritance: position_to_hc",
-      "n": 927,
+      "n": 870,
       "unit": "unique mentor-protege pairs",
       "adequate": true
     },
     {
       "analysis": "Inheritance: coordinator_to_hc",
-      "n": 613,
+      "n": 578,
       "unit": "unique mentor-protege pairs",
       "adequate": true
     },
