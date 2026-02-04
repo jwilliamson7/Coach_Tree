@@ -8,12 +8,14 @@ from dataclasses import dataclass, field
 from datetime import datetime
 import logging
 
-# Add parent directory to path to import from crawlers
-sys.path.append(str(Path(__file__).parent.parent))
+# Add project root to path to import from crawlers
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from crawlers.utils.data_constants import (
     TEAM_FRANCHISE_MAPPINGS,
-    EXCLUDED_ROLE_KEYWORDS
+    EXCLUDED_ROLE_KEYWORDS,
+    standardize_team_abbreviation,
+    FULL_TEAM_NAME_TO_PFR_ABBREV
 )
 
 # Configure logging
@@ -112,22 +114,19 @@ class Coach:
             return "NFL"
         return "None"
     
-    def _get_team_abbreviation(self, team_name: str) -> str:
-        """Extract team abbreviation from team name"""
+    def _get_team_abbreviation(self, team_name: str, year: int = None) -> str:
+        """Extract team abbreviation from team name using standardized mapping.
+
+        Uses the centralized standardize_team_abbreviation function from data_constants.py
+        which handles full team names, abbreviations, and year-based franchise logic.
+
+        Note: This mapping is optimized for the 2006+ play-by-play data era.
+        Pre-2006 team abbreviations may not be fully accurate for historical analysis.
+        """
         if not team_name:
             return ""
-        
-        # Handle special cases and extract abbreviation
-        # This is simplified - you may need to expand based on your data
-        team_lower = team_name.lower()
-        
-        # Try to find in franchise mappings
-        for abbrev, variants in TEAM_FRANCHISE_MAPPINGS.items():
-            if abbrev == team_lower[:3]:
-                return abbrev
-                
-        # Default to first 3 characters
-        return team_lower[:3] if len(team_lower) >= 3 else team_lower
+
+        return standardize_team_abbreviation(team_name, year)
     
     def _resolve_team_franchises(self, team_abbrev: str) -> List[str]:
         """Resolve team abbreviation to all historical franchise variants"""
@@ -176,7 +175,7 @@ class Coach:
                 
                 # Get team information
                 team_raw = row.get('Tm', '') or row.get('Team', '') or row.get('Employer', '')
-                team_abbrev = self._get_team_abbreviation(team_raw)
+                team_abbrev = self._get_team_abbreviation(team_raw, year)
                 team_franchises = self._resolve_team_franchises(team_abbrev)
                 
                 # Create position record

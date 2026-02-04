@@ -1,0 +1,143 @@
+{
+  "total_analyses": 21,
+  "adequate_n": 18,
+  "low_n": 3,
+  "exploratory": 3,
+  "analyses": [
+    {
+      "analysis": "Overall Aggression Data",
+      "n": 641,
+      "unit": "coach-year observations",
+      "adequate": true
+    },
+    {
+      "analysis": "Era: Early (2006-2011)",
+      "n": 204,
+      "unit": "coach-year observations",
+      "adequate": true
+    },
+    {
+      "analysis": "Era: Middle (2012-2017)",
+      "n": 199,
+      "unit": "coach-year observations",
+      "adequate": true
+    },
+    {
+      "analysis": "Era: Late (2018-2024)",
+      "n": 238,
+      "unit": "coach-year observations",
+      "adequate": true
+    },
+    {
+      "analysis": "Coach Type: Defensive",
+      "n": 251,
+      "unit": "coach-year observations",
+      "adequate": true
+    },
+    {
+      "analysis": "Coach Type: Offensive",
+      "n": 310,
+      "unit": "coach-year observations",
+      "adequate": true
+    },
+    {
+      "analysis": "Coach Type: Both",
+      "n": 45,
+      "unit": "coach-year observations",
+      "adequate": true
+    },
+    {
+      "analysis": "Type x Era: Defensive x Early",
+      "n": 88,
+      "unit": "coach-year observations",
+      "adequate": true,
+      "exploratory": false
+    },
+    {
+      "analysis": "Type x Era: Defensive x Middle",
+      "n": 87,
+      "unit": "coach-year observations",
+      "adequate": true,
+      "exploratory": false
+    },
+    {
+      "analysis": "Type x Era: Defensive x Late",
+      "n": 76,
+      "unit": "coach-year observations",
+      "adequate": true,
+      "exploratory": false
+    },
+    {
+      "analysis": "Type x Era: Offensive x Early",
+      "n": 90,
+      "unit": "coach-year observations",
+      "adequate": true,
+      "exploratory": false
+    },
+    {
+      "analysis": "Type x Era: Offensive x Middle",
+      "n": 90,
+      "unit": "coach-year observations",
+      "adequate": true,
+      "exploratory": false
+    },
+    {
+      "analysis": "Type x Era: Offensive x Late",
+      "n": 130,
+      "unit": "coach-year observations",
+      "adequate": true,
+      "exploratory": false
+    },
+    {
+      "analysis": "Type x Era: Both x Early",
+      "n": 12,
+      "unit": "coach-year observations",
+      "adequate": false,
+      "exploratory": true
+    },
+    {
+      "analysis": "Type x Era: Both x Middle",
+      "n": 15,
+      "unit": "coach-year observations",
+      "adequate": false,
+      "exploratory": true
+    },
+    {
+      "analysis": "Type x Era: Both x Late",
+      "n": 18,
+      "unit": "coach-year observations",
+      "adequate": false,
+      "exploratory": true
+    },
+    {
+      "analysis": "Persistence (Consecutive Years)",
+      "n": 467,
+      "unit": "year pairs",
+      "adequate": true
+    },
+    {
+      "analysis": "Inheritance: position_to_coordinator",
+      "n": 454,
+      "unit": "unique mentor-protege pairs",
+      "adequate": true
+    },
+    {
+      "analysis": "Inheritance: position_to_hc",
+      "n": 927,
+      "unit": "unique mentor-protege pairs",
+      "adequate": true
+    },
+    {
+      "analysis": "Inheritance: coordinator_to_hc",
+      "n": 613,
+      "unit": "unique mentor-protege pairs",
+      "adequate": true
+    },
+    {
+      "analysis": "Fixed Effects (2+ years)",
+      "n": "107",
+      "unit": "coaches",
+      "adequate": "True"
+    }
+  ]
+}

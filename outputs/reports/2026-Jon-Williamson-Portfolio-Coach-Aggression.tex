@@ -52,7 +52,7 @@
 \affil[1]{\protect\raggedright
 Knowledge Transmission in the NFL, e-mail: jon@williamsonconsultinggroup.com}
 
-\abstract{This study examines coaching aggression and performance in the NFL from 2006-2024. Using machine learning predictions on 643,290 plays, we quantify aggression across four dimensions (fourth down decisions, pass-run balance, deep passing, two-point conversions) and analyze its relationship with Wins Above Replacement. Cross-sectional correlations between aggression and performance declined from $r=0.197$ ($p=0.007$) in 2006-2011 to $r=-0.018$ ($p=0.790$) in 2018-2024. Two-way fixed effects analysis reveals a significant pooled effect: one standard deviation increase in aggression corresponds to 0.235 additional WAR games ($p=0.020$, Cohen's $d=0.13$). However, era-stratified analyses are underpowered (13-27\% power), preventing conclusions about temporal changes in the causal effect. The cross-sectional erosion reflects diffusion (mean aggression increased significantly, $p<0.001$) and increased variance (23\% rise in standard deviation). Aggression shows moderate year-to-year persistence ($r=0.458$), but minimal inheritance from mentors to prot\'{e}g\'{e}s ($r=0.062$, $p=0.162$). Fourth down philosophy is the exception, showing modest inheritance ($r=0.179$, $p<0.001$) driven entirely by offensive mentors. These findings illuminate how competitive advantages erode through diffusion and have implications for coaching evaluation.}
+\abstract{This study examines coaching aggression and performance in the NFL from 2006-2024. Using machine learning predictions on 643,290 plays, we quantify aggression across four dimensions (fourth down decisions, pass-run balance, deep passing, two-point conversions) and analyze its relationship with Wins Above Replacement. Cross-sectional correlations between aggression and performance declined from $r=0.197$ ($p=0.007$) in 2006-2011 to $r=-0.018$ ($p=0.790$) in 2018-2024. Two-way fixed effects analysis reveals a significant pooled effect: one standard deviation increase in aggression corresponds to 0.235 additional WAR games ($p=0.020$, Cohen's $d=0.13$). However, era-stratified analyses are underpowered (13-27\% power), preventing conclusions about temporal changes in the causal effect. The cross-sectional erosion reflects diffusion (mean aggression increased significantly, $p<0.001$) and increased variance (23\% rise in standard deviation). Aggression shows moderate year-to-year persistence ($r=0.458$), but minimal inheritance from mentors to prot\'{e}g\'{e}s ($r=0.050$, $p=0.261$). Fourth down philosophy is the exception, showing modest inheritance ($r=0.150$, $p<0.001$) driven entirely by offensive mentors. These findings illuminate how competitive advantages erode through diffusion and have implications for coaching evaluation.}
 
 \keywords{NFL coaching, aggression, coaching trees, competitive advantage}
 
@@ -496,7 +496,7 @@ The interpretation is clear: for offensive coaches, aggression---especially 4th 
 
 The concept of coaching ``trees''---lineages descending from influential mentors and carrying forward their strategic philosophies---is deeply embedded in NFL culture. Bill Belichick's disciples, the Andy Reid coaching tree, the Bill Walsh West Coast offense, these narratives dominate hiring discussions and suggest meaningful transmission of strategic DNA.
 
-Our data allow us to test whether from the lens of context-adjusted performance and aggression, coaching trees exist. We analyze 510 documented mentor-protégé pairs where we have aggression data for both mentor and protégé, using career average aggression scores for each coach to maximize reliability and sample size. Table~\ref{tab:inheritance} presents results for the full sample.
+Our data allow us to test whether from the lens of context-adjusted performance and aggression, coaching trees exist. We analyze 517 documented mentor-protégé pairs where we have aggression data for both mentor and protégé, using career average aggression scores for each coach to maximize reliability and sample size. Table~\ref{tab:inheritance} presents results for the full sample.
 
 \begin{table}[H]
 \caption{Aggression Inheritance: Overall Mentor-Protégé Pairs}
@@ -505,23 +505,23 @@ Our data allow us to test whether from the lens of context-adjusted performance 
 \toprule
 \textbf{Component} & \textbf{r} & \textbf{P-value} \\
 \midrule
-Composite & 0.062 & 0.162 \\
+Composite & 0.050 & 0.261 \\
 \cmidrule{1-3}
-4th Down & 0.179 & 0.0001*** \\
-Pass-Heavy & 0.007 & 0.879 \\
-Deep Pass & 0.069 & 0.122 \\
-Two-Point & 0.085 & 0.056* \\
+4th Down & 0.150 & 0.0006*** \\
+Pass-Heavy & 0.023 & 0.596 \\
+Deep Pass & 0.072 & 0.101 \\
+Two-Point & 0.085 & 0.053* \\
 \midrule
-\multicolumn{3}{l}{\small N=510 mentor→protégé pairs}\\
+\multicolumn{3}{l}{\small N=517 mentor→protégé pairs}\\
 \multicolumn{3}{l}{\small * $p<0.1$}\\
 \multicolumn{3}{l}{\small *** $p<0.001$}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Composite aggression shows essentially zero inheritance ($r=0.062$, $p=0.162$). Pass-heavy aggression is nearly zero ($r=0.007$, $p=0.879$). Deep pass targeting shows a weak non-significant positive correlation ($r=0.069$, $p=0.122$). Knowing how aggressive a coach's mentor was tells you almost nothing about how aggressive that coach will be. The coaching tree hypothesis, for overall strategic aggression, finds no support.
+Composite aggression shows essentially zero inheritance ($r=0.050$, $p=0.261$). Pass-heavy aggression is nearly zero ($r=0.023$, $p=0.596$). Deep pass targeting shows a weak non-significant positive correlation ($r=0.072$, $p=0.101$). Knowing how aggressive a coach's mentor was tells you almost nothing about how aggressive that coach will be. The coaching tree hypothesis, for overall strategic aggression, finds no support.
 
-Fourth down decision-making shows modest but significant inheritance ($r=0.179$, $p<0.001$). While explaining only 3.2\% of variance, it's statistically robust and aligns with the persistence findings showing 4th down philosophy is the most stable trait.
+Fourth down decision-making shows modest but significant inheritance ($r=0.150$, $p<0.001$). While explaining only 2.3\% of variance, it's statistically robust and aligns with the persistence findings showing 4th down philosophy is the most stable trait.
 
 \subsubsection{Offensive vs. Defensive Mentors}
 
@@ -537,20 +537,20 @@ The inheritance story becomes much richer when we separate by mentor background.
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
 \textbf{Component} & \textbf{r} & \textbf{p} & \textbf{r} & \textbf{p} \\
 \midrule
-Composite & 0.068 & 0.251 & 0.051 & 0.470 \\
+Composite & 0.068 & 0.274 & 0.042 & 0.523 \\
 \cmidrule{1-5}
-4th Down & 0.232*** & 0.0001 & 0.024 & 0.734 \\
-Pass-Heavy & 0.049 & 0.408 & -0.026 & 0.716 \\
-Deep Pass & -0.015 & 0.800 & 0.097 & 0.172 \\
-Two-Point & 0.088 & 0.139 & 0.099 & 0.159 \\
+4th Down & 0.217*** & 0.0005 & -0.016 & 0.808 \\
+Pass-Heavy & 0.031 & 0.618 & 0.035 & 0.597 \\
+Deep Pass & -0.029 & 0.649 & 0.075 & 0.250 \\
+Two-Point & 0.099 & 0.114 & 0.090 & 0.170 \\
 \midrule
-\multicolumn{5}{l}{\small Offensive: $n=284$, Defensive: $n=202$}\\
+\multicolumn{5}{l}{\small Offensive: $n=257$, Defensive: $n=236$}\\
 \multicolumn{5}{l}{\small *** $p<0.001$}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Offensive mentors show significant 4th down inheritance ($r=0.232$, $p=0.0001$)---notably stronger than the overall sample ($r=0.179$). Defensive mentors show essentially zero ($r=0.024$, $p=0.734$). The difference is nearly 10x in correlation magnitude. For pass-heavy aggression and composite aggression, neither group shows significant inheritance, though offensive mentors show weak positive correlations while defensive mentors show essentially zero or slightly negative correlations.
+Offensive mentors show significant 4th down inheritance ($r=0.217$, $p=0.0005$)---notably stronger than the overall sample ($r=0.150$). Defensive mentors show essentially zero ($r=-0.016$, $p=0.808$). The difference is substantial in correlation magnitude. For pass-heavy aggression and composite aggression, neither group shows significant inheritance, though offensive mentors show weak positive correlations while defensive mentors show essentially zero correlations.
 
 We can push this further by classifying mentors not just by overall background but by whether they were offensive coordinators (OC) or defensive coordinators (DC). Table~\ref{tab:inherit_coord} shows these results.
 
@@ -564,22 +564,22 @@ We can push this further by classifying mentors not just by overall background b
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
 \textbf{Component} & \textbf{r} & \textbf{p} & \textbf{r} & \textbf{p} \\
 \midrule
-Composite & 0.103 & 0.142 & 0.052 & 0.454 \\
+Composite & 0.079 & 0.276 & 0.041 & 0.526 \\
 \cmidrule{1-5}
-4th Down & 0.201** & 0.004 & 0.025 & 0.718 \\
-Pass-Heavy & 0.239*** & 0.0006 & -0.022 & 0.754 \\
-Deep Pass & -0.001 & 0.994 & 0.086 & 0.219 \\
-Two-Point & 0.119* & 0.091 & 0.096 & 0.168 \\
+4th Down & 0.191** & 0.008 & -0.016 & 0.808 \\
+Pass-Heavy & 0.200** & 0.005 & 0.040 & 0.533 \\
+Deep Pass & 0.062 & 0.390 & 0.064 & 0.325 \\
+Two-Point & 0.101 & 0.162 & 0.084 & 0.193 \\
 \midrule
-\multicolumn{5}{l}{\small OC: $n=204$, DC: $n=208$}\\
-\multicolumn{5}{l}{\small * $p<0.1$, ** $p<0.01$, *** $p<0.001$}\\
+\multicolumn{5}{l}{\small OC: $n=193$, DC: $n=241$}\\
+\multicolumn{5}{l}{\small ** $p<0.01$}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Offensive coordinators who become head coaches pass on both pass-heavy tendencies ($r=0.239$, $p=0.0006$) and 4th down philosophy ($r=0.201$, $p=0.004$). The pass-heavy inheritance is actually slightly stronger than 4th down, which makes sense---OCs directly control play-calling and develop strong beliefs about pass-run balance. These correlations explain 5.7\% and 4.0\% of variance respectively---modest but statistically robust effects.
+Offensive coordinators who become head coaches pass on both pass-heavy tendencies ($r=0.200$, $p=0.005$) and 4th down philosophy ($r=0.191$, $p=0.008$). The correlations are similar in magnitude, both significant at the 1\% level. These correlations explain 4.0\% and 3.6\% of variance respectively---modest but statistically robust effects.
 
-Defensive coordinators who become head coaches show no statistically detectable inheritance. All correlations are near zero and nonsignificant (4th down: $r=0.025$, $p=0.718$; pass-heavy: $r=-0.022$, $p=0.754$). They don't transmit offensive philosophies because offensive decisions were never core to their coaching identity. Working under a successful defensive head coach teaches adaptation and leadership skills, but not offensive tactical philosophy.
+Defensive coordinators who become head coaches show no statistically detectable inheritance. All correlations are near zero and nonsignificant (4th down: $r=-0.016$, $p=0.808$; pass-heavy: $r=0.040$, $p=0.533$). They don't transmit offensive philosophies because offensive decisions were never core to their coaching identity. Working under a successful defensive head coach teaches adaptation and leadership skills, but not offensive tactical philosophy.
 
 Figure~\ref{fig:inherit_type} visualizes these patterns with scatter plots split by mentor type.
 
@@ -693,7 +693,7 @@ The cross-sectional erosion reflects two concurrent, statistically robust dynami
 
 Coaching background matters for stability but not for performance. Both offensive and defensive head coaches show similar weak overall relationships between aggression and performance. Pass-heavy aggression shows statistically significant but small correlations with WAR for both groups ($r=0.136$, $p=0.016$ for offensive; $r=0.146$, $p=0.021$ for defensive), while composite aggression shows non-significant relationships for both ($r=0.074$, $p=0.192$ for offensive; $r=0.120$, $p=0.058$ for defensive). However, background profoundly affects stability: offensive coaches show nearly double the year-to-year persistence in fourth down philosophy compared to defensive coaches ($r=0.690$ vs $r=0.373$). For offensive coaches, aggression---especially fourth down decisions---represents deeply held strategic beliefs that persist across contexts. For defensive coaches making offensive decisions, aggression is more contextual and reactive, adapting to personnel and game situations.
 
-The popular narrative of coaching ``trees'' passing down strategic DNA from mentors to protégés finds minimal empirical support for aggression. Overall composite aggression inheritance is essentially zero ($r=0.062$, $p=0.162$). Fourth down philosophy provides the sole exception: it shows modest but statistically significant inheritance ($r=0.179$, $p<0.001$), driven entirely by offensive mentors ($r=0.232$, $p<0.001$) with defensive mentors transmitting nothing ($r=0.024$, $p=0.734$). Among coordinators, offensive coordinators transmit both fourth down philosophy ($r=0.201$, $p=0.004$) and pass-heavy tendencies ($r=0.239$, $p=0.0006$) to protégés who become head coaches. Defensive coordinators transmit no detectable strategic tendencies ($r \approx 0$ for all components).
+The popular narrative of coaching ``trees'' passing down strategic DNA from mentors to protégés finds minimal empirical support for aggression. Overall composite aggression inheritance is essentially zero ($r=0.050$, $p=0.261$). Fourth down philosophy provides the sole exception: it shows modest but statistically significant inheritance ($r=0.150$, $p<0.001$), driven entirely by offensive mentors ($r=0.217$, $p<0.001$) with defensive mentors transmitting nothing ($r=-0.016$, $p=0.808$). Among coordinators, offensive coordinators transmit both fourth down philosophy ($r=0.191$, $p=0.008$) and pass-heavy tendencies ($r=0.200$, $p=0.005$) to protégés who become head coaches. Defensive coordinators transmit no detectable strategic tendencies ($r \approx 0$ for all components).
 
 These findings reveal a fundamental tension in competitive environments: the strategies that create advantage inevitably destroy it through their own success. For NFL organizations, this means hiring aggressive coaches no longer improves outcomes---everyone now executes what was once cutting-edge analytics. The critical skill has shifted from tactical execution to strategic foresight: identifying tomorrow's inefficiency before it becomes common knowledge. Pedigree-based hiring compounds this problem, as coaching trees transmit yesterday's innovations rather than generating new ones. Fourth down philosophy represents the lone exception where beliefs persist and transmit, making it the only aggression dimension worth probing in candidate assessment.
 

@@ -1,0 +1,103 @@
+{
+  "issues": [
+    {
+      "type": "low_play_count",
+      "column": "fourth_down_plays",
+      "threshold": 30,
+      "count": 11,
+      "category": "play_volumes"
+    },
+    {
+      "type": "low_play_count",
+      "column": "run_pass_plays",
+      "threshold": 200,
+      "count": 8,
+      "category": "play_volumes"
+    },
+    {
+      "type": "low_play_count",
+      "column": "pass_plays",
+      "threshold": 150,
+      "count": 16,
+      "category": "play_volumes"
+    },
+    {
+      "type": "low_play_count",
+      "column": "conversion_attempts",
+      "threshold": 20,
+      "count": 46,
+      "category": "play_volumes"
+    },
+    {
+      "type": "low_play_count",
+      "column": "total_plays",
+      "threshold": 500,
+      "count": 17,
+      "category": "play_volumes"
+    },
+    {
+      "type": "extreme_outliers",
+      "count": 1,
+      "category": "data_quality"
+    },
+    {
+      "type": "missing_coaches_in_agg",
+      "year": 2006,
+      "coaches": [
+        "Jim Mora Jr"
+      ],
+      "category": "cross_validation"
+    },
+    {
+      "type": "missing_coaches_in_agg",
+      "year": 2009,
+      "coaches": [
+        "Jim Mora Jr"
+      ],
+      "category": "cross_validation"
+    }
+  ],
+  "statistics": {
+    "coverage": {
+      "total_coach_years": 641,
+      "unique_coaches": 138,
+      "years_covered": [
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "min_year": 2006,
+      "max_year": 2024,
+      "expected_coach_years": 608,
+      "coverage_rate": 1.0542763157894737
+    },
+    "play_volumes": {
+      "total_plays_analyzed": 1124935
+    },
+    "missing_patterns": {},
+    "data_quality": {},
+    "cross_validation": {
+      "coaches_in_agg": 138,
+      "coaches_in_hc_mapping": 124,
+      "coaches_in_both": 123,
+      "coaches_only_in_agg": 15,
+      "coaches_only_in_hc": 1
+    }
+  }
+}
