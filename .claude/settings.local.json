@@ -5,7 +5,9 @@
       "Bash(python:*)",
       "Bash(dir \"C:\\Personal\\Coach_Tree\\data\\processed\\coaching_genes\" /B)",
       "Bash(dir \"C:\\\\Users\\\\jonwi\\\\Documents\\\\Projects\\\\Coach_Tree\\\\scripts\\\\models\" /s /b *.py)",
-      "Bash(Out-File -Encoding utf8 C:/Users/jonwi/Documents/Projects/Coach_Tree/temp_employers.txt)"
+      "Bash(Out-File -Encoding utf8 C:/Users/jonwi/Documents/Projects/Coach_Tree/temp_employers.txt)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []

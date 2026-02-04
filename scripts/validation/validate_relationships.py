@@ -273,8 +273,8 @@ def audit_sample_relationships(data: Dict) -> List[Dict]:
             'description': 'Kyle Shanahan under Mike Shanahan (father)',
             'child': 'kyle_shanahan',
             'parent': 'mike_shanahan',
-            'years': [2008, 2009, 2010],
-            'relationship_type': 'position_to_hc'
+            'years': [2010, 2011, 2012, 2013],  # Washington years; 2008-09 Kyle was at Houston
+            'relationship_type': 'coordinator_to_hc'
         },
         {
             'description': 'Sean McVay under Jay Gruden (Washington)',
@@ -308,7 +308,7 @@ def audit_sample_relationships(data: Dict) -> List[Dict]:
             'description': 'Mike Tomlin under Tony Dungy (Bucs)',
             'child': 'mike_tomlin',
             'parent': 'tony_dungy',
-            'years': [2001, 2002, 2003, 2004, 2005],
+            'years': [2001],  # Dungy fired after 2001; Gruden was HC 2002-2005
             'relationship_type': 'position_to_hc'
         },
         {
