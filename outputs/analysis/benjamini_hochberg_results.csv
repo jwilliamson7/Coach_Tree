@@ -3,43 +3,43 @@ Temporal Trend,Linear regression,6.31e-08,1,0.000510204081632653,True,True
 Temporal Trend,ANOVA across eras,3.26e-07,2,0.001020408163265306,True,True
 Temporal Trend,Early vs Late (t-test),2.71e-06,3,0.0015306122448979593,True,True
 Temporal Trend,Middle vs Late (t-test),5.28e-05,4,0.002040816326530612,True,True
-Persistence Offensive,Deep Pass Lag 1,0.0001,5,0.0025510204081632655,True,True
-Persistence Lag 2,Composite,0.0001,6,0.0030612244897959186,True,True
-Persistence Lag 2,4th Down,0.0001,7,0.0035714285714285713,True,True
-Persistence Lag 2,Pass-Heavy,0.0001,8,0.004081632653061224,True,True
-Persistence Lag 2,Deep Pass,0.0001,9,0.004591836734693878,True,True
-Persistence Lag 2,2-Point,0.0001,10,0.005102040816326531,True,True
-Persistence Lag 3,Composite,0.0001,11,0.005612244897959184,True,True
-Persistence Lag 3,4th Down,0.0001,12,0.006122448979591837,True,True
-Persistence Lag 3,Pass-Heavy,0.0001,13,0.00663265306122449,True,True
-Persistence Lag 3,Deep Pass,0.0001,14,0.007142857142857143,True,True
-Persistence Lag 3,2-Point,0.0001,15,0.007653061224489797,True,True
-Persistence Offensive,4th Down Lag 1,0.0001,16,0.008163265306122448,True,True
-Persistence Offensive,4th Down Lag 3,0.0001,17,0.008673469387755102,True,True
-Persistence Lag 1,2-Point,0.0001,18,0.009183673469387756,True,True
+Persistence Lag 1,2-Point,0.0001,5,0.0025510204081632655,True,True
+Persistence Lag 1,Deep Pass,0.0001,6,0.0030612244897959186,True,True
+Persistence Lag 1,Pass-Heavy,0.0001,7,0.0035714285714285713,True,True
+Persistence Lag 1,4th Down,0.0001,8,0.004081632653061224,True,True
+Persistence Lag 1,Composite,0.0001,9,0.004591836734693878,True,True
+Persistence Offensive,Composite Lag 2,0.0001,10,0.005102040816326531,True,True
+Persistence Offensive,2-Point Lag 3,0.0001,11,0.005612244897959184,True,True
+Persistence Offensive,Composite Lag 1,0.0001,12,0.006122448979591837,True,True
+Persistence Offensive,2-Point Lag 2,0.0001,13,0.00663265306122449,True,True
+Persistence Offensive,2-Point Lag 1,0.0001,14,0.007142857142857143,True,True
+Persistence Offensive,Deep Pass Lag 2,0.0001,15,0.007653061224489797,True,True
+Persistence Offensive,Deep Pass Lag 1,0.0001,16,0.008163265306122448,True,True
+Persistence Offensive,Pass-Heavy Lag 3,0.0001,17,0.008673469387755102,True,True
+Persistence Offensive,Pass-Heavy Lag 2,0.0001,18,0.009183673469387756,True,True
 Persistence Offensive,Pass-Heavy Lag 1,0.0001,19,0.009693877551020408,True,True
-Persistence Offensive,Pass-Heavy Lag 2,0.0001,20,0.010204081632653062,True,True
-Persistence Offensive,Pass-Heavy Lag 3,0.0001,21,0.010714285714285714,True,True
-Persistence Offensive,Deep Pass Lag 2,0.0001,22,0.011224489795918368,True,True
-Persistence Offensive,2-Point Lag 1,0.0001,23,0.011734693877551022,True,True
-Persistence Offensive,2-Point Lag 2,0.0001,24,0.012244897959183675,True,True
-Persistence Offensive,2-Point Lag 3,0.0001,25,0.012755102040816327,True,True
-Persistence Offensive,Composite Lag 1,0.0001,26,0.01326530612244898,True,True
-Persistence Offensive,Composite Lag 2,0.0001,27,0.013775510204081631,True,True
-Persistence Offensive,4th Down Lag 2,0.0001,28,0.014285714285714285,True,True
-Persistence Lag 1,Deep Pass,0.0001,29,0.01479591836734694,True,True
-Persistence Lag 1,4th Down,0.0001,30,0.015306122448979593,True,True
-Persistence Offensive,Composite Lag 3,0.0001,31,0.015816326530612247,True,True
-Inheritance: Offensive Mentors,4th Down,0.0001,32,0.016326530612244896,True,True
-Persistence Defensive,Composite Lag 3,0.0001,33,0.01683673469387755,True,True
-Persistence Defensive,Composite Lag 2,0.0001,34,0.017346938775510204,True,True
-Persistence Defensive,Composite Lag 1,0.0001,35,0.01785714285714286,True,True
-Persistence Lag 1,Pass-Heavy,0.0001,36,0.018367346938775512,True,True
-Persistence Defensive,2-Point Lag 1,0.0001,37,0.018877551020408164,True,True
-Persistence Defensive,Deep Pass Lag 1,0.0001,38,0.019387755102040816,True,True
-Persistence Defensive,4th Down Lag 1,0.0001,39,0.019897959183673472,True,True
-Persistence Defensive,Pass-Heavy Lag 1,0.0001,40,0.020408163265306124,True,True
-Persistence Lag 1,Composite,0.0001,41,0.020918367346938777,True,True
+Persistence Offensive,4th Down Lag 3,0.0001,20,0.010204081632653062,True,True
+Persistence Offensive,4th Down Lag 2,0.0001,21,0.010714285714285714,True,True
+Persistence Offensive,4th Down Lag 1,0.0001,22,0.011224489795918368,True,True
+Persistence Lag 3,2-Point,0.0001,23,0.011734693877551022,True,True
+Persistence Lag 3,Deep Pass,0.0001,24,0.012244897959183675,True,True
+Persistence Lag 3,Pass-Heavy,0.0001,25,0.012755102040816327,True,True
+Persistence Lag 3,4th Down,0.0001,26,0.01326530612244898,True,True
+Persistence Lag 3,Composite,0.0001,27,0.013775510204081631,True,True
+Persistence Lag 2,2-Point,0.0001,28,0.014285714285714285,True,True
+Persistence Lag 2,Deep Pass,0.0001,29,0.01479591836734694,True,True
+Persistence Lag 2,Pass-Heavy,0.0001,30,0.015306122448979593,True,True
+Persistence Lag 2,4th Down,0.0001,31,0.015816326530612247,True,True
+Persistence Lag 2,Composite,0.0001,32,0.016326530612244896,True,True
+Persistence Defensive,Deep Pass Lag 1,0.0001,33,0.01683673469387755,True,True
+Persistence Defensive,4th Down Lag 1,0.0001,34,0.017346938775510204,True,True
+Persistence Defensive,Pass-Heavy Lag 1,0.0001,35,0.01785714285714286,True,True
+Persistence Offensive,Composite Lag 3,0.0001,36,0.018367346938775512,True,True
+Persistence Defensive,Composite Lag 1,0.0001,37,0.018877551020408164,True,True
+Persistence Defensive,Composite Lag 2,0.0001,38,0.019387755102040816,True,True
+Persistence Defensive,Composite Lag 3,0.0001,39,0.019897959183673472,True,True
+Persistence Defensive,2-Point Lag 1,0.0001,40,0.020408163265306124,True,True
+Inheritance: Offensive Mentors,4th Down,0.0001,41,0.020918367346938777,True,True
 Inheritance: OC->HC,Pass-Heavy,0.0006,42,0.02142857142857143,True,True
 Persistence Offensive,Deep Pass Lag 3,0.0007,43,0.02193877551020408,True,True
 Persistence Defensive,Deep Pass Lag 3,0.0008,44,0.022448979591836737,True,True

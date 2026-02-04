@@ -239,10 +239,11 @@ Required Python packages:
 
 ### Team Abbreviation Mapping
 - **Critical**: Play-by-play data and coach mapping data use different team abbreviations
-- The `calculate_aggression_gene.py` script includes a `normalize_team_abbr()` function to handle this
+- The centralized `standardize_team_abbreviation()` function in `data_constants.py` handles all mappings
 - Key mappings include: GB→GNB, KC→KAN, LA→LAR, SF→SFO, TB→TAM, etc.
 - Without proper mapping, only ~55% of plays can be attributed to coaches
 - With mapping, coverage increases to ~93% (remaining gaps are special plays without possession)
+- **NOTE: The team abbreviation mapping is optimized for 2006+ data** (when play-by-play air_yards became available). Pre-2006 historical team mappings (early NFL era, defunct franchises) may not be fully accurate. If extending analysis to earlier years, review and expand `FULL_TEAM_NAME_TO_PFR_ABBREV` in `data_constants.py`.
 
 ### Coaching Tree Framework
 - The `build_coaching_tree.py` script creates a complete network of coaching relationships

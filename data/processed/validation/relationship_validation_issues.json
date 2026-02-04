@@ -1,0 +1,138 @@
+[
+  {
+    "type": "orphan_coach",
+    "coach_id": "ed_hughes",
+    "coach_name": "Ed Hughes",
+    "sample_role": "Defensive Backs",
+    "sample_year": "1964",
+    "sample_team": "was",
+    "total_records": 11
+  },
+  {
+    "type": "orphan_coach",
+    "coach_id": "hugh_taylor",
+    "coach_name": "Hugh Taylor",
+    "sample_role": "Receivers",
+    "sample_year": "1966",
+    "sample_team": "pit",
+    "total_records": 3
+  },
+  {
+    "type": "orphan_coach",
+    "coach_id": "buddy_parker",
+    "coach_name": "Buddy Parker",
+    "sample_role": "Backfield Coach",
+    "sample_year": "1950",
+    "sample_team": "det",
+    "total_records": 1
+  },
+  {
+    "type": "orphan_coach",
+    "coach_id": "bill_mcpeak",
+    "coach_name": "Bill McPeak",
+    "sample_role": "Defensive Line",
+    "sample_year": "1956",
+    "sample_team": "pit",
+    "total_records": 3
+  },
+  {
+    "type": "orphan_coach",
+    "coach_id": "bob_dove",
+    "coach_name": "Bob Dove",
+    "sample_role": "Ends Coach",
+    "sample_year": "1958",
+    "sample_team": "det",
+    "total_records": 2
+  },
+  {
+    "type": "interim_not_excluded",
+    "field": "child_role",
+    "year": 2012,
+    "coach_name": "Aaron Kromer",
+    "role": "Interim Head Coach/OL/RB",
+    "team": "new"
+  },
+  {
+    "type": "interim_not_excluded",
+    "field": "child_role",
+    "year": 2012,
+    "coach_name": "Aaron Kromer",
+    "role": "Interim Head Coach/OL/RB",
+    "team": "new"
+  },
+  {
+    "type": "interim_not_excluded",
+    "field": "child_role",
+    "year": 2023,
+    "coach_name": "Antonio Pierce",
+    "role": "Interim Head Coach/Linebackers",
+    "team": "las"
+  },
+  {
+    "type": "interim_not_excluded",
+    "field": "child_role",
+    "year": 2019,
+    "coach_name": "Bill Callahan",
+    "role": "Asst. HC/Offensive Line/Interim HC",
+    "team": "was"
+  },
+  {
+    "type": "interim_not_excluded",
+    "field": "child_role",
+    "year": 2019,
+    "coach_name": "Bill Callahan",
+    "role": "Asst. HC/Offensive Line/Interim HC",
+    "team": "was"
+  },
+  {
+    "type": "partial_relationship",
+    "description": "Kyle Shanahan under Mike Shanahan (father)",
+    "found_years": [
+      "2010",
+      "2011",
+      "2012",
+      "2013"
+    ],
+    "expected_years": [
+      2008,
+      2009,
+      2010
+    ],
+    "missing_years": [
+      2008,
+      2009
+    ]
+  },
+  {
+    "type": "missing_relationship",
+    "description": "Bill Belichick under Bill Parcells (Giants/Patriots)",
+    "child": "bill_belichick",
+    "parent": "bill_parcells",
+    "expected_years": [
+      1988,
+      1989,
+      1990,
+      1996
+    ]
+  },
+  {
+    "type": "partial_relationship",
+    "description": "Mike Tomlin under Tony Dungy (Bucs)",
+    "found_years": [
+      "2001"
+    ],
+    "expected_years": [
+      2001,
+      2002,
+      2003,
+      2004,
+      2005
+    ],
+    "missing_years": [
+      2002,
+      2003,
+      2004,
+      2005
+    ]
+  }
+]

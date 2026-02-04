@@ -1,0 +1,33 @@
+team_name,nflfastR,pfr_full,pfr_3char,aggression_gene_output,extract_hc_output
+Buffalo Bills,BUF,BUF,buf,BUF,BUF
+Miami Dolphins,MIA,MIA,mia,MIA,MIA
+New England Patriots,NE,NWE,nwe,NWE,NWE
+New York Jets,NYJ,NYJ,nyj,NYJ,NYJ
+Baltimore Ravens,BAL,RAV,rav,RAV,RAV
+Cincinnati Bengals,CIN,CIN,cin,CIN,CIN
+Cleveland Browns,CLE,CLE,cle,CLE,CLE
+Pittsburgh Steelers,PIT,PIT,pit,PIT,PIT
+Houston Texans,HOU,HTX,htx,HTX,HTX
+Indianapolis Colts,IND,CLT,clt,CLT,CLT
+Jacksonville Jaguars,JAX,JAX,jax,JAX,JAX
+Tennessee Titans,TEN,OTI,oti,OTI,OTI
+Denver Broncos,DEN,DEN,den,DEN,DEN
+Kansas City Chiefs,KC,KAN,kan,KAN,KAN
+Las Vegas Raiders,LV,RAI,rai,LVR,RAI
+Los Angeles Chargers,LAC,SDG,sdg,SDG,SDG
+Dallas Cowboys,DAL,DAL,dal,DAL,DAL
+New York Giants,NYG,NYG,nyg,NYG,NYG
+Philadelphia Eagles,PHI,PHI,phi,PHI,PHI
+Washington Commanders,WAS,WAS,was,WAS,WAS
+Chicago Bears,CHI,CHI,chi,CHI,CHI
+Detroit Lions,DET,DET,det,DET,DET
+Green Bay Packers,GB,GNB,gnb,GNB,GNB
+Minnesota Vikings,MIN,MIN,min,MIN,MIN
+Atlanta Falcons,ATL,ATL,atl,ATL,ATL
+Carolina Panthers,CAR,CAR,car,CAR,CAR
+New Orleans Saints,NO,NOR,nor,NOR,NOR
+Tampa Bay Buccaneers,TB,TAM,tam,TAM,TAM
+Arizona Cardinals,ARI,CRD,crd,CRD,CRD
+Los Angeles Rams,LA,RAM,ram,LAR,LA
+San Francisco 49ers,SF,SFO,sfo,SFO,SFO
+Seattle Seahawks,SEA,SEA,sea,SEA,SEA

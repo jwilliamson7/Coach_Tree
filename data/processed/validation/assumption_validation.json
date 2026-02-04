@@ -1,0 +1,219 @@
+{
+  "normality_tests": [
+    {
+      "variable": "composite_aggression",
+      "n": 641,
+      "is_normal": "False",
+      "shapiro_stat": 0.9822408069540204,
+      "shapiro_pvalue": 5.050576012462997e-07,
+      "skewness": 0.47425246474416155,
+      "kurtosis": 1.3389428483309072,
+      "recommendation": "Minor deviation from normality - parametric tests likely OK"
+    },
+    {
+      "variable": "fourth_down_aggression",
+      "n": 641,
+      "is_normal": "False",
+      "shapiro_stat": 0.9434948638144998,
+      "shapiro_pvalue": 6.661394749910225e-15,
+      "skewness": 1.1575785711587228,
+      "kurtosis": 3.5521130130335026,
+      "recommendation": "Moderately skewed - consider transformation or robust methods"
+    },
+    {
+      "variable": "pass_heavy_aggression",
+      "n": 641,
+      "is_normal": "False",
+      "shapiro_stat": 0.9932746320325567,
+      "shapiro_pvalue": 0.005708326541661916,
+      "skewness": -0.2539296599504221,
+      "kurtosis": 0.41805624180393286,
+      "recommendation": "Minor deviation from normality - parametric tests likely OK"
+    },
+    {
+      "variable": "deep_pass_aggression",
+      "n": 641,
+      "is_normal": "False",
+      "shapiro_stat": 0.9930063744896784,
+      "shapiro_pvalue": 0.004335759634509854,
+      "skewness": 0.25659529034879247,
+      "kurtosis": 0.49719695867056934,
+      "recommendation": "Minor deviation from normality - parametric tests likely OK"
+    },
+    {
+      "variable": "two_point_aggression",
+      "n": 641,
+      "is_normal": "False",
+      "shapiro_stat": 0.8704253396160333,
+      "shapiro_pvalue": 1.2418246424808557e-22,
+      "skewness": 0.9180982320165769,
+      "kurtosis": 7.41363989865221,
+      "recommendation": "Minor deviation from normality - parametric tests likely OK"
+    }
+  ],
+  "variance_tests": [
+    {
+      "test": "Levene's test",
+      "groups": [
+        "Early (2006-2011)",
+        "Middle (2012-2017)",
+        "Late (2018-2024)"
+      ],
+      "group_sizes": [
+        204,
+        199,
+        238
+      ],
+      "group_variances": [
+        0.00021875519345086386,
+        0.00025237387753733334,
+        0.00032856415652460203
+      ],
+      "levene_stat": 5.781188802398922,
+      "levene_pvalue": 0.003248936922346903,
+      "homogeneous": "False",
+      "recommendation": "Heterogeneous variances - use Welch's t-test or robust methods",
+      "variance_ratio": 1.5019719136332328
+    }
+  ],
+  "autocorrelation_tests": [
+    {
+      "variable": "composite_aggression (yearly means)",
+      "n": 19,
+      "durbin_watson": 0.36184160496526985,
+      "autocorrelation_lag1": 0.8082969743005602,
+      "has_autocorrelation": true,
+      "recommendation": "Positive autocorrelation detected - use clustered/robust standard errors"
+    }
+  ],
+  "outlier_analyses": [
+    {
+      "variable": "composite_aggression",
+      "n": 641,
+      "outliers_iqr": [
+        [
+          "Jim Zorn",
+          -0.0390097020600519
+        ],
+        [
+          "Steve Spagnuolo",
+          -0.0402088544542492
+        ],
+        [
+          "Jim Tomsula",
+          0.0655911106212637
+        ],
+        [
+          "John Fox",
+          -0.0471826630099914
+        ],
+        [
+          "Eric Studesville",
+          -0.0548125411293008
+        ],
+        [
+          "Jason Garrett",
+          -0.0548973602998493
+        ],
+        [
+          "Mike Tomlin",
+          0.0714205243154586
+        ],
+        [
+          "Doug Pederson",
+          0.0489162736726033
+        ],
+        [
+          "Hue Jackson",
+          0.0637655958715878
+        ],
+        [
+          "Gregg Williams",
+          0.0612846449640749
+        ]
+      ],
+      "outliers_zscore": [
+        [
+          "Jim Tomsula",
+          0.0655911106212637
+        ],
+        [
+          "Eric Studesville",
+          -0.0548125411293008
+        ],
+        [
+          "Jason Garrett",
+          -0.0548973602998493
+        ],
+        [
+          "Mike Tomlin",
+          0.0714205243154586
+        ],
+        [
+          "Hue Jackson",
+          0.0637655958715878
+        ],
+        [
+          "Gregg Williams",
+          0.0612846449640749
+        ],
+        [
+          "Doug Pederson",
+          0.0852778391441357
+        ],
+        [
+          "Brandon Staley",
+          0.0615472535987608
+        ]
+      ],
+      "n_outliers_iqr": 15,
+      "n_outliers_zscore": 8,
+      "recommendation": "Moderate outliers - check influential observations",
+      "iqr_bounds": [
+        -0.03894209962628875,
+        0.04594445370684765
+      ],
+      "outlier_percentage": 2.3400936037441498
+    }
+  ],
+  "issues": [
+    {
+      "type": "non_normal",
+      "variable": "composite_aggression",
+      "skewness": 0.47425246474416155
+    },
+    {
+      "type": "non_normal",
+      "variable": "fourth_down_aggression",
+      "skewness": 1.1575785711587228
+    },
+    {
+      "type": "non_normal",
+      "variable": "pass_heavy_aggression",
+      "skewness": -0.2539296599504221
+    },
+    {
+      "type": "non_normal",
+      "variable": "deep_pass_aggression",
+      "skewness": 0.25659529034879247
+    },
+    {
+      "type": "non_normal",
+      "variable": "two_point_aggression",
+      "skewness": 0.9180982320165769
+    },
+    {
+      "type": "heterogeneous_variance",
+      "analysis": "era_comparison"
+    },
+    {
+      "type": "autocorrelation",
+      "variable": "yearly_means"
+    }
+  ],
+  "recommendations": [
+    "Non-normal distributions: ['composite_aggression', 'fourth_down_aggression', 'pass_heavy_aggression', 'deep_pass_aggression', 'two_point_aggression'] - use robust/non-parametric methods",
+    "Heterogeneous variance detected - use Welch's correction or bootstrap",
+    "Autocorrelation in temporal data - use clustered standard errors or AR models"
+  ]
+}
