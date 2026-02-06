@@ -1,0 +1,77 @@
+{
+  "best_params": {
+    "subsample": 0.8,
+    "reg_lambda": 5,
+    "reg_alpha": 1,
+    "n_estimators": 500,
+    "min_child_weight": 1,
+    "max_depth": 8,
+    "learning_rate": 0.2,
+    "gamma": 0.2,
+    "colsample_bytree": 0.9
+  },
+  "feature_names": [
+    "defteam_score",
+    "defteam_timeouts_remaining",
+    "div_game",
+    "down",
+    "drive_first_downs",
+    "drive_play_count",
+    "game_half",
+    "game_seconds_remaining",
+    "goal_to_go",
+    "half_seconds_remaining",
+    "location",
+    "posteam_score",
+    "posteam_timeouts_remaining",
+    "qtr",
+    "quarter_seconds_remaining",
+    "roof",
+    "score_differential",
+    "side_of_field",
+    "spread_line",
+    "surface",
+    "temp",
+    "total_line",
+    "wind",
+    "yardline_100",
+    "ydsnet",
+    "ydstogo"
+  ],
+  "n_features": 26,
+  "model_type": "XGBoost No-Huddle Prediction",
+  "target_encoding": {
+    "0": "Huddle",
+    "1": "No-Huddle"
+  },
+  "performance_metrics": {
+    "auc_score": 0.8871486016106861,
+    "classification_report": {
+      "0": {
+        "precision": 0.9357792270376201,
+        "recall": 0.9888227855621282,
+        "f1-score": 0.9615700450199516,
+        "support": 117829.0
+      },
+      "1": {
+        "precision": 0.6826506024096386,
+        "recall": 0.26161233724258937,
+        "f1-score": 0.37826290139528673,
+        "support": 10829.0
+      },
+      "accuracy": 0.9276142952634115,
+      "macro avg": {
+        "precision": 0.8092149147236294,
+        "recall": 0.6252175614023587,
+        "f1-score": 0.6699164732076192,
+        "support": 128658.0
+      },
+      "weighted avg": {
+        "precision": 0.9144736737405347,
+        "recall": 0.9276142952634115,
+        "f1-score": 0.9124737349707397,
+        "support": 128658.0
+      }
+    }
+  }
+}

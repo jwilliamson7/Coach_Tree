@@ -448,6 +448,85 @@ def get_shotgun_predictor_features() -> List[str]:
     
     return sorted(shotgun_features)
 
+def get_no_huddle_predictor_features() -> List[str]:
+    """
+    Get features specifically for no-huddle formation prediction.
+    Only includes pre-play context available before the no-huddle decision is made.
+
+    Excludes 'shotgun' since shotgun and no-huddle are co-decided pre-snap;
+    including one when predicting the other would leak coaching preference.
+    Excludes temporal fields (season, week) to focus on pure game context.
+
+    Returns:
+        List of field names for no-huddle prediction
+    """
+    no_huddle_features = [
+        # Game situation (excluding season/week)
+        "qtr",
+        "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
+        "game_half",
+
+        # Score situation
+        "posteam_score", "defteam_score", "score_differential",
+
+        # Field position and down/distance
+        "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
+
+        # Timeouts and clock management
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining",
+
+        # Drive context (known at start of play)
+        "drive_play_count", "drive_first_downs", "ydsnet",
+
+        # Game environment
+        "location", "div_game", "roof", "surface", "temp", "wind",
+
+        # Vegas context
+        "spread_line", "total_line",
+    ]
+
+    return sorted(no_huddle_features)
+
+def get_pace_predictor_features() -> List[str]:
+    """
+    Get features specifically for pace (snap timing) prediction.
+    Same core set as no-huddle -- pure game context only.
+
+    Excludes 'no_huddle' because no-huddle is itself a tempo/timing decision;
+    including it would be circular. The pace model should capture what the
+    average coach would do given game context alone.
+    Excludes temporal fields (season, week) to focus on pure game context.
+
+    Returns:
+        List of field names for pace (seconds between plays) prediction
+    """
+    pace_features = [
+        # Game situation (excluding season/week)
+        "qtr",
+        "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
+        "game_half",
+
+        # Score situation
+        "posteam_score", "defteam_score", "score_differential",
+
+        # Field position and down/distance
+        "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
+
+        # Timeouts and clock management
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining",
+
+        # Drive context (known at start of play)
+        "drive_play_count", "drive_first_downs", "ydsnet",
+
+        # Game environment
+        "location", "div_game", "roof", "surface", "temp", "wind",
+
+        # Vegas context
+        "spread_line", "total_line",
+    ]
+
+    return sorted(pace_features)
+
 def get_two_point_predictor_features() -> List[str]:
     """
     Get features specifically for two-point conversion decision prediction.

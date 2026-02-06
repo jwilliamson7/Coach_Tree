@@ -41,19 +41,26 @@ This is an NFL coaching tree analysis project that models coaching relationships
   - `run_pass_prediction_model.py`: XGBoost model predicting run vs pass play calls
   - `pass_target_prediction_model.py`: XGBoost model predicting pass targets behind vs ahead of first down marker
   - `two_point_conversion_model.py`: XGBoost model predicting two-point conversion vs extra point decisions
+  - `no_huddle_prediction_model.py`: XGBoost classifier predicting no-huddle usage from game context
+  - `pace_prediction_model.py`: XGBoost regressor predicting seconds between plays (first regression model in project)
 
 - **Coaching Gene Analysis** (`scripts/analysis/`)
   - `calculate_aggression_gene.py`: Calculates "aggression gene" for NFL coaches based on play-calling tendencies
   - `calculate_shotgun_gene.py`: Analyzes shotgun formation usage patterns
+  - `calculate_tempo_gene.py`: Calculates composite "tempo gene" from no-huddle and pace sub-components
   - Compares actual decisions to model predictions to measure deviation from expected behavior
   - Four aggression components:
     - **4th Down Aggression**: Going for it on 4th down more/less than predicted
     - **Pass-Heavy Aggression**: Passing more/less than predicted in neutral situations
     - **Deep Pass Aggression**: Targeting beyond the sticks more/less than predicted
     - **Two-Point Aggression**: Attempting two-point conversions more/less than predicted
+  - Two tempo components:
+    - **No-Huddle Gene**: Using no-huddle more/less than predicted (classification)
+    - **Pace Gene**: Snapping the ball faster/slower than predicted (regression, negated so positive=fast)
   - Generates composite aggression score combining all four dimensions
+  - Generates composite tempo score from z-scored no-huddle and pace sub-genes
   - Handles team abbreviation mapping between different data sources
-  - Processes ~900K plays per full run (2006-2024)
+  - Processes ~640K plays per full run (2006-2024)
 
 - **Visualization Tools** (`scripts/visualization/`)
   - `visualize_coaching_tree_aggression.py`: Interactive coaching tree with aggression gene overlay
@@ -114,6 +121,12 @@ python "scripts/models/pass_target_prediction_model.py"
 
 # Train two-point conversion decision model
 python "scripts/models/two_point_conversion_model.py"
+
+# Train no-huddle prediction model (for tempo gene)
+python "scripts/models/no_huddle_prediction_model.py"
+
+# Train pace (snap timing) regression model (for tempo gene)
+python "scripts/models/pace_prediction_model.py"
 ```
 
 ### Coaching Gene Analysis
@@ -126,6 +139,12 @@ python scripts/analysis/calculate_aggression_gene.py --start_year 2010 --end_yea
 
 # Custom output directory
 python scripts/analysis/calculate_aggression_gene.py --output_dir data/processed/custom_genes
+
+# Calculate tempo gene (no-huddle + pace composite) for all coaches
+python scripts/analysis/calculate_tempo_gene.py
+
+# Specify custom year range and minimum plays threshold
+python scripts/analysis/calculate_tempo_gene.py --start_year 2010 --end_year 2023 --min_plays 200
 ```
 
 ### Visualization
@@ -183,6 +202,8 @@ Required Python packages:
 - `coaching_genes/`: Coaching behavioral analysis outputs
   - `aggression_gene_YYYYMMDD.csv`: Full aggression metrics for all coaches
   - `aggression_gene_summary_YYYYMMDD.json`: Summary statistics and rankings
+  - `tempo_gene.csv`: Composite tempo gene (no-huddle + pace) for all coaches
+  - `tempo_gene_summary.json`: Tempo gene summary statistics and rankings
 
 ### Generated Outputs (`outputs/`)
 - `visualizations/`: Interactive HTML visualizations
@@ -208,6 +229,14 @@ Required Python packages:
   - `two_point_conversion_model.json`: Trained XGBoost model
   - `two_point_conversion_model_metadata.json`: Model metadata and parameters
   - `two_point_conversion_model_encoders.pkl`: Label encoders for categorical features
+- `no_huddle/`: No-huddle prediction model files
+  - `no_huddle_prediction_model.json`: Trained XGBoost classifier
+  - `no_huddle_prediction_model_metadata.json`: Model metadata and parameters
+  - `no_huddle_prediction_model_encoders.pkl`: Label encoders for categorical features
+- `pace/`: Pace (snap timing) regression model files
+  - `pace_prediction_model.json`: Trained XGBoost regressor (first regression model)
+  - `pace_prediction_model_metadata.json`: Model metadata and parameters
+  - `pace_prediction_model_encoders.pkl`: Label encoders for categorical features
 
 ## Key Features Tracked
 
@@ -272,11 +301,14 @@ Required Python packages:
 - RandomizedSearchCV with stratified cross-validation for hyperparameter tuning
 - Models saved in XGBoost native JSON format for optimal performance
 - Label encoders preserve categorical feature mappings
-- Current model performance:
-  - 4th Down Decisions: AUC 0.968 (26 features)
-  - Run vs Pass: AUC 0.786 (26 features)
+- Current model performance (n_iter=100, cv_folds=3):
+  - 4th Down Decisions: AUC 0.977 (26 features)
+  - Run vs Pass: AUC 0.784 (26 features)
   - Pass Target: AUC 0.732 (26 features)
-  - Two-Point Conversion: AUC 0.927 (21 features)
+  - Two-Point Conversion: AUC 0.926 (21 features)
+  - Shotgun: AUC 0.864 (22 features)
+  - No-Huddle: AUC 0.887 (26 features)
+  - Pace: RMSE 11.04s, R-squared 0.428 (26 features, regression)
 
 ### Future Integration
 - Play-by-play data (via nfl_data_py) will be used to generate coaching "genes"

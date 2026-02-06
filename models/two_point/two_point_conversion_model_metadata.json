@@ -1,13 +1,13 @@
 {
   "best_params": {
     "subsample": 1.0,
-    "reg_lambda": 1,
-    "reg_alpha": 1,
-    "n_estimators": 100,
-    "min_child_weight": 5,
+    "reg_lambda": 5,
+    "reg_alpha": 0,
+    "n_estimators": 500,
+    "min_child_weight": 3,
     "max_depth": 4,
-    "learning_rate": 0.2,
-    "gamma": 0.2,
+    "learning_rate": 0.1,
+    "gamma": 0.5,
     "colsample_bytree": 1.0
   },
   "feature_names": [
@@ -38,5 +38,35 @@
   "target_encoding": {
     "0": "Extra Point",
     "1": "Two-Point Conversion"
+  },
+  "performance_metrics": {
+    "auc_score": 0.9261368631351411,
+    "classification_report": {
+      "0": {
+        "precision": 0.9699614369799067,
+        "recall": 0.9912881144990666,
+        "f1-score": 0.9805088223225277,
+        "support": 4821.0
+      },
+      "1": {
+        "precision": 0.8352941176470589,
+        "recall": 0.590027700831025,
+        "f1-score": 0.6915584415584416,
+        "support": 361.0
+      },
+      "accuracy": 0.9633346198379005,
+      "macro avg": {
+        "precision": 0.9026277773134828,
+        "recall": 0.7906579076650457,
+        "f1-score": 0.8360336319404846,
+        "support": 5182.0
+      },
+      "weighted avg": {
+        "precision": 0.9605799429082822,
+        "recall": 0.9633346198379005,
+        "f1-score": 0.9603793187610002,
+        "support": 5182.0
+      }
+    }
   }
 }

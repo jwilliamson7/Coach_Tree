@@ -7,7 +7,9 @@
       "Bash(dir \"C:\\\\Users\\\\jonwi\\\\Documents\\\\Projects\\\\Coach_Tree\\\\scripts\\\\models\" /s /b *.py)",
       "Bash(Out-File -Encoding utf8 C:/Users/jonwi/Documents/Projects/Coach_Tree/temp_employers.txt)",
       "Bash(dir:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(pip install:*)",
+      "Bash(where:*)"
     ],
     "deny": [],
     "ask": []
