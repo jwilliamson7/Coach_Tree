@@ -563,6 +563,51 @@ def get_two_point_predictor_features() -> List[str]:
     
     return sorted(two_point_features)
 
+def get_defensive_scheme_predictor_features() -> List[str]:
+    """
+    Get features for defensive scheme prediction models (box stacking,
+    pass rush, man coverage).
+
+    Same core game-context features as offensive models, PLUS shotgun and
+    no_huddle. These are observable pre-snap offensive formations that
+    defenses react to -- not defensive coaching decisions -- so including
+    them is appropriate.
+
+    Excludes temporal fields (season, week) to focus on pure game context.
+
+    Returns:
+        List of 28 field names for defensive scheme prediction
+    """
+    defensive_scheme_features = [
+        # Game situation (excluding season/week)
+        "qtr",
+        "quarter_seconds_remaining", "half_seconds_remaining", "game_seconds_remaining",
+        "game_half",
+
+        # Score situation
+        "posteam_score", "defteam_score", "score_differential",
+
+        # Field position and down/distance
+        "down", "ydstogo", "goal_to_go", "yardline_100", "side_of_field",
+
+        # Timeouts and clock management
+        "posteam_timeouts_remaining", "defteam_timeouts_remaining",
+
+        # Drive context (known at start of play)
+        "drive_play_count", "drive_first_downs", "ydsnet",
+
+        # Game environment
+        "location", "div_game", "roof", "surface", "temp", "wind",
+
+        # Vegas context
+        "spread_line", "total_line",
+
+        # Pre-snap offensive formation (observable by defense before play)
+        "shotgun", "no_huddle",
+    ]
+
+    return sorted(defensive_scheme_features)
+
 def get_target_features() -> List[str]:
     """
     Get features suitable as targets (Y variables) - outcomes and analytics.

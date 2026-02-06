@@ -1,0 +1,79 @@
+{
+  "best_params": {
+    "subsample": 0.9,
+    "reg_lambda": 5,
+    "reg_alpha": 1,
+    "n_estimators": 300,
+    "min_child_weight": 5,
+    "max_depth": 6,
+    "learning_rate": 0.1,
+    "gamma": 0,
+    "colsample_bytree": 0.9
+  },
+  "feature_names": [
+    "defteam_score",
+    "defteam_timeouts_remaining",
+    "div_game",
+    "down",
+    "drive_first_downs",
+    "drive_play_count",
+    "game_half",
+    "game_seconds_remaining",
+    "goal_to_go",
+    "half_seconds_remaining",
+    "location",
+    "no_huddle",
+    "posteam_score",
+    "posteam_timeouts_remaining",
+    "qtr",
+    "quarter_seconds_remaining",
+    "roof",
+    "score_differential",
+    "shotgun",
+    "side_of_field",
+    "spread_line",
+    "surface",
+    "temp",
+    "total_line",
+    "wind",
+    "yardline_100",
+    "ydsnet",
+    "ydstogo"
+  ],
+  "n_features": 28,
+  "model_type": "XGBoost Man Coverage Classification",
+  "target_encoding": {
+    "0": "Zone Coverage",
+    "1": "Man Coverage"
+  },
+  "performance_metrics": {
+    "auc_score": 0.7099958674896665,
+    "classification_report": {
+      "0": {
+        "precision": 0.7069256756756757,
+        "recall": 0.8837400281557954,
+        "f1-score": 0.7855057351407716,
+        "support": 17048.0
+      },
+      "1": {
+        "precision": 0.6448028673835126,
+        "recall": 0.36550182852498986,
+        "f1-score": 0.466545643153527,
+        "support": 9844.0
+      },
+      "accuracy": 0.6940354008627101,
+      "macro avg": {
+        "precision": 0.6758642715295942,
+        "recall": 0.6246209283403926,
+        "f1-score": 0.6260256891471493,
+        "support": 26892.0
+      },
+      "weighted avg": {
+        "precision": 0.6841851980307234,
+        "recall": 0.6940354008627101,
+        "f1-score": 0.6687482182018144,
+        "support": 26892.0
+      }
+    }
+  }
+}

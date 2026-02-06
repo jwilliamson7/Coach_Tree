@@ -9,7 +9,9 @@
       "Bash(dir:*)",
       "Bash(findstr:*)",
       "Bash(pip install:*)",
-      "Bash(where:*)"
+      "Bash(where:*)",
+      "Bash(python3:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []
