@@ -277,8 +277,6 @@ Deep Pass & 0.020 & 0.621 \\
 
 Pass-heavy aggression shows a statistically significant weak positive relationship with coaching performance when pooling across all 19 seasons ($r=0.122$, $p=0.003$). Composite aggression also shows a positive relationship ($r=0.081$, $p=0.045$), though this finding is marginal and does not survive multiple comparison correction. These overall relationships mask temporal evolution. When we split the sample into three approximately equal eras (2006-2011, 2012-2017, 2018-2024), a pattern of decline emerges (Table~\ref{tab:era_war} and Figure~\ref{fig:temporal}).
 
-As described in Methods, we applied Benjamini-Hochberg correction to all 98 hypothesis tests in this paper (cutoff: $p \leq 0.0258$). Throughout the Results section, all findings with $p \leq 0.026$ are robust to multiple comparison correction, while marginal results ($p=0.026$-$0.09$) should be interpreted cautiously. The four tests that lose significance after correction are marginal subgroup findings ($p=0.031$-$0.043$) including the overall composite aggression relationship, which we discuss appropriately as suggestive rather than definitive.
-
 \begin{table}[H]
 \caption{Aggression vs. WAR by Era}
 \label{tab:era_war}
@@ -447,7 +445,7 @@ Deep Pass & 0.455*** & 0.207 \\
 \end{tabular}
 \end{table}
 
-All five measures show statistically significant and practically meaningful persistence. The correlations range from 0.39 to 0.56, indicating that coaching aggression in year N predicts 15-31\% of the variance in year N+1 aggression. This is substantial enough to constitute a real trait, yet modest enough to leave 70-85\% of the variance driven by contextual factors.
+All five measures show statistically significant and practically meaningful persistence. The correlations range from 0.39 to 0.56, indicating that coaching aggression in year N predicts 15-31\% of the variance in year N+1 aggression. This is substantial enough to constitute a real trait, yet modest enough to allow for year-to-year variation from roster changes, staff turnover, and strategic adaptation.
 
 Fourth down decision-making shows the strongest persistence ($r=0.556$, R²=0.309). A coach who goes for it frequently on fourth down one year is quite likely to do so again the next year, even as rosters turn over and circumstances change. This suggests fourth down philosophy represents genuine strategic preferences---core beliefs about optimal decision-making that persist across contexts.
 
@@ -467,7 +465,7 @@ Persistence patterns differ dramatically by coaching background. Table~\ref{tab:
 \begin{table}[H]
 \caption{Persistence by Coach Background (Lags 1-3)}
 \label{tab:persist_type}
-\scriptsize
+\small
 \begin{tabular}{lcccccc}
 \toprule
  & \multicolumn{3}{c}{\textbf{Offensive}} & \multicolumn{3}{c}{\textbf{Defensive}} \\
@@ -479,11 +477,12 @@ Composite & 0.521*** & 0.460*** & 0.355*** & 0.424*** & 0.387*** & 0.361*** \\
 4th Down & 0.690*** & 0.619*** & 0.549*** & 0.373*** & 0.236** & 0.269** \\
 Pass-Heavy & 0.544*** & 0.422*** & 0.425*** & 0.448*** & 0.254** & 0.234* \\
 Two-Point & 0.424*** & 0.417*** & 0.488*** & 0.425*** & 0.189* & 0.183 \\
-\midrule
-\multicolumn{7}{l}{\small Offensive: $n_{lag1}=228$, $n_{lag2}=160$, $n_{lag3}=110$; Defensive: $n_{lag1}=194$, $n_{lag2}=150$, $n_{lag3}=113$}\\
-\multicolumn{7}{l}{\small * $p<0.05$, ** $p<0.01$, *** $p<0.001$}\\
 \bottomrule
 \end{tabular}
+
+\smallskip
+\noindent\small Offensive: $n_{lag1}=228$, $n_{lag2}=160$, $n_{lag3}=110$; Defensive: $n_{lag1}=194$, $n_{lag2}=150$, $n_{lag3}=113$\\
+\noindent\small * $p<0.05$, ** $p<0.01$, *** $p<0.001$
 \end{table}
 
 Offensive coaches show much stronger year-to-year persistence than defensive coaches, particularly for 4th down decisions ($r=0.690$ vs $r=0.373$). The gap is substantial: offensive coaches explain 48\% of next year's 4th down aggression from this year's value, while defensive coaches explain only 14\%. For composite aggression, the gap is more modest ($r=0.521$ vs $r=0.424$, difference=0.097) but still substantive.
@@ -590,19 +589,11 @@ Figure~\ref{fig:inherit_type} visualizes these patterns with scatter plots split
     \label{fig:inherit_type}
 \end{figure}
 
-\subsubsection{The Null Findings: Deep Pass and Two-Point Aggression}
-
-Two aggression components---deep pass targeting and two-point conversion attempts---show essentially null relationships across all analyses. Neither correlates meaningfully with performance (deep pass: $r=0.013$, $p=0.754$; two-point: $r=-0.006$, $p=0.887$), neither shows meaningful inheritance even from offensive coordinators (deep pass: $r=-0.001$, $p=0.994$; two-point: $r=0.119$, $p=0.091$), and while both show year-to-year persistence comparable to other components, the lack of performance relationships and inheritance patterns suggests these may not represent stable coaching philosophies in the same way fourth down and pass-heavy decisions do.
-
-Several explanations warrant consideration. First, these decisions may be too rare to measure reliably---two-point attempts occur infrequently, and deep pass targeting classifications may be noisy. Second, these decisions may be more situation-dependent than coach-dependent: deep pass targeting likely depends heavily on quarterback arm strength and receiver personnel, while two-point decisions in close games may follow league-wide optimal strategies with little room for philosophical variation. Third, these measures may have poor construct validity for capturing meaningful strategic variation. The null findings suggest that not all aspects of offensive decision-making represent transmissible coaching philosophies or stable individual traits.
-
 \section{Discussion}
 
 \subsection{The Erosion of a Competitive Advantage}
 
-Our findings document the substantial erosion of a competitive advantage in professional sports, from measurable benefit to no detectable relationship in less than two decades. This pattern mirrors technology adoption in other competitive markets---financial markets arbitraging away trading strategies, military tactics becoming obsolete as adversaries adapt, business strategies eroding through imitation.
-
-In the early period (2006-2011), aggressive tactics provided measurable performance benefits ($r=0.197$, $p=0.007$ for composite aggression). But by 2018-2024, the relationship was no longer statistically distinguishable from zero ($r=-0.018$, $p=0.790$).
+Aggressive play-calling provided a measurable edge in 2006-2011 ($r=0.197$, $p=0.007$) but no detectable advantage by 2018-2024 ($r=-0.018$, $p=0.790$). The tactics diffused; the advantage eroded.
 
 The decline reflects two concurrent dynamics. First, diffusion: as analytics-driven decision-making spread through the league, more coaches adopted aggressive tactics. This claim is supported by the statistically significant increase in average aggression between the periods. Second, increased variance: rather than converging to a single optimal level, variance in aggression increased 23\% from early to late era. Some coaches pushed toward extreme aggression while others adopted moderate approaches, creating more diversity rather than homogeneity.
 
@@ -621,7 +612,7 @@ The within-coach fixed effects approach controls for all time-invariant coach ch
 
 This causal evidence strengthens our interpretation of the cross-sectional patterns. The relationship between aggression and performance is not merely that better coaches happen to be more aggressive---within the same coach, being more aggressive in a given year predicts better performance in that year. The pooled effect demonstrates a persistent causal relationship across the full 2006-2024 period.
 
-However, two critical limitations constrain our ability to characterize temporal patterns in this causal effect. First, era-stratified analyses suffer from severe power limitations. While point estimates decline from 0.258 games in early to 0.131 games in late eras (49\% reduction), post-hoc power analysis reveals dramatically insufficient power: 27\%, 21\%, and 13\% respectively. With such low power, these tests cannot distinguish true erosion from sampling variation. All era-specific effects are statistically non-significant, and we cannot rule out effects as large as 25-43 WAR games in any single era. Claims of erosion based on within-coach variation must therefore be tempered by these power constraints. Second, within-coach variation in aggression is smaller than between-coach variation, limiting effect detection. Third, reverse causation within seasons remains possible, though situational controls partially address this.
+However, three limitations temper these causal claims. First, era-stratified analyses are severely underpowered (27\%, 21\%, and 13\% respectively), preventing us from distinguishing true erosion from sampling variation despite the 49\% decline in point estimates. Second, within-coach variation in aggression is smaller than between-coach variation, limiting effect detection. Third, reverse causation within seasons remains possible.
 
 The convergent evidence from multiple approaches---cross-sectional correlations strongest when tactics were rare, erosion as tactics spread, and within-coach effects controlling for stable characteristics---collectively supports a causal interpretation while acknowledging remaining ambiguities. For practitioners, the key insight holds regardless: whether through causal mechanisms or spurious correlation, aggressive coaching no longer associates with better outcomes in the modern era.
 
@@ -629,33 +620,13 @@ The convergent evidence from multiple approaches---cross-sectional correlations 
 
 Fourth down decision-making is unique among the aggression components we measure. It's both the most persistent trait over time ($r=0.56$ year-to-year) AND the most heritable trait across mentor-protégé relationships ($r=0.19$-0.23 for offensive mentors). This dual finding suggests it represents something fundamental about coaching philosophy that other tactical decisions do not.
 
-Why might this be? Several mechanisms seem plausible and warrant deeper investigation:
-
-\begin{itemize}
-\item \textbf{Clarity of analytics.} The research on optimal fourth down decision-making is clearer and more settled than analytics on pass-run balance or deep pass targeting. Expected points models provide relatively unambiguous recommendations for many fourth down scenarios. This clarity may make fourth down philosophy more teachable and transferable as an abstract principle rather than context-dependent judgment.
-\item \textbf{Roster independence.} Unlike passing frequency (which may require a capable quarterback) or deep pass targeting (which may require strong receivers), fourth down philosophy is less constrained by roster construction. Any team can choose to go for it on fourth down; execution may vary, but the decision itself is relatively roster-independent. This independence may allow fourth down beliefs to transfer across contexts more readily.
-\end{itemize}
-
-These mechanisms have significant practical implications. If fourth down philosophy is the one truly transferable element of coaching DNA, organizations should probe this specific dimension carefully in interviews and evaluations. Ask candidates not just what fourth down decisions they would make, but why. The reasoning process may reveal more about transferable philosophy than the decisions themselves.
-
-Conversely, organizations should be skeptical of assumptions that other aspects of a candidate's previous success will transfer. Pass-run balance is heavily context-dependent and unlikely to replicate in new environments. The coaching tree narrative is mostly myth, with fourth down philosophy as the lone exception that proves the rule.
+If fourth down philosophy is the one truly transferable element of coaching DNA, organizations should probe this specific dimension carefully in interviews and evaluations. Ask candidates not just what fourth down decisions they would make, but why. The reasoning process may reveal more about transferable philosophy than the decisions themselves.
 
 \subsection{Challenging the Coaching Tree Narrative}
 
-The coaching tree narrative is pervasive in NFL culture and shapes major hiring decisions. When teams hire a candidate from a successful coaching lineage, the implicit assumption is that successful strategic DNA will transfer. Our data show this assumption is largely false.
+The coaching tree narrative shapes NFL hiring decisions, but our data challenge one of its core premises. Mentor-protégé correlations are essentially zero for composite aggression ($r=0.06$), pass-heavy aggression ($r=0.01$), deep pass aggression ($r=0.04$), and two-point aggression ($r=0.08$). The exception---fourth down philosophy ($r=0.19$-0.23)---proves the rule: most aggression-related coaching DNA does not transfer. Other dimensions we did not measure, such as scheme or player development, may behave differently.
 
-The reality is that coaching aggression philosophies are primarily adaptive and context-dependent rather than inherited traits. The correlation between mentor and protégé aggression is essentially zero for composite aggression ($r=0.06$), pass-heavy aggression ($r=0.01$), deep pass aggression ($r=0.04$), and two-point aggression ($r=0.08$). 
-
-Why does the myth persist despite the evidence? Several cognitive biases seem likely:
-
-\begin{itemize}
-\item \textbf{Availability bias.} Memorable successes from coaching trees (Bill Walsh → Mike Holmgren → Andy Reid) become readily available examples that dominate thinking, while numerous failures (which outnumber successes) are forgotten.
-\item \textbf{Narrative convenience.} The coaching tree story provides a compelling narrative structure for explaining success and failure. It's more satisfying to attribute outcomes to lineage than to context, luck, and complex interactions.
-\item \textbf{Confirmation bias.} When protégés of successful coaches succeed, we credit the coaching tree. When they fail, we explain it away as poor fit or circumstances, preserving the core belief.
-\item \textbf{Selection effects.} Successful coaches' protégés get more opportunities to become head coaches, creating a spurious association between pedigree and success that reflects opportunity rather than transferred capability.
-\end{itemize}
-
-Organizations should be explicitly skeptical of pedigree-based hiring. 
+A candidate's actual fourth down tendencies, elicited directly, may be the only transferable aggression signal worth extracting from their coaching lineage. 
 
 \subsection{Where Has the Advantage Moved?}
 
@@ -683,21 +654,13 @@ Third, we cannot observe coaching constraints. Some coaches may want to be aggre
 
 \section{Conclusion}
 
-Through comprehensive analysis of 643,290 plays and 606 coach-years spanning nearly two decades (2006-2024), we document the substantial erosion of aggressive coaching as a competitive advantage in professional football. Our findings challenge widely-held beliefs about coaching decision-making, strategic innovation, and talent evaluation in the NFL while providing a rare empirical window into how competitive advantages disappear through diffusion and adaptation.
+Through analysis of 643,290 plays and 606 coach-years (2006-2024), we document the erosion of aggressive coaching as a competitive advantage in professional football. Aggressive play-calling correlated with better performance in the early analytics era ($r=0.197$, 2006-2011) but shows no relationship today ($r=-0.018$, 2018-2024). Two-way fixed effects analysis confirms a causal relationship: controlling for coach quality and temporal trends, increased aggression causes improved performance (0.235 WAR games per standard deviation, $p=0.020$).
 
-Aggressive coaching caused measurable performance benefits in the early analytics era, and two-way fixed effects analysis establishes a persistent causal relationship. Controlling for coach quality and temporal trends, a one standard deviation increase in aggression corresponds to 0.235 additional WAR games ($p=0.020$, Cohen's $d=0.13$)---representing approximately 10\% of the interquartile range in the WAR distribution, a small but meaningful performance advantage. This pooled effect persists across the full 2006-2024 period, demonstrating that aggression causally affects performance.
+The erosion reflects diffusion. Mean aggression increased significantly over time as analytics-driven tactics spread league-wide. What once differentiated winners from losers became standard practice. Whether the causal effect itself has eroded or merely the cross-sectional signal remains uncertain due to power limitations in era-stratified analyses.
 
-Cross-sectional evidence shows clear temporal erosion: correlations between composite aggression and context-adjusted performance (WAR) declined from $r=0.197$ ($p=0.007$) in 2006-2011 to essentially zero ($r=-0.018$, $p=0.790$) in 2018-2024. Whether the causal effect itself has eroded remains less certain. Within-coach fixed effects show suggestive patterns---point estimates declining 49\% from 0.258 games in early to 0.131 games in late eras---but all era-specific effects are statistically non-significant and era-stratified analyses suffer from severe power limitations (27\%, 21\%, and 13\% power respectively), preventing definitive conclusions about temporal changes in the causal effect.
+The coaching tree narrative finds minimal empirical support. Mentor-protégé correlations are essentially zero for most aggression components. Fourth down philosophy provides the sole exception ($r=0.15$-0.22), driven entirely by offensive mentors transmitting beliefs to protégés who become head coaches. For organizations evaluating candidates, fourth down tendencies may be the only transferable aggression signal worth extracting from coaching lineage.
 
-The cross-sectional erosion reflects two concurrent, statistically robust dynamics. First, diffusion: mean aggression increased significantly over time ($\beta=+0.125\%$ per year, $R^2=0.83$, $p<0.001$), rising from $-0.35\%$ in the early era to $+1.23\%$ in the late era, a 1.58 percentage point increase ($t=-8.76$, $p<0.001$, Cohen's $d=5.37$). As analytics-driven tactics spread league-wide, they ceased to differentiate winners from losers in cross-sectional comparisons. Second, increased variance: rather than converging to a single optimum, coaches diverged---composite aggression standard deviation increased 23\% from early to late era. The mechanisms driving erosion remain ambiguous: defensive adaptation, competitive equilibration (aggression becoming table stakes), or other unmeasured factors.
-
-Coaching background matters for stability but not for performance. Both offensive and defensive head coaches show similar weak overall relationships between aggression and performance. Pass-heavy aggression shows statistically significant but small correlations with WAR for both groups ($r=0.136$, $p=0.016$ for offensive; $r=0.146$, $p=0.021$ for defensive), while composite aggression shows non-significant relationships for both ($r=0.074$, $p=0.192$ for offensive; $r=0.120$, $p=0.058$ for defensive). However, background profoundly affects stability: offensive coaches show nearly double the year-to-year persistence in fourth down philosophy compared to defensive coaches ($r=0.690$ vs $r=0.373$). For offensive coaches, aggression---especially fourth down decisions---represents deeply held strategic beliefs that persist across contexts. For defensive coaches making offensive decisions, aggression is more contextual and reactive, adapting to personnel and game situations.
-
-The popular narrative of coaching ``trees'' passing down strategic DNA from mentors to protégés finds minimal empirical support for aggression. Overall composite aggression inheritance is essentially zero ($r=0.050$, $p=0.261$). Fourth down philosophy provides the sole exception: it shows modest but statistically significant inheritance ($r=0.150$, $p<0.001$), driven entirely by offensive mentors ($r=0.217$, $p<0.001$) with defensive mentors transmitting nothing ($r=-0.016$, $p=0.808$). Among coordinators, offensive coordinators transmit both fourth down philosophy ($r=0.191$, $p=0.008$) and pass-heavy tendencies ($r=0.200$, $p=0.005$) to protégés who become head coaches. Defensive coordinators transmit no detectable strategic tendencies ($r \approx 0$ for all components).
-
-These findings reveal a fundamental tension in competitive environments: the strategies that create advantage inevitably destroy it through their own success. For NFL organizations, this means hiring aggressive coaches no longer improves outcomes---everyone now executes what was once cutting-edge analytics. The critical skill has shifted from tactical execution to strategic foresight: identifying tomorrow's inefficiency before it becomes common knowledge. Pedigree-based hiring compounds this problem, as coaching trees transmit yesterday's innovations rather than generating new ones. Fourth down philosophy represents the lone exception where beliefs persist and transmit, making it the only aggression dimension worth probing in candidate assessment.
-
-The implications for team-building are immense. Organizations investing millions in analytics departments to identify optimal fourth-down thresholds and two-point conversion situations are optimizing strategies that no longer differentiate winners from losers. The competitive frontier has moved. Success now requires coaches who can identify the next market inefficiency---perhaps in player evaluation, in-game adaptation speed, or scheme innovation---before it becomes obvious to all thirty-two teams. In the NFL's relentless competitive environment, yesterday's cutting edge is today's baseline. The advantage lies not in being aggressive, but in being first to the next source of advantage.
+These findings illustrate a fundamental dynamic in competitive environments: strategies that create advantage erode through diffusion. The frontier has moved beyond aggression. Success now requires identifying the next market inefficiency before it becomes common knowledge---not optimizing tactics that no longer differentiate winners from losers.
 
 \begin{acknowledgement}
   This analysis builds on play-by-play data from nfl\_data\_py and coaching history data scraped from Pro Football Reference. Performance metrics (WAR) were calculated separately. All code and detailed methodology are available in the project repository.

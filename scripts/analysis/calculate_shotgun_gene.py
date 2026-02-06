@@ -57,16 +57,8 @@ class ShotgunGeneCalculator:
         self.shotgun_model = None
         self.shotgun_encoders = None
         
-        # Feature lists - use only features the existing model was trained on
-        # TODO: Retrain shotgun model with environmental factors later
-        self.shotgun_features = [
-            "defteam_score", "defteam_timeouts_remaining", "div_game", "down",
-            "drive_first_downs", "drive_play_count", "game_half", "game_seconds_remaining",
-            "goal_to_go", "half_seconds_remaining", "location", "posteam_score",
-            "posteam_timeouts_remaining", "qtr", "quarter_seconds_remaining",
-            "score_differential", "side_of_field", "spread_line", "total_line",
-            "yardline_100", "ydsnet", "ydstogo"
-        ]
+        # Feature lists - use centralized feature definitions
+        self.shotgun_features = get_shotgun_predictor_features()
         self.categorical_features = get_categorical_features()
         
         # Coach mapping

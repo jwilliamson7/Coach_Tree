@@ -1,0 +1,111 @@
+{
+  "description": "Cached hyperparameters from n_iter=20 RandomizedSearchCV (3-fold CV). Saved before retraining with n_iter=100.",
+  "cached_date": "2026-02-06",
+  "models": {
+    "fourth_down": {
+      "model_type": "XGBoost 4th Down Decision",
+      "n_features": 26,
+      "best_params": {
+        "subsample": 0.9,
+        "reg_lambda": 1.5,
+        "reg_alpha": 0.1,
+        "n_estimators": 100,
+        "min_child_weight": 1,
+        "max_depth": 8,
+        "learning_rate": 0.1,
+        "gamma": 0.5,
+        "colsample_bytree": 1.0
+      }
+    },
+    "run_pass": {
+      "model_type": "XGBoost Run vs Pass Prediction",
+      "n_features": 26,
+      "best_params": {
+        "subsample": 0.9,
+        "reg_lambda": 1.5,
+        "reg_alpha": 0.1,
+        "n_estimators": 100,
+        "min_child_weight": 1,
+        "max_depth": 8,
+        "learning_rate": 0.1,
+        "gamma": 0.5,
+        "colsample_bytree": 1.0
+      }
+    },
+    "pass_target": {
+      "model_type": "XGBoost Pass Target Prediction",
+      "n_features": 26,
+      "best_params": {
+        "subsample": 1.0,
+        "reg_lambda": 5,
+        "reg_alpha": 0.01,
+        "n_estimators": 200,
+        "min_child_weight": 1,
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "gamma": 0.2,
+        "colsample_bytree": 1.0
+      }
+    },
+    "two_point": {
+      "model_type": "XGBoost Two-Point Conversion Decision",
+      "n_features": 21,
+      "best_params": {
+        "subsample": 1.0,
+        "reg_lambda": 1,
+        "reg_alpha": 1,
+        "n_estimators": 100,
+        "min_child_weight": 5,
+        "max_depth": 4,
+        "learning_rate": 0.2,
+        "gamma": 0.2,
+        "colsample_bytree": 1.0
+      }
+    },
+    "shotgun": {
+      "model_type": "XGBoost Shotgun Formation Prediction",
+      "n_features": 22,
+      "best_params": {
+        "subsample": 0.8,
+        "reg_lambda": 1,
+        "reg_alpha": 1,
+        "n_estimators": 500,
+        "min_child_weight": 1,
+        "max_depth": 8,
+        "learning_rate": 0.3,
+        "gamma": 0.2,
+        "colsample_bytree": 1.0
+      }
+    },
+    "no_huddle": {
+      "model_type": "XGBoost No-Huddle Prediction",
+      "n_features": 26,
+      "best_params": {
+        "subsample": 1.0,
+        "reg_lambda": 5,
+        "reg_alpha": 0,
+        "n_estimators": 200,
+        "min_child_weight": 3,
+        "max_depth": 8,
+        "learning_rate": 0.3,
+        "gamma": 0,
+        "colsample_bytree": 1.0
+      }
+    },
+    "pace": {
+      "model_type": "XGBoost Pace Regression",
+      "n_features": 26,
+      "best_params": {
+        "subsample": 0.9,
+        "reg_lambda": 1.5,
+        "reg_alpha": 0.1,
+        "n_estimators": 100,
+        "min_child_weight": 1,
+        "max_depth": 8,
+        "learning_rate": 0.1,
+        "gamma": 0.5,
+        "colsample_bytree": 1.0
+      }
+    }
+  }
+}

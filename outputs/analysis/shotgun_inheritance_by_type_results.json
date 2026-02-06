@@ -1,0 +1,36 @@
+{
+  "overall": {
+    "correlation": 0.41383256637448423,
+    "p_value": 6.352209232132526e-36,
+    "n": 836,
+    "significant": true
+  },
+  "by_mentor_background": {
+    "Offensive": {
+      "correlation": 0.5056941527064738,
+      "p_value": 1.0524818854743143e-24,
+      "n": 359,
+      "significant": true
+    },
+    "Defensive": {
+      "correlation": 0.23985297560207197,
+      "p_value": 1.908007071888339e-05,
+      "n": 311,
+      "significant": true
+    }
+  },
+  "by_coordinator_type": {
+    "OC": {
+      "correlation": 0.5186401627855883,
+      "p_value": 5.107703554007569e-23,
+      "n": 314,
+      "significant": true
+    },
+    "DC": {
+      "correlation": 0.21780154458684817,
+      "p_value": 1.938018945821067e-05,
+      "n": 378,
+      "significant": true
+    }
+  }
+}

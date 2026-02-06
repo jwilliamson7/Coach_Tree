@@ -431,22 +431,24 @@ class FourthDownModel:
             'predictions': y_pred
         }
     
-    def save_model(self, filepath: str, feature_names: List[str], label_encoders: Dict = None) -> None:
+    def save_model(self, filepath: str, feature_names: List[str], label_encoders: Dict = None,
+                   metrics: Dict = None) -> None:
         """
         Save the trained model and metadata.
-        
+
         Args:
             filepath: Path to save the model (without extension)
             feature_names: List of feature names used in training
             label_encoders: Dictionary of label encoders for categorical features
+            metrics: Dictionary of evaluation metrics to persist
         """
         model_path = Path(filepath)
         model_path.parent.mkdir(parents=True, exist_ok=True)
-        
+
         # Save the XGBoost model in native format
         model_file = f"{filepath}.json"
         self.model.save_model(model_file)
-        
+
         # Save model metadata
         metadata = {
             'best_params': self.best_params,
@@ -458,6 +460,12 @@ class FourthDownModel:
                 '1': 'Go for it'
             }
         }
+
+        if metrics:
+            metadata['performance_metrics'] = {
+                k: v for k, v in metrics.items()
+                if k not in ('predictions_proba', 'predictions', 'feature_importance')
+            }
         
         metadata_file = f"{filepath}_metadata.json"
         with open(metadata_file, 'w') as f:
@@ -482,8 +490,8 @@ def main():
                        help='Test set size (default: 0.2)')
     parser.add_argument('--random_state', type=int, default=42,
                        help='Random state for reproducibility (default: 42)')
-    parser.add_argument('--n_iter', type=int, default=50,
-                       help='Number of hyperparameter combinations to try (default: 50)')
+    parser.add_argument('--n_iter', type=int, default=100,
+                       help='Number of hyperparameter combinations to try (default: 100)')
     parser.add_argument('--cv_folds', type=int, default=3,
                        help='Number of CV folds (default: 3)')
     
@@ -560,7 +568,7 @@ def main():
         model_dir = Path("models/fourth_down")
         model_dir.mkdir(parents=True, exist_ok=True)
         model_filepath = str(model_dir / "fourth_down_decision_model")
-        model.save_model(model_filepath, feature_names, processor.label_encoders)
+        model.save_model(model_filepath, feature_names, processor.label_encoders, metrics=results)
         
         print("\n" + "=" * 80)
         print("FINAL RESULTS")
