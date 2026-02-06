@@ -35,6 +35,7 @@ This is an NFL coaching tree analysis project that models coaching relationships
   - `create_yearly_coach_performance_data.py`: Generates yearly coaching performance metrics
   - `extract_head_coaches.py`: Extracts and maps head coaching records
   - `build_coaching_tree.py`: Creates coaching tree relationships and network structure
+  - `scrape_missing_coordinators.py`: Scrapes missing DCs and OCs from PFR team pages (2016-2024)
 
 - **Predictive Models** (`scripts/models/`)
   - `fourth_down_decision_model.py`: XGBoost model predicting 4th down go/no-go decisions
@@ -42,7 +43,10 @@ This is an NFL coaching tree analysis project that models coaching relationships
   - `pass_target_prediction_model.py`: XGBoost model predicting pass targets behind vs ahead of first down marker
   - `two_point_conversion_model.py`: XGBoost model predicting two-point conversion vs extra point decisions
   - `no_huddle_prediction_model.py`: XGBoost classifier predicting no-huddle usage from game context
-  - `pace_prediction_model.py`: XGBoost regressor predicting seconds between plays (first regression model in project)
+  - `pace_prediction_model.py`: XGBoost regressor predicting seconds between plays
+  - `box_stacking_prediction_model.py`: XGBoost regressor predicting defenders in box (2016+)
+  - `pass_rush_prediction_model.py`: XGBoost regressor predicting number of pass rushers (2016+, pass plays)
+  - `man_coverage_prediction_model.py`: XGBoost classifier predicting man vs zone coverage (2018+, pass plays)
 
 - **Coaching Gene Analysis** (`scripts/analysis/`)
   - `calculate_aggression_gene.py`: Calculates "aggression gene" for NFL coaches based on play-calling tendencies
@@ -57,10 +61,24 @@ This is an NFL coaching tree analysis project that models coaching relationships
   - Two tempo components:
     - **No-Huddle Gene**: Using no-huddle more/less than predicted (classification)
     - **Pace Gene**: Snapping the ball faster/slower than predicted (regression, negated so positive=fast)
-  - Generates composite aggression score combining all four dimensions
+  - `calculate_defensive_scheme_gene.py`: Calculates composite "defensive scheme gene" per team-year
+  - Three defensive scheme components (grouped by defteam per season):
+    - **Box Stacking Gene**: Loading more/fewer defenders in box than predicted (regression, 2016+)
+    - **Pass Rush Gene**: Sending more/fewer pass rushers than predicted (regression, 2016+)
+    - **Man Coverage Gene**: Playing more/less man coverage than predicted (classification, 2018+)
+  - Generates composite aggression score combining all four offensive dimensions
   - Generates composite tempo score from z-scored no-huddle and pace sub-genes
+  - Generates composite defensive scheme score from z-scored box/rush/man sub-genes
+  - Team-year attribution via `defteam`; HC recorded for inheritance analysis
   - Handles team abbreviation mapping between different data sources
-  - Processes ~640K plays per full run (2006-2024)
+  - Processes ~640K plays per full run (2006-2024, offensive genes)
+  - Defensive genes process 2016-2024 data (~300K plays)
+  - `analyze_gene_inheritance.py`: Tests whether coaching genes propagate from coordinator to HC
+  - Builds DC->HC and OC->HC transitions from coaches.json career paths
+  - DC->HC: compares team defensive scheme gene during DC years vs HC years
+  - OC->HC: compares team offensive genes (aggression, tempo, shotgun) during OC years vs HC years
+  - Handles PFR-to-PBP team abbreviation mapping for cross-dataset joins
+  - Statistical tests: Pearson correlation, direction retention, mean absolute change
 
 - **Visualization Tools** (`scripts/visualization/`)
   - `visualize_coaching_tree_aggression.py`: Interactive coaching tree with aggression gene overlay
@@ -89,8 +107,12 @@ python scripts/data_processing/build_coaching_tree.py
 # Scrape coach data
 python crawlers/PFR/coach_scraping.py
 
-# Scrape team data  
+# Scrape team data
 python crawlers/PFR/team_data_scraping.py
+
+# Scrape missing DCs/OCs from team pages (2016-2024)
+python scripts/data_processing/scrape_missing_coordinators.py
+python scripts/data_processing/scrape_missing_coordinators.py --dry_run  # Preview only
 ```
 
 ### Data Processing
@@ -127,6 +149,15 @@ python "scripts/models/no_huddle_prediction_model.py"
 
 # Train pace (snap timing) regression model (for tempo gene)
 python "scripts/models/pace_prediction_model.py"
+
+# Train box stacking (defenders in box) regression model (for defensive scheme gene, 2016+)
+python "scripts/models/box_stacking_prediction_model.py"
+
+# Train pass rush regression model (for defensive scheme gene, 2016+)
+python "scripts/models/pass_rush_prediction_model.py"
+
+# Train man vs zone coverage classifier (for defensive scheme gene, 2018+)
+python "scripts/models/man_coverage_prediction_model.py"
 ```
 
 ### Coaching Gene Analysis
@@ -145,6 +176,18 @@ python scripts/analysis/calculate_tempo_gene.py
 
 # Specify custom year range and minimum plays threshold
 python scripts/analysis/calculate_tempo_gene.py --start_year 2010 --end_year 2023 --min_plays 200
+
+# Calculate defensive scheme gene per team-year (box stacking + pass rush + man coverage)
+python scripts/analysis/calculate_defensive_scheme_gene.py
+
+# Custom year range (default 2016-2024, man coverage only from 2018+)
+python scripts/analysis/calculate_defensive_scheme_gene.py --start_year 2016 --end_year 2024 --min_plays 100
+
+# Analyze gene inheritance from coordinators to head coaches
+python scripts/analysis/analyze_gene_inheritance.py
+
+# Require minimum 2 years of coordinator data
+python scripts/analysis/analyze_gene_inheritance.py --min_years 2
 ```
 
 ### Visualization
@@ -204,6 +247,10 @@ Required Python packages:
   - `aggression_gene_summary_YYYYMMDD.json`: Summary statistics and rankings
   - `tempo_gene.csv`: Composite tempo gene (no-huddle + pace) for all coaches
   - `tempo_gene_summary.json`: Tempo gene summary statistics and rankings
+  - `defensive_scheme_gene.csv`: Composite defensive scheme gene per team-year (box + rush + man)
+  - `defensive_scheme_gene_summary.json`: Defensive scheme gene summary and rankings
+  - `gene_inheritance.csv`: Coordinator-to-HC gene inheritance analysis (DC->HC defensive, OC->HC offensive)
+  - `gene_inheritance_summary.json`: Inheritance statistics, correlations, and notable examples
 
 ### Generated Outputs (`outputs/`)
 - `visualizations/`: Interactive HTML visualizations
@@ -234,9 +281,21 @@ Required Python packages:
   - `no_huddle_prediction_model_metadata.json`: Model metadata and parameters
   - `no_huddle_prediction_model_encoders.pkl`: Label encoders for categorical features
 - `pace/`: Pace (snap timing) regression model files
-  - `pace_prediction_model.json`: Trained XGBoost regressor (first regression model)
+  - `pace_prediction_model.json`: Trained XGBoost regressor
   - `pace_prediction_model_metadata.json`: Model metadata and parameters
   - `pace_prediction_model_encoders.pkl`: Label encoders for categorical features
+- `box_stacking/`: Box stacking (defenders in box) regression model files
+  - `box_stacking_prediction_model.json`: Trained XGBoost regressor (2016+ data)
+  - `box_stacking_prediction_model_metadata.json`: Model metadata and parameters
+  - `box_stacking_prediction_model_encoders.pkl`: Label encoders for categorical features
+- `pass_rush/`: Pass rush (number of pass rushers) regression model files
+  - `pass_rush_prediction_model.json`: Trained XGBoost regressor (2016+ data)
+  - `pass_rush_prediction_model_metadata.json`: Model metadata and parameters
+  - `pass_rush_prediction_model_encoders.pkl`: Label encoders for categorical features
+- `man_coverage/`: Man vs zone coverage classification model files
+  - `man_coverage_prediction_model.json`: Trained XGBoost classifier (2018+ data)
+  - `man_coverage_prediction_model_metadata.json`: Model metadata and parameters
+  - `man_coverage_prediction_model_encoders.pkl`: Label encoders for categorical features
 
 ## Key Features Tracked
 
@@ -259,10 +318,18 @@ Required Python packages:
 - Tenure classification (short/medium/long term success)
 
 ### Predictive Models
-- **4th Down Decisions**: Predicts go/no-go decisions on 4th down using game context (score, field position, time)
-- **Run vs Pass**: Predicts play-calling tendencies based on situational factors
-- **Pass Target Strategy**: Predicts whether passes target behind or ahead of the first down marker
-- **Two-Point Conversions**: Predicts whether teams attempt two-point conversions vs extra points after touchdowns
+- **Offensive Models** (attributed to head coaches):
+  - **4th Down Decisions**: Predicts go/no-go decisions on 4th down using game context
+  - **Run vs Pass**: Predicts play-calling tendencies based on situational factors
+  - **Pass Target Strategy**: Predicts whether passes target behind or ahead of first down marker
+  - **Two-Point Conversions**: Predicts two-point conversion vs extra point decisions
+  - **Shotgun Formation**: Predicts shotgun vs under-center formation choice
+  - **No-Huddle**: Predicts no-huddle usage from game context
+  - **Pace**: Predicts seconds between plays (regression)
+- **Defensive Models** (grouped by defteam per season, 2016+):
+  - **Box Stacking**: Predicts number of defenders in the box (regression, 2016+)
+  - **Pass Rush**: Predicts number of pass rushers sent (regression, pass plays, 2016+)
+  - **Man Coverage**: Predicts man vs zone coverage type (classification, pass plays, 2018+)
 
 ## Important Notes
 
@@ -298,7 +365,8 @@ Required Python packages:
 - **Environmental factors included**: Weather (temperature, wind), field conditions (roof, surface), location (home/neutral)
 - **Temporal fields excluded**: Season and week removed to prevent confounding in gene analysis
 - SVD-based imputation handles missing values in large datasets
-- RandomizedSearchCV with stratified cross-validation for hyperparameter tuning
+- Defensive models include `shotgun` and `no_huddle` as additional features (observable pre-snap offense, not defensive decisions)
+- RandomizedSearchCV with stratified cross-validation for hyperparameter tuning (KFold for regression)
 - Models saved in XGBoost native JSON format for optimal performance
 - Label encoders preserve categorical feature mappings
 - Current model performance (n_iter=100, cv_folds=3):
@@ -309,6 +377,9 @@ Required Python packages:
   - Shotgun: AUC 0.864 (22 features)
   - No-Huddle: AUC 0.887 (26 features)
   - Pace: RMSE 11.04s, R-squared 0.428 (26 features, regression)
+  - Box Stacking: TBD (28 features, regression, 2016+ data)
+  - Pass Rush: TBD (28 features, regression, 2016+ data)
+  - Man Coverage: TBD (28 features, classification, 2018+ data)
 
 ### Future Integration
 - Play-by-play data (via nfl_data_py) will be used to generate coaching "genes"

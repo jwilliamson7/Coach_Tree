@@ -1,0 +1,54 @@
+{
+  "best_params": {
+    "subsample": 0.8,
+    "reg_lambda": 2,
+    "reg_alpha": 0.01,
+    "n_estimators": 500,
+    "min_child_weight": 1,
+    "max_depth": 8,
+    "learning_rate": 0.01,
+    "gamma": 0.1,
+    "colsample_bytree": 0.8
+  },
+  "feature_names": [
+    "defteam_score",
+    "defteam_timeouts_remaining",
+    "div_game",
+    "down",
+    "drive_first_downs",
+    "drive_play_count",
+    "game_half",
+    "game_seconds_remaining",
+    "goal_to_go",
+    "half_seconds_remaining",
+    "location",
+    "no_huddle",
+    "posteam_score",
+    "posteam_timeouts_remaining",
+    "qtr",
+    "quarter_seconds_remaining",
+    "roof",
+    "score_differential",
+    "shotgun",
+    "side_of_field",
+    "spread_line",
+    "surface",
+    "temp",
+    "total_line",
+    "wind",
+    "yardline_100",
+    "ydsnet",
+    "ydstogo"
+  ],
+  "n_features": 28,
+  "model_type": "XGBoost Pass Rush Regression",
+  "target_encoding": {
+    "unit": "number_of_pass_rushers",
+    "type": "continuous"
+  },
+  "performance_metrics": {
+    "rmse": 0.7889341370476269,
+    "mae": 0.554212130866292,
+    "r2_score": 0.06782458463522079
+  }
+}
