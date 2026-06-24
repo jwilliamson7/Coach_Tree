@@ -1,0 +1,514 @@
+#!/usr/bin/env python3
+"""
+Parsimony and leakage-free utilities for Coach_Tree.
+
+Ports the robustness methodology developed in the sibling CoachingProject
+survival pipeline (scripts/survival_methods.py) to Coach_Tree's two modeling
+layers:
+
+  Upstream (play-level XGBoost gene models)
+    - drop_redundant_features : correlation / zero-variance prune
+    - xgb_importance          : gain-based feature ranking (Cox-importance analogue)
+    - stability_selection_multi : Meinshausen-Buhlmann stability selection with
+                                  GROUP-aware subsampling (a coach's / team's plays
+                                  never split across a bootstrap's in/out)
+    - select_stable_features  : union-over-K set at selection frequency >= pi
+    - selected feature persistence (load/save JSON next to the model)
+
+  Downstream (coach-year gene -> WAR regressions, tiny predictor sets)
+    - cluster_robust_ols      : coach-clustered sandwich SEs (single source of
+                                truth, lifted from analyze_within_coach_fixed_effects)
+    - cluster_bootstrap_ci    : block bootstrap over whole coaches
+    - grouped_cv_score        : honest out-of-sample CV with GroupKFold(coach/team)
+
+ASCII only (Windows cp1252 console): use '->' not unicode arrows.
+"""
+
+from pathlib import Path
+from typing import Callable, Dict, List, Optional, Sequence, Tuple
+import json
+
+import numpy as np
+import pandas as pd
+
+
+# --------------------------------------------------------------------------- #
+# (a) Redundancy pruning
+# --------------------------------------------------------------------------- #
+def drop_redundant_features(
+    X: pd.DataFrame,
+    threshold: float = 0.95,
+    protect: Optional[Sequence[str]] = None,
+) -> Tuple[pd.DataFrame, List[str]]:
+    """Drop near-duplicate / collinear numeric columns from a feature matrix.
+
+    Two passes:
+      1. drop zero-variance (constant) columns;
+      2. greedy upper-triangular |Pearson r| scan -- for each pair with
+         |r| >= threshold, drop the column with the higher mean |r| to the rest
+         (the more redundant of the two).
+
+    Unlike the hand-curated DROP list in CoachingProject's survival_methods, this
+    is data-driven because Coach_Tree's play-level context features carry no
+    construct metadata. `protect` columns are never dropped. Non-numeric columns
+    are passed through untouched (encode them first if they should participate).
+
+    Returns (X_pruned, dropped_columns).
+    """
+    protect = set(protect or [])
+    dropped: List[str] = []
+
+    num = X.select_dtypes(include=[np.number])
+    non_num = [c for c in X.columns if c not in num.columns]
+
+    # 1. zero-variance
+    nunique = num.nunique(dropna=False)
+    zero_var = [c for c in num.columns if nunique[c] <= 1 and c not in protect]
+    dropped.extend(zero_var)
+    num = num.drop(columns=zero_var)
+
+    # 2. correlation prune
+    if num.shape[1] >= 2:
+        corr = num.corr().abs()
+        mean_abs = corr.mean(axis=0)  # average |r| of each col to the rest
+        cols = list(corr.columns)
+        to_drop: set = set()
+        for i in range(len(cols)):
+            ci = cols[i]
+            if ci in to_drop:
+                continue
+            for j in range(i + 1, len(cols)):
+                cj = cols[j]
+                if cj in to_drop:
+                    continue
+                r = corr.iloc[i, j]
+                if pd.notna(r) and r >= threshold:
+                    # drop the more redundant one, respecting protect
+                    if cj in protect and ci in protect:
+                        continue
+                    if ci in protect:
+                        loser = cj
+                    elif cj in protect:
+                        loser = ci
+                    else:
+                        loser = ci if mean_abs[ci] >= mean_abs[cj] else cj
+                    to_drop.add(loser)
+                    if loser == ci:
+                        break  # ci is gone, move to next i
+        dropped.extend(sorted(to_drop))
+
+    keep = [c for c in X.columns if c not in set(dropped)]
+    # stable: original order
+    return X[keep], dropped
+
+
+# --------------------------------------------------------------------------- #
+# (b) XGBoost feature importance (cox_importance analogue)
+# --------------------------------------------------------------------------- #
+def _is_regression(objective: str) -> bool:
+    return objective.startswith("reg:") or objective.startswith("count:") or \
+        objective.startswith("survival:")
+
+
+def xgb_importance(
+    X: np.ndarray,
+    y: np.ndarray,
+    cols: Sequence[str],
+    xgb_params: Optional[Dict] = None,
+    method: str = "gain",
+    objective: str = "binary:logistic",
+    random_state: int = 42,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """XGBoost feature ranking -- signature-compatible with cox_importance.
+
+    Fits one XGBClassifier/Regressor on (X, y) and returns
+    (rank_desc_indices, importance_vector) aligned to `cols`.
+
+    method='gain' (default) uses gain-based feature_importances_ -- fast, and the
+    same signal the models already expose. method='shap' uses mean(|TreeSHAP|)
+    via pred_contribs (slow; intended for a one-off confirmatory audit, not the
+    bootstrap loop).
+    """
+    import xgboost as xgb
+
+    params = dict(
+        n_estimators=200, max_depth=5, learning_rate=0.1,
+        subsample=0.8, colsample_bytree=0.8, n_jobs=-1,
+        random_state=random_state,
+    )
+    if xgb_params:
+        params.update(xgb_params)
+
+    if _is_regression(objective):
+        model = xgb.XGBRegressor(objective=objective, importance_type="gain", **params)
+    else:
+        model = xgb.XGBClassifier(
+            objective=objective, eval_metric="logloss",
+            importance_type="gain", **params,
+        )
+
+    model.fit(np.asarray(X, float), np.asarray(y))
+
+    if method == "shap":
+        booster = model.get_booster()
+        import xgboost as _xgb
+        dmat = _xgb.DMatrix(np.asarray(X, float))
+        contribs = booster.predict(dmat, pred_contribs=True)
+        # last column is the bias term
+        imp = np.abs(contribs[:, :-1]).mean(axis=0)
+    else:
+        imp = np.asarray(model.feature_importances_, float)
+
+    # guard: feature_importances_ length should match cols
+    if imp.shape[0] != len(cols):
+        full = np.zeros(len(cols))
+        full[: imp.shape[0]] = imp
+        imp = full
+
+    return np.argsort(imp)[::-1], imp
+
+
+# --------------------------------------------------------------------------- #
+# (b) Group-aware stability selection (Meinshausen & Buhlmann 2010)
+# --------------------------------------------------------------------------- #
+def _median_impute(arr: np.ndarray) -> np.ndarray:
+    from sklearn.impute import SimpleImputer
+    return SimpleImputer(strategy="median").fit_transform(arr)
+
+
+def stability_selection_multi(
+    df: pd.DataFrame,
+    X: pd.DataFrame,
+    y: pd.Series,
+    group_col: str,
+    Ks: Sequence[int] = (8, 12, 16),
+    xgb_params: Optional[Dict] = None,
+    n_boot: int = 50,
+    subsample: float = 0.5,
+    seed: int = 0,
+    importance_fn: Optional[Callable] = None,
+    objective: str = "binary:logistic",
+    impute: Optional[Callable] = None,
+    verbose: bool = True,
+) -> Dict[int, pd.Series]:
+    """Group-aware stability selection, recording top-K membership for several K
+    from the SAME subsamples in one bootstrap pass.
+
+    Direct analogue of survival_methods.stability_selection_multi, with the Cox
+    importance swapped for xgb_importance and coach-level subsampling generalized
+    to any `group_col` (head_coach for offense, defteam for defense). On each of
+    n_boot subsamples (a `subsample` fraction of GROUPS, drawn without
+    replacement so no group's rows leak across in/out), re-impute on the subsample
+    only, rank features, and tally top-K membership for every K in `Ks`.
+
+    X must be fully numeric (encode categoricals first). df provides group_col
+    aligned row-for-row with X and y. Returns {K: selection_frequency_series}.
+    """
+    rng = np.random.default_rng(seed)
+    if importance_fn is None:
+        def importance_fn(Xi, yi, cols):
+            return xgb_importance(Xi, yi, cols, xgb_params=xgb_params,
+                                  objective=objective, random_state=seed)
+    if impute is None:
+        impute = _median_impute
+
+    cols = list(X.columns)
+    Xv = X.values
+    yv = np.asarray(y)
+    groups = df[group_col].values
+    uniq = pd.unique(groups)
+    n_take = max(1, int(len(uniq) * subsample))
+    counts = {K: np.zeros(len(cols)) for K in Ks}
+
+    for b in range(n_boot):
+        samp = rng.choice(uniq, size=n_take, replace=False)
+        mask = np.isin(groups, samp)
+        Ximp = impute(Xv[mask])
+        rank, _ = importance_fn(Ximp, yv[mask], cols)
+        for K in Ks:
+            for i in rank[:K]:
+                counts[K][i] += 1
+        if verbose and (b + 1) % 10 == 0:
+            print(f"  stability bootstrap {b + 1}/{n_boot}")
+
+    return {K: pd.Series(counts[K] / n_boot, index=cols).sort_values(ascending=False)
+            for K in Ks}
+
+
+def select_stable_features(freq_by_K: Dict[int, pd.Series], pi: float = 0.6) -> List[str]:
+    """Union across K of features with selection frequency >= pi (the plateau-
+    robust set). Returned in descending max-frequency order."""
+    best: Dict[str, float] = {}
+    for _, freq in freq_by_K.items():
+        for name, f in freq.items():
+            if f >= pi:
+                best[name] = max(best.get(name, 0.0), float(f))
+    return [name for name, _ in sorted(best.items(), key=lambda kv: kv[1], reverse=True)]
+
+
+# --------------------------------------------------------------------------- #
+# Selected-feature persistence (keeps train-time and gene-time sets in sync)
+# --------------------------------------------------------------------------- #
+def selected_features_path(model_stem: str) -> Path:
+    """Sidecar JSON path for a model stem, e.g.
+    'models/run_pass/run_pass_prediction_model' ->
+    'models/run_pass/run_pass_prediction_model_selected_features.json'."""
+    return Path(f"{model_stem}_selected_features.json")
+
+
+def save_selected_features(model_stem: str, payload: Dict) -> Path:
+    path = selected_features_path(model_stem)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w") as f:
+        json.dump(payload, f, indent=2)
+    return path
+
+
+def load_selected_features(model_stem: str) -> Optional[List[str]]:
+    """Return the persisted selected feature list for a model stem, or None if no
+    selection JSON exists (callers fall back to the full hand-curated set)."""
+    path = selected_features_path(model_stem)
+    if not path.exists():
+        return None
+    with open(path) as f:
+        payload = json.load(f)
+    feats = payload.get("selected_features")
+    return list(feats) if feats else None
+
+
+# --------------------------------------------------------------------------- #
+# (c) Honest group-aware cross-validation
+# --------------------------------------------------------------------------- #
+def grouped_cv_score(
+    make_estimator: Callable,
+    prepare_fn: Callable,
+    X_df: pd.DataFrame,
+    y: pd.Series,
+    groups: pd.Series,
+    n_splits: int = 5,
+    scoring: str = "auc",
+) -> Dict[str, float]:
+    """Out-of-sample evaluation with GroupKFold so no group (coach/team) appears
+    in both train and test.
+
+    prepare_fn(X_train_df, X_test_df) -> (X_train_num, X_test_num) must fit any
+    encoders/imputers on TRAIN ONLY and return numeric arrays. make_estimator()
+    returns a fresh model each fold. scoring in {'auc','r2','rmse'}.
+    Returns {'mean','std','per_fold'}.
+    """
+    from sklearn.model_selection import GroupKFold
+    from sklearn.metrics import roc_auc_score, r2_score, mean_squared_error
+
+    y = pd.Series(np.asarray(y))
+    groups = pd.Series(np.asarray(groups))
+    gkf = GroupKFold(n_splits=n_splits)
+    per_fold: List[float] = []
+
+    for tr, te in gkf.split(X_df, y, groups):
+        Xtr, Xte = prepare_fn(X_df.iloc[tr], X_df.iloc[te])
+        est = make_estimator()
+        est.fit(Xtr, y.iloc[tr])
+        if scoring == "auc":
+            proba = est.predict_proba(Xte)[:, 1]
+            per_fold.append(float(roc_auc_score(y.iloc[te], proba)))
+        elif scoring == "r2":
+            per_fold.append(float(r2_score(y.iloc[te], est.predict(Xte))))
+        elif scoring == "rmse":
+            per_fold.append(float(np.sqrt(mean_squared_error(y.iloc[te], est.predict(Xte)))))
+        else:
+            raise ValueError(f"unknown scoring: {scoring}")
+
+    arr = np.array(per_fold)
+    return {"mean": float(arr.mean()), "std": float(arr.std()), "per_fold": per_fold}
+
+
+# --------------------------------------------------------------------------- #
+# (d) Coach-clustered inference for the downstream gene -> WAR regressions
+# --------------------------------------------------------------------------- #
+def cluster_robust_ols(
+    X: np.ndarray,
+    y: np.ndarray,
+    clusters: np.ndarray,
+    feature_names: Sequence[str],
+) -> Dict:
+    """OLS with cluster-robust (sandwich) standard errors clustered on `clusters`.
+
+    Single source of truth for coach-clustered inference, generalizing the
+    one-feature implementation in analyze_within_coach_fixed_effects.py to k
+    predictors. Uses the finite-sample factor G/(G-1) and t reference with
+    df = G - k - 1 (G = number of clusters), matching that script.
+
+    Returns a dict with intercept, per-feature {coefficient, std_error,
+    t_statistic, p_value, significant}, r_squared, n, n_clusters.
+    """
+    from scipy import stats
+
+    X = np.asarray(X, float)
+    if X.ndim == 1:
+        X = X[:, None]
+    y = np.asarray(y, float)
+    n, k = X.shape
+
+    Xc = np.column_stack([np.ones(n), X])
+    XtX_inv = np.linalg.inv(Xc.T @ Xc)
+    beta = XtX_inv @ (Xc.T @ y)
+    resid = y - Xc @ beta
+
+    clusters = np.asarray(clusters)
+    uniq = np.unique(clusters)
+    G = len(uniq)
+
+    meat = np.zeros((k + 1, k + 1))
+    for g in uniq:
+        m = clusters == g
+        s = Xc[m].T @ resid[m]          # cluster score vector
+        meat += np.outer(s, s)
+    meat *= G / (G - 1)
+
+    vcov = XtX_inv @ meat @ XtX_inv
+    se = np.sqrt(np.diag(vcov))
+    dof = max(G - k - 1, 1)
+
+    ss_res = float(np.sum(resid ** 2))
+    ss_tot = float(np.sum((y - y.mean()) ** 2))
+    r_squared = 1 - ss_res / ss_tot if ss_tot > 0 else float("nan")
+
+    def _stat(coef, s):
+        t = coef / s if s > 0 else np.nan
+        p = 2 * (1 - stats.t.cdf(abs(t), dof)) if np.isfinite(t) else np.nan
+        return float(t), float(p)
+
+    coefficients = {}
+    for i, name in enumerate(feature_names):
+        coef = float(beta[i + 1])
+        s = float(se[i + 1])
+        t, p = _stat(coef, s)
+        coefficients[name] = {
+            "coefficient": coef,
+            "std_error": s,
+            "t_statistic": t,
+            "p_value": p,
+            "significant": bool(np.isfinite(p) and p < 0.05),
+        }
+
+    it, ip = _stat(float(beta[0]), float(se[0]))
+    return {
+        "intercept": float(beta[0]),
+        "intercept_se": float(se[0]),
+        "intercept_t": it,
+        "intercept_p": ip,
+        "coefficients": coefficients,
+        "r_squared": float(r_squared),
+        "n": int(n),
+        "n_clusters": int(G),
+        "se_type": "cluster_robust_by_coach",
+    }
+
+
+def cluster_bootstrap_ci(
+    X: np.ndarray,
+    y: np.ndarray,
+    clusters: np.ndarray,
+    feature_names: Sequence[str],
+    n_boot: int = 2000,
+    seed: int = 0,
+    ci: float = 0.95,
+) -> Dict:
+    """Block (cluster) bootstrap: resample whole clusters (coaches) WITH
+    replacement, refit OLS each draw, return percentile CIs per coefficient.
+
+    Recommended primary uncertainty for the small-n (n_coaches ~ 123) gene -> WAR
+    regressions, where cluster-robust sandwich SEs can be slightly anti-
+    conservative. Returns {feature: {coef, ci_low, ci_high}}.
+    """
+    rng = np.random.default_rng(seed)
+    X = np.asarray(X, float)
+    if X.ndim == 1:
+        X = X[:, None]
+    y = np.asarray(y, float)
+    clusters = np.asarray(clusters)
+    uniq = np.unique(clusters)
+
+    # index rows per cluster once
+    idx_by_cluster = {g: np.where(clusters == g)[0] for g in uniq}
+
+    def _fit(rows):
+        Xc = np.column_stack([np.ones(len(rows)), X[rows]])
+        beta = np.linalg.lstsq(Xc, y[rows], rcond=None)[0]
+        return beta
+
+    point = _fit(np.arange(len(y)))
+    draws = []
+    for _ in range(n_boot):
+        samp = rng.choice(uniq, size=len(uniq), replace=True)
+        rows = np.concatenate([idx_by_cluster[g] for g in samp])
+        try:
+            draws.append(_fit(rows))
+        except np.linalg.LinAlgError:
+            continue
+    draws = np.array(draws)
+
+    lo_q = (1 - ci) / 2 * 100
+    hi_q = (1 + ci) / 2 * 100
+    out = {}
+    for i, name in enumerate(feature_names):
+        col = draws[:, i + 1]
+        out[name] = {
+            "coefficient": float(point[i + 1]),
+            "ci_low": float(np.percentile(col, lo_q)),
+            "ci_high": float(np.percentile(col, hi_q)),
+        }
+    out["_meta"] = {"n_boot": int(len(draws)), "ci": ci, "n_clusters": int(len(uniq))}
+    return out
+
+
+# --------------------------------------------------------------------------- #
+# Self-test
+# --------------------------------------------------------------------------- #
+def _selftest():
+    rng = np.random.default_rng(0)
+    n = 4000
+    # 200 groups (coaches), repeated rows
+    groups = rng.integers(0, 200, size=n)
+    x1 = rng.normal(size=n)
+    x2 = x1 + rng.normal(scale=0.01, size=n)   # near-duplicate of x1
+    x3 = rng.normal(size=n)
+    noise_cols = {f"noise{i}": rng.normal(size=n) for i in range(6)}
+    const = np.ones(n)
+    X = pd.DataFrame({"x1": x1, "x2": x2, "x3": x3, "const": const, **noise_cols})
+
+    # --- redundancy prune ---
+    Xp, dropped = drop_redundant_features(X, threshold=0.95)
+    assert "const" in dropped, "zero-variance column not dropped"
+    assert ("x1" in dropped) ^ ("x2" in dropped), "one of the duplicate pair must drop"
+    print(f"prune OK -> dropped {dropped}")
+
+    # --- stability selection (group-aware) ---
+    # signal: y depends on x1 and x3
+    logit = 1.5 * x1 + 1.2 * x3
+    y = (rng.uniform(size=n) < 1 / (1 + np.exp(-logit))).astype(int)
+    df = pd.DataFrame({"coach": groups})
+    feats = ["x1", "x3"] + list(noise_cols.keys())
+    freq = stability_selection_multi(
+        df, X[feats], pd.Series(y), group_col="coach",
+        Ks=(2, 4), n_boot=12, subsample=0.5, seed=1, verbose=False,
+    )
+    stable = select_stable_features(freq, pi=0.6)
+    print(f"stability OK -> top by freq: {list(freq[2].head(3).index)}; stable@pi.6={stable}")
+    assert "x1" in stable and "x3" in stable, "signal features not selected"
+
+    # --- cluster-robust OLS vs bootstrap ---
+    beta_true = np.array([2.0, -1.0])
+    Xr = np.column_stack([x1, x3])
+    yr = 0.5 + Xr @ beta_true + rng.normal(scale=1.0, size=n)
+    res = cluster_robust_ols(Xr, yr, groups, ["x1", "x3"])
+    assert abs(res["coefficients"]["x1"]["coefficient"] - 2.0) < 0.1
+    boot = cluster_bootstrap_ci(Xr, yr, groups, ["x1", "x3"], n_boot=200, seed=2)
+    print(f"cluster OLS OK -> x1 beta={res['coefficients']['x1']['coefficient']:.3f} "
+          f"p={res['coefficients']['x1']['p_value']:.4f}; "
+          f"boot CI={boot['x1']['ci_low']:.3f}..{boot['x1']['ci_high']:.3f}")
+    print("ALL PARSIMONY SELF-TESTS PASSED")
+
+
+if __name__ == "__main__":
+    _selftest()

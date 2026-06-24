@@ -35,6 +35,7 @@ warnings.filterwarnings('ignore')
 # Add project root to path to import utils
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from utils.model_features import get_shotgun_predictor_features, get_categorical_features
+from utils import model_pipeline as mp
 
 # Configure logging
 logging.basicConfig(
@@ -56,6 +57,7 @@ class ShotgunGeneCalculator:
         # Model containers
         self.shotgun_model = None
         self.shotgun_encoders = None
+        self.shotgun_imputers = None
         
         # Feature lists - use centralized feature definitions
         self.shotgun_features = get_shotgun_predictor_features()
@@ -65,23 +67,27 @@ class ShotgunGeneCalculator:
         self.coach_mapping = None
         
     def load_model(self) -> None:
-        """Load the trained XGBoost shotgun model and its encoders"""
+        """Load the trained XGBoost shotgun model with its encoders and imputer via
+        the shared pipeline. Feature list is taken from the model's metadata so
+        gene-time features match exactly what the model was trained on (train/serve)."""
         logger.info("Loading trained shotgun model...")
-        
-        # Load shotgun model
-        shotgun_path = self.models_dir / "shotgun" / "shotgun_prediction_model.json"
-        if shotgun_path.exists():
-            self.shotgun_model = xgb.XGBClassifier()
-            self.shotgun_model.load_model(str(shotgun_path))
-            
-            # Load encoders
-            encoders_path = self.models_dir / "shotgun" / "shotgun_prediction_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.shotgun_encoders = pickle.load(f)
-            logger.info("✓ Loaded shotgun formation prediction model")
-        else:
-            raise FileNotFoundError(f"Shotgun model not found at {shotgun_path}")
+        specs = {
+            'shotgun': ('shotgun/shotgun_prediction_model', xgb.XGBClassifier),
+        }
+        for name, (relstem, model_cls) in specs.items():
+            stem = str(self.models_dir / relstem)
+            if not Path(f"{stem}.json").exists():
+                raise FileNotFoundError(f"{name} model not found at {stem}.json")
+            bundle = mp.load_inference_bundle(stem, model_cls)
+            setattr(self, f"{name}_model", bundle['model'])
+            setattr(self, f"{name}_encoders", bundle['encoders'])
+            setattr(self, f"{name}_imputers", bundle['imputers'])
+            if bundle['feature_names']:
+                setattr(self, f"{name}_features", bundle['feature_names'])
+            if bundle['imputers'] is None:
+                logger.warning(f"{name}: no imputer artifact found; using fallback median "
+                               f"impute (retrain the model to restore train/serve consistency)")
+            logger.info(f"Loaded {name} model")
     
     def load_coach_mappings(self) -> None:
         """Load the mapping of team-year to head coaches"""
@@ -246,51 +252,19 @@ class ShotgunGeneCalculator:
         return combined
     
     def prepare_features_for_model(self, df: pd.DataFrame) -> np.ndarray:
+        """Transform-only feature prep via the shared pipeline.
+
+        Encoders and the imputer (SimpleImputer + TruncatedSVD) were fit at train
+        time and are reused here, so gene-time features land in the exact same
+        space the model was trained on. If the imputer is None (model predates the
+        persistence fix) a fallback median impute is used and a warning logged.
         """
-        Prepare features for model prediction, handling missing values and encoding.
-        
-        Args:
-            df: DataFrame with raw features
-            
-        Returns:
-            Numpy array ready for model prediction
-        """
-        # Select features
-        df_features = df[self.shotgun_features].copy()
-        
-        # Encode categorical features
-        if self.shotgun_encoders:
-            for col in self.shotgun_features:
-                if col in self.shotgun_encoders and col in self.categorical_features:
-                    le = self.shotgun_encoders[col]
-                    # Handle missing/unseen categories
-                    df_features[col] = df_features[col].astype(str)
-                    mask = df_features[col].isin(le.classes_)
-                    df_features.loc[~mask, col] = 'nan'  # Use 'nan' as unknown category
-                    
-                    # Add 'nan' to encoder classes if not present
-                    if 'nan' not in le.classes_:
-                        le.classes_ = np.append(le.classes_, 'nan')
-                    
-                    df_features[col] = le.transform(df_features[col])
-        
-        # Handle missing values with median imputation for numerical columns only
-        from sklearn.impute import SimpleImputer
-        
-        # Separate numeric and categorical columns after encoding
-        numeric_cols = []
-        for col in df_features.columns:
-            if df_features[col].dtype in ['int64', 'float64']:
-                numeric_cols.append(col)
-        
-        if numeric_cols:
-            # Apply median imputation only to numeric columns
-            imputer = SimpleImputer(strategy='median')
-            df_features[numeric_cols] = imputer.fit_transform(df_features[numeric_cols])
-        
-        features_imputed = df_features.values
-        
-        return features_imputed
+        if self.shotgun_imputers is None:
+            logger.warning("No persisted imputer for this model; using fallback median "
+                           "impute. Retrain the model to restore train/serve consistency.")
+        return mp.prepare_features_for_inference(
+            df, self.shotgun_features, self.categorical_features,
+            self.shotgun_encoders, self.shotgun_imputers)
     
     def calculate_shotgun_gene(self, plays: pd.DataFrame) -> pd.DataFrame:
         """

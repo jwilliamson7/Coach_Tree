@@ -63,6 +63,11 @@ def main():
     scripts = [
         # Analysis scripts
         {
+            'path': Path("scripts/analysis/analyze_gene_war_relationship.py"),
+            'log': 'gene_war_relationship.log',
+            'description': 'Gene-WAR Multiple Regression (coach-clustered SEs)'
+        },
+        {
             'path': Path("scripts/analysis/analyze_aggression_war_relationship.py"),
             'log': 'aggression_war_relationship.log',
             'description': 'Aggression-WAR Relationship Analysis'

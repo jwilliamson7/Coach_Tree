@@ -39,6 +39,7 @@ import xgboost as xgb
 # Add parent directory to path to import utils
 sys.path.append(str(Path(__file__).parent.parent.parent))
 from utils.model_features import get_defensive_scheme_predictor_features, get_categorical_features, validate_features
+from utils import model_pipeline as mp
 
 # Configure logging
 logging.basicConfig(
@@ -78,7 +79,7 @@ class BoxStackingDataProcessor:
         key_columns = ['play_type', 'down', 'defenders_in_box', 'punt_attempt',
                        'field_goal_attempt', 'qb_scramble', 'desc',
                        'game_id', 'play_id']
-        columns_to_keep = list(set(needed_features + key_columns))
+        columns_to_keep = list(set(needed_features + key_columns + ['posteam', 'defteam', 'season']))
 
         for file_path in pbp_files:
             year = int(file_path.stem.split('_')[-1])
@@ -166,68 +167,9 @@ class BoxStackingDataProcessor:
         feature_df = df[available_features + ['box_target']].copy()
         return feature_df, available_features
 
-    def encode_categorical_features(self, df: pd.DataFrame, feature_names: List[str],
-                                    fit: bool = True) -> pd.DataFrame:
-        """Encode categorical features using label encoding."""
-        df = df.copy()
-
-        categorical_cols = [col for col in feature_names if col in self.categorical_features and col in df.columns]
-
-        if categorical_cols:
-            logger.info(f"Encoding {len(categorical_cols)} categorical features...")
-
-            for col in categorical_cols:
-                if fit:
-                    le = LabelEncoder()
-                    df[col] = df[col].astype(str)
-                    df[col] = le.fit_transform(df[col])
-                    self.label_encoders[col] = le
-                else:
-                    if col in self.label_encoders:
-                        le = self.label_encoders[col]
-                        df[col] = df[col].astype(str)
-                        mask = df[col].isin(le.classes_)
-                        df.loc[~mask, col] = 'unknown'
-                        if 'unknown' not in le.classes_:
-                            le.classes_ = np.append(le.classes_, 'unknown')
-                        df[col] = le.transform(df[col])
-
-        numeric_cols = df.select_dtypes(include=[np.number]).columns
-        non_numeric_cols = set(df.columns) - set(numeric_cols)
-
-        if 'box_target' in non_numeric_cols:
-            non_numeric_cols.remove('box_target')
-
-        if non_numeric_cols:
-            logger.warning(f"Found non-numeric columns: {non_numeric_cols}")
-            df = df.drop(columns=list(non_numeric_cols))
-
-        return df
-
-    def impute_missing_values(self, X_train: pd.DataFrame, X_test: pd.DataFrame) -> Tuple[np.ndarray, np.ndarray]:
-        """Impute missing values using SVD-based imputation."""
-        logger.info("Imputing missing values using SVD...")
-
-        simple_imputer = SimpleImputer(strategy='median')
-        X_train_simple = simple_imputer.fit_transform(X_train)
-        X_test_simple = simple_imputer.transform(X_test)
-
-        n_components = min(50, X_train.shape[1] - 1, X_train.shape[0] - 1)
-
-        if n_components > 0:
-            svd = TruncatedSVD(n_components=n_components, random_state=42)
-            X_train_svd = svd.fit_transform(X_train_simple)
-            X_train_reconstructed = svd.inverse_transform(X_train_svd)
-            X_test_svd = svd.transform(X_test_simple)
-            X_test_reconstructed = svd.inverse_transform(X_test_svd)
-
-            logger.info(f"SVD imputation completed with {n_components} components")
-            logger.info(f"Explained variance ratio: {svd.explained_variance_ratio_.sum():.3f}")
-
-            return X_train_reconstructed, X_test_reconstructed
-        else:
-            logger.warning("SVD imputation skipped due to insufficient dimensions")
-            return X_train_simple, X_test_simple
+    # Categorical encoding and SVD imputation are provided by
+    # utils.model_pipeline (split_encode_impute) so that training and gene
+    # calculation share one leakage-free, train/serve-consistent implementation.
 
 
 class BoxStackingModel:
@@ -318,45 +260,18 @@ class BoxStackingModel:
             'predictions': y_pred
         }
 
-    def save_model(self, filepath: str, feature_names: List[str], label_encoders: Dict = None,
-                   metrics: Dict = None) -> None:
-        """Save the trained model and metadata."""
-        model_path = Path(filepath)
-        model_path.parent.mkdir(parents=True, exist_ok=True)
-
-        model_file = f"{filepath}.json"
-        self.model.save_model(model_file)
-
-        metadata = {
-            'best_params': self.best_params,
-            'feature_names': feature_names,
-            'n_features': len(feature_names),
+    def save_model(self, filepath, feature_names, label_encoders=None, metrics=None, imputers=None):
+        """Persist model + metadata + encoders + imputer via the shared pipeline."""
+        metadata_extra = {
             'model_type': 'XGBoost Box Stacking Regression',
             'target_encoding': {
                 'unit': 'defenders_in_box',
                 'type': 'continuous'
-            }
+            },
         }
-
-        if metrics:
-            metadata['performance_metrics'] = {
-                k: v for k, v in metrics.items()
-                if k not in ('predictions_proba', 'predictions', 'feature_importance')
-            }
-
-        metadata_file = f"{filepath}_metadata.json"
-        with open(metadata_file, 'w') as f:
-            json.dump(metadata, f, indent=2)
-
-        if label_encoders:
-            encoders_file = f"{filepath}_encoders.pkl"
-            with open(encoders_file, 'wb') as f:
-                pickle.dump(label_encoders, f)
-
-        logger.info(f"Model saved to {model_file}")
-        logger.info(f"Metadata saved to {metadata_file}")
-        if label_encoders:
-            logger.info(f"Label encoders saved to {encoders_file}")
+        mp.persist_model(self.model, filepath, feature_names, metadata_extra,
+                         label_encoders=label_encoders, metrics=metrics,
+                         imputers=imputers, logger=logger)
 
 
 def main():
@@ -398,25 +313,22 @@ def main():
         feature_data = feature_data.dropna(subset=['box_target'])
         logger.info(f"Final dataset size: {len(feature_data):,} plays")
 
-        logger.info("Step 4: Encoding categorical features...")
-        feature_data_encoded = processor.encode_categorical_features(
-            feature_data, feature_names + ['box_target'], fit=True)
+        # Apply any persisted stability-selected feature subset (parsimony).
+        feature_names = mp.apply_feature_selection(feature_names, "models/box_stacking/box_stacking_prediction_model")
 
-        X = feature_data_encoded.drop('box_target', axis=1)
-        y = feature_data_encoded['box_target'].astype(float)
-
-        logger.info("Step 5: Creating train-test split...")
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y,
-            test_size=args.test_size,
-            random_state=args.random_state
-        )
-
-        logger.info(f"Training set: {len(X_train):,} samples")
-        logger.info(f"Test set: {len(X_test):,} samples")
-
-        logger.info("Step 6: Imputing missing values...")
-        X_train_imputed, X_test_imputed = processor.impute_missing_values(X_train, X_test)
+        # Leakage-free split + encode + impute (encoders/imputer fit on train only).
+        logger.info("Split, encode, and impute (fit on train only)...")
+        split = mp.split_encode_impute(
+            feature_data, feature_names, target_col='box_target',
+            categorical_features=processor.categorical_features,
+            test_size=args.test_size, random_state=args.random_state, stratify=False)
+        X_train_imputed, X_test_imputed = split.X_train, split.X_test
+        y_train, y_test = split.y_train, split.y_test
+        feature_names = split.feature_names
+        processor.label_encoders = split.label_encoders
+        imputers = split.imputers
+        logger.info(f"Training set: {len(X_train_imputed):,} samples")
+        logger.info(f"Test set: {len(X_test_imputed):,} samples")
 
         logger.info("Step 7: Training model with hyperparameter tuning...")
         model = BoxStackingModel(random_state=args.random_state)
@@ -433,7 +345,7 @@ def main():
         model_dir = Path("models/box_stacking")
         model_dir.mkdir(parents=True, exist_ok=True)
         model_filepath = str(model_dir / "box_stacking_prediction_model")
-        model.save_model(model_filepath, feature_names, processor.label_encoders, metrics=results)
+        model.save_model(model_filepath, feature_names, processor.label_encoders, metrics=results, imputers=imputers)
 
         print("\n" + "=" * 80)
         print("FINAL RESULTS")

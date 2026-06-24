@@ -13,9 +13,13 @@ from pathlib import Path
 from sklearn.linear_model import LinearRegression
 from scipy import stats
 import json
+import sys
 from typing import Dict, Tuple, List
 import warnings
 warnings.filterwarnings('ignore')
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.data_paths import coach_war_trajectories_path
 
 
 class TemporalRobustnessAnalyzer:
@@ -370,7 +374,7 @@ def main():
     """Main execution"""
     # File paths
     aggression_file = 'data/processed/coaching_genes/aggression_gene_by_year.csv'
-    war_file = 'data/processed/Coaching/coach_war_trajectories.csv'
+    war_file = coach_war_trajectories_path()
 
     # Initialize analyzer
     analyzer = TemporalRobustnessAnalyzer(aggression_file, war_file)

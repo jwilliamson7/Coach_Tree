@@ -28,11 +28,15 @@ import numpy as np
 from pathlib import Path
 import logging
 import json
+import sys
 from scipy import stats
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 import warnings
 warnings.filterwarnings('ignore')
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.parsimony import cluster_robust_ols
 
 logging.basicConfig(
     level=logging.INFO,
@@ -207,61 +211,22 @@ class WithinCoachFixedEffectsAnalyzer:
                                      war_var: str = 'WAR_demeaned') -> dict:
         """Run fixed effects regression: demeaned_WAR ~ demeaned_aggression"""
 
-        # Prepare data
+        # Coach-clustered OLS via the shared parsimony helper (single source of
+        # truth for cluster-robust sandwich SEs across all downstream analyses).
         X = data[[aggression_var]].values
         y = data[war_var].values
-
-        # Fit model
-        model = LinearRegression()
-        model.fit(X, y)
-
-        # Calculate predictions and R²
-        y_pred = model.predict(X)
-        r2 = r2_score(y, y_pred)
-        n = len(y)
-        k = X.shape[1]
-
-        # Calculate standard errors with clustering by coach
-        # First, get residuals
-        residuals = y - y_pred
-
-        # Calculate clustered standard errors
-        coaches = data['coach'].values
-        unique_coaches = np.unique(coaches)
-        n_clusters = len(unique_coaches)
-
-        # Cluster-robust variance estimation
-        X_with_const = np.column_stack([np.ones(n), X])
-        bread = np.linalg.inv(X_with_const.T @ X_with_const)
-
-        meat = np.zeros((k+1, k+1))
-        for coach in unique_coaches:
-            mask = coaches == coach
-            X_c = X_with_const[mask]
-            e_c = residuals[mask]
-            meat += X_c.T @ (e_c[:, None] @ e_c[None, :]) @ X_c
-
-        # Finite sample adjustment
-        meat *= n_clusters / (n_clusters - 1)
-
-        vcov = bread @ meat @ bread
-        se_clustered = np.sqrt(np.diag(vcov))
-
-        # Get coefficient and SE for aggression (index 1 in X_with_const)
-        coef = model.coef_[0]
-        se = se_clustered[1]
-        t_stat = coef / se
-        p_value = 2 * (1 - stats.t.cdf(np.abs(t_stat), n_clusters - k - 1))
+        res = cluster_robust_ols(X, y, data['coach'].values, [aggression_var])
+        c = res['coefficients'][aggression_var]
 
         return {
-            'n': int(n),
-            'n_coaches': int(n_clusters),
-            'aggression_coef': float(coef),
-            'aggression_se': float(se),
-            'aggression_t': float(t_stat),
-            'aggression_p': float(p_value),
-            'r_squared': float(r2),
-            'significant': bool(p_value < 0.05)
+            'n': int(res['n']),
+            'n_coaches': int(res['n_clusters']),
+            'aggression_coef': float(c['coefficient']),
+            'aggression_se': float(c['std_error']),
+            'aggression_t': float(c['t_statistic']),
+            'aggression_p': float(c['p_value']),
+            'r_squared': float(res['r_squared']),
+            'significant': bool(c['significant'])
         }
 
     def run_pooled_analysis(self, demeaned_data: pd.DataFrame, var_suffix: str = '_demeaned') -> dict:

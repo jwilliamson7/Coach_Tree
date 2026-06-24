@@ -42,6 +42,7 @@ from utils.model_features import (
     get_two_point_predictor_features,
     get_categorical_features
 )
+from utils import model_pipeline as mp
 
 # Configure logging
 logging.basicConfig(
@@ -71,7 +72,13 @@ class AggressionCalculator:
         self.run_pass_encoders = None
         self.pass_target_encoders = None
         self.two_point_encoders = None
-        
+
+        # Imputer containers (SimpleImputer + TruncatedSVD persisted at train time)
+        self.fourth_down_imputers = None
+        self.run_pass_imputers = None
+        self.pass_target_imputers = None
+        self.two_point_imputers = None
+
         # Feature lists
         self.fourth_down_features = get_fourth_down_predictor_features()
         self.run_pass_features = get_run_pass_predictor_features()
@@ -83,68 +90,31 @@ class AggressionCalculator:
         self.coach_mapping = None
         
     def load_models(self) -> None:
-        """Load all three trained XGBoost models and their encoders"""
+        """Load trained models with their encoders and imputers via the shared
+        pipeline. Feature lists are taken from each model's metadata so gene-time
+        features match exactly what the model was trained on (train/serve)."""
         logger.info("Loading trained models...")
-        
-        # Load 4th down model
-        fourth_down_path = self.models_dir / "fourth_down" / "fourth_down_decision_model.json"
-        if fourth_down_path.exists():
-            self.fourth_down_model = xgb.XGBClassifier()
-            self.fourth_down_model.load_model(str(fourth_down_path))
-            
-            # Load encoders
-            encoders_path = self.models_dir / "fourth_down" / "fourth_down_decision_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.fourth_down_encoders = pickle.load(f)
-            logger.info("✓ Loaded 4th down decision model")
-        else:
-            logger.warning("4th down model not found")
-            
-        # Load run/pass model
-        run_pass_path = self.models_dir / "run_pass" / "run_pass_prediction_model.json"
-        if run_pass_path.exists():
-            self.run_pass_model = xgb.XGBClassifier()
-            self.run_pass_model.load_model(str(run_pass_path))
-            
-            # Load encoders
-            encoders_path = self.models_dir / "run_pass" / "run_pass_prediction_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.run_pass_encoders = pickle.load(f)
-            logger.info("✓ Loaded run/pass prediction model")
-        else:
-            logger.warning("Run/pass model not found")
-            
-        # Load pass target model
-        pass_target_path = self.models_dir / "pass_target" / "pass_target_prediction_model.json"
-        if pass_target_path.exists():
-            self.pass_target_model = xgb.XGBClassifier()
-            self.pass_target_model.load_model(str(pass_target_path))
-            
-            # Load encoders
-            encoders_path = self.models_dir / "pass_target" / "pass_target_prediction_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.pass_target_encoders = pickle.load(f)
-            logger.info("✓ Loaded pass target prediction model")
-        else:
-            logger.warning("Pass target model not found")
-            
-        # Load two-point conversion model
-        two_point_path = self.models_dir / "two_point" / "two_point_conversion_model.json"
-        if two_point_path.exists():
-            self.two_point_model = xgb.XGBClassifier()
-            self.two_point_model.load_model(str(two_point_path))
-            
-            # Load encoders
-            encoders_path = self.models_dir / "two_point" / "two_point_conversion_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.two_point_encoders = pickle.load(f)
-            logger.info("✓ Loaded two-point conversion prediction model")
-        else:
-            logger.warning("Two-point conversion model not found")
+        specs = {
+            'fourth_down': ('fourth_down/fourth_down_decision_model', xgb.XGBClassifier),
+            'run_pass': ('run_pass/run_pass_prediction_model', xgb.XGBClassifier),
+            'pass_target': ('pass_target/pass_target_prediction_model', xgb.XGBClassifier),
+            'two_point': ('two_point/two_point_conversion_model', xgb.XGBClassifier),
+        }
+        for name, (relstem, model_cls) in specs.items():
+            stem = str(self.models_dir / relstem)
+            if not Path(f"{stem}.json").exists():
+                logger.warning(f"{name} model not found at {stem}.json")
+                continue
+            bundle = mp.load_inference_bundle(stem, model_cls)
+            setattr(self, f"{name}_model", bundle['model'])
+            setattr(self, f"{name}_encoders", bundle['encoders'])
+            setattr(self, f"{name}_imputers", bundle['imputers'])
+            if bundle['feature_names']:
+                setattr(self, f"{name}_features", bundle['feature_names'])
+            if bundle['imputers'] is None:
+                logger.warning(f"{name}: no imputer artifact found; using fallback median "
+                               f"impute (retrain the model to restore train/serve consistency)")
+            logger.info(f"Loaded {name} model")
     
     def load_coach_mappings(self) -> None:
         """Load the mapping of team-year to head coaches"""
@@ -296,45 +266,21 @@ class AggressionCalculator:
         
         return combined
     
-    def prepare_features_for_model(self, df: pd.DataFrame, features: List[str], 
-                                  encoders: Dict) -> np.ndarray:
+    def prepare_features_for_model(self, df: pd.DataFrame, features: List[str],
+                                  encoders: Dict, imputers: Dict = None) -> np.ndarray:
+        """Transform-only feature prep via the shared pipeline.
+
+        Encoders and the imputer (SimpleImputer + TruncatedSVD) were fit at train
+        time and are reused here, so gene-time features land in the exact same
+        space the model was trained on. If `imputers` is None (model predates the
+        persistence fix) a fallback median impute is used and a warning logged.
         """
-        Prepare features for model prediction, handling missing values and encoding.
-        
-        Args:
-            df: DataFrame with raw features
-            features: List of feature names needed by model
-            encoders: Dictionary of label encoders for categorical features
-            
-        Returns:
-            Numpy array ready for model prediction
-        """
-        # Select features
-        df_features = df[features].copy()
-        
-        # Encode categorical features
-        if encoders:
-            for col in features:
-                if col in encoders and col in self.categorical_features:
-                    le = encoders[col]
-                    # Handle missing/unseen categories
-                    df_features[col] = df_features[col].astype(str)
-                    mask = df_features[col].isin(le.classes_)
-                    df_features.loc[~mask, col] = 'nan'  # Use 'nan' as unknown category
-                    
-                    # Add 'nan' to encoder classes if not present
-                    if 'nan' not in le.classes_:
-                        le.classes_ = np.append(le.classes_, 'nan')
-                    
-                    df_features[col] = le.transform(df_features[col])
-        
-        # Handle missing values with median imputation
-        from sklearn.impute import SimpleImputer
-        imputer = SimpleImputer(strategy='median')
-        features_imputed = imputer.fit_transform(df_features)
-        
-        return features_imputed
-    
+        if imputers is None:
+            logger.warning("No persisted imputer for this model; using fallback median "
+                           "impute. Retrain the model to restore train/serve consistency.")
+        return mp.prepare_features_for_inference(
+            df, features, self.categorical_features, encoders, imputers)
+
     def calculate_fourth_down_aggression(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
         Calculate 4th down aggression for each coach-year.
@@ -363,9 +309,10 @@ class AggressionCalculator:
         
         # Prepare features for prediction
         features = self.prepare_features_for_model(
-            fourth_downs, 
+            fourth_downs,
             self.fourth_down_features,
-            self.fourth_down_encoders
+            self.fourth_down_encoders,
+            self.fourth_down_imputers
         )
         
         # Generate predictions (probability of going for it)
@@ -527,7 +474,8 @@ class AggressionCalculator:
         features = self.prepare_features_for_model(
             run_pass_plays,
             self.run_pass_features,
-            self.run_pass_encoders
+            self.run_pass_encoders,
+            self.run_pass_imputers
         )
         
         # Generate predictions (probability of pass)
@@ -584,7 +532,8 @@ class AggressionCalculator:
         features = self.prepare_features_for_model(
             pass_plays,
             self.pass_target_features,
-            self.pass_target_encoders
+            self.pass_target_encoders,
+            self.pass_target_imputers
         )
         
         # Generate predictions (probability of targeting beyond sticks)
@@ -638,7 +587,8 @@ class AggressionCalculator:
         features = self.prepare_features_for_model(
             conversion_plays,
             self.two_point_features,
-            self.two_point_encoders
+            self.two_point_encoders,
+            self.two_point_imputers
         )
         
         # Generate predictions (probability of attempting two-point conversion)

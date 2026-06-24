@@ -17,10 +17,14 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import json
+import sys
 from scipy import stats
 from sklearn.linear_model import LinearRegression
 from typing import Dict, Tuple
 import warnings
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.data_paths import coach_war_trajectories_path
 warnings.filterwarnings('ignore')
 
 
@@ -476,7 +480,7 @@ class EffectSizePowerAnalyzer:
 def main():
     """Main execution"""
     aggression_file = 'data/processed/coaching_genes/aggression_gene_by_year.csv'
-    war_file = 'data/processed/Coaching/coach_war_trajectories.csv'
+    war_file = coach_war_trajectories_path()
 
     analyzer = EffectSizePowerAnalyzer(aggression_file, war_file)
     analyzer.run_all_analyses()
