@@ -1,0 +1,274 @@
+{
+  "shotgun": {
+    "overall": {
+      "Shotgun Formation": {
+        "column": "shotgun_gene_zscore",
+        "correlation": 0.13899959909590962,
+        "p_value": 0.0006005439201922779,
+        "slope": 0.2676781239411694,
+        "intercept": -0.0555169221248378,
+        "r_squared": 0.019320888548823606,
+        "std_err": 0.07759689174038821,
+        "n": 606,
+        "significant": true
+      }
+    },
+    "by_era": {
+      "2006-2011": {
+        "Shotgun Formation": {
+          "correlation": 0.09360271036986738,
+          "p_value": 0.19895578679445616,
+          "n": 190,
+          "significant": false
+        }
+      },
+      "2012-2017": {
+        "Shotgun Formation": {
+          "correlation": -0.04185429533558205,
+          "p_value": 0.5643342204353267,
+          "n": 192,
+          "significant": false
+        }
+      },
+      "2018-2024": {
+        "Shotgun Formation": {
+          "correlation": 0.16009442758843004,
+          "p_value": 0.016477792731257025,
+          "n": 224,
+          "significant": true
+        }
+      }
+    },
+    "n_total": 606,
+    "n_coaches": 123,
+    "year_range": "2006-2024"
+  },
+  "tempo": {
+    "overall": {
+      "Composite Tempo": {
+        "column": "composite_tempo_zscore",
+        "correlation": 0.032411684422229546,
+        "p_value": 0.42577487258631747,
+        "slope": 0.06279347594398059,
+        "intercept": -0.0548684656656648,
+        "r_squared": 0.0010505172870861992,
+        "std_err": 0.07878911391344144,
+        "n": 606,
+        "significant": false
+      },
+      "No-Huddle": {
+        "column": "no_huddle_gene_zscore",
+        "correlation": -0.013030470980204158,
+        "p_value": 0.7488748752954779,
+        "slope": -0.024929926459099118,
+        "intercept": -0.05450529661273296,
+        "r_squared": 0.0001697931739659433,
+        "std_err": 0.0778404864751012,
+        "n": 606,
+        "significant": false
+      },
+      "Pace": {
+        "column": "pace_gene_zscore",
+        "correlation": 0.07004628402444889,
+        "p_value": 0.08490831661024696,
+        "slope": 0.13757951554775488,
+        "intercept": -0.05325183258199401,
+        "r_squared": 0.00490648190563375,
+        "std_err": 0.07972272858460475,
+        "n": 606,
+        "significant": false
+      }
+    },
+    "by_era": {
+      "2006-2011": {
+        "Composite Tempo": {
+          "correlation": 0.11078879384394956,
+          "p_value": 0.12807696567415627,
+          "n": 190,
+          "significant": false
+        },
+        "No-Huddle": {
+          "correlation": 0.04318293098647816,
+          "p_value": 0.5541293579055366,
+          "n": 190,
+          "significant": false
+        },
+        "Pace": {
+          "correlation": 0.13213948129376699,
+          "p_value": 0.06915969262696095,
+          "n": 190,
+          "significant": false
+        }
+      },
+      "2012-2017": {
+        "Composite Tempo": {
+          "correlation": -0.0479343663913394,
+          "p_value": 0.5090994942741489,
+          "n": 192,
+          "significant": false
+        },
+        "No-Huddle": {
+          "correlation": -0.114367132233421,
+          "p_value": 0.11420848079812139,
+          "n": 192,
+          "significant": false
+        },
+        "Pace": {
+          "correlation": 0.04275293562094774,
+          "p_value": 0.5559934507003567,
+          "n": 192,
+          "significant": false
+        }
+      },
+      "2018-2024": {
+        "Composite Tempo": {
+          "correlation": 0.014173796396225406,
+          "p_value": 0.8329202605645004,
+          "n": 224,
+          "significant": false
+        },
+        "No-Huddle": {
+          "correlation": -0.0007956415577480211,
+          "p_value": 0.9905521093436254,
+          "n": 224,
+          "significant": false
+        },
+        "Pace": {
+          "correlation": 0.023994963773806083,
+          "p_value": 0.7209675635105353,
+          "n": 224,
+          "significant": false
+        }
+      }
+    },
+    "n_total": 606,
+    "n_coaches": 123,
+    "year_range": "2006-2024"
+  },
+  "defensive_scheme": {
+    "overall": {
+      "Defensive Scheme": {
+        "column": "composite_scheme_zscore",
+        "correlation": 0.13487458670191582,
+        "p_value": 0.023498605722064848,
+        "slope": 0.23640713953231168,
+        "intercept": 0.234609575912442,
+        "r_squared": 0.018191154138012592,
+        "std_err": 0.10379224744272589,
+        "n": 282,
+        "significant": true
+      },
+      "Box Stacking": {
+        "column": "box_stacking_gene_zscore",
+        "correlation": 0.058286565068109204,
+        "p_value": 0.32942151012521875,
+        "slope": 0.102276301935045,
+        "intercept": 0.23703033141332905,
+        "r_squared": 0.003397323667438931,
+        "std_err": 0.10468598968689594,
+        "n": 282,
+        "significant": false
+      },
+      "Pass Rush": {
+        "column": "pass_rush_gene_zscore",
+        "correlation": 0.13881939340974403,
+        "p_value": 0.019694257011854177,
+        "slope": 0.2431024484412519,
+        "intercept": 0.23422814211588458,
+        "r_squared": 0.019270823986649324,
+        "std_err": 0.10364174645424616,
+        "n": 282,
+        "significant": true
+      }
+    },
+    "by_era": {
+      "2012-2017": {
+        "Defensive Scheme": {
+          "correlation": 0.017389460093180244,
+          "p_value": 0.8915176500559837,
+          "n": 64,
+          "significant": false
+        },
+        "Box Stacking": {
+          "correlation": 0.0026099690949574275,
+          "p_value": 0.9836698348671427,
+          "n": 64,
+          "significant": false
+        },
+        "Pass Rush": {
+          "correlation": 0.02553909678650133,
+          "p_value": 0.8412314445185328,
+          "n": 64,
+          "significant": false
+        }
+      },
+      "2018-2024": {
+        "Defensive Scheme": {
+          "correlation": 0.19626883940550235,
+          "p_value": 0.003619297871490163,
+          "n": 218,
+          "significant": true
+        },
+        "Box Stacking": {
+          "correlation": 0.09392128863157208,
+          "p_value": 0.1670284895864253,
+          "n": 218,
+          "significant": false
+        },
+        "Pass Rush": {
+          "correlation": 0.179172723085775,
+          "p_value": 0.008007874107249272,
+          "n": 218,
+          "significant": true
+        }
+      }
+    },
+    "n_total": 282,
+    "n_coaches": 79,
+    "year_range": "2016-2024"
+  },
+  "aggression": {
+    "overall": {
+      "Composite Aggression": {
+        "column": "composite_aggression",
+        "correlation": 0.1715753595178477,
+        "p_value": 2.1714466854726247e-05,
+        "slope": 18.452790682375973,
+        "intercept": -0.15242335108459365,
+        "r_squared": 0.029438103993678764,
+        "std_err": 4.311221009607658,
+        "n": 606,
+        "significant": true
+      }
+    },
+    "by_era": {
+      "2006-2011": {
+        "Composite Aggression": {
+          "correlation": 0.2424353575883603,
+          "p_value": 0.0007513893908980166,
+          "n": 190,
+          "significant": true
+        }
+      },
+      "2012-2017": {
+        "Composite Aggression": {
+          "correlation": 0.15893287433802225,
+          "p_value": 0.027674316909864223,
+          "n": 192,
+          "significant": true
+        }
+      },
+      "2018-2024": {
+        "Composite Aggression": {
+          "correlation": 0.03861317609532016,
+          "p_value": 0.5653654855059698,
+          "n": 224,
+          "significant": false
+        }
+      }
+    },
+    "n_total": 606,
+    "n_coaches": 123,
+    "year_range": "2006-2024"
+  }
+}

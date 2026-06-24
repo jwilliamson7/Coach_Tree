@@ -14,10 +14,14 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import logging
+import sys
 from scipy import stats
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import json
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.parsimony import cluster_bootstrap_corr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -204,14 +208,22 @@ class ShotgunInheritanceAnalyzer:
         logger.info("\n\nANALYZING OVERALL SHOTGUN INHERITANCE:")
         logger.info("="*80)
 
-        clean_data = pairs_df[['shotgun_mentor', 'shotgun_protege']].dropna()
+        clean_data = pairs_df[['shotgun_mentor', 'shotgun_protege', 'mentor_name']].dropna()
 
         if len(clean_data) >= 10:
             corr, p_val = stats.pearsonr(clean_data['shotgun_mentor'], clean_data['shotgun_protege'])
+            boot = cluster_bootstrap_corr(
+                clean_data['shotgun_mentor'].values, clean_data['shotgun_protege'].values,
+                clean_data['mentor_name'].values, n_boot=2000, seed=42,
+            )
 
             result = {
                 'correlation': float(corr),
                 'p_value': float(p_val),
+                'ci_low': boot['ci_low'],
+                'ci_high': boot['ci_high'],
+                'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
+                'n_mentors': boot['n_clusters'],
                 'n': int(len(clean_data)),
                 'significant': bool(p_val < 0.05)
             }
@@ -241,14 +253,22 @@ class ShotgunInheritanceAnalyzer:
                 logger.info(f"  Insufficient data (n={len(bg_pairs)})")
                 continue
 
-            clean_data = bg_pairs[['shotgun_mentor', 'shotgun_protege']].dropna()
+            clean_data = bg_pairs[['shotgun_mentor', 'shotgun_protege', 'mentor_name']].dropna()
 
             if len(clean_data) >= 10:
                 corr, p_val = stats.pearsonr(clean_data['shotgun_mentor'], clean_data['shotgun_protege'])
+                boot = cluster_bootstrap_corr(
+                    clean_data['shotgun_mentor'].values, clean_data['shotgun_protege'].values,
+                    clean_data['mentor_name'].values, n_boot=2000, seed=42,
+                )
 
                 results[bg_type] = {
                     'correlation': float(corr),
                     'p_value': float(p_val),
+                    'ci_low': boot['ci_low'],
+                    'ci_high': boot['ci_high'],
+                    'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
+                    'n_mentors': boot['n_clusters'],
                     'n': int(len(clean_data)),
                     'significant': bool(p_val < 0.05)
                 }
@@ -277,14 +297,22 @@ class ShotgunInheritanceAnalyzer:
 
             logger.info(f"  Sample size: {len(coord_pairs)} pairs")
 
-            clean_data = coord_pairs[['shotgun_mentor', 'shotgun_protege']].dropna()
+            clean_data = coord_pairs[['shotgun_mentor', 'shotgun_protege', 'mentor_name']].dropna()
 
             if len(clean_data) >= 10:
                 corr, p_val = stats.pearsonr(clean_data['shotgun_mentor'], clean_data['shotgun_protege'])
+                boot = cluster_bootstrap_corr(
+                    clean_data['shotgun_mentor'].values, clean_data['shotgun_protege'].values,
+                    clean_data['mentor_name'].values, n_boot=2000, seed=42,
+                )
 
                 results[coord_type] = {
                     'correlation': float(corr),
                     'p_value': float(p_val),
+                    'ci_low': boot['ci_low'],
+                    'ci_high': boot['ci_high'],
+                    'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
+                    'n_mentors': boot['n_clusters'],
                     'n': int(len(clean_data)),
                     'significant': bool(p_val < 0.05)
                 }

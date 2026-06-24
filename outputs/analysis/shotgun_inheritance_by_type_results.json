@@ -1,36 +1,56 @@
 {
   "overall": {
-    "correlation": 0.41383256637448423,
-    "p_value": 6.352209232132526e-36,
-    "n": 836,
+    "correlation": 0.3031237553690824,
+    "p_value": 1.794026869344356e-14,
+    "ci_low": 0.17471265459763008,
+    "ci_high": 0.4250146180525012,
+    "p_bootstrap_mentor_clustered": 0.0,
+    "n_mentors": 95,
+    "n": 612,
     "significant": true
   },
   "by_mentor_background": {
     "Offensive": {
-      "correlation": 0.5056941527064738,
-      "p_value": 1.0524818854743143e-24,
-      "n": 359,
+      "correlation": 0.4690338525074348,
+      "p_value": 1.7996585534473054e-18,
+      "ci_low": 0.32922341820146467,
+      "ci_high": 0.5811172529303003,
+      "p_bootstrap_mentor_clustered": 0.0,
+      "n_mentors": 53,
+      "n": 312,
       "significant": true
     },
     "Defensive": {
-      "correlation": 0.23985297560207197,
-      "p_value": 1.908007071888339e-05,
-      "n": 311,
-      "significant": true
+      "correlation": 0.09608368973043771,
+      "p_value": 0.1179781550109141,
+      "ci_low": -0.12934104920830702,
+      "ci_high": 0.3059558980476719,
+      "p_bootstrap_mentor_clustered": 0.38,
+      "n_mentors": 34,
+      "n": 266,
+      "significant": false
     }
   },
   "by_coordinator_type": {
     "OC": {
-      "correlation": 0.5186401627855883,
-      "p_value": 5.107703554007569e-23,
-      "n": 314,
+      "correlation": 0.426935213076911,
+      "p_value": 3.8571490151248786e-12,
+      "ci_low": 0.2516658382369593,
+      "ci_high": 0.5608562038305608,
+      "p_bootstrap_mentor_clustered": 0.0,
+      "n_mentors": 44,
+      "n": 242,
       "significant": true
     },
     "DC": {
-      "correlation": 0.21780154458684817,
-      "p_value": 1.938018945821067e-05,
-      "n": 378,
-      "significant": true
+      "correlation": 0.09146150029996214,
+      "p_value": 0.12818780960917633,
+      "ci_low": -0.11904141548264194,
+      "ci_high": 0.3028807670409796,
+      "p_bootstrap_mentor_clustered": 0.391,
+      "n_mentors": 36,
+      "n": 278,
+      "significant": false
     }
   }
 }

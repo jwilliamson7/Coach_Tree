@@ -1,18 +1,18 @@
 {
-  "generated_date": "2025-11-06T08:32:18.919042",
+  "generated_date": "2026-06-24T14:38:45.180439",
   "num_coaches": 641,
   "metrics": {
     "fourth_down_aggression": {
-      "mean": -0.00031170096737665376,
-      "std": 0.02706314496918828
+      "mean": -0.00011162935264702233,
+      "std": 0.025733887157963858
     },
     "pass_heavy_aggression": {
-      "mean": 0.01922064576357647,
-      "std": 0.039180154042074936
+      "mean": 0.020468440733911814,
+      "std": 0.044539216633624194
     },
     "deep_pass_aggression": {
-      "mean": -0.006821219760292033,
-      "std": 0.03637844044321903
+      "mean": 0.0008648453980163556,
+      "std": 0.036512730982592105
     }
   },
   "most_aggressive_coach_years": [
@@ -29,7 +29,7 @@
       2006
     ],
     [
-      "Nick Saban",
+      "Tony Dungy",
       2006
     ],
     [
@@ -41,45 +41,29 @@
       2006
     ],
     [
+      "Scott Linehan",
+      2006
+    ],
+    [
+      "Nick Saban",
+      2006
+    ],
+    [
       "Bill Belichick",
       2006
     ],
     [
-      "Tony Dungy",
-      2006
-    ],
-    [
-      "Mike Holmgren",
-      2006
-    ],
-    [
-      "Scott Linehan",
+      "Mike McCarthy",
       2006
     ]
   ],
   "least_aggressive_coach_years": [
     [
-      "Jonathan Gannon",
+      "Dan Campbell",
       2024
     ],
     [
-      "Brian Callahan",
-      2024
-    ],
-    [
-      "Sean McVay",
-      2024
-    ],
-    [
-      "Jerod Mayo",
-      2024
-    ],
-    [
-      "Kyle Shanahan",
-      2024
-    ],
-    [
-      "Todd Bowles",
+      "Antonio Pierce",
       2024
     ],
     [
@@ -87,11 +71,27 @@
       2024
     ],
     [
+      "Kyle Shanahan",
+      2024
+    ],
+    [
       "Nick Sirianni",
       2024
     ],
     [
+      "Todd Bowles",
+      2024
+    ],
+    [
       "Dennis Allen",
+      2024
+    ],
+    [
+      "Jerod Mayo",
+      2024
+    ],
+    [
+      "Brian Callahan",
       2024
     ],
     [

@@ -14,10 +14,14 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import logging
+import sys
 from scipy import stats
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import json
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.parsimony import cluster_bootstrap_corr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -220,14 +224,22 @@ class InheritanceByTypeAnalyzer:
                 mentor_col = f'{var}_mentor'
                 protege_col = f'{var}_protege'
 
-                clean_data = bg_pairs[[mentor_col, protege_col]].dropna()
+                clean_data = bg_pairs[[mentor_col, protege_col, 'mentor_name']].dropna()
 
                 if len(clean_data) >= 10:
                     corr, p_val = stats.pearsonr(clean_data[mentor_col], clean_data[protege_col])
+                    boot = cluster_bootstrap_corr(
+                        clean_data[mentor_col].values, clean_data[protege_col].values,
+                        clean_data['mentor_name'].values, n_boot=2000, seed=42,
+                    )
 
                     results[bg_type][var] = {
                         'correlation': float(corr),
                         'p_value': float(p_val),
+                        'ci_low': boot['ci_low'],
+                        'ci_high': boot['ci_high'],
+                        'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
+                        'n_mentors': boot['n_clusters'],
                         'n': int(len(clean_data)),
                         'significant': bool(p_val < 0.05)
                     }
@@ -268,14 +280,22 @@ class InheritanceByTypeAnalyzer:
                 mentor_col = f'{var}_mentor'
                 protege_col = f'{var}_protege'
 
-                clean_data = coord_pairs[[mentor_col, protege_col]].dropna()
+                clean_data = coord_pairs[[mentor_col, protege_col, 'mentor_name']].dropna()
 
                 if len(clean_data) >= 10:
                     corr, p_val = stats.pearsonr(clean_data[mentor_col], clean_data[protege_col])
+                    boot = cluster_bootstrap_corr(
+                        clean_data[mentor_col].values, clean_data[protege_col].values,
+                        clean_data['mentor_name'].values, n_boot=2000, seed=42,
+                    )
 
                     results[coord_type][var] = {
                         'correlation': float(corr),
                         'p_value': float(p_val),
+                        'ci_low': boot['ci_low'],
+                        'ci_high': boot['ci_high'],
+                        'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
+                        'n_mentors': boot['n_clusters'],
                         'n': int(len(clean_data)),
                         'significant': bool(p_val < 0.05)
                     }

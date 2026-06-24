@@ -13,10 +13,14 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import logging
+import sys
 from scipy import stats
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import json
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.parsimony import cluster_bootstrap_corr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -121,7 +125,7 @@ class AggressionPersistenceAnalyzer:
                 col_n = f'{measure}_n'
                 col_n_plus = f'{measure}_n_plus'
 
-                clean_data = lag_data[[col_n, col_n_plus]].dropna()
+                clean_data = lag_data[[col_n, col_n_plus, 'coach']].dropna()
 
                 if len(clean_data) < 10:
                     continue
@@ -130,10 +134,21 @@ class AggressionPersistenceAnalyzer:
                 slope, intercept, r_value, p_value, std_err = stats.linregress(
                     clean_data[col_n], clean_data[col_n_plus]
                 )
+                # The same coach contributes many year-N/year-N+lag pairs, so
+                # cluster the bootstrap on coach rather than treating pairs as
+                # independent.
+                boot = cluster_bootstrap_corr(
+                    clean_data[col_n].values, clean_data[col_n_plus].values,
+                    clean_data['coach'].values, n_boot=2000, seed=42,
+                )
 
                 results[f'lag_{lag}'][measure] = {
                     'correlation': float(corr),
                     'p_value': float(p_val),
+                    'ci_low': boot['ci_low'],
+                    'ci_high': boot['ci_high'],
+                    'p_bootstrap_coach_clustered': boot['p_bootstrap'],
+                    'n_coaches': boot['n_clusters'],
                     'slope': float(slope),
                     'intercept': float(intercept),
                     'r_squared': float(r_value ** 2),

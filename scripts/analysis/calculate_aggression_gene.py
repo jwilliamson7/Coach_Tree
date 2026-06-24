@@ -632,29 +632,29 @@ class AggressionCalculator:
         deep_pass_agg = self.calculate_deep_pass_aggression(plays)
         two_point_agg = self.calculate_two_point_aggression(plays)
         
-        # Merge all components on coach and season
-        aggression_df = fourth_down_agg.reset_index()
-        
+        # Each component already returns head_coach/season as columns (it ends in
+        # reset_index()), so merge directly. A second reset_index() here would
+        # inject a phantom 'index' column that collides across the chained merges
+        # (pandas MergeError on duplicate 'index_x').
+        aggression_df = fourth_down_agg
+
         if not pass_heavy_agg.empty:
-            pass_heavy_reset = pass_heavy_agg.reset_index()
             aggression_df = aggression_df.merge(
-                pass_heavy_reset,
+                pass_heavy_agg,
                 on=['head_coach', 'season'],
                 how='outer'
             )
-        
+
         if not deep_pass_agg.empty:
-            deep_pass_reset = deep_pass_agg.reset_index()
             aggression_df = aggression_df.merge(
-                deep_pass_reset,
+                deep_pass_agg,
                 on=['head_coach', 'season'],
                 how='outer'
             )
-        
+
         if not two_point_agg.empty:
-            two_point_reset = two_point_agg.reset_index()
             aggression_df = aggression_df.merge(
-                two_point_reset,
+                two_point_agg,
                 on=['head_coach', 'season'],
                 how='outer'
             )

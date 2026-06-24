@@ -1,0 +1,120 @@
+{
+  "offensive_only": {
+    "model_name": "Offensive Genes (2006-2024)",
+    "r_squared": 0.03624830897598419,
+    "adj_r_squared": 0.031445559685166824,
+    "f_statistic": 7.54740811586592,
+    "f_p_value": 5.799969413944339e-05,
+    "intercept": -0.1346596638120275,
+    "intercept_se": 0.10326008159397383,
+    "se_type": "cluster_robust_by_coach",
+    "coefficients": {
+      "Aggression": {
+        "column": "composite_aggression",
+        "coefficient": 15.010431032541618,
+        "std_error": 5.33368280283699,
+        "t_statistic": 2.8142714119702714,
+        "p_value": 0.005722344508438448,
+        "significant": true,
+        "ci_low": 4.7600956393576395,
+        "ci_high": 25.493261885332135
+      },
+      "Shotgun": {
+        "column": "shotgun_gene_zscore",
+        "coefficient": 0.1745950302132571,
+        "std_error": 0.10233866082589117,
+        "t_statistic": 1.7060515430263021,
+        "p_value": 0.09060709731789207,
+        "significant": false,
+        "ci_low": -0.03498326245141906,
+        "ci_high": 0.379060041301822
+      },
+      "Tempo": {
+        "column": "composite_tempo_zscore",
+        "coefficient": -0.017951419731008597,
+        "std_error": 0.10298758213108129,
+        "t_statistic": -0.17430664318500474,
+        "p_value": 0.8619206732252644,
+        "significant": false,
+        "ci_low": -0.1919535731737752,
+        "ci_high": 0.20870470371992772
+      }
+    },
+    "n_clusters": 123,
+    "bootstrap_n": 2000,
+    "n": 606,
+    "n_coaches": 123,
+    "year_range": "2006-2024"
+  },
+  "all_genes": {
+    "model_name": "All Genes (2016-2024)",
+    "r_squared": 0.02615271738888847,
+    "adj_r_squared": 0.012089940744684724,
+    "f_statistic": 1.8597122069536478,
+    "f_p_value": 0.11771392032507189,
+    "intercept": 0.09855779764422587,
+    "intercept_se": 0.17600504887772989,
+    "se_type": "cluster_robust_by_coach",
+    "coefficients": {
+      "Aggression": {
+        "column": "composite_aggression",
+        "coefficient": 7.102005404182582,
+        "std_error": 6.370415833061589,
+        "t_statistic": 1.1148417293772501,
+        "p_value": 0.26852585836986576,
+        "significant": false,
+        "ci_low": -4.777022901434423,
+        "ci_high": 21.208959911374418
+      },
+      "Shotgun": {
+        "column": "shotgun_gene_zscore",
+        "coefficient": 0.09472344260657548,
+        "std_error": 0.17713852950867814,
+        "t_statistic": 0.5347421753432515,
+        "p_value": 0.5944313062011692,
+        "significant": false,
+        "ci_low": -0.29411638263058265,
+        "ci_high": 0.41888685533616804
+      },
+      "Tempo": {
+        "column": "composite_tempo_zscore",
+        "coefficient": -0.03943902430119895,
+        "std_error": 0.14003961532925532,
+        "t_statistic": -0.28162762521498924,
+        "p_value": 0.7790151179938303,
+        "significant": false,
+        "ci_low": -0.3098866216781639,
+        "ci_high": 0.2601114288523633
+      },
+      "Def. Scheme": {
+        "column": "composite_scheme_zscore",
+        "coefficient": 0.21481731456136205,
+        "std_error": 0.1049621237412434,
+        "t_statistic": 2.0466174549872633,
+        "p_value": 0.04424783262897436,
+        "significant": true,
+        "ci_low": -0.002238571395576456,
+        "ci_high": 0.42361154720851374
+      }
+    },
+    "n_clusters": 79,
+    "bootstrap_n": 2000,
+    "n": 282,
+    "n_coaches": 79,
+    "year_range": "2016-2024"
+  },
+  "vif": {
+    "Aggression": 1.0652088701930325,
+    "Shotgun": 1.0698595972396305,
+    "Tempo": 1.0309600181977503,
+    "Def. Scheme": 1.0298842073919137
+  },
+  "pairwise_correlations": {
+    "Aggression <-> Shotgun": 0.21296071293140764,
+    "Aggression <-> Tempo": 0.10167666073797595,
+    "Aggression <-> Def. Scheme": 0.13123657649658055,
+    "Shotgun <-> Tempo": 0.14139708992749092,
+    "Shotgun <-> Def. Scheme": 0.11037415963606054,
+    "Tempo <-> Def. Scheme": 0.09120012004164439
+  }
+}

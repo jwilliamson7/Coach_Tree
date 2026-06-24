@@ -18,8 +18,12 @@ import numpy as np
 from pathlib import Path
 import json
 import logging
+import sys
 from scipy import stats
 from typing import Dict, List, Tuple
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.parsimony import cluster_bootstrap_corr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -169,14 +173,23 @@ class MentorWARAnalyzer:
 
         df = self.mentor_protege_pairs
 
-        # Overall correlation
+        # Overall correlation. A single mentor appears in many pairs, so the
+        # pairs are not independent; cluster the bootstrap on mentor_name.
         r_overall, p_overall = stats.pearsonr(df['avg_war_mentor'], df['avg_war_protege'])
+        boot_overall = cluster_bootstrap_corr(
+            df['avg_war_mentor'].values, df['avg_war_protege'].values,
+            df['mentor_name'].values, n_boot=2000, seed=42,
+        )
 
         results = {
             'overall': {
                 'n': len(df),
                 'correlation': float(r_overall),
                 'p_value': float(p_overall),
+                'ci_low': boot_overall['ci_low'],
+                'ci_high': boot_overall['ci_high'],
+                'p_bootstrap_mentor_clustered': boot_overall['p_bootstrap'],
+                'n_mentors': boot_overall['n_clusters'],
                 'mentor_war_mean': float(df['avg_war_mentor'].mean()),
                 'mentor_war_std': float(df['avg_war_mentor'].std()),
                 'protege_war_mean': float(df['avg_war_protege'].mean()),
@@ -205,10 +218,18 @@ class MentorWARAnalyzer:
             subset = df[df['protege_role_under_mentor'] == coord_type]
             if len(subset) >= 10:  # Minimum sample size
                 r, p = stats.pearsonr(subset['avg_war_mentor'], subset['avg_war_protege'])
+                boot = cluster_bootstrap_corr(
+                    subset['avg_war_mentor'].values, subset['avg_war_protege'].values,
+                    subset['mentor_name'].values, n_boot=2000, seed=42,
+                )
                 results['by_coordinator_type'][coord_type] = {
                     'n': len(subset),
                     'correlation': float(r),
                     'p_value': float(p),
+                    'ci_low': boot['ci_low'],
+                    'ci_high': boot['ci_high'],
+                    'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
+                    'n_mentors': boot['n_clusters'],
                     'mentor_war_mean': float(subset['avg_war_mentor'].mean()),
                     'protege_war_mean': float(subset['avg_war_protege'].mean())
                 }

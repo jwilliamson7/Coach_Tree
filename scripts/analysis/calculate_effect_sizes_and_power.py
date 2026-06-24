@@ -25,6 +25,7 @@ import warnings
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.data_paths import coach_war_trajectories_path
+from utils.parsimony import cluster_robust_ols
 warnings.filterwarnings('ignore')
 
 
@@ -266,42 +267,20 @@ class EffectSizePowerAnalyzer:
         X = data[[aggression_var]].values
         y = data[war_var].values
 
-        # Fit model
-        model = LinearRegression()
-        model.fit(X, y)
-
-        # Get basic statistics
-        y_pred = model.predict(X)
-        residuals = y - y_pred
         n = len(y)
-        k = X.shape[1]
 
-        # Clustered standard errors
+        # Coach-clustered (sandwich) SEs via the shared implementation in
+        # utils.parsimony -- single source of truth (df = n_clusters - k - 1,
+        # finite-sample G/(G-1) adjustment). Inference is on the coach count, so
+        # the effective n is n_clusters (~123), not the 606 coach-year rows.
         coaches = data['coach'].values
-        unique_coaches = np.unique(coaches)
-        n_clusters = len(unique_coaches)
-
-        X_with_const = np.column_stack([np.ones(n), X])
-        bread = np.linalg.inv(X_with_const.T @ X_with_const)
-
-        meat = np.zeros((k+1, k+1))
-        for coach in unique_coaches:
-            mask = coaches == coach
-            X_c = X_with_const[mask]
-            e_c = residuals[mask]
-            meat += X_c.T @ (e_c[:, None] @ e_c[None, :]) @ X_c
-
-        # Finite sample adjustment
-        meat *= n_clusters / (n_clusters - 1)
-
-        vcov = bread @ meat @ bread
-        se_clustered = np.sqrt(np.diag(vcov))
-
-        # Coefficient and stats
-        beta = model.coef_[0]
-        se = se_clustered[1]
-        t_stat = beta / se
-        p_value = 2 * (1 - stats.t.cdf(np.abs(t_stat), n_clusters - k - 1))
+        cr = cluster_robust_ols(X, y, coaches, [aggression_var])
+        n_clusters = cr['n_clusters']
+        coef = cr['coefficients'][aggression_var]
+        beta = coef['coefficient']
+        se = coef['std_error']
+        t_stat = coef['t_statistic']
+        p_value = coef['p_value']
 
         # Calculate effect sizes
         effect_sizes = self.calculate_effect_sizes(beta, se, n, n_clusters, data, aggression_var, war_var)

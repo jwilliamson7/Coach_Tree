@@ -1,99 +1,99 @@
-category,test,p,rank,bh_threshold,sig_raw,sig_bh
-Temporal Trend,Linear regression,6.31e-08,1,0.000510204081632653,True,True
-Temporal Trend,ANOVA across eras,3.26e-07,2,0.001020408163265306,True,True
-Temporal Trend,Early vs Late (t-test),2.71e-06,3,0.0015306122448979593,True,True
-Temporal Trend,Middle vs Late (t-test),5.28e-05,4,0.002040816326530612,True,True
-Persistence Lag 1,2-Point,0.0001,5,0.0025510204081632655,True,True
-Persistence Lag 1,Deep Pass,0.0001,6,0.0030612244897959186,True,True
-Persistence Lag 1,Pass-Heavy,0.0001,7,0.0035714285714285713,True,True
-Persistence Lag 1,4th Down,0.0001,8,0.004081632653061224,True,True
-Persistence Lag 1,Composite,0.0001,9,0.004591836734693878,True,True
-Persistence Offensive,Composite Lag 2,0.0001,10,0.005102040816326531,True,True
-Persistence Offensive,2-Point Lag 3,0.0001,11,0.005612244897959184,True,True
-Persistence Offensive,Composite Lag 1,0.0001,12,0.006122448979591837,True,True
-Persistence Offensive,2-Point Lag 2,0.0001,13,0.00663265306122449,True,True
-Persistence Offensive,2-Point Lag 1,0.0001,14,0.007142857142857143,True,True
-Persistence Offensive,Deep Pass Lag 2,0.0001,15,0.007653061224489797,True,True
-Persistence Offensive,Deep Pass Lag 1,0.0001,16,0.008163265306122448,True,True
-Persistence Offensive,Pass-Heavy Lag 3,0.0001,17,0.008673469387755102,True,True
-Persistence Offensive,Pass-Heavy Lag 2,0.0001,18,0.009183673469387756,True,True
-Persistence Offensive,Pass-Heavy Lag 1,0.0001,19,0.009693877551020408,True,True
-Persistence Offensive,4th Down Lag 3,0.0001,20,0.010204081632653062,True,True
-Persistence Offensive,4th Down Lag 2,0.0001,21,0.010714285714285714,True,True
-Persistence Offensive,4th Down Lag 1,0.0001,22,0.011224489795918368,True,True
-Persistence Lag 3,2-Point,0.0001,23,0.011734693877551022,True,True
-Persistence Lag 3,Deep Pass,0.0001,24,0.012244897959183675,True,True
-Persistence Lag 3,Pass-Heavy,0.0001,25,0.012755102040816327,True,True
-Persistence Lag 3,4th Down,0.0001,26,0.01326530612244898,True,True
-Persistence Lag 3,Composite,0.0001,27,0.013775510204081631,True,True
-Persistence Lag 2,2-Point,0.0001,28,0.014285714285714285,True,True
-Persistence Lag 2,Deep Pass,0.0001,29,0.01479591836734694,True,True
-Persistence Lag 2,Pass-Heavy,0.0001,30,0.015306122448979593,True,True
-Persistence Lag 2,4th Down,0.0001,31,0.015816326530612247,True,True
-Persistence Lag 2,Composite,0.0001,32,0.016326530612244896,True,True
-Persistence Defensive,Deep Pass Lag 1,0.0001,33,0.01683673469387755,True,True
-Persistence Defensive,4th Down Lag 1,0.0001,34,0.017346938775510204,True,True
-Persistence Defensive,Pass-Heavy Lag 1,0.0001,35,0.01785714285714286,True,True
-Persistence Offensive,Composite Lag 3,0.0001,36,0.018367346938775512,True,True
-Persistence Defensive,Composite Lag 1,0.0001,37,0.018877551020408164,True,True
-Persistence Defensive,Composite Lag 2,0.0001,38,0.019387755102040816,True,True
-Persistence Defensive,Composite Lag 3,0.0001,39,0.019897959183673472,True,True
-Persistence Defensive,2-Point Lag 1,0.0001,40,0.020408163265306124,True,True
-Inheritance: Offensive Mentors,4th Down,0.0001,41,0.020918367346938777,True,True
-Inheritance: OC->HC,Pass-Heavy,0.0006,42,0.02142857142857143,True,True
-Persistence Offensive,Deep Pass Lag 3,0.0007,43,0.02193877551020408,True,True
-Persistence Defensive,Deep Pass Lag 3,0.0008,44,0.022448979591836737,True,True
-Temporal Trend,Early vs Late (Mann-Whitney),0.0012,45,0.02295918367346939,True,True
-Persistence Defensive,Pass-Heavy Lag 2,0.0017,46,0.023469387755102045,True,True
-Persistence Defensive,Deep Pass Lag 2,0.0022,47,0.023979591836734693,True,True
-Persistence Defensive,4th Down Lag 2,0.0037,48,0.02448979591836735,True,True
-Persistence Defensive,4th Down Lag 3,0.0039,49,0.025,True,True
-Inheritance: OC->HC,4th Down,0.004,50,0.025510204081632654,True,True
-Overall WAR,Pass-Heavy Aggression,0.0047,51,0.02602040816326531,True,True
-Era Analysis,Early: Composite,0.0056,52,0.02653061224489796,True,True
-Coach Type by Era,Defensive Middle,0.0068,53,0.027040816326530617,True,True
-Coach Type (Overall),Offensive: Pass-Heavy,0.0114,54,0.027551020408163263,True,True
-Persistence Defensive,Pass-Heavy Lag 3,0.0125,55,0.02806122448979592,True,True
-Two-Way Fixed Effects,Pooled (2006-2024),0.013,56,0.02857142857142857,True,True
-Temporal Robustness,Aggression x Year interaction,0.0195,57,0.029081632653061226,True,True
-Persistence Defensive,2-Point Lag 2,0.0206,58,0.02959183673469388,True,True
-Temporal Robustness,Chow test (2011 breakpoint),0.0258,59,0.03010204081632653,True,True
-Coach Type by Era,Offensive Early,0.031,60,0.030612244897959186,True,False
-Overall WAR,Composite Aggression,0.0315,61,0.03112244897959184,True,False
-Coach Type by Era,Defensive Early,0.0422,62,0.031632653061224494,True,False
-Coach Type (Overall),Defensive: Pass-Heavy,0.0433,63,0.03214285714285715,True,False
-Persistence Defensive,2-Point Lag 3,0.0524,64,0.03265306122448979,False,False
-Two-Way Fixed Effects,Early (2006-2011),0.064,65,0.03316326530612245,False,False
-Temporal Trend,Early vs Middle (t-test),0.0653,66,0.0336734693877551,False,False
-Coach Type (Overall),Defensive: Composite,0.0892,67,0.034183673469387756,False,False
-Inheritance: OC->HC,2-Point,0.0914,68,0.03469387755102041,False,False
-Coach Type (Overall),Offensive: Composite,0.0922,69,0.03520408163265306,False,False
-Era Analysis,Middle: Pass-Heavy,0.0976,70,0.03571428571428572,False,False
-Inheritance: Offensive Mentors,2-Point,0.1387,71,0.03622448979591837,False,False
-Inheritance: OC->HC,Composite,0.1416,72,0.036734693877551024,False,False
-Era Analysis,Middle: Composite,0.145,73,0.037244897959183676,False,False
-Era Analysis,Early: Pass-Heavy,0.1488,74,0.03775510204081633,False,False
-Era Analysis,Late: Pass-Heavy,0.1518,75,0.03826530612244898,False,False
-Inheritance: Defensive Mentors,2-Point,0.1589,76,0.03877551020408163,False,False
-Inheritance: DC->HC,2-Point,0.1683,77,0.039285714285714285,False,False
-Overall WAR,4th Down Aggression,0.1709,78,0.039795918367346944,False,False
-Inheritance: Defensive Mentors,Deep Pass,0.1718,79,0.040306122448979596,False,False
-Inheritance: DC->HC,Deep Pass,0.2188,80,0.04081632653061225,False,False
-Inheritance: Offensive Mentors,Composite,0.2512,81,0.0413265306122449,False,False
-Coach Type by Era,Defensive Late,0.2925,82,0.04183673469387755,False,False
-Two-Way Fixed Effects,Middle (2012-2017),0.303,83,0.04234693877551021,False,False
-Inheritance: Offensive Mentors,Pass-Heavy,0.4077,84,0.04285714285714286,False,False
-Two-Way Fixed Effects,Late (2018-2024),0.424,85,0.04336734693877551,False,False
-Inheritance: DC->HC,Composite,0.4536,86,0.04387755102040816,False,False
-Inheritance: Defensive Mentors,Composite,0.4698,87,0.04438775510204082,False,False
-Coach Type by Era,Offensive Middle,0.7112,88,0.04489795918367347,False,False
-Inheritance: Defensive Mentors,Pass-Heavy,0.7161,89,0.045408163265306126,False,False
-Inheritance: DC->HC,4th Down,0.7184,90,0.04591836734693878,False,False
-Era Analysis,Late: Composite,0.7203,91,0.04642857142857143,False,False
-Inheritance: Defensive Mentors,4th Down,0.7343,92,0.04693877551020409,False,False
-Inheritance: DC->HC,Pass-Heavy,0.7535,93,0.04744897959183674,False,False
-Overall WAR,Deep Pass Aggression,0.7537,94,0.04795918367346939,False,False
-Inheritance: Offensive Mentors,Deep Pass,0.8003,95,0.04846938775510204,False,False
-Coach Type by Era,Offensive Late,0.8226,96,0.0489795918367347,False,False
-Overall WAR,2-Point Aggression,0.8867,97,0.04948979591836735,False,False
-Inheritance: OC->HC,Deep Pass,0.9936,98,0.05,False,False
+category,test,p,p_source,rank,bh_threshold,sig_raw,sig_bh
+Persistence lag_1,two_point,0.0,clustered,1,0.000510204081632653,True,True
+Persistence lag_1,deep_pass,0.0,clustered,2,0.001020408163265306,True,True
+Persistence lag_1,pass_heavy,0.0,clustered,3,0.0015306122448979593,True,True
+Persistence lag_1,composite,0.0,clustered,4,0.002040816326530612,True,True
+Persistence lag_1,fourth_down,0.0,clustered,5,0.0025510204081632655,True,True
+Persistence Offensive,fourth_down_aggression Lag 1,0.0,clustered,6,0.0030612244897959186,True,True
+Persistence lag_3,two_point,0.0,clustered,7,0.0035714285714285713,True,True
+Persistence Offensive,fourth_down_aggression Lag 3,0.0,clustered,8,0.004081632653061224,True,True
+Persistence lag_3,deep_pass,0.0,clustered,9,0.004591836734693878,True,True
+Persistence Defensive,deep_pass_aggression Lag 1,0.0,clustered,10,0.005102040816326531,True,True
+Persistence Defensive,fourth_down_aggression Lag 1,0.0,clustered,11,0.005612244897959184,True,True
+Persistence Offensive,composite_aggression Lag 2,0.0,clustered,12,0.006122448979591837,True,True
+Persistence Offensive,two_point_aggression Lag 3,0.0,clustered,13,0.00663265306122449,True,True
+Persistence Offensive,composite_aggression Lag 1,0.0,clustered,14,0.007142857142857143,True,True
+Persistence Defensive,pass_heavy_aggression Lag 3,0.0,clustered,15,0.007653061224489797,True,True
+Persistence Defensive,pass_heavy_aggression Lag 1,0.0,clustered,16,0.008163265306122448,True,True
+Persistence Offensive,deep_pass_aggression Lag 1,0.0,clustered,17,0.008673469387755102,True,True
+Persistence Offensive,deep_pass_aggression Lag 2,0.0,clustered,18,0.009183673469387756,True,True
+Persistence Offensive,pass_heavy_aggression Lag 1,0.0,clustered,19,0.009693877551020408,True,True
+Persistence Offensive,pass_heavy_aggression Lag 2,0.0,clustered,20,0.010204081632653062,True,True
+Persistence Offensive,fourth_down_aggression Lag 2,0.0,clustered,21,0.010714285714285714,True,True
+Persistence lag_2,pass_heavy,0.0,clustered,22,0.011224489795918368,True,True
+Persistence lag_2,fourth_down,0.0,clustered,23,0.011734693877551022,True,True
+Persistence lag_2,composite,0.0,clustered,24,0.012244897959183675,True,True
+Persistence lag_2,deep_pass,0.0,clustered,25,0.012755102040816327,True,True
+Persistence lag_3,pass_heavy,0.0,clustered,26,0.01326530612244898,True,True
+Persistence lag_3,fourth_down,0.0,clustered,27,0.013775510204081631,True,True
+Persistence lag_3,composite,0.0,clustered,28,0.014285714285714285,True,True
+Persistence Defensive,composite_aggression Lag 1,0.0,clustered,29,0.01479591836734694,True,True
+Persistence Defensive,composite_aggression Lag 2,0.0,clustered,30,0.015306122448979593,True,True
+Persistence Defensive,composite_aggression Lag 3,0.0,clustered,31,0.015816326530612247,True,True
+Persistence Defensive,two_point_aggression Lag 1,0.0,clustered,32,0.016326530612244896,True,True
+Temporal Trend,Linear regression,6.30907546675798e-08,naive,33,0.01683673469387755,True,True
+Temporal Trend,ANOVA across eras,3.262277493242122e-07,naive,34,0.017346938775510204,True,True
+Temporal Trend,Early (2006-2011) vs Late (2018-2024) (t-test),2.7134737531382975e-06,naive,35,0.01785714285714286,True,True
+Temporal Trend,Middle (2012-2017) vs Late (2018-2024) (t-test),5.275140198084176e-05,naive,36,0.018367346938775512,True,True
+Coach Type (Overall),Offensive: pass_heavy,0.00020737466838585317,naive,37,0.018877551020408164,True,True
+Era Analysis,Early (2006-2011): composite,0.0007513893908980166,naive,38,0.019387755102040816,True,True
+Coach Type by Era,Defensive Middle (2012-2017),0.0008477881868824233,naive,39,0.019897959183673472,True,True
+Overall WAR,Pass-Heavy Aggression,0.001,clustered,40,0.020408163265306124,True,True
+Overall WAR,Composite Aggression,0.001,clustered,41,0.020918367346938777,True,True
+Persistence Offensive,two_point_aggression Lag 2,0.001,clustered,42,0.02142857142857143,True,True
+Temporal Trend,Early (2006-2011) vs Late (2018-2024) (Mann-Whitney),0.0011655011655011655,naive,43,0.02193877551020408,True,True
+Coach Type by Era,Offensive Early (2006-2011),0.0014925209130731653,naive,44,0.022448979591836737,True,True
+Coach Type (Overall),Offensive: composite,0.0016181842882533228,naive,45,0.02295918367346939,True,True
+Coach Type (Overall),Defensive: composite,0.0019530798296324022,naive,46,0.023469387755102045,True,True
+Persistence Defensive,pass_heavy_aggression Lag 2,0.002,clustered,47,0.023979591836734693,True,True
+Two-Way Fixed Effects,Pooled (2006-2024),0.002897012583384262,naive,48,0.02448979591836735,True,True
+Persistence Offensive,two_point_aggression Lag 1,0.003,clustered,49,0.025,True,True
+Persistence Offensive,pass_heavy_aggression Lag 3,0.005,clustered,50,0.025510204081632654,True,True
+Persistence Offensive,composite_aggression Lag 3,0.007,clustered,51,0.02602040816326531,True,True
+Persistence Defensive,fourth_down_aggression Lag 3,0.007,clustered,52,0.02653061224489796,True,True
+Coach Type (Overall),Defensive: pass_heavy,0.008925324034187545,naive,53,0.027040816326530617,True,True
+Persistence Defensive,fourth_down_aggression Lag 2,0.012,clustered,54,0.027551020408163263,True,True
+Persistence Defensive,deep_pass_aggression Lag 3,0.013,clustered,55,0.02806122448979592,True,True
+Persistence Offensive,deep_pass_aggression Lag 3,0.013,clustered,56,0.02857142857142857,True,True
+Inheritance: OC->HC,pass_heavy,0.013,clustered,57,0.029081632653061226,True,True
+Persistence lag_2,two_point,0.014,clustered,58,0.02959183673469388,True,True
+Persistence Defensive,two_point_aggression Lag 3,0.018,clustered,59,0.03010204081632653,True,True
+Era Analysis,Middle (2012-2017): pass_heavy,0.026065519094196667,naive,60,0.030612244897959186,True,True
+Era Analysis,Middle (2012-2017): composite,0.027674316909864223,naive,61,0.03112244897959184,True,True
+Era Analysis,Early (2006-2011): pass_heavy,0.0318564331401044,naive,62,0.031632653061224494,True,False
+Temporal Robustness,Chow test (2011 breakpoint),0.03258266797708442,naive,63,0.03214285714285715,True,False
+Persistence Defensive,deep_pass_aggression Lag 2,0.04,clustered,64,0.03265306122448979,True,False
+Inheritance: Offensive Mentors,composite,0.048,clustered,65,0.03316326530612245,True,False
+Overall WAR,4th Down Aggression,0.051,clustered,66,0.0336734693877551,False,False
+Temporal Robustness,Aggression x Year interaction,0.05523024490548023,naive,67,0.034183673469387756,False,False
+Persistence Defensive,two_point_aggression Lag 2,0.062,clustered,68,0.03469387755102041,False,False
+Era Analysis,Late (2018-2024): pass_heavy,0.06402799123291324,naive,69,0.03520408163265306,False,False
+Temporal Trend,Early (2006-2011) vs Middle (2012-2017) (t-test),0.06534988403415087,naive,70,0.03571428571428572,False,False
+Coach Type by Era,Defensive Early (2006-2011),0.06568264647823295,naive,71,0.03622448979591837,False,False
+Two-Way Fixed Effects,Early (2006-2011),0.1053150011439763,naive,72,0.036734693877551024,False,False
+Inheritance: OC->HC,composite,0.11,clustered,73,0.037244897959183676,False,False
+Inheritance: Offensive Mentors,fourth_down,0.123,clustered,74,0.03775510204081633,False,False
+Inheritance: OC->HC,fourth_down,0.185,clustered,75,0.03826530612244898,False,False
+Two-Way Fixed Effects,Middle (2012-2017),0.20193442639236858,naive,76,0.03877551020408163,False,False
+Inheritance: OC->HC,deep_pass,0.218,clustered,77,0.039285714285714285,False,False
+Inheritance: Offensive Mentors,two_point,0.248,clustered,78,0.039795918367346944,False,False
+Inheritance: Defensive Mentors,two_point,0.289,clustered,79,0.040306122448979596,False,False
+Inheritance: Defensive Mentors,deep_pass,0.304,clustered,80,0.04081632653061225,False,False
+Inheritance: DC->HC,two_point,0.323,clustered,81,0.0413265306122449,False,False
+Inheritance: Offensive Mentors,pass_heavy,0.329,clustered,82,0.04183673469387755,False,False
+Inheritance: OC->HC,two_point,0.339,clustered,83,0.04234693877551021,False,False
+Two-Way Fixed Effects,Late (2018-2024),0.35846563972853085,naive,84,0.04285714285714286,False,False
+Overall WAR,2-Point Aggression,0.369,clustered,85,0.04336734693877551,False,False
+Inheritance: DC->HC,deep_pass,0.374,clustered,86,0.04387755102040816,False,False
+Coach Type by Era,Offensive Late (2018-2024),0.409698086440864,naive,87,0.04438775510204082,False,False
+Overall WAR,Deep Pass Aggression,0.41,clustered,88,0.04489795918367347,False,False
+Era Analysis,Late (2018-2024): composite,0.5653654855059698,naive,89,0.045408163265306126,False,False
+Inheritance: Defensive Mentors,composite,0.594,clustered,90,0.04591836734693878,False,False
+Inheritance: DC->HC,composite,0.625,clustered,91,0.04642857142857143,False,False
+Inheritance: Defensive Mentors,fourth_down,0.629,clustered,92,0.04693877551020409,False,False
+Inheritance: DC->HC,fourth_down,0.639,clustered,93,0.04744897959183674,False,False
+Coach Type by Era,Defensive Late (2018-2024),0.7835402106106124,naive,94,0.04795918367346939,False,False
+Coach Type by Era,Offensive Middle (2012-2017),0.8645502292556304,naive,95,0.04846938775510204,False,False
+Inheritance: Defensive Mentors,pass_heavy,0.874,clustered,96,0.0489795918367347,False,False
+Inheritance: DC->HC,pass_heavy,0.875,clustered,97,0.04948979591836735,False,False
+Inheritance: Offensive Mentors,deep_pass,1.0,clustered,98,0.05,False,False

@@ -13,9 +13,13 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import logging
+import sys
 from scipy import stats
 import matplotlib.pyplot as plt
 import json
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.parsimony import cluster_bootstrap_corr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -108,11 +112,20 @@ class PersistenceByTypeAnalyzer:
                     if len(pairs) >= 10:
                         pairs_df = pd.DataFrame(pairs)
                         corr, p_val = stats.pearsonr(pairs_df['year_n'], pairs_df['year_n_plus'])
+                        # Cluster the bootstrap on coach (same coach -> many pairs).
+                        boot = cluster_bootstrap_corr(
+                            pairs_df['year_n'].values, pairs_df['year_n_plus'].values,
+                            pairs_df['coach'].values, n_boot=2000, seed=42,
+                        )
 
                         results[bg_type][var].append({
                             'lag': int(lag),
                             'correlation': float(corr),
                             'p_value': float(p_val),
+                            'ci_low': boot['ci_low'],
+                            'ci_high': boot['ci_high'],
+                            'p_bootstrap_coach_clustered': boot['p_bootstrap'],
+                            'n_coaches': boot['n_clusters'],
                             'n_pairs': int(len(pairs)),
                             'significant': bool(p_val < 0.05)
                         })
