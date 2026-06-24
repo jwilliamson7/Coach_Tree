@@ -17,6 +17,10 @@ from scipy import stats
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import json
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.data_paths import coach_war_trajectories_path
 
 logging.basicConfig(
     level=logging.INFO,
@@ -46,7 +50,7 @@ class AggressionWARAnalyzer:
         logger.info(f"Loaded {len(self.aggression_data)} coach-year aggression records")
 
         # Load WAR data
-        war_file = Path("data/processed/Coaching/coach_war_trajectories.csv")
+        war_file = coach_war_trajectories_path()
         if not war_file.exists():
             raise FileNotFoundError(f"WAR data not found: {war_file}")
 

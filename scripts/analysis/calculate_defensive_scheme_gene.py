@@ -48,6 +48,7 @@ from utils.model_features import (
     get_defensive_scheme_predictor_features,
     get_categorical_features
 )
+from utils import model_pipeline as mp
 
 # Configure logging
 logging.basicConfig(
@@ -72,53 +73,53 @@ class DefensiveSchemeGeneCalculator:
         self.man_model = None
         self.man_encoders = None
 
-        # Feature list (shared across all 3 defensive models)
+        # Imputer containers (SimpleImputer + TruncatedSVD persisted at train time)
+        self.box_imputers = None
+        self.rush_imputers = None
+        self.man_imputers = None
+
+        # Feature list (shared default; per-model lists overridden from metadata
+        # in load_models so gene-time features match each model's training)
         self.features = get_defensive_scheme_predictor_features()
+        self.box_features = self.features
+        self.rush_features = self.features
+        self.man_features = self.features
         self.categorical_features = get_categorical_features()
 
     def load_models(self) -> None:
-        """Load all three trained defensive models and their encoders"""
+        """Load trained defensive models with their encoders and imputers via the
+        shared pipeline. Feature lists are taken from each model's metadata so
+        gene-time features match exactly what the model was trained on
+        (train/serve consistency).
+
+        Box stacking and pass rush are required (missing .json raises); man
+        coverage is optional (2018+ only) and skipped with a warning if absent.
+        """
         logger.info("Loading trained defensive models...")
-
-        # Load box stacking regressor
-        box_path = self.models_dir / "box_stacking" / "box_stacking_prediction_model.json"
-        if box_path.exists():
-            self.box_model = xgb.XGBRegressor()
-            self.box_model.load_model(str(box_path))
-            encoders_path = self.models_dir / "box_stacking" / "box_stacking_prediction_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.box_encoders = pickle.load(f)
-            logger.info("Loaded box stacking prediction model")
-        else:
-            raise FileNotFoundError(f"Box stacking model not found at {box_path}")
-
-        # Load pass rush regressor
-        rush_path = self.models_dir / "pass_rush" / "pass_rush_prediction_model.json"
-        if rush_path.exists():
-            self.rush_model = xgb.XGBRegressor()
-            self.rush_model.load_model(str(rush_path))
-            encoders_path = self.models_dir / "pass_rush" / "pass_rush_prediction_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.rush_encoders = pickle.load(f)
-            logger.info("Loaded pass rush prediction model")
-        else:
-            raise FileNotFoundError(f"Pass rush model not found at {rush_path}")
-
-        # Load man coverage classifier (optional - only available from 2018+)
-        man_path = self.models_dir / "man_coverage" / "man_coverage_prediction_model.json"
-        if man_path.exists():
-            self.man_model = xgb.XGBClassifier()
-            self.man_model.load_model(str(man_path))
-            encoders_path = self.models_dir / "man_coverage" / "man_coverage_prediction_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.man_encoders = pickle.load(f)
-            logger.info("Loaded man coverage prediction model")
-        else:
-            logger.warning(f"Man coverage model not found at {man_path} - will skip man coverage gene")
-            self.man_model = None
+        specs = {
+            'box': ('box_stacking/box_stacking_prediction_model', xgb.XGBRegressor),
+            'rush': ('pass_rush/pass_rush_prediction_model', xgb.XGBRegressor),
+            'man': ('man_coverage/man_coverage_prediction_model', xgb.XGBClassifier),
+        }
+        for name, (relstem, model_cls) in specs.items():
+            stem = str(self.models_dir / relstem)
+            if not Path(f"{stem}.json").exists():
+                if name == 'man':
+                    logger.warning(f"Man coverage model not found at {stem}.json - "
+                                   f"will skip man coverage gene")
+                    self.man_model = None
+                    continue
+                raise FileNotFoundError(f"{name} model not found at {stem}.json")
+            bundle = mp.load_inference_bundle(stem, model_cls)
+            setattr(self, f"{name}_model", bundle['model'])
+            setattr(self, f"{name}_encoders", bundle['encoders'])
+            setattr(self, f"{name}_imputers", bundle['imputers'])
+            if bundle['feature_names']:
+                setattr(self, f"{name}_features", bundle['feature_names'])
+            if bundle['imputers'] is None:
+                logger.warning(f"{name}: no imputer artifact found; using fallback median "
+                               f"impute (retrain the model to restore train/serve consistency)")
+            logger.info(f"Loaded {name} model")
 
     def load_play_data(self, start_year: int = 2016, end_year: int = 2024) -> pd.DataFrame:
         """
@@ -213,39 +214,20 @@ class DefensiveSchemeGeneCalculator:
         return combined
 
     def prepare_features_for_model(self, df: pd.DataFrame, features: List[str],
-                                   encoders: Optional[Dict]) -> np.ndarray:
+                                   encoders: Optional[Dict],
+                                   imputers: Optional[Dict] = None) -> np.ndarray:
+        """Transform-only feature prep via the shared pipeline.
+
+        Encoders and the imputer (SimpleImputer + TruncatedSVD) were fit at train
+        time and are reused here, so gene-time features land in the exact same
+        space the model was trained on. If `imputers` is None (model predates the
+        persistence fix) a fallback median impute is used and a warning logged.
         """
-        Prepare features for model prediction, handling missing values and encoding.
-
-        Args:
-            df: DataFrame with raw features
-            features: List of feature column names
-            encoders: Label encoders for categorical features
-
-        Returns:
-            Numpy array ready for model prediction
-        """
-        df_features = df[features].copy()
-
-        if encoders:
-            for col in features:
-                if col in encoders and col in self.categorical_features:
-                    le = encoders[col]
-                    df_features[col] = df_features[col].astype(str)
-                    mask = df_features[col].isin(le.classes_)
-                    df_features.loc[~mask, col] = 'nan'
-                    if 'nan' not in le.classes_:
-                        le.classes_ = np.append(le.classes_, 'nan')
-                    df_features[col] = le.transform(df_features[col])
-
-        from sklearn.impute import SimpleImputer
-        numeric_cols = [col for col in df_features.columns
-                        if df_features[col].dtype in ['int64', 'float64']]
-        if numeric_cols:
-            imputer = SimpleImputer(strategy='median')
-            df_features[numeric_cols] = imputer.fit_transform(df_features[numeric_cols])
-
-        return df_features.values
+        if imputers is None:
+            logger.warning("No persisted imputer for this model; using fallback median "
+                           "impute. Retrain the model to restore train/serve consistency.")
+        return mp.prepare_features_for_inference(
+            df, features, self.categorical_features, encoders, imputers)
 
     def calculate_box_stacking_gene(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
@@ -268,7 +250,8 @@ class DefensiveSchemeGeneCalculator:
 
         logger.info(f"Analyzing {len(box_plays):,} plays for box stacking gene")
 
-        features = self.prepare_features_for_model(box_plays, self.features, self.box_encoders)
+        features = self.prepare_features_for_model(
+            box_plays, self.box_features, self.box_encoders, self.box_imputers)
         predictions = self.box_model.predict(features)
         box_plays['predicted_box'] = predictions
         box_plays['actual_box'] = box_plays['defenders_in_box'].astype(float)
@@ -307,7 +290,8 @@ class DefensiveSchemeGeneCalculator:
 
         logger.info(f"Analyzing {len(rush_plays):,} plays for pass rush gene")
 
-        features = self.prepare_features_for_model(rush_plays, self.features, self.rush_encoders)
+        features = self.prepare_features_for_model(
+            rush_plays, self.rush_features, self.rush_encoders, self.rush_imputers)
         predictions = self.rush_model.predict(features)
         rush_plays['predicted_rushers'] = predictions
         rush_plays['actual_rushers'] = rush_plays['number_of_pass_rushers'].astype(float)
@@ -350,7 +334,8 @@ class DefensiveSchemeGeneCalculator:
 
         logger.info(f"Analyzing {len(man_plays):,} plays for man coverage gene")
 
-        features = self.prepare_features_for_model(man_plays, self.features, self.man_encoders)
+        features = self.prepare_features_for_model(
+            man_plays, self.man_features, self.man_encoders, self.man_imputers)
         predictions = self.man_model.predict_proba(features)[:, 1]
         man_plays['predicted_man_prob'] = predictions
         man_plays['actual_man'] = (man_plays['defense_man_zone_type'] == 'MAN_COVERAGE').astype(int)

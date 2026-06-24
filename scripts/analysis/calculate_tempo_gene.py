@@ -40,6 +40,7 @@ from utils.model_features import (
     get_pace_predictor_features,
     get_categorical_features
 )
+from utils import model_pipeline as mp
 
 # Configure logging
 logging.basicConfig(
@@ -61,8 +62,10 @@ class TempoGeneCalculator:
         # Model containers
         self.no_huddle_model = None
         self.no_huddle_encoders = None
+        self.no_huddle_imputers = None
         self.pace_model = None
         self.pace_encoders = None
+        self.pace_imputers = None
 
         # Feature lists
         self.no_huddle_features = get_no_huddle_predictor_features()
@@ -74,36 +77,28 @@ class TempoGeneCalculator:
         self.coach_dict = {}
 
     def load_models(self) -> None:
-        """Load both trained models and their encoders"""
+        """Load trained models with their encoders and imputers via the shared
+        pipeline. Feature lists are taken from each model's metadata so gene-time
+        features match exactly what the model was trained on (train/serve)."""
         logger.info("Loading trained models...")
-
-        # Load no-huddle classifier
-        nh_path = self.models_dir / "no_huddle" / "no_huddle_prediction_model.json"
-        if nh_path.exists():
-            self.no_huddle_model = xgb.XGBClassifier()
-            self.no_huddle_model.load_model(str(nh_path))
-
-            encoders_path = self.models_dir / "no_huddle" / "no_huddle_prediction_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.no_huddle_encoders = pickle.load(f)
-            logger.info("Loaded no-huddle prediction model")
-        else:
-            raise FileNotFoundError(f"No-huddle model not found at {nh_path}")
-
-        # Load pace regressor
-        pace_path = self.models_dir / "pace" / "pace_prediction_model.json"
-        if pace_path.exists():
-            self.pace_model = xgb.XGBRegressor()
-            self.pace_model.load_model(str(pace_path))
-
-            encoders_path = self.models_dir / "pace" / "pace_prediction_model_encoders.pkl"
-            if encoders_path.exists():
-                with open(encoders_path, 'rb') as f:
-                    self.pace_encoders = pickle.load(f)
-            logger.info("Loaded pace prediction model")
-        else:
-            raise FileNotFoundError(f"Pace model not found at {pace_path}")
+        specs = {
+            'no_huddle': ('no_huddle/no_huddle_prediction_model', xgb.XGBClassifier),
+            'pace': ('pace/pace_prediction_model', xgb.XGBRegressor),
+        }
+        for name, (relstem, model_cls) in specs.items():
+            stem = str(self.models_dir / relstem)
+            if not Path(f"{stem}.json").exists():
+                raise FileNotFoundError(f"{name} model not found at {stem}.json")
+            bundle = mp.load_inference_bundle(stem, model_cls)
+            setattr(self, f"{name}_model", bundle['model'])
+            setattr(self, f"{name}_encoders", bundle['encoders'])
+            setattr(self, f"{name}_imputers", bundle['imputers'])
+            if bundle['feature_names']:
+                setattr(self, f"{name}_features", bundle['feature_names'])
+            if bundle['imputers'] is None:
+                logger.warning(f"{name}: no imputer artifact found; using fallback median "
+                               f"impute (retrain the model to restore train/serve consistency)")
+            logger.info(f"Loaded {name} model")
 
     def load_coach_mappings(self) -> None:
         """Load the mapping of team-year to head coaches"""
@@ -239,39 +234,20 @@ class TempoGeneCalculator:
         return combined
 
     def prepare_features_for_model(self, df: pd.DataFrame, features: List[str],
-                                   encoders: Optional[Dict]) -> np.ndarray:
+                                   encoders: Optional[Dict],
+                                   imputers: Optional[Dict] = None) -> np.ndarray:
+        """Transform-only feature prep via the shared pipeline.
+
+        Encoders and the imputer (SimpleImputer + TruncatedSVD) were fit at train
+        time and are reused here, so gene-time features land in the exact same
+        space the model was trained on. If `imputers` is None (model predates the
+        persistence fix) a fallback median impute is used and a warning logged.
         """
-        Prepare features for model prediction, handling missing values and encoding.
-
-        Args:
-            df: DataFrame with raw features
-            features: List of feature column names for this model
-            encoders: Label encoders for categorical features
-
-        Returns:
-            Numpy array ready for model prediction
-        """
-        df_features = df[features].copy()
-
-        if encoders:
-            for col in features:
-                if col in encoders and col in self.categorical_features:
-                    le = encoders[col]
-                    df_features[col] = df_features[col].astype(str)
-                    mask = df_features[col].isin(le.classes_)
-                    df_features.loc[~mask, col] = 'nan'
-                    if 'nan' not in le.classes_:
-                        le.classes_ = np.append(le.classes_, 'nan')
-                    df_features[col] = le.transform(df_features[col])
-
-        from sklearn.impute import SimpleImputer
-        numeric_cols = [col for col in df_features.columns
-                        if df_features[col].dtype in ['int64', 'float64']]
-        if numeric_cols:
-            imputer = SimpleImputer(strategy='median')
-            df_features[numeric_cols] = imputer.fit_transform(df_features[numeric_cols])
-
-        return df_features.values
+        if imputers is None:
+            logger.warning("No persisted imputer for this model; using fallback median "
+                           "impute. Retrain the model to restore train/serve consistency.")
+        return mp.prepare_features_for_inference(
+            df, features, self.categorical_features, encoders, imputers)
 
     def calculate_no_huddle_gene(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
@@ -302,7 +278,8 @@ class TempoGeneCalculator:
 
         # Prepare features and predict
         features = self.prepare_features_for_model(nh_plays, self.no_huddle_features,
-                                                    self.no_huddle_encoders)
+                                                    self.no_huddle_encoders,
+                                                    self.no_huddle_imputers)
         predictions = self.no_huddle_model.predict_proba(features)[:, 1]
         nh_plays['predicted_no_huddle_rate'] = predictions
         nh_plays['actual_no_huddle'] = nh_plays['no_huddle'].astype(int)
@@ -351,7 +328,8 @@ class TempoGeneCalculator:
 
         # Prepare features and predict
         features = self.prepare_features_for_model(pace_plays, self.pace_features,
-                                                    self.pace_encoders)
+                                                    self.pace_encoders,
+                                                    self.pace_imputers)
         predictions = self.pace_model.predict(features)
         pace_plays['predicted_pace'] = predictions
         pace_plays['actual_pace'] = pace_plays['seconds_between_plays'].astype(float)

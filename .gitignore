@@ -1,6 +1,10 @@
 # Play-by-play data files (large CSV files)
 data/raw/play_by_play/
 
+# Coach WAR trajectories: canonical source is the sibling Coach_WAR repo
+# (resolved via utils/data_paths.py). The local copy is only a fallback.
+data/processed/Coaching/coach_war_trajectories.csv
+
 # Python
 __pycache__/
 *.py[cod]
@@ -155,3 +159,6 @@ tmp/
 
 # Generated outputs (HTML visualizations, reports, analysis files)
 *.html
+
+# Supermemory local container config (personal tag — do not commit)
+.claude/.supermemory-claude/
