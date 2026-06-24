@@ -462,6 +462,71 @@ def cluster_bootstrap_ci(
     return out
 
 
+def cluster_bootstrap_corr(
+    x: np.ndarray,
+    y: np.ndarray,
+    clusters: np.ndarray,
+    n_boot: int = 2000,
+    seed: int = 0,
+    ci: float = 0.95,
+) -> Dict:
+    """Cluster (block) bootstrap for a Pearson correlation: resample whole
+    clusters WITH replacement and recompute r each draw.
+
+    For repeated-measures correlations -- coach-years sharing a coach, or
+    mentor-protege pairs sharing a mentor -- the ordinary pearsonr p-value
+    treats every row as independent and is anti-conservative. This resamples at
+    the cluster level instead. Returns the point Pearson r, a percentile CI, and
+    a two-sided bootstrap p-value (share of draws on the opposite side of 0,
+    doubled). Non-finite rows are dropped; returns NaNs if <3 clusters remain.
+    """
+    rng = np.random.default_rng(seed)
+    x = np.asarray(x, float)
+    y = np.asarray(y, float)
+    clusters = np.asarray(clusters)
+    mask = np.isfinite(x) & np.isfinite(y)
+    x, y, clusters = x[mask], y[mask], clusters[mask]
+    uniq = np.unique(clusters)
+    n_clusters = len(uniq)
+
+    def _r(xi, yi):
+        if len(xi) < 3 or np.std(xi) == 0 or np.std(yi) == 0:
+            return np.nan
+        return float(np.corrcoef(xi, yi)[0, 1])
+
+    point = _r(x, y)
+    if n_clusters < 3 or not np.isfinite(point):
+        return {"r": point, "ci_low": float("nan"), "ci_high": float("nan"),
+                "p_bootstrap": float("nan"), "n": int(len(x)),
+                "n_clusters": int(n_clusters), "n_boot": 0}
+
+    idx_by_cluster = {g: np.where(clusters == g)[0] for g in uniq}
+    draws = []
+    for _ in range(n_boot):
+        samp = rng.choice(uniq, size=n_clusters, replace=True)
+        rows = np.concatenate([idx_by_cluster[g] for g in samp])
+        r = _r(x[rows], y[rows])
+        if np.isfinite(r):
+            draws.append(r)
+    draws = np.asarray(draws)
+
+    lo_q = (1 - ci) / 2 * 100
+    hi_q = (1 + ci) / 2 * 100
+    if point >= 0:
+        p = 2.0 * float(np.mean(draws <= 0))
+    else:
+        p = 2.0 * float(np.mean(draws >= 0))
+    return {
+        "r": float(point),
+        "ci_low": float(np.percentile(draws, lo_q)),
+        "ci_high": float(np.percentile(draws, hi_q)),
+        "p_bootstrap": float(min(1.0, p)),
+        "n": int(len(x)),
+        "n_clusters": int(n_clusters),
+        "n_boot": int(len(draws)),
+    }
+
+
 # --------------------------------------------------------------------------- #
 # Self-test
 # --------------------------------------------------------------------------- #
@@ -507,6 +572,12 @@ def _selftest():
     print(f"cluster OLS OK -> x1 beta={res['coefficients']['x1']['coefficient']:.3f} "
           f"p={res['coefficients']['x1']['p_value']:.4f}; "
           f"boot CI={boot['x1']['ci_low']:.3f}..{boot['x1']['ci_high']:.3f}")
+
+    # --- cluster bootstrap correlation ---
+    bc = cluster_bootstrap_corr(x1, yr, groups, n_boot=300, seed=3)
+    assert bc["p_bootstrap"] < 0.05, "true correlation should be significant"
+    print(f"cluster corr OK -> r={bc['r']:.3f} CI={bc['ci_low']:.3f}..{bc['ci_high']:.3f} "
+          f"p_boot={bc['p_bootstrap']:.4f} (clusters={bc['n_clusters']})")
     print("ALL PARSIMONY SELF-TESTS PASSED")
 
 

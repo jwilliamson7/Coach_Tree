@@ -5,7 +5,7 @@
     "intercept": -2.518620696664342,
     "r": 0.9104175777187813,
     "r_squared": 0.8288601658193332,
-    "p_value": 6.309075466757983e-08,
+    "p_value": 6.30907546675798e-08,
     "std_err": 0.000137937381284649,
     "n_years": 19,
     "year_range": "2006-2024",
@@ -64,7 +64,7 @@
       "mean_difference_percent": 1.5802118104451683,
       "t_test": {
         "t_statistic": -8.764991285022507,
-        "p_value": 2.7134737531382946e-06,
+        "p_value": 2.7134737531382975e-06,
         "significant": true
       },
       "mann_whitney": {
@@ -82,7 +82,7 @@
       "mean_difference_percent": 1.2326781366837414,
       "t_test": {
         "t_statistic": -6.372840714928023,
-        "p_value": 5.275140198084174e-05,
+        "p_value": 5.275140198084176e-05,
         "significant": true
       },
       "mann_whitney": {

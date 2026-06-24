@@ -117,6 +117,13 @@ def main():
             'log': 'mentor_war_protege_war.log',
             'description': 'Mentor-Protégé WAR Relationship Analysis'
         },
+        # Multiple-comparison correction MUST run last: it reads every analysis
+        # JSON above and applies a single global Benjamini-Hochberg FDR.
+        {
+            'path': Path("scripts/analysis/benjamini_hochberg_correction.py"),
+            'log': 'benjamini_hochberg_correction.log',
+            'description': 'Benjamini-Hochberg FDR Correction (global, clustered p where available)'
+        },
         # Visualization scripts (non-HTML)
         {
             'path': Path("scripts/visualization/visualize_aggression_trends.py"),

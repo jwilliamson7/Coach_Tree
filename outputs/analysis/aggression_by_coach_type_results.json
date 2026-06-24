@@ -2,33 +2,33 @@
   "overall_by_type": {
     "Offensive": {
       "composite": {
-        "correlation": 0.0743251599303216,
-        "p_value": 0.19184217953347238,
+        "correlation": 0.178339065004333,
+        "p_value": 0.0016181842882533228,
         "n": 310,
-        "slope": 0.4731778290006298,
-        "significant": false
+        "slope": 1.1440338900372604,
+        "significant": true
       },
       "pass_heavy": {
-        "correlation": 0.13636916259178372,
-        "p_value": 0.01628070258720142,
+        "correlation": 0.20921454720324406,
+        "p_value": 0.00020737466838585317,
         "n": 310,
-        "slope": 0.43447897301106203,
+        "slope": 0.6034735405293159,
         "significant": true
       }
     },
     "Defensive": {
       "composite": {
-        "correlation": 0.11977015972360541,
-        "p_value": 0.058109489110582446,
+        "correlation": 0.19459737997993035,
+        "p_value": 0.0019530798296324022,
         "n": 251,
-        "slope": 0.8373620914069524,
-        "significant": false
+        "slope": 1.3819050259731962,
+        "significant": true
       },
       "pass_heavy": {
-        "correlation": 0.14576339372797492,
-        "p_value": 0.020879775707771345,
+        "correlation": 0.16474416088857372,
+        "p_value": 0.008925324034187545,
         "n": 251,
-        "slope": 0.41279223304291607,
+        "slope": 0.4335143081986202,
         "significant": true
       }
     }
@@ -37,42 +37,42 @@
     "Offensive": {
       "Early (2006-2011)": {
         "composite": {
-          "correlation": 0.21618579790042428,
-          "p_value": 0.040705377857715844,
+          "correlation": 0.3299765147488493,
+          "p_value": 0.0014925209130731653,
           "n": 90,
           "significant": true
         },
         "pass_heavy": {
-          "correlation": 0.19233613756559492,
-          "p_value": 0.06934707778503567,
+          "correlation": 0.31688225766268585,
+          "p_value": 0.0023421845041536795,
           "n": 90,
-          "significant": false
+          "significant": true
         }
       },
       "Middle (2012-2017)": {
         "composite": {
-          "correlation": -0.04160584708175138,
-          "p_value": 0.6970106083021262,
+          "correlation": -0.018234618767888247,
+          "p_value": 0.8645502292556304,
           "n": 90,
           "significant": false
         },
         "pass_heavy": {
-          "correlation": -0.040380464294406095,
-          "p_value": 0.7055182535768857,
+          "correlation": -0.009269862851544143,
+          "p_value": 0.9308986893707882,
           "n": 90,
           "significant": false
         }
       },
       "Late (2018-2024)": {
         "composite": {
-          "correlation": 0.008495651702289145,
-          "p_value": 0.9235749646592755,
+          "correlation": 0.07291477120355251,
+          "p_value": 0.409698086440864,
           "n": 130,
           "significant": false
         },
         "pass_heavy": {
-          "correlation": 0.1520517937992423,
-          "p_value": 0.08417312747551543,
+          "correlation": 0.17205930076942916,
+          "p_value": 0.05029405787146888,
           "n": 130,
           "significant": false
         }
@@ -81,42 +81,42 @@
     "Defensive": {
       "Early (2006-2011)": {
         "composite": {
-          "correlation": 0.216563110745461,
-          "p_value": 0.04270202120992356,
+          "correlation": 0.19709558131776095,
+          "p_value": 0.06568264647823295,
           "n": 88,
-          "significant": true
+          "significant": false
         },
         "pass_heavy": {
-          "correlation": 0.04271957468508187,
-          "p_value": 0.6926984882457571,
+          "correlation": 0.03862038676423108,
+          "p_value": 0.7209087516026881,
           "n": 88,
           "significant": false
         }
       },
       "Middle (2012-2017)": {
         "composite": {
-          "correlation": 0.27637409058696566,
-          "p_value": 0.009563042979746835,
+          "correlation": 0.35133699091155596,
+          "p_value": 0.0008477881868824233,
           "n": 87,
           "significant": true
         },
         "pass_heavy": {
-          "correlation": 0.2896791017341638,
-          "p_value": 0.006499032394330485,
+          "correlation": 0.3031481498701961,
+          "p_value": 0.0043149502095853,
           "n": 87,
           "significant": true
         }
       },
       "Late (2018-2024)": {
         "composite": {
-          "correlation": -0.07031409979751589,
-          "p_value": 0.5461277294204315,
+          "correlation": -0.032034045838414245,
+          "p_value": 0.7835402106106124,
           "n": 76,
           "significant": false
         },
         "pass_heavy": {
-          "correlation": 0.13046994955343139,
-          "p_value": 0.2612804866596047,
+          "correlation": 0.1003300080124239,
+          "p_value": 0.3885006876407685,
           "n": 76,
           "significant": false
         }

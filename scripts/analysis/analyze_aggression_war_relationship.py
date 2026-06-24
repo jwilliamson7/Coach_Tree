@@ -21,6 +21,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.data_paths import coach_war_trajectories_path
+from utils.parsimony import cluster_bootstrap_corr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -103,7 +104,7 @@ class AggressionWARAnalyzer:
 
         for col, label in measures.items():
             # Remove any rows with missing values for this analysis
-            clean_data = self.merged_data[[col, 'annual_war']].dropna()
+            clean_data = self.merged_data[[col, 'annual_war', 'coach']].dropna()
 
             if len(clean_data) == 0:
                 logger.warning(f"No valid data for {label}")
@@ -118,9 +119,19 @@ class AggressionWARAnalyzer:
             # Linear regression
             slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
 
+            # These are coach-years; the same coach contributes many rows. Cluster
+            # the bootstrap on coach so the CI/p reflect ~123 coaches, not 606 rows.
+            boot = cluster_bootstrap_corr(
+                x.values, y.values, clean_data['coach'].values, n_boot=2000, seed=42,
+            )
+
             results[label] = {
                 'correlation': float(corr),
                 'p_value': float(p_val),
+                'ci_low': boot['ci_low'],
+                'ci_high': boot['ci_high'],
+                'p_bootstrap_coach_clustered': boot['p_bootstrap'],
+                'n_coaches': boot['n_clusters'],
                 'slope': float(slope),
                 'intercept': float(intercept),
                 'r_squared': float(r_value ** 2),

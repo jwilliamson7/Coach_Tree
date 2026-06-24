@@ -25,10 +25,14 @@ import pandas as pd
 import numpy as np
 import json
 import logging
+import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime
 from scipy import stats
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.parsimony import cluster_bootstrap_corr
 
 # Configure logging
 logging.basicConfig(
@@ -428,8 +432,14 @@ class InheritanceAnalyzer:
             hc_vals = subset['hc_era_gene'].values
             changes = subset['gene_change'].values
 
-            # Pearson correlation
+            # Pearson correlation. These are raw per-stint rows: a coach with
+            # multiple coordinator stints appears more than once, so cluster the
+            # bootstrap on coach_id rather than treating stints as independent.
             r, p = stats.pearsonr(coord_vals, hc_vals)
+            boot = cluster_bootstrap_corr(
+                coord_vals, hc_vals, subset['coach_id'].values,
+                n_boot=2000, seed=42,
+            )
 
             # Direction retention: same sign (exclude zeros)
             nonzero = (coord_vals != 0) & (hc_vals != 0)
@@ -444,6 +454,10 @@ class InheritanceAnalyzer:
                 'pearson_r': round(float(r), 4),
                 'pearson_p': round(float(p), 4),
                 'significant': p < 0.05,
+                'ci_low': round(boot['ci_low'], 4),
+                'ci_high': round(boot['ci_high'], 4),
+                'p_bootstrap_coach_clustered': round(boot['p_bootstrap'], 4),
+                'n_coaches': boot['n_clusters'],
                 'mean_coord_gene': round(float(np.mean(coord_vals)), 4),
                 'mean_hc_gene': round(float(np.mean(hc_vals)), 4),
                 'mean_change': round(float(np.mean(changes)), 4),
