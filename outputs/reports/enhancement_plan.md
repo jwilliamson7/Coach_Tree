@@ -236,6 +236,50 @@ absolute/season-agnostic design).
 
 ---
 
+## Validation pass v3 (V1-V3) - 2026-06-25 [IMPLEMENTED]
+
+Third pass: INSIGHT analyses (not robustness fixes). Construct-validity reframing settled with Jon.
+
+### Construct validity (settled)
+Aggression is a FORMATIVE construct (behaviors constitute it; need not correlate), NOT reflective -
+so the low inter-component coherence (PC1=34%, 4th-2pt r=.24 the only positive pair, pass_heavy
+independent) is fine, not a flaw. DECISION (Jon): keep ONE composite + sub-components, report
+components forward; NO sub-index. Honest caveat for paper: composite->WAR is pass_heavy-led, the
+facet with the weakest claim to "aggression". 4th-down+2-point are the one coherent "go-for-it"
+cluster; deep-pass and pass-heavy are independent facets.
+
+### V1 - Coach-vs-team variance decomposition  [analyze_coach_vs_team_variance.py]
+THE core validation of the coaching-gene premise. Coach identity explains ~5x more variance than team
+(composite 0.51 vs 0.13; shotgun .58/.12; tempo .53/.10). Gene TRAVELS across team changes (32
+movers): old-team vs new-team mean r=.61 composite, .55 shotgun, .54 tempo (>= within-team
+year-to-year persistence). Mover regression new~coach_pre+team_new_prior: coach_pre b=.53 p<.001,
+team term small. Composite travels better than components (noise cancels); 4th-down/deep-pass travel
+weakly. -> the gene is a COACH trait, not a roster/franchise artifact.
+
+### V2 - Face validity  [analyze_gene_face_validity.py]
+Career-mean rankings match reputation: aggressive Pederson/Staley/Arians, conservative Fox/Rex Ryan;
+4th-down Dan Campbell; tempo Chip Kelly (huge); shotgun Sirianni/Kingsbury/Kelly; deep Arians/Koetter;
+2pt Pederson. All genes (incl defensive) ranked by HC, consistent with the gene's attribution.
+
+### Attribution (Jon, noted as a LIMITATION, not engineered around)
+Genes are attributed to the HC as the accountable decision-maker / philosophy-setter. Play-calling
+responsibility VARIES: some HCs call their own offense or defense, most delegate to a coordinator. This
+is a paper limitation (adds idiosyncratic noise, not systematic bias), NOT something to change behavior
+on. Do not switch defensive attribution to team/DC. The strong face validity + r=.61 coach-travel argue
+HC attribution captures real coach-specific signal.
+
+### V3 - Out-of-sample temporal validation  [analyze_oos_temporal_validation.py]
+Train <=2018, predict >2018. Composite aggression train r=.19 -> test r=.12 (p=.107), skill +.02:
+season-level generalizes only WEAKLY - EXPECTED since single-season WAR is ~76% noise (career-level is
+the robust form, not a failure of the gene). Shotgun holds (.10->.15). Defensive scheme->WAR is RECENT
+(train -.02 -> test +.25): era-shifting, supports diffusion story. PAPER USE (Jon + agreed): NOT a
+featured predictive-validity result (undersells/misreadable); one robustness sentence supporting the
+career-level anchor + the defensive era-shift. Script kept in repo.
+
+All three added to run_all_analyses.py. They do NOT feed the BH family (descriptive/validation).
+
+---
+
 ## Execution order (one cascade at the end)
 
 1. Model-level changes together (they all force refits): **WS2** (feature set) -> **WS3**

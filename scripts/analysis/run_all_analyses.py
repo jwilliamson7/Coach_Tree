@@ -132,6 +132,21 @@ def main():
             'log': 'selection_sensitivity.log',
             'description': 'WS15 Selection / Filtering Sensitivity (attrition + sample cuts)'
         },
+        {
+            'path': Path("scripts/analysis/analyze_coach_vs_team_variance.py"),
+            'log': 'coach_vs_team_variance.log',
+            'description': 'Coach-vs-Team Variance Decomposition (does the gene travel with the coach?)'
+        },
+        {
+            'path': Path("scripts/analysis/analyze_gene_face_validity.py"),
+            'log': 'gene_face_validity.log',
+            'description': 'Gene Face Validity (career-mean leaders/laggards vs reputation)'
+        },
+        {
+            'path': Path("scripts/analysis/analyze_oos_temporal_validation.py"),
+            'log': 'oos_temporal_validation.log',
+            'description': 'Out-of-Sample Temporal Validation of gene -> WAR'
+        },
         # Multiple-comparison correction MUST run last: it reads every analysis
         # JSON above and applies a single global Benjamini-Hochberg FDR.
         {
