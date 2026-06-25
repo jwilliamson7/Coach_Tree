@@ -63,11 +63,11 @@ Persistence Defensive,deep_pass_aggression Lag 3,0.022,wild_cluster,61,0.0301980
 Persistence lag_2,two_point,0.022,clustered,62,0.030693069306930693,True,True
 Persistence Offensive,deep_pass_aggression Lag 3,0.022,wild_cluster,63,0.031188118811881188,True,True
 Overall WAR,4th Down Aggression,0.033,clustered,64,0.031683168316831684,True,False
-Era Analysis,Late (2018-2024): pass_heavy,0.0494754634206985,naive,65,0.03217821782178218,True,False
-Persistence Defensive,deep_pass_aggression Lag 2,0.057,wild_cluster,66,0.032673267326732675,False,False
-Era Analysis,Middle (2012-2017): composite,0.05893779909827508,naive,67,0.03316831683168317,False,False
-Temporal Trend,Early (2006-2011) vs Middle (2012-2017) (t-test),0.06534988403415087,naive,68,0.033663366336633666,False,False
-Temporal Robustness,Chow test (2011 breakpoint),0.07061877906198544,naive,69,0.03415841584158416,False,False
+Temporal Robustness,Chow test (2012 breakpoint),0.03364212734602512,naive,65,0.03217821782178218,True,False
+Era Analysis,Late (2018-2024): pass_heavy,0.0494754634206985,naive,66,0.032673267326732675,True,False
+Persistence Defensive,deep_pass_aggression Lag 2,0.057,wild_cluster,67,0.03316831683168317,False,False
+Era Analysis,Middle (2012-2017): composite,0.05893779909827508,naive,68,0.033663366336633666,False,False
+Temporal Trend,Early (2006-2011) vs Middle (2012-2017) (t-test),0.06534988403415087,naive,69,0.03415841584158416,False,False
 Persistence Defensive,fourth_down_aggression Lag 2,0.078,wild_cluster,70,0.03465346534653465,False,False
 Coach Type by Era,Defensive Early (2006-2011),0.07803102602219626,naive,71,0.035148514851485145,False,False
 Inheritance: Offensive Mentors,fourth_down,0.091,clustered,72,0.03564356435643564,False,False

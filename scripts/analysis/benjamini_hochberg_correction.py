@@ -185,8 +185,13 @@ def collect_tests():
         if inter:
             _add(tests, "Temporal Robustness", "Aggression x Year interaction", inter, False)
         breaks = d.get("structural_breaks", {})
-        # prefer a 2011 breakpoint to mirror the reported Chow test; else first
-        chosen = breaks.get("2011") or (next(iter(breaks.values())) if breaks else None)
+        bestbp = breaks.get("best_breakpoint")
+        # feature the significant break the paper reports (2012); fall back to the
+        # JSON's best_breakpoint, then any year-keyed entry.
+        chosen = breaks.get("2012") or (breaks.get(str(bestbp)) if bestbp else None)
+        if not chosen:
+            chosen = next((v for k, v in breaks.items()
+                           if k != "best_breakpoint" and isinstance(v, dict)), None)
         if chosen:
             yr = chosen.get("breakpoint", "?")
             _add(tests, "Temporal Robustness", f"Chow test ({yr} breakpoint)", chosen, False)
