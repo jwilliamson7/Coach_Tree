@@ -21,6 +21,10 @@ from scipy import stats
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter, MaxNLocator
 import json
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+from utils.parsimony import corr_with_small_cluster_guard
 
 logging.basicConfig(
     level=logging.INFO,
@@ -72,25 +76,49 @@ class TemporalAggressionAnalyzer:
             results[era] = {}
 
             # Composite aggression
-            comp_data = era_data[['composite_aggression', 'annual_war']].dropna()
+            comp_data = era_data[['composite_aggression', 'annual_war', 'coach']].dropna()
             if len(comp_data) > 0:
                 corr, p_val = stats.pearsonr(comp_data['composite_aggression'], comp_data['annual_war'])
+                boot = corr_with_small_cluster_guard(
+                    comp_data['composite_aggression'].to_numpy(),
+                    comp_data['annual_war'].to_numpy(),
+                    comp_data['coach'].to_numpy(),
+                    n_boot=2000, seed=0,
+                )
                 results[era]['composite'] = {
                     'correlation': float(corr),
                     'p_value': float(p_val),
                     'n': int(len(comp_data)),
-                    'significant': bool(p_val < 0.05)
+                    'significant': bool(p_val < 0.05),
+                    'ci_low': boot['ci_low'],
+                    'ci_high': boot['ci_high'],
+                    'n_coaches': boot['n_clusters'],
+                    'p_clustered': boot.get('p_bootstrap'),
+                    'small_cluster': boot.get('small_cluster'),
+                    'p_wild_cluster': boot.get('p_wild_cluster'),
                 }
 
             # Pass-heavy aggression
-            pass_data = era_data[['pass_heavy_aggression', 'annual_war']].dropna()
+            pass_data = era_data[['pass_heavy_aggression', 'annual_war', 'coach']].dropna()
             if len(pass_data) > 0:
                 corr, p_val = stats.pearsonr(pass_data['pass_heavy_aggression'], pass_data['annual_war'])
+                boot = corr_with_small_cluster_guard(
+                    pass_data['pass_heavy_aggression'].to_numpy(),
+                    pass_data['annual_war'].to_numpy(),
+                    pass_data['coach'].to_numpy(),
+                    n_boot=2000, seed=0,
+                )
                 results[era]['pass_heavy'] = {
                     'correlation': float(corr),
                     'p_value': float(p_val),
                     'n': int(len(pass_data)),
-                    'significant': bool(p_val < 0.05)
+                    'significant': bool(p_val < 0.05),
+                    'ci_low': boot['ci_low'],
+                    'ci_high': boot['ci_high'],
+                    'n_coaches': boot['n_clusters'],
+                    'p_clustered': boot.get('p_bootstrap'),
+                    'small_cluster': boot.get('small_cluster'),
+                    'p_wild_cluster': boot.get('p_wild_cluster'),
                 }
 
             logger.info(f"\n{era}:")

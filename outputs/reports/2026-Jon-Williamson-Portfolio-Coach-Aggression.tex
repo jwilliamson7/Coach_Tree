@@ -156,7 +156,7 @@ Table~\ref{tab:model_features} summarizes the predictor variables for each model
 
 From the candidate pool in Table~\ref{tab:model_features}, each model retains only a stability-selected subset of features (see Section~\ref{sec:pipeline}), reducing the 21--28 candidates to 13--16 stable predictors per model and guarding against overfitting collinear context variables.
 
-Model performance varies across components. Under grouped cross-validation that holds out whole team-years (so no team's plays appear in both training and evaluation), the fourth-down model reaches an AUC of 0.974, the two-point conversion model 0.927, the run-pass model 0.783, and the pass-target model 0.733. These performance levels indicate that situational factors explain most decision-making variance, leaving a smaller residual that we attribute to coaching philosophy.
+Model performance varies across components. Under grouped resampling that holds out whole team-years (so no team's plays appear in both training and evaluation), the fourth-down model reaches an AUC of 0.975 (95\% CI $[0.973, 0.976]$), the two-point conversion model 0.927 $[0.914, 0.940]$, the run-pass model 0.784 $[0.782, 0.786]$, and the pass-target model 0.734 $[0.731, 0.736]$. These performance levels indicate that situational factors explain most decision-making variance, leaving a smaller residual that we attribute to coaching philosophy.
 
 For each coach-year, we calculate component-specific aggression scores using Equation~1, where $c$ indexes the four components. The composite aggression score is a \emph{reliability-weighted} average of the four standardized component scores. Each coach-year's component is weighted by its reliability, the share of its variance that is true between-coach signal rather than sampling noise, so that a component measured from few plays in a given coach-year contributes less. We estimate these reliabilities with a DerSimonian-Laird random-effects model. We treat aggression as a \emph{formative} construct. The four components are distinct facets that jointly constitute aggressive decision-making rather than indicators of a single latent trait (they are only weakly inter-correlated), so we report component-level results alongside the composite throughout.
 
@@ -171,7 +171,7 @@ Two methodological safeguards apply uniformly to all ten predictive models and a
 
 \textbf{Cross-fitting.} A gene compares a coach's behavior to a model's prediction, so if the model were trained on that same coach its prediction would be partly fit to the coach's own tendencies, shrinking the residual and attenuating every gene toward zero. We remove this by cross-fitting: predictions used to compute genes are out-of-fold, generated under group $k$-fold cross-validation that leaves out whole coaches (offensive genes) or whole teams (defensive genes), reusing the tuned hyperparameters. Each coach-year is therefore scored by a model that never saw that coach, so the residual reflects genuine deviation from a coach-blind baseline. Cross-fitting improved the reliability of the small-sample components (for example, the two-point component's reliability rose from $0.14$ in-sample to $0.67$ cross-fit).
 
-\textbf{Reliability-weighted composites and calibration.} Each composite gene (aggression, tempo, defensive scheme) is a reliability-weighted mean of its z-scored sub-components, with weights from a DerSimonian-Laird random-effects model as described above; the single-component shotgun gene uses the analogous empirical-Bayes shrinkage. Because the genes are residuals from classifier probabilities, we verified that the classifiers are well-calibrated out-of-fold (expected calibration error $\leq 0.03$ for all seven), so the residuals are not driven by systematic mis-calibration.
+\textbf{Reliability-weighted composites and calibration.} Each composite gene (aggression, tempo, defensive scheme) is a reliability-weighted mean of its z-scored sub-components, with weights from a DerSimonian-Laird random-effects model as described above; the single-component shotgun gene uses the analogous empirical-Bayes shrinkage. Because the genes are residuals from classifier probabilities, we verified that the classifiers are well-calibrated out-of-fold (expected calibration error $\leq 0.03$ for all seven), so the residuals are not driven by systematic mis-calibration. Because each gene is itself a first-stage model estimate, the downstream confidence intervals we report treat the gene as a fixed measurement and resample only the coaches or mentors, which is the standard convention for residual- and prediction-based metrics in football analytics \citep{yurko2019}; the reliability weighting above partly absorbs each gene's measurement noise, and a fully nested two-stage bootstrap that also resampled the gene models would be more conservative still.
 
 \subsection{Measuring Schematic Identity}
 
@@ -180,39 +180,39 @@ We construct three additional coaching genes using the same residual methodology
 Table~\ref{tab:all_models} summarizes model performance across all ten predictive models used in this study.
 
 \begin{table}[H]
-\caption{Predictive Model Performance Summary (grouped cross-validation)}
+\caption{Predictive Model Performance Summary (Nadeau-Bengio corrected resampling)}
 \label{tab:all_models}
 \scriptsize
-\begin{tabular}{llcccc}
+\begin{tabular}{llccccc}
 \toprule
-\textbf{Gene} & \textbf{Model} & \textbf{Type} & \textbf{AUC / RMSE} & \textbf{R\textsuperscript{2}} & \textbf{Data Range} \\
+\textbf{Gene} & \textbf{Model} & \textbf{Type} & \textbf{AUC / RMSE} & \textbf{95\% CI} & \textbf{R\textsuperscript{2}} & \textbf{Data Range} \\
 \midrule
-\multirow{4}{*}{Aggression} & 4th Down Decision & Classifier & 0.974 & --- & 2006--2024 \\
- & Run vs Pass & Classifier & 0.783 & --- & 2006--2024 \\
- & Pass Target & Classifier & 0.733 & --- & 2006--2024 \\
- & Two-Point Conversion & Classifier & 0.927 & --- & 2006--2024 \\
+\multirow{4}{*}{Aggression} & 4th Down Decision & Classifier & 0.975 & [0.973, 0.976] & --- & 2006--2024 \\
+ & Run vs Pass & Classifier & 0.784 & [0.782, 0.786] & --- & 2006--2024 \\
+ & Pass Target & Classifier & 0.734 & [0.731, 0.736] & --- & 2006--2024 \\
+ & Two-Point Conversion & Classifier & 0.927 & [0.914, 0.940] & --- & 2006--2024 \\
 \midrule
-Shotgun & Shotgun Formation & Classifier & 0.807 & --- & 2006--2024 \\
+Shotgun & Shotgun Formation & Classifier & 0.807 & [0.802, 0.812] & --- & 2006--2024 \\
 \midrule
-\multirow{2}{*}{Tempo} & No-Huddle & Classifier & 0.766 & --- & 2006--2024 \\
- & Pace (seconds) & Regressor & 11.08s & 0.428 & 2006--2024 \\
+\multirow{2}{*}{Tempo} & No-Huddle & Classifier & 0.766 & [0.758, 0.775] & --- & 2006--2024 \\
+ & Pace (seconds) & Regressor & 11.08s & [11.04, 11.11] & 0.428 [0.424, 0.432] & 2006--2024 \\
 \midrule
-\multirow{3}{*}{Def.\ Scheme} & Box Stacking & Regressor & 0.811 & 0.423 & 2016--2024 \\
- & Pass Rush & Regressor & 0.806 & 0.055 & 2016--2024 \\
- & Man Coverage & Classifier & 0.682 & --- & 2018--2024 \\
+\multirow{3}{*}{Def.\ Scheme} & Box Stacking & Regressor & 0.811 & [0.801, 0.820] & 0.422 [0.411, 0.433] & 2016--2024 \\
+ & Pass Rush & Regressor & 0.811 & [0.793, 0.829] & 0.055 [0.051, 0.059] & 2016--2024 \\
+ & Man Coverage & Classifier & 0.680 & [0.673, 0.687] & --- & 2018--2024 \\
 \bottomrule
 \end{tabular}
 \\[2pt]
-{\scriptsize Metrics are 5-fold grouped cross-validation, holding out whole team-years (no team appears in both train and test), so they are more conservative than play-level random splits.}
+{\scriptsize Point estimates and 95\% CIs are Nadeau-Bengio corrected resampled-$t$ intervals \citep{nadeau2003} over $J=50$ grouped resamples (GroupShuffleSplit holding out whole team-years, so no team appears in both train and test). The corrected variance accounts for the overlap among resampled training sets, which a naive resample standard deviation understates. Regressor $R^2$ CIs are shown in brackets beside each $R^2$.}
 \end{table}
 
 \subsubsection{Shotgun Formation Gene}
 
-We train an XGBoost classifier (grouped-CV AUC = 0.807) to predict whether each play will be run from shotgun formation, using the offensive candidate feature set (Table~\ref{tab:model_features}, stability-selected to 16 features). The shotgun gene for each coach-year is the difference between actual and predicted shotgun rates, reliability-shrunk toward the league mean (so low-play coach-years are not over-trusted) and z-scored across all coach-years for comparability; because head-coach seasons carry ample plays, this shrinkage is small in practice. This gene captures formation preference independent of game context and is attributed to head coaches, yielding 638 coach-year observations across 2006--2024.
+We train an XGBoost classifier (AUC $=0.807$; 95\% CI $[0.802, 0.812]$) to predict whether each play will be run from shotgun formation, using the offensive candidate feature set (Table~\ref{tab:model_features}, stability-selected to 16 features). The shotgun gene for each coach-year is the difference between actual and predicted shotgun rates, reliability-shrunk toward the league mean (so low-play coach-years are not over-trusted) and z-scored across all coach-years for comparability; because head-coach seasons carry ample plays, this shrinkage is small in practice. This gene captures formation preference independent of game context and is attributed to head coaches, yielding 638 coach-year observations across 2006--2024.
 
 \subsubsection{Tempo Gene}
 
-The tempo gene combines two sub-components into a composite measure. First, a no-huddle classifier (grouped-CV AUC = 0.766) predicts whether each play will use a no-huddle formation from the stability-selected feature set. The no-huddle gene captures tendency to operate without a huddle beyond what game context predicts, reflecting a deliberate pace strategy rather than situational urgency (e.g., trailing late). Second, a pace regressor (RMSE = 11.08 seconds, $R^2$ = 0.428) predicts the number of seconds between consecutive plays using the same candidate set with no-huddle excluded (to avoid circularity). The pace gene is the negated residual, so positive values indicate faster-than-expected pace. It captures play clock management philosophy. First plays of each drive are excluded from the pace calculation as they have no meaningful inter-play interval.
+The tempo gene combines two sub-components into a composite measure. First, a no-huddle classifier (AUC $=0.766$; 95\% CI $[0.758, 0.775]$) predicts whether each play will use a no-huddle formation from the stability-selected feature set. The no-huddle gene captures tendency to operate without a huddle beyond what game context predicts, reflecting a deliberate pace strategy rather than situational urgency (e.g., trailing late). Second, a pace regressor (RMSE $=11.08$ seconds, 95\% CI $[11.04, 11.11]$; $R^2 = 0.428$, $[0.424, 0.432]$) predicts the number of seconds between consecutive plays using the same candidate set with no-huddle excluded (to avoid circularity). The pace gene is the negated residual, so positive values indicate faster-than-expected pace. It captures play clock management philosophy. First plays of each drive are excluded from the pace calculation as they have no meaningful inter-play interval.
 
 The composite tempo gene is the reliability-weighted mean of the z-scored no-huddle and pace sub-components, attributed to head coaches. This composite captures overall pace philosophy: coaches who both run more no-huddle and snap the ball faster score highly, while coaches who are fast on one dimension but slow on the other receive intermediate scores. The composite yields 638 coach-year observations across 2006--2024.
 
@@ -220,11 +220,11 @@ The composite tempo gene is the reliability-weighted mean of the z-scored no-hud
 
 The defensive scheme gene captures defensive philosophy at the team level rather than attributing decisions to individual coaches, reflecting the shared influence of head coach, defensive coordinator, and available personnel. We combine three sub-components:
 
-\textbf{Box stacking} (regressor, RMSE = 0.811, $R^2$ = 0.423): Predicts the number of defenders positioned in the box pre-snap, using the defensive candidate set (stability-selected to 15 features). The residual captures tendency to load the box beyond what offensive formation and game context predict, a hallmark of aggressive, run-stuffing defensive philosophies. Available from 2016 onward when the NFL began tracking pre-snap defensive alignment.
+\textbf{Box stacking} (regressor, RMSE $=0.811$, 95\% CI $[0.801, 0.820]$; $R^2 = 0.422$, $[0.411, 0.433]$): Predicts the number of defenders positioned in the box pre-snap, using the defensive candidate set (stability-selected to 15 features). The residual captures tendency to load the box beyond what offensive formation and game context predict, a hallmark of aggressive, run-stuffing defensive philosophies. Available from 2016 onward when the NFL began tracking pre-snap defensive alignment.
 
-\textbf{Pass rush intensity} (regressor, RMSE = 0.806, $R^2$ = 0.055): Predicts the number of pass rushers sent on passing plays. The low $R^2$ indicates that pass rush decisions are less predictable from context alone, reflecting greater coach-to-coach variation, exactly the signal our gene framework is designed to capture. Available from 2016 onward.
+\textbf{Pass rush intensity} (regressor, RMSE $=0.811$, 95\% CI $[0.793, 0.829]$; $R^2 = 0.055$, $[0.051, 0.059]$): Predicts the number of pass rushers sent on passing plays. The low $R^2$ indicates that pass rush decisions are less predictable from context alone, reflecting greater coach-to-coach variation, exactly the signal our gene framework is designed to capture. Available from 2016 onward.
 
-\textbf{Man coverage tendency} (classifier, grouped-CV AUC = 0.682): Predicts whether the defense will play man or zone coverage on passing plays. Man coverage is generally considered more aggressive and talent-dependent, requiring cornerbacks who can match up individually against receivers. Available from 2018 onward when the NFL began classifying coverage types.
+\textbf{Man coverage tendency} (classifier, AUC $=0.680$; 95\% CI $[0.673, 0.687]$): Predicts whether the defense will play man or zone coverage on passing plays. Man coverage is generally considered more aggressive and talent-dependent, requiring cornerbacks who can match up individually against receivers. Available from 2018 onward when the NFL began classifying coverage types.
 
 The composite defensive scheme gene is the reliability-weighted mean of z-scored sub-components, using two components for 2016--2017 (box stacking and pass rush) and three for 2018--2024 (adding man coverage). Because a mean of two unit-variance components has a different scale than a mean of three, we standardize the composite \emph{within} each component-count regime so that pre-2018 and post-2018 team-years are on a common scale (eliminating an artificial break at 2018). This yields 288 team-year observations across 2016--2024, with the head coach of each defending team recorded for inheritance analysis.
 
@@ -238,7 +238,7 @@ To test whether coaching genes predict performance, we correlate each composite 
 
 \textbf{Accounting for WAR measurement noise.} A single-season WAR is itself a noisy estimate. Its year-over-year reliability in our sample is only about $0.24$; the remainder is single-season luck, consistent with the binomial sampling floor of a 16-game record. Because classical noise in the dependent variable attenuates a correlation rather than inflating it, our season-level gene-WAR correlations are conservative lower bounds, not overstatements. We address this three ways: (i) we report the relationship at the \emph{career} level (one observation per coach, where mean WAR is far more reliable) as the primary anchor; (ii) we inverse-variance weight season-level coach-years by a games-based precision proxy; and (iii) we confirm robustness to dropping partial (sub-half) seasons, the least reliable WAR estimates. We deliberately do not report a single ``disattenuated'' correlation, because dividing by so low a reliability would manufacture false precision.
 
-Because each head coach contributes many coach-years, the observations are not independent. All primary repeated-measures analyses cover the gene-WAR correlations, year-to-year persistence, mentor-prot\'{e}g\'{e} inheritance, and the multiple-gene regressions. For these we report \emph{coach-clustered} inference, or \emph{mentor-clustered} inference for mentor-prot\'{e}g\'{e} pairs. P-values and 95\% confidence intervals are obtained from a cluster bootstrap that resamples whole coaches (or mentors) over 2{,}000 replicates, and the regressions additionally use cluster-robust standard errors. This is materially more conservative than treating coach-years as independent, and we treat the clustered p-value as primary throughout; conventional p-values are reported alongside where helpful. For subgroups with fewer than 40 clusters, where both the percentile cluster bootstrap and the clustered $t$ are known to be anti-conservative, we instead report a wild cluster bootstrap \citep{cameron2008} (restricted, with Rademacher weights) as the more reliable inference and flag the subgroup; era-stratified and other small cross-sections are interpreted cautiously.
+Because each head coach contributes many coach-years, the observations are not independent. All primary repeated-measures analyses cover the gene-WAR correlations, year-to-year persistence, mentor-prot\'{e}g\'{e} inheritance, and the multiple-gene regressions. For these we report \emph{coach-clustered} inference, or \emph{mentor-clustered} inference for mentor-prot\'{e}g\'{e} pairs. P-values and 95\% confidence intervals are obtained from a cluster bootstrap that resamples whole coaches (or mentors) over 2{,}000 replicates, and the regressions additionally use cluster-robust standard errors. This is materially more conservative than treating coach-years as independent, and we treat the clustered p-value as primary throughout; conventional p-values are reported alongside where helpful. For subgroups with fewer than 40 clusters, where both the percentile cluster bootstrap and the clustered $t$ are known to be anti-conservative, we instead report a wild cluster bootstrap \citep{cameron2008} (restricted, with Rademacher weights) as the more reliable inference and flag the subgroup; era-stratified and other small cross-sections are interpreted cautiously. The confidence intervals for the upstream predictive-model performance metrics (Table~\ref{tab:all_models}) are computed differently, by the Nadeau-Bengio (2003) corrected resampled-$t$: over $J=50$ random train-test resamples that hold out whole team-years, we inflate the naive resample variance by the correction $(1/J + \rho)$ with $\rho=0.2$ to account for the overlap among the resampled training sets, which a plain resample standard deviation badly understates \citep{nadeau2003}.
 
 We analyze offensive and defensive coaches separately to test whether the aggression-performance relationship differs by coaching background. Since all our offensive aggression measures focus on offensive decisions, we hypothesize that offensive coaches should show stronger relationships with performance.
 
@@ -303,27 +303,29 @@ Before asking whether genes predict performance, we establish that they measure 
 
 \textbf{Variance decomposition.} Across every gene, coach identity explains far more variance than team identity. For composite aggression, coach identity accounts for 51\% of the variance against 13\% for team and 19\% for season; the same pattern holds for shotgun (coach 58\%, team 12\%), tempo (53\% vs.\ 10\%), and the aggression components (Table~\ref{tab:variance}). A coach's genes are roughly four to five times more a function of who they are than of where they coach.
 
-\textbf{The gene travels with the coach.} A sharper test exploits coaching changes. Among the 32 coaches who changed teams during our window, the gene a coach exhibits at their new team is correlated with the gene they exhibited at their previous team: composite aggression $r=0.61$, shotgun $r=0.55$, tempo $r=0.54$, comparable to or stronger than the year-to-year persistence \emph{within} a single team (Section~\ref{sec:persistence}). A mover regression makes the attribution explicit. Regressing a coach's new-team gene on both their prior-team gene and the new team's pre-arrival gene, we find the coach term large and well-determined (composite aggression $\beta=0.53$, $p<0.001$) while the franchise's prior identity contributes little. Strategic identity is carried by the coach, not inherited from the building.
+\textbf{The gene travels with the coach.} A sharper test exploits coaching changes. Among the 32 coaches who changed teams during our window, the gene a coach exhibits at their new team is correlated with the gene they exhibited at their previous team: composite aggression $r=0.61$ (95\% CI $[0.33, 0.78]$), shotgun $r=0.55$, tempo $r=0.54$, comparable to or stronger than the year-to-year persistence \emph{within} a single team (Section~\ref{sec:persistence}). A mover regression makes the attribution explicit. Regressing a coach's new-team gene on both their prior-team gene and the new team's pre-arrival gene, we find the coach term large and well-determined (composite aggression $\beta=0.53$, 95\% CI $[0.26, 0.83]$, $p<0.001$) while the franchise's prior identity contributes little. Strategic identity is carried by the coach, not inherited from the building.
 
 \begin{table}[H]
 \caption{Genes Are Coach Traits: Variance Decomposition and Cross-Team Travel}
 \label{tab:variance}
 \begin{tabular}{lccc}
 \toprule
-\textbf{Gene} & \textbf{Var.\ Coach} & \textbf{Var.\ Team} & \textbf{Travel $r$} \\
+\textbf{Gene} & \textbf{Var.\ Coach} & \textbf{Var.\ Team} & \textbf{Travel $r$ [95\% CI]} \\
 \midrule
-Composite Aggression & 0.51 & 0.13 & 0.61 \\
-Shotgun Formation & 0.58 & 0.12 & 0.55 \\
-Tempo & 0.53 & 0.10 & 0.54 \\
+Composite Aggression & 0.51 & 0.13 & 0.61 [0.33, 0.78] \\
+Shotgun Formation & 0.58 & 0.12 & 0.55 [0.29, 0.75] \\
+Tempo & 0.53 & 0.10 & 0.54 [$-$0.11, 0.86] \\
 \cmidrule{1-4}
-4th Down & 0.53 & 0.06 & 0.18 \\
-Pass-Heavy & 0.49 & 0.19 & 0.42 \\
-Deep Pass & 0.44 & 0.12 & 0.16 \\
-Two-Point & 0.44 & 0.10 & 0.36 \\
+4th Down & 0.53 & 0.06 & 0.18 [$-$0.25, 0.51] \\
+Pass-Heavy & 0.49 & 0.19 & 0.42 [0.16, 0.65] \\
+Deep Pass & 0.44 & 0.12 & 0.16 [$-$0.20, 0.50] \\
+Two-Point & 0.44 & 0.10 & 0.36 [$-$0.02, 0.69] \\
 \midrule
-\multicolumn{4}{l}{\small Variance shares are one-way $\eta^2$ (coach / team / season identity).}\\
-\multicolumn{4}{l}{\small Travel $r$: correlation of a coach's old-team vs.\ new-team mean}\\
-\multicolumn{4}{l}{\small gene, across the 32 coaches who changed teams.}\\
+\multicolumn{4}{l}{\small Variance shares are one-way $\eta^2$ (coach / team / season identity);}\\
+\multicolumn{4}{l}{\small as a descriptive decomposition (coach and team are confounded) they}\\
+\multicolumn{4}{l}{\small carry no CI. Travel $r$: correlation of a coach's old-team vs.\ new-team}\\
+\multicolumn{4}{l}{\small mean gene, across the 32 coaches who changed teams, with a coach}\\
+\multicolumn{4}{l}{\small bootstrap 95\% CI.}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -359,24 +361,24 @@ We first test whether our four gene dimensions predict coaching performance. Tab
 \begin{table}[H]
 \caption{Coaching Genes vs. WAR: Overall Correlations}
 \label{tab:gene_war}
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Gene} & \textbf{r} & \textbf{p} & \textbf{n} \\
+\textbf{Gene} & \textbf{r} & \textbf{95\% CI} & \textbf{p} & \textbf{n} \\
 \midrule
-Composite Aggression & 0.189 & $<$0.001** & 608 \\
-Shotgun Formation & 0.142 & 0.004** & 608 \\
-Defensive Scheme & 0.151 & 0.015* & 282 \\
-Composite Tempo & 0.045 & 0.352 & 608 \\
+Composite Aggression & 0.189 & [0.10, 0.28] & $<$0.001** & 608 \\
+Shotgun Formation & 0.142 & [0.05, 0.23] & 0.004** & 608 \\
+Defensive Scheme & 0.151 & [0.03, 0.27] & 0.015* & 282 \\
+Composite Tempo & 0.045 & [$-$0.04, 0.15] & 0.352 & 608 \\
 \midrule
-\multicolumn{4}{l}{\small Coach-clustered bootstrap p; * $p<0.05$, ** $p<0.01$}\\
-\multicolumn{4}{l}{\small Defensive scheme: 2016--2024; all others: 2006--2024}\\
+\multicolumn{5}{l}{\small Coach-clustered bootstrap p and 95\% CI; * $p<0.05$, ** $p<0.01$}\\
+\multicolumn{5}{l}{\small Defensive scheme: 2016--2024; all others: 2006--2024}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 Three of the four genes are positively associated with performance. Composite aggression shows the strongest correlation with WAR ($r=0.189$, $p<0.001$), followed by defensive scheme aggressiveness ($r=0.151$, $p=0.015$) and shotgun formation preference ($r=0.142$, $p=0.004$); all three are robust to coach clustering and the global false-discovery correction. Tempo shows little relationship ($r=0.045$, $p=0.35$).
 
-These season-level correlations are conservative. As noted in the Methods, a single-season WAR is only about one-quarter reliable, and measurement noise in the outcome attenuates a correlation toward zero, so these values are lower bounds. At the \emph{career} level, where a coach's mean WAR is far more reliable, the composite aggression relationship strengthens to $r=0.303$ ($p<0.001$, $n=124$ coaches; $r=0.308$ among the 87 coaches with at least three seasons), and shotgun to $r=0.230$ ($p=0.010$); defensive scheme is positive but imprecise at the career level given its shorter window ($r=0.188$, $p=0.10$, $n=79$). The season-level estimates are also robust to inverse-variance weighting by WAR precision (composite aggression $r=0.211$) and to dropping partial seasons ($r=0.212$), so they are not driven by a handful of noisy short tenures. Given that most coaching genes carry real performance signal, we turn to whether they transmit through coaching relationships, and whether the genes that transfer most strongly are the same ones that predict winning.
+These season-level correlations are conservative. As noted in the Methods, a single-season WAR is only about one-quarter reliable, and measurement noise in the outcome attenuates a correlation toward zero, so these values are lower bounds. At the \emph{career} level, where a coach's mean WAR is far more reliable, the composite aggression relationship strengthens to $r=0.303$ (95\% CI $[0.16, 0.45]$, $p<0.001$, $n=124$ coaches; $r=0.308$, $[0.14, 0.47]$, among the 87 coaches with at least three seasons), and shotgun to $r=0.230$ ($[0.04, 0.41]$, $p=0.010$); defensive scheme is positive but imprecise at the career level given its shorter window ($r=0.188$, $[0.02, 0.35]$, $p=0.10$, $n=79$). The season-level estimates are also robust to inverse-variance weighting by WAR precision (composite aggression $r=0.211$, $[0.13, 0.29]$) and to dropping partial seasons ($r=0.211$), so they are not driven by a handful of noisy short tenures. Given that most coaching genes carry real performance signal, we turn to whether they transmit through coaching relationships, and whether the genes that transfer most strongly are the same ones that predict winning.
 
 \subsection{Testing the Theory of Coaching Trees}
 
@@ -389,16 +391,16 @@ The most fundamental claim of the coaching tree narrative is that working under 
 \begin{table}[H]
 \caption{Mentor WAR vs. Prot\'{e}g\'{e} WAR}
 \label{tab:war_inherit}
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Relationship} & \textbf{r} & \textbf{p} & \textbf{n} \\
+\textbf{Relationship} & \textbf{r} & \textbf{95\% CI} & \textbf{p} & \textbf{n} \\
 \midrule
-Overall & 0.112 & 0.13 & 196 \\
-\cmidrule{1-4}
-OC $\rightarrow$ HC & 0.087 & 0.44 & 101 \\
-DC $\rightarrow$ HC & 0.163 & 0.082 & 93 \\
+Overall & 0.112 & [$-$0.04, 0.25] & 0.13 & 196 \\
+\cmidrule{1-5}
+OC $\rightarrow$ HC & 0.087 & [$-$0.14, 0.30] & 0.44 & 101 \\
+DC $\rightarrow$ HC & 0.163 & [$-$0.02, 0.33] & 0.082 & 93 \\
 \midrule
-\multicolumn{4}{l}{\small Mentor-clustered bootstrap p}\\
+\multicolumn{5}{l}{\small Mentor-clustered bootstrap p and 95\% CI}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -412,19 +414,19 @@ If coaching trees don't transmit success, do they transmit strategy? We analyze 
 \begin{table}[H]
 \caption{Aggression Inheritance: Overall Mentor-Prot\'{e}g\'{e} Pairs}
 \label{tab:inheritance}
-\begin{tabular}{lcc}
+\begin{tabular}{lccc}
 \toprule
-\textbf{Component} & \textbf{r} & \textbf{P-value} \\
+\textbf{Component} & \textbf{r} & \textbf{95\% CI} & \textbf{P-value} \\
 \midrule
-Composite & 0.076 & 0.26 \\
-\cmidrule{1-3}
-4th Down & 0.167 & 0.08 \\
-Pass-Heavy & 0.044 & 0.56 \\
-Deep Pass & 0.090 & 0.23 \\
-Two-Point & 0.044 & 0.43 \\
+Composite & 0.076 & [$-$0.05, 0.21] & 0.26 \\
+\cmidrule{1-4}
+4th Down & 0.167 & [$-$0.02, 0.34] & 0.08 \\
+Pass-Heavy & 0.044 & [$-$0.10, 0.22] & 0.56 \\
+Deep Pass & 0.090 & [$-$0.06, 0.24] & 0.23 \\
+Two-Point & 0.044 & [$-$0.07, 0.18] & 0.43 \\
 \midrule
-\multicolumn{3}{l}{\small N=517 mentor-prot\'{e}g\'{e} pairs; mentor-clustered p}\\
-\multicolumn{3}{l}{\small No component distinguishable from zero after clustering}\\
+\multicolumn{4}{l}{\small N=517 mentor-prot\'{e}g\'{e} pairs; mentor-clustered p and 95\% CI}\\
+\multicolumn{4}{l}{\small Every CI includes zero after clustering}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -441,16 +443,16 @@ Separating by coordinator type is informative. Table~\ref{tab:inherit_coord} sho
 \toprule
  & \multicolumn{2}{c}{\textbf{OC $\rightarrow$ HC}} & \multicolumn{2}{c}{\textbf{DC $\rightarrow$ HC}} \\
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
-\textbf{Component} & \textbf{r} & \textbf{p} & \textbf{r} & \textbf{p} \\
+\textbf{Component} & \textbf{r [95\% CI]} & \textbf{p} & \textbf{r [95\% CI]} & \textbf{p} \\
 \midrule
-Composite & 0.181 & 0.15 & 0.048 & 0.72 \\
+Composite & 0.181 [$-$0.06, 0.43] & 0.15 & 0.048 [$-$0.19, 0.29] & 0.72 \\
 \cmidrule{1-5}
-4th Down & 0.229 & 0.11 & 0.010 & 0.90 \\
-Pass-Heavy & 0.316* & 0.016 & 0.022 & 0.85 \\
-Deep Pass & 0.128 & 0.22 & 0.092 & 0.41 \\
-Two-Point & 0.035 & 0.71 & 0.047 & 0.49 \\
+4th Down & 0.229 [$-$0.04, 0.47] & 0.11 & 0.010 [$-$0.16, 0.17] & 0.90 \\
+Pass-Heavy & 0.316* [0.07, 0.52] & 0.016 & 0.022 [$-$0.21, 0.26] & 0.85 \\
+Deep Pass & 0.128 [$-$0.08, 0.30] & 0.22 & 0.092 [$-$0.12, 0.29] & 0.41 \\
+Two-Point & 0.035 [$-$0.17, 0.26] & 0.71 & 0.047 [$-$0.09, 0.18] & 0.49 \\
 \midrule
-\multicolumn{5}{l}{\small OC: $n=193$ (40 mentors), DC: $n=241$ (33 mentors); mentor-clustered p}\\
+\multicolumn{5}{l}{\small OC: $n=193$ (40 mentors), DC: $n=241$ (33 mentors); mentor-clustered p and 95\% CI}\\
 \multicolumn{5}{l}{\small DC p-values are wild cluster bootstrap (fewer than 40 mentors); * $p<0.05$}\\
 \bottomrule
 \end{tabular}
@@ -463,16 +465,16 @@ The aggression results suggest weak-to-absent strategic transmission. But aggres
 \begin{table}[H]
 \caption{Shotgun Gene Inheritance: Mentor-Prot\'{e}g\'{e} Pairs}
 \label{tab:shotgun_inherit}
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Relationship} & \textbf{r} & \textbf{p} & \textbf{n} \\
+\textbf{Relationship} & \textbf{r} & \textbf{95\% CI} & \textbf{p} & \textbf{n} \\
 \midrule
-Overall & 0.299*** & $<$0.001 & 612 \\
-\cmidrule{1-4}
-OC $\rightarrow$ HC & 0.418*** & $<$0.001 & 242 \\
-DC $\rightarrow$ HC & 0.097 & 0.42 & 278 \\
+Overall & 0.299*** & [0.17, 0.42] & $<$0.001 & 612 \\
+\cmidrule{1-5}
+OC $\rightarrow$ HC & 0.418*** & [0.24, 0.55] & $<$0.001 & 242 \\
+DC $\rightarrow$ HC & 0.097 & [$-$0.12, 0.30] & 0.42 & 278 \\
 \midrule
-\multicolumn{4}{l}{\small Mentor-clustered bootstrap p; *** $p<0.001$}\\
+\multicolumn{5}{l}{\small Mentor-clustered bootstrap p and 95\% CI; *** $p<0.001$}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -488,17 +490,17 @@ Table~\ref{tab:tree_summary} synthesizes the coaching tree findings across all d
 \begin{table}[H]
 \caption{Summary: What Coaching Trees Transmit}
 \label{tab:tree_summary}
-\begin{tabular}{llcc}
+\begin{tabular}{llccc}
 \toprule
-\textbf{Dimension} & \textbf{Type} & \textbf{r} & \textbf{Transmitted?} \\
+\textbf{Dimension} & \textbf{Type} & \textbf{r} & \textbf{95\% CI} & \textbf{Transmitted?} \\
 \midrule
-Performance (WAR) & Outcome & 0.112 & No \\
-Composite Aggression & Situational & 0.076 & No \\
-4th Down Aggression & Situational & 0.167 & No$^{\dagger}$ \\
-Shotgun Formation (OC) & Schematic & 0.418*** & Strongly \\
+Performance (WAR) & Outcome & 0.112 & [$-$0.04, 0.25] & No \\
+Composite Aggression & Situational & 0.076 & [$-$0.05, 0.21] & No \\
+4th Down Aggression & Situational & 0.167 & [$-$0.02, 0.34] & No$^{\dagger}$ \\
+Shotgun Formation (OC) & Schematic & 0.418*** & [0.24, 0.55] & Strongly \\
 \midrule
-\multicolumn{4}{l}{\small *** $p<0.001$ (mentor-clustered); Shotgun DC $\rightarrow$ HC: $r=0.097$, near zero}\\
-\multicolumn{4}{l}{\small $^{\dagger}$ Stronger under unclustered p; weak after clustering ($p=0.08$)}\\
+\multicolumn{5}{l}{\small *** $p<0.001$ (mentor-clustered); Shotgun DC $\rightarrow$ HC: $r=0.097$, near zero}\\
+\multicolumn{5}{l}{\small $^{\dagger}$ Stronger under unclustered p; weak after clustering ($p=0.08$)}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -524,19 +526,19 @@ Table~\ref{tab:gene_inherit} presents the results across all four gene dimension
 \begin{table}[H]
 \caption{Coordinator-to-HC Gene Inheritance}
 \label{tab:gene_inherit}
-\begin{tabular}{llcccc}
+\begin{tabular}{llccccc}
 \toprule
-\textbf{Gene} & \textbf{Transition} & \textbf{n} & \textbf{r} & \textbf{p} & \textbf{Dir. Ret.} \\
+\textbf{Gene} & \textbf{Transition} & \textbf{n} & \textbf{r} & \textbf{95\% CI} & \textbf{p} & \textbf{Dir. Ret.} \\
 \midrule
-Defensive Scheme & DC$\rightarrow$HC & 17 & 0.572* & 0.016 & 67\% \\
-Shotgun & OC$\rightarrow$HC & 40 & 0.473*** & $<$0.001 & 75\% \\
-Tempo & OC$\rightarrow$HC & 40 & 0.091 & 0.49 & 54\% \\
-Aggression & OC$\rightarrow$HC & 40 & 0.017 & 0.90 & 53\% \\
+Defensive Scheme & DC$\rightarrow$HC & 17 & 0.572* & [0.24, 0.82] & 0.016 & 67\% \\
+Shotgun & OC$\rightarrow$HC & 40 & 0.473*** & [0.29, 0.64] & $<$0.001 & 75\% \\
+Tempo & OC$\rightarrow$HC & 40 & 0.091 & [$-$0.22, 0.48] & 0.49 & 54\% \\
+Aggression & OC$\rightarrow$HC & 40 & 0.017 & [$-$0.19, 0.20] & 0.90 & 53\% \\
 \midrule
-\multicolumn{6}{l}{\small Dir. Ret. = percentage of coaches whose gene retains the same sign}\\
-\multicolumn{6}{l}{\small Coordinator-era gene averaged across all stints, weighted by years of data}\\
-\multicolumn{6}{l}{\small Defensive scheme p is a wild cluster bootstrap ($n=17$); * $p<0.05$, *** $p<0.001$}\\
-\multicolumn{6}{l}{\small The two strongest results fall below the global FDR threshold ($p \leq 0.022$)}\\
+\multicolumn{7}{l}{\small Dir. Ret. = percentage of coaches whose gene retains the same sign}\\
+\multicolumn{7}{l}{\small Coordinator-era gene averaged across all stints, weighted by years of data}\\
+\multicolumn{7}{l}{\small Defensive scheme p and CI are a wild cluster bootstrap (small $n$); * $p<0.05$, *** $p<0.001$}\\
+\multicolumn{7}{l}{\small The two strongest results fall below the global FDR threshold ($p \leq 0.022$)}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -572,19 +574,19 @@ The composite aggression-WAR correlation ($r=0.189$, Table~\ref{tab:gene_war}) m
 \begin{table}[H]
 \caption{Aggression vs. WAR: Overall (2006-2024)}
 \label{tab:overall_war}
-\begin{tabular}{lcc}
+\begin{tabular}{lccc}
 \toprule
-\textbf{Measure} & \textbf{r} & \textbf{P-value} \\
+\textbf{Measure} & \textbf{r} & \textbf{95\% CI} & \textbf{P-value} \\
 \midrule
-Composite & 0.189 & $<$0.001** \\
-\cmidrule{1-3}
-Pass-Heavy & 0.183 & 0.002** \\
-4th Down & 0.095 & 0.033* \\
-Deep Pass & 0.020 & 0.65 \\
-2-Point & 0.037 & 0.45 \\
+Composite & 0.189 & [0.10, 0.28] & $<$0.001** \\
+\cmidrule{1-4}
+Pass-Heavy & 0.183 & [0.07, 0.28] & 0.002** \\
+4th Down & 0.095 & [0.01, 0.18] & 0.033* \\
+Deep Pass & 0.020 & [$-$0.07, 0.11] & 0.65 \\
+2-Point & 0.037 & [$-$0.06, 0.13] & 0.45 \\
 \midrule
-\multicolumn{3}{l}{\small N=608 coach-years; coach-clustered bootstrap p}\\
-\multicolumn{3}{l}{\small * $p<0.05$, ** $p<0.01$}\\
+\multicolumn{4}{l}{\small N=608 coach-years; coach-clustered bootstrap p and 95\% CI}\\
+\multicolumn{4}{l}{\small * $p<0.05$, ** $p<0.01$}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -594,15 +596,16 @@ Composite aggression shows a positive relationship with coaching performance whe
 \begin{table}[H]
 \caption{Aggression vs. WAR by Era}
 \label{tab:era_war}
+\small
 \begin{tabular}{lccc}
 \toprule
-\textbf{Era} & \textbf{Composite (r, p)} & \textbf{Pass-Heavy (r, p)} & \textbf{N} \\
+\textbf{Era} & \textbf{Composite (r [95\% CI], p)} & \textbf{Pass-Heavy (r [95\% CI], p)} & \textbf{N} \\
 \midrule
-2006-2011 & 0.239, 0.001** & 0.173, 0.016* & 192 \\
-2012-2017 & 0.137, 0.059 & 0.175, 0.015* & 192 \\
-2018-2024 & 0.101, 0.132 & 0.131, 0.049* & 224 \\
+2006-2011 & 0.239 [0.07, 0.38], 0.001** & 0.173 [0.00, 0.32], 0.016* & 192 \\
+2012-2017 & 0.137 [$-$0.07, 0.29], 0.059 & 0.175 [0.01, 0.32], 0.015* & 192 \\
+2018-2024 & 0.101 [$-$0.03, 0.25], 0.132 & 0.131 [$-$0.04, 0.31], 0.049* & 224 \\
 \midrule
-\multicolumn{4}{l}{\small * $p<0.05$, ** $p<0.01$ (unclustered subgroup p)}\\
+\multicolumn{4}{l}{\small * $p<0.05$, ** $p<0.01$ (unclustered subgroup p); 95\% CIs are coach-clustered bootstrap}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -618,7 +621,7 @@ In the early era (2006-2011), composite aggression shows a clear relationship wi
 
 \subsubsection{Temporal Robustness}
 
-To probe whether the erosion is genuine, we conduct two complementary tests. A continuous-year interaction model ($\text{WAR} = \beta_0 + \beta_1 \cdot \text{Aggression} + \beta_2 \cdot \text{Year} + \beta_3 \cdot \text{Aggression} \times \text{Year}$, with Year centered at 2015 and coach-clustered standard errors) yields $\beta_3 = -0.88$ ($SE = 0.74$, $p = 0.24$). The point estimate is negative, consistent with decline, but it is estimated imprecisely (its confidence interval includes zero), so the continuous test alone does not establish erosion. The implied effect nonetheless falls from $\beta = 25.1$ ($p = 0.012$) in 2006 to $\beta = 9.2$ ($p = 0.20$) in 2024, fading toward zero rather than reversing sign. The firmer evidence comes from structural-break testing. A Chow test points to a break at 2012 ($F = 3.41$, $p = 0.034$), with the aggression coefficient falling from $\beta = 27.2$ before the break to $\beta = 10.7$ after, a 61\% reduction; a break at 2013 is comparable ($p = 0.038$). Both lie just above the strict global false-discovery threshold, so we read them as suggestive. Taken with the era pattern, this points to a real but partial erosion rather than a clean disappearance. An out-of-sample check is consistent with this reading. Fitting the season-level relationship on 2006--2018 and applying it to 2019--2024, the aggression-WAR relationship generalizes only weakly (test $r=0.12$), as expected when the outcome is dominated by single-season luck, while the defensive-scheme-WAR relationship is concentrated in the most recent seasons (near zero before 2019, $r=0.25$ after).
+To probe whether the erosion is genuine, we conduct two complementary tests. A continuous-year interaction model ($\text{WAR} = \beta_0 + \beta_1 \cdot \text{Aggression} + \beta_2 \cdot \text{Year} + \beta_3 \cdot \text{Aggression} \times \text{Year}$, with Year centered at 2015 and coach-clustered standard errors) yields $\beta_3 = -0.88$ ($SE = 0.74$, 95\% CI $[-2.36, 0.59]$, $p = 0.24$). The point estimate is negative, consistent with decline, but its confidence interval includes zero, so the continuous test alone does not establish erosion. The implied effect nonetheless falls from $\beta = 25.1$ (95\% CI $[5.7, 44.6]$, $p = 0.012$) in 2006 to $\beta = 9.2$ ($[-4.9, 23.3]$, $p = 0.20$) in 2024, fading toward zero rather than reversing sign. The firmer evidence comes from structural-break testing. A Chow test points to a break at 2012 ($F = 3.41$, $p = 0.034$), with the aggression coefficient falling from $\beta = 27.2$ (95\% CI $[9.6, 43.8]$) before the break to $\beta = 10.7$ ($[0.2, 20.4]$) after, a 61\% reduction; a break at 2013 is comparable ($p = 0.038$). Both lie just above the strict global false-discovery threshold, so we read them as suggestive. Taken with the era pattern, this points to a real but partial erosion rather than a clean disappearance. An out-of-sample check is consistent with this reading. Fitting the season-level relationship on 2006--2018 and applying it to 2019--2024, the aggression-WAR relationship generalizes only weakly (test $r=0.12$), as expected when the outcome is dominated by single-season luck, while the defensive-scheme-WAR relationship is concentrated in the most recent seasons (near zero before 2019, $r=0.25$ after).
 
 \subsubsection{Offensive vs. Defensive Coaches}
 
@@ -632,11 +635,11 @@ Since these aggression measures focus on offensive decisions (going for it on 4t
 \toprule
  & \multicolumn{2}{c}{\textbf{Offensive}} & \multicolumn{2}{c}{\textbf{Defensive}} \\
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
-\textbf{Measure} & \textbf{r} & \textbf{p} & \textbf{r} & \textbf{p} \\
+\textbf{Measure} & \textbf{r [95\% CI]} & \textbf{p} & \textbf{r [95\% CI]} & \textbf{p} \\
 \midrule
-Composite & 0.211 & $<$0.001** & 0.184 & 0.003** \\
+Composite & 0.211 [0.09, 0.33] & $<$0.001** & 0.184 [0.03, 0.33] & 0.003** \\
 \midrule
-\multicolumn{5}{l}{\small Offensive: $n=310$, Defensive: $n=251$ (unclustered subgroup p)}\\
+\multicolumn{5}{l}{\small Offensive: $n=310$, Defensive: $n=251$ (unclustered subgroup p; 95\% CIs coach-clustered)}\\
 \multicolumn{5}{l}{\small ** $p<0.01$}\\
 \bottomrule
 \end{tabular}
@@ -648,31 +651,31 @@ Both offensive ($r=0.211$, $p<0.001$) and defensive ($r=0.184$, $p=0.003$) coach
 
 Does aggression cause better performance, or do better coaches simply become more aggressive? To address this, we employ two-way fixed effects regression controlling for both coach quality and temporal trends. The within-coach approach compares each coach to themselves across different years, isolating behavioral effects from selection confounds.
 
-Table~\ref{tab:fixed_effects} presents the results. A two-way fixed-effects specification that demeans aggression within both coach and year indicates a positive within-coach effect ($\beta=1.17$, $p=0.003$). Being more aggressive than one's own norm is associated with better performance, which is not simply a matter of better coaches happening to be more aggressive. A cluster-robust effect-size analysis quantifies the magnitude. A one standard deviation increase in aggression corresponds to 0.44 additional WAR games (Cohen's $d=0.23$), about 17\% of the IQR in the WAR distribution (2.512 games), with 99\% power in the pooled sample.
+Table~\ref{tab:fixed_effects} presents the results. A two-way fixed-effects specification that demeans aggression within both coach and year indicates a positive within-coach effect ($\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$). Being more aggressive than one's own norm is associated with better performance, which is not simply a matter of better coaches happening to be more aggressive. A cluster-robust effect-size analysis quantifies the magnitude. A one standard deviation increase in aggression corresponds to 0.44 additional WAR games (Cohen's $d=0.23$), about 17\% of the IQR in the WAR distribution (2.512 games), with 99\% power in the pooled sample.
 
 \begin{table}[H]
 \caption{Within-Coach Fixed Effects: Aggression $\rightarrow$ WAR}
 \label{tab:fixed_effects}
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Sample} & \textbf{Within-coach $\beta$} & \textbf{p} & \textbf{n} \\
+\textbf{Sample} & \textbf{Within-coach $\beta$} & \textbf{95\% CI} & \textbf{p} & \textbf{n} \\
 \midrule
-\textbf{Pooled (2006-2024)} & 1.17** & 0.003 & 585 \\
+\textbf{Pooled (2006-2024)} & 1.40** & [0.76, 1.96] & $<$0.001 & 587 \\
 \midrule
-Early (2006-2011) & 1.52 & 0.105 & 175 \\
-Middle (2012-2017) & 0.88 & 0.202 & 180 \\
-Late (2018-2024) & 0.53 & 0.358 & 207 \\
+Early (2006-2011) & 1.72* & [0.30, 3.05] & 0.019 & 177 \\
+Middle (2012-2017) & 0.78 & [$-$0.41, 1.78] & 0.160 & 180 \\
+Late (2018-2024) & 1.18* & [0.06, 2.09] & 0.024 & 207 \\
 \midrule
-\multicolumn{4}{l}{\small Two-way fixed effects (aggression demeaned within coach}\\
-\multicolumn{4}{l}{\small and year), coach-clustered SEs. Pooled effect-size}\\
-\multicolumn{4}{l}{\small translation: 0.44 WAR-games per SD (Cohen's $d=0.23$,}\\
-\multicolumn{4}{l}{\small 17\% of the 2.512-game IQR, 99\% power).}\\
-\multicolumn{4}{l}{\small ** $p<0.01$}\\
+\multicolumn{5}{l}{\small Two-way fixed effects (aggression demeaned within coach and year),}\\
+\multicolumn{5}{l}{\small coach-clustered SEs with a coach-block bootstrap 95\% CI. Pooled}\\
+\multicolumn{5}{l}{\small effect-size translation: 0.44 WAR-games per SD (Cohen's $d=0.23$,}\\
+\multicolumn{5}{l}{\small 17\% of the 2.512-game IQR, 99\% power).}\\
+\multicolumn{5}{l}{\small * $p<0.05$, ** $p<0.01$}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Era-stratified within-coach estimates decline ($\beta = 1.52$, $0.88$, $0.53$) but are imprecise and underpowered, so they neither confirm nor rule out erosion of the within-coach effect. The pooled analysis provides the most reliable estimate (99\% power).
+Era-stratified within-coach estimates are imprecise and underpowered ($\beta = 1.72$, $0.78$, $1.18$; 95\% CIs in Table~\ref{tab:fixed_effects}) and do not follow a monotone trend, so they neither confirm nor rule out erosion of the within-coach effect. The pooled analysis provides the most reliable estimate (99\% power).
 
 \subsection{Aggression as Trait and State}
 \label{sec:persistence}
@@ -684,18 +687,18 @@ Table~\ref{tab:persistence} presents the year-over-year (lag 1) correlations for
 \begin{table}[H]
 \caption{Year-to-Year Aggression Persistence (Lag 1)}
 \label{tab:persistence}
-\begin{tabular}{lcc}
+\begin{tabular}{lccc}
 \toprule
-\textbf{Component} & \textbf{r} & \textbf{R²} \\
+\textbf{Component} & \textbf{r} & \textbf{95\% CI} & \textbf{R²} \\
 \midrule
-Composite & 0.516*** & 0.266 \\
-\cmidrule{1-3}
-4th Down & 0.524*** & 0.274 \\
-Pass-Heavy & 0.552*** & 0.304 \\
-Deep Pass & 0.472*** & 0.223 \\
-2-Point & 0.400*** & 0.160 \\
+Composite & 0.516*** & [0.42, 0.60] & 0.266 \\
+\cmidrule{1-4}
+4th Down & 0.524*** & [0.42, 0.61] & 0.274 \\
+Pass-Heavy & 0.552*** & [0.45, 0.64] & 0.304 \\
+Deep Pass & 0.472*** & [0.35, 0.57] & 0.223 \\
+2-Point & 0.400*** & [0.26, 0.53] & 0.160 \\
 \midrule
-\multicolumn{3}{l}{\small *** $p<0.001$ (coach-clustered)}\\
+\multicolumn{4}{l}{\small *** $p<0.001$ (coach-clustered p and 95\% CI)}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -728,16 +731,20 @@ Persistence patterns differ by coaching background. Table~\ref{tab:persist_type}
 \textbf{Component} & \textbf{Lag 1} & \textbf{Lag 2} & \textbf{Lag 3} & \textbf{Lag 1} & \textbf{Lag 2} & \textbf{Lag 3} \\
 \midrule
 Composite & 0.550*** & 0.473*** & 0.319* & 0.518*** & 0.422*** & 0.395*** \\
+ & {\scriptsize[0.41, 0.66]} & {\scriptsize[0.31, 0.61]} & {\scriptsize[0.10, 0.55]} & {\scriptsize[0.39, 0.62]} & {\scriptsize[0.27, 0.52]} & {\scriptsize[0.23, 0.52]} \\
 \cmidrule{1-7}
 4th Down & 0.639*** & 0.586*** & 0.483** & 0.352*** & 0.212 & 0.356** \\
+ & {\scriptsize[0.52, 0.72]} & {\scriptsize[0.41, 0.71]} & {\scriptsize[0.21, 0.69]} & {\scriptsize[0.22, 0.47]} & {\scriptsize[0.00, 0.39]} & {\scriptsize[0.14, 0.54]} \\
 Pass-Heavy & 0.622*** & 0.494*** & 0.449* & 0.522*** & 0.350** & 0.273** \\
+ & {\scriptsize[0.47, 0.73]} & {\scriptsize[0.21, 0.64]} & {\scriptsize[0.13, 0.61]} & {\scriptsize[0.39, 0.62]} & {\scriptsize[0.16, 0.48]} & {\scriptsize[0.08, 0.48]} \\
 Two-Point & 0.468** & 0.402*** & 0.456** & 0.438*** & 0.259*** & 0.283*** \\
+ & {\scriptsize[0.19, 0.65]} & {\scriptsize[0.16, 0.58]} & {\scriptsize[0.18, 0.67]} & {\scriptsize[0.35, 0.54]} & {\scriptsize[0.10, 0.47]} & {\scriptsize[0.11, 0.58]} \\
 \bottomrule
 \end{tabular}
 
 \smallskip
 \noindent\small Offensive: $n_{lag1}=228$, $n_{lag2}=160$, $n_{lag3}=110$; Defensive: $n_{lag1}=194$, $n_{lag2}=150$, $n_{lag3}=113$\\
-\noindent\small Coach-clustered bootstrap p; * $p<0.05$, ** $p<0.01$, *** $p<0.001$
+\noindent\small Coach-clustered bootstrap p and 95\% CI (bracketed); * $p<0.05$, ** $p<0.01$, *** $p<0.001$
 \end{table}
 
 Offensive coaches show stronger year-to-year persistence than defensive coaches for the specific components, most clearly 4th down decisions ($r=0.639$ vs $r=0.352$). The gap is substantial: offensive coaches explain 41\% of next year's 4th down aggression from this year's value, while defensive coaches explain only 12\%. For composite aggression, however, the gap is small ($r=0.550$ vs $r=0.518$, difference=0.032): the offensive-defensive divergence is concentrated in the 4th-down and pass-heavy components rather than in overall aggression.
@@ -751,11 +758,11 @@ The interpretation is nuanced. For offensive coaches, the component tendencies, 
 
 \subsection{The Erosion of a Competitive Advantage}
 
-Aggressive play-calling provided a measurable edge in 2006-2011 ($r=0.239$, $p=0.001$) that diminished to $r=0.101$ ($p=0.13$) by 2018-2024. The continuous year-by-aggression interaction is negative but imprecise ($p=0.24$), and the 2012 structural break ($p=0.03$) lies just above the strict global false-discovery threshold; together with the era pattern, this points to a partial erosion that we treat as suggestive rather than firmly established. As analytics-driven decision-making spread, aggressive tactics became more common: fourth-down aggression in particular moved from below baseline on average in the early era to above baseline by the modern era, and its dispersion across coaches grew by about a third (standard deviation up 34\%), suggesting experimentation as the tactic diffused. Whether the residual erosion reflects defensive adaptation (counter-strategies against predictable aggression) or competitive equilibration (aggression becoming table stakes) remains ambiguous.
+Aggressive play-calling provided a measurable edge in 2006-2011 ($r=0.239$, 95\% CI $[0.07, 0.38]$, $p=0.001$) that diminished to $r=0.101$ ($[-0.03, 0.25]$, $p=0.13$) by 2018-2024. The continuous year-by-aggression interaction is negative but imprecise ($p=0.24$), and the 2012 structural break ($p=0.03$) lies just above the strict global false-discovery threshold; together with the era pattern, this points to a partial erosion that we treat as suggestive rather than firmly established. As analytics-driven decision-making spread, aggressive tactics became more common: fourth-down aggression in particular moved from below baseline on average in the early era to above baseline by the modern era, and its dispersion across coaches grew by about a third (standard deviation up 34\%), suggesting experimentation as the tactic diffused. Whether the residual erosion reflects defensive adaptation (counter-strategies against predictable aggression) or competitive equilibration (aggression becoming table stakes) remains ambiguous.
 
 \subsection{Causality: Evidence from Within-Coach Variation}
 
-Our two-way fixed effects analysis provides evidence that the aggression-performance relationship is at least partly causal. By comparing each coach to themselves across years, we find that a one standard deviation increase in aggression corresponds to 0.44 additional WAR games (within-coach two-way fixed effects $p=0.003$; Cohen's $d=0.23$), even after removing all between-coach differences and temporal trends. The relationship is not simply that better coaches happen to be more aggressive. Within the same coach, being more aggressive predicts better performance.
+Our two-way fixed effects analysis provides evidence that the aggression-performance relationship is at least partly causal. By comparing each coach to themselves across years, we find that a one standard deviation increase in aggression corresponds to 0.44 additional WAR games (within-coach two-way fixed effects $\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$; Cohen's $d=0.23$), even after removing all between-coach differences and temporal trends. The relationship is not simply that better coaches happen to be more aggressive. Within the same coach, being more aggressive predicts better performance.
 
 However, era-stratified within-coach estimates are imprecise and underpowered, preventing us from confirming whether this within-coach effect has eroded. Three findings converge on a causal interpretation. Cross-sectional correlations are strongest when tactics were rare, the relationship erodes as tactics spread, and a within-coach effect persists after controlling for stable characteristics. For practitioners, the practical reading is that aggression's edge has narrowed to at most a weak association in the modern era.
 
@@ -801,7 +808,7 @@ Second, most genes predict performance, though differently. Composite aggression
 
 Third, coaching trees transmit systems more than success or risk tolerance. Mentor WAR shows at most a weak association with prot\'{e}g\'{e} WAR ($r=0.112$, $p=0.13$), and composite aggression shows little inheritance ($r=0.076$). But shotgun formation preference transmits through offensive coaching trees ($r=0.418$, $p<0.001$), though not defensive ones ($r=0.097$), and direct coordinator-to-HC analysis indicates that schematic identity persists through promotion, with shotgun ($r=0.473$) and defensive scheme ($r=0.572$) falling below the global Benjamini-Hochberg threshold while pace and situational aggression do not. Organizations can reliably predict the system a coordinator will install but not whether they will win.
 
-Within-coach fixed-effects analysis adds causal support for the performance result (0.44 WAR games per standard deviation of aggression, $p=0.003$), even as the cross-sectional edge has narrowed in the modern era. The frontier appears to have moved beyond aggression frequency, perhaps to scheme innovation, within-game adaptation speed, or player development, dimensions we are only beginning to measure.
+Within-coach fixed-effects analysis adds causal support for the performance result (0.44 WAR games per standard deviation of aggression; within-coach $\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$), even as the cross-sectional edge has narrowed in the modern era. The frontier appears to have moved beyond aggression frequency, perhaps to scheme innovation, within-game adaptation speed, or player development, dimensions we are only beginning to measure.
 
 \begin{acknowledgement}
   This analysis builds on play-by-play data from nfl\_data\_py and coaching history data scraped from Pro Football Reference. Performance metrics (WAR) were calculated separately. All code and detailed methodology are available in the project repository.
@@ -842,6 +849,9 @@ Los Angeles Chargers (2023, December 15). Chargers Part Ways with Head Coach Bra
 \bibitem[Meinshausen and B\"uhlmann(2010)]{meinshausen2010}
 Meinshausen, N. and B\"uhlmann, P. (2010). Stability selection. \emph{Journal of the Royal Statistical Society: Series B (Statistical Methodology)}, 72(4), 417--473.
 
+\bibitem[Nadeau and Bengio(2003)]{nadeau2003}
+Nadeau, C. and Bengio, Y. (2003). Inference for the generalization error. \emph{Machine Learning}, 52(3), 239--281.
+
 \bibitem[NBC Sports(2023)]{nbc2023}
 NBC Sports (2023, September 25). Chargers' Brandon Staley defends aggressive fourth-down call in loss to Vikings. \emph{NBC Sports}.
 
@@ -862,6 +872,9 @@ Williamson, J. (2026). Coach WAR: A counterfactual approach to evaluating NFL he
 
 \bibitem[Yam and Lopez(2019)]{yam2019}
 Yam, D. and Lopez, M. J. (2019). What was lost? A causal estimate of fourth down behavior in the National Football League. \emph{Journal of Sports Economics}, 20(4), 479–501.
+
+\bibitem[Yurko et al.(2019)]{yurko2019}
+Yurko, R., Ventura, S., and Horowitz, M. (2019). nflWAR: A reproducible method for offensive player evaluation in football. \emph{Journal of Quantitative Analysis in Sports}, 15(3), 163--183.
 
 \end{thebibliography}
 \end{document}

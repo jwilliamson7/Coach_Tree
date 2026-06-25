@@ -103,5 +103,23 @@
     "n_features": 16,
     "grouped_auc": 0.927412426743244,
     "grouped_auc_std": 0.007019233808201383
+  },
+  "nb_metrics": {
+    "n": 25908,
+    "n_groups": 608,
+    "J": 50,
+    "rho": 0.2,
+    "test_frac": 0.16666666666666669,
+    "group_col": "team_year_offense",
+    "n_features": 16,
+    "nb_auc": {
+      "mean": 0.9270116832183132,
+      "ci_low": 0.9140345865072537,
+      "ci_high": 0.9399887799293727,
+      "std": 0.013767716997579556,
+      "se_corrected": 0.006457631678223606,
+      "J": 50,
+      "rho": 0.2
+    }
   }
 }

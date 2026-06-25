@@ -206,7 +206,21 @@ def career_level_corr(
         if len(d) < 10 or d["gene"].std() == 0 or d["war"].std() == 0:
             return {"insufficient": True, "n_coaches": int(len(d))}
         r, p = stats.pearsonr(d["gene"], d["war"])
+        # One row per coach (independent), so an ordinary nonparametric bootstrap
+        # over coaches gives the 95% CI; no clustering needed at the career level.
+        gene = d["gene"].to_numpy(float)
+        war = d["war"].to_numpy(float)
+        n = len(d)
+        rng = np.random.default_rng(0)
+        draws = []
+        for _ in range(2000):
+            idx = rng.integers(0, n, n)
+            if np.std(gene[idx]) > 0 and np.std(war[idx]) > 0:
+                draws.append(np.corrcoef(gene[idx], war[idx])[0, 1])
+        draws = np.asarray(draws)
         return {"correlation": float(r), "p_value": float(p),
+                "ci_low": float(np.percentile(draws, 2.5)),
+                "ci_high": float(np.percentile(draws, 97.5)),
                 "n_coaches": int(len(d)), "significant": bool(p < 0.05)}
 
     out = {}

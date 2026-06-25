@@ -36,7 +36,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from utils.parsimony import cluster_robust_ols
+from utils.parsimony import cluster_robust_ols, cluster_bootstrap_ci
 
 logging.basicConfig(
     level=logging.INFO,
@@ -215,8 +215,13 @@ class WithinCoachFixedEffectsAnalyzer:
         # truth for cluster-robust sandwich SEs across all downstream analyses).
         X = data[[aggression_var]].values
         y = data[war_var].values
-        res = cluster_robust_ols(X, y, data['coach'].values, [aggression_var])
+        clusters = data['coach'].values
+        res = cluster_robust_ols(X, y, clusters, [aggression_var])
         c = res['coefficients'][aggression_var]
+        # Coach-block bootstrap 95% CI on the within-coach slope (primary
+        # uncertainty for the small-n clustered regression).
+        boot = cluster_bootstrap_ci(X, y, clusters, [aggression_var], n_boot=2000, seed=0)
+        bc = boot[aggression_var]
 
         return {
             'n': int(res['n']),
@@ -225,6 +230,8 @@ class WithinCoachFixedEffectsAnalyzer:
             'aggression_se': float(c['std_error']),
             'aggression_t': float(c['t_statistic']),
             'aggression_p': float(c['p_value']),
+            'ci_low': float(bc['ci_low']),
+            'ci_high': float(bc['ci_high']),
             'r_squared': float(res['r_squared']),
             'significant': bool(c['significant'])
         }
