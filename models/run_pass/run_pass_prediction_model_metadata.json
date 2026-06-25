@@ -94,5 +94,14 @@
         "support": 134025.0
       }
     }
+  },
+  "grouped_cv_metrics": {
+    "n": 670124,
+    "n_groups": 608,
+    "n_splits": 5,
+    "group_col": "team_year_offense",
+    "n_features": 16,
+    "grouped_auc": 0.78330171711866,
+    "grouped_auc_std": 0.0021736988551291515
   }
 }

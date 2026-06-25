@@ -3,208 +3,208 @@
     "overall": {
       "Shotgun Formation": {
         "column": "shotgun_gene_zscore",
-        "correlation": 0.13899959909590962,
-        "p_value": 0.0006005439201922779,
-        "ci_low": 0.048514341206941404,
-        "ci_high": 0.23401716984064594,
-        "p_bootstrap_coach_clustered": 0.003,
-        "n_coaches": 123,
-        "slope": 0.2676781239411694,
-        "intercept": -0.0555169221248378,
-        "r_squared": 0.019320888548823606,
-        "std_err": 0.07759689174038821,
-        "n": 606,
+        "correlation": 0.1421467159106096,
+        "p_value": 0.0004386634625170791,
+        "ci_low": 0.05368506150633544,
+        "ci_high": 0.2287615654792078,
+        "p_bootstrap_coach_clustered": 0.004,
+        "n_coaches": 124,
+        "slope": 0.2745844809577538,
+        "intercept": -0.06155282123592407,
+        "r_squared": 0.020205688844171545,
+        "std_err": 0.07767303985841123,
+        "n": 608,
         "significant": true
       }
     },
     "by_era": {
       "2006-2011": {
         "Shotgun Formation": {
-          "correlation": 0.09360271036986738,
-          "p_value": 0.19895578679445616,
-          "n": 190,
+          "correlation": 0.08505975713321921,
+          "p_value": 0.24077440114380583,
+          "n": 192,
           "significant": false
         }
       },
       "2012-2017": {
         "Shotgun Formation": {
-          "correlation": -0.04185429533558205,
-          "p_value": 0.5643342204353267,
+          "correlation": -0.041833560317391126,
+          "p_value": 0.5645273765349994,
           "n": 192,
           "significant": false
         }
       },
       "2018-2024": {
         "Shotgun Formation": {
-          "correlation": 0.16009442758843004,
-          "p_value": 0.016477792731257025,
+          "correlation": 0.1693754641449398,
+          "p_value": 0.011111585593063644,
           "n": 224,
           "significant": true
         }
       }
     },
-    "n_total": 606,
-    "n_coaches": 123,
+    "n_total": 608,
+    "n_coaches": 124,
     "year_range": "2006-2024"
   },
   "tempo": {
     "overall": {
       "Composite Tempo": {
         "column": "composite_tempo_zscore",
-        "correlation": 0.032411684422229546,
-        "p_value": 0.42577487258631747,
-        "ci_low": -0.057878683193629404,
-        "ci_high": 0.13279478103288397,
-        "p_bootstrap_coach_clustered": 0.471,
-        "n_coaches": 123,
-        "slope": 0.06279347594398059,
-        "intercept": -0.0548684656656648,
-        "r_squared": 0.0010505172870861992,
-        "std_err": 0.07878911391344144,
-        "n": 606,
+        "correlation": 0.04543588562505281,
+        "p_value": 0.26330456195462343,
+        "ci_low": -0.04190868620619112,
+        "ci_high": 0.14713192275430137,
+        "p_bootstrap_coach_clustered": 0.352,
+        "n_coaches": 124,
+        "slope": 0.08833907629303031,
+        "intercept": -0.061793195136641874,
+        "r_squared": 0.0020644197025328852,
+        "std_err": 0.07889850928310653,
+        "n": 608,
         "significant": false
       },
       "No-Huddle": {
         "column": "no_huddle_gene_zscore",
-        "correlation": -0.013030470980204158,
-        "p_value": 0.7488748752954779,
-        "ci_low": -0.1055765933046786,
-        "ci_high": 0.08655750862052768,
-        "p_bootstrap_coach_clustered": 0.831,
-        "n_coaches": 123,
-        "slope": -0.024929926459099118,
-        "intercept": -0.05450529661273296,
-        "r_squared": 0.0001697931739659433,
-        "std_err": 0.0778404864751012,
-        "n": 606,
+        "correlation": 0.016125570421060057,
+        "p_value": 0.6914955375462537,
+        "ci_low": -0.07380935348951592,
+        "ci_high": 0.11945319929096769,
+        "p_bootstrap_coach_clustered": 0.699,
+        "n_coaches": 124,
+        "slope": 0.031070211289579108,
+        "intercept": -0.06197571923248664,
+        "r_squared": 0.0002600340214045676,
+        "std_err": 0.07825936782300179,
+        "n": 608,
         "significant": false
       },
       "Pace": {
         "column": "pace_gene_zscore",
-        "correlation": 0.07004628402444889,
-        "p_value": 0.08490831661024696,
-        "ci_low": -0.03955004189276683,
-        "ci_high": 0.18001646244759564,
-        "p_bootstrap_coach_clustered": 0.212,
-        "n_coaches": 123,
-        "slope": 0.13757951554775488,
-        "intercept": -0.05325183258199401,
-        "r_squared": 0.00490648190563375,
-        "std_err": 0.07972272858460475,
-        "n": 606,
+        "correlation": 0.06517434375570938,
+        "p_value": 0.10839554018521905,
+        "ci_low": -0.04342776541803296,
+        "ci_high": 0.17796380047570678,
+        "p_bootstrap_coach_clustered": 0.261,
+        "n_coaches": 124,
+        "slope": 0.1274513600895497,
+        "intercept": -0.06060022357600521,
+        "r_squared": 0.004247695083987376,
+        "std_err": 0.07926968922426035,
+        "n": 608,
         "significant": false
       }
     },
     "by_era": {
       "2006-2011": {
         "Composite Tempo": {
-          "correlation": 0.11078879384394956,
-          "p_value": 0.12807696567415627,
-          "n": 190,
+          "correlation": 0.08872186710360908,
+          "p_value": 0.22104530794628022,
+          "n": 192,
           "significant": false
         },
         "No-Huddle": {
-          "correlation": 0.04318293098647816,
-          "p_value": 0.5541293579055366,
-          "n": 190,
+          "correlation": 0.03803739264714793,
+          "p_value": 0.6004110578416094,
+          "n": 192,
           "significant": false
         },
         "Pace": {
-          "correlation": 0.13213948129376699,
-          "p_value": 0.06915969262696095,
-          "n": 190,
+          "correlation": 0.10637293921317123,
+          "p_value": 0.1419707698802088,
+          "n": 192,
           "significant": false
         }
       },
       "2012-2017": {
         "Composite Tempo": {
-          "correlation": -0.0479343663913394,
-          "p_value": 0.5090994942741489,
+          "correlation": -0.01681057794071654,
+          "p_value": 0.8169811535832032,
           "n": 192,
           "significant": false
         },
         "No-Huddle": {
-          "correlation": -0.114367132233421,
-          "p_value": 0.11420848079812139,
+          "correlation": -0.062115421409012314,
+          "p_value": 0.3920514111120236,
           "n": 192,
           "significant": false
         },
         "Pace": {
-          "correlation": 0.04275293562094774,
-          "p_value": 0.5559934507003567,
+          "correlation": 0.048563832530254966,
+          "p_value": 0.5035459568166291,
           "n": 192,
           "significant": false
         }
       },
       "2018-2024": {
         "Composite Tempo": {
-          "correlation": 0.014173796396225406,
-          "p_value": 0.8329202605645004,
+          "correlation": 0.04085424545336336,
+          "p_value": 0.5429994741405515,
           "n": 224,
           "significant": false
         },
         "No-Huddle": {
-          "correlation": -0.0007956415577480211,
-          "p_value": 0.9905521093436254,
+          "correlation": 0.039699640692991034,
+          "p_value": 0.554467708292753,
           "n": 224,
           "significant": false
         },
         "Pace": {
-          "correlation": 0.023994963773806083,
-          "p_value": 0.7209675635105353,
+          "correlation": 0.022250307588892675,
+          "p_value": 0.740500969822275,
           "n": 224,
           "significant": false
         }
       }
     },
-    "n_total": 606,
-    "n_coaches": 123,
+    "n_total": 608,
+    "n_coaches": 124,
     "year_range": "2006-2024"
   },
   "defensive_scheme": {
     "overall": {
       "Defensive Scheme": {
         "column": "composite_scheme_zscore",
-        "correlation": 0.13487458670191582,
-        "p_value": 0.023498605722064848,
-        "ci_low": 0.017728600236131004,
-        "ci_high": 0.2597709841429794,
-        "p_bootstrap_coach_clustered": 0.021,
+        "correlation": 0.13919753223567588,
+        "p_value": 0.01935938664710711,
+        "ci_low": 0.018781116641942715,
+        "ci_high": 0.25989829901975164,
+        "p_bootstrap_coach_clustered": 0.023,
         "n_coaches": 79,
-        "slope": 0.23640713953231168,
-        "intercept": 0.234609575912442,
-        "r_squared": 0.018191154138012592,
-        "std_err": 0.10379224744272589,
+        "slope": 0.24391545608201476,
+        "intercept": 0.2346545067760779,
+        "r_squared": 0.019375952980502025,
+        "std_err": 0.10370030619985374,
         "n": 282,
         "significant": true
       },
       "Box Stacking": {
         "column": "box_stacking_gene_zscore",
-        "correlation": 0.058286565068109204,
-        "p_value": 0.32942151012521875,
-        "ci_low": -0.05001899372180977,
-        "ci_high": 0.17030802300779269,
-        "p_bootstrap_coach_clustered": 0.297,
+        "correlation": 0.05790104616108116,
+        "p_value": 0.33263591525734765,
+        "ci_low": -0.0525001199634901,
+        "ci_high": 0.17202209435156202,
+        "p_bootstrap_coach_clustered": 0.306,
         "n_coaches": 79,
-        "slope": 0.102276301935045,
-        "intercept": 0.23703033141332905,
-        "r_squared": 0.003397323667438931,
-        "std_err": 0.10468598968689594,
+        "slope": 0.10163837410619023,
+        "intercept": 0.2370885337620563,
+        "r_squared": 0.003352531146547653,
+        "std_err": 0.10472806196612147,
         "n": 282,
         "significant": false
       },
       "Pass Rush": {
         "column": "pass_rush_gene_zscore",
-        "correlation": 0.13881939340974403,
-        "p_value": 0.019694257011854177,
-        "ci_low": 0.008699861389966621,
-        "ci_high": 0.27005149782720267,
-        "p_bootstrap_coach_clustered": 0.033,
+        "correlation": 0.16564929020676375,
+        "p_value": 0.005292656908909063,
+        "ci_low": 0.03448672710516414,
+        "ci_high": 0.2971359500389391,
+        "p_bootstrap_coach_clustered": 0.014,
         "n_coaches": 79,
-        "slope": 0.2431024484412519,
-        "intercept": 0.23422814211588458,
-        "r_squared": 0.019270823986649324,
-        "std_err": 0.10364174645424616,
+        "slope": 0.2900854155474068,
+        "intercept": 0.23350128195545752,
+        "r_squared": 0.027439687346004663,
+        "std_err": 0.10320852496770448,
         "n": 282,
         "significant": true
       }
@@ -212,40 +212,40 @@
     "by_era": {
       "2012-2017": {
         "Defensive Scheme": {
-          "correlation": 0.017389460093180244,
-          "p_value": 0.8915176500559837,
+          "correlation": 0.01871980765060871,
+          "p_value": 0.8832743648422829,
           "n": 64,
           "significant": false
         },
         "Box Stacking": {
-          "correlation": 0.0026099690949574275,
-          "p_value": 0.9836698348671427,
+          "correlation": -0.011185215985924403,
+          "p_value": 0.9300985669719752,
           "n": 64,
           "significant": false
         },
         "Pass Rush": {
-          "correlation": 0.02553909678650133,
-          "p_value": 0.8412314445185328,
+          "correlation": 0.04138988544576927,
+          "p_value": 0.7453837690390079,
           "n": 64,
           "significant": false
         }
       },
       "2018-2024": {
         "Defensive Scheme": {
-          "correlation": 0.19626883940550235,
-          "p_value": 0.003619297871490163,
+          "correlation": 0.20105076731329202,
+          "p_value": 0.0028644580939205027,
           "n": 218,
           "significant": true
         },
         "Box Stacking": {
-          "correlation": 0.09392128863157208,
-          "p_value": 0.1670284895864253,
+          "correlation": 0.09749927796999801,
+          "p_value": 0.1513715228580341,
           "n": 218,
           "significant": false
         },
         "Pass Rush": {
-          "correlation": 0.179172723085775,
-          "p_value": 0.008007874107249272,
+          "correlation": 0.20905166763922303,
+          "p_value": 0.0019142331529443139,
           "n": 218,
           "significant": true
         }
@@ -259,48 +259,48 @@
     "overall": {
       "Composite Aggression": {
         "column": "composite_aggression",
-        "correlation": 0.1715753595178477,
-        "p_value": 2.1714466854726247e-05,
-        "ci_low": 0.08692038664426699,
-        "ci_high": 0.2583313722331263,
+        "correlation": 0.18925574173603738,
+        "p_value": 2.60753886336153e-06,
+        "ci_low": 0.10027619770285084,
+        "ci_high": 0.27663557474578243,
         "p_bootstrap_coach_clustered": 0.0,
-        "n_coaches": 123,
-        "slope": 18.452790682375973,
-        "intercept": -0.15242335108459365,
-        "r_squared": 0.029438103993678764,
-        "std_err": 4.311221009607658,
-        "n": 606,
+        "n_coaches": 124,
+        "slope": 18.140900668144994,
+        "intercept": -0.11133244678725185,
+        "r_squared": 0.035817735780057744,
+        "std_err": 3.8234290740657233,
+        "n": 608,
         "significant": true
       }
     },
     "by_era": {
       "2006-2011": {
         "Composite Aggression": {
-          "correlation": 0.2424353575883603,
-          "p_value": 0.0007513893908980166,
-          "n": 190,
+          "correlation": 0.2389732626515047,
+          "p_value": 0.0008432680383063963,
+          "n": 192,
           "significant": true
         }
       },
       "2012-2017": {
         "Composite Aggression": {
-          "correlation": 0.15893287433802225,
-          "p_value": 0.027674316909864223,
+          "correlation": 0.13655460204261935,
+          "p_value": 0.05893779909827508,
           "n": 192,
-          "significant": true
+          "significant": false
         }
       },
       "2018-2024": {
         "Composite Aggression": {
-          "correlation": 0.03861317609532016,
-          "p_value": 0.5653654855059698,
+          "correlation": 0.1009284992025215,
+          "p_value": 0.13207839442161012,
           "n": 224,
           "significant": false
         }
       }
     },
-    "n_total": 606,
-    "n_coaches": 123,
+    "n_total": 608,
+    "n_coaches": 124,
     "year_range": "2006-2024"
   }
 }

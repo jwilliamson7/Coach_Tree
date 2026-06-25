@@ -6,43 +6,36 @@
   "n_using_clustered_p": 73,
   "n_using_naive_p": 28,
   "n_sig_raw": 67,
-  "n_sig_bh": 63,
-  "bh_cutoff_p": 0.027674316909864223,
-  "bh_cutoff_rank": 63,
+  "n_sig_bh": 64,
+  "bh_cutoff_p": 0.028,
+  "bh_cutoff_rank": 64,
   "lost_significance": [
     {
-      "category": "Era Analysis",
-      "test": "Early (2006-2011): pass_heavy",
-      "p": 0.0318564331401044,
-      "p_source": "naive",
-      "bh_threshold": 0.031683168316831684
-    },
-    {
-      "category": "Temporal Robustness",
-      "test": "Chow test (2011 breakpoint)",
-      "p": 0.03258266797708442,
-      "p_source": "naive",
+      "category": "Overall WAR",
+      "test": "4th Down Aggression",
+      "p": 0.033,
+      "p_source": "clustered",
       "bh_threshold": 0.03217821782178218
     },
     {
       "category": "Persistence Defensive",
-      "test": "deep_pass_aggression Lag 2",
-      "p": 0.04,
+      "test": "fourth_down_aggression Lag 2",
+      "p": 0.046,
       "p_source": "clustered",
       "bh_threshold": 0.032673267326732675
     },
     {
-      "category": "Inheritance: Offensive Mentors",
-      "test": "composite",
-      "p": 0.048,
-      "p_source": "clustered",
+      "category": "Era Analysis",
+      "test": "Late (2018-2024): pass_heavy",
+      "p": 0.0494754634206985,
+      "p_source": "naive",
       "bh_threshold": 0.03316831683168317
     }
   ],
   "tests": [
     {
-      "category": "Persistence lag_1",
-      "test": "composite",
+      "category": "Overall WAR",
+      "test": "Composite Aggression",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 1,
@@ -61,8 +54,8 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence Offensive",
-      "test": "fourth_down_aggression Lag 1",
+      "category": "Persistence lag_1",
+      "test": "composite",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 3,
@@ -111,8 +104,8 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence lag_3",
-      "test": "two_point",
+      "category": "Persistence Defensive",
+      "test": "fourth_down_aggression Lag 1",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 8,
@@ -151,8 +144,8 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence Defensive",
-      "test": "fourth_down_aggression Lag 1",
+      "category": "Persistence Offensive",
+      "test": "two_point_aggression Lag 2",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 12,
@@ -221,8 +214,8 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence lag_2",
-      "test": "pass_heavy",
+      "category": "Persistence Offensive",
+      "test": "fourth_down_aggression Lag 1",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 19,
@@ -271,8 +264,8 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence lag_1",
-      "test": "pass_heavy",
+      "category": "Persistence lag_3",
+      "test": "two_point",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 24,
@@ -301,8 +294,8 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence Defensive",
-      "test": "composite_aggression Lag 3",
+      "category": "Persistence lag_2",
+      "test": "pass_heavy",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 27,
@@ -311,8 +304,8 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence Defensive",
-      "test": "composite_aggression Lag 2",
+      "category": "Persistence lag_1",
+      "test": "pass_heavy",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 28,
@@ -332,7 +325,7 @@
     },
     {
       "category": "Persistence Defensive",
-      "test": "two_point_aggression Lag 1",
+      "test": "two_point_aggression Lag 2",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 30,
@@ -342,7 +335,7 @@
     },
     {
       "category": "Persistence Defensive",
-      "test": "deep_pass_aggression Lag 1",
+      "test": "two_point_aggression Lag 1",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 31,
@@ -352,7 +345,7 @@
     },
     {
       "category": "Persistence Defensive",
-      "test": "pass_heavy_aggression Lag 3",
+      "test": "deep_pass_aggression Lag 1",
       "p": 0.0,
       "p_source": "clustered",
       "rank": 32,
@@ -361,20 +354,20 @@
       "sig_bh": true
     },
     {
-      "category": "Temporal Trend",
-      "test": "Linear regression",
-      "p": 6.30907546675798e-08,
-      "p_source": "naive",
+      "category": "Persistence Defensive",
+      "test": "composite_aggression Lag 3",
+      "p": 0.0,
+      "p_source": "clustered",
       "rank": 33,
       "bh_threshold": 0.016336633663366337,
       "sig_raw": true,
       "sig_bh": true
     },
     {
-      "category": "Temporal Trend",
-      "test": "ANOVA across eras",
-      "p": 3.262277493242122e-07,
-      "p_source": "naive",
+      "category": "Persistence Defensive",
+      "test": "composite_aggression Lag 2",
+      "p": 0.0,
+      "p_source": "clustered",
       "rank": 34,
       "bh_threshold": 0.016831683168316833,
       "sig_raw": true,
@@ -382,8 +375,8 @@
     },
     {
       "category": "Temporal Trend",
-      "test": "Early (2006-2011) vs Late (2018-2024) (t-test)",
-      "p": 2.7134737531382975e-06,
+      "test": "Linear regression",
+      "p": 6.30907546675798e-08,
       "p_source": "naive",
       "rank": 35,
       "bh_threshold": 0.017326732673267325,
@@ -392,8 +385,8 @@
     },
     {
       "category": "Temporal Trend",
-      "test": "Middle (2012-2017) vs Late (2018-2024) (t-test)",
-      "p": 5.275140198084176e-05,
+      "test": "ANOVA across eras",
+      "p": 3.262277493242122e-07,
       "p_source": "naive",
       "rank": 36,
       "bh_threshold": 0.01782178217821782,
@@ -401,9 +394,9 @@
       "sig_bh": true
     },
     {
-      "category": "Coach Type (Overall)",
-      "test": "Offensive: pass_heavy",
-      "p": 0.00020737466838585317,
+      "category": "Temporal Trend",
+      "test": "Early (2006-2011) vs Late (2018-2024) (t-test)",
+      "p": 2.7134737531382975e-06,
       "p_source": "naive",
       "rank": 37,
       "bh_threshold": 0.018316831683168316,
@@ -411,9 +404,9 @@
       "sig_bh": true
     },
     {
-      "category": "Era Analysis",
-      "test": "Early (2006-2011): composite",
-      "p": 0.0007513893908980166,
+      "category": "Temporal Trend",
+      "test": "Middle (2012-2017) vs Late (2018-2024) (t-test)",
+      "p": 5.275140198084176e-05,
       "p_source": "naive",
       "rank": 38,
       "bh_threshold": 0.018811881188118815,
@@ -421,9 +414,9 @@
       "sig_bh": true
     },
     {
-      "category": "Coach Type by Era",
-      "test": "Defensive Middle (2012-2017)",
-      "p": 0.0008477881868824233,
+      "category": "Coach Type (Overall)",
+      "test": "Offensive: pass_heavy",
+      "p": 0.00010998093629044786,
       "p_source": "naive",
       "rank": 39,
       "bh_threshold": 0.01930693069306931,
@@ -431,32 +424,62 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence Offensive",
-      "test": "two_point_aggression Lag 2",
-      "p": 0.001,
-      "p_source": "clustered",
+      "category": "Coach Type (Overall)",
+      "test": "Offensive: composite",
+      "p": 0.00018276179675893984,
+      "p_source": "naive",
       "rank": 40,
       "bh_threshold": 0.019801980198019806,
       "sig_raw": true,
       "sig_bh": true
     },
     {
-      "category": "Overall WAR",
-      "test": "Composite Aggression",
-      "p": 0.001,
-      "p_source": "clustered",
+      "category": "Era Analysis",
+      "test": "Early (2006-2011): composite",
+      "p": 0.0008432680383063963,
+      "p_source": "naive",
       "rank": 41,
       "bh_threshold": 0.0202970297029703,
       "sig_raw": true,
       "sig_bh": true
     },
     {
-      "category": "Overall WAR",
-      "test": "Pass-Heavy Aggression",
-      "p": 0.001,
-      "p_source": "clustered",
+      "category": "Coach Type by Era",
+      "test": "Offensive Early (2006-2011)",
+      "p": 0.0009154189715636464,
+      "p_source": "naive",
       "rank": 42,
       "bh_threshold": 0.020792079207920793,
+      "sig_raw": true,
+      "sig_bh": true
+    },
+    {
+      "category": "Persistence Defensive",
+      "test": "fourth_down_aggression Lag 3",
+      "p": 0.001,
+      "p_source": "clustered",
+      "rank": 43,
+      "bh_threshold": 0.02128712871287129,
+      "sig_raw": true,
+      "sig_bh": true
+    },
+    {
+      "category": "Persistence Defensive",
+      "test": "pass_heavy_aggression Lag 3",
+      "p": 0.001,
+      "p_source": "clustered",
+      "rank": 44,
+      "bh_threshold": 0.021782178217821784,
+      "sig_raw": true,
+      "sig_bh": true
+    },
+    {
+      "category": "Persistence Offensive",
+      "test": "two_point_aggression Lag 1",
+      "p": 0.001,
+      "p_source": "clustered",
+      "rank": 45,
+      "bh_threshold": 0.02227722772277228,
       "sig_raw": true,
       "sig_bh": true
     },
@@ -464,36 +487,6 @@
       "category": "Temporal Trend",
       "test": "Early (2006-2011) vs Late (2018-2024) (Mann-Whitney)",
       "p": 0.0011655011655011655,
-      "p_source": "naive",
-      "rank": 43,
-      "bh_threshold": 0.02128712871287129,
-      "sig_raw": true,
-      "sig_bh": true
-    },
-    {
-      "category": "Coach Type by Era",
-      "test": "Offensive Early (2006-2011)",
-      "p": 0.0014925209130731653,
-      "p_source": "naive",
-      "rank": 44,
-      "bh_threshold": 0.021782178217821784,
-      "sig_raw": true,
-      "sig_bh": true
-    },
-    {
-      "category": "Coach Type (Overall)",
-      "test": "Offensive: composite",
-      "p": 0.0016181842882533228,
-      "p_source": "naive",
-      "rank": 45,
-      "bh_threshold": 0.02227722772277228,
-      "sig_raw": true,
-      "sig_bh": true
-    },
-    {
-      "category": "Coach Type (Overall)",
-      "test": "Defensive: composite",
-      "p": 0.0019530798296324022,
       "p_source": "naive",
       "rank": 46,
       "bh_threshold": 0.022772277227722775,
@@ -511,20 +504,20 @@
       "sig_bh": true
     },
     {
-      "category": "Two-Way Fixed Effects",
-      "test": "Pooled (2006-2024)",
-      "p": 0.002897012583384262,
-      "p_source": "naive",
+      "category": "Overall WAR",
+      "test": "Pass-Heavy Aggression",
+      "p": 0.002,
+      "p_source": "clustered",
       "rank": 48,
       "bh_threshold": 0.023762376237623763,
       "sig_raw": true,
       "sig_bh": true
     },
     {
-      "category": "Gene-WAR",
-      "test": "Shotgun Formation",
-      "p": 0.003,
-      "p_source": "clustered",
+      "category": "Two-Way Fixed Effects",
+      "test": "Pooled (2006-2024)",
+      "p": 0.002897012583384262,
+      "p_source": "naive",
       "rank": 49,
       "bh_threshold": 0.024257425742574258,
       "sig_raw": true,
@@ -532,7 +525,7 @@
     },
     {
       "category": "Persistence Offensive",
-      "test": "two_point_aggression Lag 1",
+      "test": "pass_heavy_aggression Lag 3",
       "p": 0.003,
       "p_source": "clustered",
       "rank": 50,
@@ -542,8 +535,8 @@
     },
     {
       "category": "Persistence Offensive",
-      "test": "pass_heavy_aggression Lag 3",
-      "p": 0.005,
+      "test": "composite_aggression Lag 3",
+      "p": 0.003,
       "p_source": "clustered",
       "rank": 51,
       "bh_threshold": 0.02524752475247525,
@@ -551,19 +544,19 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence Defensive",
-      "test": "fourth_down_aggression Lag 3",
-      "p": 0.007,
-      "p_source": "clustered",
+      "category": "Coach Type (Overall)",
+      "test": "Defensive: composite",
+      "p": 0.00346852568284508,
+      "p_source": "naive",
       "rank": 52,
       "bh_threshold": 0.025742574257425745,
       "sig_raw": true,
       "sig_bh": true
     },
     {
-      "category": "Persistence Offensive",
-      "test": "composite_aggression Lag 3",
-      "p": 0.007,
+      "category": "Gene-WAR",
+      "test": "Shotgun Formation",
+      "p": 0.004,
       "p_source": "clustered",
       "rank": 53,
       "bh_threshold": 0.02623762376237624,
@@ -573,7 +566,7 @@
     {
       "category": "Coach Type (Overall)",
       "test": "Defensive: pass_heavy",
-      "p": 0.008925324034187545,
+      "p": 0.004879970117850013,
       "p_source": "naive",
       "rank": 54,
       "bh_threshold": 0.026732673267326736,
@@ -582,8 +575,8 @@
     },
     {
       "category": "Persistence Defensive",
-      "test": "fourth_down_aggression Lag 2",
-      "p": 0.012,
+      "test": "two_point_aggression Lag 3",
+      "p": 0.006,
       "p_source": "clustered",
       "rank": 55,
       "bh_threshold": 0.02722772277227723,
@@ -591,10 +584,10 @@
       "sig_bh": true
     },
     {
-      "category": "Inheritance: OC->HC",
-      "test": "pass_heavy",
-      "p": 0.013,
-      "p_source": "clustered",
+      "category": "Coach Type by Era",
+      "test": "Defensive Middle (2012-2017)",
+      "p": 0.008551456487256016,
+      "p_source": "naive",
       "rank": 56,
       "bh_threshold": 0.027722772277227727,
       "sig_raw": true,
@@ -603,7 +596,7 @@
     {
       "category": "Persistence Defensive",
       "test": "deep_pass_aggression Lag 3",
-      "p": 0.013,
+      "p": 0.009,
       "p_source": "clustered",
       "rank": 57,
       "bh_threshold": 0.028217821782178215,
@@ -613,7 +606,7 @@
     {
       "category": "Persistence Offensive",
       "test": "deep_pass_aggression Lag 3",
-      "p": 0.013,
+      "p": 0.012,
       "p_source": "clustered",
       "rank": 58,
       "bh_threshold": 0.02871287128712871,
@@ -621,19 +614,19 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence lag_2",
-      "test": "two_point",
-      "p": 0.014,
-      "p_source": "clustered",
+      "category": "Era Analysis",
+      "test": "Middle (2012-2017): pass_heavy",
+      "p": 0.014910739466596917,
+      "p_source": "naive",
       "rank": 59,
       "bh_threshold": 0.029207920792079206,
       "sig_raw": true,
       "sig_bh": true
     },
     {
-      "category": "Persistence Defensive",
-      "test": "two_point_aggression Lag 3",
-      "p": 0.018,
+      "category": "Inheritance: OC->HC",
+      "test": "pass_heavy",
+      "p": 0.016,
       "p_source": "clustered",
       "rank": 60,
       "bh_threshold": 0.0297029702970297,
@@ -641,50 +634,50 @@
       "sig_bh": true
     },
     {
-      "category": "Gene-WAR",
-      "test": "Defensive Scheme",
-      "p": 0.021,
-      "p_source": "clustered",
+      "category": "Era Analysis",
+      "test": "Early (2006-2011): pass_heavy",
+      "p": 0.01635442944170521,
+      "p_source": "naive",
       "rank": 61,
       "bh_threshold": 0.030198019801980197,
       "sig_raw": true,
       "sig_bh": true
     },
     {
-      "category": "Era Analysis",
-      "test": "Middle (2012-2017): pass_heavy",
-      "p": 0.026065519094196667,
-      "p_source": "naive",
+      "category": "Persistence lag_2",
+      "test": "two_point",
+      "p": 0.022,
+      "p_source": "clustered",
       "rank": 62,
       "bh_threshold": 0.030693069306930693,
       "sig_raw": true,
       "sig_bh": true
     },
     {
-      "category": "Era Analysis",
-      "test": "Middle (2012-2017): composite",
-      "p": 0.027674316909864223,
-      "p_source": "naive",
+      "category": "Gene-WAR",
+      "test": "Defensive Scheme",
+      "p": 0.023,
+      "p_source": "clustered",
       "rank": 63,
       "bh_threshold": 0.031188118811881188,
       "sig_raw": true,
       "sig_bh": true
     },
     {
-      "category": "Era Analysis",
-      "test": "Early (2006-2011): pass_heavy",
-      "p": 0.0318564331401044,
-      "p_source": "naive",
+      "category": "Persistence Defensive",
+      "test": "deep_pass_aggression Lag 2",
+      "p": 0.028,
+      "p_source": "clustered",
       "rank": 64,
       "bh_threshold": 0.031683168316831684,
       "sig_raw": true,
-      "sig_bh": false
+      "sig_bh": true
     },
     {
-      "category": "Temporal Robustness",
-      "test": "Chow test (2011 breakpoint)",
-      "p": 0.03258266797708442,
-      "p_source": "naive",
+      "category": "Overall WAR",
+      "test": "4th Down Aggression",
+      "p": 0.033,
+      "p_source": "clustered",
       "rank": 65,
       "bh_threshold": 0.03217821782178218,
       "sig_raw": true,
@@ -692,8 +685,8 @@
     },
     {
       "category": "Persistence Defensive",
-      "test": "deep_pass_aggression Lag 2",
-      "p": 0.04,
+      "test": "fourth_down_aggression Lag 2",
+      "p": 0.046,
       "p_source": "clustered",
       "rank": 66,
       "bh_threshold": 0.032673267326732675,
@@ -701,52 +694,22 @@
       "sig_bh": false
     },
     {
-      "category": "Inheritance: Offensive Mentors",
-      "test": "composite",
-      "p": 0.048,
-      "p_source": "clustered",
+      "category": "Era Analysis",
+      "test": "Late (2018-2024): pass_heavy",
+      "p": 0.0494754634206985,
+      "p_source": "naive",
       "rank": 67,
       "bh_threshold": 0.03316831683168317,
       "sig_raw": true,
       "sig_bh": false
     },
     {
-      "category": "Overall WAR",
-      "test": "4th Down Aggression",
-      "p": 0.051,
-      "p_source": "clustered",
+      "category": "Era Analysis",
+      "test": "Middle (2012-2017): composite",
+      "p": 0.05893779909827508,
+      "p_source": "naive",
       "rank": 68,
       "bh_threshold": 0.033663366336633666,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Temporal Robustness",
-      "test": "Aggression x Year interaction",
-      "p": 0.05523024490548023,
-      "p_source": "naive",
-      "rank": 69,
-      "bh_threshold": 0.03415841584158416,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Persistence Defensive",
-      "test": "two_point_aggression Lag 2",
-      "p": 0.062,
-      "p_source": "clustered",
-      "rank": 70,
-      "bh_threshold": 0.03465346534653465,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Era Analysis",
-      "test": "Late (2018-2024): pass_heavy",
-      "p": 0.06402799123291324,
-      "p_source": "naive",
-      "rank": 71,
-      "bh_threshold": 0.035148514851485145,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -755,6 +718,36 @@
       "test": "Early (2006-2011) vs Middle (2012-2017) (t-test)",
       "p": 0.06534988403415087,
       "p_source": "naive",
+      "rank": 69,
+      "bh_threshold": 0.03415841584158416,
+      "sig_raw": false,
+      "sig_bh": false
+    },
+    {
+      "category": "Temporal Robustness",
+      "test": "Chow test (2011 breakpoint)",
+      "p": 0.07061877906198544,
+      "p_source": "naive",
+      "rank": 70,
+      "bh_threshold": 0.03465346534653465,
+      "sig_raw": false,
+      "sig_bh": false
+    },
+    {
+      "category": "Coach Type by Era",
+      "test": "Defensive Early (2006-2011)",
+      "p": 0.07803102602219626,
+      "p_source": "naive",
+      "rank": 71,
+      "bh_threshold": 0.035148514851485145,
+      "sig_raw": false,
+      "sig_bh": false
+    },
+    {
+      "category": "Inheritance: Offensive Mentors",
+      "test": "fourth_down",
+      "p": 0.091,
+      "p_source": "clustered",
       "rank": 72,
       "bh_threshold": 0.03564356435643564,
       "sig_raw": false,
@@ -762,11 +755,21 @@
     },
     {
       "category": "Coach Type by Era",
-      "test": "Defensive Early (2006-2011)",
-      "p": 0.06568264647823295,
+      "test": "Offensive Late (2018-2024)",
+      "p": 0.10012982257254727,
       "p_source": "naive",
       "rank": 73,
       "bh_threshold": 0.036138613861386136,
+      "sig_raw": false,
+      "sig_bh": false
+    },
+    {
+      "category": "Inheritance: OC->HC",
+      "test": "fourth_down",
+      "p": 0.105,
+      "p_source": "clustered",
+      "rank": 74,
+      "bh_threshold": 0.03663366336633663,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -775,26 +778,16 @@
       "test": "Early (2006-2011)",
       "p": 0.1053150011439763,
       "p_source": "naive",
-      "rank": 74,
-      "bh_threshold": 0.03663366336633663,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Inheritance: OC->HC",
-      "test": "composite",
-      "p": 0.11,
-      "p_source": "clustered",
       "rank": 75,
       "bh_threshold": 0.03712871287128713,
       "sig_raw": false,
       "sig_bh": false
     },
     {
-      "category": "Inheritance: Offensive Mentors",
-      "test": "fourth_down",
-      "p": 0.123,
-      "p_source": "clustered",
+      "category": "Era Analysis",
+      "test": "Late (2018-2024): composite",
+      "p": 0.13207839442161012,
+      "p_source": "naive",
       "rank": 76,
       "bh_threshold": 0.03762376237623763,
       "sig_raw": false,
@@ -802,11 +795,21 @@
     },
     {
       "category": "Inheritance: OC->HC",
-      "test": "fourth_down",
-      "p": 0.185,
+      "test": "composite",
+      "p": 0.153,
       "p_source": "clustered",
       "rank": 77,
       "bh_threshold": 0.038118811881188125,
+      "sig_raw": false,
+      "sig_bh": false
+    },
+    {
+      "category": "Inheritance: Offensive Mentors",
+      "test": "composite",
+      "p": 0.161,
+      "p_source": "clustered",
+      "rank": 78,
+      "bh_threshold": 0.03861386138613862,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -815,25 +818,15 @@
       "test": "Middle (2012-2017)",
       "p": 0.20193442639236858,
       "p_source": "naive",
-      "rank": 78,
-      "bh_threshold": 0.03861386138613862,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Inheritance: OC->HC",
-      "test": "deep_pass",
-      "p": 0.218,
-      "p_source": "clustered",
       "rank": 79,
       "bh_threshold": 0.039108910891089116,
       "sig_raw": false,
       "sig_bh": false
     },
     {
-      "category": "Inheritance: Offensive Mentors",
-      "test": "two_point",
-      "p": 0.248,
+      "category": "Inheritance: OC->HC",
+      "test": "deep_pass",
+      "p": 0.215,
       "p_source": "clustered",
       "rank": 80,
       "bh_threshold": 0.03960396039603961,
@@ -841,10 +834,10 @@
       "sig_bh": false
     },
     {
-      "category": "Inheritance: Defensive Mentors",
-      "test": "two_point",
-      "p": 0.289,
-      "p_source": "clustered",
+      "category": "Temporal Robustness",
+      "test": "Aggression x Year interaction",
+      "p": 0.237188253383537,
+      "p_source": "naive",
       "rank": 81,
       "bh_threshold": 0.04009900990099011,
       "sig_raw": false,
@@ -853,7 +846,7 @@
     {
       "category": "Inheritance: Defensive Mentors",
       "test": "deep_pass",
-      "p": 0.304,
+      "p": 0.33,
       "p_source": "clustered",
       "rank": 82,
       "bh_threshold": 0.0405940594059406,
@@ -861,9 +854,9 @@
       "sig_bh": false
     },
     {
-      "category": "Inheritance: DC->HC",
-      "test": "two_point",
-      "p": 0.323,
+      "category": "Inheritance: Offensive Mentors",
+      "test": "pass_heavy",
+      "p": 0.333,
       "p_source": "clustered",
       "rank": 83,
       "bh_threshold": 0.04108910891089109,
@@ -871,22 +864,12 @@
       "sig_bh": false
     },
     {
-      "category": "Inheritance: Offensive Mentors",
-      "test": "pass_heavy",
-      "p": 0.329,
+      "category": "Gene-WAR",
+      "test": "Composite Tempo",
+      "p": 0.352,
       "p_source": "clustered",
       "rank": 84,
       "bh_threshold": 0.041584158415841586,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Inheritance: OC->HC",
-      "test": "two_point",
-      "p": 0.339,
-      "p_source": "clustered",
-      "rank": 85,
-      "bh_threshold": 0.04207920792079208,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -895,15 +878,25 @@
       "test": "Late (2018-2024)",
       "p": 0.35846563972853085,
       "p_source": "naive",
+      "rank": 85,
+      "bh_threshold": 0.04207920792079208,
+      "sig_raw": false,
+      "sig_bh": false
+    },
+    {
+      "category": "Inheritance: DC->HC",
+      "test": "deep_pass",
+      "p": 0.396,
+      "p_source": "clustered",
       "rank": 86,
       "bh_threshold": 0.04257425742574258,
       "sig_raw": false,
       "sig_bh": false
     },
     {
-      "category": "Overall WAR",
-      "test": "2-Point Aggression",
-      "p": 0.369,
+      "category": "Inheritance: Defensive Mentors",
+      "test": "two_point",
+      "p": 0.427,
       "p_source": "clustered",
       "rank": 87,
       "bh_threshold": 0.04306930693069307,
@@ -911,9 +904,9 @@
       "sig_bh": false
     },
     {
-      "category": "Inheritance: DC->HC",
-      "test": "deep_pass",
-      "p": 0.374,
+      "category": "Overall WAR",
+      "test": "2-Point Aggression",
+      "p": 0.445,
       "p_source": "clustered",
       "rank": 88,
       "bh_threshold": 0.04356435643564357,
@@ -921,19 +914,19 @@
       "sig_bh": false
     },
     {
-      "category": "Coach Type by Era",
-      "test": "Offensive Late (2018-2024)",
-      "p": 0.409698086440864,
-      "p_source": "naive",
+      "category": "Inheritance: DC->HC",
+      "test": "two_point",
+      "p": 0.508,
+      "p_source": "clustered",
       "rank": 89,
       "bh_threshold": 0.044059405940594064,
       "sig_raw": false,
       "sig_bh": false
     },
     {
-      "category": "Overall WAR",
-      "test": "Deep Pass Aggression",
-      "p": 0.41,
+      "category": "Inheritance: Offensive Mentors",
+      "test": "two_point",
+      "p": 0.587,
       "p_source": "clustered",
       "rank": 90,
       "bh_threshold": 0.04455445544554456,
@@ -941,9 +934,9 @@
       "sig_bh": false
     },
     {
-      "category": "Gene-WAR",
-      "test": "Composite Tempo",
-      "p": 0.471,
+      "category": "Overall WAR",
+      "test": "Deep Pass Aggression",
+      "p": 0.645,
       "p_source": "clustered",
       "rank": 91,
       "bh_threshold": 0.045049504950495055,
@@ -951,19 +944,19 @@
       "sig_bh": false
     },
     {
-      "category": "Era Analysis",
-      "test": "Late (2018-2024): composite",
-      "p": 0.5653654855059698,
-      "p_source": "naive",
+      "category": "Inheritance: Defensive Mentors",
+      "test": "composite",
+      "p": 0.702,
+      "p_source": "clustered",
       "rank": 92,
       "bh_threshold": 0.04554455445544555,
       "sig_raw": false,
       "sig_bh": false
     },
     {
-      "category": "Inheritance: Defensive Mentors",
-      "test": "composite",
-      "p": 0.594,
+      "category": "Inheritance: OC->HC",
+      "test": "two_point",
+      "p": 0.706,
       "p_source": "clustered",
       "rank": 93,
       "bh_threshold": 0.046039603960396046,
@@ -973,7 +966,7 @@
     {
       "category": "Inheritance: DC->HC",
       "test": "composite",
-      "p": 0.625,
+      "p": 0.713,
       "p_source": "clustered",
       "rank": 94,
       "bh_threshold": 0.04653465346534654,
@@ -981,9 +974,9 @@
       "sig_bh": false
     },
     {
-      "category": "Inheritance: Defensive Mentors",
-      "test": "fourth_down",
-      "p": 0.629,
+      "category": "Inheritance: DC->HC",
+      "test": "pass_heavy",
+      "p": 0.848,
       "p_source": "clustered",
       "rank": 95,
       "bh_threshold": 0.04702970297029703,
@@ -991,9 +984,9 @@
       "sig_bh": false
     },
     {
-      "category": "Inheritance: DC->HC",
-      "test": "fourth_down",
-      "p": 0.639,
+      "category": "Inheritance: Defensive Mentors",
+      "test": "pass_heavy",
+      "p": 0.859,
       "p_source": "clustered",
       "rank": 96,
       "bh_threshold": 0.047524752475247525,
@@ -1002,8 +995,8 @@
     },
     {
       "category": "Coach Type by Era",
-      "test": "Defensive Late (2018-2024)",
-      "p": 0.7835402106106124,
+      "test": "Offensive Middle (2012-2017)",
+      "p": 0.9035374110376319,
       "p_source": "naive",
       "rank": 97,
       "bh_threshold": 0.04801980198019802,
@@ -1012,8 +1005,8 @@
     },
     {
       "category": "Coach Type by Era",
-      "test": "Offensive Middle (2012-2017)",
-      "p": 0.8645502292556304,
+      "test": "Defensive Late (2018-2024)",
+      "p": 0.9496927305285958,
       "p_source": "naive",
       "rank": 98,
       "bh_threshold": 0.048514851485148516,
@@ -1022,8 +1015,8 @@
     },
     {
       "category": "Inheritance: Defensive Mentors",
-      "test": "pass_heavy",
-      "p": 0.874,
+      "test": "fourth_down",
+      "p": 0.952,
       "p_source": "clustered",
       "rank": 99,
       "bh_threshold": 0.04900990099009901,
@@ -1032,8 +1025,8 @@
     },
     {
       "category": "Inheritance: DC->HC",
-      "test": "pass_heavy",
-      "p": 0.875,
+      "test": "fourth_down",
+      "p": 0.987,
       "p_source": "clustered",
       "rank": 100,
       "bh_threshold": 0.04950495049504951,

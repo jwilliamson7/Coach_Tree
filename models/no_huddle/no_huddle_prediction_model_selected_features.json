@@ -14,7 +14,10 @@
     "surface",
     "side_of_field",
     "spread_line",
-    "defteam_score"
+    "defteam_score",
+    "posteam_score",
+    "posteam_timeouts_remaining",
+    "defteam_timeouts_remaining"
   ],
   "method": "xgb_gain_stability",
   "pi_threshold": 0.6,
@@ -30,6 +33,26 @@
   "full_feature_count": 26,
   "dropped_redundant": [
     "game_seconds_remaining"
+  ],
+  "protected_core": [
+    "quarter_seconds_remaining",
+    "half_seconds_remaining",
+    "qtr",
+    "posteam_score",
+    "defteam_score",
+    "score_differential",
+    "yardline_100",
+    "down",
+    "ydstogo",
+    "goal_to_go",
+    "posteam_timeouts_remaining",
+    "defteam_timeouts_remaining"
+  ],
+  "protected_core_excluded": [],
+  "forced_in": [
+    "posteam_score",
+    "posteam_timeouts_remaining",
+    "defteam_timeouts_remaining"
   ],
   "selection_frequency": {
     "8": {
@@ -114,5 +137,5 @@
       "posteam_timeouts_remaining": 0.0
     }
   },
-  "generated": "2026-06-24 13:25:33"
+  "generated": "2026-06-25 08:36:02"
 }

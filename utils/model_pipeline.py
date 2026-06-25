@@ -33,7 +33,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.decomposition import TruncatedSVD
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GroupKFold
 
 
 TrainSplit = namedtuple(
@@ -229,6 +229,122 @@ def prepare_features_for_inference(
         return apply_impute(encoded, imputers)
     return SimpleImputer(strategy="median").fit_transform(
         encoded.reindex(columns=list(feature_names)))
+
+
+# --------------------------------------------------------------------------- #
+# Cross-fitting: out-of-fold predictions for leakage-free gene scoring (WS1)
+# --------------------------------------------------------------------------- #
+# Standard XGB hyperparameters carried over from the tuned model. A whitelist so
+# that passing either a live model.get_params() or the JSON-stringified metadata
+# best_params works without dragging deprecated / non-constructor keys (e.g.
+# use_label_encoder) along.
+_XGB_HYPERPARAMS = (
+    "n_estimators", "max_depth", "learning_rate", "subsample",
+    "colsample_bytree", "colsample_bylevel", "colsample_bynode",
+    "gamma", "min_child_weight", "reg_alpha", "reg_lambda",
+    "max_delta_step", "scale_pos_weight", "booster", "tree_method",
+    "grow_policy", "max_leaves", "max_bin",
+)
+
+
+def _coerce_numeric(v):
+    """Best-effort numeric coercion (metadata best_params may be JSON strings)."""
+    if isinstance(v, str):
+        try:
+            f = float(v)
+        except ValueError:
+            return v
+        return int(f) if (f.is_integer() and "." not in v and "e" not in v.lower()) else f
+    return v
+
+
+def build_xgb_estimator(params: Optional[Dict], objective: str, is_classifier: bool,
+                        random_state: int = 42):
+    """Construct a fresh XGB estimator from already-tuned hyperparameters.
+
+    Only the standard hyperparameters are carried over (the whitelist above), so
+    NO hyperparameter search happens here -- the tuned values are reused as-is.
+    """
+    import xgboost as xgb
+    hp = {}
+    for k in _XGB_HYPERPARAMS:
+        if params and k in params and params[k] is not None:
+            hp[k] = _coerce_numeric(params[k])
+    hp.setdefault("n_estimators", 200)
+    hp["random_state"] = random_state
+    hp["n_jobs"] = -1
+    if is_classifier:
+        return xgb.XGBClassifier(objective=objective, eval_metric="logloss", **hp)
+    return xgb.XGBRegressor(objective=objective, **hp)
+
+
+def crossfit_predict(
+    feature_data: pd.DataFrame,
+    feature_names: Sequence[str],
+    target_col: str,
+    categorical_features: set,
+    groups: Sequence,
+    params: Optional[Dict],
+    objective: str,
+    is_classifier: bool,
+    n_splits: int = 5,
+    random_state: int = 42,
+    logger=None,
+) -> np.ndarray:
+    """Out-of-fold (cross-fitted) predictions for leakage-free gene scoring (WS1).
+
+    Genes are otherwise scored on the same plays the all-data model trained on, so
+    the "expected" baseline partly fits each coach's own behavior and attenuates
+    the gene toward zero. This refits the FULL train/serve pipeline (encode +
+    impute + SVD + a fresh XGB with the already-tuned `params`, no re-search) on a
+    GroupKFold partition -- groups = coach (offense) / defteam (defense) -- and
+    predicts each held-out fold, so a coach is never scored by a model that saw
+    that coach. Returns OOF predictions aligned to feature_data's ROW ORDER
+    (P(y=1) for classifiers, the predicted value for regressors).
+
+    The all-data persisted model stays the reported/metadata model; these OOF
+    predictions are used only to compute gene = actual - predicted.
+    """
+    X_all = feature_data[list(feature_names)].reset_index(drop=True)
+    y_all = feature_data[target_col].reset_index(drop=True)
+    if is_classifier:
+        y_all = y_all.astype(int)
+    grp = pd.Series(np.asarray(groups)).reset_index(drop=True)
+    if len(grp) != len(X_all):
+        raise ValueError(f"groups length {len(grp)} != rows {len(X_all)}")
+
+    n_groups = grp.nunique()
+    k = min(n_splits, n_groups)
+    if k < 2:
+        raise ValueError(f"need >=2 groups for cross-fitting, got {n_groups}")
+
+    oof = np.full(len(X_all), np.nan, dtype=float)
+    gkf = GroupKFold(n_splits=k)
+    for fold, (tr, te) in enumerate(gkf.split(X_all, y_all, grp)):
+        le: Dict[str, LabelEncoder] = {}
+        X_tr_enc = encode_categoricals(X_all.iloc[tr], feature_names,
+                                       categorical_features, le, fit=True)
+        X_te_enc = encode_categoricals(X_all.iloc[te], feature_names,
+                                       categorical_features, le, fit=False)
+        encoded_features = list(X_tr_enc.columns)
+        X_te_enc = X_te_enc.reindex(columns=encoded_features)
+        X_tr_imp, X_te_imp, _ = fit_impute(X_tr_enc, X_te_enc)
+
+        model = build_xgb_estimator(params, objective, is_classifier, random_state)
+        model.fit(X_tr_imp, y_all.iloc[tr])
+        if is_classifier:
+            oof[te] = model.predict_proba(X_te_imp)[:, 1]
+        else:
+            oof[te] = model.predict(X_te_imp)
+        if logger:
+            logger.info("crossfit fold %d/%d: train=%d test=%d groups_held=%d",
+                        fold + 1, k, len(tr), len(te), int(grp.iloc[te].nunique()))
+
+    if np.isnan(oof).any():  # GroupKFold covers every row once; guard anyway
+        n_missing = int(np.isnan(oof).sum())
+        if logger:
+            logger.warning("crossfit: %d rows without OOF prediction (unexpected)", n_missing)
+    return oof
 
 
 # --------------------------------------------------------------------------- #

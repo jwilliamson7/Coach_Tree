@@ -22,7 +22,7 @@ import json
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from utils.data_paths import coach_war_trajectories_path
+from utils.data_paths import coach_war_trajectories_path, merge_gene_war
 from utils.parsimony import cluster_robust_ols, cluster_bootstrap_ci, cluster_bootstrap_corr
 
 logging.basicConfig(
@@ -102,7 +102,10 @@ def load_and_merge_gene(gene_key, war_data):
         config['year_col']: 'year',
     })
 
-    merged = pd.merge(gene_df, war_data, on=['coach', 'year'], how='inner')
+    # WS8: join on canonicalized coach name (+ year) with attrition logging, so
+    # name-format mismatches are recovered and true drops are surfaced.
+    merged = merge_gene_war(gene_df, war_data, 'coach', 'coach',
+                            year_cols=('year', 'year'), how='inner', logger=logger)
     logger.info(f"{gene_key}: merged {len(merged)} coach-year records "
                 f"({merged['coach'].nunique()} coaches)")
     return merged

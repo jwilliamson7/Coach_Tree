@@ -528,6 +528,121 @@ def cluster_bootstrap_corr(
 
 
 # --------------------------------------------------------------------------- #
+# (e) Reliability-weighted composite genes (WS4: shared by aggression, tempo,
+#     defensive). Components differ ~10x in intrinsic reliability, so an
+#     equal-weight mean lets sampling noise dominate the weak ones. Weight each
+#     component per unit (coach-year / team-year) by its reliability
+#         rel = tau2 / (tau2 + samp_var),
+#     where tau2 is the true between-unit variance (DerSimonian-Laird) and
+#     samp_var is the sampling variance of that component's gene mean. Weights are
+#     outcome-blind (never see WAR), so this is not circular.
+# --------------------------------------------------------------------------- #
+def dersimonian_laird_tau2(gene: np.ndarray, samp_var: np.ndarray) -> float:
+    """Heteroskedastic between-unit variance tau^2 (DerSimonian-Laird estimator).
+
+    The meta-analysis standard for combining unit estimates with differing
+    sampling variances; robust to small-n units, unlike the naive
+    Var(gene) - mean(samp_var) which can collapse to ~0. Returns max(0, .).
+    """
+    gene = np.asarray(gene, float)
+    samp_var = np.asarray(samp_var, float)
+    w = 1.0 / samp_var
+    k = len(gene)
+    if k < 2 or w.sum() <= 0:
+        return 0.0
+    gbar = float((w * gene).sum() / w.sum())
+    Q = float((w * (gene - gbar) ** 2).sum())
+    c = float(w.sum() - (w ** 2).sum() / w.sum())
+    return max(0.0, (Q - (k - 1)) / c) if c > 0 else 0.0
+
+
+def reliability_weights(gene: np.ndarray, samp_var: np.ndarray,
+                        rel_floor: float = 0.1):
+    """Per-unit reliability rel = tau2 / (tau2 + samp_var) with tau2 by DL.
+
+    Units below `rel_floor` are zeroed (mostly sampling noise). Returns
+    (rel_array, tau2).
+    """
+    samp_var = np.asarray(samp_var, float)
+    tau2 = dersimonian_laird_tau2(gene, samp_var)
+    denom = tau2 + samp_var
+    rel = np.where(denom > 0, tau2 / denom, 0.0)
+    rel = np.where(rel < rel_floor, 0.0, rel)
+    return rel, tau2
+
+
+def reliability_weighted_composite(
+    df: pd.DataFrame,
+    comp_specs: Sequence,
+    rel_floor: float = 0.1,
+    value_suffix: str = "",
+    logger=None,
+):
+    """Reliability-weighted composite gene from sub-components.
+
+    comp_specs: iterable of (gene_col, count_col, noisevar_col) where
+      - gene_col      : the component gene (actual - predicted) per unit
+      - count_col     : n plays behind that unit's component mean
+      - noisevar_col  : the SUMMED per-play noise variance for that unit
+                        (Bernoulli phat(1-phat) for classifiers; squared
+                        residual (actual - pred)^2 for regressors).
+    The sampling variance of a component mean is noisevar_col / count_col^2.
+
+    `value_suffix` selects which column is averaged in the weighted mean:
+      - ""        -> weight `gene_col` itself (same-unit components, e.g. the
+                     four aggression rate-deviations).
+      - "_zscore" -> weight `{gene_col}_zscore` (mixed-unit components, e.g. tempo
+                     rate vs seconds, defensive counts vs rate); those z-score
+                     columns must already exist. Reliability is ALWAYS computed
+                     from the raw `gene_col` (rel = tau2/(tau2+samp_var) is
+                     scale-invariant, so raw vs z-scored give identical weights).
+
+    Mutates `df` IN PLACE adding a `{gene_col}_reliability` column per component,
+    and returns (composite_series, reliability_dict, present_components). The
+    composite is the row-wise reliability-weighted mean of available components
+    (NaN where no component clears the floor). Caller assigns/z-scores it.
+    """
+    rel_dict = {}
+    present_components = []
+    for gene_col, count_col, noisevar_col in comp_specs:
+        if (gene_col not in df.columns or count_col not in df.columns
+                or noisevar_col not in df.columns):
+            continue
+        present_components.append(gene_col)
+        present = (df[gene_col].notna() & df[count_col].notna() & (df[count_col] > 0))
+        n = df.loc[present, count_col].astype(float)
+        nv = df.loc[present, noisevar_col].astype(float)
+        samp_var = (nv / (n ** 2)).clip(lower=1e-9)
+        gene = df.loc[present, gene_col].astype(float)
+        rel_arr, tau2 = reliability_weights(gene.values, samp_var.values, rel_floor)
+        rel = pd.Series(0.0, index=df.index)
+        rel.loc[present] = rel_arr
+        df[f"{gene_col}_reliability"] = rel
+        rel_dict[gene_col] = {
+            "tau2": float(tau2),
+            "mean_reliability": float(rel[present].mean()) if present.any() else 0.0,
+            "n_units": int(present.sum()),
+        }
+        if logger:
+            logger.info("%s: tau2=%.2e mean_reliability=%.3f", gene_col, tau2,
+                        rel_dict[gene_col]["mean_reliability"])
+
+    composite = pd.Series(np.nan, index=df.index)
+    if present_components:
+        num = pd.Series(0.0, index=df.index)
+        den = pd.Series(0.0, index=df.index)
+        for gene_col in present_components:
+            w = df[f"{gene_col}_reliability"].fillna(0.0)
+            val_col = f"{gene_col}{value_suffix}"
+            g = df[val_col] if val_col in df.columns else df[gene_col]
+            mask = g.notna()
+            num = num + (w * g).where(mask, 0.0)
+            den = den + w.where(mask, 0.0)
+        composite = pd.Series(np.where(den > 0, num / den, np.nan), index=df.index)
+    return composite, rel_dict, present_components
+
+
+# --------------------------------------------------------------------------- #
 # Self-test
 # --------------------------------------------------------------------------- #
 def _selftest():

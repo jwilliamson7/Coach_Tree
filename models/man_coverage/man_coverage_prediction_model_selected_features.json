@@ -14,7 +14,12 @@
     "surface",
     "temp",
     "wind",
-    "roof"
+    "roof",
+    "quarter_seconds_remaining",
+    "half_seconds_remaining",
+    "posteam_score",
+    "defteam_score",
+    "defteam_timeouts_remaining"
   ],
   "method": "xgb_gain_stability",
   "pi_threshold": 0.6,
@@ -30,6 +35,30 @@
   "full_feature_count": 28,
   "dropped_redundant": [
     "game_seconds_remaining"
+  ],
+  "protected_core": [
+    "quarter_seconds_remaining",
+    "half_seconds_remaining",
+    "qtr",
+    "posteam_score",
+    "defteam_score",
+    "score_differential",
+    "yardline_100",
+    "down",
+    "ydstogo",
+    "goal_to_go",
+    "posteam_timeouts_remaining",
+    "defteam_timeouts_remaining",
+    "shotgun",
+    "no_huddle"
+  ],
+  "protected_core_excluded": [],
+  "forced_in": [
+    "quarter_seconds_remaining",
+    "half_seconds_remaining",
+    "posteam_score",
+    "defteam_score",
+    "defteam_timeouts_remaining"
   ],
   "selection_frequency": {
     "8": {
@@ -120,5 +149,5 @@
       "ydsnet": 0.0
     }
   },
-  "generated": "2026-06-24 13:30:31"
+  "generated": "2026-06-25 08:41:27"
 }

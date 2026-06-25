@@ -43,6 +43,7 @@ sys.path.insert(0, str(REPO_ROOT / "scripts" / "models"))
 
 from utils import model_pipeline as mp
 from utils import parsimony
+from utils import model_features as mf
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -139,7 +140,21 @@ def select_for_model(name, cfg, args):
     X = mp.encode_categoricals(feature_data[feature_names].copy(), feature_names,
                                proc.categorical_features, enc, fit=True)
 
-    X_pruned, dropped = parsimony.drop_redundant_features(X, threshold=args.redundancy_threshold)
+    # WS2: protected game-state core. Restrict the pre-specified core to columns
+    # that are structurally valid for THIS model -- present and non-constant -- so
+    # `down` (constant on 4th-down-only data) and two-point's undefined
+    # down/distance/field block drop out automatically. The core is then shielded
+    # from the redundancy prune and force-included in the final selected set
+    # regardless of its measured selection frequency (frequency-blind by design).
+    core = mf.get_protected_core_features(cfg["side"])
+    core_present = [c for c in core if c in X.columns and X[c].nunique(dropna=False) > 1]
+    core_excluded = [c for c in core if c not in core_present]
+    logger.info("protected core (%d): %s", len(core_present), core_present)
+    if core_excluded:
+        logger.info("core excluded as structurally invalid (absent/constant): %s", core_excluded)
+
+    X_pruned, dropped = parsimony.drop_redundant_features(
+        X, threshold=args.redundancy_threshold, protect=core_present)
     logger.info("features: %d -> %d after redundancy prune (dropped %s)",
                 X.shape[1], X_pruned.shape[1], dropped)
 
@@ -163,6 +178,14 @@ def select_for_model(name, cfg, args):
         selected = list(freq[topk].head(topk).index)
         logger.warning("no feature reached pi=%.2f; falling back to top-%d by frequency", args.pi, topk)
 
+    # WS2: force the protected core in (regardless of selection frequency).
+    forced_in = [c for c in core_present if c not in selected]
+    selected = selected + forced_in
+    if forced_in:
+        logger.info("forced %d protected-core features not reaching pi: %s", len(forced_in), forced_in)
+    else:
+        logger.info("protected core already selected by stability selection; no features forced")
+
     payload = {
         "selected_features": selected,
         "method": "xgb_gain_stability",
@@ -174,6 +197,9 @@ def select_for_model(name, cfg, args):
         "n_groups": int(n_groups),
         "full_feature_count": int(X.shape[1]),
         "dropped_redundant": dropped,
+        "protected_core": core_present,
+        "protected_core_excluded": core_excluded,
+        "forced_in": forced_in,
         "selection_frequency": {K: freq[K].round(3).to_dict() for K in args.ks},
         "generated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
     }

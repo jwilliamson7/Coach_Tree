@@ -1,12 +1,12 @@
 {
-  "generated_date": "2026-06-24T14:39:41.851495",
+  "generated_date": "2026-06-25T09:32:41.817345",
   "num_coaches": 638,
   "metrics": {
     "shotgun_gene": {
-      "mean": -0.0036984972877335625,
-      "std": 0.14480661690181326,
-      "min": -0.42258616894031037,
-      "max": 0.3814252832907863
+      "mean": -0.004011916047547815,
+      "std": 0.1621641309466356,
+      "min": -0.4639785136671943,
+      "max": 0.42358654381043503
     },
     "actual_shotgun_rate": {
       "mean": 0.5371228127399061,
@@ -19,123 +19,123 @@
     {
       "head_coach": "Nick Saban",
       "season": 2006,
-      "shotgun_gene": 0.03391876236527369,
+      "shotgun_gene": 0.0302464252474261,
       "actual_shotgun": 0.4424778761061947
     },
     {
       "head_coach": "Bill Cowher",
       "season": 2006,
-      "shotgun_gene": -0.033516016713762586,
+      "shotgun_gene": -0.013785511156002517,
       "actual_shotgun": 0.3290766208251473
     },
     {
       "head_coach": "Bill Belichick",
       "season": 2006,
-      "shotgun_gene": -0.05097290844357227,
+      "shotgun_gene": -0.04748572086608477,
       "actual_shotgun": 0.36867862969004894
+    },
+    {
+      "head_coach": "Jack Del Rio",
+      "season": 2006,
+      "shotgun_gene": -0.08595237582241694,
+      "actual_shotgun": 0.2839506172839506
     },
     {
       "head_coach": "Brian Billick",
       "season": 2006,
-      "shotgun_gene": -0.08766291723694913,
+      "shotgun_gene": -0.09043900526079979,
       "actual_shotgun": 0.21220930232558138
     },
     {
       "head_coach": "Dick Jauron",
       "season": 2006,
-      "shotgun_gene": -0.08885335968911515,
+      "shotgun_gene": -0.09412458085692518,
       "actual_shotgun": 0.20022371364653244
-    },
-    {
-      "head_coach": "Jack Del Rio",
-      "season": 2006,
-      "shotgun_gene": -0.09635136488043233,
-      "actual_shotgun": 0.2839506172839506
     },
     {
       "head_coach": "Tony Dungy",
       "season": 2006,
-      "shotgun_gene": -0.09756798389795662,
+      "shotgun_gene": -0.11114654884634101,
       "actual_shotgun": 0.34594594594594597
     },
     {
       "head_coach": "Jim Mora",
       "season": 2006,
-      "shotgun_gene": -0.1029163732734964,
+      "shotgun_gene": -0.12018221587231248,
       "actual_shotgun": 0.32494969818913483
     },
     {
       "head_coach": "Mike McCarthy",
       "season": 2006,
-      "shotgun_gene": -0.12890220615042358,
+      "shotgun_gene": -0.12861123332626817,
       "actual_shotgun": 0.3445378151260504
     },
     {
-      "head_coach": "Eric Mangini",
+      "head_coach": "Tom Coughlin",
       "season": 2006,
-      "shotgun_gene": -0.1718173304479305,
-      "actual_shotgun": 0.21002838221381268
+      "shotgun_gene": -0.17912850553529558,
+      "actual_shotgun": 0.3260038240917782
     }
   ],
   "most_traditional_coach_years": [
     {
-      "head_coach": "Todd Bowles",
-      "season": 2024,
-      "shotgun_gene": 0.06593989345762463,
-      "actual_shotgun": 0.6355555555555555
-    },
-    {
       "head_coach": "Mike Tomlin",
       "season": 2024,
-      "shotgun_gene": 0.06393897899221423,
+      "shotgun_gene": 0.07578155881765591,
       "actual_shotgun": 0.5911552346570397
     },
     {
-      "head_coach": "Dave Canales",
+      "head_coach": "Todd Bowles",
       "season": 2024,
-      "shotgun_gene": 0.05586444895441944,
-      "actual_shotgun": 0.6829268292682927
+      "shotgun_gene": 0.07475428628714542,
+      "actual_shotgun": 0.6355555555555555
     },
     {
       "head_coach": "Sean McDermott",
       "season": 2024,
-      "shotgun_gene": 0.04559395577951342,
+      "shotgun_gene": 0.07170447023843529,
       "actual_shotgun": 0.6477462437395659
+    },
+    {
+      "head_coach": "Dave Canales",
+      "season": 2024,
+      "shotgun_gene": 0.04631456180392368,
+      "actual_shotgun": 0.6829268292682927
     },
     {
       "head_coach": "Kyle Shanahan",
       "season": 2024,
-      "shotgun_gene": 0.024149453922693853,
+      "shotgun_gene": 0.035170865482595404,
       "actual_shotgun": 0.6057312252964426
     },
     {
       "head_coach": "Kevin O'Connell",
       "season": 2024,
-      "shotgun_gene": 0.02102893661497285,
+      "shotgun_gene": 0.014247827128403667,
       "actual_shotgun": 0.5200364298724954
-    },
-    {
-      "head_coach": "DeMeco Ryans",
-      "season": 2024,
-      "shotgun_gene": -0.0019564381262071606,
-      "actual_shotgun": 0.5935374149659864
     },
     {
       "head_coach": "Dennis Allen",
       "season": 2024,
-      "shotgun_gene": -0.01886385994181472,
+      "shotgun_gene": -0.004193035388135757,
       "actual_shotgun": 0.5772994129158513
+    },
+    {
+      "head_coach": "DeMeco Ryans",
+      "season": 2024,
+      "shotgun_gene": -0.02013855419109012,
+      "actual_shotgun": 0.5935374149659864
     },
     {
       "head_coach": "Dan Campbell",
       "season": 2024,
-      "shotgun_gene": -0.035195643386824405,
+      "shotgun_gene": -0.052642335498099546,
       "actual_shotgun": 0.45611015490533563
     },
     {
       "head_coach": "Sean McVay",
       "season": 2024,
-      "shotgun_gene": -0.03878474527560927,
+      "shotgun_gene": -0.06332617328027212,
       "actual_shotgun": 0.5494313210848644
     }
   ],
@@ -149,54 +149,54 @@
       "top_genes": [
         {
           "head_coach": "Ron Rivera",
-          "shotgun_gene": 0.148349940290378,
+          "shotgun_gene": 0.16605702249832918,
           "era_shotgun_rate": 0.6281202241467142
         },
         {
           "head_coach": "Joe Philbin",
-          "shotgun_gene": 0.12616600123706262,
+          "shotgun_gene": 0.13875864314901684,
           "era_shotgun_rate": 0.47758081334723673
         },
         {
-          "head_coach": "Jim Schwartz",
-          "shotgun_gene": 0.09762117318675391,
-          "era_shotgun_rate": 0.6263786764705882
-        },
-        {
           "head_coach": "Jim Caldwell",
-          "shotgun_gene": 0.09701834013050768,
+          "shotgun_gene": 0.11629046365827116,
           "era_shotgun_rate": 0.5224527717559616
         },
         {
+          "head_coach": "Jim Schwartz",
+          "shotgun_gene": 0.10293902212446064,
+          "era_shotgun_rate": 0.6263786764705882
+        },
+        {
           "head_coach": "John Harbaugh",
-          "shotgun_gene": 0.09443400649015354,
+          "shotgun_gene": 0.09620169797675014,
           "era_shotgun_rate": 0.3297673628799457
         }
       ],
       "bottom_genes": [
         {
           "head_coach": "Mike Holmgren",
-          "shotgun_gene": -0.3827134197511597,
+          "shotgun_gene": -0.4229011374683953,
           "era_shotgun_rate": 0.05560704355885079
         },
         {
           "head_coach": "Art Shell",
-          "shotgun_gene": -0.3269752455969988,
+          "shotgun_gene": -0.37853611527519865,
           "era_shotgun_rate": 0.05508474576271186
         },
         {
           "head_coach": "Mike Nolan",
-          "shotgun_gene": -0.30198690677309514,
+          "shotgun_gene": -0.31273586851856555,
           "era_shotgun_rate": 0.1912368781378366
         },
         {
           "head_coach": "Bill Parcells",
-          "shotgun_gene": -0.2914783215882304,
+          "shotgun_gene": -0.3059400675377679,
           "era_shotgun_rate": 0.16116870876531575
         },
         {
           "head_coach": "Lane Kiffin",
-          "shotgun_gene": -0.24281357457544206,
+          "shotgun_gene": -0.2681281303784979,
           "era_shotgun_rate": 0.21018593371059013
         }
       ]
@@ -208,54 +208,54 @@
       "top_genes": [
         {
           "head_coach": "Kliff Kingsbury",
-          "shotgun_gene": 0.25953187643554876,
+          "shotgun_gene": 0.30682819902021813,
           "era_shotgun_rate": 0.8873096446700508
         },
         {
           "head_coach": "Chip Kelly",
-          "shotgun_gene": 0.2588095654661194,
+          "shotgun_gene": 0.2927042069316006,
           "era_shotgun_rate": 0.9062203228869895
         },
         {
           "head_coach": "Zac Taylor",
-          "shotgun_gene": 0.1837240663401114,
+          "shotgun_gene": 0.1893275331137855,
           "era_shotgun_rate": 0.6943907156673114
         },
         {
           "head_coach": "Brian Flores",
-          "shotgun_gene": 0.1649885085939613,
+          "shotgun_gene": 0.18882275064655016,
           "era_shotgun_rate": 0.7019801980198019
         },
         {
-          "head_coach": "Doug Pederson",
-          "shotgun_gene": 0.15897348783149134,
-          "era_shotgun_rate": 0.7246628969117007
+          "head_coach": "Matt Nagy",
+          "shotgun_gene": 0.17887436049630495,
+          "era_shotgun_rate": 0.7886847195357833
         }
       ],
       "bottom_genes": [
         {
           "head_coach": "Gary Kubiak",
-          "shotgun_gene": -0.19197417029421404,
+          "shotgun_gene": -0.24486166125938041,
           "era_shotgun_rate": 0.528343949044586
         },
         {
-          "head_coach": "Lovie Smith",
-          "shotgun_gene": -0.18041875086856407,
-          "era_shotgun_rate": 0.5
-        },
-        {
           "head_coach": "Leslie Frazier",
-          "shotgun_gene": -0.1627700242713341,
+          "shotgun_gene": -0.20316683205489286,
           "era_shotgun_rate": 0.4298507462686567
         },
         {
+          "head_coach": "Lovie Smith",
+          "shotgun_gene": -0.20003386527814007,
+          "era_shotgun_rate": 0.5
+        },
+        {
           "head_coach": "Tony Sparano",
-          "shotgun_gene": -0.16047731070120075,
+          "shotgun_gene": -0.18208420746129397,
           "era_shotgun_rate": 0.6481481481481481
         },
         {
           "head_coach": "Mike Shanahan",
-          "shotgun_gene": -0.11790783092291249,
+          "shotgun_gene": -0.13836859071965915,
           "era_shotgun_rate": 0.7257039055404177
         }
       ]
@@ -267,55 +267,55 @@
       "top_genes": [
         {
           "head_coach": "Nick Sirianni",
-          "shotgun_gene": 0.29595527582918935,
+          "shotgun_gene": 0.3287627735525698,
           "era_shotgun_rate": 0.8853891485470433
         },
         {
           "head_coach": "Shane Steichen",
-          "shotgun_gene": 0.28308546731773176,
+          "shotgun_gene": 0.32779870423048074,
           "era_shotgun_rate": 0.8967314069161535
         },
         {
           "head_coach": "Kliff Kingsbury",
-          "shotgun_gene": 0.25953187643554876,
+          "shotgun_gene": 0.30682819902021813,
           "era_shotgun_rate": 0.9157988693841119
         },
         {
-          "head_coach": "Mike Macdonald",
-          "shotgun_gene": 0.19518343862054388,
-          "era_shotgun_rate": 0.7783251231527094
+          "head_coach": "Giff Smith",
+          "shotgun_gene": 0.2762314196730006,
+          "era_shotgun_rate": 0.8454106280193237
         },
         {
-          "head_coach": "Jay Rosburg",
-          "shotgun_gene": 0.18924027681350708,
-          "era_shotgun_rate": 0.75
+          "head_coach": "Mike Macdonald",
+          "shotgun_gene": 0.20820471462724832,
+          "era_shotgun_rate": 0.7783251231527094
         }
       ],
       "bottom_genes": [
         {
           "head_coach": "Lovie Smith",
-          "shotgun_gene": -0.18041875086856407,
+          "shotgun_gene": -0.20003386527814007,
           "era_shotgun_rate": 0.6163021868787276
         },
         {
           "head_coach": "Romeo Crennel",
-          "shotgun_gene": -0.13330888846370353,
+          "shotgun_gene": -0.13687428903698248,
           "era_shotgun_rate": 0.8328611898016998
         },
         {
-          "head_coach": "Jon Gruden",
-          "shotgun_gene": -0.08923833188815611,
-          "era_shotgun_rate": 0.6073529411764705
-        },
-        {
           "head_coach": "Sean McVay",
-          "shotgun_gene": -0.08231725561198201,
+          "shotgun_gene": -0.10760555007021362,
           "era_shotgun_rate": 0.5439875065070275
         },
         {
-          "head_coach": "Sean Payton",
-          "shotgun_gene": -0.0645616448910661,
-          "era_shotgun_rate": 0.5754451733833177
+          "head_coach": "Jon Gruden",
+          "shotgun_gene": -0.092596587113477,
+          "era_shotgun_rate": 0.6073529411764705
+        },
+        {
+          "head_coach": "Mike Vrabel",
+          "shotgun_gene": -0.08062391958522636,
+          "era_shotgun_rate": 0.5128693994280267
         }
       ]
     }

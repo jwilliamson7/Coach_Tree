@@ -12,7 +12,11 @@
     "qtr",
     "total_line",
     "quarter_seconds_remaining",
-    "game_half"
+    "game_half",
+    "posteam_score",
+    "defteam_score",
+    "score_differential",
+    "defteam_timeouts_remaining"
   ],
   "method": "xgb_gain_stability",
   "pi_threshold": 0.6,
@@ -28,6 +32,29 @@
   "full_feature_count": 28,
   "dropped_redundant": [
     "game_seconds_remaining"
+  ],
+  "protected_core": [
+    "quarter_seconds_remaining",
+    "half_seconds_remaining",
+    "qtr",
+    "posteam_score",
+    "defteam_score",
+    "score_differential",
+    "yardline_100",
+    "down",
+    "ydstogo",
+    "goal_to_go",
+    "posteam_timeouts_remaining",
+    "defteam_timeouts_remaining",
+    "shotgun",
+    "no_huddle"
+  ],
+  "protected_core_excluded": [],
+  "forced_in": [
+    "posteam_score",
+    "defteam_score",
+    "score_differential",
+    "defteam_timeouts_remaining"
   ],
   "selection_frequency": {
     "8": {
@@ -118,5 +145,5 @@
       "drive_first_downs": 0.1
     }
   },
-  "generated": "2026-06-24 13:29:58"
+  "generated": "2026-06-25 08:40:52"
 }

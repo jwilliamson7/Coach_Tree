@@ -1,21 +1,24 @@
 {
   "feature_names": [
     "defteam_score",
+    "defteam_timeouts_remaining",
     "down",
     "drive_first_downs",
     "drive_play_count",
     "game_half",
     "goal_to_go",
     "half_seconds_remaining",
+    "posteam_score",
     "posteam_timeouts_remaining",
     "qtr",
+    "quarter_seconds_remaining",
     "score_differential",
     "surface",
     "yardline_100",
     "ydsnet",
     "ydstogo"
   ],
-  "n_features": 14,
+  "n_features": 17,
   "model_type": "XGBoost Pass Target Prediction",
   "target_encoding": {
     "0": "Behind/At Marker",
@@ -64,33 +67,42 @@
     "verbosity": null
   },
   "performance_metrics": {
-    "auc_score": 0.7318247420968258,
+    "auc_score": 0.7324233895146472,
     "classification_report": {
       "0": {
-        "precision": 0.7165501075929911,
-        "recall": 0.8495444191343964,
-        "f1-score": 0.7774002584733397,
+        "precision": 0.7167728808353808,
+        "recall": 0.8505922551252847,
+        "f1-score": 0.7779699154131422,
         "support": 43900.0
       },
       "1": {
-        "precision": 0.6312527914247432,
-        "recall": 0.4338833461243285,
-        "f1-score": 0.5142818157009006,
+        "precision": 0.6328369905956113,
+        "recall": 0.43380660015349193,
+        "f1-score": 0.5147527547582187,
         "support": 26060.0
       },
-      "accuracy": 0.6947112635791881,
+      "accuracy": 0.6953401943967982,
       "macro avg": {
-        "precision": 0.6739014495088671,
-        "recall": 0.6417138826293625,
-        "f1-score": 0.6458410370871202,
+        "precision": 0.674804935715496,
+        "recall": 0.6421994276393883,
+        "f1-score": 0.6463613350856805,
         "support": 69960.0
       },
       "weighted avg": {
-        "precision": 0.6847769792432978,
-        "recall": 0.6947112635791881,
-        "f1-score": 0.6793890146390091,
+        "precision": 0.6855068816980396,
+        "recall": 0.6953401943967982,
+        "f1-score": 0.6799218993086924,
         "support": 69960.0
       }
     }
+  },
+  "grouped_cv_metrics": {
+    "n": 349797,
+    "n_groups": 608,
+    "n_splits": 5,
+    "group_col": "team_year_offense",
+    "n_features": 17,
+    "grouped_auc": 0.7333250556318422,
+    "grouped_auc_std": 0.0015220157798757688
   }
 }
