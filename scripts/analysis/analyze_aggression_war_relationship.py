@@ -20,7 +20,7 @@ import json
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from utils.data_paths import coach_war_trajectories_path
+from utils.data_paths import coach_war_trajectories_path, merge_gene_war
 from utils.parsimony import cluster_bootstrap_corr
 
 logging.basicConfig(
@@ -70,13 +70,12 @@ class AggressionWARAnalyzer:
         war = self.war_data.copy()
         war.columns = war.columns.str.lower()
 
-        # Merge on coach name and year
-        self.merged_data = pd.merge(
-            aggression,
-            war,
-            on=['coach', 'year'],
-            how='inner'
-        )
+        # WS8: merge on canonicalized coach name (+ year) with attrition logging
+        # (recovers name-format mismatches like the Jim Mora Jr alias; surfaces
+        # true drops, which are interim coaches with no WAR baseline).
+        self.merged_data = merge_gene_war(
+            aggression, war, 'coach', 'coach',
+            year_cols=('year', 'year'), how='inner', logger=logger)
 
         logger.info(f"Merged dataset: {len(self.merged_data)} coach-year records")
         logger.info(f"Unique coaches: {self.merged_data['coach'].nunique()}")

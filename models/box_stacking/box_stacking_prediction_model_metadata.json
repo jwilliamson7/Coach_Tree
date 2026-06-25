@@ -68,5 +68,16 @@
     "rmse": 0.8053641554975515,
     "mae": 0.6157997835192388,
     "r2_score": 0.4280632537190393
+  },
+  "grouped_cv_metrics": {
+    "n": 308705,
+    "n_groups": 288,
+    "n_splits": 5,
+    "group_col": "team_year_defense",
+    "n_features": 15,
+    "grouped_r2": 0.42289009181366916,
+    "grouped_r2_std": 0.009246829804721694,
+    "grouped_rmse": 0.8112303094869198,
+    "grouped_rmse_std": 0.007652986363616846
   }
 }

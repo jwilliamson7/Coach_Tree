@@ -41,6 +41,8 @@ from utils.model_features import (
     get_categorical_features
 )
 from utils import model_pipeline as mp
+from utils import parsimony
+from crawlers.utils.data_constants import standardize_team_abbreviation
 
 # Configure logging
 logging.basicConfig(
@@ -54,18 +56,29 @@ class TempoGeneCalculator:
     """Calculate composite tempo gene for NFL coaches based on pace and no-huddle patterns"""
 
     def __init__(self, models_dir: str = "models", data_dir: str = "data/raw/play_by_play",
-                 coaching_dir: str = "data/processed/Coaching"):
+                 coaching_dir: str = "data/processed/Coaching", rel_floor: float = 0.1):
         self.models_dir = Path(models_dir)
         self.data_dir = Path(data_dir)
         self.coaching_dir = Path(coaching_dir)
+
+        # Reliability floor for the weighted composite (see utils.parsimony).
+        self.rel_floor = rel_floor
+        self.component_reliability = {}
+
+        # WS1 cross-fitting: leave-coach-out OOF predictions so a coach is never
+        # scored by a model trained on that same coach (removes attenuation).
+        self.use_crossfit = True
+        self.cv_splits = 5
 
         # Model containers
         self.no_huddle_model = None
         self.no_huddle_encoders = None
         self.no_huddle_imputers = None
+        self.no_huddle_params = None
         self.pace_model = None
         self.pace_encoders = None
         self.pace_imputers = None
+        self.pace_params = None
 
         # Feature lists
         self.no_huddle_features = get_no_huddle_predictor_features()
@@ -93,6 +106,7 @@ class TempoGeneCalculator:
             setattr(self, f"{name}_model", bundle['model'])
             setattr(self, f"{name}_encoders", bundle['encoders'])
             setattr(self, f"{name}_imputers", bundle['imputers'])
+            setattr(self, f"{name}_params", bundle['model'].get_params())
             if bundle['feature_names']:
                 setattr(self, f"{name}_features", bundle['feature_names'])
             if bundle['imputers'] is None:
@@ -109,27 +123,14 @@ class TempoGeneCalculator:
             self.coach_mapping = pd.read_csv(coach_file)
             self.coach_dict = {}
             for _, row in self.coach_mapping.iterrows():
-                self.coach_dict[(row['Team'], int(row['Year']))] = row['Primary_Coach']
+                # Year-aware standardized PFR key (matches the standardized lookup).
+                yr = int(row['Year'])
+                self.coach_dict[(standardize_team_abbreviation(row['Team'], yr), yr)] = \
+                    row['Primary_Coach']
             logger.info(f"Loaded coach mappings for {len(self.coach_dict)} team-years")
         else:
             logger.warning(f"Coach mapping file not found: {coach_file}")
             self.coach_dict = {}
-
-    def normalize_team_abbr(self, pbp_team: str) -> str:
-        """Normalize team abbreviations from play-by-play data to coach mapping format."""
-        team_mapping = {
-            'GB': 'GNB', 'KC': 'KAN', 'LA': 'LAR', 'LV': 'LVR',
-            'NO': 'NOR', 'NE': 'NWE', 'TEN': 'OTI', 'ARI': 'CRD',
-            'LAC': 'SDG', 'SF': 'SFO', 'TB': 'TAM', 'IND': 'CLT',
-            'BAL': 'RAV', 'HOU': 'HTX', 'OAK': 'RAI', 'SD': 'SDG',
-            'STL': 'STL',
-            'ATL': 'ATL', 'BUF': 'BUF', 'CAR': 'CAR', 'CHI': 'CHI',
-            'CIN': 'CIN', 'CLE': 'CLE', 'DAL': 'DAL', 'DEN': 'DEN',
-            'DET': 'DET', 'JAX': 'JAX', 'MIA': 'MIA', 'MIN': 'MIN',
-            'NYG': 'NYG', 'NYJ': 'NYJ', 'PHI': 'PHI', 'PIT': 'PIT',
-            'SEA': 'SEA', 'WAS': 'WAS'
-        }
-        return team_mapping.get(pbp_team, pbp_team)
 
     def load_play_data(self, start_year: int = 2006, end_year: int = 2024) -> pd.DataFrame:
         """
@@ -218,8 +219,9 @@ class TempoGeneCalculator:
                     return row['away_coach']
 
             if pd.notna(row.get('season')):
+                yr = int(row['season'])
                 return self.coach_dict.get(
-                    (self.normalize_team_abbr(row['posteam']), int(row['season'])), np.nan
+                    (standardize_team_abbreviation(row['posteam'], yr), yr), np.nan
                 )
             return np.nan
 
@@ -249,6 +251,26 @@ class TempoGeneCalculator:
         return mp.prepare_features_for_inference(
             df, features, self.categorical_features, encoders, imputers)
 
+    def _predict_component(self, df: pd.DataFrame, features: List[str], target_col: str,
+                           model, encoders, imputers, params,
+                           objective: str, is_classifier: bool) -> np.ndarray:
+        """Per-play predictions for one tempo sub-gene.
+
+        Default (use_crossfit): leave-coach-out OOF predictions via GroupKFold on
+        head_coach, refitting encode/impute/SVD + a fresh XGB (tuned `params`, no
+        re-search) per fold. `df` must already carry `target_col` and a non-null
+        `head_coach` for every row. Fallback uses the persisted all-data model.
+        """
+        if self.use_crossfit:
+            return mp.crossfit_predict(
+                df, features, target_col, self.categorical_features,
+                df["head_coach"], params, objective, is_classifier,
+                n_splits=self.cv_splits, logger=logger)
+        feats = self.prepare_features_for_model(df, features, encoders, imputers)
+        if is_classifier:
+            return model.predict_proba(feats)[:, 1]
+        return model.predict(feats)
+
     def calculate_no_huddle_gene(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
         Calculate no-huddle gene for each coach-year.
@@ -276,20 +298,26 @@ class TempoGeneCalculator:
 
         logger.info(f"Analyzing {len(nh_plays):,} plays for no-huddle gene")
 
-        # Prepare features and predict
-        features = self.prepare_features_for_model(nh_plays, self.no_huddle_features,
-                                                    self.no_huddle_encoders,
-                                                    self.no_huddle_imputers)
-        predictions = self.no_huddle_model.predict_proba(features)[:, 1]
-        nh_plays['predicted_no_huddle_rate'] = predictions
+        # Actual no-huddle (target) must exist before cross-fit prediction
         nh_plays['actual_no_huddle'] = nh_plays['no_huddle'].astype(int)
+
+        # Predictions (leave-coach-out cross-fit by default; in-sample fallback)
+        predictions = self._predict_component(
+            nh_plays, self.no_huddle_features, 'actual_no_huddle',
+            self.no_huddle_model, self.no_huddle_encoders, self.no_huddle_imputers,
+            self.no_huddle_params, objective='binary:logistic', is_classifier=True)
+        nh_plays['predicted_no_huddle_rate'] = predictions
+        # Per-play Bernoulli noise phat(1-phat); summed -> binomial var of gene mean
+        nh_plays['phat_var'] = predictions * (1 - predictions)
 
         # Group by coach-year
         coach_nh = nh_plays.groupby(['head_coach', 'season']).agg({
             'actual_no_huddle': 'mean',
             'predicted_no_huddle_rate': 'mean',
+            'phat_var': 'sum',
             'play_id': 'count'
-        }).rename(columns={'play_id': 'no_huddle_plays'})
+        }).rename(columns={'play_id': 'no_huddle_plays',
+                           'phat_var': 'no_huddle_phat_var_sum'})
 
         coach_nh['no_huddle_gene'] = (
             coach_nh['actual_no_huddle'] - coach_nh['predicted_no_huddle_rate']
@@ -326,20 +354,27 @@ class TempoGeneCalculator:
 
         logger.info(f"Analyzing {len(pace_plays):,} plays for pace gene")
 
-        # Prepare features and predict
-        features = self.prepare_features_for_model(pace_plays, self.pace_features,
-                                                    self.pace_encoders,
-                                                    self.pace_imputers)
-        predictions = self.pace_model.predict(features)
-        pace_plays['predicted_pace'] = predictions
+        # Actual pace (target) must exist before cross-fit prediction
         pace_plays['actual_pace'] = pace_plays['seconds_between_plays'].astype(float)
+
+        # Predictions (leave-coach-out cross-fit by default; in-sample fallback)
+        predictions = self._predict_component(
+            pace_plays, self.pace_features, 'actual_pace',
+            self.pace_model, self.pace_encoders, self.pace_imputers,
+            self.pace_params, objective='reg:squarederror', is_classifier=False)
+        pace_plays['predicted_pace'] = predictions
+        # Per-play squared residual; summed -> sampling var of the gene mean
+        # (regression analogue of the binomial phat(1-phat) noise term).
+        pace_plays['resid_var'] = (pace_plays['actual_pace'] - predictions) ** 2
 
         # Group by coach-year
         coach_pace = pace_plays.groupby(['head_coach', 'season']).agg({
             'actual_pace': 'mean',
             'predicted_pace': 'mean',
+            'resid_var': 'sum',
             'play_id': 'count'
-        }).rename(columns={'play_id': 'pace_plays'})
+        }).rename(columns={'play_id': 'pace_plays',
+                           'resid_var': 'pace_resid_var_sum'})
 
         # Negate so positive = faster than expected
         # (fewer seconds than predicted = faster = positive gene)
@@ -387,11 +422,9 @@ class TempoGeneCalculator:
         play_cols = [c for c in ['no_huddle_plays', 'pace_plays'] if c in tempo_df.columns]
         tempo_df['total_plays'] = tempo_df[play_cols].sum(axis=1)
 
-        # Filter by minimum plays per sub-component
-        if 'no_huddle_plays' in tempo_df.columns:
-            tempo_df.loc[tempo_df['no_huddle_plays'] < min_plays, 'no_huddle_gene'] = np.nan
-        if 'pace_plays' in tempo_df.columns:
-            tempo_df.loc[tempo_df['pace_plays'] < min_plays, 'pace_gene'] = np.nan
+        # No hard min-plays gate: low-n coach-years carry high sampling variance
+        # and are automatically down-weighted by the reliability weighting below
+        # (data-driven, replacing the old arbitrary play-count cutoff).
 
         # Z-score each sub-gene independently
         if 'no_huddle_gene' in tempo_df.columns:
@@ -422,13 +455,26 @@ class TempoGeneCalculator:
             else:
                 tempo_df['pace_gene_zscore'] = np.nan
 
-        # Composite = mean of available z-scores (NaN-tolerant)
-        zscore_cols = [c for c in ['no_huddle_gene_zscore', 'pace_gene_zscore']
-                       if c in tempo_df.columns]
-        if zscore_cols:
-            tempo_df['composite_tempo'] = tempo_df[zscore_cols].mean(axis=1)
+        # Reliability-weighted composite (WS4): weight each sub-gene's z-score by
+        # its reliability rel = tau2/(tau2+samp_var) with tau2 by DerSimonian-
+        # Laird (shared helper in utils.parsimony). Reliability is scale-invariant
+        # so it is computed from the raw genes; the weighted mean runs over the
+        # z-scores so the rate-based no-huddle and seconds-based pace components
+        # stay comparable.
+        comp_specs = [
+            ('no_huddle_gene', 'no_huddle_plays', 'no_huddle_phat_var_sum'),
+            ('pace_gene', 'pace_plays', 'pace_resid_var_sum'),
+        ]
+        composite, self.component_reliability, present = (
+            parsimony.reliability_weighted_composite(
+                tempo_df, comp_specs, rel_floor=self.rel_floor,
+                value_suffix='_zscore', logger=logger))
+        if present:
+            tempo_df['composite_tempo'] = composite
 
             # Track how many sub-components contributed
+            zscore_cols = [f'{g}_zscore' for g in present
+                           if f'{g}_zscore' in tempo_df.columns]
             tempo_df['tempo_components'] = tempo_df[zscore_cols].notna().sum(axis=1)
 
             # Z-score the composite
@@ -436,12 +482,10 @@ class TempoGeneCalculator:
             if len(ct_valid) > 1:
                 ct_mean = ct_valid.mean()
                 ct_std = ct_valid.std()
-                if ct_std > 0:
-                    tempo_df['composite_tempo_zscore'] = (
-                        (tempo_df['composite_tempo'] - ct_mean) / ct_std
-                    )
-                else:
-                    tempo_df['composite_tempo_zscore'] = 0.0
+                tempo_df['composite_tempo_zscore'] = (
+                    (tempo_df['composite_tempo'] - ct_mean) / ct_std
+                    if ct_std > 0 else 0.0
+                )
             else:
                 tempo_df['composite_tempo_zscore'] = np.nan
 
@@ -517,6 +561,7 @@ class TempoGeneCalculator:
             'num_coach_years': len(tempo_df),
             'unique_coaches': int(tempo_df['head_coach'].nunique()),
             'years_covered': f"{int(tempo_df['season'].min())}-{int(tempo_df['season'].max())}",
+            'component_reliability': getattr(self, 'component_reliability', {}),
             'metrics': {},
             'era_analysis': era_analysis
         }
@@ -562,7 +607,14 @@ def main():
     parser.add_argument('--output_dir', type=str, default='data/processed/coaching_genes',
                         help='Output directory for results')
     parser.add_argument('--min_plays', type=int, default=100,
-                        help='Minimum plays per sub-component for a coach to be included (default: 100)')
+                        help='(deprecated; reliability weighting now handles low-n, no hard gate)')
+    parser.add_argument('--rel_floor', type=float, default=0.1,
+                        help='Reliability floor below which a sub-gene gets zero weight in the composite')
+    parser.add_argument('--no_crossfit', action='store_true',
+                        help='Score in-sample with the persisted all-data model instead of '
+                             'leave-coach-out cross-fit (faster; for debugging only)')
+    parser.add_argument('--cv_splits', type=int, default=5,
+                        help='GroupKFold splits for cross-fit scoring (default 5)')
 
     args = parser.parse_args()
 
@@ -571,11 +623,15 @@ def main():
     print("=" * 80)
     print(f"Years: {args.start_year} - {args.end_year}")
     print(f"Output directory: {args.output_dir}")
-    print(f"Minimum plays threshold: {args.min_plays}")
     print("=" * 80 + "\n")
 
     try:
-        calculator = TempoGeneCalculator()
+        calculator = TempoGeneCalculator(rel_floor=args.rel_floor)
+        calculator.use_crossfit = not args.no_crossfit
+        calculator.cv_splits = args.cv_splits
+        logger.info("Scoring mode: %s",
+                    "in-sample (all-data model)" if args.no_crossfit
+                    else f"leave-coach-out cross-fit (k={args.cv_splits})")
 
         logger.info("Step 1: Loading predictive models...")
         calculator.load_models()

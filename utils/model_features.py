@@ -608,12 +608,71 @@ def get_defensive_scheme_predictor_features() -> List[str]:
 
     return sorted(defensive_scheme_features)
 
+# Pre-specified game-state core protected from stability selection (WS2).
+#
+# This is the exogenous, pre-decision game state a coach observes when making a
+# play call. We protect it so every gene is a residual computed after
+# conditioning on an identical game-state core (clock, score, field position,
+# down/distance, timeouts), with model-specific predictors added by stability
+# selection on top. The list is pre-specified on substantive grounds and is NOT
+# tuned on measured selection frequencies (doing so would reintroduce a
+# data-dependent forking path). Each member is the finest-grained representation
+# of its axis: both within-period clocks (quarter and half seconds) plus a period
+# anchor (qtr); raw scores plus the margin; the continuous yardline rather than
+# the coarse side_of_field bucket.
+#
+# game_seconds_remaining is deliberately omitted (it is the one >0.95-collinear
+# casualty the redundancy prune removes; half_seconds_remaining + qtr reconstruct
+# it). game_half is omitted as a coarsening of qtr; side_of_field as a coarsening
+# of yardline_100. Drive context (drive_play_count, drive_first_downs, ydsnet) is
+# deliberately NOT protected: it is partly endogenous to the coach's own
+# play-calling, so conditioning on it would absorb the very signal the gene
+# measures.
+#
+# Consumers restrict this list per model to STRUCTURALLY VALID columns (present in
+# that model's feature set AND non-constant on its data). That automatically drops
+# `down` from the 4th-down model (constant: every row is 4th down) and the
+# down/distance/field block from the two-point model (undefined post-TD).
+GAME_STATE_CORE_FIELDS = [
+    # Clock (granular: both within-period clocks + period anchor)
+    "quarter_seconds_remaining", "half_seconds_remaining", "qtr",
+    # Score (raw components + margin)
+    "posteam_score", "defteam_score", "score_differential",
+    # Field position (continuous)
+    "yardline_100",
+    # Down and distance
+    "down", "ydstogo", "goal_to_go",
+    # Timeouts (clock-management state)
+    "posteam_timeouts_remaining", "defteam_timeouts_remaining",
+]
+
+# Pre-snap offensive formation the defense observes before its scheme decision.
+# Added to the protected core for defensive models only (exogenous to the defense).
+DEFENSE_OBSERVED_OFFENSE_FIELDS = ["shotgun", "no_huddle"]
+
+
+def get_protected_core_features(side: str = "offense") -> List[str]:
+    """Pre-specified game-state core protected from stability selection (WS2).
+
+    Returns the conceptual core for the given side ('offense' or 'defense').
+    Defensive models additionally condition on the observable pre-snap offensive
+    look (shotgun, no_huddle). Callers must intersect this with each model's
+    actual, non-constant feature columns before protecting/forcing it, so that
+    structurally invalid members (e.g. constant `down` on 4th-down-only data) are
+    dropped automatically.
+    """
+    core = list(GAME_STATE_CORE_FIELDS)
+    if side == "defense":
+        core = core + list(DEFENSE_OBSERVED_OFFENSE_FIELDS)
+    return core
+
+
 def get_target_features() -> List[str]:
     """
     Get features suitable as targets (Y variables) - outcomes and analytics.
-    
+
     Returns:
-        List of field names suitable as target variables  
+        List of field names suitable as target variables
     """
     targets = OUTCOME_FIELDS + ANALYTICS_FIELDS
     return sorted(list(set(targets)))

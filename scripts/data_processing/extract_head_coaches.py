@@ -265,7 +265,15 @@ class HeadCoachExtractor:
                     if coach in prior_year_coaches:
                         return coach
                 
-                # If no prior year match, return first coach alphabetically for consistency
+                # If no prior year match, prefer the coach who started the season
+                # (>=10 games, the computed Is_Starter signal that was previously
+                # ignored) over an interim, before any alphabetical fallback. This
+                # picks the actual season-opening HC, which feeds the OC->HC
+                # inheritance attribution. Ties broken alphabetically.
+                if 'Is_Starter' in group.columns:
+                    starters = sorted(group[group['Is_Starter'] == True]['Coach'].unique())
+                    if starters:
+                        return starters[0]
                 return sorted(group['Coach'].unique())[0]
             
             # Get primary coach for each team-year group

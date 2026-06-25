@@ -114,6 +114,8 @@ class LeadLagAnalyzer:
         # Create lagged variables (shift by 1 within each coach)
         self.data['aggression_lag1'] = self.data.groupby('coach')['composite_aggression'].shift(1)
         self.data['war_lag1'] = self.data.groupby('coach')['WAR'].shift(1)
+        # Lag the season too, to verify the pair is actually consecutive (see below)
+        self.data['season_lag1'] = self.data.groupby('coach')['season'].shift(1)
 
         # Also lag the individual components
         self.data['fourth_down_lag1'] = self.data.groupby('coach')['fourth_down_aggression'].shift(1)
@@ -126,8 +128,15 @@ class LeadLagAnalyzer:
         self.data = self.data.dropna(subset=['aggression_lag1', 'war_lag1'])
         n_after = len(self.data)
 
+        # Gap guard: keep ONLY contiguous-season pairs (t-1 -> t). Without this, a
+        # coach's non-consecutive stints (e.g. McDaniels 2010 then 2022) get paired
+        # as if adjacent, which is not a real one-year lag.
+        self.data = self.data[self.data['season'] - self.data['season_lag1'] == 1].copy()
+        n_contig = len(self.data)
+
         logger.info(f"Dropped {n_before - n_after:,} observations with missing lags")
-        logger.info(f"Final sample: {n_after:,} observations ({self.data['coach'].nunique()} coaches)")
+        logger.info(f"Dropped {n_after - n_contig:,} non-contiguous-season lag pairs (gap guard)")
+        logger.info(f"Final sample: {n_contig:,} observations ({self.data['coach'].nunique()} coaches)")
 
     def assign_eras(self) -> None:
         """Assign each observation to an era"""
@@ -160,55 +169,47 @@ class LeadLagAnalyzer:
 
             logger.info(f"\n{era_name}: {len(era_data)} observations")
 
-            # Main regression: WAR_t ~ aggression_t-1 + WAR_t-1
+            # Main regression: WAR_t ~ aggression_t-1 + WAR_t-1, with coach-
+            # clustered (sandwich) SEs -- repeated coach-years are not independent.
             try:
-                # Prepare data
+                from utils.parsimony import cluster_robust_ols
                 X = era_data[['aggression_lag1', 'war_lag1']].values
                 y = era_data['WAR'].values
-
-                # Fit model
-                model = LinearRegression()
-                model.fit(X, y)
-
-                # Calculate predictions and R²
-                y_pred = model.predict(X)
-                r2 = r2_score(y, y_pred)
                 n = len(y)
                 k = X.shape[1]
-                adj_r2 = 1 - (1 - r2) * (n - 1) / (n - k - 1)
 
-                # Calculate standard errors and p-values
-                residuals = y - y_pred
-                mse = np.sum(residuals**2) / (n - k - 1)
-                var_coef = mse * np.linalg.inv(X.T @ X).diagonal()
-                se = np.sqrt(var_coef)
-                t_stats = model.coef_ / se
-                p_values = 2 * (1 - stats.t.cdf(np.abs(t_stats), n - k - 1))
+                res = cluster_robust_ols(X, y, era_data['coach'].values,
+                                         ['aggression_lag1', 'war_lag1'])
+                ac = res['coefficients']['aggression_lag1']
+                wc = res['coefficients']['war_lag1']
+                r2 = res['r_squared']
+                adj_r2 = 1 - (1 - r2) * (n - 1) / (n - k - 1) if n - k - 1 > 0 else float('nan')
 
                 results[era_name] = {
-                    'n': int(len(era_data)),
-                    'n_coaches': int(era_data['coach'].nunique()),
-                    'aggression_coef': float(model.coef_[0]),
-                    'aggression_se': float(se[0]),
-                    'aggression_t': float(t_stats[0]),
-                    'aggression_p': float(p_values[0]),
-                    'war_lag_coef': float(model.coef_[1]),
-                    'war_lag_se': float(se[1]),
-                    'war_lag_t': float(t_stats[1]),
-                    'war_lag_p': float(p_values[1]),
-                    'intercept': float(model.intercept_),
+                    'n': int(n),
+                    'n_coaches': int(res['n_clusters']),
+                    'aggression_coef': float(ac['coefficient']),
+                    'aggression_se': float(ac['std_error']),
+                    'aggression_t': float(ac['t_statistic']),
+                    'aggression_p': float(ac['p_value']),
+                    'war_lag_coef': float(wc['coefficient']),
+                    'war_lag_se': float(wc['std_error']),
+                    'war_lag_t': float(wc['t_statistic']),
+                    'war_lag_p': float(wc['p_value']),
+                    'intercept': float(res['intercept']),
                     'r_squared': float(r2),
                     'adj_r_squared': float(adj_r2),
-                    'significant': bool(p_values[0] < 0.05)
+                    'se_type': 'cluster_robust_by_coach',
+                    'significant': bool(ac['p_value'] < 0.05)
                 }
 
-                logger.info(f"  Aggression_t-1 coefficient: {model.coef_[0]:.4f} "
-                           f"(SE={se[0]:.4f}, "
-                           f"t={t_stats[0]:.3f}, "
-                           f"p={p_values[0]:.4f})")
-                logger.info(f"  WAR_t-1 coefficient: {model.coef_[1]:.4f} "
-                           f"(p={p_values[1]:.4f})")
-                logger.info(f"  R²={r2:.4f}, Adj R²={adj_r2:.4f}")
+                logger.info(f"  Aggression_t-1 coefficient: {ac['coefficient']:.4f} "
+                           f"(clustered SE={ac['std_error']:.4f}, "
+                           f"t={ac['t_statistic']:.3f}, "
+                           f"p={ac['p_value']:.4f})")
+                logger.info(f"  WAR_t-1 coefficient: {wc['coefficient']:.4f} "
+                           f"(p={wc['p_value']:.4f})")
+                logger.info(f"  R2={r2:.4f}, Adj R2={adj_r2:.4f}")
 
             except Exception as e:
                 logger.error(f"Error fitting model for {era_name}: {e}")

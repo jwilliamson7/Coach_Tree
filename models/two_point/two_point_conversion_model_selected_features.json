@@ -32,6 +32,23 @@
   "dropped_redundant": [
     "game_seconds_remaining"
   ],
+  "protected_core": [
+    "quarter_seconds_remaining",
+    "half_seconds_remaining",
+    "qtr",
+    "posteam_score",
+    "defteam_score",
+    "score_differential",
+    "posteam_timeouts_remaining",
+    "defteam_timeouts_remaining"
+  ],
+  "protected_core_excluded": [
+    "yardline_100",
+    "down",
+    "ydstogo",
+    "goal_to_go"
+  ],
+  "forced_in": [],
   "selection_frequency": {
     "8": {
       "defteam_score": 1.0,
@@ -100,5 +117,5 @@
       "div_game": 0.4
     }
   },
-  "generated": "2026-06-24 13:19:26"
+  "generated": "2026-06-25 08:29:30"
 }

@@ -1,35 +1,49 @@
 {
-  "generated_date": "2026-06-24T14:38:45.180439",
+  "generated_date": "2026-06-25T09:17:16.095045",
   "num_coaches": 641,
-  "metrics": {
+  "component_reliability": {
     "fourth_down_aggression": {
-      "mean": -0.00011162935264702233,
-      "std": 0.025733887157963858
+      "tau2": 0.0005261650108339476,
+      "mean_reliability": 0.6511286388971518,
+      "n_units": 641
     },
     "pass_heavy_aggression": {
-      "mean": 0.020468440733911814,
-      "std": 0.044539216633624194
+      "tau2": 0.0019931418437456275,
+      "mean_reliability": 0.9148582368392529,
+      "n_units": 641
     },
     "deep_pass_aggression": {
-      "mean": 0.0008648453980163556,
-      "std": 0.036512730982592105
+      "tau2": 0.0010195955823471333,
+      "mean_reliability": 0.7293065590601449,
+      "n_units": 641
+    },
+    "two_point_aggression": {
+      "tau2": 0.0009586619566187891,
+      "mean_reliability": 0.6696775139053203,
+      "n_units": 641
+    }
+  },
+  "metrics": {
+    "fourth_down_aggression": {
+      "mean": 0.003133202208549101,
+      "std": 0.03101699820581841
+    },
+    "pass_heavy_aggression": {
+      "mean": -0.0016063912349825178,
+      "std": 0.046784718900896284
+    },
+    "deep_pass_aggression": {
+      "mean": 0.001103498268533179,
+      "std": 0.03876573706898812
     }
   },
   "most_aggressive_coach_years": [
-    [
-      "Bill Parcells",
-      2006
-    ],
     [
       "Rod Marinelli",
       2006
     ],
     [
-      "Jim Mora",
-      2006
-    ],
-    [
-      "Tony Dungy",
+      "Bill Parcells",
       2006
     ],
     [
@@ -37,7 +51,7 @@
       2006
     ],
     [
-      "Bill Cowher",
+      "Tony Dungy",
       2006
     ],
     [
@@ -46,6 +60,14 @@
     ],
     [
       "Nick Saban",
+      2006
+    ],
+    [
+      "Jim Mora",
+      2006
+    ],
+    [
+      "Bill Cowher",
       2006
     ],
     [
@@ -63,15 +85,11 @@
       2024
     ],
     [
-      "Antonio Pierce",
+      "Sean McVay",
       2024
     ],
     [
       "John Harbaugh",
-      2024
-    ],
-    [
-      "Kyle Shanahan",
       2024
     ],
     [
@@ -87,11 +105,15 @@
       2024
     ],
     [
-      "Jerod Mayo",
+      "Antonio Pierce",
       2024
     ],
     [
       "Brian Callahan",
+      2024
+    ],
+    [
+      "Jerod Mayo",
       2024
     ],
     [

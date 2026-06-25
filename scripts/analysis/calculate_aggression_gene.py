@@ -43,6 +43,8 @@ from utils.model_features import (
     get_categorical_features
 )
 from utils import model_pipeline as mp
+from utils import parsimony
+from crawlers.utils.data_constants import standardize_team_abbreviation
 
 # Configure logging
 logging.basicConfig(
@@ -55,17 +57,40 @@ logger = logging.getLogger(__name__)
 class AggressionCalculator:
     """Calculate aggression scores for NFL coaches based on play-calling patterns"""
     
-    def __init__(self, models_dir: str = "models", data_dir: str = "data/raw/play_by_play", 
-                 coaching_dir: str = "data/processed/Coaching"):
+    def __init__(self, models_dir: str = "models", data_dir: str = "data/raw/play_by_play",
+                 coaching_dir: str = "data/processed/Coaching", rel_floor: float = 0.1):
         self.models_dir = Path(models_dir)
         self.data_dir = Path(data_dir)
         self.coaching_dir = Path(coaching_dir)
-        
+
+        # Reliability floor for the weighted composite: a component whose
+        # per-coach-year reliability rel = tau2/(tau2+sampling_var) falls below
+        # this contributes zero weight (it is mostly sampling noise). 0.1 keeps
+        # any component carrying at least ~10% true signal. Reliability and the
+        # between-coach variance tau2 are estimated from the data per run, so the
+        # weighting is data-driven rather than a hand-set play-count cutoff.
+        self.rel_floor = rel_floor
+        self.component_reliability = {}
+
+        # WS1 cross-fitting: score genes with out-of-fold (leave-coach-out)
+        # predictions so a coach is never scored by a model trained on that same
+        # coach -- removes the in-sample attenuation that shrinks genes toward 0.
+        # use_crossfit=False reverts to the persisted all-data model (debug/speed).
+        self.use_crossfit = True
+        self.cv_splits = 5
+
         # Model containers
         self.fourth_down_model = None
         self.run_pass_model = None
         self.pass_target_model = None
         self.two_point_model = None
+
+        # Tuned-hyperparameter containers (live get_params() of each loaded model;
+        # reused by cross-fit refits with NO re-search).
+        self.fourth_down_params = None
+        self.run_pass_params = None
+        self.pass_target_params = None
+        self.two_point_params = None
         
         # Encoder containers
         self.fourth_down_encoders = None
@@ -109,6 +134,7 @@ class AggressionCalculator:
             setattr(self, f"{name}_model", bundle['model'])
             setattr(self, f"{name}_encoders", bundle['encoders'])
             setattr(self, f"{name}_imputers", bundle['imputers'])
+            setattr(self, f"{name}_params", bundle['model'].get_params())
             if bundle['feature_names']:
                 setattr(self, f"{name}_features", bundle['feature_names'])
             if bundle['imputers'] is None:
@@ -126,55 +152,16 @@ class AggressionCalculator:
             # Create a dictionary for fast lookup: (team, year) -> coach
             self.coach_dict = {}
             for _, row in self.coach_mapping.iterrows():
-                # Use Primary_Coach as the main coach
-                self.coach_dict[(row['Team'], int(row['Year']))] = row['Primary_Coach']
-            logger.info(f"✓ Loaded coach mappings for {len(self.coach_dict)} team-years")
+                # Key on the YEAR-AWARE standardized PFR abbreviation so the
+                # fallback lookup (also standardized) matches across franchise
+                # relocations. Both sides go through the same shared function.
+                yr = int(row['Year'])
+                self.coach_dict[(standardize_team_abbreviation(row['Team'], yr), yr)] = \
+                    row['Primary_Coach']
+            logger.info(f"Loaded coach mappings for {len(self.coach_dict)} team-years")
         else:
             logger.warning(f"Coach mapping file not found: {coach_file}")
             self.coach_dict = {}
-    
-    def normalize_team_abbr(self, pbp_team: str) -> str:
-        """
-        Normalize team abbreviations from play-by-play data to match coach mapping format.
-        
-        Args:
-            pbp_team: Team abbreviation from play-by-play data
-            
-        Returns:
-            Normalized team abbreviation matching coach mapping format
-        """
-        # Mapping from play-by-play format to coach mapping format
-        team_mapping = {
-            # Current teams with different abbreviations
-            'GB': 'GNB',      # Green Bay Packers
-            'KC': 'KAN',      # Kansas City Chiefs
-            'LA': 'LAR',      # Los Angeles Rams
-            'LV': 'LVR',      # Las Vegas Raiders
-            'NO': 'NOR',      # New Orleans Saints
-            'NE': 'NWE',      # New England Patriots
-            'TEN': 'OTI',     # Tennessee Titans (was OTI for Oilers/Titans)
-            'ARI': 'CRD',     # Arizona Cardinals (uses CRD in coach data)
-            'LAC': 'SDG',     # Los Angeles Chargers (was San Diego)
-            'SF': 'SFO',      # San Francisco 49ers
-            'TB': 'TAM',      # Tampa Bay Buccaneers
-            'IND': 'CLT',     # Indianapolis Colts (was Baltimore Colts CLT)
-            'BAL': 'RAV',     # Baltimore Ravens
-            'HOU': 'HTX',     # Houston Texans
-            
-            # Historical teams (for older data if needed)
-            'OAK': 'RAI',     # Oakland Raiders (before Las Vegas)
-            'SD': 'SDG',      # San Diego Chargers (before LA)
-            'STL': 'STL',     # St. Louis Rams (before LA)
-            
-            # Teams that stay the same
-            'ATL': 'ATL', 'BUF': 'BUF', 'CAR': 'CAR', 'CHI': 'CHI',
-            'CIN': 'CIN', 'CLE': 'CLE', 'DAL': 'DAL', 'DEN': 'DEN',
-            'DET': 'DET', 'JAX': 'JAX', 'MIA': 'MIA', 'MIN': 'MIN',
-            'NYG': 'NYG', 'NYJ': 'NYJ', 'PHI': 'PHI', 'PIT': 'PIT',
-            'SEA': 'SEA', 'WAS': 'WAS'
-        }
-        
-        return team_mapping.get(pbp_team, pbp_team)
     
     def load_play_data(self, start_year: int = 2006, end_year: int = 2024) -> pd.DataFrame:
         """
@@ -248,12 +235,13 @@ class AggressionCalculator:
                     return row['away_coach']
             
             # Fallback to team-year mapping if coach fields not available
-            # (for older data or missing fields)
+            # (for older data or missing fields); year-aware standardized key.
             if pd.notna(row.get('season')):
+                yr = int(row['season'])
                 return self.coach_dict.get(
-                    (self.normalize_team_abbr(row['posteam']), int(row['season'])), np.nan
+                    (standardize_team_abbreviation(row['posteam'], yr), yr), np.nan
                 )
-            
+
             return np.nan
         
         combined['head_coach'] = combined.apply(get_head_coach, axis=1)
@@ -281,6 +269,28 @@ class AggressionCalculator:
         return mp.prepare_features_for_inference(
             df, features, self.categorical_features, encoders, imputers)
 
+    def _predict_component(self, df: pd.DataFrame, features: List[str], target_col: str,
+                           model, encoders, imputers, params,
+                           objective: str = "binary:logistic",
+                           is_classifier: bool = True) -> np.ndarray:
+        """Per-play predictions for one aggression component.
+
+        Default (use_crossfit): leave-coach-out OOF predictions via GroupKFold on
+        head_coach, refitting the full encode/impute/SVD + a fresh XGB (tuned
+        `params`, no re-search) per fold. `df` must already contain `target_col`
+        and a non-null `head_coach` for every row. Fallback (use_crossfit=False):
+        the persisted all-data model scored in-sample.
+        """
+        if self.use_crossfit:
+            return mp.crossfit_predict(
+                df, features, target_col, self.categorical_features,
+                df["head_coach"], params, objective, is_classifier,
+                n_splits=self.cv_splits, logger=logger)
+        feats = self.prepare_features_for_model(df, features, encoders, imputers)
+        if is_classifier:
+            return model.predict_proba(feats)[:, 1]
+        return model.predict(feats)
+
     def calculate_fourth_down_aggression(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
         Calculate 4th down aggression for each coach-year.
@@ -306,19 +316,10 @@ class AggressionCalculator:
             return pd.DataFrame()
         
         logger.info(f"Found {len(fourth_downs):,} 4th down decision plays")
-        
-        # Prepare features for prediction
-        features = self.prepare_features_for_model(
-            fourth_downs,
-            self.fourth_down_features,
-            self.fourth_down_encoders,
-            self.fourth_down_imputers
-        )
-        
-        # Generate predictions (probability of going for it)
-        predictions = self.fourth_down_model.predict_proba(features)[:, 1]
-        fourth_downs['predicted_go_rate'] = predictions
-        
+
+        # Cross-fit and the final groupby both need an attributable coach per row.
+        fourth_downs = fourth_downs[fourth_downs['head_coach'].notna()].copy()
+
         # Actual decisions - match the model's target creation exactly
         # Initialize as go-for-it (1)
         fourth_downs['actual_decision'] = 1
@@ -362,13 +363,25 @@ class AggressionCalculator:
                 fourth_downs.loc[fg_indices, 'actual_decision'] = 0
                 
                 logger.info(f"Processed {no_play_mask.sum()} no_play situations using play descriptions")
-        
+
+        # Predictions (leave-coach-out cross-fit by default; in-sample fallback)
+        predictions = self._predict_component(
+            fourth_downs, self.fourth_down_features, 'actual_decision',
+            self.fourth_down_model, self.fourth_down_encoders,
+            self.fourth_down_imputers, self.fourth_down_params)
+        fourth_downs['predicted_go_rate'] = predictions
+        # Per-play sampling-noise term phat(1-phat); summed per coach-year it gives
+        # the binomial variance of the gene mean (used for reliability weighting).
+        fourth_downs['phat_var'] = predictions * (1 - predictions)
+
         # Group by coach and season for coach-year analysis
         coach_aggression = fourth_downs.groupby(['head_coach', 'season']).agg({
             'actual_decision': 'mean',  # Actual go-for-it rate
             'predicted_go_rate': 'mean',  # Expected go-for-it rate
+            'phat_var': 'sum',  # Sum phat(1-phat) for reliability weighting
             'play_id': 'count'  # Number of 4th down decisions
-        }).rename(columns={'play_id': 'fourth_down_plays'})
+        }).rename(columns={'play_id': 'fourth_down_plays',
+                           'phat_var': 'fourth_down_phat_var_sum'})
         
         # Calculate aggression score (actual - predicted)
         coach_aggression['fourth_down_aggression'] = (
@@ -469,32 +482,33 @@ class AggressionCalculator:
             return pd.DataFrame()
         
         logger.info(f"Found {len(run_pass_plays):,} run/pass plays")
-        
-        # Prepare features for prediction
-        features = self.prepare_features_for_model(
-            run_pass_plays,
-            self.run_pass_features,
-            self.run_pass_encoders,
-            self.run_pass_imputers
-        )
-        
-        # Generate predictions (probability of pass)
-        predictions = self.run_pass_model.predict_proba(features)[:, 1]
-        run_pass_plays['predicted_pass_rate'] = predictions
-        
+
+        # Cross-fit and the final groupby both need an attributable coach per row.
+        run_pass_plays = run_pass_plays[run_pass_plays['head_coach'].notna()].copy()
+
         # Actual decisions - match the model's target creation exactly
         # Pass plays include play_type="pass" OR qb_scramble=1
         run_pass_plays['actual_pass'] = (
-            (run_pass_plays['play_type'] == 'pass') | 
+            (run_pass_plays['play_type'] == 'pass') |
             (run_pass_plays.get('qb_scramble', 0) == 1)
         ).astype(int)
+
+        # Predictions (leave-coach-out cross-fit by default; in-sample fallback)
+        predictions = self._predict_component(
+            run_pass_plays, self.run_pass_features, 'actual_pass',
+            self.run_pass_model, self.run_pass_encoders,
+            self.run_pass_imputers, self.run_pass_params)
+        run_pass_plays['predicted_pass_rate'] = predictions
+        run_pass_plays['phat_var'] = predictions * (1 - predictions)
         
         # Group by coach and season for coach-year analysis
         coach_aggression = run_pass_plays.groupby(['head_coach', 'season']).agg({
             'actual_pass': 'mean',  # Actual pass rate
             'predicted_pass_rate': 'mean',  # Expected pass rate
+            'phat_var': 'sum',  # Sum phat(1-phat) for reliability weighting
             'play_id': 'count'  # Number of plays
-        }).rename(columns={'play_id': 'run_pass_plays'})
+        }).rename(columns={'play_id': 'run_pass_plays',
+                           'phat_var': 'pass_heavy_phat_var_sum'})
         
         # Calculate aggression score (actual - predicted)
         coach_aggression['pass_heavy_aggression'] = (
@@ -527,30 +541,31 @@ class AggressionCalculator:
             return pd.DataFrame()
         
         logger.info(f"Found {len(pass_plays):,} pass plays with air_yards")
-        
-        # Prepare features for prediction
-        features = self.prepare_features_for_model(
-            pass_plays,
-            self.pass_target_features,
-            self.pass_target_encoders,
-            self.pass_target_imputers
-        )
-        
-        # Generate predictions (probability of targeting beyond sticks)
-        predictions = self.pass_target_model.predict_proba(features)[:, 1]
-        pass_plays['predicted_beyond_rate'] = predictions
-        
+
+        # Cross-fit and the final groupby both need an attributable coach per row.
+        pass_plays = pass_plays[pass_plays['head_coach'].notna()].copy()
+
         # Actual decisions (1 = beyond sticks, 0 = at/behind)
         pass_plays['actual_beyond'] = (
             pass_plays['air_yards'] > pass_plays['ydstogo']
         ).astype(int)
+
+        # Predictions (leave-coach-out cross-fit by default; in-sample fallback)
+        predictions = self._predict_component(
+            pass_plays, self.pass_target_features, 'actual_beyond',
+            self.pass_target_model, self.pass_target_encoders,
+            self.pass_target_imputers, self.pass_target_params)
+        pass_plays['predicted_beyond_rate'] = predictions
+        pass_plays['phat_var'] = predictions * (1 - predictions)
         
         # Group by coach and season for coach-year analysis
         coach_aggression = pass_plays.groupby(['head_coach', 'season']).agg({
             'actual_beyond': 'mean',  # Actual beyond-sticks rate
             'predicted_beyond_rate': 'mean',  # Expected beyond-sticks rate
+            'phat_var': 'sum',  # Sum phat(1-phat) for reliability weighting
             'play_id': 'count'  # Number of pass plays
-        }).rename(columns={'play_id': 'pass_plays'})
+        }).rename(columns={'play_id': 'pass_plays',
+                           'phat_var': 'deep_pass_phat_var_sum'})
         
         # Calculate aggression score (actual - predicted)
         coach_aggression['deep_pass_aggression'] = (
@@ -582,30 +597,31 @@ class AggressionCalculator:
             return pd.DataFrame()
         
         logger.info(f"Found {len(conversion_plays):,} conversion attempts")
-        
-        # Prepare features for prediction
-        features = self.prepare_features_for_model(
-            conversion_plays,
-            self.two_point_features,
-            self.two_point_encoders,
-            self.two_point_imputers
-        )
-        
-        # Generate predictions (probability of attempting two-point conversion)
-        predictions = self.two_point_model.predict_proba(features)[:, 1]
-        conversion_plays['predicted_two_point_rate'] = predictions
-        
+
+        # Cross-fit and the final groupby both need an attributable coach per row.
+        conversion_plays = conversion_plays[conversion_plays['head_coach'].notna()].copy()
+
         # Actual decisions (1 = two-point attempt, 0 = extra point)
         conversion_plays['actual_two_point'] = (
             conversion_plays['two_point_attempt'] == 1
         ).astype(int)
+
+        # Predictions (leave-coach-out cross-fit by default; in-sample fallback)
+        predictions = self._predict_component(
+            conversion_plays, self.two_point_features, 'actual_two_point',
+            self.two_point_model, self.two_point_encoders,
+            self.two_point_imputers, self.two_point_params)
+        conversion_plays['predicted_two_point_rate'] = predictions
+        conversion_plays['phat_var'] = predictions * (1 - predictions)
         
         # Group by coach and season for coach-year analysis
         coach_aggression = conversion_plays.groupby(['head_coach', 'season']).agg({
             'actual_two_point': 'mean',  # Actual two-point rate
             'predicted_two_point_rate': 'mean',  # Expected two-point rate
+            'phat_var': 'sum',  # Sum phat(1-phat) for reliability weighting
             'play_id': 'count'  # Number of conversion attempts
-        }).rename(columns={'play_id': 'conversion_attempts'})
+        }).rename(columns={'play_id': 'conversion_attempts',
+                           'phat_var': 'two_point_phat_var_sum'})
         
         # Calculate aggression score (actual - predicted)
         coach_aggression['two_point_aggression'] = (
@@ -659,20 +675,37 @@ class AggressionCalculator:
                 how='outer'
             )
         
-        # Calculate composite aggression score (average of four components)
-        aggression_components = []
-        if 'fourth_down_aggression' in aggression_df.columns:
-            aggression_components.append('fourth_down_aggression')
-        if 'pass_heavy_aggression' in aggression_df.columns:
-            aggression_components.append('pass_heavy_aggression')
-        if 'deep_pass_aggression' in aggression_df.columns:
-            aggression_components.append('deep_pass_aggression')
-        if 'two_point_aggression' in aggression_df.columns:
-            aggression_components.append('two_point_aggression')
-        
+        # ---- Reliability-weighted composite (shared helper, WS4) ------------
+        # Each component is a rate from n decision plays; its gene mean carries
+        # binomial sampling noise samp_var = sum(phat(1-phat)) / n^2. Components
+        # differ ~10x in intrinsic reliability (pass-heavy ~0.90 vs two-point
+        # ~0.04, validated by split-half), so an equal-weight mean lets sampling
+        # noise dominate the weak ones. Weight each by rel = tau2/(tau2+samp_var)
+        # with tau2 (true between-coach variance) by DerSimonian-Laird. Weights
+        # are outcome-blind (never see WAR) -> not circular. The DL + weighting
+        # math lives in utils.parsimony so aggression/tempo/defensive share it.
+        comp_specs = [
+            ('fourth_down_aggression', 'fourth_down_plays', 'fourth_down_phat_var_sum'),
+            ('pass_heavy_aggression', 'run_pass_plays', 'pass_heavy_phat_var_sum'),
+            ('deep_pass_aggression', 'pass_plays', 'deep_pass_phat_var_sum'),
+            ('two_point_aggression', 'conversion_attempts', 'two_point_phat_var_sum'),
+        ]
+        composite, self.component_reliability, aggression_components = (
+            parsimony.reliability_weighted_composite(
+                aggression_df, comp_specs, rel_floor=self.rel_floor, logger=logger))
+
         if aggression_components:
-            aggression_df['composite_aggression'] = aggression_df[aggression_components].mean(axis=1)
-            
+            aggression_df['composite_aggression'] = composite
+
+            # Drop coach-years with no reliable component (all weights below floor;
+            # typically brief interim/partial seasons).
+            before = len(aggression_df)
+            aggression_df = aggression_df[aggression_df['composite_aggression'].notna()].copy()
+            dropped = before - len(aggression_df)
+            if dropped:
+                logger.info(f"Dropped {dropped} coach-years with no component above "
+                            f"reliability floor {self.rel_floor}")
+
             # Standardize scores (z-scores) for better interpretation
             for col in aggression_components + ['composite_aggression']:
                 mean_val = aggression_df[col].mean()
@@ -713,6 +746,7 @@ class AggressionCalculator:
         summary = {
             'generated_date': datetime.now().isoformat(),
             'num_coaches': len(aggression_df),
+            'component_reliability': getattr(self, 'component_reliability', {}),
             'metrics': {
                 'fourth_down_aggression': {
                     'mean': float(aggression_df['fourth_down_aggression'].mean()) 
@@ -758,7 +792,14 @@ def main():
                        help='End year for analysis (default: 2024)')
     parser.add_argument('--output_dir', type=str, default='data/processed/coaching_genes',
                        help='Output directory for results')
-    
+    parser.add_argument('--rel_floor', type=float, default=0.1,
+                       help='Reliability floor below which a component gets zero weight in the composite')
+    parser.add_argument('--no_crossfit', action='store_true',
+                       help='Score in-sample with the persisted all-data model instead of '
+                            'leave-coach-out cross-fit (faster; for debugging only)')
+    parser.add_argument('--cv_splits', type=int, default=5,
+                       help='GroupKFold splits for cross-fit scoring (default 5)')
+
     args = parser.parse_args()
     
     print("=" * 80)
@@ -770,8 +811,13 @@ def main():
     
     try:
         # Initialize calculator
-        calculator = AggressionCalculator()
-        
+        calculator = AggressionCalculator(rel_floor=args.rel_floor)
+        calculator.use_crossfit = not args.no_crossfit
+        calculator.cv_splits = args.cv_splits
+        logger.info("Scoring mode: %s",
+                    "in-sample (all-data model)" if args.no_crossfit
+                    else f"leave-coach-out cross-fit (k={args.cv_splits})")
+
         # Load models
         logger.info("Step 1: Loading predictive models...")
         calculator.load_models()

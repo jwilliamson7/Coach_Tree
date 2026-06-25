@@ -1,10 +1,13 @@
 {
   "feature_names": [
     "defteam_score",
+    "defteam_timeouts_remaining",
     "down",
     "drive_first_downs",
     "goal_to_go",
     "half_seconds_remaining",
+    "posteam_score",
+    "posteam_timeouts_remaining",
     "qtr",
     "quarter_seconds_remaining",
     "roof",
@@ -16,7 +19,7 @@
     "yardline_100",
     "ydstogo"
   ],
-  "n_features": 15,
+  "n_features": 18,
   "model_type": "XGBoost No-Huddle Prediction",
   "target_encoding": {
     "0": "Huddle",
@@ -65,33 +68,42 @@
     "verbosity": null
   },
   "performance_metrics": {
-    "auc_score": 0.857974104193861,
+    "auc_score": 0.8692589535871471,
     "classification_report": {
       "0": {
-        "precision": 0.9298483422903344,
-        "recall": 0.989705420567093,
-        "f1-score": 0.9588436255102922,
+        "precision": 0.9312134666368543,
+        "recall": 0.9896884468169975,
+        "f1-score": 0.9595609260379253,
         "support": 117829.0
       },
       "1": {
-        "precision": 0.626078914919852,
-        "recall": 0.18755194385446486,
-        "f1-score": 0.2886378170965679,
+        "precision": 0.6457725947521866,
+        "recall": 0.20454335580386002,
+        "f1-score": 0.31068097342029594,
         "support": 10829.0
       },
-      "accuracy": 0.922189059366693,
+      "accuracy": 0.9236036624228575,
       "macro avg": {
-        "precision": 0.7779636286050933,
-        "recall": 0.5886286822107789,
-        "f1-score": 0.6237407213034301,
+        "precision": 0.7884930306945205,
+        "recall": 0.5971159013104288,
+        "f1-score": 0.6351209497291106,
         "support": 128658.0
       },
       "weighted avg": {
-        "precision": 0.9042804092508425,
-        "recall": 0.922189059366693,
-        "f1-score": 0.9024331520122414,
+        "precision": 0.9071882276183785,
+        "recall": 0.9236036624228575,
+        "f1-score": 0.9049454259765509,
         "support": 128658.0
       }
     }
+  },
+  "grouped_cv_metrics": {
+    "n": 643290,
+    "n_groups": 608,
+    "n_splits": 5,
+    "group_col": "team_year_offense",
+    "n_features": 18,
+    "grouped_auc": 0.7656693107423589,
+    "grouped_auc_std": 0.012041906156000625
   }
 }

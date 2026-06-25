@@ -36,6 +36,7 @@ warnings.filterwarnings('ignore')
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from utils.model_features import get_shotgun_predictor_features, get_categorical_features
 from utils import model_pipeline as mp
+from crawlers.utils.data_constants import standardize_team_abbreviation
 
 # Configure logging
 logging.basicConfig(
@@ -53,11 +54,17 @@ class ShotgunGeneCalculator:
         self.models_dir = Path(models_dir)
         self.data_dir = Path(data_dir)
         self.coaching_dir = Path(coaching_dir)
-        
+
+        # WS1 cross-fitting: leave-coach-out OOF predictions so a coach is never
+        # scored by a model trained on that same coach (removes attenuation).
+        self.use_crossfit = True
+        self.cv_splits = 5
+
         # Model containers
         self.shotgun_model = None
         self.shotgun_encoders = None
         self.shotgun_imputers = None
+        self.shotgun_params = None
         
         # Feature lists - use centralized feature definitions
         self.shotgun_features = get_shotgun_predictor_features()
@@ -82,6 +89,7 @@ class ShotgunGeneCalculator:
             setattr(self, f"{name}_model", bundle['model'])
             setattr(self, f"{name}_encoders", bundle['encoders'])
             setattr(self, f"{name}_imputers", bundle['imputers'])
+            setattr(self, f"{name}_params", bundle['model'].get_params())
             if bundle['feature_names']:
                 setattr(self, f"{name}_features", bundle['feature_names'])
             if bundle['imputers'] is None:
@@ -99,55 +107,14 @@ class ShotgunGeneCalculator:
             # Create a dictionary for fast lookup: (team, year) -> coach
             self.coach_dict = {}
             for _, row in self.coach_mapping.iterrows():
-                # Use Primary_Coach as the main coach
-                self.coach_dict[(row['Team'], int(row['Year']))] = row['Primary_Coach']
-            logger.info(f"✓ Loaded coach mappings for {len(self.coach_dict)} team-years")
+                # Year-aware standardized PFR key (matches the standardized lookup).
+                yr = int(row['Year'])
+                self.coach_dict[(standardize_team_abbreviation(row['Team'], yr), yr)] = \
+                    row['Primary_Coach']
+            logger.info(f"Loaded coach mappings for {len(self.coach_dict)} team-years")
         else:
             logger.warning(f"Coach mapping file not found: {coach_file}")
             self.coach_dict = {}
-    
-    def normalize_team_abbr(self, pbp_team: str) -> str:
-        """
-        Normalize team abbreviations from play-by-play data to match coach mapping format.
-        
-        Args:
-            pbp_team: Team abbreviation from play-by-play data
-            
-        Returns:
-            Normalized team abbreviation matching coach mapping format
-        """
-        # Mapping from play-by-play format to coach mapping format
-        team_mapping = {
-            # Current teams with different abbreviations
-            'GB': 'GNB',      # Green Bay Packers
-            'KC': 'KAN',      # Kansas City Chiefs
-            'LA': 'LAR',      # Los Angeles Rams
-            'LV': 'LVR',      # Las Vegas Raiders
-            'NO': 'NOR',      # New Orleans Saints
-            'NE': 'NWE',      # New England Patriots
-            'TEN': 'OTI',     # Tennessee Titans (was OTI for Oilers/Titans)
-            'ARI': 'CRD',     # Arizona Cardinals (uses CRD in coach data)
-            'LAC': 'SDG',     # Los Angeles Chargers (was San Diego)
-            'SF': 'SFO',      # San Francisco 49ers
-            'TB': 'TAM',      # Tampa Bay Buccaneers
-            'IND': 'CLT',     # Indianapolis Colts (was Baltimore Colts CLT)
-            'BAL': 'RAV',     # Baltimore Ravens
-            'HOU': 'HTX',     # Houston Texans
-            
-            # Historical teams (for older data if needed)
-            'OAK': 'RAI',     # Oakland Raiders (before Las Vegas)
-            'SD': 'SDG',      # San Diego Chargers (before LA)
-            'STL': 'STL',     # St. Louis Rams (before LA)
-            
-            # Teams that stay the same
-            'ATL': 'ATL', 'BUF': 'BUF', 'CAR': 'CAR', 'CHI': 'CHI',
-            'CIN': 'CIN', 'CLE': 'CLE', 'DAL': 'DAL', 'DEN': 'DEN',
-            'DET': 'DET', 'JAX': 'JAX', 'MIA': 'MIA', 'MIN': 'MIN',
-            'NYG': 'NYG', 'NYJ': 'NYJ', 'PHI': 'PHI', 'PIT': 'PIT',
-            'SEA': 'SEA', 'WAS': 'WAS'
-        }
-        
-        return team_mapping.get(pbp_team, pbp_team)
     
     def load_play_data(self, start_year: int = 1999, end_year: int = 2024) -> pd.DataFrame:
         """
@@ -233,12 +200,13 @@ class ShotgunGeneCalculator:
                     return row['away_coach']
             
             # Fallback to team-year mapping if coach fields not available
-            # (for older data or missing fields)
+            # (for older data or missing fields); year-aware standardized key.
             if pd.notna(row.get('season')):
+                yr = int(row['season'])
                 return self.coach_dict.get(
-                    (self.normalize_team_abbr(row['posteam']), int(row['season'])), np.nan
+                    (standardize_team_abbreviation(row['posteam'], yr), yr), np.nan
                 )
-            
+
             return np.nan
         
         combined['head_coach'] = combined.apply(get_head_coach, axis=1)
@@ -283,16 +251,23 @@ class ShotgunGeneCalculator:
             return pd.DataFrame()
         
         logger.info(f"Analyzing {len(plays):,} offensive plays with shotgun data")
-        
-        # Prepare features for prediction
-        features = self.prepare_features_for_model(plays)
-        
-        # Generate predictions (probability of using shotgun)
-        predictions = self.shotgun_model.predict_proba(features)[:, 1]
-        plays['predicted_shotgun_rate'] = predictions
-        
-        # Actual shotgun usage
+
+        # Cross-fit and the final groupby both need an attributable coach per row.
+        plays = plays[plays['head_coach'].notna()].copy()
+
+        # Actual shotgun usage (target) must exist before cross-fit prediction
         plays['actual_shotgun'] = plays['shotgun'].astype(int)
+
+        # Predictions (leave-coach-out cross-fit by default; in-sample fallback)
+        if self.use_crossfit:
+            predictions = mp.crossfit_predict(
+                plays, self.shotgun_features, 'actual_shotgun', self.categorical_features,
+                plays['head_coach'], self.shotgun_params, 'binary:logistic', True,
+                n_splits=self.cv_splits, logger=logger)
+        else:
+            features = self.prepare_features_for_model(plays)
+            predictions = self.shotgun_model.predict_proba(features)[:, 1]
+        plays['predicted_shotgun_rate'] = predictions
         
         # Group by coach and season for coach-year analysis
         coach_shotgun = plays.groupby(['head_coach', 'season']).agg({
@@ -438,9 +413,14 @@ def main():
                        help='Output directory for results')
     parser.add_argument('--min_plays', type=int, default=100,
                        help='Minimum plays required for a coach to be included (default: 100)')
-    
+    parser.add_argument('--no_crossfit', action='store_true',
+                       help='Score in-sample with the persisted all-data model instead of '
+                            'leave-coach-out cross-fit (faster; for debugging only)')
+    parser.add_argument('--cv_splits', type=int, default=5,
+                       help='GroupKFold splits for cross-fit scoring (default 5)')
+
     args = parser.parse_args()
-    
+
     print("=" * 80)
     print("COACHING SHOTGUN GENE CALCULATOR")
     print("=" * 80)
@@ -448,11 +428,16 @@ def main():
     print(f"Output directory: {args.output_dir}")
     print(f"Minimum plays threshold: {args.min_plays}")
     print("=" * 80 + "\n")
-    
+
     try:
         # Initialize calculator
         calculator = ShotgunGeneCalculator()
-        
+        calculator.use_crossfit = not args.no_crossfit
+        calculator.cv_splits = args.cv_splits
+        logger.info("Scoring mode: %s",
+                    "in-sample (all-data model)" if args.no_crossfit
+                    else f"leave-coach-out cross-fit (k={args.cv_splits})")
+
         # Load model
         logger.info("Step 1: Loading predictive model...")
         calculator.load_model()

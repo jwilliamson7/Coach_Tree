@@ -49,6 +49,7 @@ from utils.model_features import (
     get_categorical_features
 )
 from utils import model_pipeline as mp
+from utils import parsimony
 
 # Configure logging
 logging.basicConfig(
@@ -61,9 +62,19 @@ logger = logging.getLogger(__name__)
 class DefensiveSchemeGeneCalculator:
     """Calculate composite defensive scheme gene per team-year"""
 
-    def __init__(self, models_dir: str = "models", data_dir: str = "data/raw/play_by_play"):
+    def __init__(self, models_dir: str = "models", data_dir: str = "data/raw/play_by_play",
+                 rel_floor: float = 0.1):
         self.models_dir = Path(models_dir)
         self.data_dir = Path(data_dir)
+
+        # Reliability floor for the weighted composite (see utils.parsimony).
+        self.rel_floor = rel_floor
+        self.component_reliability = {}
+
+        # WS1 cross-fitting: leave-team-out OOF predictions so a team is never
+        # scored by a model trained on that same team (removes attenuation).
+        self.use_crossfit = True
+        self.cv_splits = 5
 
         # Model containers
         self.box_model = None
@@ -77,6 +88,12 @@ class DefensiveSchemeGeneCalculator:
         self.box_imputers = None
         self.rush_imputers = None
         self.man_imputers = None
+
+        # Tuned-hyperparameter containers (live get_params() of each loaded model;
+        # reused by cross-fit refits with NO re-search).
+        self.box_params = None
+        self.rush_params = None
+        self.man_params = None
 
         # Feature list (shared default; per-model lists overridden from metadata
         # in load_models so gene-time features match each model's training)
@@ -114,6 +131,7 @@ class DefensiveSchemeGeneCalculator:
             setattr(self, f"{name}_model", bundle['model'])
             setattr(self, f"{name}_encoders", bundle['encoders'])
             setattr(self, f"{name}_imputers", bundle['imputers'])
+            setattr(self, f"{name}_params", bundle['model'].get_params())
             if bundle['feature_names']:
                 setattr(self, f"{name}_features", bundle['feature_names'])
             if bundle['imputers'] is None:
@@ -229,6 +247,27 @@ class DefensiveSchemeGeneCalculator:
         return mp.prepare_features_for_inference(
             df, features, self.categorical_features, encoders, imputers)
 
+    def _predict_component(self, df: pd.DataFrame, features: List[str], target_col: str,
+                           model, encoders, imputers, params,
+                           objective: str, is_classifier: bool) -> np.ndarray:
+        """Per-play predictions for one defensive sub-gene.
+
+        Default (use_crossfit): leave-team-out OOF predictions via GroupKFold on
+        defteam, refitting encode/impute/SVD + a fresh XGB (tuned `params`, no
+        re-search) per fold, so a team is never scored by a model that saw it.
+        `df` must already carry `target_col` and a non-null `defteam` for every
+        row. Fallback uses the persisted all-data model.
+        """
+        if self.use_crossfit:
+            return mp.crossfit_predict(
+                df, features, target_col, self.categorical_features,
+                df["defteam"], params, objective, is_classifier,
+                n_splits=self.cv_splits, logger=logger)
+        feats = self.prepare_features_for_model(df, features, encoders, imputers)
+        if is_classifier:
+            return model.predict_proba(feats)[:, 1]
+        return model.predict(feats)
+
     def calculate_box_stacking_gene(self, plays: pd.DataFrame) -> pd.DataFrame:
         """
         Calculate box stacking gene for each team-year.
@@ -250,17 +289,22 @@ class DefensiveSchemeGeneCalculator:
 
         logger.info(f"Analyzing {len(box_plays):,} plays for box stacking gene")
 
-        features = self.prepare_features_for_model(
-            box_plays, self.box_features, self.box_encoders, self.box_imputers)
-        predictions = self.box_model.predict(features)
-        box_plays['predicted_box'] = predictions
         box_plays['actual_box'] = box_plays['defenders_in_box'].astype(float)
+        predictions = self._predict_component(
+            box_plays, self.box_features, 'actual_box',
+            self.box_model, self.box_encoders, self.box_imputers,
+            self.box_params, objective='reg:squarederror', is_classifier=False)
+        box_plays['predicted_box'] = predictions
+        # Per-play squared residual; summed -> sampling var of the gene mean
+        box_plays['resid_var'] = (box_plays['actual_box'] - predictions) ** 2
 
         team_box = box_plays.groupby(['defteam', 'season']).agg({
             'actual_box': 'mean',
             'predicted_box': 'mean',
+            'resid_var': 'sum',
             'play_id': 'count'
-        }).rename(columns={'play_id': 'box_plays'})
+        }).rename(columns={'play_id': 'box_plays',
+                           'resid_var': 'box_resid_var_sum'})
 
         team_box['box_stacking_gene'] = (
             team_box['actual_box'] - team_box['predicted_box']
@@ -290,17 +334,22 @@ class DefensiveSchemeGeneCalculator:
 
         logger.info(f"Analyzing {len(rush_plays):,} plays for pass rush gene")
 
-        features = self.prepare_features_for_model(
-            rush_plays, self.rush_features, self.rush_encoders, self.rush_imputers)
-        predictions = self.rush_model.predict(features)
-        rush_plays['predicted_rushers'] = predictions
         rush_plays['actual_rushers'] = rush_plays['number_of_pass_rushers'].astype(float)
+        predictions = self._predict_component(
+            rush_plays, self.rush_features, 'actual_rushers',
+            self.rush_model, self.rush_encoders, self.rush_imputers,
+            self.rush_params, objective='reg:squarederror', is_classifier=False)
+        rush_plays['predicted_rushers'] = predictions
+        # Per-play squared residual; summed -> sampling var of the gene mean
+        rush_plays['resid_var'] = (rush_plays['actual_rushers'] - predictions) ** 2
 
         team_rush = rush_plays.groupby(['defteam', 'season']).agg({
             'actual_rushers': 'mean',
             'predicted_rushers': 'mean',
+            'resid_var': 'sum',
             'play_id': 'count'
-        }).rename(columns={'play_id': 'rush_plays'})
+        }).rename(columns={'play_id': 'rush_plays',
+                           'resid_var': 'rush_resid_var_sum'})
 
         team_rush['pass_rush_gene'] = (
             team_rush['actual_rushers'] - team_rush['predicted_rushers']
@@ -334,17 +383,22 @@ class DefensiveSchemeGeneCalculator:
 
         logger.info(f"Analyzing {len(man_plays):,} plays for man coverage gene")
 
-        features = self.prepare_features_for_model(
-            man_plays, self.man_features, self.man_encoders, self.man_imputers)
-        predictions = self.man_model.predict_proba(features)[:, 1]
-        man_plays['predicted_man_prob'] = predictions
         man_plays['actual_man'] = (man_plays['defense_man_zone_type'] == 'MAN_COVERAGE').astype(int)
+        predictions = self._predict_component(
+            man_plays, self.man_features, 'actual_man',
+            self.man_model, self.man_encoders, self.man_imputers,
+            self.man_params, objective='binary:logistic', is_classifier=True)
+        man_plays['predicted_man_prob'] = predictions
+        # Per-play Bernoulli noise phat(1-phat); summed -> binomial var of gene mean
+        man_plays['phat_var'] = predictions * (1 - predictions)
 
         team_man = man_plays.groupby(['defteam', 'season']).agg({
             'actual_man': 'mean',
             'predicted_man_prob': 'mean',
+            'phat_var': 'sum',
             'play_id': 'count'
-        }).rename(columns={'play_id': 'man_plays'})
+        }).rename(columns={'play_id': 'man_plays',
+                           'phat_var': 'man_phat_var_sum'})
 
         team_man['man_coverage_gene'] = (
             team_man['actual_man'] - team_man['predicted_man_prob']
@@ -397,13 +451,9 @@ class DefensiveSchemeGeneCalculator:
         play_cols = [c for c in ['box_plays', 'rush_plays', 'man_plays'] if c in scheme_df.columns]
         scheme_df['total_plays'] = scheme_df[play_cols].sum(axis=1)
 
-        # Filter by minimum plays per sub-component
-        if 'box_plays' in scheme_df.columns:
-            scheme_df.loc[scheme_df['box_plays'] < min_plays, 'box_stacking_gene'] = np.nan
-        if 'rush_plays' in scheme_df.columns:
-            scheme_df.loc[scheme_df['rush_plays'] < min_plays, 'pass_rush_gene'] = np.nan
-        if 'man_plays' in scheme_df.columns:
-            scheme_df.loc[scheme_df['man_plays'] < min_plays, 'man_coverage_gene'] = np.nan
+        # No hard min-plays gate: low-n team-years carry high sampling variance
+        # and are automatically down-weighted by the reliability weighting below
+        # (data-driven, replacing the old arbitrary play-count cutoff).
 
         # Z-score each sub-gene independently
         gene_zscore_cols = []
@@ -425,24 +475,40 @@ class DefensiveSchemeGeneCalculator:
                     scheme_df[zscore_col] = np.nan
                 gene_zscore_cols.append(zscore_col)
 
-        # Composite = mean of available z-scores (NaN-tolerant)
-        if gene_zscore_cols:
-            scheme_df['composite_scheme'] = scheme_df[gene_zscore_cols].mean(axis=1)
+        # Reliability-weighted composite (WS4): weight each sub-gene's z-score by
+        # its reliability rel = tau2/(tau2+samp_var) with tau2 by DerSimonian-
+        # Laird (shared helper in utils.parsimony). Reliability is scale-invariant
+        # so it is computed from the raw genes; the weighted mean runs over the
+        # z-scores so the count-based box/rush and rate-based man components stay
+        # comparable. Box/rush noise = summed squared residual; man = Bernoulli.
+        # Partial coverage (2016-2017 has no man component) is handled by the
+        # helper skipping absent components.
+        comp_specs = [
+            ('box_stacking_gene', 'box_plays', 'box_resid_var_sum'),
+            ('pass_rush_gene', 'rush_plays', 'rush_resid_var_sum'),
+            ('man_coverage_gene', 'man_plays', 'man_phat_var_sum'),
+        ]
+        composite, self.component_reliability, present = (
+            parsimony.reliability_weighted_composite(
+                scheme_df, comp_specs, rel_floor=self.rel_floor,
+                value_suffix='_zscore', logger=logger))
+        if present:
+            scheme_df['composite_scheme'] = composite
 
             # Track how many sub-components contributed
-            scheme_df['scheme_components'] = scheme_df[gene_zscore_cols].notna().sum(axis=1)
+            zscore_cols = [f'{g}_zscore' for g in present
+                           if f'{g}_zscore' in scheme_df.columns]
+            scheme_df['scheme_components'] = scheme_df[zscore_cols].notna().sum(axis=1)
 
             # Z-score the composite
             cs_valid = scheme_df['composite_scheme'].dropna()
             if len(cs_valid) > 1:
                 cs_mean = cs_valid.mean()
                 cs_std = cs_valid.std()
-                if cs_std > 0:
-                    scheme_df['composite_scheme_zscore'] = (
-                        (scheme_df['composite_scheme'] - cs_mean) / cs_std
-                    )
-                else:
-                    scheme_df['composite_scheme_zscore'] = 0.0
+                scheme_df['composite_scheme_zscore'] = (
+                    (scheme_df['composite_scheme'] - cs_mean) / cs_std
+                    if cs_std > 0 else 0.0
+                )
             else:
                 scheme_df['composite_scheme_zscore'] = np.nan
 
@@ -537,6 +603,7 @@ class DefensiveSchemeGeneCalculator:
             'num_team_years': len(scheme_df),
             'unique_teams': int(scheme_df['defteam'].nunique()),
             'years_covered': f"{int(scheme_df['season'].min())}-{int(scheme_df['season'].max())}",
+            'component_reliability': getattr(self, 'component_reliability', {}),
             'metrics': {},
             'era_analysis': era_analysis
         }
@@ -588,7 +655,14 @@ def main():
     parser.add_argument('--output_dir', type=str, default='data/processed/coaching_genes',
                         help='Output directory for results')
     parser.add_argument('--min_plays', type=int, default=100,
-                        help='Minimum plays per sub-component (default: 100)')
+                        help='(deprecated; reliability weighting now handles low-n, no hard gate)')
+    parser.add_argument('--rel_floor', type=float, default=0.1,
+                        help='Reliability floor below which a sub-gene gets zero weight in the composite')
+    parser.add_argument('--no_crossfit', action='store_true',
+                        help='Score in-sample with the persisted all-data model instead of '
+                             'leave-team-out cross-fit (faster; for debugging only)')
+    parser.add_argument('--cv_splits', type=int, default=5,
+                        help='GroupKFold splits for cross-fit scoring (default 5)')
 
     args = parser.parse_args()
 
@@ -597,11 +671,15 @@ def main():
     print("=" * 80)
     print(f"Years: {args.start_year} - {args.end_year}")
     print(f"Output directory: {args.output_dir}")
-    print(f"Minimum plays threshold: {args.min_plays}")
     print("=" * 80 + "\n")
 
     try:
-        calculator = DefensiveSchemeGeneCalculator()
+        calculator = DefensiveSchemeGeneCalculator(rel_floor=args.rel_floor)
+        calculator.use_crossfit = not args.no_crossfit
+        calculator.cv_splits = args.cv_splits
+        logger.info("Scoring mode: %s",
+                    "in-sample (all-data model)" if args.no_crossfit
+                    else f"leave-team-out cross-fit (k={args.cv_splits})")
 
         logger.info("Step 1: Loading predictive models...")
         calculator.load_models()

@@ -1,6 +1,7 @@
 {
   "feature_names": [
     "defteam_score",
+    "defteam_timeouts_remaining",
     "drive_first_downs",
     "drive_play_count",
     "game_half",
@@ -16,7 +17,7 @@
     "ydsnet",
     "ydstogo"
   ],
-  "n_features": 15,
+  "n_features": 16,
   "model_type": "XGBoost 4th Down Decision",
   "target_encoding": {
     "0": "Punt/Field Goal",
@@ -65,33 +66,42 @@
     "verbosity": null
   },
   "performance_metrics": {
-    "auc_score": 0.976705373119312,
+    "auc_score": 0.976760571442944,
     "classification_report": {
       "0": {
-        "precision": 0.9609149455918277,
-        "recall": 0.9771906052393857,
-        "f1-score": 0.9689844362333445,
+        "precision": 0.9599318619463784,
+        "recall": 0.9756850346281241,
+        "f1-score": 0.96774434406033,
         "support": 13284.0
       },
       "1": {
-        "precision": 0.8690012970168612,
-        "recall": 0.7919621749408984,
-        "f1-score": 0.8286951144094001,
+        "precision": 0.8607758620689655,
+        "recall": 0.7868400315208826,
+        "f1-score": 0.8221490325236723,
         "support": 2538.0
       },
-      "accuracy": 0.947478194918468,
+      "accuracy": 0.9453924914675768,
       "macro avg": {
-        "precision": 0.9149581213043445,
-        "recall": 0.884576390090142,
-        "f1-score": 0.8988397753213724,
+        "precision": 0.9103538620076719,
+        "recall": 0.8812625330745033,
+        "f1-score": 0.8949466882920012,
         "support": 15822.0
       },
       "weighted avg": {
-        "precision": 0.946171118004717,
-        "recall": 0.947478194918468,
-        "f1-score": 0.9464806883639746,
+        "precision": 0.9440262920001722,
+        "recall": 0.9453924914675768,
+        "f1-score": 0.9443894647353371,
         "support": 15822.0
       }
     }
+  },
+  "grouped_cv_metrics": {
+    "n": 79106,
+    "n_groups": 608,
+    "n_splits": 5,
+    "group_col": "team_year_offense",
+    "n_features": 16,
+    "grouped_auc": 0.9744679577176825,
+    "grouped_auc_std": 0.0016498107263781185
   }
 }

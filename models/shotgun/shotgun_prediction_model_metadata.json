@@ -6,6 +6,8 @@
     "game_half",
     "goal_to_go",
     "half_seconds_remaining",
+    "posteam_score",
+    "posteam_timeouts_remaining",
     "qtr",
     "quarter_seconds_remaining",
     "roof",
@@ -15,7 +17,7 @@
     "yardline_100",
     "ydstogo"
   ],
-  "n_features": 14,
+  "n_features": 16,
   "model_type": "XGBoost Shotgun Formation Prediction",
   "target_encoding": {
     "0": "Not Shotgun",
@@ -64,33 +66,42 @@
     "verbosity": null
   },
   "performance_metrics": {
-    "auc_score": 0.8204912793777553,
+    "auc_score": 0.8213566246817635,
     "classification_report": {
       "0": {
-        "precision": 0.6911506680863189,
-        "recall": 0.7793955997497167,
-        "f1-score": 0.7326254212500795,
+        "precision": 0.6920633493654575,
+        "recall": 0.7811036138873387,
+        "f1-score": 0.7338926227815117,
         "support": 59133.0
       },
       "1": {
-        "precision": 0.7895118999596612,
-        "recall": 0.7037756202804747,
-        "f1-score": 0.7441825095057034,
+        "precision": 0.7909459437634252,
+        "recall": 0.7043941028407048,
+        "f1-score": 0.7451651679067574,
         "support": 69525.0
       },
-      "accuracy": 0.7385316109375243,
+      "accuracy": 0.7396508573116324,
       "macro avg": {
-        "precision": 0.7403312840229901,
-        "recall": 0.7415856100150957,
-        "f1-score": 0.7384039653778914,
+        "precision": 0.7415046465644414,
+        "recall": 0.7427488583640218,
+        "f1-score": 0.7395288953441346,
         "support": 128658.0
       },
       "weighted avg": {
-        "precision": 0.7443037145039075,
-        "recall": 0.7385316109375243,
-        "f1-score": 0.7388707115621647,
+        "precision": 0.7454981328652687,
+        "recall": 0.7396508573116324,
+        "f1-score": 0.7399841499297085,
         "support": 128658.0
       }
     }
+  },
+  "grouped_cv_metrics": {
+    "n": 643290,
+    "n_groups": 608,
+    "n_splits": 5,
+    "group_col": "team_year_offense",
+    "n_features": 16,
+    "grouped_auc": 0.8064809459413398,
+    "grouped_auc_std": 0.0052117025408931145
   }
 }
