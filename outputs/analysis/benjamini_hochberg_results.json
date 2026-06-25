@@ -6,7 +6,7 @@
   "n_using_wild_cluster_p": 30,
   "n_using_clustered_p": 43,
   "n_using_naive_p": 28,
-  "n_sig_raw": 65,
+  "n_sig_raw": 66,
   "n_sig_bh": 63,
   "bh_cutoff_p": 0.022,
   "bh_cutoff_rank": 63,
@@ -19,11 +19,18 @@
       "bh_threshold": 0.031683168316831684
     },
     {
+      "category": "Temporal Robustness",
+      "test": "Chow test (2012 breakpoint)",
+      "p": 0.03364212734602512,
+      "p_source": "naive",
+      "bh_threshold": 0.03217821782178218
+    },
+    {
       "category": "Era Analysis",
       "test": "Late (2018-2024): pass_heavy",
       "p": 0.0494754634206985,
       "p_source": "naive",
-      "bh_threshold": 0.03217821782178218
+      "bh_threshold": 0.032673267326732675
     }
   ],
   "tests": [
@@ -668,12 +675,22 @@
       "sig_bh": false
     },
     {
+      "category": "Temporal Robustness",
+      "test": "Chow test (2012 breakpoint)",
+      "p": 0.03364212734602512,
+      "p_source": "naive",
+      "rank": 65,
+      "bh_threshold": 0.03217821782178218,
+      "sig_raw": true,
+      "sig_bh": false
+    },
+    {
       "category": "Era Analysis",
       "test": "Late (2018-2024): pass_heavy",
       "p": 0.0494754634206985,
       "p_source": "naive",
-      "rank": 65,
-      "bh_threshold": 0.03217821782178218,
+      "rank": 66,
+      "bh_threshold": 0.032673267326732675,
       "sig_raw": true,
       "sig_bh": false
     },
@@ -682,8 +699,8 @@
       "test": "deep_pass_aggression Lag 2",
       "p": 0.057,
       "p_source": "wild_cluster",
-      "rank": 66,
-      "bh_threshold": 0.032673267326732675,
+      "rank": 67,
+      "bh_threshold": 0.03316831683168317,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -692,8 +709,8 @@
       "test": "Middle (2012-2017): composite",
       "p": 0.05893779909827508,
       "p_source": "naive",
-      "rank": 67,
-      "bh_threshold": 0.03316831683168317,
+      "rank": 68,
+      "bh_threshold": 0.033663366336633666,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -701,16 +718,6 @@
       "category": "Temporal Trend",
       "test": "Early (2006-2011) vs Middle (2012-2017) (t-test)",
       "p": 0.06534988403415087,
-      "p_source": "naive",
-      "rank": 68,
-      "bh_threshold": 0.033663366336633666,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Temporal Robustness",
-      "test": "Chow test (2011 breakpoint)",
-      "p": 0.07061877906198544,
       "p_source": "naive",
       "rank": 69,
       "bh_threshold": 0.03415841584158416,

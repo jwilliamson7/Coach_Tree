@@ -1,5 +1,45 @@
 # Coach Aggression Paper: Claim-by-Claim Delta Map
 
+## 2026-06-25 v2/v3 RE-THREAD (CURRENT) -- paper rewritten against the WS11-WS15 + V1-V3 outputs
+
+Paper restructured and re-threaded after two further passes (WS11-15 robustness: cross-fit genes,
+WAR-noise/career-level, small-cluster wild bootstrap, defensive 2018-break fix, shotgun reliability,
+selection sensitivity; V1-V3: coach-vs-team variance, face validity, OOS). Compiles clean (26 pp,
+no undefined refs). Key changes from the committed (2026-06-24) draft:
+
+- NEW LEAD Results section "Coaching Genes Are Coach Traits": coach variance ~5x team (composite
+  0.51 vs 0.13); gene travels across team changes (composite r=0.61, shotgun 0.55, tempo 0.54;
+  mover regression coach_pre b=0.53 p<.001); face-validity table. Two new tables (tab:variance,
+  tab:face_validity). This is now the opening result (Jon's directive).
+- Gene->WAR refreshed: composite aggression 0.172->0.189 (clust p<.001); shotgun 0.139->0.142
+  (.004); defensive 0.135->0.151 (.015); tempo 0.032->0.045 (ns). CAREER-LEVEL anchor added:
+  aggression career r=0.303 (p<.001, n=124); the season-level is framed as a conservative floor
+  because single-season WAR is ~24% reliable. IVW (0.211) + partial-season (0.212) robustness noted.
+- 4th-down->WAR: 0.085/0.051 -> 0.095/0.033 (clustered), but BH-LOST (career-level 0.187 robust).
+- Erosion SOFTENED: era composite 0.242/0.159/0.039 -> 0.239/0.137/0.101 (late now 0.10, not ~0.04);
+  continuous interaction -1.59/0.055 -> -0.884/0.237 (clearly NS); Chow 2012 4.42/0.012 ->
+  3.41/0.034 (conventional-sig, but BH-LOST at cutoff 0.022). Framed as "real but partial, suggestive".
+- Coordinator-to-HC: shotgun 0.519->0.473, defensive 0.616->0.572 (wild p .0155, n=17 suggestive),
+  TEMPO 0.359->0.091 (NO LONGER transmits after cross-fit; claim dropped), aggression 0.093->0.017.
+- Aggression inheritance overall composite 0.101->0.076; OC pass-heavy 0.326->0.316 (clust .016,
+  wild .022, survives). Shotgun OC inheritance 0.427->0.418.
+- Within-coach FE: 0.39 games/SD/d.20 -> 0.44/d.23, power 97->99%, two-way p=0.003 (table reformatted
+  to within-coach betas). Coach-type composite: off 0.178->0.211, def 0.195->0.184.
+- Persistence lag1 composite 0.501->0.516; by-type table refreshed (off 4th-down 0.692->0.639;
+  def 4th-down lag2 now ns).
+- Model table -> grouped-CV (no_huddle 0.858->0.766, shotgun 0.820->0.807, man 0.702->0.682, etc).
+- BH family: 101 tests, cutoff 0.028->0.022, 63 BH-sig. Now prefers wild-cluster p for small subgroups.
+- METHODS added: cross-fitting, reliability-weighted/formative composites, calibration (ECE<=.03),
+  WAR-noise/career anchor, wild cluster bootstrap (Cameron-Gelbach-Miller cite added), coach-vs-team
+  variance method, defensive 2018-block z-scoring. New limitations: WAR noise, play-calling
+  attribution (HC vs coordinator), formative construct, defensive team-attribution.
+
+The 2026-06-24 map below is retained as history (it documented the FIRST rewrite, now superseded).
+
+---
+
+# (HISTORY) 2026-06-24 map
+
 Generated 2026-06-24 from the regenerated outputs (leakage-free pipeline, stability-selected
 models, external WAR, coach/mentor-clustered inference, global BH-FDR).
 
