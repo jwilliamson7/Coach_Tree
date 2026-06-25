@@ -1,0 +1,54 @@
+{
+  "Composite Aggression": {
+    "split_year": 2018,
+    "n_train": 416,
+    "n_test": 192,
+    "train_r": 0.1917648632606871,
+    "train_slope": 19.908696453495885,
+    "test_r": 0.11664373386354447,
+    "test_p": 0.1071331894774889,
+    "rmse_model_on_test": 1.8490879705338976,
+    "rmse_baseline_on_test": 1.8917932657144936,
+    "predictive_skill": 0.022573975684635372,
+    "note": "frozen train-window slope applied to unseen test window; predictive_skill > 0 means the early gene->WAR relation generalizes"
+  },
+  "Shotgun": {
+    "split_year": 2018,
+    "n_train": 416,
+    "n_test": 192,
+    "train_r": 0.09832851039207575,
+    "train_slope": 0.20232243198056926,
+    "test_r": 0.15030566466457262,
+    "test_p": 0.03744004556731691,
+    "rmse_model_on_test": 1.8448850783924755,
+    "rmse_baseline_on_test": 1.8917932657144936,
+    "predictive_skill": 0.024795620204463353,
+    "note": "frozen train-window slope applied to unseen test window; predictive_skill > 0 means the early gene->WAR relation generalizes"
+  },
+  "Tempo": {
+    "split_year": 2018,
+    "n_train": 416,
+    "n_test": 192,
+    "train_r": 0.04815605548313295,
+    "train_slope": 0.08850937422616002,
+    "test_r": 0.03238330574929525,
+    "test_p": 0.6556672352183811,
+    "rmse_model_on_test": 1.8901912958240539,
+    "rmse_baseline_on_test": 1.8917932657144936,
+    "predictive_skill": 0.0008467996580137083,
+    "note": "frozen train-window slope applied to unseen test window; predictive_skill > 0 means the early gene->WAR relation generalizes"
+  },
+  "Defensive Scheme": {
+    "split_year": 2018,
+    "n_train": 96,
+    "n_test": 186,
+    "train_r": -0.020468901550366923,
+    "train_slope": -0.04175032923074452,
+    "test_r": 0.24890076112967283,
+    "test_p": 0.000613118058892768,
+    "rmse_model_on_test": 1.6689723844480953,
+    "rmse_baseline_on_test": 1.657701176494875,
+    "predictive_skill": -0.006799300207443126,
+    "note": "frozen train-window slope applied to unseen test window; predictive_skill > 0 means the early gene->WAR relation generalizes"
+  }
+}
