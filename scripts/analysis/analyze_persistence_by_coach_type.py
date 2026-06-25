@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 import json
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from utils.parsimony import cluster_bootstrap_corr
+from utils.parsimony import cluster_bootstrap_corr, corr_with_small_cluster_guard
 
 logging.basicConfig(
     level=logging.INFO,
@@ -113,9 +113,11 @@ class PersistenceByTypeAnalyzer:
                         pairs_df = pd.DataFrame(pairs)
                         corr, p_val = stats.pearsonr(pairs_df['year_n'], pairs_df['year_n_plus'])
                         # Cluster the bootstrap on coach (same coach -> many pairs).
-                        boot = cluster_bootstrap_corr(
+                        # Coach-type x lag splits get small (e.g. offensive lag-3
+                        # ~33 coaches), so flag + add a wild cluster bootstrap p.
+                        boot = corr_with_small_cluster_guard(
                             pairs_df['year_n'].values, pairs_df['year_n_plus'].values,
-                            pairs_df['coach'].values, n_boot=2000, seed=42,
+                            pairs_df['coach'].values, min_clusters=40, n_boot=2000, seed=42,
                         )
 
                         results[bg_type][var].append({
@@ -126,6 +128,8 @@ class PersistenceByTypeAnalyzer:
                             'ci_high': boot['ci_high'],
                             'p_bootstrap_coach_clustered': boot['p_bootstrap'],
                             'n_coaches': boot['n_clusters'],
+                            'small_cluster': boot.get('small_cluster', False),
+                            'p_wild_cluster': boot.get('p_wild_cluster'),
                             'n_pairs': int(len(pairs)),
                             'significant': bool(p_val < 0.05)
                         })

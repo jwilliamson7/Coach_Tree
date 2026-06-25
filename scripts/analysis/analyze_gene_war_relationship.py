@@ -24,6 +24,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.data_paths import coach_war_trajectories_path, merge_gene_war
 from utils.parsimony import cluster_robust_ols, cluster_bootstrap_ci, cluster_bootstrap_corr
+from utils.war_noise import war_noise_robustness, career_level_corr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -149,10 +150,27 @@ def analyze_correlations(merged, measures, gene_key):
             'significant': bool(p < 0.05),
         }
 
+        # WS11: WAR-noise-aware robustness (IVW, partial-season, disattenuation
+        # bracket) + career-level anchor. Observed r above stays the primary number.
+        results[label].update(
+            war_noise_robustness(merged, col, war_col='annual_war', coach_col='coach'))
+        results[label]['career'] = career_level_corr(merged, col)
+
         sig = "**" if p < 0.01 else ("*" if p < 0.05 else "n.s.")
         cp = boot['p_bootstrap']
         logger.info(f"  {label:25s}: r={r:7.4f}, p={p:.4f} ({sig}), "
                     f"clust_p={cp:.4f}, n={len(clean)}")
+        if 'r_ivw' in results[label]:
+            relw = results[label].get('war_test_retest_reliability', float('nan'))
+            rpar = results[label].get('r_partial_season', float('nan'))
+            logger.info(f"  {'':25s}  [noise] ivw_r={results[label]['r_ivw']:7.4f} "
+                        f"(clust_p={results[label]['p_ivw_coach_clustered']:.4f}), "
+                        f"partial_r={rpar:7.4f} (n_drop={results[label].get('n_dropped_partial','?')}), "
+                        f"war_reliab={relw:.3f}")
+        car = results[label]['career'].get('all_coaches', {})
+        if 'correlation' in car:
+            logger.info(f"  {'':25s}  [career] r={car['correlation']:7.4f} "
+                        f"p={car['p_value']:.4f} n_coaches={car['n_coaches']}")
 
     return results
 

@@ -32,7 +32,7 @@ from datetime import datetime
 from scipy import stats
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from utils.parsimony import cluster_bootstrap_corr
+from utils.parsimony import cluster_bootstrap_corr, corr_with_small_cluster_guard
 
 # Configure logging
 logging.basicConfig(
@@ -436,9 +436,12 @@ class InheritanceAnalyzer:
             # multiple coordinator stints appears more than once, so cluster the
             # bootstrap on coach_id rather than treating stints as independent.
             r, p = stats.pearsonr(coord_vals, hc_vals)
-            boot = cluster_bootstrap_corr(
+            # Inheritance subgroups (esp. DC->HC, ~17 coaches) are small-cluster:
+            # the percentile bootstrap / clustered-t are anti-conservative there,
+            # so attach a wild cluster bootstrap p and a small_cluster flag.
+            boot = corr_with_small_cluster_guard(
                 coord_vals, hc_vals, subset['coach_id'].values,
-                n_boot=2000, seed=42,
+                min_clusters=40, n_boot=2000, seed=42,
             )
 
             # Direction retention: same sign (exclude zeros)
@@ -458,6 +461,9 @@ class InheritanceAnalyzer:
                 'ci_high': round(boot['ci_high'], 4),
                 'p_bootstrap_coach_clustered': round(boot['p_bootstrap'], 4),
                 'n_coaches': boot['n_clusters'],
+                'small_cluster': boot.get('small_cluster', False),
+                'p_wild_cluster': (round(boot['p_wild_cluster'], 4)
+                                   if boot.get('p_wild_cluster') is not None else None),
                 'mean_coord_gene': round(float(np.mean(coord_vals)), 4),
                 'mean_hc_gene': round(float(np.mean(hc_vals)), 4),
                 'mean_change': round(float(np.mean(changes)), 4),

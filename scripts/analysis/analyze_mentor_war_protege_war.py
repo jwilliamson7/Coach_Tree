@@ -23,7 +23,7 @@ from scipy import stats
 from typing import Dict, List, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from utils.parsimony import cluster_bootstrap_corr
+from utils.parsimony import cluster_bootstrap_corr, corr_with_small_cluster_guard
 
 logging.basicConfig(
     level=logging.INFO,
@@ -218,9 +218,9 @@ class MentorWARAnalyzer:
             subset = df[df['protege_role_under_mentor'] == coord_type]
             if len(subset) >= 10:  # Minimum sample size
                 r, p = stats.pearsonr(subset['avg_war_mentor'], subset['avg_war_protege'])
-                boot = cluster_bootstrap_corr(
+                boot = corr_with_small_cluster_guard(
                     subset['avg_war_mentor'].values, subset['avg_war_protege'].values,
-                    subset['mentor_name'].values, n_boot=2000, seed=42,
+                    subset['mentor_name'].values, min_clusters=40, n_boot=2000, seed=42,
                 )
                 results['by_coordinator_type'][coord_type] = {
                     'n': len(subset),
@@ -230,6 +230,8 @@ class MentorWARAnalyzer:
                     'ci_high': boot['ci_high'],
                     'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
                     'n_mentors': boot['n_clusters'],
+                    'small_cluster': boot.get('small_cluster', False),
+                    'p_wild_cluster': boot.get('p_wild_cluster'),
                     'mentor_war_mean': float(subset['avg_war_mentor'].mean()),
                     'protege_war_mean': float(subset['avg_war_protege'].mean())
                 }
@@ -248,10 +250,21 @@ class MentorWARAnalyzer:
             subset = df[df['era'] == era]
             if len(subset) >= 10:
                 r, p = stats.pearsonr(subset['avg_war_mentor'], subset['avg_war_protege'])
+                # Era splits were previously naive Pearson (ignored mentor clustering
+                # AND small cluster counts). Route through the same clustered guard:
+                # small eras (e.g. 2020+, ~few mentors) get a wild cluster bootstrap p.
+                boot = corr_with_small_cluster_guard(
+                    subset['avg_war_mentor'].values, subset['avg_war_protege'].values,
+                    subset['mentor_name'].values, min_clusters=40, n_boot=2000, seed=42,
+                )
                 results['by_era'][str(era)] = {
                     'n': len(subset),
                     'correlation': float(r),
-                    'p_value': float(p)
+                    'p_value': float(p),
+                    'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
+                    'n_mentors': boot['n_clusters'],
+                    'small_cluster': boot.get('small_cluster', False),
+                    'p_wild_cluster': boot.get('p_wild_cluster'),
                 }
 
         return results

@@ -528,6 +528,233 @@ def cluster_bootstrap_corr(
 
 
 # --------------------------------------------------------------------------- #
+# (d2) Measurement-error-aware correlation (WS11: the dependent variable WAR is
+#      a noisy single-season estimate, ~half sampling noise against the binomial
+#      floor, and its noise is heteroskedastic in games coached. Two honest
+#      moves: (i) inverse-variance weight so precise full-season coach-years
+#      count more; (ii) report a disattenuation bracket so the conservative
+#      observed r is understood as a FLOOR, not the whole story. Neither invents
+#      precision: the weights come from a transparent games-based proxy and the
+#      disattenuation is reported as a range with its assumption stated.)
+# --------------------------------------------------------------------------- #
+def weighted_pearson(x: np.ndarray, y: np.ndarray, w: np.ndarray) -> float:
+    """Weighted Pearson correlation with non-negative weights w (e.g. inverse
+    WAR sampling variance). Reduces to ordinary Pearson r when w is constant.
+    Non-finite / non-positive-weight rows are dropped; NaN if <3 rows remain."""
+    x = np.asarray(x, float)
+    y = np.asarray(y, float)
+    w = np.asarray(w, float)
+    m = np.isfinite(x) & np.isfinite(y) & np.isfinite(w) & (w > 0)
+    x, y, w = x[m], y[m], w[m]
+    if len(x) < 3:
+        return float("nan")
+    sw = w.sum()
+    mx = (w * x).sum() / sw
+    my = (w * y).sum() / sw
+    cov = (w * (x - mx) * (y - my)).sum() / sw
+    vx = (w * (x - mx) ** 2).sum() / sw
+    vy = (w * (y - my) ** 2).sum() / sw
+    if vx <= 0 or vy <= 0:
+        return float("nan")
+    return float(cov / np.sqrt(vx * vy))
+
+
+def cluster_bootstrap_corr_weighted(
+    x: np.ndarray,
+    y: np.ndarray,
+    clusters: np.ndarray,
+    w: Optional[np.ndarray] = None,
+    n_boot: int = 2000,
+    seed: int = 0,
+    ci: float = 0.95,
+) -> Dict:
+    """Cluster (block) bootstrap for an inverse-variance-WEIGHTED Pearson r.
+
+    Same machinery as cluster_bootstrap_corr (resample whole clusters with
+    replacement, recompute the statistic each draw) but the point estimate and
+    every draw use weighted_pearson with per-row weights w (carried through the
+    resample). With w=None this is identical to the unweighted version. The
+    bootstrap deliberately does NOT add extra noise to y -- the observed y already
+    contains its sampling noise, and double-counting it would over-widen the CI;
+    the residual uncertainty about the TRUE (noise-free) correlation is handled
+    separately and analytically by disattenuate_r. Returns r, percentile CI,
+    two-sided bootstrap p, n, n_clusters, n_boot.
+    """
+    rng = np.random.default_rng(seed)
+    x = np.asarray(x, float)
+    y = np.asarray(y, float)
+    clusters = np.asarray(clusters)
+    if w is None:
+        w = np.ones(len(x), float)
+    w = np.asarray(w, float)
+    mask = np.isfinite(x) & np.isfinite(y) & np.isfinite(w) & (w > 0)
+    x, y, w, clusters = x[mask], y[mask], w[mask], clusters[mask]
+    uniq = np.unique(clusters)
+    n_clusters = len(uniq)
+
+    point = weighted_pearson(x, y, w)
+    if n_clusters < 3 or not np.isfinite(point):
+        return {"r": point, "ci_low": float("nan"), "ci_high": float("nan"),
+                "p_bootstrap": float("nan"), "n": int(len(x)),
+                "n_clusters": int(n_clusters), "n_boot": 0}
+
+    idx_by_cluster = {g: np.where(clusters == g)[0] for g in uniq}
+    draws = []
+    for _ in range(n_boot):
+        samp = rng.choice(uniq, size=n_clusters, replace=True)
+        rows = np.concatenate([idx_by_cluster[g] for g in samp])
+        r = weighted_pearson(x[rows], y[rows], w[rows])
+        if np.isfinite(r):
+            draws.append(r)
+    draws = np.asarray(draws)
+
+    lo_q = (1 - ci) / 2 * 100
+    hi_q = (1 + ci) / 2 * 100
+    if point >= 0:
+        p = 2.0 * float(np.mean(draws <= 0))
+    else:
+        p = 2.0 * float(np.mean(draws >= 0))
+    return {
+        "r": float(point),
+        "ci_low": float(np.percentile(draws, lo_q)),
+        "ci_high": float(np.percentile(draws, hi_q)),
+        "p_bootstrap": float(min(1.0, p)),
+        "n": int(len(x)),
+        "n_clusters": int(n_clusters),
+        "n_boot": int(len(draws)),
+    }
+
+
+SMALL_CLUSTER_MIN = 40   # below this, percentile cluster bootstrap / clustered t
+                         # are anti-conservative; prefer the wild cluster bootstrap
+
+
+def wild_cluster_bootstrap_corr(
+    x: np.ndarray,
+    y: np.ndarray,
+    clusters: np.ndarray,
+    n_boot: int = 2000,
+    seed: int = 0,
+) -> Dict:
+    """Wild cluster bootstrap p-value for H0: corr(x, y) = 0, valid with FEW
+    clusters (the percentile cluster bootstrap and the clustered-t both become
+    anti-conservative when the number of clusters is small, < ~40).
+
+    Cameron-Gelbach-Miller restricted bootstrap (WCB-R) with Rademacher weights:
+    standardize x and y so the OLS slope equals Pearson r, impose the null
+    (slope = 0, restricted residuals = y - mean(y)), then for each replicate flip
+    the SIGN of every cluster's residual block by an independent +/-1 and recompute
+    the cluster-robust t. p = share of bootstrap |t*| >= observed |t|. Returns
+    {r, t_observed, p_wild, n, n_clusters, n_boot}.
+    """
+    x = np.asarray(x, float)
+    y = np.asarray(y, float)
+    clusters = np.asarray(clusters)
+    m = np.isfinite(x) & np.isfinite(y)
+    x, y, clusters = x[m], y[m], clusters[m]
+    uniq = np.unique(clusters)
+    G = len(uniq)
+    if G < 2 or np.std(x) == 0 or np.std(y) == 0:
+        return {"r": float("nan"), "t_observed": float("nan"), "p_wild": float("nan"),
+                "n": int(len(x)), "n_clusters": int(G), "n_boot": 0}
+
+    xs = (x - x.mean()) / x.std()
+    ys = (y - y.mean()) / y.std()
+
+    def _slope_t(yy):
+        res = cluster_robust_ols(xs, yy, clusters, ["x"])
+        c = res["coefficients"]["x"]
+        s = c["std_error"]
+        return c["coefficient"], (c["coefficient"] / s if s > 0 else np.nan)
+
+    slope_obs, t_obs = _slope_t(ys)
+    b0 = ys.mean()
+    resid = ys - b0
+    idx_by = {g: np.where(clusters == g)[0] for g in uniq}
+
+    rng = np.random.default_rng(seed)
+    count = 0
+    nb = 0
+    for _ in range(n_boot):
+        signs = rng.choice([-1.0, 1.0], size=G)
+        ystar = np.empty_like(ys)
+        for gi, g in enumerate(uniq):
+            rows = idx_by[g]
+            ystar[rows] = b0 + signs[gi] * resid[rows]
+        _, t_star = _slope_t(ystar)
+        if np.isfinite(t_star):
+            nb += 1
+            if abs(t_star) >= abs(t_obs):
+                count += 1
+    p = count / nb if nb > 0 else float("nan")
+    return {"r": float(slope_obs), "t_observed": float(t_obs), "p_wild": float(p),
+            "n": int(len(x)), "n_clusters": int(G), "n_boot": int(nb)}
+
+
+def corr_with_small_cluster_guard(
+    x: np.ndarray,
+    y: np.ndarray,
+    clusters: np.ndarray,
+    min_clusters: int = SMALL_CLUSTER_MIN,
+    n_boot: int = 2000,
+    seed: int = 0,
+) -> Dict:
+    """Cluster-bootstrap correlation with an automatic small-cluster guard.
+
+    Always returns the percentile cluster-bootstrap result (r, CI, p_bootstrap,
+    n_clusters). Adds `small_cluster` = (n_clusters < min_clusters); when that is
+    true it also attaches a wild cluster bootstrap p-value (`p_wild_cluster`) as
+    the trustworthy inference and `t_observed`, so callers can report the robust p
+    and flag the subgroup rather than over-claim from few clusters.
+    """
+    res = cluster_bootstrap_corr(x, y, clusters, n_boot=n_boot, seed=seed)
+    res["small_cluster"] = bool(res.get("n_clusters", 0) < min_clusters)
+    if res["small_cluster"] and np.isfinite(res.get("r", np.nan)):
+        wcb = wild_cluster_bootstrap_corr(x, y, clusters, n_boot=n_boot, seed=seed)
+        res["p_wild_cluster"] = wcb["p_wild"]
+        res["t_observed"] = wcb["t_observed"]
+    return res
+
+
+def reliability_from_variance(observed_values: np.ndarray, noise_var) -> float:
+    """Panel reliability of a noisy measure: the fraction of its observed variance
+    that is true between-unit signal rather than sampling noise,
+
+        rel = max(0, (Var_observed - mean_noise_var) / Var_observed).
+
+    For WAR this is (Var of single-season WAR across coach-years minus the mean
+    per-row sampling variance) / Var of single-season WAR. `noise_var` may be a
+    scalar (one global sampling variance) or a per-unit array (averaged). Returns
+    NaN if Var_observed <= 0. This is an APPROXIMATION (it assumes the sampling-
+    noise estimate is right and uncorrelated with signal); callers should report
+    the resulting disattenuation as a bracket, not a point claim.
+    """
+    obs = np.asarray(observed_values, float)
+    obs = obs[np.isfinite(obs)]
+    if len(obs) < 2:
+        return float("nan")
+    var_obs = float(np.var(obs, ddof=1))
+    mnv = float(np.mean(noise_var)) if np.ndim(noise_var) else float(noise_var)
+    if var_obs <= 0:
+        return float("nan")
+    return float(max(0.0, (var_obs - mnv) / var_obs))
+
+
+def disattenuate_r(r_obs: float, rel_x: float = 1.0, rel_y: float = 1.0) -> float:
+    """Spearman correction for attenuation: r_true = r_obs / sqrt(rel_x * rel_y).
+
+    Measurement error in x and/or y biases an observed correlation TOWARD zero, so
+    the observed r is a floor; this recovers an estimate of the correlation between
+    the underlying true quantities. rel_x / rel_y are reliabilities in (0, 1].
+    Guarded (reliabilities clipped to (1e-6, 1], output capped at +/-0.999). This
+    is assumption-dependent (see reliability_from_variance); report as a bracket.
+    """
+    rel_x = min(max(float(rel_x), 1e-6), 1.0)
+    rel_y = min(max(float(rel_y), 1e-6), 1.0)
+    return float(np.clip(r_obs / np.sqrt(rel_x * rel_y), -0.999, 0.999))
+
+
+# --------------------------------------------------------------------------- #
 # (e) Reliability-weighted composite genes (WS4: shared by aggression, tempo,
 #     defensive). Components differ ~10x in intrinsic reliability, so an
 #     equal-weight mean lets sampling noise dominate the weak ones. Weight each
@@ -693,6 +920,41 @@ def _selftest():
     assert bc["p_bootstrap"] < 0.05, "true correlation should be significant"
     print(f"cluster corr OK -> r={bc['r']:.3f} CI={bc['ci_low']:.3f}..{bc['ci_high']:.3f} "
           f"p_boot={bc['p_bootstrap']:.4f} (clusters={bc['n_clusters']})")
+
+    # --- WS11: weighted corr / disattenuation / reliability ---
+    w_uniform = np.ones(n)
+    assert abs(weighted_pearson(x1, yr, w_uniform) - np.corrcoef(x1, yr)[0, 1]) < 1e-9, \
+        "weighted_pearson with uniform weights must equal ordinary Pearson r"
+    bw = cluster_bootstrap_corr_weighted(x1, yr, groups, w=w_uniform, n_boot=200, seed=4)
+    assert abs(bw["r"] - bc["r"]) < 1e-9, "uniform-weight bootstrap must match unweighted point r"
+    # add heteroskedastic noise to y, weight by inverse noise var -> recover signal
+    noise_sd = np.where(rng.uniform(size=n) < 0.5, 0.3, 3.0)
+    y_noisy = yr + rng.normal(scale=noise_sd, size=n)
+    r_unw = np.corrcoef(x1, y_noisy)[0, 1]
+    r_ivw = weighted_pearson(x1, y_noisy, 1.0 / noise_sd ** 2)
+    assert r_ivw > r_unw, "inverse-variance weighting should recover attenuated signal"
+    rel = reliability_from_variance(y_noisy, np.mean(noise_sd ** 2))
+    assert 0.0 < rel < 1.0, "panel reliability must be a fraction"
+    assert disattenuate_r(0.2, 1.0, rel) > 0.2, "disattenuation must raise the correlation"
+    print(f"WS11 OK -> ivw r {r_unw:.3f}->{r_ivw:.3f}; rel_y={rel:.3f}; "
+          f"disatt 0.20->{disattenuate_r(0.2, 1.0, rel):.3f}")
+
+    # --- WS12: wild cluster bootstrap / small-cluster guard ---
+    # few-cluster subgroup with a real signal -> WCB should detect it;
+    # a null subgroup -> WCB should NOT reject.
+    fg = rng.integers(0, 18, size=400)                  # 18 clusters (< 40)
+    fx = rng.normal(size=400)
+    fy = 0.6 * fx + rng.normal(size=400)
+    wsig = wild_cluster_bootstrap_corr(fx, fy, fg, n_boot=499, seed=5)
+    assert wsig["p_wild"] < 0.05, "WCB should detect a real few-cluster signal"
+    fy0 = rng.normal(size=400)
+    wnull = wild_cluster_bootstrap_corr(fx, fy0, fg, n_boot=499, seed=6)
+    g_sig = corr_with_small_cluster_guard(fx, fy, fg, n_boot=499, seed=5)
+    assert g_sig["small_cluster"] and "p_wild_cluster" in g_sig, "guard must flag few clusters"
+    g_big = corr_with_small_cluster_guard(x1, yr, groups, n_boot=300, seed=7)
+    assert not g_big["small_cluster"] and "p_wild_cluster" not in g_big, "200 clusters not small"
+    print(f"WS12 OK -> WCB sig p={wsig['p_wild']:.3f} (clusters={wsig['n_clusters']}); "
+          f"null p={wnull['p_wild']:.3f}; guard flags small={g_sig['small_cluster']}")
     print("ALL PARSIMONY SELF-TESTS PASSED")
 
 

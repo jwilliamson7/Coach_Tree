@@ -1,0 +1,63 @@
+{
+  "attrition": {
+    "gene_coach_years_total": 641,
+    "matched_to_war": 608,
+    "unmatched_coach_years": 33,
+    "kept_coaches": {
+      "n_coaches": 124,
+      "n_coach_years": 626,
+      "mean_seasons": 5.048387096774194,
+      "median_seasons": 4.0,
+      "mean_composite_gene": 0.00270988399319491
+    },
+    "dropped_coaches": {
+      "n_coaches": 14,
+      "n_coach_years": 15,
+      "mean_seasons": 1.0714285714285714,
+      "median_seasons": 1.0,
+      "mean_composite_gene": -0.0016984558922370867
+    },
+    "note": "dropped coaches are those with no WAR baseline -- predominantly interims / very short stints; compare seasons + mean gene to check they are not a biased slice on the gene dimension"
+  },
+  "sensitivity": {
+    "all_matched": {
+      "r": 0.18925574173603754,
+      "ci_low": 0.10027619770285084,
+      "ci_high": 0.27663557474578243,
+      "p_bootstrap_coach_clustered": 0.0,
+      "n": 608,
+      "n_coaches": 124
+    },
+    "exclude_one_season_coaches": {
+      "r": 0.1889463316106598,
+      "ci_low": 0.09639636841107047,
+      "ci_high": 0.2782654847731789,
+      "p_bootstrap_coach_clustered": 0.001,
+      "n": 587,
+      "n_coaches": 103
+    },
+    "exclude_partial_seasons": {
+      "r": 0.21148576552744186,
+      "ci_low": 0.12249049296605316,
+      "ci_high": 0.29433366815820505,
+      "p_bootstrap_coach_clustered": 0.0,
+      "n": 596,
+      "n_coaches": 124,
+      "n_dropped": 12
+    },
+    "career_level": {
+      "all_coaches": {
+        "correlation": 0.3033919185271304,
+        "p_value": 0.000614079532669092,
+        "n_coaches": 124,
+        "significant": true
+      },
+      "min3_seasons": {
+        "correlation": 0.3081765462279798,
+        "p_value": 0.0036850442823880675,
+        "n_coaches": 87,
+        "significant": true
+      }
+    }
+  }
+}
