@@ -1,43 +1,43 @@
 {
   "offensive_only": {
     "model_name": "Offensive Genes (2006-2024)",
-    "r_squared": 0.04142691021181877,
-    "adj_r_squared": 0.03664996790390429,
-    "f_statistic": 8.672265131438142,
-    "f_p_value": 1.2186780490419657e-05,
-    "intercept": -0.09675680806509626,
-    "intercept_se": 0.10405632138887072,
+    "r_squared": 0.04140526905671149,
+    "adj_r_squared": 0.03662821890250911,
+    "f_statistic": 8.667539113083572,
+    "f_p_value": 1.2266902450708272e-05,
+    "intercept": -0.0968605591587545,
+    "intercept_se": 0.10406553174133257,
     "se_type": "cluster_robust_by_coach",
     "coefficients": {
       "Aggression": {
         "column": "composite_aggression",
-        "coefficient": 15.289631401429052,
-        "std_error": 4.849315814880886,
-        "t_statistic": 3.15294610314107,
-        "p_value": 0.002045956039797847,
+        "coefficient": 15.295219956363415,
+        "std_error": 4.84900041081715,
+        "t_statistic": 3.1543037039639814,
+        "p_value": 0.0020372006275375387,
         "significant": true,
-        "ci_low": 5.909603171855634,
-        "ci_high": 24.91185215481592
+        "ci_low": 5.908720698922329,
+        "ci_high": 24.919606569915626
       },
       "Shotgun": {
         "column": "shotgun_gene_zscore",
-        "coefficient": 0.15167632696372804,
-        "std_error": 0.10694258177072564,
-        "t_statistic": 1.418296851004656,
-        "p_value": 0.1587176371610779,
+        "coefficient": 0.15098204364884452,
+        "std_error": 0.1066415637516404,
+        "t_statistic": 1.4157898509484483,
+        "p_value": 0.15944903267954524,
         "significant": false,
-        "ci_low": -0.06461634721505255,
-        "ci_high": 0.37030876386978145
+        "ci_low": -0.06473223780085427,
+        "ci_high": 0.3695770954890892
       },
       "Tempo": {
         "column": "composite_tempo_zscore",
-        "coefficient": 0.004858048169912402,
-        "std_error": 0.10202248516562672,
-        "t_statistic": 0.047617426315637354,
-        "p_value": 0.962100966651759,
+        "coefficient": 0.004946916675598945,
+        "std_error": 0.10202738169903389,
+        "t_statistic": 0.048486167078085514,
+        "p_value": 0.9614100712873936,
         "significant": false,
-        "ci_low": -0.16567654608981572,
-        "ci_high": 0.2371452169877461
+        "ci_low": -0.16562191036909082,
+        "ci_high": 0.2372497694741727
       }
     },
     "n_clusters": 123,
@@ -48,53 +48,53 @@
   },
   "all_genes": {
     "model_name": "All Genes (2016-2024)",
-    "r_squared": 0.03378037826311009,
-    "adj_r_squared": 0.01982774834633183,
-    "f_statistic": 2.4210760598250247,
-    "f_p_value": 0.048668228813433245,
-    "intercept": 0.09475946747508429,
-    "intercept_se": 0.17519711425833637,
+    "r_squared": 0.035904920694673104,
+    "adj_r_squared": 0.021982970090986043,
+    "f_statistic": 2.57901509039719,
+    "f_p_value": 0.03773824847607821,
+    "intercept": 0.10216524675793692,
+    "intercept_se": 0.17424679909131638,
     "se_type": "cluster_robust_by_coach",
     "coefficients": {
       "Aggression": {
         "column": "composite_aggression",
-        "coefficient": 9.551340872875262,
-        "std_error": 6.0752576169467005,
-        "t_statistic": 1.5721705111289688,
-        "p_value": 0.12017719838887997,
+        "coefficient": 9.198373903850156,
+        "std_error": 6.103003454091632,
+        "t_statistic": 1.507188054708257,
+        "p_value": 0.1360198390997862,
         "significant": false,
-        "ci_low": -2.051618507709476,
-        "ci_high": 22.719606488322142
+        "ci_low": -2.5134552054323493,
+        "ci_high": 22.59132507611905
       },
       "Shotgun": {
         "column": "shotgun_gene_zscore",
-        "coefficient": 0.08647287679639148,
-        "std_error": 0.17646926688110218,
-        "t_statistic": 0.4900166375976024,
-        "p_value": 0.6255717994076069,
+        "coefficient": 0.07906662618896682,
+        "std_error": 0.17349812115608618,
+        "t_statistic": 0.4557203597486531,
+        "p_value": 0.6499255744954655,
         "significant": false,
-        "ci_low": -0.2923902312032252,
-        "ci_high": 0.41184266041064144
+        "ci_low": -0.2963322512961507,
+        "ci_high": 0.40288802640432614
       },
       "Tempo": {
         "column": "composite_tempo_zscore",
-        "coefficient": -0.040758716727326866,
-        "std_error": 0.14678928282668718,
-        "t_statistic": -0.27766820535154807,
-        "p_value": 0.782041350137002,
+        "coefficient": -0.03910449643822712,
+        "std_error": 0.14516193238463407,
+        "t_statistic": -0.2693853395021781,
+        "p_value": 0.7883828918693903,
         "significant": false,
-        "ci_low": -0.33353423616003947,
-        "ci_high": 0.27135877180722623
+        "ci_low": -0.32918764248760346,
+        "ci_high": 0.27089950774570476
       },
       "Def. Scheme": {
         "column": "composite_scheme_zscore",
-        "coefficient": 0.2132779254073886,
-        "std_error": 0.10558200414741327,
-        "t_statistic": 2.020021566455684,
-        "p_value": 0.04700162730011659,
+        "coefficient": 0.23012386686384154,
+        "std_error": 0.10840291978868422,
+        "t_statistic": 2.1228567211329246,
+        "p_value": 0.03711088486456671,
         "significant": true,
-        "ci_low": -0.014657231152546872,
-        "ci_high": 0.42237985297074576
+        "ci_low": -0.009676197121822593,
+        "ci_high": 0.4396564407967639
       }
     },
     "n_clusters": 79,
@@ -104,17 +104,17 @@
     "year_range": "2016-2024"
   },
   "vif": {
-    "Aggression": 1.0738910634302659,
-    "Shotgun": 1.0811857016937716,
-    "Tempo": 1.0330754352804006,
-    "Def. Scheme": 1.0306332407659526
+    "Aggression": 1.0796279500723307,
+    "Shotgun": 1.0853191336454908,
+    "Tempo": 1.0319753059137027,
+    "Def. Scheme": 1.0415146406404878
   },
   "pairwise_correlations": {
-    "Aggression <-> Shotgun": 0.22904074739964525,
+    "Aggression <-> Shotgun": 0.22915968248024374,
     "Aggression <-> Tempo": 0.10997545181501377,
-    "Aggression <-> Def. Scheme": 0.13415024892930297,
-    "Shotgun <-> Tempo": 0.15076078198888188,
-    "Shotgun <-> Def. Scheme": 0.12014311200991065,
-    "Tempo <-> Def. Scheme": 0.08311734369167986
+    "Aggression <-> Def. Scheme": 0.15994421969827946,
+    "Shotgun <-> Tempo": 0.1507934002515772,
+    "Shotgun <-> Def. Scheme": 0.14352950901481856,
+    "Tempo <-> Def. Scheme": 0.0782122668815191
   }
 }

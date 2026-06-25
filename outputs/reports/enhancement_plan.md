@@ -179,6 +179,63 @@ effect). Update `paper_delta_map.md`.
 
 ---
 
+## Robustness pass v2 (WS11-WS15) - 2026-06-25 [IMPLEMENTED, pre-paper]
+
+Second methodological pass (after the WS1-WS9 audit) focused on what survives a clean
+pipeline: what the gene->WAR claim means, not whether the code is correct. NO model
+retraining anywhere; WS13/WS14 re-run gene CALCULATORS (inference + changed aggregation) only.
+
+### WS11 - WAR-measurement-noise-aware gene->WAR  [IMPLEMENTED]
+Finding: a single-season WAR is only ~24% reliable (year-over-year test-retest r=0.24); the rest
+is luck (binomial floor). Classical noise in the DEPENDENT variable ATTENUATES the correlation, so
+the season-level r=0.189 is a FLOOR, not inflated. Also: the WAR file's `annual_games` is mislabeled
+(it is WAR-in-games, not games coached); real games reconstructed from raw PFR results (`G`, 100%
+match) in `data_paths.load_coach_year_games`.
+- New: `utils/war_noise.py` (war_noise_robustness + career_level_corr); `parsimony.weighted_pearson`,
+  `cluster_bootstrap_corr_weighted`, `reliability_from_variance`, `disattenuate_r`;
+  `data_paths.add_war_precision` (games-based proxy SE = 2.4833*sqrt(16/games)).
+- Views added to gene_war + aggression_war: inverse-variance-weighted r, partial-season-drop
+  sensitivity, empirical WAR reliability, and the CAREER-LEVEL anchor (one row/coach, WAR reliable).
+- DELIBERATELY NO disattenuated point estimate (rel~0.24 -> dividing by sqrt(rel) is false precision).
+- RESULT: composite aggression->WAR season 0.189 -> CAREER 0.303 (p=.0006, n=124); 4th-down 0.095 ->
+  career 0.187; pass-heavy 0.183 -> 0.251; deep/2pt weak everywhere. IVW + partial-season hold.
+
+### WS12 - Small-cluster subgroup inference  [IMPLEMENTED]
+Added `parsimony.wild_cluster_bootstrap_corr` (Cameron-Gelbach-Miller restricted, Rademacher) +
+`corr_with_small_cluster_guard` (auto WCB + `small_cluster` flag when n_clusters < 40, textbook).
+Wired into gene_inheritance, inheritance_by_coach_type, shotgun_inheritance_by_coach_type,
+mentor_war (era splits were naive Pearson -> now clustered), persistence_by_coach_type. BH now
+prefers `p_wild_cluster` for small-cluster tests.
+- SURVIVE WCB: OC->HC shotgun (p=.003), OC->HC pass-heavy (.022), DC->HC defensive scheme (.0155,
+  n=17 so suggestive), gene-persistence subgroups (strong).
+- DEMOTED (naive p was anti-conservative): OC->HC 4th-down (.001->.187), OC->HC composite aggression
+  (.012->.209), offensive-mentor 4th-down. [percentile clustered p already demoted these; WCB confirms]
+
+### WS13 - Defensive composite 2018 structural break  [IMPLEMENTED]
+The composite is a reliability-weighted mean of k component z-scores; k=2 (box, rush) for 2016-17 and
+k=3 (adds man) for 2018+, and the mean of k unit-variance terms has k-dependent variance -> a scale
+jump at 2018. Fix: z-score the composite WITHIN each `scheme_components` regime so 2017 and 2019 genes
+are comparable. Verified: each regime now mean 0, std 1. Defensive gene recomputed.
+
+### WS14 - Shotgun reliability  [IMPLEMENTED]
+Folded shotgun (the one gene outside the WS4 framework) in via empirical-Bayes SHRINKAGE
+(gene_shrunk = mean + rel*(gene-mean), rel = tau2/(tau2+samp_var) from per-play phat(1-phat)).
+Practical impact negligible: HC coach-years have ample plays so reliability is 0.95-0.996 (mean .993),
+shrinkage moves the gene ~0.001. Honest finding: shotgun was never at risk; framework now consistent.
+
+### WS15 - Selection / filtering sensitivity  [IMPLEMENTED]
+New `analyze_selection_sensitivity.py`. Attrition: 641 gene coach-years, 608 matched to WAR, 33
+dropped (14 coaches), all short-tenure interims (mean 1.07 seasons) with mean gene -0.002 vs kept
++0.003 -> NOT a biased slice. Headline holds across all cuts: all .189, excl-one-season .189,
+excl-partial .211, career .305. Added to run_all_analyses.
+
+### Deferred (documented limitation, not implemented)
+Opponent-strength adjustment in the upstream play models (would require retraining all offensive
+models; arguably part of the coach's signature). Pooled cross-era z-scoring is NOT a flaw (settled
+absolute/season-agnostic design).
+
+---
+
 ## Execution order (one cascade at the end)
 
 1. Model-level changes together (they all force refits): **WS2** (feature set) -> **WS3**

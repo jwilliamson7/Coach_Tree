@@ -28,6 +28,8 @@
       "ci_high": 0.30364999971762346,
       "p_bootstrap_mentor_clustered": 0.444,
       "n_mentors": 64,
+      "small_cluster": false,
+      "p_wild_cluster": null,
       "mentor_war_mean": -0.014046577807790537,
       "protege_war_mean": -0.03856250302214499
     },
@@ -39,6 +41,8 @@
       "ci_high": 0.33312293637806323,
       "p_bootstrap_mentor_clustered": 0.082,
       "n_mentors": 57,
+      "small_cluster": false,
+      "p_wild_cluster": null,
       "mentor_war_mean": 0.012453664459687897,
       "protege_war_mean": -0.0432530561167419
     }
@@ -47,22 +51,38 @@
     "2010-2019": {
       "n": 103,
       "correlation": 0.1066291019380181,
-      "p_value": 0.2837110977711612
+      "p_value": 0.2837110977711612,
+      "p_bootstrap_mentor_clustered": 0.183,
+      "n_mentors": 57,
+      "small_cluster": false,
+      "p_wild_cluster": null
     },
     "2000-2009": {
       "n": 54,
       "correlation": 0.021135869597349533,
-      "p_value": 0.8794243902449592
+      "p_value": 0.8794243902449592,
+      "p_bootstrap_mentor_clustered": 0.837,
+      "n_mentors": 36,
+      "small_cluster": true,
+      "p_wild_cluster": 0.864
     },
     "Pre-2000": {
       "n": 12,
       "correlation": -0.1510547362394294,
-      "p_value": 0.6393434713179064
+      "p_value": 0.6393434713179064,
+      "p_bootstrap_mentor_clustered": 0.545,
+      "n_mentors": 11,
+      "small_cluster": true,
+      "p_wild_cluster": 0.472
     },
     "2020+": {
       "n": 27,
       "correlation": 0.38854712512634837,
-      "p_value": 0.045188123812626095
+      "p_value": 0.045188123812626095,
+      "p_bootstrap_mentor_clustered": 0.071,
+      "n_mentors": 21,
+      "small_cluster": true,
+      "p_wild_cluster": 0.116
     }
   }
 }

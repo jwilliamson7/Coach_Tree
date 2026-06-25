@@ -22,6 +22,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.data_paths import coach_war_trajectories_path, merge_gene_war
 from utils.parsimony import cluster_bootstrap_corr
+from utils.war_noise import war_noise_robustness, career_level_corr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -139,8 +140,23 @@ class AggressionWARAnalyzer:
                 'significant': bool(p_val < 0.05)
             }
 
-            sig_marker = "✓ SIGNIFICANT" if p_val < 0.05 else "not significant"
+            # WS11: WAR-noise-aware robustness + career-level anchor (the observed
+            # r above stays the primary, conservative number).
+            results[label].update(
+                war_noise_robustness(self.merged_data, col,
+                                     war_col='annual_war', coach_col='coach'))
+            results[label]['career'] = career_level_corr(self.merged_data, col)
+
+            sig_marker = "SIGNIFICANT" if p_val < 0.05 else "not significant"
             logger.info(f"{label:25s}: r={corr:7.4f}, p={p_val:.4f} ({sig_marker}), n={len(clean_data)}")
+            if 'r_ivw' in results[label]:
+                car = results[label]['career'].get('all_coaches', {})
+                cr = car.get('correlation', float('nan'))
+                logger.info(f"{'':25s}  [noise] ivw_r={results[label]['r_ivw']:7.4f} "
+                            f"partial_r={results[label].get('r_partial_season', float('nan')):7.4f} "
+                            f"(n_drop={results[label].get('n_dropped_partial','?')}) "
+                            f"war_reliab={results[label].get('war_test_retest_reliability', float('nan')):.3f} "
+                            f"career_r={cr:7.4f}")
 
         return results
 

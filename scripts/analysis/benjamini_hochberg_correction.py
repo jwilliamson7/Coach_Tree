@@ -31,6 +31,10 @@ logger = logging.getLogger(__name__)
 
 ANALYSIS_DIR = Path("outputs/analysis")
 
+# Wild cluster bootstrap p-value: the trustworthy inference for SMALL-cluster
+# subgroups (< ~40 clusters), where the percentile bootstrap / clustered-t are
+# anti-conservative. Present only on small-cluster tests (WS12); preferred when so.
+WILD_KEY = "p_wild_cluster"
 # Keys that hold a clustered (preferred) p-value, in priority order.
 CLUSTERED_KEYS = ("p_bootstrap_coach_clustered", "p_bootstrap_mentor_clustered")
 # Keys that hold a naive p-value, in priority order.
@@ -47,10 +51,13 @@ def _load(name):
 
 
 def _pick_p(node, prefer_clustered=True):
-    """Return (p, source) from a result dict. Clustered p wins when present."""
+    """Return (p, source) from a result dict. For small-cluster tests the wild
+    cluster bootstrap p wins; else the percentile clustered p; else naive."""
     if not isinstance(node, dict):
         return None, None
     if prefer_clustered:
+        if node.get(WILD_KEY) is not None:
+            return float(node[WILD_KEY]), "wild_cluster"
         for k in CLUSTERED_KEYS:
             if node.get(k) is not None:
                 return float(node[k]), "clustered"
@@ -214,6 +221,7 @@ def main():
 
     n = len(df)
     n_clustered = int((df["p_source"] == "clustered").sum())
+    n_wild = int((df["p_source"] == "wild_cluster").sum())
     df, cutoff_rank = benjamini_hochberg(df)
     cutoff_p = float(df.loc[df["rank"] == cutoff_rank, "p"].iloc[0]) if cutoff_rank else 0.0
 
@@ -221,8 +229,9 @@ def main():
     print("BENJAMINI-HOCHBERG FDR CORRECTION (single global family)")
     print("=" * 80)
     print(f"Total tests:                     {n}")
-    print(f"  using clustered p-value:       {n_clustered}")
-    print(f"  using naive p-value:           {n - n_clustered}")
+    print(f"  using wild-cluster p (small):  {n_wild}")
+    print(f"  using percentile clustered p:  {n_clustered}")
+    print(f"  using naive p-value:           {n - n_clustered - n_wild}")
     print(f"Significant at raw p < 0.05:     {int(df['sig_raw'].sum())}")
     print(f"Significant after BH (FDR 0.05): {int(df['sig_bh'].sum())}")
     print(f"BH cutoff: p <= {cutoff_p:.6f} (rank {cutoff_rank}/{n})")
@@ -247,8 +256,9 @@ def main():
         "family": "single_global",
         "alpha": 0.05,
         "n_tests": n,
+        "n_using_wild_cluster_p": n_wild,
         "n_using_clustered_p": n_clustered,
-        "n_using_naive_p": n - n_clustered,
+        "n_using_naive_p": n - n_clustered - n_wild,
         "n_sig_raw": int(df["sig_raw"].sum()),
         "n_sig_bh": int(df["sig_bh"].sum()),
         "bh_cutoff_p": cutoff_p,

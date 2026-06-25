@@ -21,7 +21,7 @@ from matplotlib.ticker import FuncFormatter
 import json
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from utils.parsimony import cluster_bootstrap_corr
+from utils.parsimony import cluster_bootstrap_corr, corr_with_small_cluster_guard
 
 logging.basicConfig(
     level=logging.INFO,
@@ -212,9 +212,9 @@ class ShotgunInheritanceAnalyzer:
 
         if len(clean_data) >= 10:
             corr, p_val = stats.pearsonr(clean_data['shotgun_mentor'], clean_data['shotgun_protege'])
-            boot = cluster_bootstrap_corr(
+            boot = corr_with_small_cluster_guard(
                 clean_data['shotgun_mentor'].values, clean_data['shotgun_protege'].values,
-                clean_data['mentor_name'].values, n_boot=2000, seed=42,
+                clean_data['mentor_name'].values, min_clusters=40, n_boot=2000, seed=42,
             )
 
             result = {
@@ -224,6 +224,8 @@ class ShotgunInheritanceAnalyzer:
                 'ci_high': boot['ci_high'],
                 'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
                 'n_mentors': boot['n_clusters'],
+                'small_cluster': boot.get('small_cluster', False),
+                'p_wild_cluster': boot.get('p_wild_cluster'),
                 'n': int(len(clean_data)),
                 'significant': bool(p_val < 0.05)
             }
@@ -257,9 +259,9 @@ class ShotgunInheritanceAnalyzer:
 
             if len(clean_data) >= 10:
                 corr, p_val = stats.pearsonr(clean_data['shotgun_mentor'], clean_data['shotgun_protege'])
-                boot = cluster_bootstrap_corr(
+                boot = corr_with_small_cluster_guard(
                     clean_data['shotgun_mentor'].values, clean_data['shotgun_protege'].values,
-                    clean_data['mentor_name'].values, n_boot=2000, seed=42,
+                    clean_data['mentor_name'].values, min_clusters=40, n_boot=2000, seed=42,
                 )
 
                 results[bg_type] = {
@@ -269,6 +271,8 @@ class ShotgunInheritanceAnalyzer:
                     'ci_high': boot['ci_high'],
                     'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
                     'n_mentors': boot['n_clusters'],
+                    'small_cluster': boot.get('small_cluster', False),
+                    'p_wild_cluster': boot.get('p_wild_cluster'),
                     'n': int(len(clean_data)),
                     'significant': bool(p_val < 0.05)
                 }
@@ -301,9 +305,9 @@ class ShotgunInheritanceAnalyzer:
 
             if len(clean_data) >= 10:
                 corr, p_val = stats.pearsonr(clean_data['shotgun_mentor'], clean_data['shotgun_protege'])
-                boot = cluster_bootstrap_corr(
+                boot = corr_with_small_cluster_guard(
                     clean_data['shotgun_mentor'].values, clean_data['shotgun_protege'].values,
-                    clean_data['mentor_name'].values, n_boot=2000, seed=42,
+                    clean_data['mentor_name'].values, min_clusters=40, n_boot=2000, seed=42,
                 )
 
                 results[coord_type] = {
@@ -313,6 +317,8 @@ class ShotgunInheritanceAnalyzer:
                     'ci_high': boot['ci_high'],
                     'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
                     'n_mentors': boot['n_clusters'],
+                    'small_cluster': boot.get('small_cluster', False),
+                    'p_wild_cluster': boot.get('p_wild_cluster'),
                     'n': int(len(clean_data)),
                     'significant': bool(p_val < 0.05)
                 }

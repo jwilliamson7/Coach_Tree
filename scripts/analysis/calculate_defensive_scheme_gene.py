@@ -500,17 +500,24 @@ class DefensiveSchemeGeneCalculator:
                            if f'{g}_zscore' in scheme_df.columns]
             scheme_df['scheme_components'] = scheme_df[zscore_cols].notna().sum(axis=1)
 
-            # Z-score the composite
-            cs_valid = scheme_df['composite_scheme'].dropna()
-            if len(cs_valid) > 1:
-                cs_mean = cs_valid.mean()
-                cs_std = cs_valid.std()
-                scheme_df['composite_scheme_zscore'] = (
-                    (scheme_df['composite_scheme'] - cs_mean) / cs_std
-                    if cs_std > 0 else 0.0
-                )
-            else:
-                scheme_df['composite_scheme_zscore'] = np.nan
+            # Z-score the composite WITHIN each component-count regime (WS13).
+            # The composite is a reliability-weighted MEAN of k component z-scores,
+            # and the mean of k ~N(0,1) values has variance that shrinks as k grows
+            # (~ sum w^2 / (sum w)^2). Man coverage is unavailable before 2018, so
+            # 2016-2017 team-years use k=2 (box, rush) and 2018+ use k=3 (adds man).
+            # A single pooled z-score would therefore put the two regimes on
+            # different scales -- a structural break at 2018 (the pre-2018 genes
+            # would read as systematically more extreme). Standardizing within each
+            # scheme_components group makes a 2017 and a 2019 defensive gene
+            # comparable: each is SDs from the mean of its own k-component regime.
+            scheme_df['composite_scheme_zscore'] = np.nan
+            for k_comp, grp in scheme_df.groupby('scheme_components'):
+                cs_valid = grp['composite_scheme'].dropna()
+                if len(cs_valid) > 1 and cs_valid.std() > 0:
+                    scheme_df.loc[grp.index, 'composite_scheme_zscore'] = (
+                        (grp['composite_scheme'] - cs_valid.mean()) / cs_valid.std())
+                elif len(cs_valid) >= 1:
+                    scheme_df.loc[grp.index, 'composite_scheme_zscore'] = 0.0
 
         # Add HC of defending team (most common per team-year from PBP data)
         if 'defteam_coach' in plays.columns:

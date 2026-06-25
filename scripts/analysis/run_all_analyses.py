@@ -117,6 +117,21 @@ def main():
             'log': 'mentor_war_protege_war.log',
             'description': 'Mentor-Protégé WAR Relationship Analysis'
         },
+        {
+            'path': Path("scripts/analysis/analyze_gene_inheritance.py"),
+            'log': 'gene_inheritance.log',
+            'description': 'Gene Inheritance (DC->HC defensive, OC->HC offensive; small-cluster WCB)'
+        },
+        {
+            'path': Path("scripts/analysis/analyze_shotgun_inheritance_by_coach_type.py"),
+            'log': 'shotgun_inheritance_by_coach_type.log',
+            'description': 'Shotgun Inheritance by Coach Type (small-cluster WCB)'
+        },
+        {
+            'path': Path("scripts/analysis/analyze_selection_sensitivity.py"),
+            'log': 'selection_sensitivity.log',
+            'description': 'WS15 Selection / Filtering Sensitivity (attrition + sample cuts)'
+        },
         # Multiple-comparison correction MUST run last: it reads every analysis
         # JSON above and applies a single global Benjamini-Hochberg FDR.
         {

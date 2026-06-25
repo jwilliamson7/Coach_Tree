@@ -1,5 +1,5 @@
 {
-  "generated_date": "2026-06-25T09:27:39.013248",
+  "generated_date": "2026-06-25T11:53:51.695833",
   "num_team_years": 288,
   "unique_teams": 32,
   "years_covered": "2016-2024",
@@ -270,70 +270,70 @@
       "season": 2024,
       "head_coach": "Dan Campbell",
       "composite_scheme": 1.7983502411006147,
-      "composite_scheme_zscore": 2.506351485327754
+      "composite_scheme_zscore": 2.6782404077254243
     },
     {
       "defteam": "DEN",
       "season": 2016,
       "head_coach": "Gary Kubiak",
       "composite_scheme": 1.790344669965334,
-      "composite_scheme_zscore": 2.4951193924407202
+      "composite_scheme_zscore": 2.0448144476932537
     },
     {
       "defteam": "ARI",
       "season": 2016,
       "head_coach": "Bruce Arians",
       "composite_scheme": 1.77642922996718,
-      "composite_scheme_zscore": 2.4755955493591943
+      "composite_scheme_zscore": 2.027388596342702
     },
     {
       "defteam": "NE",
       "season": 2019,
       "head_coach": "Bill Belichick",
       "composite_scheme": 1.644382383997665,
-      "composite_scheme_zscore": 2.2903292623814737
+      "composite_scheme_zscore": 2.452652245856782
     },
     {
       "defteam": "KC",
       "season": 2020,
       "head_coach": "Andy Reid",
       "composite_scheme": 1.52557811087395,
-      "composite_scheme_zscore": 2.1236427626236596
+      "composite_scheme_zscore": 2.278584501456087
     },
     {
       "defteam": "DAL",
       "season": 2023,
       "head_coach": "Mike McCarthy",
       "composite_scheme": 1.5000531039622704,
-      "composite_scheme_zscore": 2.087830296063881
+      "composite_scheme_zscore": 2.2411861801490622
     },
     {
       "defteam": "MIA",
       "season": 2021,
       "head_coach": "Brian Flores",
       "composite_scheme": 1.4836676157367366,
-      "composite_scheme_zscore": 2.064840889981719
+      "composite_scheme_zscore": 2.217178752627051
     },
     {
       "defteam": "CAR",
       "season": 2017,
       "head_coach": "Ron Rivera",
       "composite_scheme": 1.4604579543999698,
-      "composite_scheme_zscore": 2.0322769332563477
+      "composite_scheme_zscore": 1.631708080325328
     },
     {
       "defteam": "BAL",
       "season": 2020,
       "head_coach": "John Harbaugh",
       "composite_scheme": 1.4481059816266637,
-      "composite_scheme_zscore": 2.014946688707465
+      "composite_scheme_zscore": 2.1650751264359527
     },
     {
       "defteam": "MIA",
       "season": 2020,
       "head_coach": "Brian Flores",
       "composite_scheme": 1.4409952552212824,
-      "composite_scheme_zscore": 2.004970093892443
+      "composite_scheme_zscore": 2.154656746070574
     }
   ],
   "least_aggressive_team_years": [
@@ -342,70 +342,70 @@
       "season": 2022,
       "head_coach": "Kevin O'Connell",
       "composite_scheme": -1.3226434971071985,
-      "composite_scheme_zscore": -1.872510556496152
+      "composite_scheme_zscore": -1.8945272715381614
     },
     {
       "defteam": "CAR",
       "season": 2020,
       "head_coach": "Matt Rhule",
       "composite_scheme": -1.329582784088139,
-      "composite_scheme_zscore": -1.8822466158756275
+      "composite_scheme_zscore": -1.9046944650301292
     },
     {
       "defteam": "KC",
       "season": 2016,
       "head_coach": "Andy Reid",
       "composite_scheme": -1.3650548019286144,
-      "composite_scheme_zscore": -1.9320150824274873
+      "composite_scheme_zscore": -1.9065893279780326
     },
     {
       "defteam": "NYG",
       "season": 2020,
       "head_coach": "Joe Judge",
       "composite_scheme": -1.4447271166298017,
-      "composite_scheme_zscore": -2.043798092549646
+      "composite_scheme_zscore": -2.0733997962363513
     },
     {
       "defteam": "CHI",
       "season": 2016,
       "head_coach": "John Fox",
       "composite_scheme": -1.4661819620268746,
-      "composite_scheme_zscore": -2.0738999818845443
+      "composite_scheme_zscore": -2.0332275700752636
     },
     {
       "defteam": "CHI",
       "season": 2017,
       "head_coach": "John Fox",
       "composite_scheme": -1.4862082621324935,
-      "composite_scheme_zscore": -2.101997572820765
+      "composite_scheme_zscore": -2.058305852097847
     },
     {
       "defteam": "LV",
       "season": 2021,
       "head_coach": "Rich Bisaccia",
       "composite_scheme": -1.4881026793221175,
-      "composite_scheme_zscore": -2.1046555055879694
+      "composite_scheme_zscore": -2.136952109309299
     },
     {
       "defteam": "LA",
       "season": 2020,
       "head_coach": "Sean McVay",
       "composite_scheme": -1.5385731834544105,
-      "composite_scheme_zscore": -2.1754673665894986
+      "composite_scheme_zscore": -2.2108996751845247
     },
     {
       "defteam": "LAC",
       "season": 2019,
       "head_coach": "Anthony Lynn",
       "composite_scheme": -1.6516183897875614,
-      "composite_scheme_zscore": -2.334073696670327
+      "composite_scheme_zscore": -2.3765294422319765
     },
     {
       "defteam": "IND",
       "season": 2018,
       "head_coach": "Frank Reich",
       "composite_scheme": -1.7049282141335451,
-      "composite_scheme_zscore": -2.4088692220272523
+      "composite_scheme_zscore": -2.4546370778777042
     }
   ]
 }

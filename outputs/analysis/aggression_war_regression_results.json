@@ -11,7 +11,34 @@
     "r_squared": 0.035817735780057744,
     "std_err": 3.8234290740657233,
     "n": 608,
-    "significant": true
+    "significant": true,
+    "r_ivw": 0.21080333596642697,
+    "ci_low_ivw": 0.12605583711547724,
+    "ci_high_ivw": 0.29375442442769706,
+    "p_ivw_coach_clustered": 0.0,
+    "n_ivw": 608,
+    "r_partial_season": 0.21148576552744186,
+    "p_partial_coach_clustered": 0.0,
+    "n_partial": 596,
+    "n_dropped_partial": 12,
+    "n_games_matched": 608,
+    "war_test_retest_reliability": 0.24011000144692013,
+    "n_pairs": 458,
+    "note": "observed r is a FLOOR (single-season WAR is mostly luck, which attenuates it); r_ivw down-weights noisy short seasons; the career-level correlation is the reliable-WAR anchor",
+    "career": {
+      "all_coaches": {
+        "correlation": 0.3033919185271304,
+        "p_value": 0.000614079532669092,
+        "n_coaches": 124,
+        "significant": true
+      },
+      "min3_seasons": {
+        "correlation": 0.3081765462279798,
+        "p_value": 0.0036850442823880675,
+        "n_coaches": 87,
+        "significant": true
+      }
+    }
   },
   "4th Down Aggression": {
     "correlation": 0.09502074459120206,
@@ -25,7 +52,34 @@
     "r_squared": 0.00902894190266646,
     "std_err": 2.6564996761888535,
     "n": 608,
-    "significant": true
+    "significant": true,
+    "r_ivw": 0.1031286448478733,
+    "ci_low_ivw": 0.01771013316505021,
+    "ci_high_ivw": 0.18361565027514956,
+    "p_ivw_coach_clustered": 0.015,
+    "n_ivw": 608,
+    "r_partial_season": 0.09781624878423774,
+    "p_partial_coach_clustered": 0.019,
+    "n_partial": 596,
+    "n_dropped_partial": 12,
+    "n_games_matched": 608,
+    "war_test_retest_reliability": 0.24011000144692013,
+    "n_pairs": 458,
+    "note": "observed r is a FLOOR (single-season WAR is mostly luck, which attenuates it); r_ivw down-weights noisy short seasons; the career-level correlation is the reliable-WAR anchor",
+    "career": {
+      "all_coaches": {
+        "correlation": 0.1874370610489306,
+        "p_value": 0.03710697725156525,
+        "n_coaches": 124,
+        "significant": true
+      },
+      "min3_seasons": {
+        "correlation": 0.2424829259571088,
+        "p_value": 0.023641691344558763,
+        "n_coaches": 87,
+        "significant": true
+      }
+    }
   },
   "Pass-Heavy Aggression": {
     "correlation": 0.18283148484505823,
@@ -39,7 +93,34 @@
     "r_squared": 0.0334273518506488,
     "std_err": 1.6715899507175198,
     "n": 608,
-    "significant": true
+    "significant": true,
+    "r_ivw": 0.18730897144995265,
+    "ci_low_ivw": 0.08016452217828976,
+    "ci_high_ivw": 0.28363314079924506,
+    "p_ivw_coach_clustered": 0.0,
+    "n_ivw": 608,
+    "r_partial_season": 0.1876991727948496,
+    "p_partial_coach_clustered": 0.0,
+    "n_partial": 596,
+    "n_dropped_partial": 12,
+    "n_games_matched": 608,
+    "war_test_retest_reliability": 0.24011000144692013,
+    "n_pairs": 458,
+    "note": "observed r is a FLOOR (single-season WAR is mostly luck, which attenuates it); r_ivw down-weights noisy short seasons; the career-level correlation is the reliable-WAR anchor",
+    "career": {
+      "all_coaches": {
+        "correlation": 0.2505793815790843,
+        "p_value": 0.005000478601601214,
+        "n_coaches": 124,
+        "significant": true
+      },
+      "min3_seasons": {
+        "correlation": 0.29651686426047685,
+        "p_value": 0.00529147953927802,
+        "n_coaches": 87,
+        "significant": true
+      }
+    }
   },
   "Deep Pass Aggression": {
     "correlation": 0.02002004338537704,
@@ -53,7 +134,34 @@
     "r_squared": 0.0004008021371523797,
     "std_err": 2.0796538156358007,
     "n": 608,
-    "significant": false
+    "significant": false,
+    "r_ivw": 0.04691434934244082,
+    "ci_low_ivw": -0.03955433272111785,
+    "ci_high_ivw": 0.1326374115566257,
+    "p_ivw_coach_clustered": 0.271,
+    "n_ivw": 608,
+    "r_partial_season": 0.05349625649691829,
+    "p_partial_coach_clustered": 0.209,
+    "n_partial": 596,
+    "n_dropped_partial": 12,
+    "n_games_matched": 608,
+    "war_test_retest_reliability": 0.24011000144692013,
+    "n_pairs": 458,
+    "note": "observed r is a FLOOR (single-season WAR is mostly luck, which attenuates it); r_ivw down-weights noisy short seasons; the career-level correlation is the reliable-WAR anchor",
+    "career": {
+      "all_coaches": {
+        "correlation": 0.0731281127541452,
+        "p_value": 0.41957748741129425,
+        "n_coaches": 124,
+        "significant": false
+      },
+      "min3_seasons": {
+        "correlation": 0.02727758413507172,
+        "p_value": 0.8019725733458507,
+        "n_coaches": 87,
+        "significant": false
+      }
+    }
   },
   "2-Point Aggression": {
     "correlation": 0.03665469061755588,
@@ -67,6 +175,33 @@
     "r_squared": 0.001343566344268736,
     "std_err": 1.8236416095766166,
     "n": 608,
-    "significant": false
+    "significant": false,
+    "r_ivw": 0.039158999398920445,
+    "ci_low_ivw": -0.04609946006970506,
+    "ci_high_ivw": 0.12182539477433234,
+    "p_ivw_coach_clustered": 0.367,
+    "n_ivw": 608,
+    "r_partial_season": 0.03789912495154303,
+    "p_partial_coach_clustered": 0.401,
+    "n_partial": 596,
+    "n_dropped_partial": 12,
+    "n_games_matched": 608,
+    "war_test_retest_reliability": 0.24011000144692013,
+    "n_pairs": 458,
+    "note": "observed r is a FLOOR (single-season WAR is mostly luck, which attenuates it); r_ivw down-weights noisy short seasons; the career-level correlation is the reliable-WAR anchor",
+    "career": {
+      "all_coaches": {
+        "correlation": 0.09462258461013937,
+        "p_value": 0.29586181133841866,
+        "n_coaches": 124,
+        "significant": false
+      },
+      "min3_seasons": {
+        "correlation": 0.06689654948604118,
+        "p_value": 0.5381355933181309,
+        "n_coaches": 87,
+        "significant": false
+      }
+    }
   }
 }

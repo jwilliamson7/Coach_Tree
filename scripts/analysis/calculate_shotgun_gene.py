@@ -36,6 +36,7 @@ warnings.filterwarnings('ignore')
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from utils.model_features import get_shotgun_predictor_features, get_categorical_features
 from utils import model_pipeline as mp
+from utils import parsimony
 from crawlers.utils.data_constants import standardize_team_abbreviation
 
 # Configure logging
@@ -59,6 +60,10 @@ class ShotgunGeneCalculator:
         # scored by a model trained on that same coach (removes attenuation).
         self.use_crossfit = True
         self.cv_splits = 5
+
+        # WS14: reliability floor for empirical-Bayes shrinkage of the (single-
+        # component) shotgun gene, mirroring the composite genes' rel framework.
+        self.rel_floor = 0.1
 
         # Model containers
         self.shotgun_model = None
@@ -268,30 +273,60 @@ class ShotgunGeneCalculator:
             features = self.prepare_features_for_model(plays)
             predictions = self.shotgun_model.predict_proba(features)[:, 1]
         plays['predicted_shotgun_rate'] = predictions
-        
+        # WS14: per-play Bernoulli prediction variance phat(1-phat); summed per
+        # coach-year it gives the sampling variance of the coach's shotgun-rate
+        # estimate (sum / n^2), the input to the reliability weighting.
+        plays['shotgun_phat_var'] = (
+            plays['predicted_shotgun_rate'] * (1 - plays['predicted_shotgun_rate'])
+        )
+
         # Group by coach and season for coach-year analysis
         coach_shotgun = plays.groupby(['head_coach', 'season']).agg({
             'actual_shotgun': 'mean',  # Actual shotgun rate
             'predicted_shotgun_rate': 'mean',  # Expected shotgun rate
+            'shotgun_phat_var': 'sum',  # Summed per-play Bernoulli variance
             'play_id': 'count'  # Number of plays
-        }).rename(columns={'play_id': 'total_plays'})
-        
+        }).rename(columns={'play_id': 'total_plays',
+                           'shotgun_phat_var': 'shotgun_phat_var_sum'})
+
         # Calculate shotgun gene (actual - predicted)
         coach_shotgun['shotgun_gene'] = (
             coach_shotgun['actual_shotgun'] - coach_shotgun['predicted_shotgun_rate']
         )
-        
+
         # Reset index to make head_coach and season regular columns
         coach_shotgun = coach_shotgun.reset_index()
-        
-        # Calculate z-score for better interpretation
-        mean_gene = coach_shotgun['shotgun_gene'].mean()
-        std_gene = coach_shotgun['shotgun_gene'].std()
-        coach_shotgun['shotgun_gene_zscore'] = (coach_shotgun['shotgun_gene'] - mean_gene) / std_gene
-        
+
+        # WS14: bring shotgun into the WS4 reliability framework. As a single-
+        # component gene it cannot be reliability-WEIGHTED against siblings, so the
+        # analog is empirical-Bayes SHRINKAGE: shrink each coach-year's gene toward
+        # the population mean by its reliability rel = tau2/(tau2+samp_var), with
+        # tau2 by DerSimonian-Laird and samp_var = sum phat(1-phat) / n^2. Noisy
+        # low-play coach-years are pulled toward 0 instead of being trusted equally
+        # with high-play ones; the z-score is then computed on the shrunk gene.
+        samp_var = (coach_shotgun['shotgun_phat_var_sum']
+                    / coach_shotgun['total_plays'] ** 2).clip(lower=1e-9)
+        rel, tau2 = parsimony.reliability_weights(
+            coach_shotgun['shotgun_gene'].values, samp_var.values, self.rel_floor)
+        coach_shotgun['shotgun_gene_reliability'] = rel
+        self.shotgun_reliability = {
+            'tau2': float(tau2),
+            'mean_reliability': float(np.mean(rel)) if len(rel) else 0.0,
+        }
+        gene_mean_raw = coach_shotgun['shotgun_gene'].mean()
+        coach_shotgun['shotgun_gene_shrunk'] = (
+            gene_mean_raw + rel * (coach_shotgun['shotgun_gene'] - gene_mean_raw))
+
+        # Z-score the shrunk gene for interpretation/downstream use
+        mean_gene = coach_shotgun['shotgun_gene_shrunk'].mean()
+        std_gene = coach_shotgun['shotgun_gene_shrunk'].std()
+        coach_shotgun['shotgun_gene_zscore'] = (
+            (coach_shotgun['shotgun_gene_shrunk'] - mean_gene) / std_gene
+            if std_gene > 0 else 0.0)
+
         # Sort by season, then shotgun gene
         coach_shotgun = coach_shotgun.sort_values(['season', 'shotgun_gene'], ascending=[True, False])
-        
+
         return coach_shotgun
     
     def analyze_by_era(self, plays: pd.DataFrame, coach_shotgun: pd.DataFrame) -> Dict:

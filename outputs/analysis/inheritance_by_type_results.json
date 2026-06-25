@@ -7,6 +7,8 @@
       "ci_high": 0.33582646371135483,
       "p_bootstrap_mentor_clustered": 0.082,
       "n_mentors": 87,
+      "small_cluster": false,
+      "p_wild_cluster": null,
       "n": 517,
       "significant": true
     },
@@ -17,6 +19,8 @@
       "ci_high": 0.22168937184807413,
       "p_bootstrap_mentor_clustered": 0.558,
       "n_mentors": 87,
+      "small_cluster": false,
+      "p_wild_cluster": null,
       "n": 517,
       "significant": false
     },
@@ -27,6 +31,8 @@
       "ci_high": 0.23630784818873415,
       "p_bootstrap_mentor_clustered": 0.227,
       "n_mentors": 87,
+      "small_cluster": false,
+      "p_wild_cluster": null,
       "n": 517,
       "significant": true
     },
@@ -37,6 +43,8 @@
       "ci_high": 0.17781084264421246,
       "p_bootstrap_mentor_clustered": 0.429,
       "n_mentors": 87,
+      "small_cluster": false,
+      "p_wild_cluster": null,
       "n": 517,
       "significant": false
     },
@@ -47,6 +55,8 @@
       "ci_high": 0.21251733489869404,
       "p_bootstrap_mentor_clustered": 0.256,
       "n_mentors": 87,
+      "small_cluster": false,
+      "p_wild_cluster": null,
       "n": 517,
       "significant": false
     }
@@ -60,6 +70,8 @@
         "ci_high": 0.46578103100896945,
         "p_bootstrap_mentor_clustered": 0.091,
         "n_mentors": 49,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 257,
         "significant": true
       },
@@ -70,6 +82,8 @@
         "ci_high": 0.39627972702715486,
         "p_bootstrap_mentor_clustered": 0.333,
         "n_mentors": 49,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 257,
         "significant": false
       },
@@ -80,6 +94,8 @@
         "ci_high": 0.2079363245342459,
         "p_bootstrap_mentor_clustered": 1.0,
         "n_mentors": 49,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 257,
         "significant": false
       },
@@ -90,6 +106,8 @@
         "ci_high": 0.22100087649787276,
         "p_bootstrap_mentor_clustered": 0.587,
         "n_mentors": 49,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 257,
         "significant": false
       },
@@ -100,6 +118,8 @@
         "ci_high": 0.33516838171287017,
         "p_bootstrap_mentor_clustered": 0.161,
         "n_mentors": 49,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 257,
         "significant": false
       }
@@ -112,6 +132,8 @@
         "ci_high": 0.16918789446187804,
         "p_bootstrap_mentor_clustered": 0.952,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.925,
         "n": 236,
         "significant": false
       },
@@ -122,6 +144,8 @@
         "ci_high": 0.2623476020674274,
         "p_bootstrap_mentor_clustered": 0.859,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.877,
         "n": 236,
         "significant": false
       },
@@ -132,6 +156,8 @@
         "ci_high": 0.314714120817869,
         "p_bootstrap_mentor_clustered": 0.33,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.3715,
         "n": 236,
         "significant": false
       },
@@ -142,6 +168,8 @@
         "ci_high": 0.17710358799445183,
         "p_bootstrap_mentor_clustered": 0.427,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.488,
         "n": 236,
         "significant": false
       },
@@ -152,6 +180,8 @@
         "ci_high": 0.2878685388882756,
         "p_bootstrap_mentor_clustered": 0.702,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.723,
         "n": 236,
         "significant": false
       }
@@ -166,6 +196,8 @@
         "ci_high": 0.4735425102403193,
         "p_bootstrap_mentor_clustered": 0.105,
         "n_mentors": 40,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 193,
         "significant": true
       },
@@ -176,6 +208,8 @@
         "ci_high": 0.5241128812156867,
         "p_bootstrap_mentor_clustered": 0.016,
         "n_mentors": 40,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 193,
         "significant": true
       },
@@ -186,6 +220,8 @@
         "ci_high": 0.29563276608071987,
         "p_bootstrap_mentor_clustered": 0.215,
         "n_mentors": 40,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 193,
         "significant": false
       },
@@ -196,6 +232,8 @@
         "ci_high": 0.26301522612483863,
         "p_bootstrap_mentor_clustered": 0.706,
         "n_mentors": 40,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 193,
         "significant": false
       },
@@ -206,6 +244,8 @@
         "ci_high": 0.4315490928775929,
         "p_bootstrap_mentor_clustered": 0.153,
         "n_mentors": 40,
+        "small_cluster": false,
+        "p_wild_cluster": null,
         "n": 193,
         "significant": true
       }
@@ -218,6 +258,8 @@
         "ci_high": 0.16691044221945686,
         "p_bootstrap_mentor_clustered": 0.987,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.899,
         "n": 241,
         "significant": false
       },
@@ -228,6 +270,8 @@
         "ci_high": 0.2639076890171172,
         "p_bootstrap_mentor_clustered": 0.848,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.846,
         "n": 241,
         "significant": false
       },
@@ -238,6 +282,8 @@
         "ci_high": 0.2866630266651572,
         "p_bootstrap_mentor_clustered": 0.396,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.413,
         "n": 241,
         "significant": false
       },
@@ -248,6 +294,8 @@
         "ci_high": 0.1829176366999723,
         "p_bootstrap_mentor_clustered": 0.508,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.494,
         "n": 241,
         "significant": false
       },
@@ -258,6 +306,8 @@
         "ci_high": 0.2879434774510136,
         "p_bootstrap_mentor_clustered": 0.713,
         "n_mentors": 33,
+        "small_cluster": true,
+        "p_wild_cluster": 0.718,
         "n": 241,
         "significant": false
       }

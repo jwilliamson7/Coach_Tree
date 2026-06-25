@@ -99,6 +99,95 @@ def merge_gene_war(gene_df, war_df, gene_name_col, war_name_col,
                  ", ".join(unmatched[:40]) + (" ..." if len(unmatched) > 40 else ""))
     return merged.drop(columns=["coach_canon"])
 
+# --------------------------------------------------------------------------- #
+# Per-coach-year WAR precision (WS11)
+# --------------------------------------------------------------------------- #
+# Coach_WAR persists only ONE global single-season WAR standard error: the test
+# RMSE (0.15521 in win-fraction units) scaled to a 16-game season = 2.4833 wins,
+# which sits just above the ~1.94-win binomial sampling floor (so a single-season
+# WAR is roughly half irreducible luck). Coach_WAR does NOT publish a per-row SE.
+# But the dominant noise source is season length: a season win fraction has
+# binomial sampling variance ~ p(1-p)/games, i.e. variance scales ~ 1/games. So
+# we derive a transparent per-row precision from games coached rather than invent
+# a model-based SE. full_games=16 matches Coach_WAR's *16 WAR scaling convention.
+WAR_SE_FULL_SEASON = 2.4833   # wins; Coach_WAR global single-season WAR SE
+
+
+def load_coach_year_games(coaches_dir=None):
+    """Build a [coach_canon, year, games_coached] table from the raw PFR coaching
+    results (data/raw/Coaches/<name>/all_coaching_results.csv), which carry a real
+    per-season regular-season game count `G`.
+
+    The WAR trajectory file does NOT contain games coached (its 'annual_games'
+    column is actually WAR expressed in games, = annual_war*16), so games -- needed
+    for WAR-precision weighting and the partial-season sensitivity -- are
+    reconstructed here. NFL rows only; G summed within (coach, year) to handle
+    mid-season team changes. Coach key is canonicalized to match gene/WAR joins.
+    Returns an empty frame if the directory is absent.
+    """
+    import pandas as pd
+    base = Path(coaches_dir) if coaches_dir else (REPO_ROOT / "data" / "raw" / "Coaches")
+    if not base.exists():
+        _logger.warning("load_coach_year_games: %s absent; games unavailable", base)
+        return pd.DataFrame(columns=["coach_canon", "year", "games_coached"])
+    rows = []
+    for d in base.iterdir():
+        f = d / "all_coaching_results.csv"
+        if not f.exists():
+            continue
+        try:
+            r = pd.read_csv(f, usecols=lambda c: c in ("Year", "Lg", "G"))
+        except Exception:
+            continue
+        if "Year" not in r.columns or "G" not in r.columns:
+            continue
+        if "Lg" in r.columns:
+            r = r[r["Lg"] == "NFL"]
+        r = r.assign(coach_canon=canonicalize_coach_name(d.name))
+        r["year"] = pd.to_numeric(r["Year"], errors="coerce")
+        r["games_coached"] = pd.to_numeric(r["G"], errors="coerce")
+        rows.append(r[["coach_canon", "year", "games_coached"]].dropna())
+    if not rows:
+        return pd.DataFrame(columns=["coach_canon", "year", "games_coached"])
+    out = pd.concat(rows, ignore_index=True)
+    out["year"] = out["year"].astype(int)
+    return out.groupby(["coach_canon", "year"], as_index=False)["games_coached"].sum()
+
+
+def add_war_precision(df, games_col="games_coached",
+                      war_se_full: float = WAR_SE_FULL_SEASON,
+                      full_games: float = 16.0):
+    """Add per-row WAR precision columns from a games-based sampling-noise proxy.
+
+    WAR is a single-season win-fraction residual; its sampling variance scales
+    ~ 1/games_coached, so
+
+        war_var_row = war_se_full^2 * (full_games / games),
+        war_se_row  = sqrt(war_var_row),
+        war_weight  = 1 / war_var_row   (proportional to games coached).
+
+    This is a heteroskedasticity model, NOT a claim of a per-row model SE: it
+    down-weights short/partial seasons (the noisiest WAR estimates, which
+    Coach_WAR warns also amplify negative values) without manufacturing precision
+    Coach_WAR does not provide. Rows with missing or non-positive games fall back
+    to a full-season SE. Returns a copy with war_se_row, war_var_row, war_weight.
+    """
+    import numpy as np
+    import pandas as pd
+    df = df.copy()
+    if games_col in df.columns:
+        g = pd.to_numeric(df[games_col], errors="coerce")
+        g = g.where(g > 0, full_games)          # missing / 0 -> treat as full season
+    else:
+        _logger.warning("add_war_precision: '%s' absent; using full-season SE for all rows",
+                        games_col)
+        g = pd.Series(full_games, index=df.index)
+    df["war_se_row"] = war_se_full * np.sqrt(full_games / g)
+    df["war_var_row"] = df["war_se_row"] ** 2
+    df["war_weight"] = 1.0 / df["war_var_row"]
+    return df
+
+
 _ENV_VAR = "COACH_WAR_TRAJECTORIES"
 _SIBLING = REPO_ROOT.parent / "Coach_WAR" / "data" / "final" / "coach_war_trajectories.csv"
 _LOCAL_FALLBACK = REPO_ROOT / "data" / "processed" / "Coaching" / "coach_war_trajectories.csv"
