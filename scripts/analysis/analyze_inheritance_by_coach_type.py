@@ -195,6 +195,50 @@ class InheritanceByTypeAnalyzer:
 
         return pairs_df
 
+    def analyze_overall(self, pairs_df):
+        """Analyze inheritance pooling across all mentor-protege pairs (overall table)."""
+        logger.info("\n\nANALYZING OVERALL INHERITANCE (all pairs):")
+        logger.info("="*80)
+
+        aggression_types = [
+            ('fourth_down', '4th Down'),
+            ('pass_heavy', 'Pass-Heavy'),
+            ('deep_pass', 'Deep Pass'),
+            ('two_point', 'Two-Point'),
+            ('composite', 'Composite')
+        ]
+
+        results = {}
+
+        for var, label in aggression_types:
+            mentor_col = f'{var}_mentor'
+            protege_col = f'{var}_protege'
+
+            clean_data = pairs_df[[mentor_col, protege_col, 'mentor_name']].dropna()
+
+            if len(clean_data) >= 10:
+                corr, p_val = stats.pearsonr(clean_data[mentor_col], clean_data[protege_col])
+                boot = cluster_bootstrap_corr(
+                    clean_data[mentor_col].values, clean_data[protege_col].values,
+                    clean_data['mentor_name'].values, n_boot=2000, seed=42,
+                )
+
+                results[var] = {
+                    'correlation': float(corr),
+                    'p_value': float(p_val),
+                    'ci_low': boot['ci_low'],
+                    'ci_high': boot['ci_high'],
+                    'p_bootstrap_mentor_clustered': boot['p_bootstrap'],
+                    'n_mentors': boot['n_clusters'],
+                    'n': int(len(clean_data)),
+                    'significant': bool(p_val < 0.05)
+                }
+
+                sig_marker = "SIG" if p_val < 0.05 else "n.s."
+                logger.info(f"  {label}: r={corr:.3f}, p={p_val:.4f} ({sig_marker}), n={len(clean_data)}")
+
+        return results
+
     def analyze_by_mentor_type(self, pairs_df):
         """Analyze inheritance by mentor's background type"""
         logger.info("\n\nANALYZING INHERITANCE BY MENTOR TYPE:")
@@ -504,7 +548,7 @@ class InheritanceByTypeAnalyzer:
 
         plt.close()
 
-    def save_results(self, pairs_df, mentor_type_results, coord_type_results):
+    def save_results(self, pairs_df, overall_results, mentor_type_results, coord_type_results):
         """Save results"""
         output_dir = Path("outputs/analysis")
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -516,6 +560,7 @@ class InheritanceByTypeAnalyzer:
 
         # Save results
         results = {
+            'overall': overall_results,
             'by_mentor_background': mentor_type_results,
             'by_coordinator_type': coord_type_results
         }
@@ -575,6 +620,9 @@ def main():
         # Create pairs
         pairs_df = analyzer.create_mentor_protege_pairs()
 
+        # Analyze overall (pooled across all pairs)
+        overall_results = analyzer.analyze_overall(pairs_df)
+
         # Analyze by mentor type
         mentor_type_results = analyzer.analyze_by_mentor_type(pairs_df)
 
@@ -586,7 +634,7 @@ def main():
         analyzer.create_comparison_bar_chart(mentor_type_results, coord_type_results)
 
         # Save results
-        analyzer.save_results(pairs_df, mentor_type_results, coord_type_results)
+        analyzer.save_results(pairs_df, overall_results, mentor_type_results, coord_type_results)
 
         # Print summary
         analyzer.print_summary(mentor_type_results, coord_type_results)

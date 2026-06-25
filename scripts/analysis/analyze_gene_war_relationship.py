@@ -23,7 +23,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.data_paths import coach_war_trajectories_path
-from utils.parsimony import cluster_robust_ols, cluster_bootstrap_ci
+from utils.parsimony import cluster_robust_ols, cluster_bootstrap_ci, cluster_bootstrap_corr
 
 logging.basicConfig(
     level=logging.INFO,
@@ -113,7 +113,7 @@ def analyze_correlations(merged, measures, gene_key):
     results = {}
 
     for col, label in measures.items():
-        clean = merged[[col, 'annual_war']].dropna()
+        clean = merged[[col, 'annual_war', 'coach']].dropna()
         if len(clean) < 10:
             logger.warning(f"  {label}: insufficient data (n={len(clean)})")
             continue
@@ -124,10 +124,20 @@ def analyze_correlations(merged, measures, gene_key):
         r, p = stats.pearsonr(x, y)
         slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
 
+        # Coach-clustered bootstrap p/CI: coach-years are repeated measures, so the
+        # naive Pearson p overstates significance. This is the primary inference.
+        boot = cluster_bootstrap_corr(
+            x.values, y.values, clean['coach'].values, n_boot=2000, seed=0,
+        )
+
         results[label] = {
             'column': col,
             'correlation': float(r),
             'p_value': float(p),
+            'ci_low': boot['ci_low'],
+            'ci_high': boot['ci_high'],
+            'p_bootstrap_coach_clustered': boot['p_bootstrap'],
+            'n_coaches': boot['n_clusters'],
             'slope': float(slope),
             'intercept': float(intercept),
             'r_squared': float(r_value ** 2),
@@ -137,7 +147,9 @@ def analyze_correlations(merged, measures, gene_key):
         }
 
         sig = "**" if p < 0.01 else ("*" if p < 0.05 else "n.s.")
-        logger.info(f"  {label:25s}: r={r:7.4f}, p={p:.4f} ({sig}), n={len(clean)}")
+        cp = boot['p_bootstrap']
+        logger.info(f"  {label:25s}: r={r:7.4f}, p={p:.4f} ({sig}), "
+                    f"clust_p={cp:.4f}, n={len(clean)}")
 
     return results
 

@@ -1,5 +1,5 @@
 {
-  "verification_date": "2026-06-24T15:07:33.287746",
+  "verification_date": "2026-06-24T20:53:16.867740",
   "sections": {
     "coordinator_to_hc_inheritance": {
       "raw_per_stint": {
@@ -193,6 +193,58 @@
       }
     },
     "aggression_inheritance_by_type": {
+      "overall": {
+        "fourth_down": {
+          "correlation": 0.17252824077530804,
+          "p_value": 8.047061935122559e-05,
+          "ci_low": -0.018535810791566916,
+          "ci_high": 0.3474015107874166,
+          "p_bootstrap_mentor_clustered": 0.074,
+          "n_mentors": 87,
+          "n": 517,
+          "significant": true
+        },
+        "pass_heavy": {
+          "correlation": 0.04478730173062866,
+          "p_value": 0.3094377871167485,
+          "ci_low": -0.09811792058753825,
+          "ci_high": 0.23025591951085403,
+          "p_bootstrap_mentor_clustered": 0.549,
+          "n_mentors": 87,
+          "n": 517,
+          "significant": false
+        },
+        "deep_pass": {
+          "correlation": 0.09578673694112402,
+          "p_value": 0.0294282724208816,
+          "ci_low": -0.04311480665295875,
+          "ci_high": 0.23340718942388702,
+          "p_bootstrap_mentor_clustered": 0.183,
+          "n_mentors": 87,
+          "n": 517,
+          "significant": true
+        },
+        "two_point": {
+          "correlation": 0.08110659955835695,
+          "p_value": 0.06536621725990352,
+          "ci_low": -0.031714153794788244,
+          "ci_high": 0.22842215536667887,
+          "p_bootstrap_mentor_clustered": 0.163,
+          "n_mentors": 87,
+          "n": 517,
+          "significant": false
+        },
+        "composite": {
+          "correlation": 0.10119359372430033,
+          "p_value": 0.021377871277790225,
+          "ci_low": -0.019093478080091292,
+          "ci_high": 0.2291993397567773,
+          "p_bootstrap_mentor_clustered": 0.103,
+          "n_mentors": 87,
+          "n": 517,
+          "significant": true
+        }
+      },
       "by_mentor_background": {
         "Offensive": {
           "fourth_down": {

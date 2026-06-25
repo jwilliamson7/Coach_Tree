@@ -72,6 +72,21 @@ def collect_tests():
     """Walk the regenerated JSONs and build the full list of paper tests."""
     tests = []
 
+    # 0. Composite gene -> WAR (clustered by coach). Composite aggression is added
+    #    from aggression_war_regression_results.json below, so only the other three
+    #    composite genes are taken here to avoid double-counting.
+    d = _load("gene_war_correlation_results.json")
+    if d:
+        gene_war = [
+            ("defensive_scheme", "Defensive Scheme"),
+            ("shotgun", "Shotgun Formation"),
+            ("tempo", "Composite Tempo"),
+        ]
+        for gene_key, label in gene_war:
+            node = d.get(gene_key, {}).get("overall", {}).get(label)
+            if node:
+                _add(tests, "Gene-WAR", label, node)
+
     # 1. Overall aggression -> WAR (clustered by coach)
     d = _load("aggression_war_regression_results.json")
     if d:
