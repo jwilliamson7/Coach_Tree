@@ -6,14 +6,26 @@
         "p_value": 0.00018276179675893984,
         "n": 310,
         "slope": 1.2349822024852664,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.08904855209012269,
+        "ci_high": 0.3290797774805223,
+        "n_coaches": 66,
+        "p_clustered": 0.002,
+        "small_cluster": false,
+        "p_wild_cluster": null
       },
       "pass_heavy": {
         "correlation": 0.21789152821562768,
         "p_value": 0.00010998093629044786,
         "n": 310,
         "slope": 0.6003020730552397,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.07546351184851745,
+        "ci_high": 0.33929341529544654,
+        "n_coaches": 66,
+        "p_clustered": 0.004,
+        "small_cluster": false,
+        "p_wild_cluster": null
       }
     },
     "Defensive": {
@@ -22,14 +34,26 @@
         "p_value": 0.00346852568284508,
         "n": 251,
         "slope": 1.1157343537555202,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.027245259978904,
+        "ci_high": 0.32690030714231577,
+        "n_coaches": 49,
+        "p_clustered": 0.016,
+        "small_cluster": false,
+        "p_wild_cluster": null
       },
       "pass_heavy": {
         "correlation": 0.17714876809050709,
         "p_value": 0.004879970117850013,
         "n": 251,
         "slope": 0.44298028173222975,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.004105321191182274,
+        "ci_high": 0.32823265398015267,
+        "n_coaches": 49,
+        "p_clustered": 0.048,
+        "small_cluster": false,
+        "p_wild_cluster": null
       }
     }
   },

@@ -49,12 +49,16 @@
       "all_coaches": {
         "correlation": 0.3033919185271304,
         "p_value": 0.000614079532669092,
+        "ci_low": 0.1596370070566676,
+        "ci_high": 0.4499921400100293,
         "n_coaches": 124,
         "significant": true
       },
       "min3_seasons": {
         "correlation": 0.3081765462279798,
         "p_value": 0.0036850442823880675,
+        "ci_low": 0.13931015707071598,
+        "ci_high": 0.47275526224429587,
         "n_coaches": 87,
         "significant": true
       }

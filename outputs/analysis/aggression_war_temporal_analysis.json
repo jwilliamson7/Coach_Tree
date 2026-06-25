@@ -5,13 +5,25 @@
         "correlation": 0.2389732626515047,
         "p_value": 0.0008432680383063963,
         "n": 192,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.07003326771062643,
+        "ci_high": 0.38041696016513926,
+        "n_coaches": 61,
+        "p_clustered": 0.004,
+        "small_cluster": false,
+        "p_wild_cluster": null
       },
       "pass_heavy": {
         "correlation": 0.17309100680289663,
         "p_value": 0.01635442944170521,
         "n": 192,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.0010912922160469366,
+        "ci_high": 0.32197446756195397,
+        "n_coaches": 61,
+        "p_clustered": 0.048,
+        "small_cluster": false,
+        "p_wild_cluster": null
       }
     },
     "Middle (2012-2017)": {
@@ -19,13 +31,25 @@
         "correlation": 0.13655460204261935,
         "p_value": 0.05893779909827508,
         "n": 192,
-        "significant": false
+        "significant": false,
+        "ci_low": -0.06685795828502658,
+        "ci_high": 0.29161693673000705,
+        "n_coaches": 59,
+        "p_clustered": 0.157,
+        "small_cluster": false,
+        "p_wild_cluster": null
       },
       "pass_heavy": {
         "correlation": 0.1754781542630044,
         "p_value": 0.014910739466596917,
         "n": 192,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.0072393353957237155,
+        "ci_high": 0.3230474168315457,
+        "n_coaches": 59,
+        "p_clustered": 0.044,
+        "small_cluster": false,
+        "p_wild_cluster": null
       }
     },
     "Late (2018-2024)": {
@@ -33,13 +57,25 @@
         "correlation": 0.1009284992025215,
         "p_value": 0.13207839442161012,
         "n": 224,
-        "significant": false
+        "significant": false,
+        "ci_low": -0.034202335226046335,
+        "ci_high": 0.2454458683077116,
+        "n_coaches": 67,
+        "p_clustered": 0.146,
+        "small_cluster": false,
+        "p_wild_cluster": null
       },
       "pass_heavy": {
         "correlation": 0.13142217690549804,
         "p_value": 0.0494754634206985,
         "n": 224,
-        "significant": true
+        "significant": true,
+        "ci_low": -0.043547939206931965,
+        "ci_high": 0.30512546846206245,
+        "n_coaches": 67,
+        "p_clustered": 0.143,
+        "small_cluster": false,
+        "p_wild_cluster": null
       }
     }
   },

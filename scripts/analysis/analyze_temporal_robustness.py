@@ -20,6 +20,7 @@ warnings.filterwarnings('ignore')
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.data_paths import coach_war_trajectories_path
+from utils.parsimony import cluster_bootstrap_ci
 
 
 class TemporalRobustnessAnalyzer:
@@ -136,6 +137,10 @@ class TemporalRobustnessAnalyzer:
         t_stats = coef_full / se_robust
         df = n_clusters - k_full
         p_values = 2 * (1 - stats.t.cdf(np.abs(t_stats), df))
+        # 95% CIs from the cluster-robust SEs (t critical on n_clusters - k dof)
+        t_crit = stats.t.ppf(0.975, df)
+        ci_low = coef_full - t_crit * se_robust
+        ci_high = coef_full + t_crit * se_robust
 
         # Model fit
         r_squared = 1 - np.sum(residuals**2) / np.sum((y - np.mean(y))**2)
@@ -151,13 +156,17 @@ class TemporalRobustnessAnalyzer:
                     'beta': float(coef_full[0]),
                     'se': float(se_robust[0]),
                     't': float(t_stats[0]),
-                    'p': float(p_values[0])
+                    'p': float(p_values[0]),
+                    'ci_low': float(ci_low[0]),
+                    'ci_high': float(ci_high[0])
                 },
                 'aggression': {
                     'beta': float(coef_full[1]),
                     'se': float(se_robust[1]),
                     't': float(t_stats[1]),
                     'p': float(p_values[1]),
+                    'ci_low': float(ci_low[1]),
+                    'ci_high': float(ci_high[1]),
                     'interpretation': 'Main effect of aggression at year 2015'
                 },
                 'year': {
@@ -165,6 +174,8 @@ class TemporalRobustnessAnalyzer:
                     'se': float(se_robust[2]),
                     't': float(t_stats[2]),
                     'p': float(p_values[2]),
+                    'ci_low': float(ci_low[2]),
+                    'ci_high': float(ci_high[2]),
                     'interpretation': 'Temporal trend in WAR'
                 },
                 'aggression_x_year': {
@@ -172,6 +183,8 @@ class TemporalRobustnessAnalyzer:
                     'se': float(se_robust[3]),
                     't': float(t_stats[3]),
                     'p': float(p_values[3]),
+                    'ci_low': float(ci_low[3]),
+                    'ci_high': float(ci_high[3]),
                     'interpretation': 'Change in aggression effect per year'
                 }
             }
@@ -198,7 +211,9 @@ class TemporalRobustnessAnalyzer:
                 'effect_size': float(effect),
                 'se': float(se_effect),
                 't': float(t_effect),
-                'p': float(p_effect)
+                'p': float(p_effect),
+                'ci_low': float(effect - t_crit * se_effect),
+                'ci_high': float(effect + t_crit * se_effect)
             }
 
         results['implied_effects_by_year'] = implied_effects
@@ -279,13 +294,25 @@ class TemporalRobustnessAnalyzer:
         f_stat = numerator / denominator
         p_value = 1 - stats.f.cdf(f_stat, k, n - 2*k)
 
+        # Coach-clustered bootstrap 95% CIs on each period's aggression slope
+        early_ci = cluster_bootstrap_ci(
+            X_early, y_early, early['coach'].values, ['aggression'], n_boot=2000, seed=0
+        )['aggression']
+        late_ci = cluster_bootstrap_ci(
+            X_late, y_late, late['coach'].values, ['aggression'], n_boot=2000, seed=0
+        )['aggression']
+
         # Store results
         result = {
             'breakpoint': int(breakpoint),
             'n_early': int(len(early)),
             'n_late': int(len(late)),
             'beta_early': float(model_early.coef_[0]),
+            'beta_early_ci_low': float(early_ci['ci_low']),
+            'beta_early_ci_high': float(early_ci['ci_high']),
             'beta_late': float(model_late.coef_[0]),
+            'beta_late_ci_low': float(late_ci['ci_low']),
+            'beta_late_ci_high': float(late_ci['ci_high']),
             'change': float(model_late.coef_[0] - model_early.coef_[0]),
             'pct_change': float(100 * (model_late.coef_[0] - model_early.coef_[0]) / model_early.coef_[0]) if model_early.coef_[0] != 0 else None,
             'rss_pooled': float(rss_pooled),

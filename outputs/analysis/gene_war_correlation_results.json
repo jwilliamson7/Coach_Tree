@@ -32,12 +32,16 @@
           "all_coaches": {
             "correlation": 0.2295377163304982,
             "p_value": 0.0103332412254409,
+            "ci_low": 0.03669833915535546,
+            "ci_high": 0.40855877100918825,
             "n_coaches": 124,
             "significant": true
           },
           "min3_seasons": {
             "correlation": 0.2568713026922546,
             "p_value": 0.01631774714546874,
+            "ci_low": 0.059557762217142686,
+            "ci_high": 0.442547128516633,
             "n_coaches": 87,
             "significant": true
           }
@@ -107,12 +111,16 @@
           "all_coaches": {
             "correlation": 0.05819884918359167,
             "p_value": 0.5208368339598797,
+            "ci_low": -0.06491974196995642,
+            "ci_high": 0.2228716883519391,
             "n_coaches": 124,
             "significant": false
           },
           "min3_seasons": {
             "correlation": 0.0028641781713692194,
             "p_value": 0.9789949864922337,
+            "ci_low": -0.15751327788653635,
+            "ci_high": 0.2429345108736076,
             "n_coaches": 87,
             "significant": false
           }
@@ -149,12 +157,16 @@
           "all_coaches": {
             "correlation": 0.08375494856399375,
             "p_value": 0.35505108948946507,
+            "ci_low": -0.04257908593413734,
+            "ci_high": 0.26881445282307365,
             "n_coaches": 124,
             "significant": false
           },
           "min3_seasons": {
             "correlation": 0.02841904550947351,
             "p_value": 0.7938657883496261,
+            "ci_low": -0.13039100765874015,
+            "ci_high": 0.2825946909543575,
             "n_coaches": 87,
             "significant": false
           }
@@ -191,12 +203,16 @@
           "all_coaches": {
             "correlation": 0.012743991318716917,
             "p_value": 0.8882811131329217,
+            "ci_low": -0.1346078087917719,
+            "ci_high": 0.1690923180935868,
             "n_coaches": 124,
             "significant": false
           },
           "min3_seasons": {
             "correlation": -0.030706218340913093,
             "p_value": 0.7776885036924444,
+            "ci_low": -0.2195977884132094,
+            "ci_high": 0.20235420747092217,
             "n_coaches": 87,
             "significant": false
           }
@@ -302,12 +318,16 @@
           "all_coaches": {
             "correlation": 0.18842460511629397,
             "p_value": 0.09631393431479338,
+            "ci_low": 0.016074307570740902,
+            "ci_high": 0.3514453836235844,
             "n_coaches": 79,
             "significant": false
           },
           "min3_seasons": {
             "correlation": 0.16301074565977097,
             "p_value": 0.2790631460203373,
+            "ci_low": -0.07721453167553072,
+            "ci_high": 0.43363166669652464,
             "n_coaches": 46,
             "significant": false
           }
@@ -344,12 +364,16 @@
           "all_coaches": {
             "correlation": -0.05112027835785169,
             "p_value": 0.6545736792740952,
+            "ci_low": -0.224721299405337,
+            "ci_high": 0.13332748064090028,
             "n_coaches": 79,
             "significant": false
           },
           "min3_seasons": {
             "correlation": 0.09061276910595104,
             "p_value": 0.5492484924522029,
+            "ci_low": -0.14669906074793543,
+            "ci_high": 0.3719973644763562,
             "n_coaches": 46,
             "significant": false
           }
@@ -386,12 +410,16 @@
           "all_coaches": {
             "correlation": 0.20641530850354378,
             "p_value": 0.06798209878351273,
+            "ci_low": 0.03251558013588838,
+            "ci_high": 0.3629659191662581,
             "n_coaches": 79,
             "significant": false
           },
           "min3_seasons": {
             "correlation": 0.19170628247833107,
             "p_value": 0.20184633683221448,
+            "ci_low": -0.056546245006583985,
+            "ci_high": 0.48853784084786017,
             "n_coaches": 46,
             "significant": false
           }
@@ -477,12 +505,16 @@
           "all_coaches": {
             "correlation": 0.3033919185271304,
             "p_value": 0.000614079532669092,
+            "ci_low": 0.1596370070566676,
+            "ci_high": 0.4499921400100293,
             "n_coaches": 124,
             "significant": true
           },
           "min3_seasons": {
             "correlation": 0.3081765462279798,
             "p_value": 0.0036850442823880675,
+            "ci_low": 0.13931015707071598,
+            "ci_high": 0.47275526224429587,
             "n_coaches": 87,
             "significant": true
           }

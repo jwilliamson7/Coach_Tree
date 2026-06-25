@@ -22,14 +22,18 @@
         "std_error": 0.12360866593141345,
         "t_statistic": 4.289570655178862,
         "p_value": 0.0001813359497253586,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.25776482754247027,
+        "ci_high": 0.8322412654758448
       },
       "team_new_prior": {
         "coefficient": 0.7215256162946531,
         "std_error": 0.22845954230254595,
         "t_statistic": 3.158220527900499,
         "p_value": 0.0036912900916654667,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.208587307518681,
+        "ci_high": 1.1439505761183146
       },
       "r_squared": 0.5064411660940642,
       "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
@@ -58,14 +62,18 @@
         "std_error": 0.20600711212042294,
         "t_statistic": 0.9980569128621611,
         "p_value": 0.3265072443319257,
-        "significant": false
+        "significant": false,
+        "ci_low": -0.35095882724823396,
+        "ci_high": 0.587239228700315
       },
       "team_new_prior": {
         "coefficient": 0.19271619310760477,
         "std_error": 0.2943801363458894,
         "t_statistic": 0.6546508045677647,
         "p_value": 0.5178515771454135,
-        "significant": false
+        "significant": false,
+        "ci_low": -0.4979751242007273,
+        "ci_high": 0.8035082180411434
       },
       "r_squared": 0.03901471947960866,
       "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
@@ -94,14 +102,18 @@
         "std_error": 0.19467555632065467,
         "t_statistic": 2.197695014134612,
         "p_value": 0.03610720883225005,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.06684589909107223,
+        "ci_high": 0.8964956848231618
       },
       "team_new_prior": {
         "coefficient": 0.3432804782858132,
         "std_error": 0.32232178274997675,
         "t_statistic": 1.0650241363057178,
         "p_value": 0.29565249714356256,
-        "significant": false
+        "significant": false,
+        "ci_low": -0.19032608195945358,
+        "ci_high": 1.1616654491680443
       },
       "r_squared": 0.2195253166954686,
       "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
@@ -130,14 +142,18 @@
         "std_error": 0.14271575158872934,
         "t_statistic": 0.9242686263638197,
         "p_value": 0.36297378327777263,
-        "significant": false
+        "significant": false,
+        "ci_low": -0.1752634838053777,
+        "ci_high": 0.4104317909187202
       },
       "team_new_prior": {
         "coefficient": -0.05948369456083953,
         "std_error": 0.26688600082535224,
         "t_statistic": -0.22288053467354818,
         "p_value": 0.8251909141858031,
-        "significant": false
+        "significant": false,
+        "ci_low": -0.6633841354893631,
+        "ci_high": 0.5117973177079603
       },
       "r_squared": 0.02838070956000016,
       "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
@@ -166,14 +182,18 @@
         "std_error": 0.15048809077887706,
         "t_statistic": 1.8229265263900523,
         "p_value": 0.07863981074004855,
-        "significant": false
+        "significant": false,
+        "ci_low": -0.035804742200966314,
+        "ci_high": 0.6442105082256772
       },
       "team_new_prior": {
         "coefficient": 0.2358653084849429,
         "std_error": 0.34048158808966245,
         "t_statistic": 0.6927402735880981,
         "p_value": 0.49398315624786315,
-        "significant": false
+        "significant": false,
+        "ci_low": -0.49910446218571436,
+        "ci_high": 0.9182722363005661
       },
       "r_squared": 0.14378508600090834,
       "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
@@ -202,14 +222,18 @@
         "std_error": 0.13835743684422117,
         "t_statistic": 3.253303569281412,
         "p_value": 0.0028948907916965805,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.13633126586586652,
+        "ci_high": 0.6782644563857609
       },
       "team_new_prior": {
         "coefficient": 0.5605267656279029,
         "std_error": 0.19678423034525397,
         "t_statistic": 2.848433355886648,
         "p_value": 0.007996804077912367,
-        "significant": true
+        "significant": true,
+        "ci_low": 0.038289796683532294,
+        "ci_high": 1.0244223363141707
       },
       "r_squared": 0.4197609833208109,
       "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
@@ -238,14 +262,18 @@
         "std_error": 0.13974469835633266,
         "t_statistic": 3.0523157529473246,
         "p_value": 0.004824138558174873,
-        "significant": true
+        "significant": true,
+        "ci_low": -0.2606640659882772,
+        "ci_high": 0.599028766318989
       },
       "team_new_prior": {
         "coefficient": -0.506923967109663,
         "std_error": 0.6253038380396152,
         "t_statistic": -0.8106842406387846,
         "p_value": 0.42415036819799146,
-        "significant": false
+        "significant": false,
+        "ci_low": -1.9747116776997538,
+        "ci_high": 0.45797904248855736
       },
       "r_squared": 0.30891769986690587,
       "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"

@@ -30,7 +30,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.data_paths import canonicalize_coach_name
-from utils.parsimony import cluster_robust_ols
+from utils.parsimony import cluster_robust_ols, cluster_bootstrap_ci
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -105,7 +105,9 @@ def analyze_gene(label, csv, gene_col, coach_col, year_col):
         "team_match_rate": float(g["Team"].notna().mean()),
     }
 
-    # 1. variance explained by coach vs team vs season
+    # 1. variance explained by coach vs team vs season (descriptive one-way eta^2;
+    #    coach and team are confounded so these bracket rather than identify -- the
+    #    inferential CI lives on the cross-team travel r and the mover regression)
     out["var_explained_coach"] = _eta2(g, gene_col, "canon")
     out["var_explained_team"] = _eta2(g, gene_col, "Team")
     out["var_explained_season"] = _eta2(g, gene_col, year_col)
@@ -150,10 +152,19 @@ def analyze_gene(label, csv, gene_col, coach_col, year_col):
         # clusters = each mover is its own cluster (independent moves) -> use index
         res = cluster_robust_ols(X, y, np.arange(mask.sum()),
                                  ["coach_pre", "team_new_prior"])
+        # Bootstrap 95% CIs over movers (each move is an independent observation).
+        mboot = cluster_bootstrap_ci(X, y, np.arange(mask.sum()),
+                                     ["coach_pre", "team_new_prior"], n_boot=2000, seed=0)
+        coach_pre = dict(res["coefficients"]["coach_pre"])
+        coach_pre["ci_low"] = mboot["coach_pre"]["ci_low"]
+        coach_pre["ci_high"] = mboot["coach_pre"]["ci_high"]
+        team_prior = dict(res["coefficients"]["team_new_prior"])
+        team_prior["ci_low"] = mboot["team_new_prior"]["ci_low"]
+        team_prior["ci_high"] = mboot["team_new_prior"]["ci_high"]
         out["mover_regression"] = {
             "n": int(mask.sum()),
-            "coach_pre": res["coefficients"]["coach_pre"],
-            "team_new_prior": res["coefficients"]["team_new_prior"],
+            "coach_pre": coach_pre,
+            "team_new_prior": team_prior,
             "r_squared": res["r_squared"],
             "note": ("new-team gene ~ coach's old-team gene + new-team's pre-arrival "
                      "gene; large coach_pre vs small team_new_prior = coach trait"),
