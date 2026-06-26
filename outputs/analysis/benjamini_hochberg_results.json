@@ -6,31 +6,31 @@
   "n_using_wild_cluster_p": 30,
   "n_using_clustered_p": 43,
   "n_using_naive_p": 28,
-  "n_sig_raw": 66,
-  "n_sig_bh": 63,
-  "bh_cutoff_p": 0.022,
-  "bh_cutoff_rank": 63,
+  "n_sig_raw": 68,
+  "n_sig_bh": 65,
+  "bh_cutoff_p": 0.02417092086883943,
+  "bh_cutoff_rank": 65,
   "lost_significance": [
     {
       "category": "Overall WAR",
       "test": "4th Down Aggression",
       "p": 0.033,
       "p_source": "clustered",
-      "bh_threshold": 0.031683168316831684
+      "bh_threshold": 0.032673267326732675
     },
     {
       "category": "Temporal Robustness",
       "test": "Chow test (2012 breakpoint)",
       "p": 0.03364212734602512,
       "p_source": "naive",
-      "bh_threshold": 0.03217821782178218
+      "bh_threshold": 0.03316831683168317
     },
     {
       "category": "Era Analysis",
       "test": "Late (2018-2024): pass_heavy",
       "p": 0.0494754634206985,
       "p_source": "naive",
-      "bh_threshold": 0.032673267326732675
+      "bh_threshold": 0.033663366336633666
     }
   ],
   "tests": [
@@ -385,9 +385,9 @@
       "sig_bh": true
     },
     {
-      "category": "Temporal Trend",
-      "test": "Middle (2012-2017) vs Late (2018-2024) (t-test)",
-      "p": 5.275140198084176e-05,
+      "category": "Two-Way Fixed Effects",
+      "test": "Pooled (2006-2024)",
+      "p": 3.5804219705282136e-05,
       "p_source": "naive",
       "rank": 36,
       "bh_threshold": 0.01782178217821782,
@@ -395,9 +395,9 @@
       "sig_bh": true
     },
     {
-      "category": "Coach Type (Overall)",
-      "test": "Offensive: pass_heavy",
-      "p": 0.00010998093629044786,
+      "category": "Temporal Trend",
+      "test": "Middle (2012-2017) vs Late (2018-2024) (t-test)",
+      "p": 5.275140198084176e-05,
       "p_source": "naive",
       "rank": 37,
       "bh_threshold": 0.018316831683168316,
@@ -406,11 +406,21 @@
     },
     {
       "category": "Coach Type (Overall)",
-      "test": "Offensive: composite",
-      "p": 0.00018276179675893984,
+      "test": "Offensive: pass_heavy",
+      "p": 0.00010998093629044786,
       "p_source": "naive",
       "rank": 38,
       "bh_threshold": 0.018811881188118815,
+      "sig_raw": true,
+      "sig_bh": true
+    },
+    {
+      "category": "Coach Type (Overall)",
+      "test": "Offensive: composite",
+      "p": 0.00018276179675893984,
+      "p_source": "naive",
+      "rank": 39,
+      "bh_threshold": 0.01930693069306931,
       "sig_raw": true,
       "sig_bh": true
     },
@@ -419,8 +429,8 @@
       "test": "Early (2006-2011): composite",
       "p": 0.0008432680383063963,
       "p_source": "naive",
-      "rank": 39,
-      "bh_threshold": 0.01930693069306931,
+      "rank": 40,
+      "bh_threshold": 0.019801980198019806,
       "sig_raw": true,
       "sig_bh": true
     },
@@ -429,8 +439,8 @@
       "test": "Offensive Early (2006-2011)",
       "p": 0.0009154189715636464,
       "p_source": "naive",
-      "rank": 40,
-      "bh_threshold": 0.019801980198019806,
+      "rank": 41,
+      "bh_threshold": 0.0202970297029703,
       "sig_raw": true,
       "sig_bh": true
     },
@@ -439,8 +449,8 @@
       "test": "two_point_aggression Lag 1",
       "p": 0.001,
       "p_source": "clustered",
-      "rank": 41,
-      "bh_threshold": 0.0202970297029703,
+      "rank": 42,
+      "bh_threshold": 0.020792079207920793,
       "sig_raw": true,
       "sig_bh": true
     },
@@ -449,8 +459,8 @@
       "test": "Early (2006-2011) vs Late (2018-2024) (Mann-Whitney)",
       "p": 0.0011655011655011655,
       "p_source": "naive",
-      "rank": 42,
-      "bh_threshold": 0.020792079207920793,
+      "rank": 43,
+      "bh_threshold": 0.02128712871287129,
       "sig_raw": true,
       "sig_bh": true
     },
@@ -459,16 +469,6 @@
       "test": "Pass-Heavy Aggression",
       "p": 0.002,
       "p_source": "clustered",
-      "rank": 43,
-      "bh_threshold": 0.02128712871287129,
-      "sig_raw": true,
-      "sig_bh": true
-    },
-    {
-      "category": "Two-Way Fixed Effects",
-      "test": "Pooled (2006-2024)",
-      "p": 0.002897012583384262,
-      "p_source": "naive",
       "rank": 44,
       "bh_threshold": 0.021782178217821784,
       "sig_raw": true,
@@ -635,10 +635,10 @@
       "sig_bh": true
     },
     {
-      "category": "Persistence Defensive",
-      "test": "deep_pass_aggression Lag 3",
-      "p": 0.022,
-      "p_source": "wild_cluster",
+      "category": "Two-Way Fixed Effects",
+      "test": "Early (2006-2011)",
+      "p": 0.019304348676656646,
+      "p_source": "naive",
       "rank": 61,
       "bh_threshold": 0.030198019801980197,
       "sig_raw": true,
@@ -665,12 +665,32 @@
       "sig_bh": true
     },
     {
+      "category": "Persistence Defensive",
+      "test": "deep_pass_aggression Lag 3",
+      "p": 0.022,
+      "p_source": "wild_cluster",
+      "rank": 64,
+      "bh_threshold": 0.031683168316831684,
+      "sig_raw": true,
+      "sig_bh": true
+    },
+    {
+      "category": "Two-Way Fixed Effects",
+      "test": "Late (2018-2024)",
+      "p": 0.02417092086883943,
+      "p_source": "naive",
+      "rank": 65,
+      "bh_threshold": 0.03217821782178218,
+      "sig_raw": true,
+      "sig_bh": true
+    },
+    {
       "category": "Overall WAR",
       "test": "4th Down Aggression",
       "p": 0.033,
       "p_source": "clustered",
-      "rank": 64,
-      "bh_threshold": 0.031683168316831684,
+      "rank": 66,
+      "bh_threshold": 0.032673267326732675,
       "sig_raw": true,
       "sig_bh": false
     },
@@ -679,8 +699,8 @@
       "test": "Chow test (2012 breakpoint)",
       "p": 0.03364212734602512,
       "p_source": "naive",
-      "rank": 65,
-      "bh_threshold": 0.03217821782178218,
+      "rank": 67,
+      "bh_threshold": 0.03316831683168317,
       "sig_raw": true,
       "sig_bh": false
     },
@@ -689,8 +709,8 @@
       "test": "Late (2018-2024): pass_heavy",
       "p": 0.0494754634206985,
       "p_source": "naive",
-      "rank": 66,
-      "bh_threshold": 0.032673267326732675,
+      "rank": 68,
+      "bh_threshold": 0.033663366336633666,
       "sig_raw": true,
       "sig_bh": false
     },
@@ -699,8 +719,8 @@
       "test": "deep_pass_aggression Lag 2",
       "p": 0.057,
       "p_source": "wild_cluster",
-      "rank": 67,
-      "bh_threshold": 0.03316831683168317,
+      "rank": 69,
+      "bh_threshold": 0.03415841584158416,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -709,8 +729,8 @@
       "test": "Middle (2012-2017): composite",
       "p": 0.05893779909827508,
       "p_source": "naive",
-      "rank": 68,
-      "bh_threshold": 0.033663366336633666,
+      "rank": 70,
+      "bh_threshold": 0.03465346534653465,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -719,8 +739,8 @@
       "test": "Early (2006-2011) vs Middle (2012-2017) (t-test)",
       "p": 0.06534988403415087,
       "p_source": "naive",
-      "rank": 69,
-      "bh_threshold": 0.03415841584158416,
+      "rank": 71,
+      "bh_threshold": 0.035148514851485145,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -729,8 +749,8 @@
       "test": "fourth_down_aggression Lag 2",
       "p": 0.078,
       "p_source": "wild_cluster",
-      "rank": 70,
-      "bh_threshold": 0.03465346534653465,
+      "rank": 72,
+      "bh_threshold": 0.03564356435643564,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -739,8 +759,8 @@
       "test": "Defensive Early (2006-2011)",
       "p": 0.07803102602219626,
       "p_source": "naive",
-      "rank": 71,
-      "bh_threshold": 0.035148514851485145,
+      "rank": 73,
+      "bh_threshold": 0.036138613861386136,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -749,8 +769,8 @@
       "test": "fourth_down",
       "p": 0.091,
       "p_source": "clustered",
-      "rank": 72,
-      "bh_threshold": 0.03564356435643564,
+      "rank": 74,
+      "bh_threshold": 0.03663366336633663,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -759,8 +779,8 @@
       "test": "Offensive Late (2018-2024)",
       "p": 0.10012982257254727,
       "p_source": "naive",
-      "rank": 73,
-      "bh_threshold": 0.036138613861386136,
+      "rank": 75,
+      "bh_threshold": 0.03712871287128713,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -769,18 +789,8 @@
       "test": "fourth_down",
       "p": 0.105,
       "p_source": "clustered",
-      "rank": 74,
-      "bh_threshold": 0.03663366336633663,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Two-Way Fixed Effects",
-      "test": "Early (2006-2011)",
-      "p": 0.1053150011439763,
-      "p_source": "naive",
-      "rank": 75,
-      "bh_threshold": 0.03712871287128713,
+      "rank": 76,
+      "bh_threshold": 0.03762376237623763,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -789,8 +799,8 @@
       "test": "Late (2018-2024): composite",
       "p": 0.13207839442161012,
       "p_source": "naive",
-      "rank": 76,
-      "bh_threshold": 0.03762376237623763,
+      "rank": 77,
+      "bh_threshold": 0.038118811881188125,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -798,16 +808,6 @@
       "category": "Inheritance: OC->HC",
       "test": "composite",
       "p": 0.153,
-      "p_source": "clustered",
-      "rank": 77,
-      "bh_threshold": 0.038118811881188125,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Inheritance: Offensive Mentors",
-      "test": "composite",
-      "p": 0.161,
       "p_source": "clustered",
       "rank": 78,
       "bh_threshold": 0.03861386138613862,
@@ -817,10 +817,20 @@
     {
       "category": "Two-Way Fixed Effects",
       "test": "Middle (2012-2017)",
-      "p": 0.20193442639236858,
+      "p": 0.16029964288408927,
       "p_source": "naive",
       "rank": 79,
       "bh_threshold": 0.039108910891089116,
+      "sig_raw": false,
+      "sig_bh": false
+    },
+    {
+      "category": "Inheritance: Offensive Mentors",
+      "test": "composite",
+      "p": 0.161,
+      "p_source": "clustered",
+      "rank": 80,
+      "bh_threshold": 0.03960396039603961,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -829,8 +839,8 @@
       "test": "deep_pass",
       "p": 0.215,
       "p_source": "clustered",
-      "rank": 80,
-      "bh_threshold": 0.03960396039603961,
+      "rank": 81,
+      "bh_threshold": 0.04009900990099011,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -839,8 +849,8 @@
       "test": "Aggression x Year interaction",
       "p": 0.237188253383537,
       "p_source": "naive",
-      "rank": 81,
-      "bh_threshold": 0.04009900990099011,
+      "rank": 82,
+      "bh_threshold": 0.0405940594059406,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -849,8 +859,8 @@
       "test": "pass_heavy",
       "p": 0.333,
       "p_source": "clustered",
-      "rank": 82,
-      "bh_threshold": 0.0405940594059406,
+      "rank": 83,
+      "bh_threshold": 0.04108910891089109,
       "sig_raw": false,
       "sig_bh": false
     },
@@ -859,16 +869,6 @@
       "test": "Composite Tempo",
       "p": 0.352,
       "p_source": "clustered",
-      "rank": 83,
-      "bh_threshold": 0.04108910891089109,
-      "sig_raw": false,
-      "sig_bh": false
-    },
-    {
-      "category": "Two-Way Fixed Effects",
-      "test": "Late (2018-2024)",
-      "p": 0.35846563972853085,
-      "p_source": "naive",
       "rank": 84,
       "bh_threshold": 0.041584158415841586,
       "sig_raw": false,

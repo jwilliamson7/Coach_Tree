@@ -179,8 +179,13 @@ class InheritanceAnalyzer:
     def build_transitions(self) -> List[dict]:
         """Build coordinator->HC transitions from coaches.json.
 
-        Each coordinator stint is paired with the first HC stint that starts
-        after the coordinator stint ends (temporal ordering enforced).
+        For each coach and each coordinator role (DC, OC) we retain only the
+        MOST RECENT coordinator stint and pair it with the first HC stint that
+        starts after that stint ends (temporal ordering enforced). Keeping a
+        single stint per coach per role avoids pseudo-replication: a coach with
+        several earlier coordinator stints would otherwise contribute several
+        rows that all pair with the same head-coaching outcome, duplicating the
+        HC-era gene and over-weighting that coach in the correlation.
         """
         transitions = []
 
@@ -190,48 +195,34 @@ class InheritanceAnalyzer:
             if not career:
                 continue
 
-            dc_stints = self._extract_stints(career, 'DC')
-            oc_stints = self._extract_stints(career, 'OC')
             hc_stints = self._extract_stints(career, 'HC')
-
             if not hc_stints:
                 continue
 
-            # DC -> HC transitions
-            for coord_stint in dc_stints:
-                coord_end = max(coord_stint['years'])
-                for hc_stint in hc_stints:
-                    hc_start = min(hc_stint['years'])
-                    if hc_start > coord_end:
-                        transitions.append({
-                            'coach_name': name,
-                            'coach_id': coach_id,
-                            'transition_type': 'DC->HC',
-                            'coord_team': coord_stint['team'],
-                            'coord_years': coord_stint['years'],
-                            'hc_team': hc_stint['team'],
-                            'hc_years': hc_stint['years'],
-                            'years_gap': hc_start - coord_end,
-                        })
-                        break  # Pair with first eligible HC stint only
-
-            # OC -> HC transitions
-            for coord_stint in oc_stints:
-                coord_end = max(coord_stint['years'])
-                for hc_stint in hc_stints:
-                    hc_start = min(hc_stint['years'])
-                    if hc_start > coord_end:
-                        transitions.append({
-                            'coach_name': name,
-                            'coach_id': coach_id,
-                            'transition_type': 'OC->HC',
-                            'coord_team': coord_stint['team'],
-                            'coord_years': coord_stint['years'],
-                            'hc_team': hc_stint['team'],
-                            'hc_years': hc_stint['years'],
-                            'years_gap': hc_start - coord_end,
-                        })
-                        break
+            for role, ttype in (('DC', 'DC->HC'), ('OC', 'OC->HC')):
+                coord_stints = self._extract_stints(career, role)
+                # Walk stints in chronological order; keep overwriting so that
+                # `best` ends as the most recent coordinator stint that has an
+                # eligible later HC stint.
+                best = None
+                for coord_stint in coord_stints:
+                    coord_end = max(coord_stint['years'])
+                    for hc_stint in hc_stints:
+                        hc_start = min(hc_stint['years'])
+                        if hc_start > coord_end:
+                            best = {
+                                'coach_name': name,
+                                'coach_id': coach_id,
+                                'transition_type': ttype,
+                                'coord_team': coord_stint['team'],
+                                'coord_years': coord_stint['years'],
+                                'hc_team': hc_stint['team'],
+                                'hc_years': hc_stint['years'],
+                                'years_gap': hc_start - coord_end,
+                            }
+                            break  # first eligible HC stint for this coord stint
+                if best is not None:
+                    transitions.append(best)
 
         dc_count = sum(1 for t in transitions if t['transition_type'] == 'DC->HC')
         oc_count = sum(1 for t in transitions if t['transition_type'] == 'OC->HC')

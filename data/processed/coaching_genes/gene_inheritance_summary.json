@@ -1,95 +1,85 @@
 {
-  "generated_date": "2026-06-25T15:08:59.212266",
-  "total_transitions": 201,
-  "unique_coaches": 57,
+  "generated_date": "2026-06-25T16:12:33.978610",
+  "total_transitions": 134,
+  "unique_coaches": 56,
   "min_years_required": 1,
   "statistics": {
     "aggression": {
-      "n": 61,
-      "pearson_r": 0.0165,
-      "pearson_p": 0.8995,
+      "n": 39,
+      "pearson_r": -0.0115,
+      "pearson_p": 0.9445,
       "significant": "False",
-      "ci_low": -0.1944,
-      "ci_high": 0.2027,
-      "p_bootstrap_coach_clustered": 0.897,
-      "n_coaches": 40,
-      "small_cluster": false,
-      "p_wild_cluster": null,
-      "mean_coord_gene": -0.0005,
-      "mean_hc_gene": 0.0093,
-      "mean_change": 0.0098,
-      "mean_abs_change": 0.0206,
-      "direction_retention_pct": 52.5,
-      "mean_years_gap": 2.4
-    },
-    "defensive_scheme": {
-      "n": 18,
-      "pearson_r": 0.5718,
-      "pearson_p": 0.0132,
-      "significant": "True",
-      "ci_low": 0.242,
-      "ci_high": 0.8173,
-      "p_bootstrap_coach_clustered": 0.002,
-      "n_coaches": 17,
+      "ci_low": -0.3374,
+      "ci_high": 0.2971,
+      "p_bootstrap_coach_clustered": 0.883,
+      "n_coaches": 39,
       "small_cluster": true,
-      "p_wild_cluster": 0.0155,
-      "mean_coord_gene": -0.0348,
-      "mean_hc_gene": -0.0677,
-      "mean_change": -0.0329,
-      "mean_abs_change": 0.562,
-      "direction_retention_pct": 66.7,
+      "p_wild_cluster": 0.9545,
+      "mean_coord_gene": 0.0021,
+      "mean_hc_gene": 0.0093,
+      "mean_change": 0.0072,
+      "mean_abs_change": 0.0206,
+      "direction_retention_pct": 51.3,
       "mean_years_gap": 1.2
     },
-    "shotgun": {
-      "n": 61,
-      "pearson_r": 0.4727,
-      "pearson_p": 0.0001,
+    "defensive_scheme": {
+      "n": 17,
+      "pearson_r": 0.5705,
+      "pearson_p": 0.0168,
       "significant": "True",
-      "ci_low": 0.2931,
-      "ci_high": 0.6389,
+      "ci_low": 0.2195,
+      "ci_high": 0.8173,
+      "p_bootstrap_coach_clustered": 0.008,
+      "n_coaches": 17,
+      "small_cluster": true,
+      "p_wild_cluster": 0.0195,
+      "mean_coord_gene": -0.0444,
+      "mean_hc_gene": -0.0799,
+      "mean_change": -0.0355,
+      "mean_abs_change": 0.5943,
+      "direction_retention_pct": 64.7,
+      "mean_years_gap": 1.0
+    },
+    "shotgun": {
+      "n": 39,
+      "pearson_r": 0.6697,
+      "pearson_p": 0.0,
+      "significant": "True",
+      "ci_low": 0.4735,
+      "ci_high": 0.805,
       "p_bootstrap_coach_clustered": 0.0,
-      "n_coaches": 40,
-      "small_cluster": false,
-      "p_wild_cluster": null,
-      "mean_coord_gene": -0.0485,
-      "mean_hc_gene": 0.2453,
-      "mean_change": 0.2938,
-      "mean_abs_change": 0.7132,
-      "direction_retention_pct": 75.4,
-      "mean_years_gap": 2.4
+      "n_coaches": 39,
+      "small_cluster": true,
+      "p_wild_cluster": 0.0,
+      "mean_coord_gene": 0.0281,
+      "mean_hc_gene": 0.3657,
+      "mean_change": 0.3377,
+      "mean_abs_change": 0.5684,
+      "direction_retention_pct": 82.1,
+      "mean_years_gap": 1.2
     },
     "tempo": {
-      "n": 61,
-      "pearson_r": 0.0908,
-      "pearson_p": 0.4863,
+      "n": 39,
+      "pearson_r": 0.3054,
+      "pearson_p": 0.0587,
       "significant": "False",
-      "ci_low": -0.2164,
-      "ci_high": 0.4759,
-      "p_bootstrap_coach_clustered": 0.694,
-      "n_coaches": 40,
-      "small_cluster": false,
-      "p_wild_cluster": null,
-      "mean_coord_gene": 0.2371,
-      "mean_hc_gene": -0.0307,
-      "mean_change": -0.2678,
-      "mean_abs_change": 0.8134,
-      "direction_retention_pct": 54.1,
-      "mean_years_gap": 2.4
+      "ci_low": -0.1735,
+      "ci_high": 0.6279,
+      "p_bootstrap_coach_clustered": 0.299,
+      "n_coaches": 39,
+      "small_cluster": true,
+      "p_wild_cluster": 0.3145,
+      "mean_coord_gene": 0.1422,
+      "mean_hc_gene": -0.0382,
+      "mean_change": -0.1804,
+      "mean_abs_change": 0.7473,
+      "direction_retention_pct": 56.4,
+      "mean_years_gap": 1.2
     }
   },
   "notable_examples": {
     "aggression": {
       "faithful_inheritors": [
-        {
-          "coach_name": "Kyle Shanahan",
-          "coord_team": "was",
-          "coord_years": "2010-2013",
-          "coord_era_gene": -0.01227089842946865,
-          "hc_team": "sfo",
-          "hc_years": "2017-2025",
-          "hc_era_gene": -0.01221597925212985,
-          "gene_change": 5.491917733880039e-05
-        },
         {
           "coach_name": "Jay Gruden",
           "coord_team": "cin",
@@ -123,12 +113,22 @@
         {
           "coach_name": "Josh McDaniels",
           "coord_team": "nwe",
-          "coord_years": "2006-2008",
-          "coord_era_gene": 0.011876806884412434,
-          "hc_team": "den",
-          "hc_years": "2009-2010",
-          "hc_era_gene": 0.008553434697214101,
-          "gene_change": -0.003323372187198333
+          "coord_years": "2012-2021",
+          "coord_era_gene": 0.0027823921665570293,
+          "hc_team": "rai",
+          "hc_years": "2022-2023",
+          "hc_era_gene": 0.0072889538377856,
+          "gene_change": 0.004506561671228571
+        },
+        {
+          "coach_name": "Nick Sirianni",
+          "coord_team": "clt",
+          "coord_years": "2018-2020",
+          "coord_era_gene": 0.010514459646232432,
+          "hc_team": "phi",
+          "hc_years": "2021-2025",
+          "hc_era_gene": 0.016300118015478274,
+          "gene_change": 0.005785658369245841
         }
       ],
       "biggest_transformers": [
@@ -141,26 +141,6 @@
           "hc_years": "2016-2020",
           "hc_era_gene": 0.0494141646289845,
           "gene_change": 0.0664990299247214
-        },
-        {
-          "coach_name": "Brian Daboll",
-          "coord_team": "kan",
-          "coord_years": "2012-2012",
-          "coord_era_gene": -0.0438698723242707,
-          "hc_team": "nyg",
-          "hc_years": "2022-2025",
-          "hc_era_gene": 0.0090239090069975,
-          "gene_change": 0.052893781331268194
-        },
-        {
-          "coach_name": "Rob Chudzinski",
-          "coord_team": "cle",
-          "coord_years": "2007-2008",
-          "coord_era_gene": -0.02380759603524025,
-          "hc_team": "cle",
-          "hc_years": "2013-2013",
-          "hc_era_gene": 0.0261586025934086,
-          "gene_change": 0.049966198628648845
         },
         {
           "coach_name": "Mike McDaniel",
@@ -181,21 +161,31 @@
           "hc_years": "2020-2025",
           "hc_era_gene": 0.022576354750035076,
           "gene_change": 0.045015615256697075
+        },
+        {
+          "coach_name": "Matt LaFleur",
+          "coord_team": "oti",
+          "coord_years": "2018-2018",
+          "coord_era_gene": -0.0145121748737848,
+          "hc_team": "gnb",
+          "hc_years": "2019-2025",
+          "hc_era_gene": 0.028584136262214455,
+          "gene_change": 0.04309631113599925
+        },
+        {
+          "coach_name": "Ken Whisenhunt",
+          "coord_team": "sdg",
+          "coord_years": "2013-2013",
+          "coord_era_gene": -0.0251022883053054,
+          "hc_team": "oti",
+          "hc_years": "2014-2015",
+          "hc_era_gene": 0.012729413216684051,
+          "gene_change": 0.03783170152198945
         }
       ]
     },
     "defensive_scheme": {
       "faithful_inheritors": [
-        {
-          "coach_name": "Raheem Morris",
-          "coord_team": "atl",
-          "coord_years": "2020-2020",
-          "coord_era_gene": 0.1278834499550693,
-          "hc_team": "atl",
-          "hc_years": "2024-2025",
-          "hc_era_gene": 0.1404387299606924,
-          "gene_change": 0.012555280005623087
-        },
         {
           "coach_name": "Lovie Smith",
           "coord_team": "htx",
@@ -235,6 +225,16 @@
           "hc_years": "2017-2025",
           "hc_era_gene": -0.1474568741106791,
           "gene_change": -0.3727048075797498
+        },
+        {
+          "coach_name": "Todd Bowles",
+          "coord_team": "tam",
+          "coord_years": "2019-2021",
+          "coord_era_gene": 0.8517477315843588,
+          "hc_team": "tam",
+          "hc_years": "2022-2025",
+          "hc_era_gene": 0.4360723801576145,
+          "gene_change": -0.4156753514267443
         }
       ],
       "biggest_transformers": [
@@ -345,54 +345,54 @@
       ],
       "biggest_transformers": [
         {
-          "coach_name": "Brian Daboll",
-          "coord_team": "mia",
-          "coord_years": "2011-2011",
-          "coord_era_gene": -1.2842015164028275,
-          "hc_team": "nyg",
-          "hc_years": "2022-2025",
-          "hc_era_gene": 0.8283774664701582,
-          "gene_change": 2.1125789828729857
+          "coach_name": "Doug Marrone",
+          "coord_team": "nor",
+          "coord_years": "2006-2008",
+          "coord_era_gene": -1.2828409568857015,
+          "hc_team": "buf",
+          "hc_years": "2013-2014",
+          "hc_era_gene": 0.5763612608745929,
+          "gene_change": 1.8592022177602945
         },
         {
-          "coach_name": "Hue Jackson",
-          "coord_team": "atl",
-          "coord_years": "2007-2007",
-          "coord_era_gene": 0.2663704142959111,
-          "hc_team": "rai",
-          "hc_years": "2011-2011",
-          "hc_era_gene": -1.821151087456396,
-          "gene_change": -2.087521501752307
+          "coach_name": "Arthur Smith",
+          "coord_team": "oti",
+          "coord_years": "2019-2020",
+          "coord_era_gene": -0.9009920190377665,
+          "hc_team": "atl",
+          "hc_years": "2021-2023",
+          "hc_era_gene": 0.7955925908890821,
+          "gene_change": 1.6965846099268487
         },
         {
-          "coach_name": "Brian Daboll",
-          "coord_team": "kan",
-          "coord_years": "2012-2012",
-          "coord_era_gene": -1.2280574956905093,
-          "hc_team": "nyg",
-          "hc_years": "2022-2025",
-          "hc_era_gene": 0.8283774664701582,
-          "gene_change": 2.0564349621606675
+          "coach_name": "Norv Turner",
+          "coord_team": "sfo",
+          "coord_years": "2006-2006",
+          "coord_era_gene": -2.550039411708433,
+          "hc_team": "sdg",
+          "hc_years": "2007-2012",
+          "hc_era_gene": -0.9360462823578932,
+          "gene_change": 1.6139931293505398
         },
         {
-          "coach_name": "Kyle Shanahan",
-          "coord_team": "htx",
-          "coord_years": "2008-2009",
-          "coord_era_gene": -2.1076710159927483,
-          "hc_team": "sfo",
-          "hc_years": "2017-2025",
-          "hc_era_gene": -0.08471817487020467,
-          "gene_change": 2.0229528411225437
+          "coach_name": "Kevin Stefanski",
+          "coord_team": "min",
+          "coord_years": "2019-2019",
+          "coord_era_gene": -1.342992739906349,
+          "hc_team": "cle",
+          "hc_years": "2020-2025",
+          "hc_era_gene": 0.2523617545240012,
+          "gene_change": 1.5953544944303504
         },
         {
-          "coach_name": "Shane Steichen",
-          "coord_team": "sdg",
-          "coord_years": "2020-2020",
-          "coord_era_gene": 0.130105616041924,
-          "hc_team": "clt",
-          "hc_years": "2023-2025",
-          "hc_era_gene": 2.0346069227507266,
-          "gene_change": 1.9045013067088026
+          "coach_name": "Gary Kubiak",
+          "coord_team": "rav",
+          "coord_years": "2014-2014",
+          "coord_era_gene": -1.6407954667299176,
+          "hc_team": "den",
+          "hc_years": "2015-2016",
+          "hc_era_gene": -0.13526930263168843,
+          "gene_change": 1.5055261640982291
         }
       ]
     },
@@ -409,16 +409,6 @@
           "gene_change": 0.02672704401352599
         },
         {
-          "coach_name": "Brian Daboll",
-          "coord_team": "kan",
-          "coord_years": "2012-2012",
-          "coord_era_gene": -0.1996424334328842,
-          "hc_team": "nyg",
-          "hc_years": "2022-2025",
-          "hc_era_gene": -0.15145284004144174,
-          "gene_change": 0.048189593391442465
-        },
-        {
           "coach_name": "Mike Mularkey",
           "coord_team": "atl",
           "coord_years": "2008-2011",
@@ -429,16 +419,6 @@
           "gene_change": 0.07246208748263411
         },
         {
-          "coach_name": "Brian Daboll",
-          "coord_team": "mia",
-          "coord_years": "2011-2011",
-          "coord_era_gene": -0.073542457585965,
-          "hc_team": "nyg",
-          "hc_years": "2022-2025",
-          "hc_era_gene": -0.15145284004144174,
-          "gene_change": -0.07791038245547674
-        },
-        {
           "coach_name": "Doug Pederson",
           "coord_team": "kan",
           "coord_years": "2013-2015",
@@ -447,29 +427,29 @@
           "hc_years": "2016-2020",
           "hc_era_gene": -0.27860414181895565,
           "gene_change": 0.09504518816648366
+        },
+        {
+          "coach_name": "Anthony Lynn",
+          "coord_team": "buf",
+          "coord_years": "2016-2016",
+          "coord_era_gene": -0.2439666804149999,
+          "hc_team": "sdg",
+          "hc_years": "2017-2020",
+          "hc_era_gene": -0.39036276287074195,
+          "gene_change": -0.14639608245574207
+        },
+        {
+          "coach_name": "Shane Steichen",
+          "coord_team": "phi",
+          "coord_years": "2021-2022",
+          "coord_era_gene": 0.7102646691793659,
+          "hc_team": "clt",
+          "hc_years": "2023-2025",
+          "hc_era_gene": 0.5587641142502241,
+          "gene_change": -0.15150055492914183
         }
       ],
       "biggest_transformers": [
-        {
-          "coach_name": "Pat Shurmur",
-          "coord_team": "phi",
-          "coord_years": "2013-2015",
-          "coord_era_gene": 5.48519322315848,
-          "hc_team": "nyg",
-          "hc_years": "2018-2019",
-          "hc_era_gene": -0.5113700129891605,
-          "gene_change": -5.99656323614764
-        },
-        {
-          "coach_name": "Adam Gase",
-          "coord_team": "den",
-          "coord_years": "2013-2014",
-          "coord_era_gene": 2.864020886207423,
-          "hc_team": "mia",
-          "hc_years": "2016-2018",
-          "hc_era_gene": -0.437227882610779,
-          "gene_change": -3.301248768818202
-        },
         {
           "coach_name": "Bill O'Brien",
           "coord_team": "nwe",
@@ -491,14 +471,34 @@
           "gene_change": 2.0780881242492626
         },
         {
-          "coach_name": "Kyle Shanahan",
-          "coord_team": "cle",
-          "coord_years": "2014-2014",
-          "coord_era_gene": 1.3890671074560546,
-          "hc_team": "sfo",
-          "hc_years": "2017-2025",
-          "hc_era_gene": -0.5631664732869364,
-          "gene_change": -1.952233580742991
+          "coach_name": "Jim Caldwell",
+          "coord_team": "rav",
+          "coord_years": "2013-2013",
+          "coord_era_gene": 2.137690702709176,
+          "hc_team": "det",
+          "hc_years": "2014-2017",
+          "hc_era_gene": 0.31878247021250683,
+          "gene_change": -1.818908232496669
+        },
+        {
+          "coach_name": "Josh McDaniels",
+          "coord_team": "nwe",
+          "coord_years": "2012-2021",
+          "coord_era_gene": 0.9943775000739355,
+          "hc_team": "rai",
+          "hc_years": "2022-2023",
+          "hc_era_gene": -0.7949169118152964,
+          "gene_change": -1.789294411889232
+        },
+        {
+          "coach_name": "Adam Gase",
+          "coord_team": "chi",
+          "coord_years": "2015-2015",
+          "coord_era_gene": 1.0629493350117978,
+          "hc_team": "mia",
+          "hc_years": "2016-2018",
+          "hc_era_gene": -0.437227882610779,
+          "gene_change": -1.5001772176225767
         }
       ]
     }
