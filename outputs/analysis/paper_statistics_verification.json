@@ -1,69 +1,69 @@
 {
-  "verification_date": "2026-06-25T16:05:09.548713",
+  "verification_date": "2026-06-25T19:58:45.858256",
   "sections": {
     "coordinator_to_hc_inheritance": {
       "raw_per_stint": {
         "aggression": {
-          "n": 61,
-          "pearson_r": 0.0165,
-          "p_value": 0.8995,
-          "direction_retention_pct": 52.5,
+          "n": 39,
+          "pearson_r": -0.0115,
+          "p_value": 0.9445,
+          "direction_retention_pct": 51.3,
           "transition_type": "OC->HC"
         },
         "defensive_scheme": {
-          "n": 18,
-          "pearson_r": 0.5718,
-          "p_value": 0.0132,
-          "direction_retention_pct": 66.7,
+          "n": 17,
+          "pearson_r": 0.5705,
+          "p_value": 0.0168,
+          "direction_retention_pct": 64.7,
           "transition_type": "DC->HC"
         },
         "shotgun": {
-          "n": 61,
-          "pearson_r": 0.4727,
-          "p_value": 0.0001,
-          "direction_retention_pct": 75.4,
+          "n": 39,
+          "pearson_r": 0.6697,
+          "p_value": 0.0,
+          "direction_retention_pct": 82.1,
           "transition_type": "OC->HC"
         },
         "tempo": {
-          "n": 61,
-          "pearson_r": 0.0908,
-          "p_value": 0.4863,
-          "direction_retention_pct": 54.1,
+          "n": 39,
+          "pearson_r": 0.3054,
+          "p_value": 0.0587,
+          "direction_retention_pct": 56.4,
           "transition_type": "OC->HC"
         }
       },
       "aggregated_per_coach": {
         "aggression": {
-          "n": 40,
-          "pearson_r": -0.0549,
-          "p_value": 0.736465,
-          "direction_retention_pct": 55.0,
+          "n": 39,
+          "pearson_r": -0.0115,
+          "p_value": 0.944539,
+          "direction_retention_pct": 51.3,
           "transition_type": "OC->HC",
-          "coaches_with_multiple_stints": 14
+          "coaches_with_multiple_stints": 0
         },
         "defensive_scheme": {
           "n": 17,
-          "pearson_r": 0.5832,
-          "p_value": 0.013994,
+          "pearson_r": 0.5705,
+          "p_value": 0.016788,
           "direction_retention_pct": 64.7,
           "transition_type": "DC->HC",
-          "coaches_with_multiple_stints": 1
+          "coaches_with_multiple_stints": 0
         },
         "shotgun": {
-          "n": 40,
-          "pearson_r": 0.5324,
-          "p_value": 0.000406,
-          "direction_retention_pct": 70.0,
+          "n": 39,
+          "pearson_r": 0.6697,
+          "p_value": 3e-06,
+          "direction_retention_pct": 82.1,
           "transition_type": "OC->HC",
-          "coaches_with_multiple_stints": 14
+          "coaches_with_multiple_stints": 0
         },
         "tempo": {
-          "n": 40,
-          "pearson_r": 0.1779,
-          "p_value": 0.272085,
-          "direction_retention_pct": 52.5,
+          "n": 39,
+          "pearson_r": 0.3054,
+          "p_value": 0.058663,
+          "direction_retention_pct": 56.4,
           "transition_type": "OC->HC",
-          "coaches_with_multiple_stints": 14
+          "coaches_with_multiple_stints": 0
         }
       }
     },
