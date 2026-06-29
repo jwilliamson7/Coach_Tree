@@ -176,7 +176,14 @@ class Coach:
                 # Get team information
                 team_raw = row.get('Tm', '') or row.get('Team', '') or row.get('Employer', '')
                 team_abbrev = self._get_team_abbreviation(team_raw, year)
-                team_franchises = self._resolve_team_franchises(team_abbrev)
+                # Use the single year-aware canonical franchise key for identity
+                # (consistent with Coach_WAR / CoachingProject). Expanding to the
+                # full variant list collapsed distinct franchises that share a
+                # legacy code (Texans/Titans 'oti', Colts/Ravens 'clt'), producing
+                # false cross-franchise mentor-protege edges. The canonical key
+                # already merges genuine relocations (OAK/LV->rai, SD/LAC->sdg,
+                # STL/LAR->ram) while keeping distinct franchises distinct.
+                team_franchises = [team_abbrev] if team_abbrev else []
                 
                 # Create position record
                 position = CoachingPosition(

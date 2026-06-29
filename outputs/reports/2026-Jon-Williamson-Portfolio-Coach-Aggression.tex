@@ -53,7 +53,7 @@
 %\affil[1]{\protect\raggedright
 %Knowledge Transmission in the NFL, e-mail: jon@williamsonconsultinggroup.com}
 
-\abstract{We develop a framework to measure coaching ``DNA'' in the NFL, the strategic tendencies that distinguish how coaches run teams. Using XGBoost models trained on more than 600,000 plays from 2006--2024 with a leakage-free, cross-fit pipeline, we quantify four dimensions of coaching identity: aggression (fourth down, pass-run balance, deep passing, two-point), shotgun formation preference, tempo, and defensive scheme. Each gene is the residual between actual decisions and situation-adjusted predictions, separating tendency from forced circumstance. We first show the genes are stable coach traits, not team artifacts: coach identity explains about five times the team's variance, and the genes travel across team changes (composite aggression $r=0.61$, 95\% CI $[0.33, 0.78]$; shotgun $0.55$, $[0.29, 0.75]$). Under coach-clustered inference, composite aggression ($r=0.30$, $[0.16, 0.45]$) and shotgun preference ($r=0.23$, $[0.04, 0.41]$) predict career-level, context-adjusted Coach Wins Above Replacement (Coach WAR), while tempo does not. The aggression-WAR association has weakened in recent seasons, but within coaches higher aggression still adds wins ($\beta=1.40$ WAR games per standard deviation, $[0.76, 1.96]$). Neither mentor performance ($r=0.11$, $[-0.04, 0.25]$) nor situational aggression ($r=0.08$, $[-0.05, 0.21]$) transmits to prot\'{e}g\'{e}s, but shotgun preference transmits through offensive coaching trees ($r=0.42$, $[0.24, 0.55]$) and persists from coordinator to head coach ($r=0.67$, $[0.47, 0.81]$). Coaching trees reliably transmit systems (shotgun $p<0.001$, defensive scheme $p=0.02$) but not risk tolerance or winning (both $p>0.10$).}
+\abstract{We develop a framework to measure coaching ``DNA'' in the NFL, the strategic tendencies that distinguish how coaches run teams. Using XGBoost models trained on more than 600,000 plays from 2006--2024 with a leakage-free, cross-fit pipeline, we quantify four dimensions of coaching identity: aggression (fourth down, pass-run balance, deep passing, two-point), shotgun formation preference, tempo, and defensive scheme. Each gene is the residual between actual decisions and situation-adjusted predictions, separating tendency from forced circumstance. We first show the genes are stable coach traits, not team artifacts: coach identity explains about five times the team's variance, and the genes travel across team changes (composite aggression $r=0.61$, 95\% CI $[0.33, 0.78]$; shotgun $0.55$, $[0.29, 0.75]$). Under coach-clustered inference, composite aggression ($r=0.30$, $[0.16, 0.45]$) and shotgun preference ($r=0.23$, $[0.04, 0.41]$) predict career-level, context-adjusted Coach Wins Above Replacement (Coach WAR), while tempo does not. The aggression-WAR association has weakened in recent seasons, but within coaches higher aggression still adds wins ($\beta=1.40$ WAR games per standard deviation, $[0.76, 1.96]$). Neither mentor performance ($r=0.12$, $[-0.01, 0.26]$) nor situational aggression ($r=0.08$, $[-0.05, 0.22]$) transmits to prot\'{e}g\'{e}s, but shotgun preference transmits through offensive coaching trees ($r=0.40$, $[0.21, 0.54]$) and persists from coordinator to head coach ($r=0.67$, $[0.47, 0.81]$). Coaching trees reliably transmit systems (shotgun $p<0.001$, defensive scheme $p=0.02$) but not risk tolerance or winning (both $p>0.05$).}
 
 \keywords{NFL coaching, coaching DNA, coaching trees, strategic identity, competitive advantage}
 
@@ -282,7 +282,7 @@ The composite defensive scheme gene is the reliability-weighted mean of z-scored
 
 \subsection{Validating the Genes as Coach Traits}
 
-Before relating genes to performance, we test whether they capture stable, coach-specific tendencies rather than team or roster artifacts. We decompose the variance of each gene into the share attributable to coach identity, team identity, and season (one-way $\eta^2$). As a sharper test that exploits coaching changes, we examine the coaches who moved between teams: if a gene is a coach trait, a coach's gene at a new team should track their gene at the old team. We quantify this with the across-team correlation of a coach's old-team and new-team mean gene, and with a mover regression of the new-team gene on (a) the coach's prior-team gene and (b) the new team's pre-arrival gene, where a large coach coefficient with a small team coefficient identifies the gene as coach-attached. Finally, as a face-validity check, we rank coaches by career-average gene and compare against public reputation.
+Before relating genes to performance, we test whether they capture stable, coach-specific tendencies rather than team or roster artifacts. We decompose the variance of each gene into the share attributable to coach identity, team identity, and season (one-way $\eta^2$). As a sharper test that exploits coaching changes, we examine the coaches who moved between teams: if a gene is a coach trait, a coach's gene at a new team should track their gene at the old team. We quantify this with the across-team correlation of a coach's old-team and new-team mean gene, and with a mover regression of the new-team gene on (a) the coach's prior-team gene and (b) the new team's pre-arrival gene, which separates the part of a coach's behavior that travels with them from the part that reflects the destination's prior identity. Finally, as a face-validity check, we rank coaches by career-average gene and compare against public reputation.
 
 \subsection{Performance Analysis}
 
@@ -355,7 +355,7 @@ Before asking whether genes predict performance, we establish that they measure 
 
 \textbf{Variance decomposition.} Across every gene, coach identity explains far more variance than team identity. For composite aggression, coach identity accounts for 51\% of the variance against 13\% for team and 19\% for season; the same pattern holds for shotgun (coach 58\%, team 12\%), tempo (53\% vs.\ 10\%), and the aggression components (Table~\ref{tab:variance}). A coach's genes are roughly four to five times more a function of who they are than of where they coach.
 
-\textbf{The gene travels with the coach.} A sharper test exploits coaching changes. Among the 32 coaches who changed teams during our window, the gene a coach exhibits at their new team is correlated with the gene they exhibited at their previous team: composite aggression $r=0.61$ (95\% CI $[0.33, 0.78]$), shotgun $r=0.55$, tempo $r=0.54$, comparable to or stronger than the year-to-year persistence \emph{within} a single team (Section~\ref{sec:persistence}). A mover regression makes the attribution explicit. Regressing a coach's new-team gene on both their prior-team gene and the new team's pre-arrival gene, we find the coach term large and well-determined (composite aggression $\beta=0.53$, 95\% CI $[0.26, 0.83]$, $p<0.001$) while the franchise's prior identity contributes little. Strategic identity is carried by the coach, not inherited from the building.
+\textbf{The gene travels with the coach.} A sharper test exploits coaching changes. Among the 32 coaches who changed teams during our window, the gene a coach exhibits at their new team is correlated with the gene they exhibited at their previous team: composite aggression $r=0.61$ (95\% CI $[0.33, 0.78]$), shotgun $r=0.55$, tempo $r=0.54$, comparable to or stronger than the year-to-year persistence \emph{within} a single team (Section~\ref{sec:persistence}). A mover regression refines the attribution. Regressing a coach's new-team gene on both their prior-team gene and the new team's pre-arrival gene, we find the coach term large and well-determined (composite aggression $\beta=0.53$, 95\% CI $[0.26, 0.83]$, $p<0.001$); the new team's pre-arrival tendency also carries predictive weight ($\beta=0.72$, $p=0.004$), consistent with teams hiring coaches whose style fits the building. The strong cross-team travel of the gene nonetheless shows that strategic identity is substantially carried by the coach.
 
 \begin{table}[H]
 \caption{Genes Are Coach Traits: Variance Decomposition and Cross-Team Travel}
@@ -447,21 +447,21 @@ The most fundamental claim of the coaching tree narrative is that working under 
 \toprule
 \textbf{Relationship} & \textbf{r} & \textbf{95\% CI} & \textbf{p} & \textbf{n} \\
 \midrule
-Overall & 0.112 & [$-$0.04, 0.25] & 0.13 & 196 \\
+Overall & 0.124 & [$-$0.01, 0.26] & 0.074 & 192 \\
 \cmidrule{1-5}
-OC $\rightarrow$ HC & 0.087 & [$-$0.14, 0.30] & 0.44 & 101 \\
-DC $\rightarrow$ HC & 0.163 & [$-$0.02, 0.33] & 0.082 & 93 \\
+OC $\rightarrow$ HC & 0.087 & [$-$0.13, 0.30] & 0.45 & 101 \\
+DC $\rightarrow$ HC & 0.190* & [0.01, 0.37] & 0.045 & 89 \\
 \midrule
-\multicolumn{5}{l}{\small Mentor-clustered bootstrap p and 95\% CI}\\
+\multicolumn{5}{l}{\small Mentor-clustered bootstrap p and 95\% CI; * $p<0.05$ (not significant after global FDR)}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Mentor performance shows at most a weak association with prot\'{e}g\'{e} performance ($r=0.112$, $p=0.13$), explaining about 1\% of the variance. The association is similarly weak for offensive coordinator prot\'{e}g\'{e}s ($r=0.087$, $p=0.44$) and modest but imprecise for defensive coordinator prot\'{e}g\'{e}s ($r=0.163$, $p=0.082$). On average, the data give little indication that working under a highly successful coach, rather than an average one, predicts greater success as a head coach.
+Mentor performance shows at most a weak association with prot\'{e}g\'{e} performance ($r=0.124$, $p=0.074$), explaining under 2\% of the variance. The association is negligible for offensive coordinator prot\'{e}g\'{e}s ($r=0.087$, $p=0.45$) and modest for defensive coordinator prot\'{e}g\'{e}s ($r=0.190$, $p=0.045$), though the latter does not survive the global false-discovery correction. On average, the data give little indication that working under a highly successful coach, rather than an average one, predicts greater success as a head coach.
 
 \subsubsection{Aggression Inheritance}
 
-If coaching trees don't transmit success, do they transmit strategy? We analyze 517 documented mentor-prot\'{e}g\'{e} pairs where we have aggression data for both, using career average aggression scores to maximize reliability. Table~\ref{tab:inheritance} presents results.
+If coaching trees don't transmit success, do they transmit strategy? We analyze 513 documented mentor-prot\'{e}g\'{e} pairs where we have aggression data for both, using career average aggression scores to maximize reliability. Table~\ref{tab:inheritance} presents results.
 
 \begin{table}[H]
 \caption{Aggression Inheritance: Overall Mentor-Prot\'{e}g\'{e} Pairs}
@@ -470,22 +470,22 @@ If coaching trees don't transmit success, do they transmit strategy? We analyze 
 \toprule
 \textbf{Component} & \textbf{r} & \textbf{95\% CI} & \textbf{P-value} \\
 \midrule
-Composite & 0.076 & [$-$0.05, 0.21] & 0.26 \\
+Composite & 0.080 & [$-$0.05, 0.22] & 0.24 \\
 \cmidrule{1-4}
-4th Down & 0.167 & [$-$0.02, 0.34] & 0.08 \\
-Pass-Heavy & 0.044 & [$-$0.10, 0.22] & 0.56 \\
-Deep Pass & 0.090 & [$-$0.06, 0.24] & 0.23 \\
-Two-Point & 0.044 & [$-$0.07, 0.18] & 0.43 \\
+4th Down & 0.172 & [$-$0.01, 0.34] & 0.07 \\
+Pass-Heavy & 0.025 & [$-$0.13, 0.20] & 0.69 \\
+Deep Pass & 0.085 & [$-$0.07, 0.23] & 0.27 \\
+Two-Point & 0.050 & [$-$0.07, 0.18] & 0.36 \\
 \midrule
-\multicolumn{4}{l}{\small N=517 mentor-prot\'{e}g\'{e} pairs; mentor-clustered p and 95\% CI}\\
+\multicolumn{4}{l}{\small N=513 mentor-prot\'{e}g\'{e} pairs; mentor-clustered p and 95\% CI}\\
 \multicolumn{4}{l}{\small Every CI includes zero after clustering}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Composite aggression shows little inheritance ($r=0.076$, $p=0.26$). A mentor's aggression carries little information about the prot\'{e}g\'{e}'s. Fourth-down decision-making is the strongest component ($r=0.167$, $p=0.08$), and is more pronounced under conventional unclustered inference, consistent with our persistence findings that 4th-down philosophy is the most stable, trait-like component; once the repeated appearance of the same mentors is taken into account, however, the signal is weak.
+Composite aggression shows little inheritance ($r=0.080$, $p=0.24$). A mentor's aggression carries little information about the prot\'{e}g\'{e}'s. Fourth-down decision-making is the strongest component ($r=0.172$, $p=0.07$), and is more pronounced under conventional unclustered inference, consistent with our persistence findings that 4th-down philosophy is the most stable, trait-like component; once the repeated appearance of the same mentors is taken into account, however, the signal is weak.
 
-Separating by coordinator type is informative. Table~\ref{tab:inherit_coord} shows that among OC-mentored prot\'{e}g\'{e}s, pass-heavy tendency shows the clearest inheritance ($r=0.316$, clustered $p=0.016$, wild cluster bootstrap $p=0.022$), while the 4th-down association ($r=0.229$) is weaker once mentor clustering is applied ($p=0.11$). DC-mentored prot\'{e}g\'{e}s show little inheritance for any aggression component.
+Separating by coordinator type is informative. Table~\ref{tab:inherit_coord} shows that among OC-mentored prot\'{e}g\'{e}s, pass-heavy tendency shows the clearest inheritance ($r=0.333$, clustered $p=0.004$), while the 4th-down association ($r=0.232$) is weaker once mentor clustering is applied ($p=0.12$). DC-mentored prot\'{e}g\'{e}s show little inheritance for any aggression component.
 
 \begin{table}[H]
 \caption{Aggression Inheritance by Coordinator Type}
@@ -497,14 +497,14 @@ Separating by coordinator type is informative. Table~\ref{tab:inherit_coord} sho
 \cmidrule(lr){2-3} \cmidrule(lr){4-5}
 \textbf{Component} & \textbf{r [95\% CI]} & \textbf{p} & \textbf{r [95\% CI]} & \textbf{p} \\
 \midrule
-Composite & 0.181 [$-$0.06, 0.43] & 0.15 & 0.048 [$-$0.19, 0.29] & 0.72 \\
+Composite & 0.218 [$-$0.01, 0.44] & 0.07 & 0.019 [$-$0.21, 0.27] & 0.89 \\
 \cmidrule{1-5}
-4th Down & 0.229 [$-$0.04, 0.47] & 0.11 & 0.010 [$-$0.16, 0.17] & 0.90 \\
-Pass-Heavy & 0.316* [0.07, 0.52] & 0.016 & 0.022 [$-$0.21, 0.26] & 0.85 \\
-Deep Pass & 0.128 [$-$0.08, 0.30] & 0.22 & 0.092 [$-$0.12, 0.29] & 0.41 \\
-Two-Point & 0.035 [$-$0.17, 0.26] & 0.71 & 0.047 [$-$0.09, 0.18] & 0.49 \\
+4th Down & 0.232 [$-$0.05, 0.49] & 0.12 & 0.016 [$-$0.16, 0.18] & 0.86 \\
+Pass-Heavy & 0.333* [0.11, 0.51] & 0.004 & $-$0.040 [$-$0.28, 0.22] & 0.75 \\
+Deep Pass & 0.101 [$-$0.12, 0.28] & 0.35 & 0.094 [$-$0.12, 0.30] & 0.38 \\
+Two-Point & 0.060 [$-$0.14, 0.29] & 0.52 & 0.048 [$-$0.09, 0.19] & 0.48 \\
 \midrule
-\multicolumn{5}{l}{\small OC: $n=193$ (40 mentors), DC: $n=241$ (33 mentors); mentor-clustered p and 95\% CI}\\
+\multicolumn{5}{l}{\small OC: $n=200$ (40 mentors), DC: $n=232$ (33 mentors); mentor-clustered p and 95\% CI}\\
 \multicolumn{5}{l}{\small DC p-values are wild cluster bootstrap (fewer than 40 mentors); * $p<0.05$}\\
 \bottomrule
 \end{tabular}
@@ -521,19 +521,19 @@ The aggression results suggest weak-to-absent strategic transmission. But aggres
 \toprule
 \textbf{Relationship} & \textbf{r} & \textbf{95\% CI} & \textbf{p} & \textbf{n} \\
 \midrule
-Overall & 0.299*** & [0.17, 0.42] & $<$0.001 & 612 \\
+Overall & 0.289*** & [0.16, 0.41] & $<$0.001 & 608 \\
 \cmidrule{1-5}
-OC $\rightarrow$ HC & 0.418*** & [0.24, 0.55] & $<$0.001 & 242 \\
-DC $\rightarrow$ HC & 0.097 & [$-$0.12, 0.30] & 0.42 & 278 \\
+OC $\rightarrow$ HC & 0.399*** & [0.21, 0.54] & $<$0.001 & 249 \\
+DC $\rightarrow$ HC & 0.096 & [$-$0.12, 0.30] & 0.43 & 269 \\
 \midrule
 \multicolumn{5}{l}{\small Mentor-clustered bootstrap p and 95\% CI; *** $p<0.001$}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Shotgun formation preference shows clearer overall inheritance ($r=0.299$, $p<0.001$, $n=612$), several times stronger than composite aggression ($r=0.076$), and the association holds under mentor clustering.
+Shotgun formation preference shows clearer overall inheritance ($r=0.289$, $p<0.001$, $n=608$), several times stronger than composite aggression ($r=0.080$), and the association holds under mentor clustering.
 
-Shotgun inheritance is specific to offensive backgrounds. Offensive coordinator prot\'{e}g\'{e}s show clear inheritance ($r=0.418$, $p<0.001$), while defensive coordinator prot\'{e}g\'{e}s show little ($r=0.097$, $p=0.42$). This domain-specificity is consistent with the mechanism: offensive coordinators design and install formation packages, while defensive coordinators have no direct role in shotgun usage decisions.
+Shotgun inheritance is specific to offensive backgrounds. Offensive coordinator prot\'{e}g\'{e}s show clear inheritance ($r=0.399$, $p<0.001$), while defensive coordinator prot\'{e}g\'{e}s show little ($r=0.096$, $p=0.43$). This domain-specificity is consistent with the mechanism: offensive coordinators design and install formation packages, while defensive coordinators have no direct role in shotgun usage decisions.
 
 \subsubsection{Synthesis: What Coaching Trees Actually Transmit}
 
@@ -546,12 +546,12 @@ Table~\ref{tab:tree_summary} synthesizes the coaching tree findings across all d
 \toprule
 \textbf{Dimension} & \textbf{Type} & \textbf{r} & \textbf{95\% CI} & \textbf{Transmitted?} \\
 \midrule
-Performance (WAR) & Outcome & 0.112 & [$-$0.04, 0.25] & No \\
-Composite Aggression & Situational & 0.076 & [$-$0.05, 0.21] & No \\
-4th Down Aggression & Situational & 0.167 & [$-$0.02, 0.34] & No$^{\dagger}$ \\
-Shotgun Formation (OC) & Schematic & 0.418*** & [0.24, 0.55] & Strongly \\
+Performance (WAR) & Outcome & 0.124 & [$-$0.01, 0.26] & No \\
+Composite Aggression & Situational & 0.080 & [$-$0.05, 0.22] & No \\
+4th Down Aggression & Situational & 0.172 & [$-$0.01, 0.34] & No$^{\dagger}$ \\
+Shotgun Formation (OC) & Schematic & 0.399*** & [0.21, 0.54] & Strongly \\
 \midrule
-\multicolumn{5}{l}{\small *** $p<0.001$ (mentor-clustered); Shotgun DC $\rightarrow$ HC: $r=0.097$, near zero}\\
+\multicolumn{5}{l}{\small *** $p<0.001$ (mentor-clustered); Shotgun DC $\rightarrow$ HC: $r=0.096$, near zero}\\
 \multicolumn{5}{l}{\small $^{\dagger}$ Stronger under unclustered p; weak after clustering ($p=0.08$)}\\
 \bottomrule
 \end{tabular}
@@ -595,7 +595,7 @@ Aggression & OC$\rightarrow$HC & 39 & $-$0.012 & [$-$0.34, 0.30] & 0.95 & 51\% \
 \end{tabular}
 \end{table}
 
-The results reinforce the mentor-prot\'{e}g\'{e} findings. Shotgun formation preference, the most visible schematic element of offensive identity, shows strong direct transmission ($r=0.670$, $p<0.001$), consistent with the OC mentor-prot\'{e}g\'{e} correlation ($r=0.418$, Table~\ref{tab:shotgun_inherit}). When an offensive coordinator runs shotgun-heavy formations, about 82\% of the time their subsequent head-coaching tenure shows the same tendency. Matt Nagy, for instance, carried a shotgun-heavy identity from his Kansas City coordinator years to his Chicago head-coaching tenure, and Jason Garrett a below-average one from his Dallas coordinator years through his decade as the team's head coach.
+The results reinforce the mentor-prot\'{e}g\'{e} findings. Shotgun formation preference, the most visible schematic element of offensive identity, shows strong direct transmission ($r=0.670$, $p<0.001$), consistent with the OC mentor-prot\'{e}g\'{e} correlation ($r=0.399$, Table~\ref{tab:shotgun_inherit}). When an offensive coordinator runs shotgun-heavy formations, about 82\% of the time their subsequent head-coaching tenure shows the same tendency. Matt Nagy, for instance, carried a shotgun-heavy identity from his Kansas City coordinator years to his Chicago head-coaching tenure, and Jason Garrett a below-average one from his Dallas coordinator years through his decade as the team's head coach.
 
 Defensive scheme also shows a positive association ($r=0.570$; $p=0.020$ from a wild cluster bootstrap appropriate to the small sample), though with only $n=17$ transitions, limited by defensive tracking data from 2016 onward, this is suggestive rather than definitive. Dan Quinn, for example, carried an aggressive defensive scheme from his Dallas coordinator tenure to Washington, and Matt Patricia a conservative one from New England to Detroit.
 
@@ -820,17 +820,17 @@ However, era-stratified within-coach estimates do not follow a monotone trend, p
 
 \subsection{Scheme Identity vs. Situational Decision-Making}
 
-Our analyses reveal a distinction between two types of coaching DNA, though not as clean as a simple binary. \emph{Schematic identity}, meaning formation preferences and defensive packages, transfers through offensive coaching trees (shotgun OC: $r=0.418$, $p<0.001$) and persists through promotion (shotgun: $r=0.670$, $p<0.001$; defensive scheme: $r=0.570$, suggestive at $n=17$). \emph{Situational decision-making}, the in-game risk choices, predicts performance (aggression: $r=0.189$, $p<0.001$, strengthening to $r=0.30$ at the career level) but is not transmitted through coaching trees ($r=0.076$, $p=0.26$).
+Our analyses reveal a distinction between two types of coaching DNA, though not as clean as a simple binary. \emph{Schematic identity}, meaning formation preferences and defensive packages, transfers through offensive coaching trees (shotgun OC: $r=0.399$, $p<0.001$) and persists through promotion (shotgun: $r=0.670$, $p<0.001$; defensive scheme: $r=0.570$, suggestive at $n=17$). \emph{Situational decision-making}, the in-game risk choices, predicts performance (aggression: $r=0.189$, $p<0.001$, strengthening to $r=0.30$ at the career level) but is not transmitted through coaching trees ($r=0.080$, $p=0.24$).
 
-Shotgun preference and defensive scheme bridge both categories. They transfer through coaching relationships \emph{and} predict performance (shotgun: $r=0.142$, $p=0.004$; defensive scheme: $r=0.151$, $p=0.015$). This suggests that some schematic choices are not purely stylistic, since they carry competitive implications. Transmission also appears domain-specific, with only offensive coordinators transmitting offensive schematic identity (shotgun DC: $r=0.097$, near zero), consistent with coaching DNA propagating through expertise rather than mere exposure.
+Shotgun preference and defensive scheme bridge both categories. They transfer through coaching relationships \emph{and} predict performance (shotgun: $r=0.142$, $p=0.004$; defensive scheme: $r=0.151$, $p=0.015$). This suggests that some schematic choices are not purely stylistic, since they carry competitive implications. Transmission also appears domain-specific, with only offensive coordinators transmitting offensive schematic identity (shotgun DC: $r=0.096$, near zero), consistent with coaching DNA propagating through expertise rather than mere exposure.
 
 The distinction also surfaces within aggression. Fourth-down philosophy is among the most persistent aggression components within coaches (Table~\ref{tab:persistence}), arguably the most ``schematic'' aspect of aggression given that teams develop explicit decision charts, even though its cross-coach \emph{inheritance} is weak once mentor clustering is applied (among components, only the pass-heavy OC inheritance remains). Pass-heavy and two-point tendencies are more reactive to game flow.
 
 \subsection{Challenging the Coaching Tree Narrative}
 
-The coaching tree narrative shapes NFL hiring decisions, but our data sit uneasily with its premises. Mentor WAR shows at most a weak association with prot\'{e}g\'{e} WAR ($r=0.112$, $p=0.13$), giving little indication that working under a successful coach makes a coach successful. Composite aggression shows little transmission ($r=0.076$). For situational decisions, the premises of pedigree-based hiring find little support here.
+The coaching tree narrative shapes NFL hiring decisions, but our data sit uneasily with its premises. Mentor WAR shows at most a weak association with prot\'{e}g\'{e} WAR ($r=0.124$, $p=0.074$), giving little indication that working under a successful coach makes a coach successful. Composite aggression shows little transmission ($r=0.080$). For situational decisions, the premises of pedigree-based hiring find little support here.
 
-However, offensive coaching trees \emph{do} transmit schematic identity. Shotgun preference shows clear OC mentor-prot\'{e}g\'{e} inheritance ($r=0.418$, $p<0.001$), and coordinator-to-HC analysis indicates that formation preferences ($r=0.670$) and defensive schemes ($r=0.570$) persist through promotion, while pace does not reliably once genes are cross-fit. When Matt Nagy left Kansas City's shotgun-heavy offense to coach Chicago, he installed a nearly identical formation philosophy. When Dan Quinn left Dallas's aggressive defensive scheme to coach Washington, his defense looked similar. Teams can reliably predict the \emph{system} a coordinator will install, but not whether they will win.
+However, offensive coaching trees \emph{do} transmit schematic identity. Shotgun preference shows clear OC mentor-prot\'{e}g\'{e} inheritance ($r=0.399$, $p<0.001$), and coordinator-to-HC analysis indicates that formation preferences ($r=0.670$) and defensive schemes ($r=0.570$) persist through promotion, while pace does not reliably once genes are cross-fit. When Matt Nagy left Kansas City's shotgun-heavy offense to coach Chicago, he installed a nearly identical formation philosophy. When Dan Quinn left Dallas's aggressive defensive scheme to coach Washington, his defense looked similar. Teams can reliably predict the \emph{system} a coordinator will install, but not whether they will win.
 
 \subsection{Limitations}
 
@@ -838,7 +838,7 @@ Several limitations warrant discussion beyond the causality concerns addressed e
 
 First, our play-by-play data begin in 2006, missing earlier eras. We cannot determine whether the early aggressive advantage we observe in 2006-2011 was itself a continuation of an even longer trend or represented a genuine inflection point. Historical data would reveal whether similar adoption curves occurred for previous innovations.
 
-Second, our inheritance analyses are limited by sample size. The career-average aggression analysis uses 517 mentor-prot\'{e}g\'{e} pairs, while the direct coordinator-to-HC gene analysis uses 17--39 transitions depending on gene type. The defensive scheme analysis is particularly constrained (n=17) because defensive tracking data only became available in 2016. We address the small-cluster regime by reporting wild cluster bootstrap p-values for subgroups with fewer than 40 clusters. Even so, the shotgun coordinator-to-HC result (n=39, $r=0.670$, $p<0.001$) is robust, and the OC mentor-prot\'{e}g\'{e} analysis (n=242, $r=0.418$, $p<0.001$) corroborates the pattern, whereas the defensive-scheme transition (n=17) should be read as suggestive.
+Second, our inheritance analyses are limited by sample size. The career-average aggression analysis uses 513 mentor-prot\'{e}g\'{e} pairs, while the direct coordinator-to-HC gene analysis uses 17--39 transitions depending on gene type. The defensive scheme analysis is particularly constrained (n=17) because defensive tracking data only became available in 2016. We address the small-cluster regime by reporting wild cluster bootstrap p-values for subgroups with fewer than 40 clusters. Even so, the shotgun coordinator-to-HC result (n=39, $r=0.670$, $p<0.001$) is robust, and the OC mentor-prot\'{e}g\'{e} analysis (n=249, $r=0.399$, $p<0.001$) corroborates the pattern, whereas the defensive-scheme transition (n=17) should be read as suggestive.
 
 Third, the gene-WAR correlations should be interpreted with caution regarding causality. The defensive scheme-WAR correlation ($r=0.151$) may reflect reverse causation: teams with better defensive talent can afford to play man coverage and send extra rushers, whereas the gene framework attributes this to coaching philosophy. Our residual approach controls for game situation but cannot fully separate scheme preference from roster-enabled opportunity.
 
@@ -858,7 +858,7 @@ First, coaching genes are genuine, stable traits of the coach rather than artifa
 
 Second, most genes predict performance, though differently. Composite aggression ($r=0.189$, $p<0.001$), shotgun formation ($r=0.142$, $p=0.004$), and defensive scheme ($r=0.151$, $p=0.015$) all correlate with WAR under coach-clustered inference, while tempo does not. Because single-season WAR is mostly noise, the more reliable anchor is the career level, where the aggression relationship strengthens to $r=0.30$. The aggression edge has diminished over time, from $r=0.24$ (2006--2011) to $r=0.10$ (2018--2024), with a 2012 structural break ($p=0.03$, just above the global false-discovery threshold), as analytics-driven tactics spread.
 
-Third, coaching trees transmit systems more than success or risk tolerance. Mentor WAR shows at most a weak association with prot\'{e}g\'{e} WAR ($r=0.112$, $p=0.13$), and composite aggression shows little inheritance ($r=0.076$). But shotgun formation preference transmits through offensive coaching trees ($r=0.418$, $p<0.001$), though not defensive ones ($r=0.097$), and direct coordinator-to-HC analysis indicates that schematic identity persists through promotion, with shotgun ($r=0.670$) and defensive scheme ($r=0.570$) falling below the global Benjamini-Hochberg threshold while pace and situational aggression do not. Organizations can reliably predict the system a coordinator will install but not whether they will win.
+Third, coaching trees transmit systems more than success or risk tolerance. Mentor WAR shows at most a weak association with prot\'{e}g\'{e} WAR ($r=0.124$, $p=0.074$), and composite aggression shows little inheritance ($r=0.080$). But shotgun formation preference transmits through offensive coaching trees ($r=0.399$, $p<0.001$), though not defensive ones ($r=0.096$), and direct coordinator-to-HC analysis indicates that schematic identity persists through promotion, with shotgun ($r=0.670$) and defensive scheme ($r=0.570$) falling below the global Benjamini-Hochberg threshold while pace and situational aggression do not. Organizations can reliably predict the system a coordinator will install but not whether they will win.
 
 Within-coach fixed-effects analysis adds causal support for the performance result (0.44 WAR games per standard deviation of aggression; within-coach $\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$), even as the cross-sectional edge has narrowed in the modern era. The frontier appears to have moved beyond aggression frequency, perhaps to scheme innovation, within-game adaptation speed, or player development, dimensions we are only beginning to measure.
 
