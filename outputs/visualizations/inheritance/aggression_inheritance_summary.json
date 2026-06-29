@@ -1,49 +1,49 @@
 {
   "overall": {
-    "correlation": 0.046025203817147045,
-    "p_value": 0.252878701265914,
-    "sample_size": 619,
+    "correlation": 0.04796680979426683,
+    "p_value": 0.23606114591081745,
+    "sample_size": 612,
     "significant": false
   },
   "by_relationship_type": {
     "position_to_coordinator": {
-      "correlation": 0.056286289015025484,
-      "p_value": 0.531307182977718,
-      "sample_size": 126,
+      "correlation": 0.05535689700426249,
+      "p_value": 0.5397694869718185,
+      "sample_size": 125,
       "significant": false
     },
     "position_to_hc": {
-      "correlation": 0.09286684551241514,
-      "p_value": 0.13456405369698757,
-      "sample_size": 261,
+      "correlation": 0.09658391513443969,
+      "p_value": 0.12102648027125283,
+      "sample_size": 259,
       "significant": false
     },
     "coordinator_to_hc": {
-      "correlation": -0.010744142313451822,
-      "p_value": 0.8706990022364082,
-      "sample_size": 232,
+      "correlation": -0.007783558164467266,
+      "p_value": 0.9069512315912703,
+      "sample_size": 228,
       "significant": false
     }
   },
   "by_component": {
     "4th Down": {
-      "correlation": 0.07823704368323471,
-      "p_value": 0.05170719090577866,
-      "significant": false
+      "correlation": 0.08227444306706552,
+      "p_value": 0.04188643626898225,
+      "significant": true
     },
     "Pass-Heavy": {
-      "correlation": 0.028246162320484595,
-      "p_value": 0.4830060968082977,
+      "correlation": 0.0230161908617802,
+      "p_value": 0.5698310487643821,
       "significant": false
     },
     "Deep Pass": {
-      "correlation": 0.05728679080059738,
-      "p_value": 0.15457181203125184,
+      "correlation": 0.05969665064658827,
+      "p_value": 0.14018293809389126,
       "significant": false
     },
     "2-Point": {
-      "correlation": 0.024861354633206042,
-      "p_value": 0.5369785063377943,
+      "correlation": 0.03127718534442614,
+      "p_value": 0.4399000910038713,
       "significant": false
     }
   }

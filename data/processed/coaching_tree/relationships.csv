@@ -726,10 +726,10 @@ year,child_id,child_name,child_role,parent_id,parent_name,parent_role,team,relat
 1996,chris_palmer,Chris Palmer,Quarterbacks,bill_parcells,Bill Parcells,Head Coach,nwe,position_to_hc
 1997,chris_palmer,Chris Palmer,Offensive Coordinator,tom_coughlin,Tom Coughlin,Head Coach,jax,coordinator_to_hc
 1998,chris_palmer,Chris Palmer,Offensive Coordinator,tom_coughlin,Tom Coughlin,Head Coach,jax,coordinator_to_hc
-2002,chris_palmer,Chris Palmer,Offensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
-2003,chris_palmer,Chris Palmer,Offensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
-2004,chris_palmer,Chris Palmer,Offensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
-2005,chris_palmer,Chris Palmer,Offensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
+2002,chris_palmer,Chris Palmer,Offensive Coordinator,dom_capers,Dom Capers,Head Coach,htx,coordinator_to_hc
+2003,chris_palmer,Chris Palmer,Offensive Coordinator,dom_capers,Dom Capers,Head Coach,htx,coordinator_to_hc
+2004,chris_palmer,Chris Palmer,Offensive Coordinator,dom_capers,Dom Capers,Head Coach,htx,coordinator_to_hc
+2005,chris_palmer,Chris Palmer,Offensive Coordinator,dom_capers,Dom Capers,Head Coach,htx,coordinator_to_hc
 2006,chris_palmer,Chris Palmer,Quarterbacks,bill_parcells,Bill Parcells,Head Coach,dal,position_to_hc
 2007,chris_palmer,Chris Palmer,Quarterbacks,kevin_gilbride,Kevin Gilbride,Offensive Coordinator,nyg,position_to_coordinator
 2007,chris_palmer,Chris Palmer,Quarterbacks,tom_coughlin,Tom Coughlin,Head Coach,nyg,position_to_hc
@@ -2782,11 +2782,11 @@ year,child_id,child_name,child_role,parent_id,parent_name,parent_role,team,relat
 2019,kevin_stefanski,Kevin Stefanski,Offensive Coordinator,mike_zimmer,Mike Zimmer,Head Coach,min,coordinator_to_hc
 2024,kliff_kingsbury,Kliff Kingsbury,Offensive Coordinator,dan_quinn,Dan Quinn,Head Coach,was,coordinator_to_hc
 2025,kliff_kingsbury,Kliff Kingsbury,Offensive Coordinator,dan_quinn,Dan Quinn,Head Coach,was,coordinator_to_hc
-2006,kyle_shanahan,Kyle Shanahan,Wide Receivers,jeff_fisher,Jeff Fisher,Head Coach,htx,position_to_hc
+2006,kyle_shanahan,Kyle Shanahan,Wide Receivers,gary_kubiak,Gary Kubiak,Head Coach,htx,position_to_hc
 2007,kyle_shanahan,Kyle Shanahan,Quarterbacks,mike_sherman,Mike Sherman,Offensive Coordinator,htx,position_to_coordinator
-2007,kyle_shanahan,Kyle Shanahan,Quarterbacks,jeff_fisher,Jeff Fisher,Head Coach,htx,position_to_hc
-2008,kyle_shanahan,Kyle Shanahan,Offensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
-2009,kyle_shanahan,Kyle Shanahan,Offensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
+2007,kyle_shanahan,Kyle Shanahan,Quarterbacks,gary_kubiak,Gary Kubiak,Head Coach,htx,position_to_hc
+2008,kyle_shanahan,Kyle Shanahan,Offensive Coordinator,gary_kubiak,Gary Kubiak,Head Coach,htx,coordinator_to_hc
+2009,kyle_shanahan,Kyle Shanahan,Offensive Coordinator,gary_kubiak,Gary Kubiak,Head Coach,htx,coordinator_to_hc
 2010,kyle_shanahan,Kyle Shanahan,Offensive Coordinator,mike_shanahan,Mike Shanahan,Head Coach,was,coordinator_to_hc
 2011,kyle_shanahan,Kyle Shanahan,Offensive Coordinator,mike_shanahan,Mike Shanahan,Head Coach,was,coordinator_to_hc
 2012,kyle_shanahan,Kyle Shanahan,Offensive Coordinator,mike_shanahan,Mike Shanahan,Head Coach,was,coordinator_to_hc
@@ -2878,7 +2878,7 @@ year,child_id,child_name,child_role,parent_id,parent_name,parent_role,team,relat
 2001,lovie_smith,Lovie Smith,Defensive Coordinator,mike_martz,Mike Martz,Head Coach,ram,coordinator_to_hc
 2002,lovie_smith,Lovie Smith,Defensive Coordinator,mike_martz,Mike Martz,Head Coach,ram,coordinator_to_hc
 2003,lovie_smith,Lovie Smith,Defensive Coordinator,mike_martz,Mike Martz,Head Coach,ram,coordinator_to_hc
-2021,lovie_smith,Lovie Smith,Defensive Coordinator,mike_vrabel,Mike Vrabel,Head Coach,htx,coordinator_to_hc
+2021,lovie_smith,Lovie Smith,Defensive Coordinator,david_culley,David Culley,Head Coach,htx,coordinator_to_hc
 1945,lud_wray,Lud Wray,Line Coach,jim_leonard,Jim Leonard,Head Coach,pit,position_to_hc
 1985,marc_trestman,Marc Trestman,Running Backs,jerry_burns,Jerry Burns,Offensive Coordinator,min,position_to_coordinator
 1985,marc_trestman,Marc Trestman,Running Backs,bud_grant,Bud Grant,Head Coach,min,position_to_hc
@@ -3284,8 +3284,8 @@ year,child_id,child_name,child_role,parent_id,parent_name,parent_role,team,relat
 1997,mike_sherman,Mike Sherman,Tight Ends/Assistant Offensive Line,mike_holmgren,Mike Holmgren,Head Coach,gnb,position_to_hc
 1998,mike_sherman,Mike Sherman,Tight Ends/Assistant Offensive Line,mike_holmgren,Mike Holmgren,Head Coach,gnb,position_to_hc
 1999,mike_sherman,Mike Sherman,Offensive Coordinator,mike_holmgren,Mike Holmgren,Head Coach,sea,coordinator_to_hc
-2006,mike_sherman,Mike Sherman,Assistant Head Coach/Offense,jeff_fisher,Jeff Fisher,Head Coach,htx,position_to_hc
-2007,mike_sherman,Mike Sherman,Offensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
+2006,mike_sherman,Mike Sherman,Assistant Head Coach/Offense,gary_kubiak,Gary Kubiak,Head Coach,htx,position_to_hc
+2007,mike_sherman,Mike Sherman,Offensive Coordinator,gary_kubiak,Gary Kubiak,Head Coach,htx,coordinator_to_hc
 2012,mike_sherman,Mike Sherman,Offensive Coordinator,joe_philbin,Joe Philbin,Head Coach,mia,coordinator_to_hc
 2013,mike_sherman,Mike Sherman,Offensive Coordinator,joe_philbin,Joe Philbin,Head Coach,mia,coordinator_to_hc
 2003,mike_singletary,Mike Singletary,Linebackers,mike_nolan,Mike Nolan,Defensive Coordinator,rav,position_to_coordinator
@@ -3349,12 +3349,12 @@ year,child_id,child_name,child_role,parent_id,parent_name,parent_role,team,relat
 2005,mike_tomlin,Mike Tomlin,Defensive Backs,jon_gruden,Jon Gruden,Head Coach,tam,position_to_hc
 2006,mike_tomlin,Mike Tomlin,Defensive Coordinator,brad_childress,Brad Childress,Head Coach,min,coordinator_to_hc
 2014,mike_vrabel,Mike Vrabel,Linebackers,romeo_crennel,Romeo Crennel,Defensive Coordinator,htx,position_to_coordinator
-2014,mike_vrabel,Mike Vrabel,Linebackers,ken_whisenhunt,Ken Whisenhunt,Head Coach,htx,position_to_hc
+2014,mike_vrabel,Mike Vrabel,Linebackers,bill_o'brien,Bill O'Brien,Head Coach,htx,position_to_hc
 2015,mike_vrabel,Mike Vrabel,Linebackers,romeo_crennel,Romeo Crennel,Defensive Coordinator,htx,position_to_coordinator
-2015,mike_vrabel,Mike Vrabel,Linebackers,ken_whisenhunt,Ken Whisenhunt,Head Coach,htx,position_to_hc
+2015,mike_vrabel,Mike Vrabel,Linebackers,bill_o'brien,Bill O'Brien,Head Coach,htx,position_to_hc
 2016,mike_vrabel,Mike Vrabel,Linebackers,romeo_crennel,Romeo Crennel,Defensive Coordinator,htx,position_to_coordinator
-2016,mike_vrabel,Mike Vrabel,Linebackers,mike_mularkey,Mike Mularkey,Head Coach,htx,position_to_hc
-2017,mike_vrabel,Mike Vrabel,Defensive Coordinator,mike_mularkey,Mike Mularkey,Head Coach,htx,coordinator_to_hc
+2016,mike_vrabel,Mike Vrabel,Linebackers,bill_o'brien,Bill O'Brien,Head Coach,htx,position_to_hc
+2017,mike_vrabel,Mike Vrabel,Defensive Coordinator,bill_o'brien,Bill O'Brien,Head Coach,htx,coordinator_to_hc
 1978,mike_white,Mike White,Offensive Line,fred_o'connor,Fred O'Connor,Offensive Coordinator,sfo,position_to_coordinator
 1978,mike_white,Mike White,Offensive Line,pete_mcculley,Pete McCulley,Head Coach,sfo,position_to_hc
 1979,mike_white,Mike White,Offensive Line,bill_walsh,Bill Walsh,Head Coach,sfo,position_to_hc
@@ -4101,14 +4101,13 @@ year,child_id,child_name,child_role,parent_id,parent_name,parent_role,team,relat
 2004,romeo_crennel,Romeo Crennel,Defensive Coordinator,bill_belichick,Bill Belichick,Head Coach,nwe,coordinator_to_hc
 2010,romeo_crennel,Romeo Crennel,Defensive Coordinator,todd_haley,Todd Haley,Head Coach,kan,coordinator_to_hc
 2011,romeo_crennel,Romeo Crennel,Defensive Coordinator,todd_haley,Todd Haley,Head Coach,kan,coordinator_to_hc
-2014,romeo_crennel,Romeo Crennel,Defensive Coordinator,ken_whisenhunt,Ken Whisenhunt,Head Coach,htx,coordinator_to_hc
-2015,romeo_crennel,Romeo Crennel,Defensive Coordinator,ken_whisenhunt,Ken Whisenhunt,Head Coach,htx,coordinator_to_hc
-2016,romeo_crennel,Romeo Crennel,Defensive Coordinator,mike_mularkey,Mike Mularkey,Head Coach,htx,coordinator_to_hc
-2017,romeo_crennel,Romeo Crennel,Asst. Head Coach,mike_mularkey,Mike Mularkey,Head Coach,htx,position_to_hc
-2018,romeo_crennel,Romeo Crennel,Defensive Coordinator,mike_vrabel,Mike Vrabel,Head Coach,htx,coordinator_to_hc
-2019,romeo_crennel,Romeo Crennel,Defensive Coordinator,mike_vrabel,Mike Vrabel,Head Coach,htx,coordinator_to_hc
-2020,romeo_crennel,Romeo Crennel,Asst. Head Coach/Interim Head Coach,arthur_smith,Arthur Smith,Offensive Coordinator,htx,position_to_coordinator
-2020,romeo_crennel,Romeo Crennel,Asst. Head Coach/Interim Head Coach,mike_vrabel,Mike Vrabel,Head Coach,htx,position_to_hc
+2014,romeo_crennel,Romeo Crennel,Defensive Coordinator,bill_o'brien,Bill O'Brien,Head Coach,htx,coordinator_to_hc
+2015,romeo_crennel,Romeo Crennel,Defensive Coordinator,bill_o'brien,Bill O'Brien,Head Coach,htx,coordinator_to_hc
+2016,romeo_crennel,Romeo Crennel,Defensive Coordinator,bill_o'brien,Bill O'Brien,Head Coach,htx,coordinator_to_hc
+2017,romeo_crennel,Romeo Crennel,Asst. Head Coach,bill_o'brien,Bill O'Brien,Head Coach,htx,position_to_hc
+2018,romeo_crennel,Romeo Crennel,Defensive Coordinator,bill_o'brien,Bill O'Brien,Head Coach,htx,coordinator_to_hc
+2019,romeo_crennel,Romeo Crennel,Defensive Coordinator,bill_o'brien,Bill O'Brien,Head Coach,htx,coordinator_to_hc
+2020,romeo_crennel,Romeo Crennel,Asst. Head Coach/Interim Head Coach,bill_o'brien,Bill O'Brien,Head Coach,htx,position_to_hc
 1973,ron_erhardt,Ron Erhardt,Offensive Backs,chuck_fairbanks,Chuck Fairbanks,Head Coach,nwe,position_to_hc
 1974,ron_erhardt,Ron Erhardt,Offensive Backs,chuck_fairbanks,Chuck Fairbanks,Head Coach,nwe,position_to_hc
 1975,ron_erhardt,Ron Erhardt,Offensive Backs,chuck_fairbanks,Chuck Fairbanks,Head Coach,nwe,position_to_hc
@@ -4514,11 +4513,11 @@ year,child_id,child_name,child_role,parent_id,parent_name,parent_role,team,relat
 2009,vance_joseph,Vance Joseph,Defensive Backs,mike_singletary,Mike Singletary,Head Coach,sfo,position_to_hc
 2010,vance_joseph,Vance Joseph,Defensive Backs,mike_singletary,Mike Singletary,Head Coach,sfo,position_to_hc
 2011,vance_joseph,Vance Joseph,Defensive Backs,wade_phillips,Wade Phillips,Defensive Coordinator,htx,position_to_coordinator
-2011,vance_joseph,Vance Joseph,Defensive Backs,mike_munchak,Mike Munchak,Head Coach,htx,position_to_hc
+2011,vance_joseph,Vance Joseph,Defensive Backs,gary_kubiak,Gary Kubiak,Head Coach,htx,position_to_hc
 2012,vance_joseph,Vance Joseph,Defensive Backs,wade_phillips,Wade Phillips,Defensive Coordinator,htx,position_to_coordinator
-2012,vance_joseph,Vance Joseph,Defensive Backs,mike_munchak,Mike Munchak,Head Coach,htx,position_to_hc
+2012,vance_joseph,Vance Joseph,Defensive Backs,gary_kubiak,Gary Kubiak,Head Coach,htx,position_to_hc
 2013,vance_joseph,Vance Joseph,Defensive Backs,wade_phillips,Wade Phillips,Defensive Coordinator,htx,position_to_coordinator
-2013,vance_joseph,Vance Joseph,Defensive Backs,mike_munchak,Mike Munchak,Head Coach,htx,position_to_hc
+2013,vance_joseph,Vance Joseph,Defensive Backs,gary_kubiak,Gary Kubiak,Head Coach,htx,position_to_hc
 2014,vance_joseph,Vance Joseph,Defensive Backs,marvin_lewis,Marvin Lewis,Head Coach,cin,position_to_hc
 2015,vance_joseph,Vance Joseph,Defensive Backs,marvin_lewis,Marvin Lewis,Head Coach,cin,position_to_hc
 2016,vance_joseph,Vance Joseph,Defensive Coordinator,adam_gase,Adam Gase,Head Coach,mia,coordinator_to_hc
@@ -4545,10 +4544,10 @@ year,child_id,child_name,child_role,parent_id,parent_name,parent_role,team,relat
 1999,vic_fangio,Vic Fangio,Defensive Coordinator,jim_mora_sr,Jim Mora Sr,Head Coach,clt,coordinator_to_hc
 2000,vic_fangio,Vic Fangio,Defensive Coordinator,jim_mora_sr,Jim Mora Sr,Head Coach,clt,coordinator_to_hc
 2001,vic_fangio,Vic Fangio,Defensive Coordinator,jim_mora_sr,Jim Mora Sr,Head Coach,clt,coordinator_to_hc
-2002,vic_fangio,Vic Fangio,Defensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
-2003,vic_fangio,Vic Fangio,Defensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
-2004,vic_fangio,Vic Fangio,Defensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
-2005,vic_fangio,Vic Fangio,Defensive Coordinator,jeff_fisher,Jeff Fisher,Head Coach,htx,coordinator_to_hc
+2002,vic_fangio,Vic Fangio,Defensive Coordinator,dom_capers,Dom Capers,Head Coach,htx,coordinator_to_hc
+2003,vic_fangio,Vic Fangio,Defensive Coordinator,dom_capers,Dom Capers,Head Coach,htx,coordinator_to_hc
+2004,vic_fangio,Vic Fangio,Defensive Coordinator,dom_capers,Dom Capers,Head Coach,htx,coordinator_to_hc
+2005,vic_fangio,Vic Fangio,Defensive Coordinator,dom_capers,Dom Capers,Head Coach,htx,coordinator_to_hc
 2006,vic_fangio,Vic Fangio,Linebackers,rex_ryan,Rex Ryan,Defensive Coordinator,rav,position_to_coordinator
 2006,vic_fangio,Vic Fangio,Linebackers,brian_billick,Brian Billick,Head Coach,rav,position_to_hc
 2007,vic_fangio,Vic Fangio,Linebackers,rex_ryan,Rex Ryan,Defensive Coordinator,rav,position_to_coordinator
@@ -4612,9 +4611,9 @@ year,child_id,child_name,child_role,parent_id,parent_name,parent_role,team,relat
 2004,wade_phillips,Wade Phillips,Defensive Coordinator,marty_schottenheimer,Marty Schottenheimer,Head Coach,sdg,coordinator_to_hc
 2005,wade_phillips,Wade Phillips,Defensive Coordinator,marty_schottenheimer,Marty Schottenheimer,Head Coach,sdg,coordinator_to_hc
 2006,wade_phillips,Wade Phillips,Defensive Coordinator,marty_schottenheimer,Marty Schottenheimer,Head Coach,sdg,coordinator_to_hc
-2011,wade_phillips,Wade Phillips,Defensive Coordinator,mike_munchak,Mike Munchak,Head Coach,htx,coordinator_to_hc
-2012,wade_phillips,Wade Phillips,Defensive Coordinator,mike_munchak,Mike Munchak,Head Coach,htx,coordinator_to_hc
-2013,wade_phillips,Wade Phillips,Defensive Coordinator,mike_munchak,Mike Munchak,Head Coach,htx,coordinator_to_hc
+2011,wade_phillips,Wade Phillips,Defensive Coordinator,gary_kubiak,Gary Kubiak,Head Coach,htx,coordinator_to_hc
+2012,wade_phillips,Wade Phillips,Defensive Coordinator,gary_kubiak,Gary Kubiak,Head Coach,htx,coordinator_to_hc
+2013,wade_phillips,Wade Phillips,Defensive Coordinator,gary_kubiak,Gary Kubiak,Head Coach,htx,coordinator_to_hc
 2015,wade_phillips,Wade Phillips,Defensive Coordinator,gary_kubiak,Gary Kubiak,Head Coach,den,coordinator_to_hc
 2016,wade_phillips,Wade Phillips,Defensive Coordinator,gary_kubiak,Gary Kubiak,Head Coach,den,coordinator_to_hc
 2017,wade_phillips,Wade Phillips,Defensive Coordinator,sean_mcvay,Sean McVay,Head Coach,ram,coordinator_to_hc
