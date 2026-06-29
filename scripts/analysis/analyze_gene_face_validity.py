@@ -55,9 +55,14 @@ def rank_gene(csv, gene_col, coach_col, min_seasons, top_n):
     career = career[career["seasons"] >= min_seasons].sort_values("gene", ascending=False)
     if career.empty:
         return None
-    top = [{"coach": c, "gene": round(float(r.gene), 4), "seasons": int(r.seasons)}
+    # Standardize the career-mean gene across coaches so magnitudes are comparable
+    # across genes (z = SDs above/below the average qualifying coach).
+    mu = float(career["gene"].mean())
+    sd = float(career["gene"].std(ddof=0))
+    career["z"] = (career["gene"] - mu) / sd if sd > 0 else 0.0
+    top = [{"coach": c, "gene": round(float(r.gene), 4), "z": round(float(r.z), 2), "seasons": int(r.seasons)}
            for c, r in career.head(top_n).iterrows()]
-    bottom = [{"coach": c, "gene": round(float(r.gene), 4), "seasons": int(r.seasons)}
+    bottom = [{"coach": c, "gene": round(float(r.gene), 4), "z": round(float(r.z), 2), "seasons": int(r.seasons)}
               for c, r in career.tail(top_n).iloc[::-1].iterrows()]
     return {"n_coaches": int(len(career)), "top": top, "bottom": bottom}
 

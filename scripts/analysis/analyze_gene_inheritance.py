@@ -152,13 +152,17 @@ class InheritanceAnalyzer:
     def build_transitions(self) -> List[dict]:
         """Build coordinator->HC transitions from coaches.json.
 
-        For each coach and each coordinator role (DC, OC) we retain only the
-        MOST RECENT coordinator stint and pair it with the first HC stint that
-        starts after that stint ends (temporal ordering enforced). Keeping a
-        single stint per coach per role avoids pseudo-replication: a coach with
-        several earlier coordinator stints would otherwise contribute several
-        rows that all pair with the same head-coaching outcome, duplicating the
-        HC-era gene and over-weighting that coach in the correlation.
+        For each coach and each coordinator role (DC, OC) we retain a single
+        transition: the MOST RECENT coordinator stint that PRECEDES a head-
+        coaching role, paired with the first HC stint that starts after that
+        coordinator stint ends (temporal ordering enforced). A later coordinator
+        stint with no subsequent HC job cannot be paired and is skipped, so the
+        chosen stint is the most recent coordinator-then-HC transition rather
+        than the most recent coordinator stint overall. Keeping a single stint
+        per coach per role avoids pseudo-replication: a coach with several
+        earlier coordinator stints would otherwise contribute several rows that
+        all pair with the same head-coaching outcome, duplicating the HC-era
+        gene and over-weighting that coach in the correlation.
         """
         transitions = []
 

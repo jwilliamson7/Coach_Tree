@@ -1,0 +1,24 @@
+{
+  "Offensive": {
+    "correlation": 0.15430403023093497,
+    "p_value": 0.051392316148023184,
+    "n": 160,
+    "ci_low": 0.00515609761507408,
+    "ci_high": 0.29557331085283023,
+    "n_coaches": 44,
+    "p_clustered": 0.048,
+    "small_cluster": false,
+    "p_wild_cluster": null
+  },
+  "Defensive": {
+    "correlation": 0.026545168200421427,
+    "p_value": 0.793197713556815,
+    "n": 100,
+    "ci_low": -0.14127779919451933,
+    "ci_high": 0.20606192313938687,
+    "n_coaches": 29,
+    "p_clustered": 0.799,
+    "small_cluster": true,
+    "p_wild_cluster": 0.775
+  }
+}
