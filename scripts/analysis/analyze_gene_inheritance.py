@@ -33,6 +33,7 @@ from scipy import stats
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.parsimony import cluster_bootstrap_corr, corr_with_small_cluster_guard
+from crawlers.utils.data_constants import pfr_to_pbp, pfr_to_hc_csv
 
 # Configure logging
 logging.basicConfig(
@@ -42,37 +43,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# =============================================================================
-# PFR -> PBP Team Abbreviation Mapping
-# =============================================================================
-
-# Static mappings for teams whose PBP code doesn't change in the modern era
-PFR_TO_PBP_STATIC = {
-    'atl': 'ATL', 'buf': 'BUF', 'car': 'CAR', 'chi': 'CHI',
-    'cin': 'CIN', 'cle': 'CLE', 'clt': 'IND', 'crd': 'ARI',
-    'dal': 'DAL', 'den': 'DEN', 'det': 'DET', 'gnb': 'GB',
-    'htx': 'HOU', 'jax': 'JAX', 'kan': 'KC', 'mia': 'MIA',
-    'min': 'MIN', 'nor': 'NO', 'nwe': 'NE', 'nyg': 'NYG',
-    'nyj': 'NYJ', 'oti': 'TEN', 'phi': 'PHI', 'pit': 'PIT',
-    'rav': 'BAL', 'sea': 'SEA', 'sfo': 'SF', 'tam': 'TB', 'was': 'WAS',
-}
-
-
-def pfr_to_pbp(pfr_code: str, year: int) -> str:
-    """Convert PFR lowercase team code to PBP format for a given year.
-
-    Handles year-dependent relocations (Raiders, Chargers, Rams).
-    """
-    if pfr_code in PFR_TO_PBP_STATIC:
-        return PFR_TO_PBP_STATIC[pfr_code]
-    # Year-dependent relocations
-    if pfr_code in ('rai', 'oak', 'lvr'):
-        return 'LV' if year >= 2020 else 'OAK'
-    if pfr_code in ('sdg', 'lac', 'sd'):
-        return 'LAC' if year >= 2017 else 'SD'
-    if pfr_code in ('ram', 'lar', 'stl'):
-        return 'LA' if year >= 2016 else 'STL'
-    return pfr_code.upper()  # fallback
+# Team-code converters (pfr_to_pbp, pfr_to_hc_csv) are imported from
+# crawlers.utils.data_constants so the year-aware relocation logic lives in a
+# single place (next to standardize_team_abbreviation).
 
 
 # =============================================================================
@@ -280,15 +253,14 @@ class InheritanceAnalyzer:
         return None
 
     def _get_hc_name(self, team_pfr: str, year: int) -> Optional[str]:
-        """Get HC name for a team-year from team_year_head_coaches.csv.
-
-        team_year_head_coaches.csv uses uppercase PFR codes (CRD, GNB, KAN).
-        """
+        """Get HC name for a team-year from team_year_head_coaches.csv, using the
+        year-aware franchise mapping pfr_to_hc_csv (so relocated teams, e.g. the
+        Rams' STL/LAR codes, resolve correctly)."""
         if self.hc_mapping is None:
             return None
-        team_upper = team_pfr.upper()
+        team_code = pfr_to_hc_csv(team_pfr, year)
         match = self.hc_mapping[
-            (self.hc_mapping['Team'] == team_upper) &
+            (self.hc_mapping['Team'] == team_code) &
             (self.hc_mapping['Year'] == year)
         ]
         if len(match) == 1:

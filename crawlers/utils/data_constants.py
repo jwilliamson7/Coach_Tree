@@ -551,3 +551,67 @@ def standardize_team_abbreviation(team: str, year: Optional[int] = None) -> str:
 
     # If no mapping found, return lowercase version
     return team_str.lower()
+
+
+# =============================================================================
+# Source-specific team-code converters (single source of truth)
+# =============================================================================
+# These translate the canonical PFR franchise key (the output of
+# standardize_team_abbreviation) into the code used by a specific data source.
+# Both are year-aware by contract (they take a year); they differ only in how
+# the SOURCE keys relocated franchises by season:
+#   - Play-by-play / gene CSVs (nflfastR) back-apply each franchise's CURRENT
+#     code to every season, so pfr_to_pbp returns the modern code for all years.
+#   - team_year_head_coaches.csv stores the HISTORICAL code, so pfr_to_hc_csv
+#     returns different codes on either side of the relocation boundary.
+
+# PFR canonical -> play-by-play code, for franchises with a stable PBP code.
+PFR_TO_PBP_STATIC = {
+    'atl': 'ATL', 'buf': 'BUF', 'car': 'CAR', 'chi': 'CHI',
+    'cin': 'CIN', 'cle': 'CLE', 'clt': 'IND', 'crd': 'ARI',
+    'dal': 'DAL', 'den': 'DEN', 'det': 'DET', 'gnb': 'GB',
+    'htx': 'HOU', 'jax': 'JAX', 'kan': 'KC', 'mia': 'MIA',
+    'min': 'MIN', 'nor': 'NO', 'nwe': 'NE', 'nyg': 'NYG',
+    'nyj': 'NYJ', 'oti': 'TEN', 'phi': 'PHI', 'pit': 'PIT',
+    'rav': 'BAL', 'sea': 'SEA', 'sfo': 'SF', 'tam': 'TB', 'was': 'WAS',
+}
+
+
+def pfr_to_pbp(pfr_code, year):
+    """Canonical PFR code + year -> play-by-play (nflfastR) code.
+
+    Year-aware by contract. nflfastR back-applies each franchise's CURRENT code
+    to every season (verified against the gene CSVs: Raiders are LV, Chargers
+    LAC, Rams LA for all 2016--2024 seasons, with no OAK/SD/STL), so for this
+    source the per-year code is the modern one. The ``year`` argument keeps the
+    converter uniform with pfr_to_hc_csv and guards against a future convention
+    change.
+    """
+    code = (pfr_code or '').lower()
+    if code in PFR_TO_PBP_STATIC:
+        return PFR_TO_PBP_STATIC[code]
+    if code in ('rai', 'oak', 'lvr'):
+        return 'LV'
+    if code in ('sdg', 'sd', 'lac'):
+        return 'LAC'
+    if code in ('ram', 'lar', 'stl'):
+        return 'LA'
+    return code.upper()  # fallback
+
+
+def pfr_to_hc_csv(pfr_code, year):
+    """Canonical PFR code -> the code used in team_year_head_coaches.csv.
+
+    That file stores HISTORICAL codes, so this mapping is YEAR-AWARE: Rams RAM
+    (<=1994) / STL (1995-2015) / LAR (>=2016); Raiders RAI (<=2019) / LVR
+    (>=2020); Chargers SDG (all years). Every other franchise is the uppercased
+    PFR code.
+    """
+    code = (pfr_code or '').lower()
+    if code in ('ram', 'lar', 'stl'):
+        return 'LAR' if year >= 2016 else ('STL' if year >= 1995 else 'RAM')
+    if code in ('rai', 'oak', 'lvr'):
+        return 'LVR' if year >= 2020 else 'RAI'
+    if code in ('sdg', 'sd', 'lac'):
+        return 'SDG'
+    return code.upper()
