@@ -355,98 +355,64 @@ class InheritanceByTypeAnalyzer:
 
         return results
 
-    def create_visualization_by_type(self, pairs_df, mentor_type_results):
-        """Create scatter plots by mentor type"""
-        logger.info("\nCreating visualization by mentor type...")
+    def create_visualization_by_type(self, coord_type_results):
+        """Forest plot of OC vs DC coordinator-to-HC inheritance r with 95% CIs per component."""
+        logger.info("\nCreating coordinator-type forest plot...")
 
         import sys
         sys.path.insert(0, str(Path(__file__).parent.parent / 'visualization'))
         from plot_config import configure_plots
         configure_plots()
 
-        aggression_types = [
+        # Top-to-bottom display order (composite first)
+        comps = [
+            ('composite', 'Composite'),
             ('fourth_down', '4th Down'),
             ('pass_heavy', 'Pass-Heavy'),
             ('deep_pass', 'Deep Pass'),
             ('two_point', 'Two-Point'),
-            ('composite', 'Composite')
         ]
+        colors = {'OC': '#FF6B35', 'DC': '#004E89'}
+        offsets = {'OC': 0.15, 'DC': -0.15}
+        labels = {'OC': 'OC -> HC', 'DC': 'DC -> HC'}
 
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        axes = axes.flatten()
+        fig, ax = plt.subplots(figsize=(9, 6))
+        yticks, ylabels = [], []
+        seen_legend = set()
 
-        colors = {'Offensive': '#FF6B35', 'Defensive': '#004E89'}
-
-        def percent_formatter(x, pos):
-            return f"{x*100:+.1f}%"
-
-        for idx, (var, label) in enumerate(aggression_types):
-            ax = axes[idx]
-
-            mentor_col = f'{var}_mentor'
-            protege_col = f'{var}_protege'
-
-            for bg_type in ['Offensive', 'Defensive']:
-                bg_pairs = pairs_df[pairs_df['mentor_background'] == bg_type]
-                clean_data = bg_pairs[[mentor_col, protege_col]].dropna()
-
-                if len(clean_data) < 10:
+        for i, (var, label) in enumerate(comps):
+            y = len(comps) - i
+            yticks.append(y)
+            ylabels.append(label)
+            for ct in ['OC', 'DC']:
+                res = coord_type_results.get(ct, {}).get(var)
+                if not res:
                     continue
+                r = res['correlation']
+                lo = res.get('ci_low', r)
+                hi = res.get('ci_high', r)
+                yy = y + offsets[ct]
+                ax.errorbar(
+                    r, yy, xerr=[[max(0.0, r - lo)], [max(0.0, hi - r)]],
+                    fmt='o', color=colors[ct], ecolor=colors[ct], elinewidth=2,
+                    capsize=3, markersize=8, markeredgecolor='black', markeredgewidth=0.6,
+                    label=labels[ct] if ct not in seen_legend else None,
+                )
+                seen_legend.add(ct)
 
-                x = clean_data[mentor_col]
-                y = clean_data[protege_col]
-
-                # Scatter plot
-                ax.scatter(x, y, c=colors[bg_type], alpha=0.5, s=60,
-                          edgecolors='black', linewidth=0.5, label=bg_type)
-
-                # Regression line
-                corr, p_val = stats.pearsonr(x, y)
-                slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
-                x_range = np.array([x.min(), x.max()])
-                ax.plot(x_range, slope * x_range + intercept,
-                       color=colors[bg_type], linestyle='--', linewidth=2, alpha=0.7)
-
-            # Reference lines
-            ax.axhline(y=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
-            ax.axvline(x=0, color='gray', linestyle=':', linewidth=1, alpha=0.5)
-
-            # Labels
-            ax.set_xlabel('Mentor Aggression POE', fontsize=13, fontweight='bold')
-            ax.set_ylabel('Protégé Aggression POE', fontsize=13, fontweight='bold')
-            ax.set_title(f'{label} Aggression', fontsize=14, fontweight='bold', pad=10)
-
-            # Format axes
-            ax.xaxis.set_major_formatter(FuncFormatter(percent_formatter))
-            ax.yaxis.set_major_formatter(FuncFormatter(percent_formatter))
-
-            # Add statistics
-            stats_text = []
-            for bg_type in ['Offensive', 'Defensive']:
-                if bg_type in mentor_type_results and var in mentor_type_results[bg_type]:
-                    result = mentor_type_results[bg_type][var]
-                    sig = "SIG" if result['significant'] else "n.s."
-                    stats_text.append(f"{bg_type}: r={result['correlation']:.3f} ({sig})")
-
-            if stats_text:
-                ax.text(0.05, 0.95, '\n'.join(stats_text),
-                       transform=ax.transAxes,
-                       fontsize=12,
-                       verticalalignment='top',
-                       bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='gray'))
-
-            ax.grid(True, alpha=0.3, linestyle=':')
-            ax.legend(loc='lower right', framealpha=0.95)
-
-        # Hide extra subplot
-        axes[5].axis('off')
-
+        ax.axvline(0, color='gray', linestyle=':', linewidth=1)
+        ax.set_yticks(yticks)
+        ax.set_yticklabels(ylabels)
+        ax.set_ylim(0.4, len(comps) + 0.7)
+        ax.set_xlabel('Mentor-protege correlation r (95% CI)', fontsize=13, fontweight='bold')
+        ax.set_title('Offensive-aggression inheritance by coordinator type',
+                     fontsize=14, fontweight='bold', pad=10)
+        ax.legend(loc='lower right', framealpha=0.95)
+        ax.grid(True, axis='x', alpha=0.3, linestyle=':')
         plt.tight_layout()
 
-        # Save
         output_dir = Path("outputs/visualizations/inheritance")
         output_dir.mkdir(parents=True, exist_ok=True)
-
         png_path = output_dir / "inheritance_by_mentor_type.png"
         plt.savefig(png_path, dpi=300, bbox_inches='tight', facecolor='white')
         logger.info(f"Saved visualization: {png_path}")
@@ -636,7 +602,7 @@ def main():
         coord_type_results = analyzer.analyze_by_coordinator_type(pairs_df)
 
         # Create visualizations
-        analyzer.create_visualization_by_type(pairs_df, mentor_type_results)
+        analyzer.create_visualization_by_type(coord_type_results)
         analyzer.create_comparison_bar_chart(mentor_type_results, coord_type_results)
 
         # Save results

@@ -36,7 +36,7 @@ ANALYSIS_DIR = Path("outputs/analysis")
 # anti-conservative. Present only on small-cluster tests (WS12); preferred when so.
 WILD_KEY = "p_wild_cluster"
 # Keys that hold a clustered (preferred) p-value, in priority order.
-CLUSTERED_KEYS = ("p_bootstrap_coach_clustered", "p_bootstrap_mentor_clustered")
+CLUSTERED_KEYS = ("p_bootstrap_coach_clustered", "p_bootstrap_mentor_clustered", "p_clustered")
 # Keys that hold a naive p-value, in priority order.
 NAIVE_KEYS = ("p_value", "pearson_p", "aggression_p", "p")
 
@@ -127,19 +127,28 @@ def collect_tests():
                 if measure in measures:
                     _add(tests, "Era Analysis", f"{era}: {measure}", measures[measure], False)
 
-    # 4. & 5. Coach type overall and by era (naive)
+    # 4. & 5. Coach type overall (clustered by coach) and by era (naive subsets)
     d = _load("aggression_by_coach_type_results.json")
     if d:
         for ctype, measures in d.get("overall_by_type", {}).items():
             for measure in ("composite", "pass_heavy"):
                 if measure in measures:
-                    _add(tests, "Coach Type (Overall)", f"{ctype}: {measure}", measures[measure], False)
+                    _add(tests, "Coach Type (Overall)", f"{ctype}: {measure}", measures[measure], True)
         for ctype, eras in d.get("by_type_and_era", {}).items():
             if ctype not in ("Offensive", "Defensive"):
                 continue
             for era, measures in eras.items():
                 if isinstance(measures, dict) and "composite" in measures:
                     _add(tests, "Coach Type by Era", f"{ctype} {era}", measures["composite"], False)
+
+    # 5b. Defensive aggression -> WAR by coach background (clustered by coach;
+    #     wild cluster p for the small defensive-coach subgroup)
+    d = _load("defensive_aggression_by_coach_type_results.json")
+    if d:
+        for ctype, node in d.items():
+            if isinstance(node, dict):
+                _add(tests, "Coach Type (Defensive Agg.)",
+                     f"{ctype}: defensive aggression", node, True)
 
     # 6. Persistence overall (clustered by coach)
     d = _load("aggression_persistence_results.json")
@@ -159,15 +168,49 @@ def collect_tests():
                     lag = node.get("lag", "?")
                     _add(tests, f"Persistence {ctype}", f"{measure} Lag {lag}", node)
 
-    # 8. & 9. Inheritance by mentor background / coordinator type (clustered by mentor)
+    # 8. & 9. Offensive-aggression inheritance: overall + by mentor background +
+    #         by coordinator type (clustered by mentor)
     d = _load("inheritance_by_type_results.json")
     if d:
+        for measure, node in d.get("overall", {}).items():
+            _add(tests, "Inheritance: Overall", measure, node)
         for ctype, measures in d.get("by_mentor_background", {}).items():
             for measure, node in measures.items():
                 _add(tests, f"Inheritance: {ctype} Mentors", measure, node)
         for ctype, measures in d.get("by_coordinator_type", {}).items():
             for measure, node in measures.items():
                 _add(tests, f"Inheritance: {ctype}->HC", measure, node)
+
+    # 9b. Shotgun inheritance: overall + by mentor background + by coordinator type
+    d = _load("shotgun_inheritance_by_type_results.json")
+    if d:
+        if isinstance(d.get("overall"), dict):
+            _add(tests, "Shotgun Inheritance", "Overall", d["overall"])
+        for ctype, node in d.get("by_mentor_background", {}).items():
+            _add(tests, f"Shotgun Inheritance: {ctype} Mentors", "shotgun", node)
+        for ctype, node in d.get("by_coordinator_type", {}).items():
+            _add(tests, f"Shotgun Inheritance: {ctype}->HC", "shotgun", node)
+
+    # 9c. Mentor WAR -> Protege WAR (clustered by mentor)
+    d = _load("mentor_protege_war_analysis.json")
+    if d:
+        if isinstance(d.get("overall"), dict):
+            _add(tests, "Mentor WAR -> Protege WAR", "Overall", d["overall"])
+        for ctype, node in d.get("by_coordinator_type", {}).items():
+            if isinstance(node, dict):
+                _add(tests, "Mentor WAR -> Protege WAR", ctype, node)
+
+    # 9d. Direct coordinator-to-HC gene transmission (clustered by coach; wild
+    #     cluster p for the small defensive-scheme sample)
+    gi_path = Path("data/processed/coaching_genes/gene_inheritance_summary.json")
+    if gi_path.exists():
+        with open(gi_path) as f:
+            d = json.load(f)
+        for gene_key, node in d.get("statistics", {}).items():
+            if isinstance(node, dict):
+                _add(tests, "Coordinator-to-HC Transmission", gene_key, node)
+    else:
+        logger.warning("missing source JSON: %s (its tests are skipped)", gi_path)
 
     # 10. Within-coach two-way fixed effects (cluster-robust aggression_p)
     d = _load("within_coach_fixed_effects_results.json")

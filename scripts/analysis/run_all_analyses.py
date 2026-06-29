@@ -88,6 +88,11 @@ def main():
             'description': 'Aggression by Coach Type (Offensive vs Defensive)'
         },
         {
+            'path': Path("scripts/analysis/analyze_defensive_aggression_by_coach_type.py"),
+            'log': 'defensive_aggression_by_coach_type.log',
+            'description': 'Defensive Aggression by Coach Type (Offensive vs Defensive)'
+        },
+        {
             'path': Path("scripts/analysis/analyze_persistence_by_coach_type.py"),
             'log': 'persistence_by_coach_type.log',
             'description': 'Persistence by Coach Type Analysis'
