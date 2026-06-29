@@ -53,7 +53,7 @@
 %\affil[1]{\protect\raggedright
 %Knowledge Transmission in the NFL, e-mail: jon@williamsonconsultinggroup.com}
 
-\abstract{We develop a framework to measure coaching ``DNA'' in the NFL, the strategic tendencies that distinguish how coaches run teams. Using XGBoost models trained on more than 600,000 plays from 2006--2024 with a leakage-free, cross-fit pipeline, we quantify four dimensions of coaching identity: aggression (fourth down, pass-run balance, deep passing, two-point), shotgun formation preference, tempo, and defensive scheme. Each gene is the residual between actual decisions and situation-adjusted predictions, separating tendency from forced circumstance. We first show the genes are stable coach traits, not team artifacts: coach identity explains about five times the team's variance, and the genes travel across team changes (composite aggression $r=0.61$, 95\% CI $[0.33, 0.78]$; shotgun $0.55$, $[0.29, 0.75]$). Under coach-clustered inference, composite aggression ($r=0.30$, $[0.16, 0.45]$) and shotgun preference ($r=0.23$, $[0.04, 0.41]$) predict career-level, context-adjusted Coach Wins Above Replacement (Coach WAR), while tempo does not. The aggression-WAR association has weakened in recent seasons, but within coaches higher aggression still adds wins ($\beta=1.40$ WAR games per standard deviation, $[0.76, 1.96]$). Neither mentor performance ($r=0.12$, $[-0.01, 0.26]$) nor situational aggression ($r=0.08$, $[-0.05, 0.22]$) transmits to prot\'{e}g\'{e}s, but shotgun preference transmits through offensive coaching trees ($r=0.40$, $[0.21, 0.54]$) and persists from coordinator to head coach ($r=0.67$, $[0.47, 0.81]$). Coaching trees reliably transmit systems (shotgun $p<0.001$, defensive scheme $p=0.02$) but not risk tolerance or winning (both $p>0.05$).}
+\abstract{We develop a framework to measure coaching ``DNA'' in the NFL, the strategic tendencies that distinguish how coaches run teams. Using XGBoost models trained on more than 600,000 plays from 2006--2024 with a leakage-free, cross-fit pipeline, we quantify four dimensions of coaching identity: offensive aggression (fourth down, pass-run balance, deep passing, two-point), shotgun formation preference, tempo, and defensive aggression. Each gene is the residual between actual decisions and situation-adjusted predictions, separating tendency from forced circumstance. We first show the genes are stable coach traits, not team artifacts: coach identity explains about five times the team's variance, and the genes travel across team changes (composite offensive aggression $r=0.61$, 95\% CI $[0.33, 0.78]$; shotgun $0.55$, $[0.29, 0.75]$). Under coach-clustered inference, composite offensive aggression ($r=0.30$, $[0.16, 0.45]$) and shotgun preference ($r=0.23$, $[0.04, 0.41]$) predict career-level, context-adjusted Coach Wins Above Replacement (Coach WAR), while tempo does not. The offensive aggression-WAR association has weakened in recent seasons, but within coaches higher offensive aggression still adds wins ($\beta=1.40$ WAR games per standard deviation, $[0.76, 1.96]$). Neither mentor performance ($r=0.12$, $[-0.01, 0.26]$) nor situational aggression ($r=0.08$, $[-0.05, 0.22]$) transmits to prot\'{e}g\'{e}s, but shotgun preference transmits through offensive coaching trees ($r=0.40$, $[0.21, 0.54]$) and persists from coordinator to head coach ($r=0.67$, $[0.48, 0.80]$). Coaching trees reliably transmit systems (shotgun $p<0.001$, defensive aggression $p=0.02$) but not risk tolerance or winning (both $p>0.05$).}
 
 \keywords{NFL coaching, coaching DNA, coaching trees, strategic identity, competitive advantage}
 
@@ -61,13 +61,11 @@
 
 \section{Introduction}
 
-Throughout the 2023 season, Los Angeles Chargers head coach Brandon Staley's aggressive fourth-down philosophy drew criticism \citep{cbs2021}. In Week 3 against Minnesota, with a four-point lead late in the game, Staley went for it on 4th-and-1 from his own 24-yard line rather than punting \citep{nbc2023}. The Chargers didn't convert, giving Minnesota the ball in good field position. Though the Vikings did not score, the decision drew further criticism. In December 2023, after a 63-21 loss to the Raiders, Staley was fired \citep{chargers2023}.
+Fourth-down analytics consistently show that aggressive coaches win more games \citep{romer2006,yam2019}. Teams that ``go for it'' on fourth down in marginal situations would gain approximately 0.4 additional wins per season on average \citep{yam2019}. Expected points models demonstrate that punting from midfield often surrenders value \citep{burke2009}. These findings raise a deeper question in competitive strategy: if aggressive decisions are individually optimal, does their advantage persist once every team adopts them? 
 
-Yet Staley's decisions weren't necessarily reckless. Fourth-down analytics consistently show that aggressive coaches win more games \citep{romer2006,yam2019}. Teams that ``go for it'' on fourth down in marginal situations would gain approximately 0.4 additional wins per season on average \citep{yam2019}. Expected points models demonstrate that punting from midfield often surrenders value \citep{burke2009}. Staley's firing therefore points to a deeper question in competitive strategy: if aggressive decisions are individually optimal, does their advantage persist once every team adopts them? 
+NFL coaching is among the highest-stakes decision-making environments in professional sports. Head coaches command salaries that average several million dollars and reach \$20 million for the highest-paid \citep{sportico2024}, and their individual in-game choices are dissected in granular detail by analysts and fans. Yet how a coach is characterized, as aggressive, conservative, run-heavy, or innovative, still rests largely on narrative and reputation rather than measurement. We lack an objective, decision-level vocabulary for a coach's strategic tendencies.
 
-NFL coaching represents one of the highest-stakes decision-making environments in professional sports. Head coaches command salaries that average roughly \$6 million annually and reach \$20 million for the highest-paid \citep{sportico2024}. Yet evaluating coaching performance remains remarkably subjective. Teams fire coaches based on win-loss records that confound coaching quality with inherited roster talent, front office decisions, and random variation. Organizations seek objective frameworks for evaluating coaching effectiveness independent of circumstances.
-
-This evaluation challenge extends beyond any single decision type. Coaching philosophy manifests in dozens of observable choices every game: whether to go for it on fourth down, whether to run from shotgun or under center, how fast to snap the ball, how many defenders to send after the quarterback. Each choice reflects a coach's strategic identity, their ``DNA.'' But these tendencies are hard to measure objectively, hard to separate from forced circumstance, and hard to classify as stable traits versus situational adaptations. That is the goal of this project.
+These tendencies surface in dozens of observable choices every game: whether to go for it on fourth down, whether to run from shotgun or under center, how fast to snap the ball, how many defenders to send after the quarterback. Each choice reflects a coach's strategic identity, their ``DNA.'' But the tendencies are hard to measure objectively, hard to separate from forced circumstance, and hard to classify as stable traits versus situational adaptations. Building that vocabulary is the goal of this project.
 
 \subsection{Measuring Coaching Philosophy}
 
@@ -77,13 +75,13 @@ We propose a general framework for quantifying coaching tendencies across multip
 \text{Gene}_c = \text{Actual Rate}_c - \text{Predicted Rate}_c
 \end{equation}
 
-This residual approach isolates genuine strategic tendency from forced circumstance. A coach who goes for it on fourth down frequently because they are always trailing is not truly aggressive, and our model accounts for score differential. Only the \emph{excess} tendency beyond what the situation demands is attributed to coaching philosophy. We apply this framework to four dimensions of coaching DNA:
+This residual approach isolates genuine strategic tendency from forced circumstance. A coach who goes for it on fourth down frequently only because they are always trailing is not truly aggressive. Only the \emph{excess} tendency beyond what the situation demands is attributed to coaching philosophy. We apply this framework to four dimensions of coaching DNA:
 
 \begin{itemize}
-\item \textbf{Aggression}: a composite of four sub-components, namely fourth-down decisions, pass-run balance, deep passing tendency, and two-point conversion attempts. This is the dimension with the strongest theoretical prior for predicting performance, since analytics research suggests aggressive decisions are expected-value optimal in many common situations \citep{burke2009}.
+\item \textbf{Offensive Aggression}: a composite of four sub-components, namely fourth-down decisions, pass-run balance, deep passing tendency, and two-point conversion attempts. This is the dimension with the strongest theoretical prior for predicting performance, since analytics research finds aggressive fourth-down decisions are frequently expected-value optimal \citep{romer2006,burke2009}.
 \item \textbf{Shotgun formation preference}: a single gene capturing whether coaches run more or less shotgun than game context predicts, reflecting offensive system design independent of situational necessity.
 \item \textbf{Tempo}: a composite of no-huddle usage and pace (seconds between plays, with faster-than-expected scored positively), measuring how fast an offense operates.
-\item \textbf{Defensive scheme}: a composite of box stacking, pass rush intensity, and man-versus-zone coverage tendency, measured at the team level from 2016 onward (man/zone from 2018).
+\item \textbf{Defensive aggression}: a composite of box stacking, pass rush intensity, and man-versus-zone coverage tendency, measured at the team level from 2016 onward (man/zone from 2018).
 \end{itemize}
 Three of the four dimensions are composites of their sub-components and shotgun preference is a single gene; together they profile coaching DNA across both sides of the ball.
 
@@ -93,38 +91,44 @@ When NFL teams hire head coaches, pedigree frequently influences decisions. Coor
 
 \subsection{WAR as the Measure of Coaching Success}
 
-To test whether coaching genes relate to success, we need a measure of coaching quality that separates a coach's contribution from inherited circumstances, since win-loss records confound coaching ability with roster talent, strength of schedule, and luck. We adopt Coach Wins Above Replacement (Coach WAR), a context-adjusted estimate of the wins a coach adds relative to a replacement-level alternative, developed and validated on held-out coaches in companion work \citep{williamson2026war} (held-out $R^2 = 0.43$). Single-season WAR is modest in $R^2$ largely because a 16-game season carries an irreducible binomial sampling floor (about 1.94 wins of standard deviation even with perfect knowledge of a team's true win probability), not because coaching signal is absent; averaging across a coach's seasons cancels much of this noise, which is why we anchor our performance tests at the career level. Using Coach WAR as the outcome lets us ask whether a coach's strategic DNA predicts winning once roster quality and circumstance are accounted for.
+To test whether coaching genes relate to success, we need a measure of coaching quality that separates a coach's contribution from inherited circumstances, since win-loss records confound coaching ability with roster talent, strength of schedule, and luck. We adopt Coach Wins Above Replacement (Coach WAR), a context-adjusted estimate of the wins a coach adds relative to a replacement-level alternative, developed and validated on held-out coaches in companion work \citep{williamson2026war}. Using Coach WAR as the outcome lets us ask whether a coach's strategic DNA predicts winning once roster quality and circumstance are accounted for.
 
 \subsection{This Study}
 
-This study does more than define these genes; it tests three claims about them. First, that they are real: stable traits that belong to coaches rather than to teams. Second, that they matter: that a coach's strategic DNA predicts coaching success, measured by Coach WAR, beyond inherited roster quality. Third, that they are heritable: that genes transmit from mentors and coordinators to the head coaches they produce. We find that the genes are real and that several predict winning, but that coaching trees pass on systems far more reliably than success or risk tolerance.
+This study defines these genes and tests three claims about them:
+\begin{enumerate}
+\item \textbf{Real}: the genes are stable traits that belong to coaches rather than to teams.
+\item \textbf{Predictive}: a coach's strategic DNA predicts coaching success, measured by Coach WAR, beyond inherited roster quality.
+\item \textbf{Heritable}: the genes transmit from mentors and coordinators to the head coaches they produce.
+\end{enumerate}
+We find that the genes are real and that several predict winning, but that coaching trees pass on systems far more reliably than success or risk tolerance.
 
 \section{Literature Review}
 
 The study of coaching decision-making in the NFL has focused primarily on conservative bias. \citet{romer2006} demonstrated that NFL coaches punt too frequently on fourth down, forgoing positive-expected-value conversion attempts, a robust and widely cited finding. \citet{yam2019} extended this work with causal estimates, finding that teams adopting more aggressive fourth-down strategies would gain approximately 0.4 wins per season. \citet{horowitz2014} confirmed the persistence of the fourth-down puzzle using different statistical methods, while \citet{burke2009} generalized the finding through expected points models showing that conservative play-calling surrenders value across a range of game situations. Collectively, this literature establishes that aggressive coaching decisions are often optimal in isolation, but does not address whether the advantage persists as adoption spreads.
 
-A parallel literature has sought to quantify coaching and team quality more broadly, though primarily at the team level. \citet{schatz2003} developed DVOA (Defense-adjusted Value Over Average), one of the first publicly available metrics for evaluating team performance adjusted for opponent quality. These metrics, however, are fundamentally team-level \emph{outcome} measures that combine the on-field performance of players, coordinators, and coaching staffs. They tell us how well a team performed, but not what strategic choices the coaching staff made to get there, making it difficult to separate a head coach's philosophy from the talent available to execute it. On coaching careers specifically, \citet{goff2006} identified a managerial life cycle in the NFL, in which coaches tend to perform best in their early years and decline over time, suggesting that coaching effectiveness is not static and may interact with organizational context. What remains missing is a framework that measures coaching \emph{decision tendencies} rather than outcomes, namely what coaches choose to do beyond what the situation demands, decomposed into dimensions that can be tracked across time, relationships, and career transitions.
+A parallel literature has sought to quantify team quality more broadly. \citet{schatz2003} developed DVOA (Defense-adjusted Value Over Average), one of the first publicly available metrics for evaluating team performance adjusted for opponent quality. These metrics, however, are fundamentally team-level \emph{outcome} measures that combine the on-field performance of players, coordinators, and coaching staffs. They capture how well a team performed, not the strategic choices behind that performance, and so cannot separate a head coach's philosophy from the talent executing it. On coaching careers specifically, \citet{goff2006} identified a managerial life cycle in the NFL, in which coaches tend to perform best in their early years and decline over time, suggesting that coaching effectiveness is not static and may interact with organizational context. What remains missing is a framework that measures coaching \emph{decision tendencies} rather than outcomes, namely what coaches choose to do beyond what the situation demands, decomposed into dimensions that can be tracked across time, relationships, and career transitions.
 
-The competitive dynamics of strategic adoption have been studied extensively outside sports. \citet{rogers2007} formalized the S-curve pattern of innovation diffusion, in which early adopters gain outsized advantages that erode as the innovation becomes mainstream. Because the analytics literature establishes that aggressive tactics are expected-value positive, this framework predicts they should follow a similar trajectory: they provide a competitive edge while still rare, an edge that should erode as analytics-driven decision-making becomes universal. However, this prediction has not been empirically tested in the coaching context.
+The competitive dynamics of strategic adoption have been studied extensively outside sports. \citet{rogers2007} formalized the S-curve pattern of innovation diffusion, in which early adopters gain outsized advantages that erode as the innovation becomes mainstream. Because the analytics literature establishes that aggressive tactics are expected-value positive, this framework predicts that aggressive tactics should follow a similar trajectory: they provide a competitive edge while rare, an edge that erodes as analytics-driven decision-making becomes universal. However, this prediction has not been empirically tested in the coaching context.
 
-Several gaps emerge from this literature. No studies have examined how the aggression-performance relationship evolves temporally as analytics disseminate and defenses adapt. Aggression persistence within coaches, distinguishing stable traits from situational tactics, has not been systematically analyzed. Coaching tree effects have not been tested using context-adjusted performance metrics that control for inherited roster quality. Whether strategic philosophies genuinely transmit from mentors to prot\'{e}g\'{e}s, and which dimensions show transmission, remains unexamined.
+Several gaps emerge from this literature. No studies have examined how the offensive aggression-performance relationship evolves temporally as analytics disseminate and defenses adapt. Offensive Aggression persistence within coaches, distinguishing stable traits from situational tactics, has not been systematically analyzed. Coaching tree effects have not been tested using context-adjusted performance metrics that control for inherited roster quality. Whether strategic philosophies genuinely transmit from mentors to prot\'{e}g\'{e}s, and which dimensions show transmission, remains unexamined.
 
 \section{Methods}
 
 \subsection{Data}
 
-Our analysis integrates three complementary datasets spanning nearly two decades of NFL football. The primary dataset consists of play-by-play records for every offensive snap from the 2006 through 2024 seasons, obtained through the nfl\_data\_py package. This yields more than 600,000 analyzable plays with complete situational information including down, distance, field position, score differential, time remaining, and environmental conditions; the exact count entering each model varies with the decision being modeled. The 2006 starting point is determined by data availability, particularly for air yards data required for our deep passing analysis.
+Our analysis integrates three complementary datasets spanning nearly two decades of NFL football. The primary dataset consists of play-by-play records for every offensive snap from the 2006 through 2024 seasons, obtained through the \texttt{nfl\_data\_py} package. This yields more than 600,000 analyzable plays with complete situational information (down, distance, field position, score differential, time remaining, and environmental conditions). The exact number of plays entering each model varies with the decision being modeled. The 2006 starting point is determined by data availability, particularly for air yards data required for our deep passing analysis.
 
-The coaching data comes from career histories scraped from Pro Football Reference, covering 536 NFL coaches across 104 years of league history. For each coach, we have complete position-by-position career timelines, allowing us to classify coaches by background (offensive vs defensive vs other) and construct mentor-protégé relationships based on overlapping team assignments. Coach backgrounds are determined by analyzing their coordinator and position coach experience prior to becoming head coaches, using pattern matching on role titles to identify offensive versus defensive specialization. A coordinator is considered a protégé of a head coach if they worked together for at least one season, creating a network of 4,836 documented coaching relationships.
+The coaching data comes from career histories scraped from Pro Football Reference, covering the 185 NFL coaches active between 2006 and 2024. For each coach, we have complete position-by-position career timelines, allowing us to classify coaches by background (offensive vs defensive vs other) and construct mentor-protégé relationships based on overlapping team assignments, matched on a year-aware canonical franchise key so that relocations are handled correctly. Coach backgrounds are determined by analyzing their coordinator and position coach experience prior to becoming head coaches, using pattern matching on role titles to identify offensive versus defensive specialization. A coordinator is considered a protégé of a head coach if they worked together for at least one season, yielding 1{,}467 documented coaching relationships over this period.
 
-Performance metrics come from a separate Wins Above Replacement (WAR) calculation that estimates each head coach's contribution to team success relative to a replacement-level alternative \citep{williamson2026war}. This dataset contains 1,637 coach-year observations, which we merge with our gene measures on a canonicalized coach name and season, logging attrition. The merge yields 608 coach-year observations for offensive genes (aggression, shotgun, tempo) and 282 for defensive scheme (2016--2024 only), covering 124 unique head coaches; the 33 unmatched gene coach-years (31 coaches) are all partial-season interim stints, none a full 16-game season, for which Coach WAR provides no replacement-level baseline, and they do not differ systematically from the retained sample on the gene dimension. We classify these coach-years by background as 310 offensive (51.2\%) and 251 defensive (41.4\%), with 45 (7.4\%) having substantial experience on both sides of the ball; the offensive-versus-defensive comparisons that follow use the 561 cleanly classified observations.
+Performance metrics come from a separate Wins Above Replacement (WAR) calculation that estimates each head coach's contribution to team success relative to a replacement-level alternative \citep{williamson2026war}. This dataset contains 1,637 coach-year observations, which we merge with our gene measures on a canonicalized coach name and season, logging attrition. The merge yields 608 coach-year observations for offensive genes (offensive aggression, shotgun, tempo) and 282 for defensive aggression (2016--2024 only), covering 124 unique head coaches; the 33 unmatched gene coach-years (31 coaches) are all partial-season interim stints (none a full 16-game season). Coach WAR does not score these stints because they lack a replacement-level baseline, and in their gene values they do not differ systematically from the retained sample. We classify these coach-years by background as 310 offensive (51.2\%) and 251 defensive (41.4\%), with 45 (7.4\%) having substantial experience on both sides of the ball; the offensive-versus-defensive comparisons that follow use the 561 cleanly classified observations.
 
 \subsection{Measuring Coaching Genes}
 \label{sec:genes}
 
-Each gene measures systematic deviation from expected decision-making. Rather than using raw frequencies, which confound individual tendencies with situational factors, we train machine learning models to predict baseline behavior and measure how much a coach or team deviates from these predictions. Across the four gene dimensions we fit ten component models, one per observable decision, and form the genes from their residuals. Aggression, tempo, and defensive scheme are \emph{composite} genes built from several component models, while shotgun preference is a single-model gene; Table~\ref{tab:gene_architecture} maps the ten models to the four genes.
+Each gene measures systematic deviation from expected decision-making. Rather than using raw frequencies, which confound individual tendencies with situational factors, we train machine learning models to predict baseline behavior and measure how much a coach or team deviates from these predictions. Across the four gene dimensions we fit ten component models, one per observable decision, and form the genes from their residuals. Offensive Aggression, tempo, and defensive aggression are \emph{composite} genes built from several component models, while shotgun preference is a single-model gene; Table~\ref{tab:gene_architecture} maps the ten models to the four genes.
 
-We use gradient-boosted decision trees (XGBoost) for every component model because they are consistently the strongest performers on tabular, point-in-time prediction of this kind, where the inputs are heterogeneous structured features and they outperform deep networks \citep{chen2016,grinsztajn2022}. Each model is a classifier or a regressor depending on its target, but the residual definition of a gene (Equation~1) is identical in both cases. Every model is trained on situational features alone and excludes season, week, and coach identity, so the baseline reflects what the average coach would do in identical circumstances and our analyses of temporal evolution and individual differences are not confounded. Hyperparameters are tuned per model by randomized search (100 iterations), with 5-fold stratified cross-validation for classifiers and KFold for regressors.
+We use gradient-boosted decision trees (XGBoost) for every component model because they are consistently the strongest performers on tabular, point-in-time prediction of this kind: with heterogeneous structured features rather than images or text, gradient-boosted trees outperform deep networks \citep{chen2016,grinsztajn2022}. Each model is a classifier or a regressor depending on its target, but the residual definition of a gene (Equation~1) is identical in both cases. Every model is trained on situational features alone and excludes season, week, and coach identity, so the baseline reflects what the average coach would do in identical circumstances and our analyses of temporal evolution and individual differences are not confounded. Hyperparameters are tuned per model by randomized search (100 iterations), with 5-fold stratified cross-validation for classifiers and KFold for regressors.
 
 \begin{table}[H]
 \caption{The four coaching genes and their ten component models}
@@ -132,9 +136,9 @@ We use gradient-boosted decision trees (XGBoost) for every component model becau
 \scriptsize
 \begin{tabular}{lllccc}
 \toprule
-\textbf{Gene} & \textbf{Component model} & \textbf{Type} & \textbf{Attribution} & \textbf{Feats.} & \textbf{Seasons} \\
+\textbf{Gene} & \textbf{Component model} & \textbf{Type} & \textbf{Attribution} & \textbf{Features} & \textbf{Seasons} \\
 \midrule
-\multirow{4}{*}{Aggression (composite)} & Fourth-down decision & Classifier & Head coach & 16 & 2006--2024 \\
+\multirow{4}{*}{Offensive Aggression (composite)} & Fourth-down decision & Classifier & Head coach & 16 & 2006--2024 \\
  & Run vs.\ pass & Classifier & Head coach & 16 & 2006--2024 \\
  & Pass target (deep) & Classifier & Head coach & 17 & 2006--2024 \\
  & Two-point conversion & Classifier & Head coach & 16 & 2006--2024 \\
@@ -144,16 +148,14 @@ Shotgun (single) & Shotgun formation & Classifier & Head coach & 16 & 2006--2024
 \multirow{2}{*}{Tempo (composite)} & No-huddle & Classifier & Head coach & 18 & 2006--2024 \\
  & Pace (seconds/play) & Regressor & Head coach & 15 & 2006--2024 \\
 \midrule
-\multirow{3}{*}{Defensive scheme (composite)} & Box stacking & Regressor & Team-year & 15 & 2016--2024 \\
+\multirow{3}{*}{Defensive aggression (composite)} & Box stacking & Regressor & Team-year & 15 & 2016--2024 \\
  & Pass rush & Regressor & Team-year & 17 & 2016--2024 \\
  & Man coverage & Classifier & Team-year & 20 & 2018--2024 \\
 \bottomrule
 \end{tabular}
 \\[2pt]
-{\scriptsize ``Feats.'' is the number of stability-selected predictors each model retains from the shared candidate pool (Table~\ref{tab:model_features}). Aggression, tempo, and defensive scheme are composites of their component genes; shotgun is a single component.}
+{\scriptsize The Features column gives the number of stability-selected predictors each model retains from the shared candidate pool (Table~\ref{tab:model_features}). Offensive Aggression, tempo, and defensive aggression are composites of their component genes; shotgun is a single component.}
 \end{table}
-
-Table~\ref{tab:model_features} summarizes the shared candidate feature pool that the ten models draw on.
 
 \begin{table}[H]
 \caption{Shared candidate feature pool for the component models}
@@ -200,14 +202,14 @@ Model performance varies across the ten components and is summarized for all of 
 \toprule
 \textbf{Gene} & \textbf{Model} & \textbf{AUC} & \textbf{95\% CI} & \textbf{Seasons} \\
 \midrule
-\multirow{4}{*}{Aggression} & 4th Down Decision & 0.975 & [0.973, 0.976] & 2006--2024 \\
+\multirow{4}{*}{Offensive Aggression} & 4th Down Decision & 0.975 & [0.973, 0.976] & 2006--2024 \\
  & Run vs Pass & 0.784 & [0.782, 0.786] & 2006--2024 \\
  & Pass Target & 0.734 & [0.731, 0.736] & 2006--2024 \\
  & Two-Point Conversion & 0.927 & [0.914, 0.940] & 2006--2024 \\
 \midrule
 Shotgun & Shotgun Formation & 0.807 & [0.802, 0.812] & 2006--2024 \\
 Tempo & No-Huddle & 0.766 & [0.758, 0.775] & 2006--2024 \\
-Def.\ Scheme & Man Coverage & 0.680 & [0.673, 0.687] & 2018--2024 \\
+Def.\ Aggression & Man Coverage & 0.680 & [0.673, 0.687] & 2018--2024 \\
 \bottomrule
 \end{tabular}
 \\[6pt]
@@ -217,39 +219,31 @@ Def.\ Scheme & Man Coverage & 0.680 & [0.673, 0.687] & 2018--2024 \\
 \textbf{Gene} & \textbf{Model} & \textbf{RMSE} & \textbf{95\% CI} & \textbf{$R^2$ [95\% CI]} & \textbf{Seasons} \\
 \midrule
 Tempo & Pace (seconds) & 11.08 & [11.04, 11.11] & 0.428 [0.424, 0.432] & 2006--2024 \\
-\multirow{2}{*}{Def.\ Scheme} & Box Stacking & 0.811 & [0.801, 0.820] & 0.422 [0.411, 0.433] & 2016--2024 \\
+\multirow{2}{*}{Def.\ Aggression} & Box Stacking & 0.811 & [0.801, 0.820] & 0.422 [0.411, 0.433] & 2016--2024 \\
  & Pass Rush & 0.811 & [0.793, 0.829] & 0.055 [0.051, 0.059] & 2016--2024 \\
 \bottomrule
 \end{tabular}
 \\[2pt]
-{\scriptsize Point estimates and 95\% CIs are Nadeau-Bengio corrected resampled-$t$ intervals \citep{nadeau2003} over $J=50$ grouped resamples (GroupShuffleSplit holding out whole team-years, so no team appears in both train and test). The corrected variance inflates the naive resample variance to account for the overlap among resampled training sets.}
+{\scriptsize Point estimates and 95\% CIs are Nadeau-Bengio corrected resampled-$t$ intervals \citep{nadeau2003} over $J=50$ grouped resamples (GroupShuffleSplit holding out whole team-years, so no team appears in both train and test). The corrected variance inflates the naive resample variance to account for the overlap among resampled training sets. RMSE units differ by target: seconds for pace, players for box stacking and pass rush. The low pass-rush $R^2$ reflects that pass-rusher counts are only weakly predictable from pre-snap context, leaving more of their variation to coaching tendency.}
 \end{table}
 
-\subsubsection{Aggression Gene}
+\subsubsection{Offensive Aggression Gene}
 
-Aggression is a composite of four component models, each predicting a discrete in-game decision: going for it on fourth down, passing versus running, targeting beyond versus behind the first-down marker, and attempting a two-point conversion versus an extra point. For each coach-year, we calculate component-specific aggression scores using Equation~1, where $c$ indexes the four components. The composite aggression score is a \emph{reliability-weighted} average of the four standardized component scores. Each coach-year's component is weighted by its reliability, the share of its variance that is true between-coach signal rather than sampling noise, so that a component measured from few plays in a given coach-year contributes less. We estimate these reliabilities with a DerSimonian-Laird random-effects model. We treat aggression as a \emph{formative} construct. The four components are distinct facets that jointly constitute aggressive decision-making rather than indicators of a single latent trait (they are only weakly inter-correlated), so we report component-level results alongside the composite throughout.
+Offensive Aggression is a composite of four component models, each predicting a discrete in-game decision: going for it on fourth down, passing versus running, targeting beyond the first-down marker versus at or short of it (air yards exceeding the yards to go), and attempting a two-point conversion versus an extra point. For each coach-year, we calculate component-specific offensive aggression scores using Equation~1, where $c$ indexes the four components. The composite offensive aggression score is a \emph{reliability-weighted} average of the four standardized component scores. Each coach-year's component is weighted by its reliability, the share of its variance that is true between-coach signal rather than sampling noise, so that a component measured from few plays in a given coach-year contributes less. We estimate these reliabilities with a DerSimonian-Laird random-effects model \citep{dersimonian1986}, detailed in Section~\ref{sec:pipeline}. We treat offensive aggression as a \emph{formative} construct. The four components are distinct facets that jointly constitute aggressive decision-making rather than indicators of a single latent trait (they are only weakly inter-correlated), so we report component-level results alongside the composite throughout.
 
 \subsubsection{Shotgun Formation Gene}
 
-We train an XGBoost classifier (AUC $=0.807$; 95\% CI $[0.802, 0.812]$) to predict whether each play will be run from shotgun formation, using the offensive candidate feature set (Table~\ref{tab:model_features}, stability-selected to 16 features). The shotgun gene for each coach-year is the difference between actual and predicted shotgun rates, reliability-shrunk toward the league mean (so low-play coach-years are not over-trusted) and z-scored across all coach-years for comparability; because head-coach seasons carry ample plays, this shrinkage is small in practice. This gene captures formation preference independent of game context and is attributed to head coaches, yielding 638 coach-year observations across 2006--2024.
+We train an XGBoost classifier to predict whether each play will be run from shotgun formation, using the offensive candidate feature set (Table~\ref{tab:model_features}, stability-selected to 16 features). The shotgun gene for each coach-year is the difference between actual and predicted shotgun rates, reliability-shrunk toward the league mean (so low-play coach-years are not over-trusted) and z-scored across all coach-years for comparability; because head-coach seasons carry ample plays, this shrinkage is small in practice. This gene captures formation preference independent of game context and is attributed to head coaches, yielding 638 coach-year observations across 2006--2024.
 
 \subsubsection{Tempo Gene}
 
-The tempo gene combines two sub-components into a composite measure. First, a no-huddle classifier (AUC $=0.766$; 95\% CI $[0.758, 0.775]$) predicts whether each play will use a no-huddle formation from the stability-selected feature set. The no-huddle gene captures tendency to operate without a huddle beyond what game context predicts, reflecting a deliberate pace strategy rather than situational urgency (e.g., trailing late). Second, a pace regressor (RMSE $=11.08$ seconds, 95\% CI $[11.04, 11.11]$; $R^2 = 0.428$, $[0.424, 0.432]$) predicts the number of seconds between consecutive plays using the same candidate set with no-huddle excluded (to avoid circularity). The pace gene is the negated residual, so positive values indicate faster-than-expected pace. It captures play clock management philosophy. First plays of each drive are excluded from the pace calculation as they have no meaningful inter-play interval.
+The tempo gene combines two sub-components into a composite measure. First, a no-huddle classifier predicts whether each play will use a no-huddle formation, capturing deliberate no-huddle usage beyond what game context (such as trailing late) predicts. Second, a pace regressor predicts the number of seconds between consecutive plays using the same candidate set with no-huddle excluded (to avoid circularity). The pace gene is the negated residual, so positive values indicate faster-than-expected pace. It captures play clock management philosophy. First plays of each drive are excluded from the pace calculation as they have no meaningful inter-play interval.
 
 The composite tempo gene is the reliability-weighted mean of the z-scored no-huddle and pace sub-components, attributed to head coaches. This composite captures overall pace philosophy: coaches who both run more no-huddle and snap the ball faster score highly, while coaches who are fast on one dimension but slow on the other receive intermediate scores. The composite yields 638 coach-year observations across 2006--2024.
 
-\subsubsection{Defensive Scheme Gene}
+\subsubsection{Defensive Aggression Gene}
 
-The defensive scheme gene captures defensive philosophy at the team level rather than attributing decisions to individual coaches, reflecting the shared influence of head coach, defensive coordinator, and available personnel. We combine three sub-components:
-
-\begin{itemize}
-\item \textbf{Box stacking} predicts the number of defenders positioned in the box pre-snap, using the defensive candidate set. The residual captures tendency to load the box beyond what offensive formation and game context predict, a hallmark of aggressive, run-stuffing defensive philosophies. Available from 2016 onward, when the NFL began tracking pre-snap defensive alignment.
-\item \textbf{Pass rush intensity} predicts the number of pass rushers sent on passing plays. Pass rush decisions are less predictable from context alone, reflecting greater coach-to-coach variation, exactly the signal our gene framework is designed to capture. Available from 2016 onward.
-\item \textbf{Man coverage tendency} predicts whether the defense will play man or zone coverage on passing plays. Man coverage is generally considered more aggressive and talent-dependent, requiring cornerbacks who can match up individually against receivers. Available from 2018 onward, when the NFL began classifying coverage types.
-\end{itemize}
-
-The composite defensive scheme gene is the reliability-weighted mean of z-scored sub-components, using two components for 2016--2017 (box stacking and pass rush) and three for 2018--2024 (adding man coverage). Because a mean of two unit-variance components has a different scale than a mean of three, we standardize the composite \emph{within} each component-count regime so that pre-2018 and post-2018 team-years are on a common scale (eliminating an artificial break at 2018). This yields 288 team-year observations across 2016--2024, with the head coach of each defending team recorded for inheritance analysis.
+Defensive aggression is a composite of three component models, each capturing an aggressive defensive tendency at the team level: box stacking (loading more defenders near the line than offensive formation and game context predict, a hallmark of run-stuffing fronts), pass rush intensity (sending more rushers on passing plays), and man coverage (playing man rather than zone, the more aggressive, talent-dependent option). We measure defensive aggression at the team level rather than attributing it to an individual coach, reflecting the shared influence of head coach, defensive coordinator, and available personnel. Box stacking and pass rush are available from 2016 and man coverage from 2018, when these tracking and coverage-classification fields enter \texttt{nfl\_data\_py}. The composite is the reliability-weighted mean of the z-scored components, using two components for 2016--2017 and three from 2018; because a mean of two unit-variance components has a different scale than a mean of three, we standardize within each component-count regime so that pre- and post-2018 team-years share a common scale (eliminating an artificial break at 2018). This yields 288 team-year observations across 2016--2024, with the head coach of each defending team recorded for inheritance analysis.
 
 \subsection{Modeling Pipeline and Feature Selection}
 \label{sec:pipeline}
@@ -258,15 +252,15 @@ Several methodological safeguards apply uniformly to all ten predictive models a
 
 Because a gene is the residual between observed behavior and a model's prediction, the gene is only meaningful if predictions at scoring time are generated in exactly the feature space the model was trained in. We therefore fit all preprocessing on the training split alone. The categorical encoders, the median imputer, and the truncated-SVD reconstruction step are estimated on training data, persisted, and then applied in transform-only mode when computing genes for the full play-by-play record. This eliminates a train/serve mismatch in which preprocessing re-estimated on all plays would place genes in a different feature space than the one the models learned. Two further leakage paths are closed elsewhere in this section. Coach identity, season, and week are excluded from every model as predictors, so a model cannot recover a coach's tendencies from their name or from the calendar; and every data split is made at the team-year group level, so no coach or team appears in both training and evaluation (detailed below).
 
-Rather than hand-curating which context variables enter each model, we select features by stability selection \citep{meinshausen2010}. For each model we draw repeated subsamples of the data, subsampling at the team-year group level so that a team's or coach's plays are never split across the in- and out-of-sample sets, then refit the model and rank features by gain importance. For shortlist length $K$ and subsample $b$, let $\hat{S}^{(b)}_{K}$ denote the $K$ highest-importance features; the selection frequency of feature $k$ is
+We do not hand-curate the full feature set: a pre-specified core of game-state fields is always retained, and the remaining context variables are selected by stability selection \citep{meinshausen2010}. For each model we draw repeated subsamples of the data, subsampling at the team-year group level so that a team's or coach's plays are never split across the in- and out-of-sample sets, then refit the model and rank features by gain importance. For shortlist length $K$ and subsample $b$, let $\hat{S}^{(b)}_{K}$ denote the $K$ highest-importance features; the selection frequency of feature $k$ is
 \begin{equation}
 \hat{\Pi}_k^{(K)} = \frac{1}{B}\sum_{b=1}^{B} \mathbf{1}\!\left\{k \in \hat{S}^{(b)}_{K}\right\},
 \end{equation}
 over $B = 50$ subsamples, each a 50\% sample of team-year groups drawn without replacement. We treat a feature as stable when its selection frequency reaches the threshold $\pi = 0.6$, and take the stable set as the union of such features over the shortlist lengths $K \in \{8, 12, 16\}$. This prunes the 21--28 candidate context variables (several of them collinear, such as the three time-remaining measures and the score-differential family) to a parsimonious 15--20 stable predictors per model, reducing variance from redundant inputs without materially changing predictive accuracy. We protect a pre-specified core of fine-grained game-state fields (the clocks, score margin, field position, down and distance, and timeouts) from pruning so that the situational baseline a gene is measured against is always fully controlled.
 
-A gene compares a coach's behavior to a model's prediction, so if the model were trained on that same coach its prediction would be partly fit to the coach's own tendencies, shrinking the residual and attenuating every gene toward zero. We remove this by cross-fitting: predictions used to compute genes are out-of-fold, generated under group $k$-fold cross-validation that leaves out whole coaches (offensive genes) or whole teams (defensive genes), reusing the tuned hyperparameters. Each coach-year is therefore scored by a model that never saw that coach, so the residual reflects genuine deviation from a coach-blind baseline. This matters most for the small-sample components, whose residuals would otherwise be attenuated toward zero.
+A gene compares a coach's behavior to a model's prediction, so if the model were trained on that same coach its prediction would be partly fit to the coach's own tendencies, shrinking the residual and attenuating every gene toward zero. We remove this by cross-fitting: predictions used to compute genes are out-of-fold, generated under group $k$-fold cross-validation that leaves out whole coaches (offensive genes) or whole teams (defensive genes), reusing the tuned hyperparameters. Each coach-year is therefore scored by a model that never saw that coach, so the residual reflects genuine deviation from a coach-blind baseline. Folds are formed by coach or team rather than by season; because every model excludes season and week and pools plays across all years, its baseline is a single all-era norm, so era-imbalanced folds do not introduce time-shift bias into the residuals. This matters most for the small-sample components, whose residuals would otherwise be attenuated toward zero.
 
-Each composite gene (aggression, tempo, defensive scheme) is a reliability-weighted mean of its z-scored sub-components; the single-component shotgun gene uses the analogous empirical-Bayes shrinkage. For a sub-component, a coach-year's residual $\theta_i$ has binomial sampling variance $v_i = \sum \hat{p}(1-\hat{p})/n_i^2$, and we estimate the between-coach-year variance with the DerSimonian-Laird random-effects estimator \citep{dersimonian1986},
+Each composite gene (offensive aggression, tempo, defensive aggression) is a reliability-weighted mean of its z-scored sub-components; the single-component shotgun gene uses the analogous empirical-Bayes shrinkage. For a sub-component, a coach-year's residual $\theta_i$ has binomial sampling variance $v_i = \sum \hat{p}(1-\hat{p})/n_i^2$, and we estimate the between-coach-year variance with the DerSimonian-Laird random-effects estimator \citep{dersimonian1986},
 \begin{equation}
 \hat{\tau}^2 = \max\!\left(0,\; \frac{Q - (m-1)}{C}\right),
 \end{equation}
@@ -282,27 +276,27 @@ Before relating genes to performance, we test whether they capture stable, coach
 
 \subsection{Performance Analysis}
 
-To test whether coaching genes predict performance, we correlate each composite gene with annual WAR. For the aggression gene, which has the strongest theoretical prior for predicting performance, we additionally run component-level analyses and examine temporal evolution by splitting the sample into three eras (2006-2011, 2012-2017, 2018-2024); a Chow test motivates the 2012 boundary by identifying a structural break there (reported in the temporal-robustness results below).
+To test whether coaching genes predict performance, we correlate each composite gene with annual WAR. For the offensive aggression gene, which has the strongest theoretical prior for predicting performance, we additionally run component-level analyses and examine temporal evolution by splitting the sample into three eras (2006-2011, 2012-2017, 2018-2024), with boundaries informed by a Chow test for structural breaks.
 
-Single-season WAR is itself a noisy estimate. As established for the Coach WAR metric \citep{williamson2026war}, a 16-game season carries an irreducible binomial sampling floor of roughly 1.94 wins of standard deviation, so single-season records explain only a limited share of variance (held-out $R^2 = 0.43$) and year-to-year WAR is correspondingly low in reliability; the residual is single-season luck, not absent coaching signal. Because classical noise in the dependent variable attenuates a correlation rather than inflating it, our season-level gene-WAR correlations are conservative lower bounds, not overstatements. We address this three ways: (i) we report the relationship at the \emph{career} level (one observation per coach, where mean WAR is far more reliable) as the primary anchor; (ii) we inverse-variance weight season-level coach-years by a games-based precision proxy; and (iii) we confirm robustness to dropping partial (sub-half) seasons, the least reliable WAR estimates. We deliberately do not report a single ``disattenuated'' correlation, because dividing by so low a reliability would manufacture false precision.
+Single-season WAR is a noisy estimate, dominated by the game-to-game variance of a 16-game season \citep{williamson2026war}. Because classical noise in the dependent variable attenuates a correlation rather than inflating it, our season-level gene-WAR correlations are conservative lower bounds, not overstatements. We address this three ways: (i) we report the relationship at the \emph{career} level (one observation per coach, where mean WAR is far more reliable) as the primary anchor; (ii) we inverse-variance weight season-level coach-years by a games-based precision proxy; and (iii) we confirm robustness to dropping partial (sub-half) seasons, the least reliable WAR estimates. We deliberately do not report a single ``disattenuated'' correlation, because dividing by so low a reliability would manufacture false precision.
 
 Because each head coach contributes many coach-years, the observations are not independent. All primary repeated-measures analyses cover the gene-WAR correlations, year-to-year persistence, mentor-prot\'{e}g\'{e} inheritance, and the multiple-gene regressions. For these we report \emph{coach-clustered} inference, or \emph{mentor-clustered} inference for mentor-prot\'{e}g\'{e} pairs. P-values and 95\% confidence intervals are obtained from a cluster bootstrap that resamples whole coaches (or mentors) over 2{,}000 replicates, and the regressions additionally use cluster-robust standard errors. This is materially more conservative than treating coach-years as independent, and we treat the clustered p-value as primary throughout; conventional p-values are reported alongside where helpful. For subgroups with fewer than 40 clusters, where both the percentile cluster bootstrap and the clustered $t$ are known to be anti-conservative, we instead report a wild cluster bootstrap \citep{cameron2008} (restricted, with Rademacher weights) as the more reliable inference and flag the subgroup; era-stratified and other small cross-sections are interpreted cautiously. The confidence intervals for the upstream predictive-model performance metrics (Table~\ref{tab:all_models}) are computed differently, by the Nadeau-Bengio (2003) corrected resampled-$t$: over $J=50$ random train-test resamples that hold out whole team-years, we inflate the naive resample variance by the correction $(1/J + \rho)$ with $\rho=0.2$ to account for the overlap among the resampled training sets, which a plain resample standard deviation badly understates \citep{nadeau2003}.
 
-We analyze offensive and defensive coaches separately to test whether the aggression-performance relationship differs by coaching background. Since all our offensive aggression measures focus on offensive decisions, we hypothesize that offensive coaches should show stronger relationships with performance.
+We analyze offensive and defensive coaches separately to test whether the offensive aggression-performance relationship differs by coaching background. Since all our offensive aggression measures focus on offensive decisions, we hypothesize that offensive coaches should show stronger relationships with performance.
 
 \subsection{Persistence Analysis}
 
-To measure the stability of coaching aggression over time, we construct lagged datasets matching each coach-year with their aggression in subsequent years:
+To measure the stability of offensive aggression over time, we construct lagged datasets matching each coach-year with their offensive aggression in subsequent years:
 
 \begin{equation}
 \rho_k = \text{Corr}(\text{Aggression}_{t}, \text{Aggression}_{t+k})
 \end{equation}
 
-for lags $k \in \{1,2,3\}$. We estimate these correlations separately for offensive and defensive coaches to test whether coaching background affects the stability of aggressive tendencies. If aggression represents core philosophical beliefs for offensive coaches but situational adaptation for defensive coaches, we should observe stronger persistence among offensive coaches.
+for lags $k \in \{1,2,3\}$. We estimate these correlations separately for offensive and defensive coaches to test whether coaching background affects the stability of aggressive tendencies.
 
 \subsection{Inheritance Analysis}
 
-To test whether coaching DNA transmits through coaching relationships, we match coaches with their documented mentors based on career overlap. We test inheritance for both aggression and shotgun formation genes, analyzing coordinator-to-head-coach relationships separately by mentor background (offensive vs defensive) and by coordinator type (OC vs DC).
+To test whether coaching DNA transmits through coaching relationships, we match coaches with their documented mentors based on career overlap. We test inheritance for all four genes through two complementary approaches: career-average mentor-prot\'{e}g\'{e} correlations for offensive aggression and shotgun, where mentor-prot\'{e}g\'{e} pairs are available, analyzed separately by mentor background (offensive vs defensive) and coordinator type (OC vs DC); and direct coordinator-to-head-coach transitions (below), which cover all four genes, including the team-level defensive aggression gene.
 
 For each mentor-prot\'{e}g\'{e} pair, we calculate average career gene scores (pooling across all seasons to reduce measurement error) and estimate:
 
@@ -312,21 +306,21 @@ For each mentor-prot\'{e}g\'{e} pair, we calculate average career gene scores (p
 
 Under an inheritance hypothesis, we would expect substantial positive correlations. We additionally test whether mentor WAR predicts prot\'{e}g\'{e} WAR, directly addressing whether working under a successful coach predicts future success.
 
-The mentor-prot\'{e}g\'{e} analysis above tests inheritance through career-average aggression across all coaching tree relationships. To conduct a more direct test of strategic transmission, we analyze coordinator-to-head-coach transitions specifically. Using complete career histories from Pro Football Reference, we identify every coach who served as a defensive coordinator (DC) before becoming a head coach, and every coach who served as an offensive coordinator (OC) before becoming a head coach.
+The mentor-prot\'{e}g\'{e} analysis above tests inheritance through career-average offensive aggression across all coaching tree relationships. To conduct a more direct test of strategic transmission, we analyze coordinator-to-head-coach transitions specifically. Using complete career histories from Pro Football Reference, we identify every coach who served as a defensive coordinator (DC) before becoming a head coach, and every coach who served as an offensive coordinator (OC) before becoming a head coach.
 
-For DC$\rightarrow$HC transitions, we compare the team's defensive scheme gene during the coordinator's DC tenure with the team's defensive scheme gene during their HC tenure. For OC$\rightarrow$HC transitions, we compare the team's offensive genes (aggression, shotgun, tempo) during the OC's coordinator tenure with their HC-era genes. When a coach had multiple coordinator stints, we retain only the most recent stint to avoid pseudo-replication of the HC-era outcome. Coordinator years must precede HC years to ensure proper temporal ordering.
+For DC$\rightarrow$HC transitions, we compare the team's defensive aggression gene during the coordinator's DC tenure with the team's defensive aggression gene during their HC tenure. For OC$\rightarrow$HC transitions, we compare the team's offensive genes (offensive aggression, shotgun, tempo) during the OC's coordinator tenure with their HC-era genes. When a coach had multiple coordinator stints, we retain only the most recent stint to avoid pseudo-replication of the HC-era outcome. Coordinator years must precede HC years to ensure proper temporal ordering.
 
 This approach tests a more specific hypothesis than the career-average analysis: does the \emph{team-level} strategic identity that a coordinator helped create persist when they take the helm of their own team?
 
 \subsection{Multiple Comparison Correction}
 
-Our analysis involves numerous hypothesis tests across gene-WAR performance relationships, aggression component analyses, persistence, inheritance patterns, within-coach causal effects, and temporal robustness. To address concerns about false discoveries from multiple testing, we apply the Benjamini-Hochberg procedure to control the False Discovery Rate (FDR) at $\alpha=0.05$ \citep{benjamini1995}. This method is more powerful than the conservative Bonferroni correction while still providing strong protection against spurious findings.
+Our analysis involves numerous hypothesis tests across gene-WAR performance relationships, offensive aggression component analyses, persistence, inheritance patterns, within-coach causal effects, and temporal robustness. To address concerns about false discoveries from multiple testing, we apply the Benjamini-Hochberg procedure to control the False Discovery Rate (FDR) at $\alpha=0.05$ \citep{benjamini1995}.
 
-We apply a single global Benjamini-Hochberg family spanning all 101 hypothesis tests in the study, preferring the wild cluster bootstrap p-value for small-cluster subgroups, the percentile clustered p-value for other repeated-measures tests, and the conventional p-value otherwise. This is the most conservative, least forking-path-prone choice. Under this family the Benjamini-Hochberg threshold falls at $p \leq 0.024$, below which 65 of the 101 tests lie. The strongest results fall below it: the composite aggression, shotgun, and defensive-scheme gene-WAR relationships; the early-era aggression-performance advantage; year-to-year persistence at all lags; the offensive shotgun and pass-heavy mentor-prot\'{e}g\'{e} inheritance; the pooled and the early- and late-era within-coach effects; and the direct coordinator-to-HC shotgun and defensive-scheme transmission results. Results that are positive under conventional p-values but lie above the strict global threshold include the fourth-down component of the aggression-WAR relationship at the season level (clustered $p=0.033$; its career-level form is stronger), the late-era pass-heavy subgroup correlation, and the 2012 structural-break test ($p=0.034$); the coordinator-to-HC tempo transmission and a handful of marginal subgroup tests are weak after correction. We treat this threshold as one decision rule rather than a sharp boundary, read borderline results as graded evidence, and report both clustered and conventional p-values throughout.
+We apply a single global Benjamini-Hochberg family spanning all 101 hypothesis tests in the study, preferring the wild cluster bootstrap p-value for small-cluster subgroups, the percentile clustered p-value for other repeated-measures tests, and the conventional p-value otherwise. This is the most conservative, least forking-path-prone choice. Under this family the Benjamini-Hochberg threshold falls at $p \leq 0.024$, below which 65 of the 101 tests lie. We treat this threshold as one decision rule rather than a sharp boundary and report both clustered and conventional p-values throughout.
 
 \subsection{Within-Coach Fixed Effects}
 
-To strengthen causal inference, we employ two-way fixed effects regression that controls for both coach-specific quality and temporal changes in aggression's effectiveness. This approach isolates whether coaches perform better when they are more aggressive than usual, removing confounds from stable coach characteristics and league-wide temporal trends.
+To strengthen causal inference, we employ two-way fixed effects regression that controls for both coach-specific quality and temporal changes in offensive aggression's effectiveness. This approach isolates whether coaches perform better when they are more aggressive than usual, removing confounds from stable coach characteristics and league-wide temporal trends.
 
 The model specification is:
 
@@ -334,9 +328,9 @@ The model specification is:
 \text{WAR}_{it} = \beta \cdot \text{Aggression}_{it} + \alpha_i + \gamma_t + \epsilon_{it}
 \end{equation}
 
-where $\alpha_i$ represents coach fixed effects (controlling for time-invariant coach quality) and $\gamma_t$ represents year fixed effects (controlling for temporal changes in the value of aggression). We demean variables within both coaches and years, then estimate $\beta$ using OLS with standard errors clustered by coach.
+where $\alpha_i$ represents coach fixed effects (controlling for time-invariant coach quality) and $\gamma_t$ represents year fixed effects (controlling for temporal changes in the value of offensive aggression). We demean variables within both coaches and years, then estimate $\beta$ using OLS with standard errors clustered by coach.
 
-This two-way fixed effects approach is critical because coaches' aggression may increase over time as league-wide norms shift. Without year fixed effects, within-coach increases in aggression would be confounded with the declining competitive advantage of aggression, potentially obscuring a genuine causal relationship. The two-way approach asks: when a coach is more aggressive than the league average in year $t$ (relative to their typical deviation from league norms), do they perform better?
+This two-way fixed effects approach is critical because coaches' offensive aggression may increase over time as league-wide norms shift. Without year fixed effects, within-coach increases in offensive aggression would be confounded with the declining competitive advantage of offensive aggression, potentially obscuring a genuine causal relationship. The two-way approach asks: when a coach is more aggressive than the league average in year $t$ (relative to their typical deviation from league norms), do they perform better?
 
 \section{Results}
 
@@ -345,9 +339,9 @@ This two-way fixed effects approach is critical because coaches' aggression may 
 
 Before asking whether genes predict performance, we establish that they measure something real and coach-specific, a stable strategic identity that belongs to the coach rather than to the team or its roster. Three lines of evidence converge.
 
-\textbf{Variance decomposition.} Across every gene, coach identity explains far more variance than team identity. For composite aggression, coach identity accounts for 51\% of the variance against 13\% for team and 19\% for season; the same pattern holds for shotgun (coach 58\%, team 12\%), tempo (53\% vs.\ 10\%), and the aggression components (Table~\ref{tab:variance}). A coach's genes are roughly four to five times more a function of who they are than of where they coach.
+\textbf{Variance decomposition.} Across every gene, coach identity explains far more variance than team identity. For composite offensive aggression, coach identity accounts for 51\% of the variance against 13\% for team and 19\% for season; the same pattern holds for shotgun (coach 58\%, team 12\%), tempo (53\% vs.\ 10\%), and the offensive aggression components (Table~\ref{tab:variance}). A coach's genes are roughly four to five times more a function of who they are than of where they coach.
 
-\textbf{The gene travels with the coach.} A sharper test exploits coaching changes. Among the 32 coaches who changed teams during our window, the gene a coach exhibits at their new team is correlated with the gene they exhibited at their previous team: composite aggression $r=0.61$ (95\% CI $[0.33, 0.78]$), shotgun $r=0.55$, tempo $r=0.54$, comparable to or stronger than the year-to-year persistence \emph{within} a single team (Section~\ref{sec:persistence}). A mover regression refines the attribution. Regressing a coach's new-team gene on both their prior-team gene and the new team's pre-arrival gene, we find the coach term large and well-determined (composite aggression $\beta=0.53$, 95\% CI $[0.26, 0.83]$, $p<0.001$); the new team's pre-arrival tendency also carries predictive weight ($\beta=0.72$, $p=0.004$), consistent with teams hiring coaches whose style fits the building. The strong cross-team travel of the gene nonetheless shows that strategic identity is substantially carried by the coach.
+\textbf{The gene travels with the coach.} A sharper test exploits coaching changes. Among the 32 coaches who changed teams during our window, the gene a coach exhibits at their new team is correlated with the gene they exhibited at their previous team: composite offensive aggression $r=0.61$ (95\% CI $[0.33, 0.78]$), shotgun $r=0.55$, tempo $r=0.54$, comparable to or stronger than the year-to-year persistence \emph{within} a single team (Section~\ref{sec:persistence}). A mover regression refines the attribution. Regressing a coach's new-team gene on both their prior-team gene and the new team's pre-arrival gene, we find the coach term large and well-determined (composite offensive aggression $\beta=0.53$, 95\% CI $[0.26, 0.83]$, $p<0.001$); the new team's pre-arrival tendency also carries predictive weight ($\beta=0.72$, $p=0.004$), consistent with teams hiring coaches whose style fits the building. The strong cross-team travel of the gene nonetheless shows that strategic identity is substantially carried by the coach.
 
 \begin{table}[H]
 \caption{Genes Are Coach Traits: Variance Decomposition and Cross-Team Travel}
@@ -356,7 +350,7 @@ Before asking whether genes predict performance, we establish that they measure 
 \toprule
 \textbf{Gene} & \textbf{Var.\ Coach} & \textbf{Var.\ Team} & \textbf{Travel $r$ [95\% CI]} \\
 \midrule
-Composite Aggression & 0.51 & 0.13 & 0.61 [0.33, 0.78] \\
+Composite Offensive Aggression & 0.51 & 0.13 & 0.61 [0.33, 0.78] \\
 Shotgun Formation & 0.58 & 0.12 & 0.55 [0.29, 0.75] \\
 Tempo & 0.53 & 0.10 & 0.54 [$-$0.11, 0.86] \\
 \cmidrule{1-4}
@@ -386,7 +380,7 @@ The composite travels better than any single component, because aggregating the 
 \toprule
 \textbf{Gene} & \textbf{Most} & \textbf{Least} \\
 \midrule
-Composite Aggression & Pederson, Staley, Arians & Jauron, Childress, Fox \\
+Composite Offensive Aggression & Pederson, Staley, Arians & Jauron, Childress, Fox \\
 4th Down & Campbell, LaFleur, Staley & Schwartz, McCoy, Dungy \\
 Shotgun & Sirianni, Kingsbury, Kelly & Holmgren, Nolan, Marinelli \\
 Tempo & Kelly, Kingsbury, Spagnuolo & Nolan, LaFleur, Gailey \\
@@ -409,20 +403,20 @@ We first test whether our four gene dimensions predict coaching performance. Tab
 \toprule
 \textbf{Gene} & \textbf{r} & \textbf{95\% CI} & \textbf{p} & \textbf{n} \\
 \midrule
-Composite Aggression & 0.189 & [0.10, 0.28] & $<$0.001** & 608 \\
+Composite Offensive Aggression & 0.189 & [0.10, 0.28] & $<$0.001** & 608 \\
 Shotgun Formation & 0.142 & [0.05, 0.23] & 0.004** & 608 \\
-Defensive Scheme & 0.151 & [0.03, 0.27] & 0.015* & 282 \\
+Defensive Aggression & 0.151 & [0.03, 0.27] & 0.015* & 282 \\
 Composite Tempo & 0.045 & [$-$0.04, 0.15] & 0.352 & 608 \\
 \midrule
 \multicolumn{5}{l}{\small Coach-clustered bootstrap p and 95\% CI; * $p<0.05$, ** $p<0.01$}\\
-\multicolumn{5}{l}{\small Defensive scheme: 2016--2024; all others: 2006--2024}\\
+\multicolumn{5}{l}{\small Defensive aggression: 2016--2024; all others: 2006--2024}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Three of the four genes are positively associated with performance. Composite aggression shows the strongest correlation with WAR ($r=0.189$, $p<0.001$), followed by defensive scheme aggressiveness ($r=0.151$, $p=0.015$) and shotgun formation preference ($r=0.142$, $p=0.004$); all three are robust to coach clustering and the global false-discovery correction. Tempo shows little relationship ($r=0.045$, $p=0.35$).
+Three of the four genes are positively associated with performance. Composite offensive aggression shows the strongest correlation with WAR ($r=0.189$, $p<0.001$), followed by defensive aggression ($r=0.151$, $p=0.015$) and shotgun formation preference ($r=0.142$, $p=0.004$); all three are robust to coach clustering and the global false-discovery correction. Tempo shows little relationship ($r=0.045$, $p=0.35$).
 
-These season-level correlations are conservative. As noted in the Methods, a single-season WAR is only about one-quarter reliable, and measurement noise in the outcome attenuates a correlation toward zero, so these values are lower bounds. At the \emph{career} level, where a coach's mean WAR is far more reliable, the composite aggression relationship strengthens to $r=0.303$ (95\% CI $[0.16, 0.45]$, $p<0.001$, $n=124$ coaches; $r=0.308$, $[0.14, 0.47]$, among the 87 coaches with at least three seasons), and shotgun to $r=0.230$ ($[0.04, 0.41]$, $p=0.010$); defensive scheme is positive but imprecise at the career level given its shorter window ($r=0.188$, $[0.02, 0.35]$, $p=0.10$, $n=79$). The season-level estimates are also robust to inverse-variance weighting by WAR precision (composite aggression $r=0.211$, $[0.13, 0.29]$) and to dropping partial seasons ($r=0.211$), so they are not driven by a handful of noisy short tenures. Given that most coaching genes carry real performance signal, we turn to whether they transmit through coaching relationships, and whether the genes that transfer most strongly are the same ones that predict winning.
+These season-level correlations are conservative. As noted in the Methods, a single-season WAR is only about one-quarter reliable, and measurement noise in the outcome attenuates a correlation toward zero, so these values are lower bounds. At the \emph{career} level, where a coach's mean WAR is far more reliable, the composite offensive aggression relationship strengthens to $r=0.303$ (95\% CI $[0.16, 0.45]$, $p<0.001$, $n=124$ coaches; $r=0.308$, $[0.14, 0.47]$, among the 87 coaches with at least three seasons), and shotgun to $r=0.230$ ($[0.04, 0.41]$, $p=0.010$); defensive aggression is positive but imprecise at the career level given its shorter window ($r=0.188$, $[0.02, 0.35]$, $p=0.10$, $n=79$). The season-level estimates are also robust to inverse-variance weighting by WAR precision (composite offensive aggression $r=0.211$, $[0.13, 0.29]$) and to dropping partial seasons ($r=0.211$), so they are not driven by a handful of noisy short tenures. Given that most coaching genes carry real performance signal, we turn to whether they transmit through coaching relationships, and whether the genes that transfer most strongly are the same ones that predict winning.
 
 \subsection{Testing the Theory of Coaching Trees}
 
@@ -451,12 +445,12 @@ DC $\rightarrow$ HC & 0.190* & [0.01, 0.37] & 0.045 & 89 \\
 
 Mentor performance shows at most a weak association with prot\'{e}g\'{e} performance ($r=0.124$, $p=0.074$), explaining under 2\% of the variance. The association is negligible for offensive coordinator prot\'{e}g\'{e}s ($r=0.087$, $p=0.45$) and modest for defensive coordinator prot\'{e}g\'{e}s ($r=0.190$, $p=0.045$), though the latter does not survive the global false-discovery correction. On average, the data give little indication that working under a highly successful coach, rather than an average one, predicts greater success as a head coach.
 
-\subsubsection{Aggression Inheritance}
+\subsubsection{Offensive Aggression Inheritance}
 
-If coaching trees don't transmit success, do they transmit strategy? We analyze 513 documented mentor-prot\'{e}g\'{e} pairs where we have aggression data for both, using career average aggression scores to maximize reliability. Table~\ref{tab:inheritance} presents results.
+If coaching trees don't transmit success, do they transmit strategy? We analyze 513 documented mentor-prot\'{e}g\'{e} pairs where we have offensive aggression data for both, using career average offensive aggression scores to maximize reliability. Table~\ref{tab:inheritance} presents results.
 
 \begin{table}[H]
-\caption{Aggression Inheritance: Overall Mentor-Prot\'{e}g\'{e} Pairs}
+\caption{Offensive Aggression Inheritance: Overall Mentor-Prot\'{e}g\'{e} Pairs}
 \label{tab:inheritance}
 \begin{tabular}{lccc}
 \toprule
@@ -475,12 +469,12 @@ Two-Point & 0.050 & [$-$0.07, 0.18] & 0.36 \\
 \end{tabular}
 \end{table}
 
-Composite aggression shows little inheritance ($r=0.080$, $p=0.24$). A mentor's aggression carries little information about the prot\'{e}g\'{e}'s. Fourth-down decision-making is the strongest component ($r=0.172$, $p=0.07$), and is more pronounced under conventional unclustered inference, consistent with our persistence findings that 4th-down philosophy is the most stable, trait-like component; once the repeated appearance of the same mentors is taken into account, however, the signal is weak.
+Composite offensive aggression shows little inheritance ($r=0.080$, $p=0.24$). A mentor's offensive aggression carries little information about the prot\'{e}g\'{e}'s. Fourth-down decision-making is the strongest component ($r=0.172$, $p=0.07$), and is more pronounced under conventional unclustered inference, consistent with our persistence findings that 4th-down philosophy is the most stable, trait-like component; once the repeated appearance of the same mentors is taken into account, however, the signal is weak.
 
-Separating by coordinator type is informative. Table~\ref{tab:inherit_coord} shows that among OC-mentored prot\'{e}g\'{e}s, pass-heavy tendency shows the clearest inheritance ($r=0.333$, clustered $p=0.004$), while the 4th-down association ($r=0.232$) is weaker once mentor clustering is applied ($p=0.12$). DC-mentored prot\'{e}g\'{e}s show little inheritance for any aggression component.
+Separating by coordinator type is informative. Table~\ref{tab:inherit_coord} shows that among OC-mentored prot\'{e}g\'{e}s, pass-heavy tendency shows the clearest inheritance ($r=0.333$, clustered $p=0.004$), while the 4th-down association ($r=0.232$) is weaker once mentor clustering is applied ($p=0.12$). DC-mentored prot\'{e}g\'{e}s show little inheritance for any offensive aggression component.
 
 \begin{table}[H]
-\caption{Aggression Inheritance by Coordinator Type}
+\caption{Offensive Aggression Inheritance by Coordinator Type}
 \label{tab:inherit_coord}
 \scriptsize
 \begin{tabular}{lcccc}
@@ -504,7 +498,7 @@ Two-Point & 0.060 [$-$0.14, 0.29] & 0.52 & 0.048 [$-$0.09, 0.19] & 0.48 \\
 
 \subsubsection{Shotgun Formation Inheritance}
 
-The aggression results suggest weak-to-absent strategic transmission. But aggression captures situational decision-making, the in-the-moment choices about risk. What about schematic identity, the structural elements of how a team looks pre-snap? The shotgun formation gene provides a direct test.
+The offensive aggression results suggest weak-to-absent strategic transmission. But offensive aggression captures situational decision-making, the in-the-moment choices about risk. What about schematic identity, the structural elements of how a team looks pre-snap? The shotgun formation gene provides a direct test.
 
 \begin{table}[H]
 \caption{Shotgun Gene Inheritance: Mentor-Prot\'{e}g\'{e} Pairs}
@@ -523,7 +517,7 @@ DC $\rightarrow$ HC & 0.096 & [$-$0.12, 0.30] & 0.43 & 269 \\
 \end{tabular}
 \end{table}
 
-Shotgun formation preference shows clearer overall inheritance ($r=0.289$, $p<0.001$, $n=608$), several times stronger than composite aggression ($r=0.080$), and the association holds under mentor clustering.
+Shotgun formation preference shows clearer overall inheritance ($r=0.289$, $p<0.001$, $n=608$), several times stronger than composite offensive aggression ($r=0.080$), and the association holds under mentor clustering.
 
 Shotgun inheritance is specific to offensive backgrounds. Offensive coordinator prot\'{e}g\'{e}s show clear inheritance ($r=0.399$, $p<0.001$), while defensive coordinator prot\'{e}g\'{e}s show little ($r=0.096$, $p=0.43$). This domain-specificity is consistent with the mechanism: offensive coordinators design and install formation packages, while defensive coordinators have no direct role in shotgun usage decisions.
 
@@ -539,7 +533,7 @@ Table~\ref{tab:tree_summary} synthesizes the coaching tree findings across all d
 \textbf{Dimension} & \textbf{Type} & \textbf{r} & \textbf{95\% CI} & \textbf{Transmitted?} \\
 \midrule
 Performance (WAR) & Outcome & 0.124 & [$-$0.01, 0.26] & No \\
-Composite Aggression & Situational & 0.080 & [$-$0.05, 0.22] & No \\
+Composite Offensive Aggression & Situational & 0.080 & [$-$0.05, 0.22] & No \\
 4th Down Aggression & Situational & 0.172 & [$-$0.01, 0.34] & No$^{\dagger}$ \\
 Shotgun Formation (OC) & Schematic & 0.399*** & [0.21, 0.54] & Strongly \\
 \midrule
@@ -551,12 +545,12 @@ Shotgun Formation (OC) & Schematic & 0.399*** & [0.21, 0.54] & Strongly \\
 
 The pattern across dimensions is consistent. Coaching trees show little transmission of performance or general risk tolerance, but offensive coaching trees \emph{do} transmit schematic identity, the structural elements of how a team looks on the field. The distinction maps cleanly onto the difference between system design (transmissible) and situational judgment (personal), with the further finding that transmission is domain-specific. Only coaches who designed the system transmit it.
 
-Figure~\ref{fig:inherit_type} visualizes the aggression inheritance patterns split by mentor background.
+Figure~\ref{fig:inherit_type} visualizes the offensive aggression inheritance patterns split by mentor background.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{../visualizations/inheritance/inheritance_by_mentor_type.png}
-    \caption{Mentor-prot\'{e}g\'{e} aggression correlations split by mentor background. Only offensive mentors (orange) show a clear positive slope, most visibly for 4th-down aggression. Defensive mentors (blue) show flat relationships across all components.}
+    \caption{Mentor-prot\'{e}g\'{e} offensive aggression correlations split by mentor background. Only offensive mentors (orange) show a clear positive slope, most visibly for 4th-down aggression. Defensive mentors (blue) show flat relationships across all components.}
     \label{fig:inherit_type}
 \end{figure}
 
@@ -574,31 +568,31 @@ Table~\ref{tab:gene_inherit} presents the results across all four gene dimension
 \toprule
 \textbf{Gene} & \textbf{Transition} & \textbf{n} & \textbf{r} & \textbf{95\% CI} & \textbf{p} & \textbf{Dir. Ret.} \\
 \midrule
-Defensive Scheme & DC$\rightarrow$HC & 17 & 0.570* & [0.22, 0.82] & 0.020 & 65\% \\
-Shotgun & OC$\rightarrow$HC & 39 & 0.670*** & [0.47, 0.81] & $<$0.001 & 82\% \\
-Tempo & OC$\rightarrow$HC & 39 & 0.305 & [$-$0.17, 0.63] & 0.31 & 56\% \\
-Aggression & OC$\rightarrow$HC & 39 & $-$0.012 & [$-$0.34, 0.30] & 0.95 & 51\% \\
+Defensive Aggression & DC$\rightarrow$HC & 17 & 0.570* & [0.22, 0.82] & 0.020 & 65\% \\
+Shotgun & OC$\rightarrow$HC & 40 & 0.674*** & [0.48, 0.80] & $<$0.001 & 82\% \\
+Tempo & OC$\rightarrow$HC & 40 & 0.318 & [$-$0.15, 0.64] & 0.23 & 58\% \\
+Offensive Aggression & OC$\rightarrow$HC & 40 & $-$0.008 & [$-$0.34, 0.29] & 0.93 & 52\% \\
 \midrule
 \multicolumn{7}{l}{\small Dir. Ret. = percentage of coaches whose gene retains the same sign}\\
 \multicolumn{7}{l}{\small One transition per coach: the most recent coordinator stint, averaged over its seasons with data}\\
-\multicolumn{7}{l}{\small All p-values are wild cluster bootstrap (every transition set has fewer than 40 coaches); 95\% CIs are the percentile coach cluster bootstrap; * $p<0.05$, *** $p<0.001$}\\
+\multicolumn{7}{l}{\small Defensive aggression ($n=17$) uses a wild cluster bootstrap p; the offensive transitions ($n=40$) use the coach-clustered bootstrap p; 95\% CIs are the percentile coach cluster bootstrap; * $p<0.05$, *** $p<0.001$}\\
 \multicolumn{7}{l}{\small The two strongest results fall below the global FDR threshold ($p \leq 0.024$)}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The results reinforce the mentor-prot\'{e}g\'{e} findings. Shotgun formation preference, the most visible schematic element of offensive identity, shows strong direct transmission ($r=0.670$, $p<0.001$), consistent with the OC mentor-prot\'{e}g\'{e} correlation ($r=0.399$, Table~\ref{tab:shotgun_inherit}). When an offensive coordinator runs shotgun-heavy formations, about 82\% of the time their subsequent head-coaching tenure shows the same tendency. Matt Nagy, for instance, carried a shotgun-heavy identity from his Kansas City coordinator years to his Chicago head-coaching tenure, and Jason Garrett a below-average one from his Dallas coordinator years through his decade as the team's head coach.
+The results reinforce the mentor-prot\'{e}g\'{e} findings. Shotgun formation preference, the most visible schematic element of offensive identity, shows strong direct transmission ($r=0.674$, $p<0.001$), consistent with the OC mentor-prot\'{e}g\'{e} correlation ($r=0.399$, Table~\ref{tab:shotgun_inherit}). When an offensive coordinator runs shotgun-heavy formations, about 82\% of the time their subsequent head-coaching tenure shows the same tendency. Matt Nagy, for instance, carried a shotgun-heavy identity from his Kansas City coordinator years to his Chicago head-coaching tenure, and Jason Garrett a below-average one from his Dallas coordinator years through his decade as the team's head coach.
 
-Defensive scheme also shows a positive association ($r=0.570$; $p=0.020$ from a wild cluster bootstrap appropriate to the small sample), though with only $n=17$ transitions, limited by defensive tracking data from 2016 onward, this is suggestive rather than definitive. Dan Quinn, for example, carried an aggressive defensive scheme from his Dallas coordinator tenure to Washington, and Matt Patricia a conservative one from New England to Detroit.
+Defensive aggression also shows a positive association ($r=0.570$; $p=0.020$ from a wild cluster bootstrap appropriate to the small sample), though with only $n=17$ transitions, limited by defensive tracking data from 2016 onward, this is suggestive rather than definitive. Dan Quinn, for example, carried an aggressive defense from his Dallas coordinator tenure to Washington, and Matt Patricia a conservative one from New England to Detroit.
 
-Tempo shows a moderate point estimate that is not statistically reliable at this sample size ($r=0.305$; wild cluster bootstrap $p=0.31$, naive $p=0.059$), so we do not read it as dependable coordinator-to-HC inheritance. Aggression shows essentially none ($r=-0.012$, $p=0.95$), consistent with the career-average analysis. Of these four, the shotgun and defensive-scheme associations fall below the global Benjamini-Hochberg threshold of $p \leq 0.024$.
+Tempo shows a moderate point estimate that is not statistically reliable at this sample size ($r=0.318$; coach-clustered bootstrap $p=0.23$, naive $p=0.046$), so we do not read it as dependable coordinator-to-HC inheritance. Offensive Aggression shows essentially none ($r=-0.008$, $p=0.93$), consistent with the career-average analysis. Of these four, the shotgun and defensive-aggression associations fall below the global Benjamini-Hochberg threshold of $p \leq 0.024$.
 
-Figure~\ref{fig:gene_scatter} visualizes these patterns, contrasting shotgun (positive slope, tight clustering) with aggression (flat, dispersed).
+Figure~\ref{fig:gene_scatter} visualizes these patterns, contrasting shotgun (positive slope, tight clustering) with offensive aggression (flat, dispersed).
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{../visualizations/inheritance/gene_inheritance_scatter.png}
-    \caption{Coordinator-era gene versus HC-era gene for all four dimensions. Each point represents one coordinator-to-HC transition. Shotgun formation and defensive scheme show strong positive correlations, indicating that schematic identity persists. Aggression shows no relationship and tempo only a weak, statistically unreliable one, indicating that situational decision-making and pace do not reliably transfer.}
+    \caption{Coordinator-era gene versus HC-era gene for all four dimensions. Each point represents one coordinator-to-HC transition. Shotgun formation and defensive aggression show strong positive correlations, indicating that schematic identity persists. Offensive Aggression shows no relationship and tempo only a weak, statistically unreliable one, indicating that situational decision-making and pace do not reliably transfer.}
     \label{fig:gene_scatter}
 \end{figure}
 
@@ -607,16 +601,16 @@ Figure~\ref{fig:gene_summary} summarizes the inheritance strength and direction 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{../visualizations/inheritance/gene_inheritance_summary.png}
-    \caption{Left: Pearson correlation between coordinator-era and HC-era genes. Right: Percentage of coaches whose gene retains the same sign (positive/negative) across transitions. The dashed line indicates chance level (50\%). Schematic genes (defensive scheme, shotgun) show strong inheritance while situational decision-making (aggression) and tempo do not.}
+    \caption{Left: Pearson correlation between coordinator-era and HC-era genes. Right: Percentage of coaches whose gene retains the same sign (positive/negative) across transitions. The dashed line indicates chance level (50\%). Schematic genes (defensive aggression, shotgun) show strong inheritance while situational decision-making (offensive aggression) and tempo do not.}
     \label{fig:gene_summary}
 \end{figure}
 
-\subsection{Aggression and Performance: A Disappearing Advantage}
+\subsection{Offensive Aggression and Performance: A Disappearing Advantage}
 
-The composite aggression-WAR correlation ($r=0.189$, Table~\ref{tab:gene_war}) masks a dynamic temporal story. Table~\ref{tab:overall_war} presents the component-level relationships pooling across all seasons from 2006-2024.
+The composite offensive aggression-WAR correlation ($r=0.189$, Table~\ref{tab:gene_war}) masks a dynamic temporal story. Table~\ref{tab:overall_war} presents the component-level relationships pooling across all seasons from 2006-2024.
 
 \begin{table}[H]
-\caption{Aggression vs. WAR: Overall (2006-2024)}
+\caption{Offensive Aggression vs. WAR: Overall (2006-2024)}
 \label{tab:overall_war}
 \begin{tabular}{lccc}
 \toprule
@@ -635,10 +629,10 @@ Deep Pass & 0.020 & [$-$0.07, 0.11] & 0.65 \\
 \end{tabular}
 \end{table}
 
-Composite aggression shows a positive relationship with coaching performance when pooling across all 19 seasons ($r=0.189$, $p<0.001$), driven primarily by the pass-heavy component ($r=0.183$, $p=0.002$). The fourth-down component is positive but weaker under coach clustering ($r=0.095$, $p=0.033$) and lies above the global false-discovery threshold at the season level, though it is stronger at the career level ($r=0.187$). These overall relationships mask temporal evolution. When we split the sample into three eras (2006-2011, n=192; 2012-2017, n=192; 2018-2024, n=224), a pattern of decline emerges (Table~\ref{tab:era_war} and Figure~\ref{fig:temporal}).
+Composite offensive aggression shows a positive relationship with coaching performance when pooling across all 19 seasons ($r=0.189$, $p<0.001$), driven primarily by the pass-heavy component ($r=0.183$, $p=0.002$). The fourth-down component is positive but weaker under coach clustering ($r=0.095$, $p=0.033$) and lies above the global false-discovery threshold at the season level, though it is stronger at the career level ($r=0.187$). These overall relationships mask temporal evolution. When we split the sample into three eras (2006-2011, n=192; 2012-2017, n=192; 2018-2024, n=224), a pattern of decline emerges (Table~\ref{tab:era_war} and Figure~\ref{fig:temporal}).
 
 \begin{table}[H]
-\caption{Aggression vs. WAR by Era}
+\caption{Offensive Aggression vs. WAR by Era}
 \label{tab:era_war}
 \small
 \begin{tabular}{lccc}
@@ -657,22 +651,22 @@ Composite aggression shows a positive relationship with coaching performance whe
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{../visualizations/performance/aggression_war_by_era.png}
-    \caption{Scatterplots of composite aggression (top row) and pass-heavy aggression (bottom row) versus annual WAR, split by era. The strength of the composite aggression relationship has declined from $r=0.239$ ($p=0.001$) in the early era to $r=0.101$ ($p=0.13$) in the late era, while the pass-heavy component remains positive throughout.}
+    \caption{Scatterplots of composite offensive aggression (top row) and pass-heavy aggression (bottom row) versus annual WAR, split by era. The strength of the composite offensive aggression relationship has declined from $r=0.239$ ($p=0.001$) in the early era to $r=0.101$ ($p=0.13$) in the late era, while the pass-heavy component remains positive throughout.}
     \label{fig:temporal}
 \end{figure}
 
-In the early era (2006-2011), composite aggression shows a clear relationship with performance ($r=0.239$, $p=0.001$). By the middle era (2012-2017) it had weakened ($r=0.137$, $p=0.059$), and by the modern era (2018-2024) it had fallen further ($r=0.101$, $p=0.13$). The composite advantage roughly halved across the window. It has diminished rather than vanished outright, and the pass-heavy component in particular remains positive even in the modern era ($r=0.131$, $p=0.049$).
+In the early era (2006-2011), composite offensive aggression shows a clear relationship with performance ($r=0.239$, $p=0.001$). By the middle era (2012-2017) it had weakened ($r=0.137$, $p=0.059$), and by the modern era (2018-2024) it had fallen further ($r=0.101$, $p=0.13$). The composite advantage roughly halved across the window. It has diminished rather than vanished outright, and the pass-heavy component in particular remains positive even in the modern era ($r=0.131$, $p=0.049$).
 
 \subsubsection{Temporal Robustness}
 
-To probe whether the erosion is genuine, we conduct two complementary tests. A continuous-year interaction model ($\text{WAR} = \beta_0 + \beta_1 \cdot \text{Aggression} + \beta_2 \cdot \text{Year} + \beta_3 \cdot \text{Aggression} \times \text{Year}$, with Year centered at 2015 and coach-clustered standard errors) yields $\beta_3 = -0.88$ ($SE = 0.74$, 95\% CI $[-2.36, 0.59]$, $p = 0.24$). The point estimate is negative, consistent with decline, but its confidence interval includes zero, so the continuous test alone does not establish erosion. The implied effect nonetheless falls from $\beta = 25.1$ (95\% CI $[5.7, 44.6]$, $p = 0.012$) in 2006 to $\beta = 9.2$ ($[-4.9, 23.3]$, $p = 0.20$) in 2024, fading toward zero rather than reversing sign. The firmer evidence comes from structural-break testing. A Chow test points to a break at 2012 ($F = 3.41$, $p = 0.034$), with the aggression coefficient falling from $\beta = 27.2$ (95\% CI $[9.6, 43.8]$) before the break to $\beta = 10.7$ ($[0.2, 20.4]$) after, a 61\% reduction; a break at 2013 is comparable ($p = 0.038$). Both lie just above the strict global false-discovery threshold, so we read them as suggestive. Taken with the era pattern, this points to a real but partial erosion rather than a clean disappearance. An out-of-sample check is consistent with this reading. Fitting the season-level relationship on 2006--2018 and applying it to 2019--2024, the aggression-WAR relationship generalizes only weakly (test $r=0.12$), as expected when the outcome is dominated by single-season luck, while the defensive-scheme-WAR relationship is concentrated in the most recent seasons (near zero before 2019, $r=0.25$ after).
+To probe whether the erosion is genuine, we conduct two complementary tests. A continuous-year interaction model ($\text{WAR} = \beta_0 + \beta_1 \cdot \text{Aggression} + \beta_2 \cdot \text{Year} + \beta_3 \cdot \text{Aggression} \times \text{Year}$, with Year centered at 2015 and coach-clustered standard errors) yields $\beta_3 = -0.88$ ($SE = 0.74$, 95\% CI $[-2.36, 0.59]$, $p = 0.24$). The point estimate is negative, consistent with decline, but its confidence interval includes zero, so the continuous test alone does not establish erosion. The implied effect nonetheless falls from $\beta = 25.1$ (95\% CI $[5.7, 44.6]$, $p = 0.012$) in 2006 to $\beta = 9.2$ ($[-4.9, 23.3]$, $p = 0.20$) in 2024, fading toward zero rather than reversing sign. The firmer evidence comes from structural-break testing. A Chow test points to a break at 2012 ($F = 3.41$, $p = 0.034$), with the offensive aggression coefficient falling from $\beta = 27.2$ (95\% CI $[9.6, 43.8]$) before the break to $\beta = 10.7$ ($[0.2, 20.4]$) after, a 61\% reduction; a break at 2013 is comparable ($p = 0.038$). Both lie just above the strict global false-discovery threshold, so we read them as suggestive. Taken with the era pattern, this points to a real but partial erosion rather than a clean disappearance. An out-of-sample check is consistent with this reading. Fitting the season-level relationship on 2006--2018 and applying it to 2019--2024, the offensive aggression-WAR relationship generalizes only weakly (test $r=0.12$), as expected when the outcome is dominated by single-season luck, while the defensive-aggression-WAR relationship is concentrated in the most recent seasons (near zero before 2019, $r=0.25$ after).
 
 \subsubsection{Offensive vs. Defensive Coaches}
 
-Since these aggression measures focus on offensive decisions (going for it on 4th down, passing vs running, deep pass targeting, two-point attempts), we examine whether offensive-minded head coaches show different aggression-performance relationships than defensive coaches making offensive decisions.
+Since these offensive aggression measures focus on offensive decisions (going for it on 4th down, passing vs running, deep pass targeting, two-point attempts), we examine whether offensive-minded head coaches show different offensive aggression-performance relationships than defensive coaches making offensive decisions.
 
 \begin{table}[H]
-\caption{Aggression vs. WAR by Coach Type}
+\caption{Offensive Aggression vs. WAR by Coach Type}
 \label{tab:type_war}
 \scriptsize
 \begin{tabular}{lcccc}
@@ -689,16 +683,16 @@ Composite & 0.211 [0.09, 0.33] & $<$0.001** & 0.184 [0.03, 0.33] & 0.003** \\
 \end{tabular}
 \end{table}
 
-Both offensive ($r=0.211$, $p<0.001$) and defensive ($r=0.184$, $p=0.003$) coaches show positive relationships of similar magnitude between composite aggression and WAR. The two backgrounds are comparable, indicating that aggression relates to performance regardless of whether a coach comes from the offensive or defensive side of the ball.
+Both offensive ($r=0.211$, $p<0.001$) and defensive ($r=0.184$, $p=0.003$) coaches show positive relationships of similar magnitude between composite offensive aggression and WAR. The two backgrounds are comparable, indicating that offensive aggression relates to performance regardless of whether a coach comes from the offensive or defensive side of the ball.
 
 \subsubsection{Within-Coach Fixed Effects: Causal Evidence}
 
-Does aggression cause better performance, or do better coaches simply become more aggressive? To address this, we employ two-way fixed effects regression controlling for both coach quality and temporal trends. The within-coach approach compares each coach to themselves across different years, isolating behavioral effects from selection confounds.
+Does offensive aggression cause better performance, or do better coaches simply become more aggressive? To address this, we employ two-way fixed effects regression controlling for both coach quality and temporal trends. The within-coach approach compares each coach to themselves across different years, isolating behavioral effects from selection confounds.
 
-Table~\ref{tab:fixed_effects} presents the results. A two-way fixed-effects specification that demeans aggression within both coach and year indicates a positive within-coach effect ($\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$). Being more aggressive than one's own norm is associated with better performance, which is not simply a matter of better coaches happening to be more aggressive. A cluster-robust effect-size analysis quantifies the magnitude. A one standard deviation increase in aggression corresponds to 0.44 additional WAR games (Cohen's $d=0.23$), about 17\% of the IQR in the WAR distribution (2.512 games), with 99\% power in the pooled sample.
+Table~\ref{tab:fixed_effects} presents the results. A two-way fixed-effects specification that demeans offensive aggression within both coach and year indicates a positive within-coach effect ($\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$). Being more aggressive than one's own norm is associated with better performance, which is not simply a matter of better coaches happening to be more aggressive. A cluster-robust effect-size analysis quantifies the magnitude. A one standard deviation increase in offensive aggression corresponds to 0.44 additional WAR games (Cohen's $d=0.23$), about 17\% of the IQR in the WAR distribution (2.512 games), with 99\% power in the pooled sample.
 
 \begin{table}[H]
-\caption{Within-Coach Fixed Effects: Aggression $\rightarrow$ WAR}
+\caption{Within-Coach Fixed Effects: Offensive Aggression $\rightarrow$ WAR}
 \label{tab:fixed_effects}
 \begin{tabular}{lcccc}
 \toprule
@@ -710,7 +704,7 @@ Early (2006-2011) & 1.72* & [0.30, 3.05] & 0.019 & 177 \\
 Middle (2012-2017) & 0.78 & [$-$0.41, 1.78] & 0.160 & 180 \\
 Late (2018-2024) & 1.18* & [0.06, 2.09] & 0.024 & 207 \\
 \midrule
-\multicolumn{5}{l}{\small Two-way fixed effects (aggression demeaned within coach and year),}\\
+\multicolumn{5}{l}{\small Two-way fixed effects (offensive aggression demeaned within coach and year),}\\
 \multicolumn{5}{l}{\small coach-clustered SEs with a coach-block bootstrap 95\% CI. Pooled}\\
 \multicolumn{5}{l}{\small effect-size translation: 0.44 WAR-games per SD (Cohen's $d=0.23$,}\\
 \multicolumn{5}{l}{\small 17\% of the 2.512-game IQR, 99\% power).}\\
@@ -721,15 +715,15 @@ Late (2018-2024) & 1.18* & [0.06, 2.09] & 0.024 & 207 \\
 
 Era-stratified within-coach estimates do not follow a monotone trend ($\beta = 1.72$, $0.78$, $1.18$; the early and late eras are individually significant while the middle era is not; 95\% CIs in Table~\ref{tab:fixed_effects}), so they neither confirm nor rule out erosion of the within-coach effect. The pooled analysis provides the most reliable estimate (99\% power).
 
-\subsection{Aggression as Trait and State}
+\subsection{Offensive Aggression as Trait and State}
 \label{sec:persistence}
 
-Understanding whether coaching aggression represents stable individual traits or adaptive responses to circumstances has important implications for talent evaluation. Our persistence analysis examines year-to-year correlations in coaching behavior.
+Understanding whether offensive aggression represents stable individual traits or adaptive responses to circumstances has important implications for talent evaluation. Our persistence analysis examines year-to-year correlations in coaching behavior.
 
-Table~\ref{tab:persistence} presents the year-over-year (lag 1) correlations for each aggression component, based on 467 consecutive coach-year pairs where the same coach was in place for two consecutive seasons. Note that these estimates may be upward-biased due to survivorship: coaches who retain their positions across multiple seasons are disproportionately successful, and successful coaches may have more stable situations that enable consistent strategic approaches.
+Table~\ref{tab:persistence} presents the year-over-year (lag 1) correlations for each offensive aggression component, based on 467 consecutive coach-year pairs where the same coach was in place for two consecutive seasons. Note that these estimates may be upward-biased due to survivorship: coaches who retain their positions across multiple seasons are disproportionately successful, and successful coaches may have more stable situations that enable consistent strategic approaches.
 
 \begin{table}[H]
-\caption{Year-to-Year Aggression Persistence (Lag 1)}
+\caption{Year-to-Year Offensive Aggression Persistence (Lag 1)}
 \label{tab:persistence}
 \begin{tabular}{lccc}
 \toprule
@@ -747,7 +741,7 @@ Deep Pass & 0.472*** & [0.35, 0.57] & 0.223 \\
 \end{tabular}
 \end{table}
 
-All five measures show substantial persistence (clustered $p<0.001$ throughout). The correlations range from 0.40 to 0.55, indicating that coaching aggression in year N predicts 16-30\% of the variance in year N+1 aggression. This is substantial enough to constitute a real trait, yet modest enough to allow for year-to-year variation from roster changes, staff turnover, and strategic adaptation.
+All five measures show substantial persistence (clustered $p<0.001$ throughout). The correlations range from 0.40 to 0.55, indicating that offensive aggression in year N predicts 16-30\% of the variance in year N+1 offensive aggression. This is substantial enough to constitute a real trait, yet modest enough to allow for year-to-year variation from roster changes, staff turnover, and strategic adaptation.
 
 Pass-heavy and fourth-down tendencies are the most persistent components ($r=0.55$ and $r=0.52$). A coach who goes for it frequently on fourth down one year is quite likely to do so again the next, even as rosters turn over and circumstances change, suggesting that fourth-down philosophy in particular reflects genuine strategic preferences that persist across contexts.
 
@@ -756,7 +750,7 @@ Figure~\ref{fig:persistence} shows how these correlations decay as we extend the
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{../visualizations/persistence/aggression_persistence_decay.png}
-    \caption{Persistence of coaching aggression over 1, 2, and 3 year lags. Fourth down aggression (purple squares) shows the strongest and most stable persistence, while two-point aggression (green triangles) decays most rapidly. All measures remain clearly positive even at 3-year lags.}
+    \caption{Persistence of offensive aggression over 1, 2, and 3 year lags. Fourth down aggression (purple squares) shows the strongest and most stable persistence, while two-point aggression (green triangles) decays most rapidly. All measures remain clearly positive even at 3-year lags.}
     \label{fig:persistence}
 \end{figure}
 
@@ -791,7 +785,7 @@ Two-Point & 0.468** & 0.402*** & 0.456** & 0.438*** & 0.259*** & 0.283*** \\
 \noindent\small Coach-clustered bootstrap p and 95\% CI (bracketed); * $p<0.05$, ** $p<0.01$, *** $p<0.001$
 \end{table}
 
-Offensive coaches show stronger year-to-year persistence than defensive coaches for the specific components, most clearly 4th down decisions ($r=0.639$ vs $r=0.352$). The gap is substantial: offensive coaches explain 41\% of next year's 4th down aggression from this year's value, while defensive coaches explain only 12\%. For composite aggression, however, the gap is small ($r=0.550$ vs $r=0.518$, difference=0.032): the offensive-defensive divergence is concentrated in the 4th-down and pass-heavy components rather than in overall aggression.
+Offensive coaches show stronger year-to-year persistence than defensive coaches for the specific components, most clearly 4th down decisions ($r=0.639$ vs $r=0.352$). The gap is substantial: offensive coaches explain 41\% of next year's 4th down aggression from this year's value, while defensive coaches explain only 12\%. For composite offensive aggression, however, the gap is small ($r=0.550$ vs $r=0.518$, difference=0.032): the offensive-defensive divergence is concentrated in the 4th-down and pass-heavy components rather than in overall offensive aggression.
 
 This pattern extends across longer lags. At 2-year lags, the 4th down persistence gap is largest ($r=0.586$ vs $r=0.212$, difference=$+0.374$). At 3-year lags, sizable gaps persist for 4th down and pass-heavy aggression, while for defensive coaches fourth-down aggression at the 2-year lag is no longer distinguishable from zero.
 
@@ -802,27 +796,27 @@ The interpretation is nuanced. For offensive coaches, the component tendencies, 
 
 \subsection{The Erosion of a Competitive Advantage}
 
-Aggressive play-calling provided a measurable edge in 2006-2011 ($r=0.239$, 95\% CI $[0.07, 0.38]$, $p=0.001$) that diminished to $r=0.101$ ($[-0.03, 0.25]$, $p=0.13$) by 2018-2024. The continuous year-by-aggression interaction is negative but imprecise ($p=0.24$), and the 2012 structural break ($p=0.03$) lies just above the strict global false-discovery threshold; together with the era pattern, this points to a partial erosion that we treat as suggestive rather than firmly established. As analytics-driven decision-making spread, aggressive tactics became more common: fourth-down aggression in particular moved from below baseline on average in the early era to above baseline by the modern era, and its dispersion across coaches grew by about a third (standard deviation up 34\%), suggesting experimentation as the tactic diffused. Whether the residual erosion reflects defensive adaptation (counter-strategies against predictable aggression) or competitive equilibration (aggression becoming table stakes) remains ambiguous.
+Aggressive play-calling provided a measurable edge in 2006-2011 ($r=0.239$, 95\% CI $[0.07, 0.38]$, $p=0.001$) that diminished to $r=0.101$ ($[-0.03, 0.25]$, $p=0.13$) by 2018-2024. The continuous year-by-aggression interaction is negative but imprecise ($p=0.24$), and the 2012 structural break ($p=0.03$) lies just above the strict global false-discovery threshold; together with the era pattern, this points to a partial erosion that we treat as suggestive rather than firmly established. As analytics-driven decision-making spread, aggressive tactics became more common: fourth-down aggression in particular moved from below baseline on average in the early era to above baseline by the modern era, and its dispersion across coaches grew by about a third (standard deviation up 34\%), suggesting experimentation as the tactic diffused. Whether the residual erosion reflects defensive adaptation (counter-strategies against predictable offensive aggression) or competitive equilibration (offensive aggression becoming table stakes) remains ambiguous.
 
 \subsection{Causality: Evidence from Within-Coach Variation}
 
-Our two-way fixed effects analysis provides evidence that the aggression-performance relationship is at least partly causal. By comparing each coach to themselves across years, we find that a one standard deviation increase in aggression corresponds to 0.44 additional WAR games (within-coach two-way fixed effects $\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$; Cohen's $d=0.23$), even after removing all between-coach differences and temporal trends. The relationship is not simply that better coaches happen to be more aggressive. Within the same coach, being more aggressive predicts better performance.
+Our two-way fixed effects analysis provides evidence that the offensive aggression-performance relationship is at least partly causal. By comparing each coach to themselves across years, we find that a one standard deviation increase in offensive aggression corresponds to 0.44 additional WAR games (within-coach two-way fixed effects $\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$; Cohen's $d=0.23$), even after removing all between-coach differences and temporal trends. The relationship is not simply that better coaches happen to be more aggressive. Within the same coach, being more aggressive predicts better performance.
 
-However, era-stratified within-coach estimates do not follow a monotone trend, preventing us from confirming whether this within-coach effect has eroded. Three findings converge on a causal interpretation. Cross-sectional correlations are strongest when tactics were rare, the relationship erodes as tactics spread, and a within-coach effect persists after controlling for stable characteristics. For practitioners, the practical reading is that aggression's edge has narrowed to at most a weak association in the modern era.
+However, era-stratified within-coach estimates do not follow a monotone trend, preventing us from confirming whether this within-coach effect has eroded. Three findings converge on a causal interpretation. Cross-sectional correlations are strongest when tactics were rare, the relationship erodes as tactics spread, and a within-coach effect persists after controlling for stable characteristics. For practitioners, the practical reading is that offensive aggression's edge has narrowed to at most a weak association in the modern era.
 
 \subsection{Scheme Identity vs. Situational Decision-Making}
 
-Our analyses reveal a distinction between two types of coaching DNA, though not as clean as a simple binary. \emph{Schematic identity}, meaning formation preferences and defensive packages, transfers through offensive coaching trees (shotgun OC: $r=0.399$, $p<0.001$) and persists through promotion (shotgun: $r=0.670$, $p<0.001$; defensive scheme: $r=0.570$, suggestive at $n=17$). \emph{Situational decision-making}, the in-game risk choices, predicts performance (aggression: $r=0.189$, $p<0.001$, strengthening to $r=0.30$ at the career level) but is not transmitted through coaching trees ($r=0.080$, $p=0.24$).
+Our analyses reveal a distinction between two types of coaching DNA, though not as clean as a simple binary. \emph{Schematic identity}, meaning formation preferences and defensive packages, transfers through offensive coaching trees (shotgun OC: $r=0.399$, $p<0.001$) and persists through promotion (shotgun: $r=0.674$, $p<0.001$; defensive aggression: $r=0.570$, suggestive at $n=17$). \emph{Situational decision-making}, the in-game risk choices, predicts performance (offensive aggression: $r=0.189$, $p<0.001$, strengthening to $r=0.30$ at the career level) but is not transmitted through coaching trees ($r=0.080$, $p=0.24$).
 
-Shotgun preference and defensive scheme bridge both categories. They transfer through coaching relationships \emph{and} predict performance (shotgun: $r=0.142$, $p=0.004$; defensive scheme: $r=0.151$, $p=0.015$). This suggests that some schematic choices are not purely stylistic, since they carry competitive implications. Transmission also appears domain-specific, with only offensive coordinators transmitting offensive schematic identity (shotgun DC: $r=0.096$, near zero), consistent with coaching DNA propagating through expertise rather than mere exposure.
+Shotgun preference and defensive aggression bridge both categories. They transfer through coaching relationships \emph{and} predict performance (shotgun: $r=0.142$, $p=0.004$; defensive aggression: $r=0.151$, $p=0.015$). This suggests that some schematic choices are not purely stylistic, since they carry competitive implications. Transmission also appears domain-specific, with only offensive coordinators transmitting offensive schematic identity (shotgun DC: $r=0.096$, near zero), consistent with coaching DNA propagating through expertise rather than mere exposure.
 
-The distinction also surfaces within aggression. Fourth-down philosophy is among the most persistent aggression components within coaches (Table~\ref{tab:persistence}), arguably the most ``schematic'' aspect of aggression given that teams develop explicit decision charts, even though its cross-coach \emph{inheritance} is weak once mentor clustering is applied (among components, only the pass-heavy OC inheritance remains). Pass-heavy and two-point tendencies are more reactive to game flow.
+The distinction also surfaces within offensive aggression. Fourth-down philosophy is among the most persistent offensive aggression components within coaches (Table~\ref{tab:persistence}), arguably the most ``schematic'' aspect of offensive aggression given that teams develop explicit decision charts, even though its cross-coach \emph{inheritance} is weak once mentor clustering is applied (among components, only the pass-heavy OC inheritance remains). Pass-heavy and two-point tendencies are more reactive to game flow.
 
 \subsection{Challenging the Coaching Tree Narrative}
 
-The coaching tree narrative shapes NFL hiring decisions, but our data sit uneasily with its premises. Mentor WAR shows at most a weak association with prot\'{e}g\'{e} WAR ($r=0.124$, $p=0.074$), giving little indication that working under a successful coach makes a coach successful. Composite aggression shows little transmission ($r=0.080$). For situational decisions, the premises of pedigree-based hiring find little support here.
+The coaching tree narrative shapes NFL hiring decisions, but our data sit uneasily with its premises. Mentor WAR shows at most a weak association with prot\'{e}g\'{e} WAR ($r=0.124$, $p=0.074$), giving little indication that working under a successful coach makes a coach successful. Composite offensive aggression shows little transmission ($r=0.080$). For situational decisions, the premises of pedigree-based hiring find little support here.
 
-However, offensive coaching trees \emph{do} transmit schematic identity. Shotgun preference shows clear OC mentor-prot\'{e}g\'{e} inheritance ($r=0.399$, $p<0.001$), and coordinator-to-HC analysis indicates that formation preferences ($r=0.670$) and defensive schemes ($r=0.570$) persist through promotion, while pace does not reliably once genes are cross-fit. When Matt Nagy left Kansas City's shotgun-heavy offense to coach Chicago, he installed a nearly identical formation philosophy. When Dan Quinn left Dallas's aggressive defensive scheme to coach Washington, his defense looked similar. Teams can reliably predict the \emph{system} a coordinator will install, but not whether they will win.
+However, offensive coaching trees \emph{do} transmit schematic identity. Shotgun preference shows clear OC mentor-prot\'{e}g\'{e} inheritance ($r=0.399$, $p<0.001$), and coordinator-to-HC analysis indicates that formation preferences ($r=0.674$) and defensive aggression ($r=0.570$) persist through promotion, while pace does not reliably once genes are cross-fit. When Matt Nagy left Kansas City's shotgun-heavy offense to coach Chicago, he installed a nearly identical formation philosophy. When Dan Quinn left Dallas's aggressive defense to coach Washington, his defense looked similar. Teams can reliably predict the \emph{system} a coordinator will install, but not whether they will win.
 
 \subsection{Limitations}
 
@@ -830,32 +824,32 @@ Several limitations warrant discussion beyond the causality concerns addressed e
 
 First, our play-by-play data begin in 2006, missing earlier eras. We cannot determine whether the early aggressive advantage we observe in 2006-2011 was itself a continuation of an even longer trend or represented a genuine inflection point. Historical data would reveal whether similar adoption curves occurred for previous innovations.
 
-Second, our inheritance analyses are limited by sample size. The career-average aggression analysis uses 513 mentor-prot\'{e}g\'{e} pairs, while the direct coordinator-to-HC gene analysis uses 17--39 transitions depending on gene type. The defensive scheme analysis is particularly constrained (n=17) because defensive tracking data only became available in 2016. We address the small-cluster regime by reporting wild cluster bootstrap p-values for subgroups with fewer than 40 clusters. Even so, the shotgun coordinator-to-HC result (n=39, $r=0.670$, $p<0.001$) is robust, and the OC mentor-prot\'{e}g\'{e} analysis (n=249, $r=0.399$, $p<0.001$) corroborates the pattern, whereas the defensive-scheme transition (n=17) should be read as suggestive.
+Second, our inheritance analyses are limited by sample size. The career-average offensive aggression analysis uses 513 mentor-prot\'{e}g\'{e} pairs, while the direct coordinator-to-HC gene analysis uses 17--40 transitions depending on gene type. The defensive aggression analysis is particularly constrained (n=17) because defensive tracking data only became available in 2016. We address the small-cluster regime by reporting wild cluster bootstrap p-values for subgroups with fewer than 40 clusters. Even so, the shotgun coordinator-to-HC result (n=40, $r=0.674$, $p<0.001$) is robust, and the OC mentor-prot\'{e}g\'{e} analysis (n=249, $r=0.399$, $p<0.001$) corroborates the pattern, whereas the defensive-aggression transition (n=17) should be read as suggestive.
 
-Third, the gene-WAR correlations should be interpreted with caution regarding causality. The defensive scheme-WAR correlation ($r=0.151$) may reflect reverse causation: teams with better defensive talent can afford to play man coverage and send extra rushers, whereas the gene framework attributes this to coaching philosophy. Our residual approach controls for game situation but cannot fully separate scheme preference from roster-enabled opportunity.
+Third, the gene-WAR correlations should be interpreted with caution regarding causality. The defensive aggression-WAR correlation ($r=0.151$) may reflect reverse causation: teams with better defensive talent can afford to play man coverage and send extra rushers, whereas the gene framework attributes this to coaching philosophy. Our residual approach controls for game situation but cannot fully separate this preference from roster-enabled opportunity.
 
 Fourth, we cannot observe coaching constraints. Some coaches may want to be aggressive but face organizational pressure to be conservative. Others may have coordinator partnerships that override their personal preferences. Our measures capture observed behavior rather than underlying intentions, which may differ due to unmeasured constraints.
 
 Fifth, single-season WAR is itself a noisy outcome: its year-over-year reliability is only about one-quarter, so measurement error attenuates our season-level gene-WAR correlations. We mitigate this by anchoring the performance claim on career-level relationships (where mean WAR is far more reliable) and by inverse-variance weighting, but the season-level estimates should be read as conservative lower bounds rather than precise effect sizes.
 
-Sixth, we attribute each gene to the head coach as the accountable decision-maker, yet play-calling responsibility varies: some head coaches call their own offensive or defensive plays while most delegate to a coordinator. This introduces idiosyncratic noise into the attribution rather than systematic bias, and the strong face validity and cross-team portability of the genes indicate that head-coach attribution nonetheless captures genuine coach-specific signal. Relatedly, the defensive-scheme gene is measured at the team level and so blends head coach, coordinator, and personnel.
+Sixth, we attribute each gene to the head coach as the accountable decision-maker, yet play-calling responsibility varies: some head coaches call their own offensive or defensive plays while most delegate to a coordinator. This introduces idiosyncratic noise into the attribution rather than systematic bias, and the strong face validity and cross-team portability of the genes indicate that head-coach attribution nonetheless captures genuine coach-specific signal. Relatedly, the defensive-aggression gene is measured at the team level and so blends head coach, coordinator, and personnel.
 
-Finally, ``aggression'' is best understood as a formative index of four weakly-correlated facets (fourth-down, pass-run balance, deep passing, two-point) rather than a single latent trait; we therefore report the components alongside the composite, and note that the composite-WAR relationship is carried mainly by the pass-heavy and fourth-down facets.
+Finally, ``offensive aggression'' is best understood as a formative index of four weakly-correlated facets (fourth-down, pass-run balance, deep passing, two-point) rather than a single latent trait; we therefore report the components alongside the composite, and note that the composite-WAR relationship is carried mainly by the pass-heavy and fourth-down facets.
 
 \section{Conclusion}
 
 Through analysis of more than 600,000 plays, 608 coach-years, and 612 mentor-prot\'{e}g\'{e} pairs (2006--2024), we develop a machine learning framework for measuring coaching ``DNA'' across four strategic dimensions and test what this DNA is, what it predicts, and how it transmits.
 
-First, coaching genes are genuine, stable traits of the coach rather than artifacts of the team. Coach identity explains roughly five times as much of each gene's variance as team identity, and when coaches change teams their strategic tendencies travel with them (composite aggression $r=0.61$ across team changes), with rankings that match public reputation. This grounds the rest of the analysis: the genes measure the coach.
+First, coaching genes are genuine, stable traits of the coach rather than artifacts of the team. Coach identity explains roughly five times as much of each gene's variance as team identity, and when coaches change teams their strategic tendencies travel with them (composite offensive aggression $r=0.61$ across team changes), with rankings that match public reputation. This grounds the rest of the analysis: the genes measure the coach.
 
-Second, most genes predict performance, though differently. Composite aggression ($r=0.189$, $p<0.001$), shotgun formation ($r=0.142$, $p=0.004$), and defensive scheme ($r=0.151$, $p=0.015$) all correlate with WAR under coach-clustered inference, while tempo does not. Because single-season WAR is mostly noise, the more reliable anchor is the career level, where the aggression relationship strengthens to $r=0.30$. The aggression edge has diminished over time, from $r=0.24$ (2006--2011) to $r=0.10$ (2018--2024), with a 2012 structural break ($p=0.03$, just above the global false-discovery threshold), as analytics-driven tactics spread.
+Second, most genes predict performance, though differently. Composite offensive aggression ($r=0.189$, $p<0.001$), shotgun formation ($r=0.142$, $p=0.004$), and defensive aggression ($r=0.151$, $p=0.015$) all correlate with WAR under coach-clustered inference, while tempo does not. Because single-season WAR is mostly noise, the more reliable anchor is the career level, where the offensive aggression relationship strengthens to $r=0.30$. The offensive aggression edge has diminished over time, from $r=0.24$ (2006--2011) to $r=0.10$ (2018--2024), with a 2012 structural break ($p=0.03$, just above the global false-discovery threshold), as analytics-driven tactics spread.
 
-Third, coaching trees transmit systems more than success or risk tolerance. Mentor WAR shows at most a weak association with prot\'{e}g\'{e} WAR ($r=0.124$, $p=0.074$), and composite aggression shows little inheritance ($r=0.080$). But shotgun formation preference transmits through offensive coaching trees ($r=0.399$, $p<0.001$), though not defensive ones ($r=0.096$), and direct coordinator-to-HC analysis indicates that schematic identity persists through promotion, with shotgun ($r=0.670$) and defensive scheme ($r=0.570$) falling below the global Benjamini-Hochberg threshold while pace and situational aggression do not. Organizations can reliably predict the system a coordinator will install but not whether they will win.
+Third, coaching trees transmit systems more than success or risk tolerance. Mentor WAR shows at most a weak association with prot\'{e}g\'{e} WAR ($r=0.124$, $p=0.074$), and composite offensive aggression shows little inheritance ($r=0.080$). But shotgun formation preference transmits through offensive coaching trees ($r=0.399$, $p<0.001$), though not defensive ones ($r=0.096$), and direct coordinator-to-HC analysis indicates that schematic identity persists through promotion, with shotgun ($r=0.674$) and defensive aggression ($r=0.570$) falling below the global Benjamini-Hochberg threshold while pace and situational aggression do not. Organizations can reliably predict the system a coordinator will install but not whether they will win.
 
-Within-coach fixed-effects analysis adds causal support for the performance result (0.44 WAR games per standard deviation of aggression; within-coach $\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$), even as the cross-sectional edge has narrowed in the modern era. The frontier appears to have moved beyond aggression frequency, perhaps to scheme innovation, within-game adaptation speed, or player development, dimensions we are only beginning to measure.
+Within-coach fixed-effects analysis adds causal support for the performance result (0.44 WAR games per standard deviation of offensive aggression; within-coach $\beta=1.40$, 95\% CI $[0.76, 1.96]$, $p<0.001$), even as the cross-sectional edge has narrowed in the modern era. The frontier appears to have moved beyond offensive aggression frequency, perhaps to scheme innovation, within-game adaptation speed, or player development, dimensions we are only beginning to measure.
 
 \begin{acknowledgement}
-  This analysis builds on play-by-play data from nfl\_data\_py and coaching history data scraped from Pro Football Reference. Performance metrics (WAR) were calculated separately. All code and detailed methodology are available in the project repository.
+  This analysis builds on play-by-play data from \texttt{nfl\_data\_py} and coaching history data scraped from Pro Football Reference. Performance metrics (WAR) were calculated separately. All code and detailed methodology are available in the project repository.
 \end{acknowledgement}
 
 \begin{thebibliography}{9}
@@ -868,9 +862,6 @@ Burke, B. (2009). Fourth down study. \emph{Advanced NFL Stats} (later renamed \e
 
 \bibitem[Cameron et al.(2008)]{cameron2008}
 Cameron, A. C., Gelbach, J. B., and Miller, D. L. (2008). Bootstrap-based improvements for inference with clustered errors. \emph{The Review of Economics and Statistics}, 90(3), 414--427.
-
-\bibitem[CBS Sports(2021)]{cbs2021}
-CBS Sports (2021, October 18). Brandon Staley's fourth-down decisions burn Chargers as head coach tried to generate life into dormant offense. \emph{CBS Sports}.
 
 \bibitem[Chen and Guestrin(2016)]{chen2016}
 Chen, T. and Guestrin, C. (2016). XGBoost: A scalable tree boosting system. In \emph{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}, 785--794.
@@ -887,17 +878,11 @@ Grinsztajn, L., Oyallon, E., and Varoquaux, G. (2022). Why do tree-based models 
 \bibitem[Horowitz and Shim(2014)]{horowitz2014}
 Horowitz, I. and Shim, R. (2014). The fourth down puzzle in the National Football League. \emph{Journal of the Royal Statistical Society: Series A}, 177(3), 717--733.
 
-\bibitem[Los Angeles Chargers(2023)]{chargers2023}
-Los Angeles Chargers (2023, December 15). Chargers Part Ways with Head Coach Brandon Staley and General Manager Tom Telesco. Retrieved from https://www.chargers.com/news/
-
 \bibitem[Meinshausen and B\"uhlmann(2010)]{meinshausen2010}
 Meinshausen, N. and B\"uhlmann, P. (2010). Stability selection. \emph{Journal of the Royal Statistical Society: Series B (Statistical Methodology)}, 72(4), 417--473.
 
 \bibitem[Nadeau and Bengio(2003)]{nadeau2003}
 Nadeau, C. and Bengio, Y. (2003). Inference for the generalization error. \emph{Machine Learning}, 52(3), 239--281.
-
-\bibitem[NBC Sports(2023)]{nbc2023}
-NBC Sports (2023, September 25). Chargers' Brandon Staley defends aggressive fourth-down call in loss to Vikings. \emph{NBC Sports}.
 
 \bibitem[Rogers(2007)]{rogers2007}
 Rogers, E. M. (2007). \emph{Diffusion of Innovations} (5th ed.). Free Press, New York.

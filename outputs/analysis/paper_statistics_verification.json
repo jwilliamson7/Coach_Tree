@@ -1,13 +1,13 @@
 {
-  "verification_date": "2026-06-29T15:39:17.367868",
+  "verification_date": "2026-06-29T17:37:15.551481",
   "sections": {
     "coordinator_to_hc_inheritance": {
       "raw_per_stint": {
         "aggression": {
-          "n": 39,
-          "pearson_r": -0.0115,
-          "p_value": 0.9445,
-          "direction_retention_pct": 51.3,
+          "n": 40,
+          "pearson_r": -0.0079,
+          "p_value": 0.9613,
+          "direction_retention_pct": 52.5,
           "transition_type": "OC->HC"
         },
         "defensive_scheme": {
@@ -18,26 +18,26 @@
           "transition_type": "DC->HC"
         },
         "shotgun": {
-          "n": 39,
-          "pearson_r": 0.6697,
+          "n": 40,
+          "pearson_r": 0.6736,
           "p_value": 0.0,
-          "direction_retention_pct": 82.1,
+          "direction_retention_pct": 82.5,
           "transition_type": "OC->HC"
         },
         "tempo": {
-          "n": 39,
-          "pearson_r": 0.3054,
-          "p_value": 0.0587,
-          "direction_retention_pct": 56.4,
+          "n": 40,
+          "pearson_r": 0.3179,
+          "p_value": 0.0456,
+          "direction_retention_pct": 57.5,
           "transition_type": "OC->HC"
         }
       },
       "aggregated_per_coach": {
         "aggression": {
-          "n": 39,
-          "pearson_r": -0.0115,
-          "p_value": 0.944539,
-          "direction_retention_pct": 51.3,
+          "n": 40,
+          "pearson_r": -0.0079,
+          "p_value": 0.961319,
+          "direction_retention_pct": 52.5,
           "transition_type": "OC->HC",
           "coaches_with_multiple_stints": 0
         },
@@ -50,18 +50,18 @@
           "coaches_with_multiple_stints": 0
         },
         "shotgun": {
-          "n": 39,
-          "pearson_r": 0.6697,
-          "p_value": 3e-06,
-          "direction_retention_pct": 82.1,
+          "n": 40,
+          "pearson_r": 0.6736,
+          "p_value": 2e-06,
+          "direction_retention_pct": 82.5,
           "transition_type": "OC->HC",
           "coaches_with_multiple_stints": 0
         },
         "tempo": {
-          "n": 39,
-          "pearson_r": 0.3054,
-          "p_value": 0.058663,
-          "direction_retention_pct": 56.4,
+          "n": 40,
+          "pearson_r": 0.3179,
+          "p_value": 0.045599,
+          "direction_retention_pct": 57.5,
           "transition_type": "OC->HC",
           "coaches_with_multiple_stints": 0
         }
