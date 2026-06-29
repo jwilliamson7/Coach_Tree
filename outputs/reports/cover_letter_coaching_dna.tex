@@ -1,0 +1,47 @@
+% Cover letter for the Journal of Quantitative Analysis in Sports submission.
+% Standalone one-page letter; addressed to the editor (not blinded).
+\documentclass[12pt,USenglish]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}            % Times, matching the manuscript
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\smallskipamount}
+
+\begin{document}
+
+\today
+
+\medskip
+
+Dr.\ Gilbert W.\ Fellingham\\
+Editor, \emph{Journal of Quantitative Analysis in Sports}\\
+Brigham Young University
+
+\medskip
+
+Dear Dr.\ Fellingham,
+
+Please consider the enclosed manuscript, ``Coaching DNA: Measuring Strategic Identity and Knowledge Transmission in the NFL,'' for publication in the \emph{Journal of Quantitative Analysis in Sports} as a Research Article.
+
+NFL teams hire, evaluate, and fire head coaches largely on win-loss records that confound a coach's choices with inherited talent and luck. This manuscript develops a general framework for measuring coaching ``DNA,'' the strategic tendencies that distinguish how head coaches run teams, apart from the circumstances they inherit. For each decision type we model the situation-adjusted baseline and define a coaching gene as the residual from it.
+
+Using XGBoost models trained on 643{,}290 plays from 2006 to 2024 within a leakage-free, cross-fit pipeline, we quantify four dimensions: aggression, shotgun formation preference, tempo, and defensive scheme. These tendencies prove to be coach traits rather than team artifacts: coach identity explains roughly five times the variance the team does, and the tendencies travel with coaches across team changes (composite aggression $r = 0.61$). Under coach-clustered inference, aggression, shotgun preference, and defensive scheme are associated with context-adjusted performance, while tempo is not. Within coaching trees, systems such as shotgun and schematic identity transmit and persist from coordinator to head coach, whereas risk tolerance and winning largely do not.
+
+In the interest of transparency, I want to flag a companion manuscript. The outcome measure used here, a context-adjusted Wins Above Replacement (WAR) for NFL head coaches, is developed and validated in a separate paper, ``Coach WAR: A Counterfactual Approach to Evaluating NFL Head Coach Impact in the Modern Era,'' currently under revision at the journal [Manuscript ID, if known] and likely familiar to the editorial office. The two are distinct contributions: that paper builds and validates the metric, while the present one applies WAR as a single outcome among several to study coaching tendencies and their transmission. The present manuscript reuses none of its text and describes WAR only briefly before citing it. As that work is not yet public, I am glad to provide its manuscript and data to you and the reviewers on request.
+
+The manuscript fits the journal's interest in quantitative methods for evaluating strategy and performance in professional sport. It is original, is not under consideration elsewhere, and has not been previously published; it has been de-identified for blind review, including the companion citation. I have no conflicts of interest, and all analysis code and processed data are available on reasonable request.
+
+Thank you for considering this manuscript for publication in the \emph{Journal of Quantitative Analysis in Sports}.
+
+\medskip
+
+Sincerely,\\
+Jon Williamson\\
+Des Moines, Iowa, USA\\
+\href{mailto:jonwilliamson@live.com}{jonwilliamson@live.com} \quad \href{mailto:jon@williamsonconsultinggroup.com}{jon@williamsonconsultinggroup.com}
+
+\end{document}
