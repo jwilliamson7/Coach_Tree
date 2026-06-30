@@ -44,7 +44,9 @@ from utils.data_paths import (
     load_coach_year_games,
     canonicalize_coach_name,
 )
-from utils.parsimony import cluster_bootstrap_corr, cluster_bootstrap_corr_weighted
+from utils.parsimony import (
+    cluster_bootstrap_corr, cluster_bootstrap_corr_weighted, within_group_demean,
+)
 
 GAMES_PER_SEASON = 16          # matches Coach_WAR's *16 WAR scaling
 PARTIAL_SEASON_GAMES = 8       # "half season" cutoff for the sensitivity drop
@@ -129,13 +131,18 @@ def war_noise_robustness(
     callers keep their existing primary estimate so headline numbers are unchanged.
     We deliberately do NOT report a disattenuated r: single-season WAR is mostly
     luck (reliability is low and uncertain), so dividing by sqrt(reliability) would
-    manufacture precision. The career-level anchor (career_level_corr) is the
-    honest answer to season-level WAR noise.
+    manufacture precision. Instead, season-level WAR noise is handled by the
+    inverse-variance-weighted estimate (r_ivw, and its era-clean variant
+    r_ivw_eradj), which down-weights the noisy short seasons; the career-level
+    correlation is a secondary cross-check that additionally carries a window-
+    selection era artifact.
     """
     df = _ensure_precision(merged, coach_col=coach_col, year_col=year_col)
     cols = [gene_col, war_col, coach_col, "war_weight"]
     if games_col in df.columns:
         cols.append(games_col)
+    if year_col in df.columns and year_col not in cols:
+        cols.append(year_col)
     clean = df[cols].dropna(subset=[gene_col, war_col, coach_col, "war_weight"]).copy()
     out: Dict = {}
     if len(clean) < 10:
@@ -151,6 +158,25 @@ def war_noise_robustness(
     out["r_ivw"] = bw["r"]
     out["ci_low_ivw"] = bw["ci_low"]
     out["ci_high_ivw"] = bw["ci_high"]
+
+    # 1b. era-adjusted IVW: the noise-aware AND era-clean season-level estimate.
+    # Within-season demean gene and WAR (contemporary-group control), then
+    # inverse-variance weight (down-weighting noisy short seasons), coach-clustered.
+    # This is the primary season-level number when both WAR noise and league-wide
+    # drift must be handled at once.
+    if year_col in clean.columns:
+        cc = clean.dropna(subset=[year_col]).copy()
+        cc["_w16"] = cc[war_col].astype(float) * GAMES_PER_SEASON
+        gdm = within_group_demean(cc, gene_col, year_col).to_numpy(float)
+        wdm = within_group_demean(cc, "_w16", year_col).to_numpy(float)
+        bwe = cluster_bootstrap_corr_weighted(
+            gdm, wdm, cc[coach_col].to_numpy(), w=cc["war_weight"].to_numpy(float),
+            n_boot=n_boot, seed=seed)
+        out["r_ivw_eradj"] = bwe["r"]
+        out["ci_low_ivw_eradj"] = bwe["ci_low"]
+        out["ci_high_ivw_eradj"] = bwe["ci_high"]
+        out["p_ivw_eradj_coach_clustered"] = bwe["p_bootstrap"]
+        out["n_ivw_eradj"] = bwe["n"]
     out["p_ivw_coach_clustered"] = bw["p_bootstrap"]
     out["n_ivw"] = bw["n"]
 
