@@ -32,7 +32,11 @@ from datetime import datetime
 from scipy import stats
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from utils.parsimony import cluster_bootstrap_corr, corr_with_small_cluster_guard
+from utils.parsimony import (
+    cluster_bootstrap_corr,
+    corr_with_small_cluster_guard,
+    within_group_demean,
+)
 from crawlers.utils.data_constants import pfr_to_pbp, pfr_to_hc_csv
 
 # Configure logging
@@ -105,6 +109,24 @@ class InheritanceAnalyzer:
                 logger.info(f"Loaded {attr}: {len(getattr(self, attr))} coach-years")
             else:
                 logger.warning(f"{filename} not found")
+
+        # Add era-adjusted (contemporary-group) columns: within-season demean each
+        # gene over its full panel. Coordinator-era and HC-era gene values both carry
+        # the league-wide temporal drift; demeaning by season removes that shared-era
+        # component so the transmission correlation is not inflated by both stints
+        # sitting in the same era. Published gene CSVs stay absolute.
+        if self.defensive_genes is not None and 'composite_scheme' in self.defensive_genes:
+            self.defensive_genes['composite_scheme_eradj'] = within_group_demean(
+                self.defensive_genes, 'composite_scheme', 'season')
+        if self.aggression_genes is not None and 'composite_aggression' in self.aggression_genes:
+            self.aggression_genes['composite_aggression_eradj'] = within_group_demean(
+                self.aggression_genes, 'composite_aggression', 'season')
+        if self.tempo_genes is not None and 'composite_tempo' in self.tempo_genes:
+            self.tempo_genes['composite_tempo_eradj'] = within_group_demean(
+                self.tempo_genes, 'composite_tempo', 'season')
+        if self.shotgun_genes is not None and 'shotgun_gene_zscore' in self.shotgun_genes:
+            self.shotgun_genes['shotgun_gene_zscore_eradj'] = within_group_demean(
+                self.shotgun_genes, 'shotgun_gene_zscore', 'season')
 
         # HC mapping — team_year_head_coaches.csv (uppercase PFR team codes)
         hc_path = self.coaching_dir / "team_year_head_coaches.csv"
@@ -211,33 +233,35 @@ class InheritanceAnalyzer:
     # Gene Lookups
     # -----------------------------------------------------------------
 
-    def _get_defensive_gene_by_team(self, team_pfr: str, year: int) -> Optional[float]:
-        """Look up defensive scheme gene for a team-year via PFR code."""
+    def _get_defensive_gene_by_team(self, team_pfr: str, year: int):
+        """Look up defensive scheme gene (raw, era-adjusted) for a team-year via PFR code."""
         if self.defensive_genes is None:
-            return None
+            return None, None
         pbp_code = pfr_to_pbp(team_pfr, year)
         match = self.defensive_genes[
             (self.defensive_genes['defteam'] == pbp_code) &
             (self.defensive_genes['season'] == year)
         ]
         if len(match) == 1:
-            return float(match.iloc[0]['composite_scheme'])
-        return None
+            return (float(match.iloc[0]['composite_scheme']),
+                    float(match.iloc[0]['composite_scheme_eradj']))
+        return None, None
 
-    def _get_defensive_gene_by_hc(self, coach_name: str, year: int) -> Optional[float]:
-        """Look up defensive scheme gene by HC name and season."""
+    def _get_defensive_gene_by_hc(self, coach_name: str, year: int):
+        """Look up defensive scheme gene (raw, era-adjusted) by HC name and season."""
         if self.defensive_genes is None:
-            return None
+            return None, None
         match = self.defensive_genes[
             (self.defensive_genes['head_coach'] == coach_name) &
             (self.defensive_genes['season'] == year)
         ]
         if len(match) == 1:
-            return float(match.iloc[0]['composite_scheme'])
-        return None
+            return (float(match.iloc[0]['composite_scheme']),
+                    float(match.iloc[0]['composite_scheme_eradj']))
+        return None, None
 
-    def _get_offensive_gene(self, coach_name: str, year: int, gene_type: str) -> Optional[float]:
-        """Look up an offensive gene by HC name and season.
+    def _get_offensive_gene(self, coach_name: str, year: int, gene_type: str):
+        """Look up an offensive gene (raw, era-adjusted) by HC name and season.
 
         gene_type: 'aggression', 'tempo', or 'shotgun'
         """
@@ -248,13 +272,13 @@ class InheritanceAnalyzer:
         }
         df, col = gene_map.get(gene_type, (None, None))
         if df is None:
-            return None
+            return None, None
         match = df[(df['head_coach'] == coach_name) & (df['season'] == year)]
         if len(match) == 1:
             val = match.iloc[0][col]
             if pd.notna(val):
-                return float(val)
-        return None
+                return float(val), float(match.iloc[0][f'{col}_eradj'])
+        return None, None
 
     def _get_hc_name(self, team_pfr: str, year: int) -> Optional[str]:
         """Get HC name for a team-year from team_year_head_coaches.csv, using the
@@ -285,23 +309,23 @@ class InheritanceAnalyzer:
         dc_transitions = [t for t in transitions if t['transition_type'] == 'DC->HC']
 
         for t in dc_transitions:
-            # DC-era genes
-            dc_genes = []
+            # DC-era genes (raw, era-adjusted)
+            dc_raw, dc_e = [], []
             for year in t['coord_years']:
-                gene = self._get_defensive_gene_by_team(t['coord_team'], year)
-                if gene is not None:
-                    dc_genes.append(gene)
+                rraw, re = self._get_defensive_gene_by_team(t['coord_team'], year)
+                if rraw is not None:
+                    dc_raw.append(rraw); dc_e.append(re)
 
-            # HC-era genes
-            hc_genes = []
+            # HC-era genes (raw, era-adjusted)
+            hc_raw, hc_e = [], []
             for year in t['hc_years']:
-                gene = self._get_defensive_gene_by_hc(t['coach_name'], year)
-                if gene is not None:
-                    hc_genes.append(gene)
+                rraw, re = self._get_defensive_gene_by_hc(t['coach_name'], year)
+                if rraw is not None:
+                    hc_raw.append(rraw); hc_e.append(re)
 
-            if len(dc_genes) >= self.min_years and len(hc_genes) >= self.min_years:
-                coord_avg = float(np.mean(dc_genes))
-                hc_avg = float(np.mean(hc_genes))
+            if len(dc_raw) >= self.min_years and len(hc_raw) >= self.min_years:
+                coord_avg = float(np.mean(dc_raw)); hc_avg = float(np.mean(hc_raw))
+                coord_avg_e = float(np.mean(dc_e)); hc_avg_e = float(np.mean(hc_e))
                 results.append({
                     'coach_name': t['coach_name'],
                     'coach_id': t['coach_id'],
@@ -309,13 +333,16 @@ class InheritanceAnalyzer:
                     'gene_type': 'defensive_scheme',
                     'coord_team': t['coord_team'],
                     'coord_years': f"{min(t['coord_years'])}-{max(t['coord_years'])}",
-                    'coord_years_with_data': len(dc_genes),
+                    'coord_years_with_data': len(dc_raw),
                     'coord_era_gene': coord_avg,
+                    'coord_era_gene_eradj': coord_avg_e,
                     'hc_team': t['hc_team'],
                     'hc_years': f"{min(t['hc_years'])}-{max(t['hc_years'])}",
-                    'hc_years_with_data': len(hc_genes),
+                    'hc_years_with_data': len(hc_raw),
                     'hc_era_gene': hc_avg,
+                    'hc_era_gene_eradj': hc_avg_e,
                     'gene_change': hc_avg - coord_avg,
+                    'gene_change_eradj': hc_avg_e - coord_avg_e,
                     'years_gap': t['years_gap'],
                 })
 
@@ -335,25 +362,25 @@ class InheritanceAnalyzer:
 
         for t in oc_transitions:
             for gene_type in gene_types:
-                # OC-era: find HC of team, look up their gene
-                oc_genes = []
+                # OC-era: find HC of team, look up their gene (raw, era-adjusted)
+                oc_raw, oc_e = [], []
                 for year in t['coord_years']:
                     hc_name = self._get_hc_name(t['coord_team'], year)
                     if hc_name:
-                        gene = self._get_offensive_gene(hc_name, year, gene_type)
-                        if gene is not None:
-                            oc_genes.append(gene)
+                        rraw, re = self._get_offensive_gene(hc_name, year, gene_type)
+                        if rraw is not None:
+                            oc_raw.append(rraw); oc_e.append(re)
 
-                # HC-era: look up directly by own name
-                hc_genes = []
+                # HC-era: look up directly by own name (raw, era-adjusted)
+                hc_raw, hc_e = [], []
                 for year in t['hc_years']:
-                    gene = self._get_offensive_gene(t['coach_name'], year, gene_type)
-                    if gene is not None:
-                        hc_genes.append(gene)
+                    rraw, re = self._get_offensive_gene(t['coach_name'], year, gene_type)
+                    if rraw is not None:
+                        hc_raw.append(rraw); hc_e.append(re)
 
-                if len(oc_genes) >= self.min_years and len(hc_genes) >= self.min_years:
-                    coord_avg = float(np.mean(oc_genes))
-                    hc_avg = float(np.mean(hc_genes))
+                if len(oc_raw) >= self.min_years and len(hc_raw) >= self.min_years:
+                    coord_avg = float(np.mean(oc_raw)); hc_avg = float(np.mean(hc_raw))
+                    coord_avg_e = float(np.mean(oc_e)); hc_avg_e = float(np.mean(hc_e))
                     results.append({
                         'coach_name': t['coach_name'],
                         'coach_id': t['coach_id'],
@@ -361,13 +388,16 @@ class InheritanceAnalyzer:
                         'gene_type': gene_type,
                         'coord_team': t['coord_team'],
                         'coord_years': f"{min(t['coord_years'])}-{max(t['coord_years'])}",
-                        'coord_years_with_data': len(oc_genes),
+                        'coord_years_with_data': len(oc_raw),
                         'coord_era_gene': coord_avg,
+                        'coord_era_gene_eradj': coord_avg_e,
                         'hc_team': t['hc_team'],
                         'hc_years': f"{min(t['hc_years'])}-{max(t['hc_years'])}",
-                        'hc_years_with_data': len(hc_genes),
+                        'hc_years_with_data': len(hc_raw),
                         'hc_era_gene': hc_avg,
+                        'hc_era_gene_eradj': hc_avg_e,
                         'gene_change': hc_avg - coord_avg,
+                        'gene_change_eradj': hc_avg_e - coord_avg_e,
                         'years_gap': t['years_gap'],
                     })
 
@@ -380,65 +410,68 @@ class InheritanceAnalyzer:
     # Statistics
     # -----------------------------------------------------------------
 
-    def _compute_statistics(self, df: pd.DataFrame) -> dict:
-        """Compute inheritance statistics per gene type."""
-        results = {}
+    def _corr_block(self, coord_vals, hc_vals, coach_ids, tag=''):
+        """Correlation + clustered inference + direction/change stats for one set of
+        coordinator-era vs HC-era gene values. These are per-stint rows: a coach with
+        multiple coordinator stints appears more than once, so the bootstrap clusters
+        on coach_id. Inheritance subgroups (esp. DC->HC, ~17 coaches) are small-
+        cluster, so a wild cluster bootstrap p and small_cluster flag are attached.
+        `tag` suffixes the keys ('' for the era-adjusted canonical block, '_raw' for
+        the raw comparison).
+        """
+        changes = hc_vals - coord_vals
+        r, p = stats.pearsonr(coord_vals, hc_vals)
+        boot = corr_with_small_cluster_guard(
+            coord_vals, hc_vals, coach_ids, min_clusters=40, n_boot=2000, seed=42,
+        )
+        nonzero = (coord_vals != 0) & (hc_vals != 0)
+        if nonzero.sum() > 0:
+            same_sign = np.sum(np.sign(coord_vals[nonzero]) == np.sign(hc_vals[nonzero]))
+            direction_pct = round(same_sign / nonzero.sum() * 100, 1)
+        else:
+            direction_pct = None
+        return {
+            f'pearson_r{tag}': round(float(r), 4),
+            f'pearson_p{tag}': round(float(p), 4),
+            f'ci_low{tag}': round(boot['ci_low'], 4),
+            f'ci_high{tag}': round(boot['ci_high'], 4),
+            f'p_bootstrap_coach_clustered{tag}': round(boot['p_bootstrap'], 4),
+            f'n_coaches{tag}': boot['n_clusters'],
+            f'small_cluster{tag}': boot.get('small_cluster', False),
+            f'p_wild_cluster{tag}': (round(boot['p_wild_cluster'], 4)
+                                     if boot.get('p_wild_cluster') is not None else None),
+            f'mean_coord_gene{tag}': round(float(np.mean(coord_vals)), 4),
+            f'mean_hc_gene{tag}': round(float(np.mean(hc_vals)), 4),
+            f'mean_change{tag}': round(float(np.mean(changes)), 4),
+            f'mean_abs_change{tag}': round(float(np.mean(np.abs(changes))), 4),
+            f'direction_retention_pct{tag}': direction_pct,
+        }
 
+    def _compute_statistics(self, df: pd.DataFrame) -> dict:
+        """Compute inheritance statistics per gene type.
+
+        Canonical (unsuffixed) keys are the era-adjusted (contemporary-group
+        controlled) estimates, so the BH harvester and the paper use the era-clean
+        inference; *_raw keys hold the raw estimate for the era-inflation comparison.
+        """
+        results = {}
         for gene_type in sorted(df['gene_type'].unique()):
             subset = df[df['gene_type'] == gene_type]
             n = len(subset)
-
             if n < 3:
                 results[gene_type] = {
                     'n': n,
                     'note': 'Too few transitions for statistical analysis'
                 }
                 continue
-
-            coord_vals = subset['coord_era_gene'].values
-            hc_vals = subset['hc_era_gene'].values
-            changes = subset['gene_change'].values
-
-            # Pearson correlation. These are raw per-stint rows: a coach with
-            # multiple coordinator stints appears more than once, so cluster the
-            # bootstrap on coach_id rather than treating stints as independent.
-            r, p = stats.pearsonr(coord_vals, hc_vals)
-            # Inheritance subgroups (esp. DC->HC, ~17 coaches) are small-cluster:
-            # the percentile bootstrap / clustered-t are anti-conservative there,
-            # so attach a wild cluster bootstrap p and a small_cluster flag.
-            boot = corr_with_small_cluster_guard(
-                coord_vals, hc_vals, subset['coach_id'].values,
-                min_clusters=40, n_boot=2000, seed=42,
-            )
-
-            # Direction retention: same sign (exclude zeros)
-            nonzero = (coord_vals != 0) & (hc_vals != 0)
-            if nonzero.sum() > 0:
-                same_sign = np.sum(np.sign(coord_vals[nonzero]) == np.sign(hc_vals[nonzero]))
-                direction_pct = round(same_sign / nonzero.sum() * 100, 1)
-            else:
-                direction_pct = None
-
-            results[gene_type] = {
-                'n': n,
-                'pearson_r': round(float(r), 4),
-                'pearson_p': round(float(p), 4),
-                'significant': p < 0.05,
-                'ci_low': round(boot['ci_low'], 4),
-                'ci_high': round(boot['ci_high'], 4),
-                'p_bootstrap_coach_clustered': round(boot['p_bootstrap'], 4),
-                'n_coaches': boot['n_clusters'],
-                'small_cluster': boot.get('small_cluster', False),
-                'p_wild_cluster': (round(boot['p_wild_cluster'], 4)
-                                   if boot.get('p_wild_cluster') is not None else None),
-                'mean_coord_gene': round(float(np.mean(coord_vals)), 4),
-                'mean_hc_gene': round(float(np.mean(hc_vals)), 4),
-                'mean_change': round(float(np.mean(changes)), 4),
-                'mean_abs_change': round(float(np.mean(np.abs(changes))), 4),
-                'direction_retention_pct': direction_pct,
-                'mean_years_gap': round(float(subset['years_gap'].mean()), 1),
-            }
-
+            ids = subset['coach_id'].values
+            block = {'n': n, 'mean_years_gap': round(float(subset['years_gap'].mean()), 1)}
+            block.update(self._corr_block(subset['coord_era_gene_eradj'].values,
+                                          subset['hc_era_gene_eradj'].values, ids, tag=''))
+            block.update(self._corr_block(subset['coord_era_gene'].values,
+                                          subset['hc_era_gene'].values, ids, tag='_raw'))
+            block['significant'] = block['pearson_p'] < 0.05
+            results[gene_type] = block
         return results
 
     # -----------------------------------------------------------------

@@ -25,6 +25,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.parsimony import corr_with_small_cluster_guard
+from utils.data_paths import canonicalize_coach_name
 
 logging.basicConfig(
     level=logging.INFO,
@@ -66,26 +67,32 @@ class CoachBackgroundClassifier:
         matched_data = []
         unmatched = []
 
+        # Canonical name column for a robust exact match (handles punctuation, case,
+        # and suffix differences) -- replaces the old unanchored last-name substring
+        # match, which silently took the first row and so could attach the WRONG
+        # coach's background for shared surnames (the Ryan brothers, the Harbaughs,
+        # the two Jim Moras).
+        bg = self.coach_backgrounds.copy()
+        bg['_canon'] = bg['Coach_Name'].map(canonicalize_coach_name)
+
         for _, agg_row in aggression_war_data.iterrows():
             coach_name = agg_row['coach']
 
             # Try exact match on coach name
-            matches = self.coach_backgrounds[self.coach_backgrounds['Coach_Name'] == coach_name]
+            matches = bg[bg['Coach_Name'] == coach_name]
 
             # Try directory-style name (spaces to underscores)
             if len(matches) == 0:
                 coach_dir = coach_name.replace(' ', '_')
-                matches = self.coach_backgrounds[self.coach_backgrounds['Coach_Directory'] == coach_dir]
+                matches = bg[bg['Coach_Directory'] == coach_dir]
 
-            # Try partial match on last name
+            # Try canonical-name match (case/punctuation/suffix-insensitive, exact)
             if len(matches) == 0:
-                last_name = coach_name.split()[-1] if ' ' in coach_name else coach_name
-                matches = self.coach_backgrounds[
-                    self.coach_backgrounds['Coach_Name'].str.contains(last_name, case=False, na=False)
-                ]
+                matches = bg[bg['_canon'] == canonicalize_coach_name(coach_name)]
 
-            if len(matches) > 0:
-                # Take first match
+            # Require a UNIQUE match. An ambiguous result must not silently take the
+            # first row -- skip it and warn, so a mismatch never propagates downstream.
+            if len(matches) == 1:
                 match = matches.iloc[0]
                 row_with_bg = agg_row.to_dict()
                 row_with_bg['Background'] = match['Background']
@@ -93,6 +100,9 @@ class CoachBackgroundClassifier:
                 row_with_bg['Defensive_Years'] = match['Defensive_Years']
                 matched_data.append(row_with_bg)
             else:
+                if len(matches) > 1:
+                    logger.warning(f"  ambiguous background match for '{coach_name}' "
+                                   f"({len(matches)} candidates); skipping")
                 unmatched.append(coach_name)
 
         matched_df = pd.DataFrame(matched_data)

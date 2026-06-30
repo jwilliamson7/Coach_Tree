@@ -44,7 +44,37 @@
     "bootstrap_n": 2000,
     "n": 606,
     "n_coaches": 123,
-    "year_range": "2006-2024"
+    "year_range": "2006-2024",
+    "season_fe": {
+      "coefficients": {
+        "Aggression": {
+          "coefficient": 15.844597639932246,
+          "std_error": 5.312005133318818,
+          "t_statistic": 2.9827903479515103,
+          "p_value": 0.003580958105500409,
+          "significant": true
+        },
+        "Shotgun": {
+          "coefficient": 0.15333097283168118,
+          "std_error": 0.13377033316669204,
+          "t_statistic": 1.1462255434515103,
+          "p_value": 0.2544102439058975,
+          "significant": false
+        },
+        "Tempo": {
+          "coefficient": 0.0005621509826822108,
+          "std_error": 0.1044007273659584,
+          "t_statistic": 0.00538455044198772,
+          "p_value": 0.9957143922072322,
+          "significant": false
+        }
+      },
+      "r_squared": 0.06089425113115554,
+      "n_clusters": 123,
+      "n_season_dummies": 18,
+      "se_type": "cluster_robust_by_coach",
+      "note": "gene coefficients with year fixed effects; year dummies suppressed"
+    }
   },
   "all_genes": {
     "model_name": "All Genes (2016-2024)",
@@ -101,7 +131,44 @@
     "bootstrap_n": 2000,
     "n": 282,
     "n_coaches": 79,
-    "year_range": "2016-2024"
+    "year_range": "2016-2024",
+    "season_fe": {
+      "coefficients": {
+        "Aggression": {
+          "coefficient": 9.053940832513582,
+          "std_error": 6.478238377022326,
+          "t_statistic": 1.3975930346476626,
+          "p_value": 0.1669155966695428,
+          "significant": false
+        },
+        "Shotgun": {
+          "coefficient": 0.11661516700700285,
+          "std_error": 0.181161260000853,
+          "t_statistic": 0.6437091848801105,
+          "p_value": 0.5219946332918832,
+          "significant": false
+        },
+        "Tempo": {
+          "coefficient": -0.0449417760038334,
+          "std_error": 0.13777380723835914,
+          "t_statistic": -0.3261997102691713,
+          "p_value": 0.74530535471458,
+          "significant": false
+        },
+        "Def. Scheme": {
+          "coefficient": 0.22111165092988871,
+          "std_error": 0.11029889296946306,
+          "t_statistic": 2.004658840874358,
+          "p_value": 0.04910481418000345,
+          "significant": true
+        }
+      },
+      "r_squared": 0.05310759286922884,
+      "n_clusters": 79,
+      "n_season_dummies": 8,
+      "se_type": "cluster_robust_by_coach",
+      "note": "gene coefficients with year fixed effects; year dummies suppressed"
+    }
   },
   "vif": {
     "Aggression": 1.0796279500723307,

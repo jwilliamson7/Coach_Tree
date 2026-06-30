@@ -81,6 +81,18 @@ class EffectSizePowerAnalyzer:
         # Remove missing
         self.data = self.data.dropna(subset=['composite_aggression', 'WAR', 'season'])
 
+        # Filter to coaches with 2+ seasons -- the SAME within-coach sample as
+        # analyze_within_coach_fixed_effects.py. Single-season coaches contribute
+        # only zeros after two-way demeaning and otherwise inflate n while diluting
+        # the panel, so both scripts must use the multi-season sample for the effect
+        # sizes and power to describe the same estimand.
+        coach_counts = self.data['coach'].value_counts()
+        multi = coach_counts[coach_counts >= 2].index
+        n_before = len(self.data)
+        self.data = self.data[self.data['coach'].isin(multi)]
+        print(f"Filtered to {len(multi)} coaches with 2+ seasons "
+              f"({len(self.data)} obs; dropped {n_before - len(self.data)} single-season rows)")
+
         # Add era labels
         self.data['era'] = pd.cut(
             self.data['season'],
@@ -167,17 +179,16 @@ class EffectSizePowerAnalyzer:
         - 95% confidence interval
         - Percentile impact (what percentile shift does beta represent)
         """
-        # Get standard deviations
-        sd_aggression = data[aggression_var.replace('_twoway', '')].std()
-        sd_war = data[war_var.replace('_twoway', '')].std()
+        # Standard deviations on the WITHIN-demeaned columns (the two-way-demeaned
+        # gene and WAR actually used in the regression), NOT the raw columns. The
+        # beta is a within-coach slope, so the matching standardized effect must use
+        # the within (demeaned) SDs; using raw SDs mixed a within slope with a
+        # between+within spread (the prior bug).
+        sd_aggression = data[aggression_var].std()
+        sd_war = data[war_var].std()
 
-        # Cohen's d: effect size in SD units
-        # d = beta * (SD_X / SD_Y)
+        # Cohen's d: within-coach effect size in within-SD units, d = beta * SD_X/SD_Y
         cohens_d = beta * (sd_aggression / sd_war)
-
-        # Standardized beta (beta-coefficient in correlation units)
-        # Equivalent to correlation in simple regression
-        standardized_beta = beta * (sd_aggression / sd_war)
 
         # 95% Confidence interval
         # Use t-distribution with n_clusters - k - 1 degrees of freedom
@@ -199,7 +210,6 @@ class EffectSizePowerAnalyzer:
 
         return {
             'cohens_d': float(cohens_d),
-            'standardized_beta': float(standardized_beta),
             'ci_95_lower': float(ci_lower),
             'ci_95_upper': float(ci_upper),
             'sd_war': float(sd_war),
@@ -326,10 +336,9 @@ class EffectSizePowerAnalyzer:
         print(f"  p    = {result['p']:.4f}")
         print(f"  95% CI: [{result['effect_sizes']['ci_95_lower']:.4f}, {result['effect_sizes']['ci_95_upper']:.4f}]")
 
-        print(f"\nEffect Sizes:")
-        print(f"  Cohen's d:           {result['effect_sizes']['cohens_d']:.4f}")
-        print(f"  Standardized beta:   {result['effect_sizes']['standardized_beta']:.4f}")
-        print(f"  Effect (1 SD aggr): {result['effect_sizes']['effect_1sd_aggression_games']:.3f} games")
+        print(f"\nEffect Sizes (within-coach SDs, WAR in games):")
+        print(f"  Cohen's d (within):  {result['effect_sizes']['cohens_d']:.4f}")
+        print(f"  Effect (1 within-SD aggr): {result['effect_sizes']['effect_1sd_aggression_games']:.3f} games")
         print(f"  Proportion of IQR:   {result['effect_sizes']['proportion_iqr']:.2%}")
         print(f"  Percentile shift:    {result['effect_sizes']['percentile_impact']:.1f}th percentile")
 

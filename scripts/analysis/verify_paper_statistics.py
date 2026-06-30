@@ -279,28 +279,86 @@ def verify_aggression_inheritance_by_type():
 
 
 def verify_aggression_war():
-    """Verify aggression-WAR correlation tables."""
+    """Verify aggression-WAR correlation tables. Reports the season-level raw and
+    era-adjusted estimates so the verifier captures the era-clean primary."""
     logger.info("\n" + "=" * 70)
     logger.info("VERIFYING: Aggression-WAR Correlations")
     logger.info("=" * 70)
 
-    for filename in ['aggression_war_regression_results.json',
-                     'aggression_war_temporal_analysis.json']:
-        filepath = Path("outputs/analysis") / filename
-        if filepath.exists():
-            with open(filepath) as f:
-                data = json.load(f)
-            logger.info(f"\n  File: {filename}")
-            if 'correlations' in data:
-                for key, val in data['correlations'].items():
-                    if isinstance(val, dict) and 'pearson_r' in val:
-                        logger.info(f"    {key}: r={val['pearson_r']:.4f}, "
-                                     f"p={val['pearson_p']:.4f}, n={val['n']}")
-            if 'by_era' in data:
-                for era, era_data in data['by_era'].items():
-                    if isinstance(era_data, dict) and 'pearson_r' in era_data:
-                        logger.info(f"    Era {era}: r={era_data['pearson_r']:.4f}, "
-                                     f"p={era_data['pearson_p']:.4f}, n={era_data['n']}")
+    out = {}
+    reg = Path("outputs/analysis/aggression_war_regression_results.json")
+    if reg.exists():
+        with open(reg) as f:
+            data = json.load(f)
+        for label, val in data.items():
+            if isinstance(val, dict) and 'correlation' in val:
+                out[label] = {
+                    'r_raw': val.get('correlation'),
+                    'p_raw_clustered': val.get('p_bootstrap_coach_clustered'),
+                    'r_eradj': val.get('correlation_eradj'),
+                    'p_eradj_clustered': val.get('p_bootstrap_coach_clustered_eradj'),
+                    'career_r': val.get('career', {}).get('all_coaches', {}).get('correlation'),
+                    'career_war_vs_era_r': val.get('career', {}).get('career_war_vs_era_r'),
+                    'n': val.get('n'),
+                }
+                logger.info(f"    {label:25s}: raw r={val.get('correlation'):.4f} | "
+                            f"era-adj r={val.get('correlation_eradj', float('nan')):.4f} | "
+                            f"career r={out[label]['career_r']}")
+    return out
+
+
+def verify_headline_recompute():
+    """Independently RECOMPUTE the two headline numbers from source/intermediate
+    data (not echoing the analysis JSON), so a fabricated or drifted JSON would be
+    caught: (a) the season-level era-adjusted composite aggression -> WAR
+    correlation, recomputed from the gene CSV + WAR trajectories; (b) the
+    era-adjusted Offensive-mentor x OC-protege shotgun inheritance cell, recomputed
+    from the saved mentor-protege pairs. Logs each against the pipeline value."""
+    import sys as _sys
+    logger.info("\n" + "=" * 70)
+    logger.info("INDEPENDENT RECOMPUTE OF HEADLINE NUMBERS")
+    logger.info("=" * 70)
+    _sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+    out = {}
+
+    # (a) season-level era-adjusted composite aggression -> WAR
+    try:
+        from utils.data_paths import coach_war_trajectories_path, merge_gene_war
+        from utils.parsimony import within_group_demean
+        agg = pd.read_csv("data/processed/coaching_genes/aggression_gene_by_year.csv")
+        agg = agg.rename(columns={'head_coach': 'coach', 'season': 'year'})
+        war = pd.read_csv(coach_war_trajectories_path())
+        war.columns = war.columns.str.lower()
+        m = merge_gene_war(agg, war, 'coach', 'coach', year_cols=('year', 'year'), how='inner')
+        m = m[['composite_aggression', 'annual_war', 'coach', 'year']].dropna().copy()
+        m['_w'] = m['annual_war'] * 16
+        gx = within_group_demean(m, 'composite_aggression', 'year')
+        gy = within_group_demean(m, '_w', 'year')
+        r = float(np.corrcoef(gx, gy)[0, 1])
+        j = json.load(open("outputs/analysis/aggression_war_regression_results.json"))
+        jr = j.get('Composite Aggression', {}).get('correlation_eradj')
+        out['composite_aggression_war_eradj'] = {'recomputed_r': r, 'json_r': jr, 'n': int(len(m))}
+        logger.info(f"  composite aggression->WAR era-adj: recomputed r={r:.4f} "
+                    f"(n={len(m)}) vs JSON {jr}")
+    except Exception as e:
+        logger.warning(f"  aggression->WAR recompute failed: {e}")
+
+    # (b) era-adjusted Offensive-mentor x OC-protege shotgun cell, from saved pairs
+    try:
+        p = pd.read_csv("outputs/analysis/shotgun_mentor_protege_pairs.csv")
+        cell = p[(p['mentor_background'] == 'Offensive') & (p['protege_role'] == 'OC')]
+        cell = cell[['shotgun_mentor_eradj', 'shotgun_protege_eradj']].dropna()
+        r = float(np.corrcoef(cell['shotgun_mentor_eradj'], cell['shotgun_protege_eradj'])[0, 1])
+        j = json.load(open("outputs/analysis/shotgun_inheritance_by_type_results.json"))
+        jr = j.get('two_by_two', {}).get('Offensive|OC', {}).get('correlation')
+        out['shotgun_off_mentor_oc_protege_eradj'] = {'recomputed_r': r, 'json_r': jr,
+                                                      'n': int(len(cell))}
+        logger.info(f"  shotgun Off-mentor x OC-protege era-adj: recomputed r={r:.4f} "
+                    f"(n={len(cell)}) vs JSON {jr}")
+    except Exception as e:
+        logger.warning(f"  shotgun 2x2 recompute failed: {e}")
+
+    return out
 
 
 def main():
@@ -342,8 +400,15 @@ def main():
     if agg_inherit:
         all_results['sections']['aggression_inheritance_by_type'] = agg_inherit
 
-    # 6. Aggression-WAR
-    verify_aggression_war()
+    # 6. Aggression-WAR (now captured)
+    agg_war = verify_aggression_war()
+    if agg_war:
+        all_results['sections']['aggression_war'] = agg_war
+
+    # 7. Independent recompute of headline numbers (recompute, not echo)
+    recompute = verify_headline_recompute()
+    if recompute:
+        all_results['sections']['headline_recompute'] = recompute
 
     # Save verification results
     output_file = log_dir / "paper_statistics_verification.json"

@@ -111,6 +111,12 @@ class WithinCoachFixedEffectsAnalyzer:
             how='inner'
         )
 
+        # Put WAR on the games-per-season scale (Coach_WAR's *16 convention) so this
+        # script and the effect-size/power script report the same units. Scale is
+        # linear, so t/p and significance are unchanged; only beta/SE/CI magnitudes
+        # move (now games per unit of gene rather than per-game-WAR per unit).
+        self.data['WAR'] = self.data['WAR'] * 16
+
         logger.info(f"Merged dataset: {len(self.data):,} coach-year observations")
         logger.info(f"Unique coaches: {self.data['coach'].nunique()}")
         logger.info(f"Year range: {self.data['season'].min()}-{self.data['season'].max()}")
@@ -223,6 +229,15 @@ class WithinCoachFixedEffectsAnalyzer:
         boot = cluster_bootstrap_ci(X, y, clusters, [aggression_var], n_boot=2000, seed=0)
         bc = boot[aggression_var]
 
+        # Standardized effect on the WITHIN-demeaned SDs (X and y here are already
+        # the demeaned columns), so units match the within-coach design: Cohen's d
+        # and games per one within-coach SD of the gene. WAR is on the games scale,
+        # so games_per_within_sd is in games per season.
+        sd_x = float(np.std(X[:, 0], ddof=1))
+        sd_y = float(np.std(y, ddof=1))
+        cohens_d = float(c['coefficient'] * sd_x / sd_y) if sd_y > 0 else float('nan')
+        games_per_within_sd = float(c['coefficient'] * sd_x)
+
         return {
             'n': int(res['n']),
             'n_coaches': int(res['n_clusters']),
@@ -233,6 +248,11 @@ class WithinCoachFixedEffectsAnalyzer:
             'ci_low': float(bc['ci_low']),
             'ci_high': float(bc['ci_high']),
             'r_squared': float(res['r_squared']),
+            'cohens_d_within': cohens_d,
+            'games_per_within_sd': games_per_within_sd,
+            'sd_gene_within': sd_x,
+            'sd_war_within_games': sd_y,
+            'war_scale': 'games_per_season',
             'significant': bool(c['significant'])
         }
 

@@ -5,10 +5,25 @@
     "n_teams": 34,
     "team_match_rate": 0.9485179407176287,
     "var_explained_coach": 0.5146201018733872,
+    "var_explained_coach_null_mean": 0.21384504905247093,
+    "var_explained_coach_null_p95": 0.25632473179255877,
+    "var_explained_coach_excess": 0.3007750528209163,
+    "var_explained_coach_perm_p": 0.0,
     "var_explained_team": 0.13264536844385894,
+    "var_explained_team_null_mean": 0.054372707239354126,
+    "var_explained_team_null_p95": 0.07554473482867474,
+    "var_explained_team_excess": 0.07827266120450481,
+    "var_explained_team_perm_p": 0.0,
     "var_explained_season": 0.1880993293443328,
     "n_movers": 32,
     "cross_team_travel": {
+      "r_old_vs_new_team": 0.5661526384807587,
+      "ci_low": 0.32606443650209355,
+      "ci_high": 0.7351835465383528,
+      "n": 32,
+      "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
+    },
+    "cross_team_travel_raw": {
       "r_old_vs_new_team": 0.6076950207586757,
       "ci_low": 0.3284434824267008,
       "ci_high": 0.7791004761928539,
@@ -16,6 +31,29 @@
       "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
     },
     "mover_regression": {
+      "n": 32,
+      "coach_pre": {
+        "coefficient": 0.5587946160503903,
+        "std_error": 0.13303176683469375,
+        "t_statistic": 4.200460005501938,
+        "p_value": 0.00023155490424131564,
+        "significant": true,
+        "ci_low": 0.306497222367589,
+        "ci_high": 0.8993344568297675
+      },
+      "team_new_prior": {
+        "coefficient": 0.7408164313753903,
+        "std_error": 0.24818025849139758,
+        "t_statistic": 2.9849933910076434,
+        "p_value": 0.005708810494742478,
+        "significant": true,
+        "ci_low": 0.21441669649266937,
+        "ci_high": 1.3382553309710843
+      },
+      "r_squared": 0.4391282838080023,
+      "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
+    },
+    "mover_regression_raw": {
       "n": 32,
       "coach_pre": {
         "coefficient": 0.5302281061051982,
@@ -44,11 +82,26 @@
     "n_coaches": 138,
     "n_teams": 34,
     "team_match_rate": 0.9485179407176287,
-    "var_explained_coach": 0.526313930664183,
-    "var_explained_team": 0.06036428333491378,
+    "var_explained_coach": 0.5263139306641831,
+    "var_explained_coach_null_mean": 0.2150166446622029,
+    "var_explained_coach_null_p95": 0.26580482794780796,
+    "var_explained_coach_excess": 0.31129728600198014,
+    "var_explained_coach_perm_p": 0.0,
+    "var_explained_team": 0.060364283334913775,
+    "var_explained_team_null_mean": 0.054580387178588055,
+    "var_explained_team_null_p95": 0.07880930230860765,
+    "var_explained_team_excess": 0.00578389615632572,
+    "var_explained_team_perm_p": 0.291,
     "var_explained_season": 0.2848090849993776,
     "n_movers": 32,
     "cross_team_travel": {
+      "r_old_vs_new_team": 0.1265705146651133,
+      "ci_low": -0.20737818431353827,
+      "ci_high": 0.4399914408326618,
+      "n": 32,
+      "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
+    },
+    "cross_team_travel_raw": {
       "r_old_vs_new_team": 0.17682023289442733,
       "ci_low": -0.2526562352139084,
       "ci_high": 0.5079763544691952,
@@ -56,6 +109,29 @@
       "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
     },
     "mover_regression": {
+      "n": 32,
+      "coach_pre": {
+        "coefficient": 0.12157798925359568,
+        "std_error": 0.15418270598198208,
+        "t_statistic": 0.7885319464285663,
+        "p_value": 0.43678456315412095,
+        "significant": false,
+        "ci_low": -0.23499807794826713,
+        "ci_high": 0.4981918396827003
+      },
+      "team_new_prior": {
+        "coefficient": 0.10942654653716505,
+        "std_error": 0.25093647166720934,
+        "t_statistic": 0.4360727072080856,
+        "p_value": 0.6660131131300404,
+        "significant": false,
+        "ci_low": -0.4442374677858237,
+        "ci_high": 0.5641058743075478
+      },
+      "r_squared": 0.022213089420568877,
+      "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
+    },
+    "mover_regression_raw": {
       "n": 32,
       "coach_pre": {
         "coefficient": 0.2056068223505584,
@@ -84,11 +160,26 @@
     "n_coaches": 138,
     "n_teams": 34,
     "team_match_rate": 0.9485179407176287,
-    "var_explained_coach": 0.4937874468894183,
-    "var_explained_team": 0.1859846484724433,
+    "var_explained_coach": 0.49378744688941834,
+    "var_explained_coach_null_mean": 0.2135893904673878,
+    "var_explained_coach_null_p95": 0.2509449199127264,
+    "var_explained_coach_excess": 0.28019805642203055,
+    "var_explained_coach_perm_p": 0.0,
+    "var_explained_team": 0.18598464847244334,
+    "var_explained_team_null_mean": 0.05471184573395812,
+    "var_explained_team_null_p95": 0.07615042103791707,
+    "var_explained_team_excess": 0.1312728027384852,
+    "var_explained_team_perm_p": 0.0,
     "var_explained_season": 0.08269217146993592,
     "n_movers": 32,
     "cross_team_travel": {
+      "r_old_vs_new_team": 0.3333219707348791,
+      "ci_low": 0.003220555673854463,
+      "ci_high": 0.6086349091618134,
+      "n": 32,
+      "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
+    },
+    "cross_team_travel_raw": {
       "r_old_vs_new_team": 0.42386146888119586,
       "ci_low": 0.16121179467839444,
       "ci_high": 0.6527010685041161,
@@ -96,6 +187,29 @@
       "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
     },
     "mover_regression": {
+      "n": 32,
+      "coach_pre": {
+        "coefficient": 0.39419948529663884,
+        "std_error": 0.19610067156066793,
+        "t_statistic": 2.0101893693652384,
+        "p_value": 0.05379394063419607,
+        "significant": false,
+        "ci_low": -0.011483476726652122,
+        "ci_high": 0.7919009220041484
+      },
+      "team_new_prior": {
+        "coefficient": 0.47289872713133313,
+        "std_error": 0.31858831031540896,
+        "t_statistic": 1.4843568072637496,
+        "p_value": 0.14850339345192842,
+        "significant": false,
+        "ci_low": -0.08257216326517951,
+        "ci_high": 1.2229322403881917
+      },
+      "r_squared": 0.17146591502203312,
+      "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
+    },
+    "mover_regression_raw": {
       "n": 32,
       "coach_pre": {
         "coefficient": 0.42783749949978467,
@@ -124,11 +238,26 @@
     "n_coaches": 138,
     "n_teams": 34,
     "team_match_rate": 0.9485179407176287,
-    "var_explained_coach": 0.4444685975674076,
-    "var_explained_team": 0.12273404585608663,
+    "var_explained_coach": 0.44446859756740764,
+    "var_explained_coach_null_mean": 0.21503644872912497,
+    "var_explained_coach_null_p95": 0.2555012384784833,
+    "var_explained_coach_excess": 0.22943214883828267,
+    "var_explained_coach_perm_p": 0.0,
+    "var_explained_team": 0.12273404585608665,
+    "var_explained_team_null_mean": 0.05414012723763997,
+    "var_explained_team_null_p95": 0.07818663286096074,
+    "var_explained_team_excess": 0.06859391861844667,
+    "var_explained_team_perm_p": 0.0,
     "var_explained_season": 0.05937564139097039,
     "n_movers": 32,
     "cross_team_travel": {
+      "r_old_vs_new_team": 0.16457124115949667,
+      "ci_low": -0.22106711950323624,
+      "ci_high": 0.5156833090008244,
+      "n": 32,
+      "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
+    },
+    "cross_team_travel_raw": {
       "r_old_vs_new_team": 0.16369147023534086,
       "ci_low": -0.19937764893634616,
       "ci_high": 0.4957117289802146,
@@ -136,6 +265,29 @@
       "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
     },
     "mover_regression": {
+      "n": 32,
+      "coach_pre": {
+        "coefficient": 0.13360399104873733,
+        "std_error": 0.15099587741277617,
+        "t_statistic": 0.8848187999431614,
+        "p_value": 0.38353208756527657,
+        "significant": false,
+        "ci_low": -0.18199046316267728,
+        "ci_high": 0.45137751575601875
+      },
+      "team_new_prior": {
+        "coefficient": -0.03308120735347391,
+        "std_error": 0.2786437652127176,
+        "t_statistic": -0.11872222343901936,
+        "p_value": 0.9063140042945457,
+        "significant": false,
+        "ci_low": -0.6340164955519876,
+        "ci_high": 0.5856972313242642
+      },
+      "r_squared": 0.027572990223972527,
+      "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
+    },
+    "mover_regression_raw": {
       "n": 32,
       "coach_pre": {
         "coefficient": 0.131907691681395,
@@ -164,11 +316,26 @@
     "n_coaches": 138,
     "n_teams": 34,
     "team_match_rate": 0.9485179407176287,
-    "var_explained_coach": 0.44270884288790596,
-    "var_explained_team": 0.10190651134395033,
+    "var_explained_coach": 0.4427088428879059,
+    "var_explained_coach_null_mean": 0.21469667417933178,
+    "var_explained_coach_null_p95": 0.2743397597730208,
+    "var_explained_coach_excess": 0.22801216870857413,
+    "var_explained_coach_perm_p": 0.0,
+    "var_explained_team": 0.10190651134395035,
+    "var_explained_team_null_mean": 0.054796377497278184,
+    "var_explained_team_null_p95": 0.07830398246669132,
+    "var_explained_team_excess": 0.04711013384667216,
+    "var_explained_team_perm_p": 0.0,
     "var_explained_season": 0.17056536729468808,
     "n_movers": 32,
     "cross_team_travel": {
+      "r_old_vs_new_team": 0.42663595193894616,
+      "ci_low": 0.1595232454578931,
+      "ci_high": 0.67761265251268,
+      "n": 32,
+      "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
+    },
+    "cross_team_travel_raw": {
       "r_old_vs_new_team": 0.36165808846210357,
       "ci_low": -0.02350689398259255,
       "ci_high": 0.6930418931701356,
@@ -176,6 +343,29 @@
       "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
     },
     "mover_regression": {
+      "n": 32,
+      "coach_pre": {
+        "coefficient": 0.35181361142207845,
+        "std_error": 0.14284727420087623,
+        "t_statistic": 2.4628654161601107,
+        "p_value": 0.019961302267192726,
+        "significant": true,
+        "ci_low": 0.1172274240563565,
+        "ci_high": 0.7864415044285206
+      },
+      "team_new_prior": {
+        "coefficient": 0.2834166352149339,
+        "std_error": 0.28452276547692845,
+        "t_statistic": 0.9961123312570773,
+        "p_value": 0.3274350106871631,
+        "significant": false,
+        "ci_low": -0.433071762438775,
+        "ci_high": 0.827933922996413
+      },
+      "r_squared": 0.2005343160460854,
+      "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
+    },
+    "mover_regression_raw": {
       "n": 32,
       "coach_pre": {
         "coefficient": 0.2743287325866092,
@@ -205,10 +395,25 @@
     "n_teams": 34,
     "team_match_rate": 0.9529780564263323,
     "var_explained_coach": 0.5792297532889809,
+    "var_explained_coach_null_mean": 0.21633786177280234,
+    "var_explained_coach_null_p95": 0.25122975333037406,
+    "var_explained_coach_excess": 0.3628918915161785,
+    "var_explained_coach_perm_p": 0.0,
     "var_explained_team": 0.12089155246221273,
+    "var_explained_team_null_mean": 0.05401577087510323,
+    "var_explained_team_null_p95": 0.07733935392609655,
+    "var_explained_team_excess": 0.0668757815871095,
+    "var_explained_team_perm_p": 0.0,
     "var_explained_season": 0.49170343878987244,
     "n_movers": 32,
     "cross_team_travel": {
+      "r_old_vs_new_team": 0.26725371555140837,
+      "ci_low": -0.1981406109990108,
+      "ci_high": 0.6688716445797624,
+      "n": 32,
+      "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
+    },
+    "cross_team_travel_raw": {
       "r_old_vs_new_team": 0.5499915346442271,
       "ci_low": 0.29220389372518957,
       "ci_high": 0.7453694568217021,
@@ -216,6 +421,29 @@
       "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
     },
     "mover_regression": {
+      "n": 32,
+      "coach_pre": {
+        "coefficient": 0.37016164312057726,
+        "std_error": 0.27933211371949684,
+        "t_statistic": 1.3251667994475234,
+        "p_value": 0.1954624272717056,
+        "significant": false,
+        "ci_low": -0.21692424533849497,
+        "ci_high": 0.8903343170272378
+      },
+      "team_new_prior": {
+        "coefficient": 0.42814143649040426,
+        "std_error": 0.1928374889264525,
+        "t_statistic": 2.220218894541278,
+        "p_value": 0.03437824351948682,
+        "significant": true,
+        "ci_low": -0.13941003934012444,
+        "ci_high": 0.8971621662561937
+      },
+      "r_squared": 0.12054772349263942,
+      "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
+    },
+    "mover_regression_raw": {
       "n": 32,
       "coach_pre": {
         "coefficient": 0.4501187431219323,
@@ -245,10 +473,25 @@
     "n_teams": 34,
     "team_match_rate": 0.9485179407176287,
     "var_explained_coach": 0.5261407615526904,
-    "var_explained_team": 0.09868158416582452,
+    "var_explained_coach_null_mean": 0.2139541201605752,
+    "var_explained_coach_null_p95": 0.2735613685218785,
+    "var_explained_coach_excess": 0.3121866413921152,
+    "var_explained_coach_perm_p": 0.0,
+    "var_explained_team": 0.09868158416582454,
+    "var_explained_team_null_mean": 0.05479848329725806,
+    "var_explained_team_null_p95": 0.0771336329104361,
+    "var_explained_team_excess": 0.04388310086856648,
+    "var_explained_team_perm_p": 0.004,
     "var_explained_season": 0.07854833389187756,
     "n_movers": 32,
     "cross_team_travel": {
+      "r_old_vs_new_team": 0.49215239642248304,
+      "ci_low": -0.10036818511391313,
+      "ci_high": 0.8332080209062583,
+      "n": 32,
+      "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
+    },
+    "cross_team_travel_raw": {
       "r_old_vs_new_team": 0.5378819344578214,
       "ci_low": -0.10766162936961217,
       "ci_high": 0.8623604955960749,
@@ -256,6 +499,29 @@
       "note": "coach's mean gene at old team vs new team; high = gene travels with coach"
     },
     "mover_regression": {
+      "n": 32,
+      "coach_pre": {
+        "coefficient": 0.41942820807763553,
+        "std_error": 0.1502747945520943,
+        "t_statistic": 2.79107490599321,
+        "p_value": 0.009195346416541295,
+        "significant": true,
+        "ci_low": -0.23587119801348708,
+        "ci_high": 0.6126338648744472
+      },
+      "team_new_prior": {
+        "coefficient": -0.6001638102707267,
+        "std_error": 0.6671996582043158,
+        "t_statistic": -0.8995265553432571,
+        "p_value": 0.375781238171111,
+        "significant": false,
+        "ci_low": -2.13294126623052,
+        "ci_high": 0.5003003814626705
+      },
+      "r_squared": 0.27347944853730954,
+      "note": "new-team gene ~ coach's old-team gene + new-team's pre-arrival gene; large coach_pre vs small team_new_prior = coach trait"
+    },
+    "mover_regression_raw": {
       "n": 32,
       "coach_pre": {
         "coefficient": 0.42654494418390626,
