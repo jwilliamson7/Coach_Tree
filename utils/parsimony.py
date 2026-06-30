@@ -325,6 +325,29 @@ def grouped_cv_score(
 # --------------------------------------------------------------------------- #
 # (d) Coach-clustered inference for the downstream gene -> WAR regressions
 # --------------------------------------------------------------------------- #
+def within_group_demean(
+    df: pd.DataFrame,
+    value_col: str,
+    group_col: str = "season",
+) -> pd.Series:
+    """Contemporary-group centering: value minus its within-group mean.
+
+    Subtracts each group's (default: season's) cross-sectional mean from
+    `value_col`, yielding the deviation of each observation from its
+    contemporaries. This is the analysis-time era control used throughout the
+    downstream inference (transmission, gene -> WAR): the published gene CSVs are
+    left absolute, and the league-wide temporal drift is removed only here, where
+    it would otherwise act as a shared-environment confounder. It is the
+    contemporary-group (herd-year-season) fixed effect of the quantitative-
+    genetics animal model: traits compared relative to peers of the same era.
+
+    Group means are computed over non-null `value_col` rows; rows whose value is
+    NaN return NaN. Returns a Series aligned to df.index.
+    """
+    s = df[value_col]
+    return s - s.groupby(df[group_col]).transform("mean")
+
+
 def cluster_robust_ols(
     X: np.ndarray,
     y: np.ndarray,

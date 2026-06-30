@@ -46,6 +46,7 @@
       "n_dropped": 12
     },
     "career_level": {
+      "career_war_vs_era_r": 0.29702920903461305,
       "all_coaches": {
         "correlation": 0.3033919185271304,
         "p_value": 0.000614079532669092,

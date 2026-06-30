@@ -30,28 +30,28 @@
     },
     "Defensive": {
       "composite": {
-        "correlation": 0.18383093060980704,
-        "p_value": 0.00346852568284508,
-        "n": 251,
-        "slope": 1.1157343537555202,
+        "correlation": 0.1816043494542546,
+        "p_value": 0.0037503669996259282,
+        "n": 253,
+        "slope": 1.1071650008054212,
         "significant": true,
-        "ci_low": 0.027245259978904,
-        "ci_high": 0.32690030714231577,
-        "n_coaches": 49,
-        "p_clustered": 0.016,
+        "ci_low": 0.018557530056751266,
+        "ci_high": 0.3256200222180031,
+        "n_coaches": 50,
+        "p_clustered": 0.028,
         "small_cluster": false,
         "p_wild_cluster": null
       },
       "pass_heavy": {
-        "correlation": 0.17714876809050709,
-        "p_value": 0.004879970117850013,
-        "n": 251,
-        "slope": 0.44298028173222975,
+        "correlation": 0.18326936431256172,
+        "p_value": 0.003439469186920216,
+        "n": 253,
+        "slope": 0.4570920511439708,
         "significant": true,
-        "ci_low": 0.004105321191182274,
-        "ci_high": 0.32823265398015267,
-        "n_coaches": 49,
-        "p_clustered": 0.048,
+        "ci_low": 0.0047358535604826195,
+        "ci_high": 0.34342613886074597,
+        "n_coaches": 50,
+        "p_clustered": 0.04,
         "small_cluster": false,
         "p_wild_cluster": null
       }
@@ -105,15 +105,15 @@
     "Defensive": {
       "Early (2006-2011)": {
         "composite": {
-          "correlation": 0.18885987745230326,
-          "p_value": 0.07803102602219626,
-          "n": 88,
+          "correlation": 0.1706300694406247,
+          "p_value": 0.10785118636180262,
+          "n": 90,
           "significant": false
         },
         "pass_heavy": {
-          "correlation": 0.061221053102511455,
-          "p_value": 0.5709691598367527,
-          "n": 88,
+          "correlation": 0.07271521401233833,
+          "p_value": 0.4958103225997028,
+          "n": 90,
           "significant": false
         }
       },

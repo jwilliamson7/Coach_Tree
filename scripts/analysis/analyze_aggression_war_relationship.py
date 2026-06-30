@@ -21,7 +21,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.data_paths import coach_war_trajectories_path, merge_gene_war
-from utils.parsimony import cluster_bootstrap_corr
+from utils.parsimony import cluster_bootstrap_corr, within_group_demean
 from utils.war_noise import war_noise_robustness, career_level_corr
 
 logging.basicConfig(
@@ -140,8 +140,26 @@ class AggressionWARAnalyzer:
                 'significant': bool(p_val < 0.05)
             }
 
-            # WS11: WAR-noise-aware robustness + career-level anchor (the observed
-            # r above stays the primary, conservative number).
+            # Era control (contemporary-group): within-season demean both gene and
+            # WAR, then re-correlate (coach-clustered). Annual WAR is ~era-flat, so
+            # this is a near-no-op confirming the season-level link is not the
+            # league-wide drift; the career aggregate carries a window-selection era
+            # artifact (see career note), so season is the era-clean primary grain.
+            m2 = self.merged_data[[col, 'annual_war', 'coach', 'year']].dropna().copy()
+            m2['_war_games'] = m2['annual_war'] * 16
+            gx = within_group_demean(m2, col, 'year').to_numpy()
+            gy = within_group_demean(m2, '_war_games', 'year').to_numpy()
+            re_, pe_ = stats.pearsonr(gx, gy)
+            eboot = cluster_bootstrap_corr(gx, gy, m2['coach'].values, n_boot=2000, seed=42)
+            results[label]['correlation_eradj'] = float(re_)
+            results[label]['p_value_eradj'] = float(pe_)
+            results[label]['ci_low_eradj'] = eboot['ci_low']
+            results[label]['ci_high_eradj'] = eboot['ci_high']
+            results[label]['p_bootstrap_coach_clustered_eradj'] = eboot['p_bootstrap']
+            results[label]['n_eradj'] = int(len(m2))
+
+            # WS11: WAR-noise-aware robustness + career-level secondary anchor (the
+            # season-level estimates above stay primary).
             results[label].update(
                 war_noise_robustness(self.merged_data, col,
                                      war_col='annual_war', coach_col='coach'))

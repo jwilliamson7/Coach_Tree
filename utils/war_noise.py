@@ -18,11 +18,17 @@ three honest robustness views WITHOUT manufacturing precision:
      floor. The reliability is estimated by variance decomposition (approximate),
      so this is a bracket, not a headline.
 
-A fourth, assumption-light view lives here too:
+A fourth view lives here too, now SECONDARY:
   4. career-level correlation    -- collapse to one row per coach (career-mean
      gene vs precision-weighted career-mean WAR). A coach's mean WAR is reliable
-     even when any single season is not, so this sidesteps season noise entirely
-     and needs no clustering (one row per coach).
+     even when any single season is not, so this sidesteps season noise. BUT it
+     carries a window-selection era artifact: within a fixed observation window,
+     career-mean WAR correlates with the coach's career midpoint (~0.29 here,
+     because still-employed recent coaches skew positive), even though annual WAR
+     is replacement-relative and ~era-flat by construction. So the career-level
+     correlation BRACKETS ABOVE the season-level estimate rather than refining it,
+     and the season-level (coach-clustered, era-controlled) grain is the primary,
+     era-clean answer. The career number is reported with this caveat.
 
 ASCII only (Windows console).
 """
@@ -165,9 +171,12 @@ def war_noise_robustness(
 
     # 3. empirical single-season WAR reliability (context, not used to disattenuate)
     out.update(_war_test_retest_reliability(df, war_col, coach_col, year_col))
-    out["note"] = ("observed r is a FLOOR (single-season WAR is mostly luck, which "
-                   "attenuates it); r_ivw down-weights noisy short seasons; the "
-                   "career-level correlation is the reliable-WAR anchor")
+    out["note"] = ("season-level coach-clustered r is the era-clean PRIMARY grain "
+                   "(annual WAR is ~era-flat, ~3% between-season variance, so a season "
+                   "control barely moves it); r_ivw down-weights noisy short seasons. "
+                   "The career-level correlation is a SECONDARY anchor that carries a "
+                   "window-selection era artifact (career-mean WAR correlates with era), "
+                   "so it brackets above rather than refining the season estimate.")
     return out
 
 
@@ -189,7 +198,10 @@ def career_level_corr(
     with >=3 seasons where career WAR is most reliable).
     """
     df = _ensure_precision(merged, coach_col=coach_col, year_col=year_col)
-    sub = df[[gene_col, war_col, coach_col, "war_weight"]].dropna().copy()
+    keep = [gene_col, war_col, coach_col, "war_weight"]
+    if year_col in df.columns:
+        keep.append(year_col)
+    sub = df[keep].dropna(subset=[gene_col, war_col, coach_col, "war_weight"]).copy()
     if sub.empty:
         return {}
     sub["war_games"] = sub[war_col].astype(float) * GAMES_PER_SEASON
@@ -199,8 +211,10 @@ def career_level_corr(
         w = g["war_weight"].to_numpy(float)
         war_career = (float(np.average(g["war_games"].to_numpy(float), weights=w))
                       if w.sum() > 0 else float(g["war_games"].mean()))
-        recs.append((coach, float(g[gene_col].mean()), war_career, int(len(g))))
-    cdf = pd.DataFrame(recs, columns=["coach", "gene", "war", "n_seasons"])
+        mid_year = (float(pd.to_numeric(g[year_col], errors="coerce").mean())
+                    if year_col in g.columns else float("nan"))
+        recs.append((coach, float(g[gene_col].mean()), war_career, int(len(g)), mid_year))
+    cdf = pd.DataFrame(recs, columns=["coach", "gene", "war", "n_seasons", "mid_year"])
 
     def _report(d: pd.DataFrame) -> Dict:
         if len(d) < 10 or d["gene"].std() == 0 or d["war"].std() == 0:
@@ -224,6 +238,15 @@ def career_level_corr(
                 "n_coaches": int(len(d)), "significant": bool(p < 0.05)}
 
     out = {}
+    # Window-selection era artifact: correlation of career-mean WAR with the coach's
+    # career midpoint. Annual WAR is era-flat by construction, so a non-zero value
+    # here is an observation-window selection effect (still-employed recent coaches
+    # skew positive) that inflates the career-level gene->WAR correlation. Reported
+    # so the career anchor is read as bracketing-above, not refining.
+    valid_my = cdf.dropna(subset=["mid_year"])
+    if len(valid_my) >= 10 and valid_my["war"].std() > 0 and valid_my["mid_year"].std() > 0:
+        out["career_war_vs_era_r"] = float(
+            np.corrcoef(valid_my["war"], valid_my["mid_year"])[0, 1])
     for m in min_seasons_variants:
         key = "all_coaches" if m <= 1 else f"min{m}_seasons"
         out[key] = _report(cdf[cdf["n_seasons"] >= m])

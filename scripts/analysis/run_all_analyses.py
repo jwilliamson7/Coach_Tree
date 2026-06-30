@@ -159,6 +159,15 @@ def main():
             'log': 'benjamini_hochberg_correction.log',
             'description': 'Benjamini-Hochberg FDR Correction (global, clustered p where available)'
         },
+        # Verification runs after BH so it sees every regenerated JSON; it produces
+        # no p-values, so it cannot affect the FDR family. Independently recomputes
+        # the headline numbers (recompute, not echo) so the pipeline cannot silently
+        # drift from the paper.
+        {
+            'path': Path("scripts/analysis/verify_paper_statistics.py"),
+            'log': 'verify_paper_statistics.log',
+            'description': 'Verify Paper Statistics (independent recompute of headlines)'
+        },
         # Visualization scripts (non-HTML)
         {
             'path': Path("scripts/visualization/visualize_aggression_trends.py"),

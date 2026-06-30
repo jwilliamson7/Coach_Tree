@@ -67,6 +67,21 @@ def _pick_p(node, prefer_clustered=True):
     return None, None
 
 
+def _prefer_eradj(node):
+    """For gene->WAR nodes, surface the era-adjusted (contemporary-group) clustered
+    p as the FDR family member. Annual WAR is ~era-flat, so the era-adjusted
+    season-level estimate is the era-clean primary; falls back to the raw clustered
+    p when the era-adjusted key is absent."""
+    if not isinstance(node, dict):
+        return node
+    p = node.get("p_bootstrap_coach_clustered_eradj")
+    if p is None:
+        return node
+    out = dict(node)
+    out["p_bootstrap_coach_clustered"] = p
+    return out
+
+
 def _add(tests, category, test, node, prefer_clustered=True):
     p, source = _pick_p(node, prefer_clustered)
     if p is None:
@@ -92,16 +107,16 @@ def collect_tests():
         for gene_key, label in gene_war:
             node = d.get(gene_key, {}).get("overall", {}).get(label)
             if node:
-                _add(tests, "Gene-WAR", label, node)
+                _add(tests, "Gene-WAR", label, _prefer_eradj(node))
 
-    # 1. Overall aggression -> WAR (clustered by coach)
+    # 1. Overall aggression -> WAR (clustered by coach; era-adjusted season-level p)
     d = _load("aggression_war_regression_results.json")
     if d:
         for label in ["Composite Aggression", "4th Down Aggression",
                       "Pass-Heavy Aggression", "Deep Pass Aggression",
                       "2-Point Aggression"]:
             if label in d:
-                _add(tests, "Overall WAR", label, d[label])
+                _add(tests, "Overall WAR", label, _prefer_eradj(d[label]))
 
     # 2. Temporal trend (no cluster structure -> naive)
     d = _load("aggression_temporal_trend_results.json")
@@ -169,7 +184,10 @@ def collect_tests():
                     _add(tests, f"Persistence {ctype}", f"{measure} Lag {lag}", node)
 
     # 8. & 9. Offensive-aggression inheritance: overall + by mentor background +
-    #         by coordinator type (clustered by mentor)
+    #         by protege role (clustered by mentor; era-adjusted p is the canonical
+    #         key on each node, so the FDR family uses the contemporary-group-
+    #         controlled estimate). The 2x2 cells are reported descriptively in the
+    #         JSON and are NOT added here, to avoid double-counting the marginals.
     d = _load("inheritance_by_type_results.json")
     if d:
         for measure, node in d.get("overall", {}).items():
@@ -177,19 +195,20 @@ def collect_tests():
         for ctype, measures in d.get("by_mentor_background", {}).items():
             for measure, node in measures.items():
                 _add(tests, f"Inheritance: {ctype} Mentors", measure, node)
-        for ctype, measures in d.get("by_coordinator_type", {}).items():
+        for role, measures in d.get("by_protege_role", {}).items():
             for measure, node in measures.items():
-                _add(tests, f"Inheritance: {ctype}->HC", measure, node)
+                _add(tests, f"Inheritance: Protege {role}", measure, node)
 
-    # 9b. Shotgun inheritance: overall + by mentor background + by coordinator type
+    # 9b. Shotgun inheritance: overall + by mentor background + by protege role
+    #     (era-adjusted canonical p; 2x2 cells descriptive, not in the family)
     d = _load("shotgun_inheritance_by_type_results.json")
     if d:
         if isinstance(d.get("overall"), dict):
             _add(tests, "Shotgun Inheritance", "Overall", d["overall"])
         for ctype, node in d.get("by_mentor_background", {}).items():
             _add(tests, f"Shotgun Inheritance: {ctype} Mentors", "shotgun", node)
-        for ctype, node in d.get("by_coordinator_type", {}).items():
-            _add(tests, f"Shotgun Inheritance: {ctype}->HC", "shotgun", node)
+        for role, node in d.get("by_protege_role", {}).items():
+            _add(tests, f"Shotgun Inheritance: Protege {role}", "shotgun", node)
 
     # 9c. Mentor WAR -> Protege WAR (clustered by mentor)
     d = _load("mentor_protege_war_analysis.json")

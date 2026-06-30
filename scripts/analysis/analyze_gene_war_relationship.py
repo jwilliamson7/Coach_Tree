@@ -23,7 +23,9 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from utils.data_paths import coach_war_trajectories_path, merge_gene_war
-from utils.parsimony import cluster_robust_ols, cluster_bootstrap_ci, cluster_bootstrap_corr
+from utils.parsimony import (
+    cluster_robust_ols, cluster_bootstrap_ci, cluster_bootstrap_corr, within_group_demean,
+)
 from utils.war_noise import war_noise_robustness, career_level_corr
 
 logging.basicConfig(
@@ -150,8 +152,28 @@ def analyze_correlations(merged, measures, gene_key):
             'significant': bool(p < 0.05),
         }
 
-        # WS11: WAR-noise-aware robustness (IVW, partial-season, disattenuation
-        # bracket) + career-level anchor. Observed r above stays the primary number.
+        # Era control (contemporary-group): within-season demean BOTH gene and WAR,
+        # then re-correlate (coach-clustered). At the season grain annual WAR carries
+        # almost no era (~3% between-season variance), so this is a near-no-op that
+        # confirms the season-level gene->WAR link is not the league-wide drift. The
+        # CAREER-level aggregate, by contrast, picks up a window-selection era artifact
+        # (career_level_corr note), which is why the season grain is the era-clean
+        # primary. Coach-clustered, like the raw estimate above.
+        m2 = merged[[col, 'annual_war', 'coach', 'year']].dropna().copy()
+        m2['_war_games'] = m2['annual_war'] * 16
+        gx = within_group_demean(m2, col, 'year').to_numpy()
+        gy = within_group_demean(m2, '_war_games', 'year').to_numpy()
+        re_, pe_ = stats.pearsonr(gx, gy)
+        eboot = cluster_bootstrap_corr(gx, gy, m2['coach'].values, n_boot=2000, seed=0)
+        results[label]['correlation_eradj'] = float(re_)
+        results[label]['p_value_eradj'] = float(pe_)
+        results[label]['ci_low_eradj'] = eboot['ci_low']
+        results[label]['ci_high_eradj'] = eboot['ci_high']
+        results[label]['p_bootstrap_coach_clustered_eradj'] = eboot['p_bootstrap']
+        results[label]['n_eradj'] = int(len(m2))
+
+        # WS11: WAR-noise-aware robustness (IVW, partial-season) + career-level
+        # secondary anchor. The season-level estimates above stay primary.
         results[label].update(
             war_noise_robustness(merged, col, war_col='annual_war', coach_col='coach'))
         results[label]['career'] = career_level_corr(merged, col)
@@ -268,6 +290,9 @@ def run_multiple_regression(war_data):
     model1_results['n'] = len(clean)
     model1_results['n_coaches'] = int(merged.loc[clean.index, 'coach'].nunique())
     model1_results['year_range'] = '2006-2024'
+    model1_results['season_fe'] = _season_fe_coeffs(
+        X, y, ['Aggression', 'Shotgun', 'Tempo'],
+        merged.loc[clean.index, 'year'].values, coaches1)
     results['offensive_only'] = model1_results
 
     # --- Model 2: All genes (2016-2024) ---
@@ -292,6 +317,9 @@ def run_multiple_regression(war_data):
     model2_results['n'] = len(clean2)
     model2_results['n_coaches'] = int(merged2.loc[clean2.index, 'coach'].nunique())
     model2_results['year_range'] = '2016-2024'
+    model2_results['season_fe'] = _season_fe_coeffs(
+        X2, y2, ['Aggression', 'Shotgun', 'Tempo', 'Def. Scheme'],
+        merged2.loc[clean2.index, 'year'].values, coaches2)
     results['all_genes'] = model2_results
 
     # --- Multicollinearity check ---
@@ -420,6 +448,33 @@ def _fit_and_report(X, y, feature_cols, labels, model_name, clusters=None):
         result['n_clusters'] = cl['n_clusters']
         result['bootstrap_n'] = boot['_meta']['n_boot']
     return result
+
+
+def _season_fe_coeffs(X_genes, y, gene_labels, season, clusters):
+    """Refit the gene->WAR model adding season fixed effects (year dummies),
+    returning ONLY the gene coefficients (the ~8-18 year dummies are suppressed
+    from output). Annual WAR is ~era-flat, so this should barely move the gene
+    coefficients; it is reported as a contemporary-group / era-robustness check.
+    Coach-clustered SEs via cluster_robust_ols (handles the extra columns).
+    """
+    D = pd.get_dummies(pd.Series(np.asarray(season)).astype(int),
+                       drop_first=True, prefix='yr')
+    dlabels = list(D.columns)
+    Xfull = np.column_stack([np.asarray(X_genes, float), D.to_numpy(float)])
+    labels_full = list(gene_labels) + dlabels
+    cl = cluster_robust_ols(Xfull, y, np.asarray(clusters), labels_full)
+    out = {'coefficients': {}, 'r_squared': cl['r_squared'],
+           'n_clusters': cl['n_clusters'], 'n_season_dummies': len(dlabels),
+           'se_type': 'cluster_robust_by_coach',
+           'note': 'gene coefficients with year fixed effects; year dummies suppressed'}
+    for lab in gene_labels:
+        c = cl['coefficients'][lab]
+        out['coefficients'][lab] = {
+            'coefficient': c['coefficient'], 'std_error': c['std_error'],
+            't_statistic': c['t_statistic'], 'p_value': c['p_value'],
+            'significant': bool(np.isfinite(c['p_value']) and c['p_value'] < 0.05),
+        }
+    return out
 
 
 def main():
