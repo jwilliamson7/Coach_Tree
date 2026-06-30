@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Diffusion of fourth-down aggression over time.
+"""Diffusion of composite offensive aggression over time.
 
-Plots the league-wide fourth-down aggression gene (actual go-for-it rate minus the
-season-agnostic model expectation) by season, with a 95% CI band, and the
-cross-coach dispersion. Because the baseline model excludes season, the rising
-league mean is the diffusion signal: coaches move from below the time-invariant
-baseline early to above it in the modern era. Writes
-outputs/visualizations/performance/fourth_down_adoption_curve.png. ASCII only.
+Plots the league-wide composite offensive aggression gene (actual minus the
+season-agnostic model expectation, reliability-weighted across the four
+sub-components) by season, with a 95% CI band, and the cross-coach dispersion.
+Because the baseline model excludes season, the rising league mean is the
+diffusion signal: coaches move from below the time-invariant baseline early to
+above it in the modern era. Writes
+outputs/visualizations/performance/aggression_adoption_curve.png. ASCII only.
 """
 
 import logging
@@ -25,7 +26,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 GENE_CSV = "data/processed/coaching_genes/aggression_gene_by_year.csv"
-COL = "fourth_down_aggression"
+COL = "composite_aggression"
 
 
 def main():
@@ -57,16 +58,17 @@ def main():
     ax.fill_between(s["season"], s["lo"], s["hi"], color="#FF6B35", alpha=0.35,
                     label="95% CI of league mean")
     ax.plot(s["season"], s["mean"], color="#B8400E", linewidth=2.5, marker="o",
-            markersize=5, label="League-mean fourth-down aggression")
+            markersize=5, label="League-mean composite offensive aggression")
 
     ax.axhline(0, color="gray", linestyle="--", linewidth=1.2)
-    ax.text(s["season"].min(), 0.002, "model expectation (season-agnostic baseline)",
+    ax.text(s["season"].min(), 0.0008, "model expectation (season-agnostic baseline)",
             fontsize=10, color="gray", va="bottom")
 
-    ax.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x*100:+.0f} pp"))
+    ax.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x:+.3f}"))
     ax.set_xlabel("Season", fontsize=13, fontweight="bold")
-    ax.set_ylabel("Go-for-it rate minus expected", fontsize=13, fontweight="bold")
-    ax.set_title("Diffusion of fourth-down aggression, 2006--2024",
+    ax.set_ylabel("Composite aggression (actual minus expected)", fontsize=13,
+                  fontweight="bold")
+    ax.set_title("Diffusion of composite offensive aggression, 2006-2024",
                  fontsize=14, fontweight="bold", pad=10)
     ax.set_xticks(range(int(s["season"].min()), int(s["season"].max()) + 1, 2))
     ax.legend(loc="upper left", framealpha=0.95, fontsize=10)
@@ -75,7 +77,7 @@ def main():
 
     out_dir = Path("outputs/visualizations/performance")
     out_dir.mkdir(parents=True, exist_ok=True)
-    png = out_dir / "fourth_down_adoption_curve.png"
+    png = out_dir / "aggression_adoption_curve.png"
     plt.savefig(png, dpi=300, bbox_inches="tight", facecolor="white")
     plt.close()
     logger.info(f"Saved: {png}")
