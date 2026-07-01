@@ -42,6 +42,7 @@ from utils.model_features import (
 )
 from utils import model_pipeline as mp
 from utils import parsimony
+from utils.coach_attribution import build_game_coach_map, attach_head_coach
 from crawlers.utils.data_constants import standardize_team_abbreviation
 
 # Configure logging
@@ -207,25 +208,15 @@ class TempoGeneCalculator:
         del all_plays
         gc.collect()
 
-        # Map plays to head coaches
-        def get_head_coach(row):
-            if pd.isna(row['posteam']):
-                return np.nan
-
-            if all(col in row.index for col in ['home_coach', 'away_coach', 'home_team', 'away_team']):
-                if pd.notna(row.get('home_coach')) and row['posteam'] == row.get('home_team'):
-                    return row['home_coach']
-                elif pd.notna(row.get('away_coach')) and row['posteam'] == row.get('away_team'):
-                    return row['away_coach']
-
-            if pd.notna(row.get('season')):
-                yr = int(row['season'])
-                return self.coach_dict.get(
-                    (standardize_team_abbreviation(row['posteam'], yr), yr), np.nan
-                )
-            return np.nan
-
-        combined['head_coach'] = combined.apply(get_head_coach, axis=1)
+        # Authoritative game-level head-coach attribution shared across all gene
+        # calculators (utils/coach_attribution.py): PBP per-game coach, mid-season
+        # changes PBP missed corrected from coach game-count records, names
+        # canonicalized to the coaching-tree identity, NOR 2012 dropped.
+        gcmap = build_game_coach_map(
+            start_year, end_year, self.data_dir,
+            self.data_dir.parent / "Coaches",
+            drop_team_seasons=[("NO", 2012)], logger=logger)
+        combined = attach_head_coach(combined, gcmap, "posteam", "head_coach")
 
         mapped_count = combined['head_coach'].notna().sum()
         total_with_posteam = combined['posteam'].notna().sum()

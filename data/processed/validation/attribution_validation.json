@@ -1,0 +1,387 @@
+{
+  "generated": "2026-07-01 11:19:03",
+  "coverage": {
+    "offense_play_attribution_rate": 1.0,
+    "defense_play_attribution_rate": 1.0,
+    "offense_plays_total": 906567,
+    "offense_plays_with_posteam": 859473,
+    "offense_plays_attributed": 859473,
+    "defense_plays_total": 906567,
+    "defense_plays_with_defteam": 859473,
+    "defense_plays_attributed": 859473
+  },
+  "statistics": {
+    "invariants": {
+      "aggression": {
+        "rows": 646,
+        "duplicate_keys": 0,
+        "zero_play_rows": 0
+      },
+      "shotgun": {
+        "rows": 646,
+        "duplicate_keys": 0,
+        "zero_play_rows": 0
+      },
+      "tempo": {
+        "rows": 646,
+        "duplicate_keys": 0,
+        "zero_play_rows": 0
+      },
+      "defense": {
+        "rows": 310,
+        "duplicate_keys": 0,
+        "zero_play_rows": 0,
+        "defense_rows_without_hc_label": 0
+      }
+    },
+    "reconcile_hcmap": {
+      "rows_checked": 608,
+      "primary_name_mismatches": 12,
+      "coach_count_mismatches": 7,
+      "pbp_missed_midseason_changes": 7,
+      "team_years_absent_from_pbp": 0
+    },
+    "reconcile_genes": {
+      "offense_rows": 646,
+      "offense_phantom": 0,
+      "defense_team_seasons": 288,
+      "defense_phantom": 0,
+      "nor2012_offense_rows": 0,
+      "midseason_total": 39,
+      "offense_split_ok": 39,
+      "offense_split_incomplete": 0,
+      "defense_split_ok": 22,
+      "defense_split_partial_lowplay": 0,
+      "defense_still_blended": 0
+    },
+    "golden": {
+      "cases": 0,
+      "passed": 0,
+      "failed": 0
+    }
+  },
+  "hard_failure_count": 0,
+  "issues": [
+    {
+      "type": "primary_coach_mismatch",
+      "team": "ATL",
+      "year": 2020,
+      "hc_map_primary": "Dan Quinn",
+      "pbp_modal": "Raheem Morris",
+      "pbp_all": [
+        [
+          "Raheem Morris",
+          11
+        ],
+        [
+          "Dan Quinn",
+          5
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "pbp_missed_midseason_change",
+      "team": "CAR",
+      "year": 2019,
+      "hc_map_total": 2,
+      "hc_map_primary": "Ron Rivera",
+      "pbp_n_coaches": 1,
+      "pbp_all": [
+        [
+          "Ron Rivera",
+          16
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "CAR",
+      "year": 2022,
+      "hc_map_primary": "Matt Rhule",
+      "pbp_modal": "Steve Wilks",
+      "pbp_all": [
+        [
+          "Steve Wilks",
+          12
+        ],
+        [
+          "Matt Rhule",
+          5
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "pbp_missed_midseason_change",
+      "team": "CHI",
+      "year": 2024,
+      "hc_map_total": 2,
+      "hc_map_primary": "Matt Eberflus",
+      "pbp_n_coaches": 1,
+      "pbp_all": [
+        [
+          "Matt Eberflus",
+          17
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "CLE",
+      "year": 2018,
+      "hc_map_primary": "Hue Jackson",
+      "pbp_modal": "Gregg Williams",
+      "pbp_all": [
+        [
+          "Gregg Williams",
+          8
+        ],
+        [
+          "Hue Jackson",
+          8
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "DAL",
+      "year": 2010,
+      "hc_map_primary": "Wade Phillips",
+      "pbp_modal": "Jason Garrett",
+      "pbp_all": [
+        [
+          "Jason Garrett",
+          8
+        ],
+        [
+          "Wade Phillips",
+          8
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "HTX",
+      "year": 2020,
+      "hc_map_primary": "Bill O'Brien",
+      "pbp_modal": "Romeo Crennel",
+      "pbp_all": [
+        [
+          "Romeo Crennel",
+          12
+        ],
+        [
+          "Bill O'Brien",
+          4
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "pbp_missed_midseason_change",
+      "team": "LAR",
+      "year": 2016,
+      "hc_map_total": 2,
+      "hc_map_primary": "Jeff Fisher",
+      "pbp_n_coaches": 1,
+      "pbp_all": [
+        [
+          "Jeff Fisher",
+          16
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "LVR",
+      "year": 2021,
+      "hc_map_primary": "Jon Gruden",
+      "pbp_modal": "Rich Bisaccia",
+      "pbp_all": [
+        [
+          "Rich Bisaccia",
+          13
+        ],
+        [
+          "Jon Gruden",
+          5
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "LVR",
+      "year": 2023,
+      "hc_map_primary": "Josh McDaniels",
+      "pbp_modal": "Antonio Pierce",
+      "pbp_all": [
+        [
+          "Antonio Pierce",
+          9
+        ],
+        [
+          "Josh McDaniels",
+          8
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "pbp_missed_midseason_change",
+      "team": "MIA",
+      "year": 2015,
+      "hc_map_total": 2,
+      "hc_map_primary": "Joe Philbin",
+      "pbp_n_coaches": 1,
+      "pbp_all": [
+        [
+          "Joe Philbin",
+          16
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "pbp_missed_midseason_change",
+      "team": "NOR",
+      "year": 2024,
+      "hc_map_total": 2,
+      "hc_map_primary": "Dennis Allen",
+      "pbp_n_coaches": 1,
+      "pbp_all": [
+        [
+          "Dennis Allen",
+          17
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "pbp_missed_midseason_change",
+      "team": "NYJ",
+      "year": 2024,
+      "hc_map_total": 2,
+      "hc_map_primary": "Robert Saleh",
+      "pbp_n_coaches": 1,
+      "pbp_all": [
+        [
+          "Robert Saleh",
+          17
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "pbp_missed_midseason_change",
+      "team": "OTI",
+      "year": 2015,
+      "hc_map_total": 2,
+      "hc_map_primary": "Ken Whisenhunt",
+      "pbp_n_coaches": 1,
+      "pbp_all": [
+        [
+          "Ken Whisenhunt",
+          16
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "RAI",
+      "year": 2008,
+      "hc_map_primary": "Lane Kiffin",
+      "pbp_modal": "Tom Cable",
+      "pbp_all": [
+        [
+          "Tom Cable",
+          12
+        ],
+        [
+          "Lane Kiffin",
+          4
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "RAI",
+      "year": 2014,
+      "hc_map_primary": "Dennis Allen",
+      "pbp_modal": "Tony Sparano",
+      "pbp_all": [
+        [
+          "Tony Sparano",
+          12
+        ],
+        [
+          "Dennis Allen",
+          4
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "SFO",
+      "year": 2008,
+      "hc_map_primary": "Mike Nolan",
+      "pbp_modal": "Mike Singletary",
+      "pbp_all": [
+        [
+          "Mike Singletary",
+          9
+        ],
+        [
+          "Mike Nolan",
+          7
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "STL",
+      "year": 2008,
+      "hc_map_primary": "Scott Linehan",
+      "pbp_modal": "Jim Haslett",
+      "pbp_all": [
+        [
+          "Jim Haslett",
+          12
+        ],
+        [
+          "Scott Linehan",
+          4
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    },
+    {
+      "type": "primary_coach_mismatch",
+      "team": "WAS",
+      "year": 2019,
+      "hc_map_primary": "Jay Gruden",
+      "pbp_modal": "Bill Callahan",
+      "pbp_all": [
+        [
+          "Bill Callahan",
+          11
+        ],
+        [
+          "Jay Gruden",
+          5
+        ]
+      ],
+      "category": "reconcile_hcmap"
+    }
+  ]
+}

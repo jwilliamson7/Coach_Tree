@@ -44,6 +44,7 @@ from utils.model_features import (
 )
 from utils import model_pipeline as mp
 from utils import parsimony
+from utils.coach_attribution import build_game_coach_map, attach_head_coach
 from crawlers.utils.data_constants import standardize_team_abbreviation
 
 # Configure logging
@@ -219,33 +220,19 @@ class AggressionCalculator:
             raise ValueError("No play data loaded")
             
         combined = pd.concat(all_plays, ignore_index=True)
-        
-        # Map posteam to the actual head coach for that play
-        # Use home_coach/away_coach fields which correctly handle interim coaches
-        def get_head_coach(row):
-            if pd.isna(row['posteam']):
-                return np.nan
-            
-            # Check if we have coach data in the play-by-play
-            # This gives us exact coach attribution for each play, handling interim coaches
-            if all(col in row.index for col in ['home_coach', 'away_coach', 'home_team', 'away_team']):
-                if pd.notna(row['home_coach']) and row['posteam'] == row['home_team']:
-                    return row['home_coach']
-                elif pd.notna(row['away_coach']) and row['posteam'] == row['away_team']:
-                    return row['away_coach']
-            
-            # Fallback to team-year mapping if coach fields not available
-            # (for older data or missing fields); year-aware standardized key.
-            if pd.notna(row.get('season')):
-                yr = int(row['season'])
-                return self.coach_dict.get(
-                    (standardize_team_abbreviation(row['posteam'], yr), yr), np.nan
-                )
 
-            return np.nan
-        
-        combined['head_coach'] = combined.apply(get_head_coach, axis=1)
-        
+        # Authoritative game-level head-coach attribution, shared across every gene
+        # calculator (utils/coach_attribution.py). It uses the PBP per-game coach
+        # (correct for single-coach seasons and mid-season changes PBP captured),
+        # corrects the mid-season changes PBP silently misses from coach game-count
+        # records (Bug B), canonicalizes names to the coaching-tree identity, and
+        # drops NOR 2012 (the co-HC suspension year). Offense joins on posteam.
+        gcmap = build_game_coach_map(
+            start_year, end_year, self.data_dir,
+            self.data_dir.parent / "Coaches",
+            drop_team_seasons=[("NO", 2012)], logger=logger)
+        combined = attach_head_coach(combined, gcmap, "posteam", "head_coach")
+
         # Log how many plays we could map to coaches
         mapped_count = combined['head_coach'].notna().sum()
         total_with_posteam = combined['posteam'].notna().sum()

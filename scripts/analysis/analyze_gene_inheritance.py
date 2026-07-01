@@ -38,6 +38,7 @@ from utils.parsimony import (
     within_group_demean,
 )
 from crawlers.utils.data_constants import pfr_to_pbp, pfr_to_hc_csv
+from utils.data_paths import canonicalize_coach_name
 
 # Configure logging
 logging.basicConfig(
@@ -234,7 +235,14 @@ class InheritanceAnalyzer:
     # -----------------------------------------------------------------
 
     def _get_defensive_gene_by_team(self, team_pfr: str, year: int):
-        """Look up defensive scheme gene (raw, era-adjusted) for a team-year via PFR code."""
+        """DC-era team defensive gene (raw, era-adjusted) for a team-year via PFR code.
+
+        The defensive gene is now attributed per head coach (a mid-season change is
+        stored as separate coach-rows). A coordinator, however, runs the defense for
+        the whole season regardless of a head-coaching change above him, so the
+        DC-era value is the team's WHOLE-season defense: the play-weighted mean of
+        the coach-rows for that team-season.
+        """
         if self.defensive_genes is None:
             return None, None
         pbp_code = pfr_to_pbp(team_pfr, year)
@@ -242,22 +250,39 @@ class InheritanceAnalyzer:
             (self.defensive_genes['defteam'] == pbp_code) &
             (self.defensive_genes['season'] == year)
         ]
+        if len(match) == 0:
+            return None, None
         if len(match) == 1:
             return (float(match.iloc[0]['composite_scheme']),
                     float(match.iloc[0]['composite_scheme_eradj']))
-        return None, None
+        # Mid-season HC change during the DC's tenure: aggregate coach-rows by
+        # plays so the DC-era value reflects the full season he coordinated.
+        w = match['total_plays'].astype(float) if 'total_plays' in match else None
+        return (float(np.average(match['composite_scheme'], weights=w)),
+                float(np.average(match['composite_scheme_eradj'], weights=w)))
 
     def _get_defensive_gene_by_hc(self, coach_name: str, year: int):
-        """Look up defensive scheme gene (raw, era-adjusted) by HC name and season."""
+        """HC-era defensive gene (raw, era-adjusted) by head-coach name and season.
+
+        Matches on the canonical coach key so tree/roster vs gene name spellings
+        cannot silently drop a transition (the gene names are already the tree
+        identity; this guards future drift). One coach coaches one team per season,
+        so this is a single coach-row.
+        """
         if self.defensive_genes is None:
             return None, None
+        key = canonicalize_coach_name(coach_name)
         match = self.defensive_genes[
-            (self.defensive_genes['head_coach'] == coach_name) &
+            (self.defensive_genes['head_coach'].map(canonicalize_coach_name) == key) &
             (self.defensive_genes['season'] == year)
         ]
         if len(match) == 1:
             return (float(match.iloc[0]['composite_scheme']),
                     float(match.iloc[0]['composite_scheme_eradj']))
+        if len(match) > 1:
+            w = match['total_plays'].astype(float) if 'total_plays' in match else None
+            return (float(np.average(match['composite_scheme'], weights=w)),
+                    float(np.average(match['composite_scheme_eradj'], weights=w)))
         return None, None
 
     def _get_offensive_gene(self, coach_name: str, year: int, gene_type: str):
@@ -273,7 +298,9 @@ class InheritanceAnalyzer:
         df, col = gene_map.get(gene_type, (None, None))
         if df is None:
             return None, None
-        match = df[(df['head_coach'] == coach_name) & (df['season'] == year)]
+        key = canonicalize_coach_name(coach_name)
+        match = df[(df['head_coach'].map(canonicalize_coach_name) == key) &
+                   (df['season'] == year)]
         if len(match) == 1:
             val = match.iloc[0][col]
             if pd.notna(val):
