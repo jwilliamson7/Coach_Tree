@@ -50,6 +50,7 @@ from utils.model_features import (
 )
 from utils import model_pipeline as mp
 from utils import parsimony
+from utils.coach_attribution import build_game_coach_map, attach_head_coach
 
 # Configure logging
 logging.basicConfig(
@@ -206,19 +207,18 @@ class DefensiveSchemeGeneCalculator:
         del all_plays
         gc.collect()
 
-        # Derive HC of the defending team from PBP coach fields
+        # Attribute each play to the defending team's head coach via the shared
+        # authoritative game-level map (utils/coach_attribution.py). Unlike the raw
+        # PBP coach field this splits mid-season changes by the coach who led each
+        # game (so the defensive gene is per head-coach, not a whole-season blend),
+        # corrects the changes PBP misses (Bug B), canonicalizes names to the
+        # coaching-tree identity, and drops NOR 2012. Defense joins on defteam.
         logger.info("Attributing plays to defending team HC...")
-
-        def get_def_coach(row):
-            if pd.isna(row.get('defteam')):
-                return np.nan
-            if pd.notna(row.get('home_coach')) and row['defteam'] == row.get('home_team'):
-                return row['home_coach']
-            elif pd.notna(row.get('away_coach')) and row['defteam'] == row.get('away_team'):
-                return row['away_coach']
-            return np.nan
-
-        combined['defteam_coach'] = combined.apply(get_def_coach, axis=1)
+        gcmap = build_game_coach_map(
+            start_year, end_year, self.data_dir,
+            self.data_dir.parent / "Coaches",
+            drop_team_seasons=[("NO", 2012)], logger=logger)
+        combined = attach_head_coach(combined, gcmap, "defteam", "defteam_coach")
 
         # Report attribution statistics
         total = len(combined)
@@ -298,7 +298,7 @@ class DefensiveSchemeGeneCalculator:
         # Per-play squared residual; summed -> sampling var of the gene mean
         box_plays['resid_var'] = (box_plays['actual_box'] - predictions) ** 2
 
-        team_box = box_plays.groupby(['defteam', 'season']).agg({
+        team_box = box_plays.groupby(['defteam', 'defteam_coach', 'season']).agg({
             'actual_box': 'mean',
             'predicted_box': 'mean',
             'resid_var': 'sum',
@@ -343,7 +343,7 @@ class DefensiveSchemeGeneCalculator:
         # Per-play squared residual; summed -> sampling var of the gene mean
         rush_plays['resid_var'] = (rush_plays['actual_rushers'] - predictions) ** 2
 
-        team_rush = rush_plays.groupby(['defteam', 'season']).agg({
+        team_rush = rush_plays.groupby(['defteam', 'defteam_coach', 'season']).agg({
             'actual_rushers': 'mean',
             'predicted_rushers': 'mean',
             'resid_var': 'sum',
@@ -392,7 +392,7 @@ class DefensiveSchemeGeneCalculator:
         # Per-play Bernoulli noise phat(1-phat); summed -> binomial var of gene mean
         man_plays['phat_var'] = predictions * (1 - predictions)
 
-        team_man = man_plays.groupby(['defteam', 'season']).agg({
+        team_man = man_plays.groupby(['defteam', 'defteam_coach', 'season']).agg({
             'actual_man': 'mean',
             'predicted_man_prob': 'mean',
             'phat_var': 'sum',
@@ -431,19 +431,20 @@ class DefensiveSchemeGeneCalculator:
             raise ValueError("No data available for any defensive scheme sub-component")
 
         # Merge sub-genes on (defteam, season) with outer joins
-        scheme_df = box_df if not box_df.empty else pd.DataFrame(columns=['defteam', 'season'])
+        scheme_df = box_df if not box_df.empty else pd.DataFrame(
+            columns=['defteam', 'defteam_coach', 'season'])
 
         if not rush_df.empty:
             scheme_df = scheme_df.merge(
                 rush_df,
-                on=['defteam', 'season'],
+                on=['defteam', 'defteam_coach', 'season'],
                 how='outer'
             )
 
         if not man_df.empty:
             scheme_df = scheme_df.merge(
                 man_df,
-                on=['defteam', 'season'],
+                on=['defteam', 'defteam_coach', 'season'],
                 how='outer'
             )
 
@@ -519,13 +520,10 @@ class DefensiveSchemeGeneCalculator:
                 elif len(cs_valid) >= 1:
                     scheme_df.loc[grp.index, 'composite_scheme_zscore'] = 0.0
 
-        # Add HC of defending team (most common per team-year from PBP data)
-        if 'defteam_coach' in plays.columns:
-            hc_info = plays.dropna(subset=['defteam', 'defteam_coach']).groupby(
-                ['defteam', 'season']
-            )['defteam_coach'].agg(lambda x: x.mode().iloc[0] if len(x) > 0 else np.nan)
-            hc_info = hc_info.reset_index().rename(columns={'defteam_coach': 'head_coach'})
-            scheme_df = scheme_df.merge(hc_info, on=['defteam', 'season'], how='left')
+        # The defending-team head coach IS the grouping coach: each row is one
+        # coach's portion of a team-season (mid-season changes are separate rows),
+        # so the label is the per-game coach directly, not a season plurality.
+        scheme_df['head_coach'] = scheme_df['defteam_coach']
 
         # Sort by season then composite
         sort_cols = ['season']

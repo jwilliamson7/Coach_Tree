@@ -37,6 +37,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from utils.model_features import get_shotgun_predictor_features, get_categorical_features
 from utils import model_pipeline as mp
 from utils import parsimony
+from utils.coach_attribution import build_game_coach_map, attach_head_coach
 from crawlers.utils.data_constants import standardize_team_abbreviation
 
 # Configure logging
@@ -189,33 +190,17 @@ class ShotgunGeneCalculator:
             raise ValueError("No play data loaded")
             
         combined = pd.concat(all_plays, ignore_index=True)
-        
-        # Map posteam to the actual coach for that play
-        # Use home_coach/away_coach fields which correctly handle interim coaches
-        def get_head_coach(row):
-            if pd.isna(row['posteam']):
-                return np.nan
-            
-            # Check if we have coach data in the play-by-play
-            # This gives us exact coach attribution for each play, handling interim coaches
-            if all(col in row.index for col in ['home_coach', 'away_coach', 'home_team', 'away_team']):
-                if pd.notna(row['home_coach']) and row['posteam'] == row['home_team']:
-                    return row['home_coach']
-                elif pd.notna(row['away_coach']) and row['posteam'] == row['away_team']:
-                    return row['away_coach']
-            
-            # Fallback to team-year mapping if coach fields not available
-            # (for older data or missing fields); year-aware standardized key.
-            if pd.notna(row.get('season')):
-                yr = int(row['season'])
-                return self.coach_dict.get(
-                    (standardize_team_abbreviation(row['posteam'], yr), yr), np.nan
-                )
 
-            return np.nan
-        
-        combined['head_coach'] = combined.apply(get_head_coach, axis=1)
-        
+        # Authoritative game-level head-coach attribution shared across all gene
+        # calculators (utils/coach_attribution.py): PBP per-game coach, mid-season
+        # changes PBP missed corrected from coach game-count records, names
+        # canonicalized to the coaching-tree identity, NOR 2012 dropped.
+        gcmap = build_game_coach_map(
+            start_year, end_year, self.data_dir,
+            self.data_dir.parent / "Coaches",
+            drop_team_seasons=[("NO", 2012)], logger=logger)
+        combined = attach_head_coach(combined, gcmap, "posteam", "head_coach")
+
         # Log how many plays we could map to coaches
         mapped_count = combined['head_coach'].notna().sum()
         total_with_posteam = combined['posteam'].notna().sum()
@@ -446,8 +431,10 @@ def main():
                        help='End year for analysis (default: 2024)')
     parser.add_argument('--output_dir', type=str, default='data/processed/coaching_genes',
                        help='Output directory for results')
-    parser.add_argument('--min_plays', type=int, default=100,
-                       help='Minimum plays required for a coach to be included (default: 100)')
+    parser.add_argument('--min_plays', type=int, default=0,
+                       help='Optional hard minimum-plays gate (default: 0 = no gate; '
+                            'low-n coach-seasons are down-weighted by reliability '
+                            'shrinkage, matching the other genes)')
     parser.add_argument('--no_crossfit', action='store_true',
                        help='Score in-sample with the persisted all-data model instead of '
                             'leave-coach-out cross-fit (faster; for debugging only)')
@@ -489,9 +476,14 @@ def main():
         logger.info("Step 4: Calculating shotgun gene...")
         coach_shotgun = calculator.calculate_shotgun_gene(plays)
         
-        # Filter by minimum plays
-        coach_shotgun = coach_shotgun[coach_shotgun['total_plays'] >= args.min_plays]
-        logger.info(f"Analyzing {len(coach_shotgun)} coaches with at least {args.min_plays} plays")
+        # No hard min-plays gate by default (consistency with aggression/tempo/
+        # defensive): low-n coach-seasons carry high sampling variance and are
+        # already down-weighted by the empirical-Bayes reliability shrinkage
+        # computed in calculate_shotgun_gene. --min_plays>0 re-enables a manual gate.
+        if args.min_plays > 0:
+            coach_shotgun = coach_shotgun[coach_shotgun['total_plays'] >= args.min_plays]
+        logger.info(f"Analyzing {len(coach_shotgun)} coach-seasons "
+                    f"(min_plays gate={args.min_plays})")
         
         # Analyze by era
         logger.info("Step 5: Analyzing trends by era...")

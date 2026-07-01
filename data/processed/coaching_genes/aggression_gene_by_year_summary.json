@@ -1,57 +1,57 @@
 {
-  "generated_date": "2026-06-25T09:17:16.095045",
-  "num_coaches": 641,
+  "generated_date": "2026-07-01T11:10:20.169152",
+  "num_coaches": 646,
   "component_reliability": {
     "fourth_down_aggression": {
-      "tau2": 0.0005261650108339476,
-      "mean_reliability": 0.6511286388971518,
-      "n_units": 641
+      "tau2": 0.0005614081482346029,
+      "mean_reliability": 0.6613617194089256,
+      "n_units": 646
     },
     "pass_heavy_aggression": {
-      "tau2": 0.0019931418437456275,
-      "mean_reliability": 0.9148582368392529,
-      "n_units": 641
+      "tau2": 0.001977072253638129,
+      "mean_reliability": 0.9125042191439295,
+      "n_units": 646
     },
     "deep_pass_aggression": {
-      "tau2": 0.0010195955823471333,
-      "mean_reliability": 0.7293065590601449,
-      "n_units": 641
+      "tau2": 0.0010141230257118877,
+      "mean_reliability": 0.7250228783011635,
+      "n_units": 646
     },
     "two_point_aggression": {
-      "tau2": 0.0009586619566187891,
-      "mean_reliability": 0.6696775139053203,
-      "n_units": 641
+      "tau2": 0.0008935769235608892,
+      "mean_reliability": 0.6533620381451345,
+      "n_units": 646
     }
   },
   "metrics": {
     "fourth_down_aggression": {
-      "mean": 0.003133202208549101,
-      "std": 0.03101699820581841
+      "mean": 0.0031283780046628537,
+      "std": 0.03156335592227973
     },
     "pass_heavy_aggression": {
-      "mean": -0.0016063912349825178,
-      "std": 0.046784718900896284
+      "mean": -0.0014981956118342507,
+      "std": 0.046576413470749374
     },
     "deep_pass_aggression": {
-      "mean": 0.001103498268533179,
-      "std": 0.03876573706898812
+      "mean": 0.00095375849218331,
+      "std": 0.038514794410858845
     }
   },
   "most_aggressive_coach_years": [
-    [
-      "Rod Marinelli",
-      2006
-    ],
     [
       "Bill Parcells",
       2006
     ],
     [
-      "Andy Reid",
+      "Rod Marinelli",
       2006
     ],
     [
       "Tony Dungy",
+      2006
+    ],
+    [
+      "Andy Reid",
       2006
     ],
     [
@@ -63,7 +63,11 @@
       2006
     ],
     [
-      "Jim Mora",
+      "Mike McCarthy",
+      2006
+    ],
+    [
+      "Jim Mora Jr",
       2006
     ],
     [
@@ -73,17 +77,9 @@
     [
       "Bill Belichick",
       2006
-    ],
-    [
-      "Mike McCarthy",
-      2006
     ]
   ],
   "least_aggressive_coach_years": [
-    [
-      "Dan Campbell",
-      2024
-    ],
     [
       "Sean McVay",
       2024
@@ -93,15 +89,15 @@
       2024
     ],
     [
+      "Dan Campbell",
+      2024
+    ],
+    [
       "Nick Sirianni",
       2024
     ],
     [
       "Todd Bowles",
-      2024
-    ],
-    [
-      "Dennis Allen",
       2024
     ],
     [
@@ -119,8 +115,12 @@
     [
       "Mike Tomlin",
       2024
+    ],
+    [
+      "Dennis Allen",
+      2024
     ]
   ],
-  "unique_coaches": 138,
+  "unique_coaches": 140,
   "years_covered": "2006-2024"
 }
