@@ -62,7 +62,7 @@ def classify_coach_background(coach_histories):
         
         # Look for offensive coordinator and position coach experience
         offensive_patterns = [
-            'Offensive Coordinator', 'Off\. Coordinator',
+            'Offensive Coordinator', r'Off\. Coordinator',
             'Quarterbacks', 'QB Coach', 'Quarterback',
             'Running Backs', 'RB Coach', 'Running Back',
             'Wide Receivers', 'WR Coach', 'Wide Receiver', 'Receivers',
@@ -77,12 +77,10 @@ def classify_coach_background(coach_histories):
             'Offensive Coach', 'Play-Caller', 'Ends/Centers'
         ]
         offensive_pattern = '|'.join(offensive_patterns)
-        offensive_experience = non_hc_roles[non_hc_roles['Role'].str.contains(
-            offensive_pattern, case=False, na=False)]
-        
+
         # Look for defensive coordinator and position coach experience
         defensive_patterns = [
-            'Defensive Coordinator', 'Def\. Coordinator',
+            'Defensive Coordinator', r'Def\. Coordinator',
             'Linebackers', 'LB Coach', 'Linebacker',
             'Defensive Backs', 'DB Coach', 'Secondary',
             'Cornerbacks', 'CB Coach', 'Cornerback',
@@ -95,8 +93,20 @@ def classify_coach_background(coach_histories):
             'Defensive Backfield', 'Defensive Coach'
         ]
         defensive_pattern = '|'.join(defensive_patterns)
-        defensive_experience = non_hc_roles[non_hc_roles['Role'].str.contains(
-            defensive_pattern, case=False, na=False)]
+
+        # Assign each role to a single side, defensive first. Several offensive
+        # patterns are bare tokens ('Line Coach', 'Backs Coach', 'Backfield',
+        # 'Ends Coach', 'Tackles') that also appear inside defensive role names
+        # ("Defensive Line Coach", "Defensive Backs Coach", "Defensive Ends
+        # Coach", "Defensive Tackles"). Matching offense independently double
+        # counted those defensive roles on both sides; excluding defensive
+        # matches from the offensive set keeps every role on one side of the ball.
+        is_defensive = non_hc_roles['Role'].str.contains(
+            defensive_pattern, case=False, na=False)
+        is_offensive = non_hc_roles['Role'].str.contains(
+            offensive_pattern, case=False, na=False) & ~is_defensive
+        offensive_experience = non_hc_roles[is_offensive]
+        defensive_experience = non_hc_roles[is_defensive]
         
         # Count years of experience
         offensive_years = len(offensive_experience)

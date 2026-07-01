@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Set
@@ -24,6 +25,25 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
+def _keyword_matches(role_upper: str, keywords: List[str]) -> bool:
+    """True if any keyword occurs in an uppercased role string.
+
+    Short all-letter abbreviations (QB, RB, DB, ...) are matched on word
+    boundaries so they cannot fire inside a longer word: 'RB' must not match
+    'CORNERBACK', 'TE' must not match 'TEAMS'. Longer keywords are matched as
+    plain substrings so plural and compound forms still hit ('Cornerback'
+    matches 'CORNERBACKS', 'Defensive Line' matches 'DEFENSIVE LINE COACH').
+    """
+    for kw in keywords:
+        ku = kw.upper()
+        if len(ku) <= 3 and ku.isalpha():
+            if re.search(r'\b' + ku + r'\b', role_upper):
+                return True
+        elif ku in role_upper:
+            return True
+    return False
 
 
 @dataclass
@@ -87,18 +107,23 @@ class Coach:
         offensive_keywords = ['Quarterback', 'QB', 'Running Back', 'RB', 'Offensive Line', 
                              'OL', 'Wide Receiver', 'WR', 'Tight End', 'TE', 'Pass', 'Run Game']
         # Defensive positions  
-        defensive_keywords = ['Defensive', 'DB', 'Linebacker', 'LB', 'Defensive Line', 
-                             'DL', 'Secondary', 'Cornerback', 'CB', 'Safety', 'Pass Rush']
+        defensive_keywords = ['Defensive', 'DB', 'Linebacker', 'LB', 'Defensive Line',
+                             'DL', 'Secondary', 'Cornerback', 'CB', 'Safety', 'Safeties', 'Pass Rush']
         # Special teams positions
         special_keywords = ['Special Teams', 'Kicking', 'Punting', 'Return']
         
         role_upper = role.upper()
-        
-        if any(kw.upper() in role_upper for kw in offensive_keywords):
-            return (role, "Position_Offensive")
-        elif any(kw.upper() in role_upper for kw in defensive_keywords):
+
+        # Defensive is checked before offensive: "Pass Rush" contains the
+        # offensive token "Pass", so with substring matching that role would
+        # otherwise fall to the offensive side. Word-boundary matching for the
+        # two-letter abbreviations (see _keyword_matches) additionally keeps
+        # "RB" out of "cornerback" and "TE" out of "teams".
+        if _keyword_matches(role_upper, defensive_keywords):
             return (role, "Position_Defensive")
-        elif any(kw.upper() in role_upper for kw in special_keywords):
+        elif _keyword_matches(role_upper, offensive_keywords):
+            return (role, "Position_Offensive")
+        elif _keyword_matches(role_upper, special_keywords):
             return (role, "Position_Special")
         
         # Default position coach
