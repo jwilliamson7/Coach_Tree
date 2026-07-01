@@ -72,8 +72,8 @@ class DefensiveSchemeGeneCalculator:
         self.rel_floor = rel_floor
         self.component_reliability = {}
 
-        # WS1 cross-fitting: leave-team-out OOF predictions so a team is never
-        # scored by a model trained on that same team (removes attenuation).
+        # WS1 cross-fitting: leave-coach-out OOF predictions so a coach is never
+        # scored by a model trained on that same coach (removes attenuation).
         self.use_crossfit = True
         self.cv_splits = 5
 
@@ -252,17 +252,18 @@ class DefensiveSchemeGeneCalculator:
                            objective: str, is_classifier: bool) -> np.ndarray:
         """Per-play predictions for one defensive sub-gene.
 
-        Default (use_crossfit): leave-team-out OOF predictions via GroupKFold on
-        defteam, refitting encode/impute/SVD + a fresh XGB (tuned `params`, no
-        re-search) per fold, so a team is never scored by a model that saw it.
-        `df` must already carry `target_col` and a non-null `defteam` for every
-        row. Fallback uses the persisted all-data model.
+        Default (use_crossfit): leave-coach-out OOF predictions via era-balanced
+        StratifiedGroupKFold on defteam_coach (the defending team's head coach),
+        refitting encode/impute/SVD + a fresh XGB (tuned `params`, no re-search)
+        per fold, so a coach is never scored by a model that saw that coach.
+        `df` must already carry `target_col` and a non-null `defteam_coach` for
+        every row. Fallback uses the persisted all-data model.
         """
         if self.use_crossfit:
             return mp.crossfit_predict(
                 df, features, target_col, self.categorical_features,
-                df["defteam"], params, objective, is_classifier,
-                n_splits=self.cv_splits, logger=logger)
+                df["defteam_coach"], params, objective, is_classifier,
+                n_splits=self.cv_splits, strata_time=df["season"], logger=logger)
         feats = self.prepare_features_for_model(df, features, encoders, imputers)
         if is_classifier:
             return model.predict_proba(feats)[:, 1]
@@ -280,7 +281,8 @@ class DefensiveSchemeGeneCalculator:
         box_plays = plays[
             (plays['defenders_in_box'].notna()) &
             (plays['defenders_in_box'] > 0) &
-            (plays['defteam'].notna())
+            (plays['defteam'].notna()) &
+            (plays['defteam_coach'].notna())
         ].copy()
 
         if len(box_plays) == 0:
@@ -325,7 +327,8 @@ class DefensiveSchemeGeneCalculator:
             (plays['play_type'] == 'pass') &
             (plays['number_of_pass_rushers'].notna()) &
             (plays['number_of_pass_rushers'] > 0) &
-            (plays['defteam'].notna())
+            (plays['defteam'].notna()) &
+            (plays['defteam_coach'].notna())
         ].copy()
 
         if len(rush_plays) == 0:
@@ -374,7 +377,8 @@ class DefensiveSchemeGeneCalculator:
         man_plays = plays[
             (plays['play_type'] == 'pass') &
             (plays['defense_man_zone_type'].isin(['MAN_COVERAGE', 'ZONE_COVERAGE'])) &
-            (plays['defteam'].notna())
+            (plays['defteam'].notna()) &
+            (plays['defteam_coach'].notna())
         ].copy()
 
         if len(man_plays) == 0:
