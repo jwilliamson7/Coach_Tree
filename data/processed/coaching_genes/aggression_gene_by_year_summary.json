@@ -1,40 +1,40 @@
 {
-  "generated_date": "2026-07-01T11:10:20.169152",
+  "generated_date": "2026-07-01T14:42:08.371061",
   "num_coaches": 646,
   "component_reliability": {
     "fourth_down_aggression": {
-      "tau2": 0.0005614081482346029,
-      "mean_reliability": 0.6613617194089256,
+      "tau2": 0.0005188748333258201,
+      "mean_reliability": 0.6423797661102855,
       "n_units": 646
     },
     "pass_heavy_aggression": {
-      "tau2": 0.001977072253638129,
-      "mean_reliability": 0.9125042191439295,
+      "tau2": 0.001983618650482051,
+      "mean_reliability": 0.9127958723796261,
       "n_units": 646
     },
     "deep_pass_aggression": {
-      "tau2": 0.0010141230257118877,
-      "mean_reliability": 0.7250228783011635,
+      "tau2": 0.0010068579090176774,
+      "mean_reliability": 0.723741366020783,
       "n_units": 646
     },
     "two_point_aggression": {
-      "tau2": 0.0008935769235608892,
-      "mean_reliability": 0.6533620381451345,
+      "tau2": 0.000900674723390408,
+      "mean_reliability": 0.6525393804493332,
       "n_units": 646
     }
   },
   "metrics": {
     "fourth_down_aggression": {
-      "mean": 0.0031283780046628537,
-      "std": 0.03156335592227973
+      "mean": 0.0033505466744808807,
+      "std": 0.030911064489057352
     },
     "pass_heavy_aggression": {
-      "mean": -0.0014981956118342507,
-      "std": 0.046576413470749374
+      "mean": -0.001532073104243671,
+      "std": 0.04658954978876358
     },
     "deep_pass_aggression": {
-      "mean": 0.00095375849218331,
-      "std": 0.038514794410858845
+      "mean": 0.0011762277284810842,
+      "std": 0.0384698745076268
     }
   },
   "most_aggressive_coach_years": [
@@ -59,7 +59,7 @@
       2006
     ],
     [
-      "Nick Saban",
+      "Bill Cowher",
       2006
     ],
     [
@@ -67,33 +67,29 @@
       2006
     ],
     [
-      "Jim Mora Jr",
-      2006
-    ],
-    [
-      "Bill Cowher",
-      2006
-    ],
-    [
       "Bill Belichick",
+      2006
+    ],
+    [
+      "Nick Saban",
+      2006
+    ],
+    [
+      "Jim Mora Jr",
       2006
     ]
   ],
   "least_aggressive_coach_years": [
     [
+      "Kyle Shanahan",
+      2024
+    ],
+    [
       "Sean McVay",
       2024
     ],
     [
-      "John Harbaugh",
-      2024
-    ],
-    [
       "Dan Campbell",
-      2024
-    ],
-    [
-      "Nick Sirianni",
       2024
     ],
     [
@@ -105,11 +101,15 @@
       2024
     ],
     [
-      "Brian Callahan",
+      "Nick Sirianni",
       2024
     ],
     [
       "Jerod Mayo",
+      2024
+    ],
+    [
+      "Brian Callahan",
       2024
     ],
     [

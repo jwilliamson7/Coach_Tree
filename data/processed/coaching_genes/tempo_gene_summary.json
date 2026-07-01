@@ -1,218 +1,218 @@
 {
-  "generated_date": "2026-07-01T11:12:16.069002",
+  "generated_date": "2026-07-01T14:44:12.853424",
   "num_coach_years": 646,
   "unique_coaches": 140,
   "years_covered": "2006-2024",
   "component_reliability": {
     "no_huddle_gene": {
-      "tau2": 0.0068492337547926005,
-      "mean_reliability": 0.9890185933934971,
+      "tau2": 0.006999045808489357,
+      "mean_reliability": 0.9892111511059003,
       "n_units": 646
     },
     "pace_gene": {
-      "tau2": 1.2718184259155365,
-      "mean_reliability": 0.8797458440371164,
+      "tau2": 1.277937750394821,
+      "mean_reliability": 0.8802692548280807,
       "n_units": 646
     }
   },
   "metrics": {
     "no_huddle_gene": {
-      "mean": 0.001923255338177901,
-      "std": 0.08850239068034269,
-      "min": -0.14559693517864086,
-      "max": 0.6241996673659522
+      "mean": 0.0016986610011487182,
+      "std": 0.0893485038395407,
+      "min": -0.1677139450312688,
+      "max": 0.624328652335011
     },
     "pace_gene": {
-      "mean": -0.011774501026725993,
-      "std": 1.222635671851261,
-      "min": -3.283658237420312,
-      "max": 5.879075775317805
+      "mean": -0.01091899362045582,
+      "std": 1.2225215683877988,
+      "min": -3.26273503691651,
+      "max": 5.809171716039053
     },
     "composite_tempo": {
-      "mean": 0.0007733626837864833,
-      "std": 0.8705509364491979,
-      "min": -1.4810683087682015,
-      "max": 5.987236628626301
+      "mean": 0.0009839429821103928,
+      "std": 0.8743329903239203,
+      "min": -1.4582919533420056,
+      "max": 5.9257793779074515
     }
   },
   "era_analysis": {
     "Mid (2006-2012)": {
       "num_coach_years": 235,
       "num_coaches": 73,
-      "avg_no_huddle_gene": -0.024193509533035323,
-      "avg_pace_gene": -0.1660415868195482,
+      "avg_no_huddle_gene": -0.02307676890775776,
+      "avg_pace_gene": -0.16893357894844196,
       "top_tempo": [
         {
           "head_coach": "Bill Belichick",
           "season": 2012,
-          "composite_tempo": 2.8715016756503076
+          "composite_tempo": 2.95954286815111
         },
         {
           "head_coach": "Dick Jauron",
           "season": 2009,
-          "composite_tempo": 2.7121415587637987
+          "composite_tempo": 2.649191682243095
         },
         {
           "head_coach": "Bill Belichick",
           "season": 2011,
-          "composite_tempo": 2.476593560736303
+          "composite_tempo": 2.49985489345784
         },
         {
           "head_coach": "Eric Mangini",
           "season": 2006,
-          "composite_tempo": 2.38334746054369
+          "composite_tempo": 2.3516964068771737
         },
         {
           "head_coach": "John Harbaugh",
           "season": 2012,
-          "composite_tempo": 1.7129914183649253
+          "composite_tempo": 1.7177881545262816
         }
       ],
       "bottom_tempo": [
         {
           "head_coach": "Brian Billick",
           "season": 2006,
-          "composite_tempo": -1.4477518320715028
+          "composite_tempo": -1.4444450652675083
         },
         {
-          "head_coach": "Romeo Crennel",
-          "season": 2006,
-          "composite_tempo": -1.272271010583263
+          "head_coach": "Tom Coughlin",
+          "season": 2008,
+          "composite_tempo": -1.3531392742191815
         },
         {
           "head_coach": "Norv Turner",
           "season": 2010,
-          "composite_tempo": -1.2387992545089186
+          "composite_tempo": -1.2586784324499627
+        },
+        {
+          "head_coach": "Romeo Crennel",
+          "season": 2006,
+          "composite_tempo": -1.2089157303455116
         },
         {
           "head_coach": "Mike Tomlin",
           "season": 2007,
-          "composite_tempo": -1.1283867406716672
-        },
-        {
-          "head_coach": "Jack Del Rio",
-          "season": 2006,
-          "composite_tempo": -1.116813770057412
+          "composite_tempo": -1.17785692862769
         }
       ]
     },
     "Modern (2013-2019)": {
       "num_coach_years": 237,
       "num_coaches": 75,
-      "avg_no_huddle_gene": 0.01775857964060406,
-      "avg_pace_gene": 0.23129596191776675,
+      "avg_no_huddle_gene": 0.017173110775112906,
+      "avg_pace_gene": 0.2303695756356265,
       "top_tempo": [
         {
           "head_coach": "Chip Kelly",
           "season": 2015,
-          "composite_tempo": 5.987236628626301
+          "composite_tempo": 5.9257793779074515
         },
         {
           "head_coach": "Chip Kelly",
           "season": 2013,
-          "composite_tempo": 5.49464133144468
+          "composite_tempo": 5.421012086898432
         },
         {
           "head_coach": "Chip Kelly",
           "season": 2014,
-          "composite_tempo": 5.005232354095292
+          "composite_tempo": 4.9362393965870766
         },
         {
           "head_coach": "Steve Spagnuolo",
           "season": 2017,
-          "composite_tempo": 4.208439568186402
+          "composite_tempo": 4.144679134907159
         },
         {
           "head_coach": "Ben McAdoo",
           "season": 2016,
-          "composite_tempo": 3.7129562715506914
+          "composite_tempo": 3.922563193587624
         }
       ],
       "bottom_tempo": [
         {
           "head_coach": "Anthony Lynn",
           "season": 2018,
-          "composite_tempo": -1.3885272251762815
-        },
-        {
-          "head_coach": "Jason Garrett",
-          "season": 2014,
-          "composite_tempo": -1.22919330500567
-        },
-        {
-          "head_coach": "Marc Trestman",
-          "season": 2013,
-          "composite_tempo": -1.1060592989538713
-        },
-        {
-          "head_coach": "Anthony Lynn",
-          "season": 2016,
-          "composite_tempo": -1.0678111637451742
+          "composite_tempo": -1.3820036319918196
         },
         {
           "head_coach": "John Fassel",
           "season": 2016,
-          "composite_tempo": -1.0549588043763614
+          "composite_tempo": -1.3149490689341277
+        },
+        {
+          "head_coach": "Tom Coughlin",
+          "season": 2013,
+          "composite_tempo": -1.2645826517240903
+        },
+        {
+          "head_coach": "Marc Trestman",
+          "season": 2013,
+          "composite_tempo": -1.1303586517066038
+        },
+        {
+          "head_coach": "Jason Garrett",
+          "season": 2014,
+          "composite_tempo": -1.1248942310535248
         }
       ]
     },
     "Current (2020-2024)": {
       "num_coach_years": 174,
       "num_coaches": 69,
-      "avg_no_huddle_gene": 0.01562709375806359,
-      "avg_pace_gene": -0.1345040099723097,
+      "avg_no_huddle_gene": 0.014082462335421757,
+      "avg_pace_gene": -0.12616016236536826,
       "top_tempo": [
         {
           "head_coach": "Dan Quinn",
           "season": 2024,
-          "composite_tempo": 3.512820362583402
+          "composite_tempo": 3.516050799929047
         },
         {
           "head_coach": "Kliff Kingsbury",
           "season": 2020,
-          "composite_tempo": 3.014102861978898
+          "composite_tempo": 2.9867146031009737
         },
         {
           "head_coach": "Giff Smith",
           "season": 2023,
-          "composite_tempo": 2.2629014023370027
+          "composite_tempo": 2.280918997262605
         },
         {
           "head_coach": "Kliff Kingsbury",
           "season": 2021,
-          "composite_tempo": 2.1720084459788214
+          "composite_tempo": 2.210988308127812
         },
         {
           "head_coach": "Kliff Kingsbury",
           "season": 2022,
-          "composite_tempo": 1.7516834005327004
+          "composite_tempo": 1.8813387573713312
         }
       ],
       "bottom_tempo": [
         {
           "head_coach": "Matt LaFleur",
           "season": 2022,
-          "composite_tempo": -1.4810683087682015
+          "composite_tempo": -1.4582919533420056
         },
         {
           "head_coach": "Matt LaFleur",
           "season": 2021,
-          "composite_tempo": -1.278224296104255
+          "composite_tempo": -1.3606773331550246
         },
         {
           "head_coach": "Frank Reich",
           "season": 2021,
-          "composite_tempo": -1.2611516566120293
-        },
-        {
-          "head_coach": "Matt LaFleur",
-          "season": 2020,
-          "composite_tempo": -1.2574635278274537
+          "composite_tempo": -1.3565857183851215
         },
         {
           "head_coach": "Kyle Shanahan",
           "season": 2024,
-          "composite_tempo": -1.0782067794416346
+          "composite_tempo": -1.2431000972575323
+        },
+        {
+          "head_coach": "Matt LaFleur",
+          "season": 2020,
+          "composite_tempo": -1.2349580511507163
         }
       ]
     }
@@ -221,124 +221,124 @@
     {
       "head_coach": "Chip Kelly",
       "season": 2015,
-      "composite_tempo": 5.987236628626301,
-      "composite_tempo_zscore": 6.876637558234205
+      "composite_tempo": 5.9257793779074515,
+      "composite_tempo_zscore": 6.77636038042021
     },
     {
       "head_coach": "Chip Kelly",
       "season": 2013,
-      "composite_tempo": 5.49464133144468,
-      "composite_tempo_zscore": 6.310794393225599
+      "composite_tempo": 5.421012086898432,
+      "composite_tempo_zscore": 6.199043389530944
     },
     {
       "head_coach": "Chip Kelly",
       "season": 2014,
-      "composite_tempo": 5.005232354095292,
-      "composite_tempo_zscore": 5.748611346997897
+      "composite_tempo": 4.9362393965870766,
+      "composite_tempo_zscore": 5.644594803378707
     },
     {
       "head_coach": "Steve Spagnuolo",
       "season": 2017,
-      "composite_tempo": 4.208439568186402,
-      "composite_tempo_zscore": 4.833337176874267
+      "composite_tempo": 4.144679134907159,
+      "composite_tempo_zscore": 4.739264373851323
     },
     {
       "head_coach": "Ben McAdoo",
       "season": 2016,
-      "composite_tempo": 3.7129562715506914,
-      "composite_tempo_zscore": 4.264176573065503
+      "composite_tempo": 3.922563193587624,
+      "composite_tempo_zscore": 4.485223929561045
+    },
+    {
+      "head_coach": "Pat Shurmur",
+      "season": 2015,
+      "composite_tempo": 3.718643331285173,
+      "composite_tempo_zscore": 4.251994868597781
     },
     {
       "head_coach": "John Fox",
       "season": 2013,
-      "composite_tempo": 3.644204576889699,
-      "composite_tempo_zscore": 4.185201648356999
-    },
-    {
-      "head_coach": "Tom Coughlin",
-      "season": 2015,
-      "composite_tempo": 3.5358913478183425,
-      "composite_tempo_zscore": 4.06078247362939
+      "composite_tempo": 3.70740093574639,
+      "composite_tempo_zscore": 4.239136614748046
     },
     {
       "head_coach": "Dan Quinn",
       "season": 2024,
-      "composite_tempo": 3.512820362583402,
-      "composite_tempo_zscore": 4.034280882201504
+      "composite_tempo": 3.516050799929047,
+      "composite_tempo_zscore": 4.020283914535451
     },
     {
       "head_coach": "Chip Kelly",
       "season": 2016,
-      "composite_tempo": 3.484000497137244,
-      "composite_tempo_zscore": 4.00117556436254
+      "composite_tempo": 3.39247217597307,
+      "composite_tempo_zscore": 3.8789434580690947
     },
     {
-      "head_coach": "Doug Marrone",
-      "season": 2013,
-      "composite_tempo": 3.034833295874825,
-      "composite_tempo_zscore": 3.4852181603139254
+      "head_coach": "Tom Coughlin",
+      "season": 2015,
+      "composite_tempo": 3.213906200978636,
+      "composite_tempo_zscore": 3.674712373378719
     }
   ],
   "slowest_tempo_coach_years": [
     {
-      "head_coach": "Mike Tomlin",
-      "season": 2007,
-      "composite_tempo": -1.1283867406716672,
-      "composite_tempo_zscore": -1.297063797278848
-    },
-    {
-      "head_coach": "Jason Garrett",
-      "season": 2014,
-      "composite_tempo": -1.22919330500567,
-      "composite_tempo_zscore": -1.4128600822672628
+      "head_coach": "Kyle Shanahan",
+      "season": 2024,
+      "composite_tempo": -1.2431000972575323,
+      "composite_tempo_zscore": -1.4228949999687626
     },
     {
       "head_coach": "Norv Turner",
       "season": 2010,
-      "composite_tempo": -1.2387992545089186,
-      "composite_tempo_zscore": -1.4238944159300686
+      "composite_tempo": -1.2586784324499627,
+      "composite_tempo_zscore": -1.440712393759038
     },
     {
-      "head_coach": "Matt LaFleur",
-      "season": 2020,
-      "composite_tempo": -1.2574635278274537,
-      "composite_tempo_zscore": -1.4453340267984032
+      "head_coach": "Tom Coughlin",
+      "season": 2013,
+      "composite_tempo": -1.2645826517240903,
+      "composite_tempo_zscore": -1.4474652205875673
+    },
+    {
+      "head_coach": "John Fassel",
+      "season": 2016,
+      "composite_tempo": -1.3149490689341277,
+      "composite_tempo_zscore": -1.5050707527674496
+    },
+    {
+      "head_coach": "Tom Coughlin",
+      "season": 2008,
+      "composite_tempo": -1.3531392742191815,
+      "composite_tempo_zscore": -1.548749998212489
     },
     {
       "head_coach": "Frank Reich",
       "season": 2021,
-      "composite_tempo": -1.2611516566120293,
-      "composite_tempo_zscore": -1.449570572450308
-    },
-    {
-      "head_coach": "Romeo Crennel",
-      "season": 2006,
-      "composite_tempo": -1.272271010583263,
-      "composite_tempo_zscore": -1.4623433505907664
+      "composite_tempo": -1.3565857183851215,
+      "composite_tempo_zscore": -1.5526917963650022
     },
     {
       "head_coach": "Matt LaFleur",
       "season": 2021,
-      "composite_tempo": -1.278224296104255,
-      "composite_tempo_zscore": -1.4691818769442893
+      "composite_tempo": -1.3606773331550246,
+      "composite_tempo_zscore": -1.5573714948496575
     },
     {
       "head_coach": "Anthony Lynn",
       "season": 2018,
-      "composite_tempo": -1.3885272251762815,
-      "composite_tempo_zscore": -1.5958866158099207
+      "composite_tempo": -1.3820036319918196,
+      "composite_tempo_zscore": -1.5817630013726975
     },
     {
       "head_coach": "Brian Billick",
       "season": 2006,
-      "composite_tempo": -1.4477518320715028,
-      "composite_tempo_zscore": -1.663917795164901
+      "composite_tempo": -1.4444450652675083,
+      "composite_tempo_zscore": -1.6531790796480417
     },
     {
       "head_coach": "Matt LaFleur",
       "season": 2022,
-      "composite_tempo": -1.4810683087682015,
-      "composite_tempo_zscore": -1.7021883607363881
+      "composite_tempo": -1.4582919533420056,
+      "composite_tempo_zscore": -1.6690161671510162
     }
   ]
 }

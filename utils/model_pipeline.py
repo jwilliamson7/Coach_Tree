@@ -33,7 +33,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.decomposition import TruncatedSVD
-from sklearn.model_selection import train_test_split, GroupKFold
+from sklearn.model_selection import train_test_split, GroupKFold, StratifiedGroupKFold
 
 
 TrainSplit = namedtuple(
@@ -289,6 +289,8 @@ def crossfit_predict(
     is_classifier: bool,
     n_splits: int = 5,
     random_state: int = 42,
+    strata_time: Optional[Sequence] = None,
+    n_era_bins: int = 4,
     logger=None,
 ) -> np.ndarray:
     """Out-of-fold (cross-fitted) predictions for leakage-free gene scoring (WS1).
@@ -297,10 +299,11 @@ def crossfit_predict(
     the "expected" baseline partly fits each coach's own behavior and attenuates
     the gene toward zero. This refits the FULL train/serve pipeline (encode +
     impute + SVD + a fresh XGB with the already-tuned `params`, no re-search) on a
-    GroupKFold partition -- groups = coach (offense) / defteam (defense) -- and
-    predicts each held-out fold, so a coach is never scored by a model that saw
-    that coach. Returns OOF predictions aligned to feature_data's ROW ORDER
-    (P(y=1) for classifiers, the predicted value for regressors).
+    group partition -- groups = coach (offense) / defensive head coach (defense),
+    era-balanced across folds when a per-row season is supplied -- and predicts
+    each held-out fold, so a coach is never scored by a model that saw that coach.
+    Returns OOF predictions aligned to feature_data's ROW ORDER (P(y=1) for
+    classifiers, the predicted value for regressors).
 
     The all-data persisted model stays the reported/metadata model; these OOF
     predictions are used only to compute gene = actual - predicted.
@@ -319,8 +322,42 @@ def crossfit_predict(
         raise ValueError(f"need >=2 groups for cross-fitting, got {n_groups}")
 
     oof = np.full(len(X_all), np.nan, dtype=float)
-    gkf = GroupKFold(n_splits=k)
-    for fold, (tr, te) in enumerate(gkf.split(X_all, y_all, grp)):
+
+    # Fold assignment: leave-whole-group-out (a group is never split across
+    # train/test). When a per-row time value is supplied, balance each group's
+    # era across folds via StratifiedGroupKFold so no fold trains on a
+    # temporally skewed subset -- an era-blind model trained on a skewed era
+    # would mis-predict other eras and bias the residual. Falls back to plain
+    # GroupKFold when strata are unavailable or degenerate.
+    splits = None
+    if strata_time is not None:
+        t = pd.Series(np.asarray(strata_time)).reset_index(drop=True)
+        if len(t) != len(X_all):
+            raise ValueError(f"strata_time length {len(t)} != rows {len(X_all)}")
+        # One era label per GROUP (constant within group): bin the group's
+        # median time into quantile eras so the strata are coach-level, not play.
+        grp_time = pd.DataFrame({"t": t, "g": grp}).groupby("g")["t"].transform("median")
+        nq = min(n_era_bins, int(grp_time.nunique()))
+        if nq >= 2:
+            era = pd.qcut(grp_time, q=nq, labels=False, duplicates="drop")
+            if era.nunique() >= 2:
+                try:
+                    sgkf = StratifiedGroupKFold(n_splits=k, shuffle=True,
+                                                random_state=random_state)
+                    splits = list(sgkf.split(X_all, era.to_numpy(), grp))
+                    if logger:
+                        logger.info("crossfit: StratifiedGroupKFold k=%d era_bins=%d",
+                                    k, int(era.nunique()))
+                except Exception as e:  # degenerate strata -> plain GroupKFold
+                    if logger:
+                        logger.warning("crossfit: StratifiedGroupKFold failed (%s); "
+                                       "GroupKFold fallback", e)
+    if splits is None:
+        splits = list(GroupKFold(n_splits=k).split(X_all, y_all, grp))
+        if logger:
+            logger.info("crossfit: GroupKFold k=%d (no era strata)", k)
+
+    for fold, (tr, te) in enumerate(splits):
         le: Dict[str, LabelEncoder] = {}
         X_tr_enc = encode_categoricals(X_all.iloc[tr], feature_names,
                                        categorical_features, le, fit=True)

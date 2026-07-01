@@ -253,7 +253,7 @@ class ShotgunGeneCalculator:
             predictions = mp.crossfit_predict(
                 plays, self.shotgun_features, 'actual_shotgun', self.categorical_features,
                 plays['head_coach'], self.shotgun_params, 'binary:logistic', True,
-                n_splits=self.cv_splits, logger=logger)
+                n_splits=self.cv_splits, strata_time=plays['season'], logger=logger)
         else:
             features = self.prepare_features_for_model(plays)
             predictions = self.shotgun_model.predict_proba(features)[:, 1]

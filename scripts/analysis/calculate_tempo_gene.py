@@ -256,7 +256,7 @@ class TempoGeneCalculator:
             return mp.crossfit_predict(
                 df, features, target_col, self.categorical_features,
                 df["head_coach"], params, objective, is_classifier,
-                n_splits=self.cv_splits, logger=logger)
+                n_splits=self.cv_splits, strata_time=df["season"], logger=logger)
         feats = self.prepare_features_for_model(df, features, encoders, imputers)
         if is_classifier:
             return model.predict_proba(feats)[:, 1]
