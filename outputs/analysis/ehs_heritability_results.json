@@ -1,0 +1,782 @@
+{
+  "subtraits": {
+    "fourth_down": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": -0.019759394137016596,
+        "h2_mean": -0.028775455874132688,
+        "hdi_low": -0.452289000426981,
+        "hdi_high": 0.3678383545901828,
+        "p_positive": 0.443,
+        "raw_latent_slope_median": -0.07482213034403215,
+        "mentor_repeatability_median": 0.41417514430040303,
+        "r_hat": 1.00073413040258,
+        "ess_bulk": 1220.656627454007
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": -0.017836694327871768,
+        "h2_mean": -0.027488147911392934,
+        "hdi_low": -0.4815235882135359,
+        "hdi_high": 0.3756341197732939,
+        "p_positive": 0.4505,
+        "raw_latent_slope_median": -0.06679949923721865,
+        "mentor_repeatability_median": 0.42556126955345847,
+        "r_hat": 1.0027378302216492,
+        "ess_bulk": 1185.007337429197
+      },
+      "c1_freq_clustered": {
+        "slope": -0.004928152463024702,
+        "std_error": 0.16060809570012471,
+        "p_value": 0.9757118679590677,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.5839789612974575,
+        "hdi_low": 0.41867849901199816,
+        "hdi_high": 0.7371696876687382,
+        "r_hat": 1.002489489093654,
+        "ess_bulk": 462.3695247483588
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.005875,
+        "repeat_minus_h2_median": 0.6078801119374448,
+        "repeat_minus_h2_hdi": [
+          0.17118075474867456,
+          1.0436462157675694
+        ]
+      }
+    },
+    "pass_heavy": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.08345567112000263,
+        "h2_mean": 0.08436209616498448,
+        "hdi_low": -0.0815240369294433,
+        "hdi_high": 0.25451334792969615,
+        "p_positive": 0.84,
+        "raw_latent_slope_median": 0.2136165118811073,
+        "mentor_repeatability_median": 0.40445956328423677,
+        "r_hat": 1.0005814561320254,
+        "ess_bulk": 2479.657105620182
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.08461965762206544,
+        "h2_mean": 0.08444565891332788,
+        "hdi_low": -0.09005760256887485,
+        "hdi_high": 0.2585862520485593,
+        "p_positive": 0.8315,
+        "raw_latent_slope_median": 0.21485322243924868,
+        "mentor_repeatability_median": 0.40877437466444155,
+        "r_hat": 1.0005204522860476,
+        "ess_bulk": 3077.048364788391
+      },
+      "c1_freq_clustered": {
+        "slope": 0.0810319632354153,
+        "std_error": 0.10685940970599368,
+        "p_value": 0.45381776225574555,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.34032807723004316,
+        "hdi_low": 0.25028465863165184,
+        "hdi_high": 0.43314685417312887,
+        "r_hat": 1.0012296766677382,
+        "ess_bulk": 2955.438971502463
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.004625,
+        "repeat_minus_h2_median": 0.2564941141821129,
+        "repeat_minus_h2_hdi": [
+          0.06706697091480054,
+          0.44930280775423126
+        ]
+      }
+    },
+    "deep_pass": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.3213587357620633,
+        "h2_mean": 0.3194475044234884,
+        "hdi_low": 0.023852636825635872,
+        "hdi_high": 0.6215537459112582,
+        "p_positive": 0.979,
+        "raw_latent_slope_median": 0.4646917914249675,
+        "mentor_repeatability_median": 0.7051398196014033,
+        "r_hat": 0.9999152739063065,
+        "ess_bulk": 2036.343428875675
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.32397415497518856,
+        "h2_mean": 0.32311669416794286,
+        "hdi_low": 0.003879957040735353,
+        "hdi_high": 0.6332053905082515,
+        "p_positive": 0.975375,
+        "raw_latent_slope_median": 0.4735298864804849,
+        "mentor_repeatability_median": 0.6984562397578659,
+        "r_hat": 1.0001790286148093,
+        "ess_bulk": 3917.8637782798487
+      },
+      "c1_freq_clustered": {
+        "slope": 0.3783860500656848,
+        "std_error": 0.20693133881972312,
+        "p_value": 0.0768004229263699,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.41736989393506607,
+        "hdi_low": 0.30471936825584206,
+        "hdi_high": 0.5412620488426418,
+        "r_hat": 1.0006175632546466,
+        "ess_bulk": 1865.7588726468207
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.282125,
+        "repeat_minus_h2_median": 0.09585084962559057,
+        "repeat_minus_h2_hdi": [
+          -0.20634514344990446,
+          0.4423291600821013
+        ]
+      }
+    },
+    "two_point": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.0004185672600578803,
+        "h2_mean": 0.01066083632458796,
+        "hdi_low": -0.22753663296445048,
+        "hdi_high": 0.28178729470764635,
+        "p_positive": 0.526875,
+        "raw_latent_slope_median": 0.04714570647751641,
+        "mentor_repeatability_median": 0.09362939903373675,
+        "r_hat": 1.0028667068133612,
+        "ess_bulk": 1248.3246851228257
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.00187124516034874,
+        "h2_mean": 0.018157643668843725,
+        "hdi_low": -0.23496063987928678,
+        "hdi_high": 0.28839143132682815,
+        "p_positive": 0.556125,
+        "raw_latent_slope_median": 0.11838599226698543,
+        "mentor_repeatability_median": 0.09748747611041444,
+        "r_hat": 1.0052466168961864,
+        "ess_bulk": 1570.7915991251978
+      },
+      "c1_freq_clustered": {
+        "slope": -0.06899691583496889,
+        "std_error": 0.08948485605192412,
+        "p_value": 0.446336026491962,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.3516127159041762,
+        "hdi_low": 0.2263238135040726,
+        "hdi_high": 0.47938726550744365,
+        "r_hat": 1.0019262901684114,
+        "ess_bulk": 1831.7877880405422
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.015125,
+        "repeat_minus_h2_median": 0.34618780080333056,
+        "repeat_minus_h2_hdi": [
+          0.053487158541923874,
+          0.6013377957754407
+        ]
+      }
+    },
+    "no_huddle": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.2954722081002342,
+        "h2_mean": 0.2971281535751475,
+        "hdi_low": 0.08808644946899231,
+        "hdi_high": 0.5080194954451619,
+        "p_positive": 0.997,
+        "raw_latent_slope_median": 0.5297915002845419,
+        "mentor_repeatability_median": 0.5677818885010112,
+        "r_hat": 1.001220037922262,
+        "ess_bulk": 2812.6075689260333
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.3096709528078727,
+        "h2_mean": 0.3106573845308634,
+        "hdi_low": 0.11328830394652538,
+        "hdi_high": 0.5160631560517593,
+        "p_positive": 0.998625,
+        "raw_latent_slope_median": 0.5567806294706139,
+        "mentor_repeatability_median": 0.5674882508963355,
+        "r_hat": 1.0016499573557476,
+        "ess_bulk": 3644.9024194619196
+      },
+      "c1_freq_clustered": {
+        "slope": 0.3500403045451015,
+        "std_error": 0.19523329372868276,
+        "p_value": 0.08244131310239289,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.4651916953242321,
+        "hdi_low": 0.3742916596292392,
+        "hdi_high": 0.5512731445046938,
+        "r_hat": 1.0001581061731435,
+        "ess_bulk": 3399.5644213603146
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.075875,
+        "repeat_minus_h2_median": 0.1679935867036851,
+        "repeat_minus_h2_hdi": [
+          -0.06489244037528935,
+          0.39465473399784096
+        ]
+      }
+    },
+    "pace": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.1024224989684239,
+        "h2_mean": 0.0982512629185118,
+        "hdi_low": -0.1490420086017109,
+        "hdi_high": 0.340163738025644,
+        "p_positive": 0.792375,
+        "raw_latent_slope_median": 0.18816140105897988,
+        "mentor_repeatability_median": 0.5496667831260411,
+        "r_hat": 1.0005008292563902,
+        "ess_bulk": 1471.87604654561
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.10939567846409094,
+        "h2_mean": 0.10814178340475283,
+        "hdi_low": -0.1407966425136777,
+        "hdi_high": 0.3699286743430044,
+        "p_positive": 0.80225,
+        "raw_latent_slope_median": 0.20316701625365696,
+        "mentor_repeatability_median": 0.5489417600190342,
+        "r_hat": 1.001948100521215,
+        "ess_bulk": 1679.673927791493
+      },
+      "c1_freq_clustered": {
+        "slope": 0.1250606398026491,
+        "std_error": 0.12199303642798627,
+        "p_value": 0.3129818913260598,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.3682900677179932,
+        "hdi_low": 0.262531773014671,
+        "hdi_high": 0.4689478057331855,
+        "r_hat": 1.0013693064148494,
+        "ess_bulk": 2806.6976988082633
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.021,
+        "repeat_minus_h2_median": 0.2668966745996061,
+        "repeat_minus_h2_hdi": [
+          0.02158190823107492,
+          0.5522361881478821
+        ]
+      }
+    },
+    "box_stacking": {
+      "c1": {
+        "n_proteges": 17,
+        "n_mentors": 13,
+        "n_mentor_seasons": 40,
+        "n_protege_seasons": 47,
+        "h2_median": 0.438804366753447,
+        "h2_mean": 0.4383668946832979,
+        "hdi_low": 0.04744089211120052,
+        "hdi_high": 0.8072937747596239,
+        "p_positive": 0.986875,
+        "raw_latent_slope_median": 0.6524113612119627,
+        "mentor_repeatability_median": 0.6959718105376185,
+        "r_hat": 1.0004990445393886,
+        "ess_bulk": 2955.7057336545263
+      },
+      "c1_mentor_re": {
+        "n_proteges": 17,
+        "n_mentors": 13,
+        "n_mentor_seasons": 40,
+        "n_protege_seasons": 47,
+        "h2_median": 0.4530057160758892,
+        "h2_mean": 0.45306908165959353,
+        "hdi_low": 0.025172144344266238,
+        "hdi_high": 0.8576775176326263,
+        "p_positive": 0.981,
+        "raw_latent_slope_median": 0.6647324440718949,
+        "mentor_repeatability_median": 0.7004128248687143,
+        "r_hat": 1.0010095597063737,
+        "ess_bulk": 3511.7574070092287
+      },
+      "c1_freq_clustered": {
+        "slope": 0.501857990438244,
+        "std_error": 0.21145561428176476,
+        "p_value": 0.036932679589966044,
+        "n_clusters": 13
+      },
+      "c2": {
+        "n_obs": 310,
+        "n_coaches": 95,
+        "repeatability_median": 0.39447446549927156,
+        "hdi_low": 0.2644273815795688,
+        "hdi_high": 0.5416594076059117,
+        "r_hat": 1.0009329893163281,
+        "ess_bulk": 2511.669903442721
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.5845,
+        "repeat_minus_h2_median": -0.04171305810010234,
+        "repeat_minus_h2_hdi": [
+          -0.43991119831194675,
+          0.3768864700956862
+        ]
+      }
+    },
+    "pass_rush": {
+      "c1": {
+        "n_proteges": 17,
+        "n_mentors": 13,
+        "n_mentor_seasons": 40,
+        "n_protege_seasons": 47,
+        "h2_median": 0.41948842347013426,
+        "h2_mean": 0.4187511692982142,
+        "hdi_low": 0.11887584984881906,
+        "hdi_high": 0.7346516119603191,
+        "p_positive": 0.99275,
+        "raw_latent_slope_median": 0.6105323509775793,
+        "mentor_repeatability_median": 0.6995177552177376,
+        "r_hat": 1.000153406169573,
+        "ess_bulk": 3572.9393282640517
+      },
+      "c1_mentor_re": {
+        "n_proteges": 17,
+        "n_mentors": 13,
+        "n_mentor_seasons": 40,
+        "n_protege_seasons": 47,
+        "h2_median": 0.38558301784359605,
+        "h2_mean": 0.3852173968030916,
+        "hdi_low": 0.0383330103458987,
+        "hdi_high": 0.7327513667606912,
+        "p_positive": 0.984875,
+        "raw_latent_slope_median": 0.566756517625752,
+        "mentor_repeatability_median": 0.6941064243620093,
+        "r_hat": 1.000084881695869,
+        "ess_bulk": 3637.0711153857746
+      },
+      "c1_freq_clustered": {
+        "slope": 0.5340900541716154,
+        "std_error": 0.13522017166625785,
+        "p_value": 0.002273551205496993,
+        "n_clusters": 13
+      },
+      "c2": {
+        "n_obs": 310,
+        "n_coaches": 95,
+        "repeatability_median": 0.38719774633156084,
+        "hdi_low": 0.2488121775930604,
+        "hdi_high": 0.5195890634735683,
+        "r_hat": 1.0006096894090812,
+        "ess_bulk": 2828.8512786424017
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.57075,
+        "repeat_minus_h2_median": -0.02873101555174809,
+        "repeat_minus_h2_hdi": [
+          -0.36400754001387603,
+          0.30940148941735224
+        ]
+      }
+    },
+    "man_coverage": {
+      "c1": {
+        "n_proteges": 12,
+        "n_mentors": 10,
+        "n_mentor_seasons": 29,
+        "n_protege_seasons": 27,
+        "h2_median": 0.14160756594320095,
+        "h2_mean": 0.15087501159296027,
+        "hdi_low": -0.3252693129741698,
+        "hdi_high": 0.6231377947400273,
+        "p_positive": 0.747625,
+        "raw_latent_slope_median": 0.31570054629469224,
+        "mentor_repeatability_median": 0.4994145996874833,
+        "r_hat": 1.0009913191497488,
+        "ess_bulk": 2486.968540302879
+      },
+      "c1_mentor_re": {
+        "n_proteges": 12,
+        "n_mentors": 10,
+        "n_mentor_seasons": 29,
+        "n_protege_seasons": 27,
+        "h2_median": 0.11822627973340347,
+        "h2_mean": 0.12481433438434181,
+        "hdi_low": -0.3286928628585607,
+        "hdi_high": 0.6277477845640985,
+        "p_positive": 0.71125,
+        "raw_latent_slope_median": 0.2521388875922117,
+        "mentor_repeatability_median": 0.5238279044708325,
+        "r_hat": 1.000481729610482,
+        "ess_bulk": 4578.980739779006
+      },
+      "c1_freq_clustered": {
+        "slope": 0.22183725467072393,
+        "std_error": 0.3297355484214348,
+        "p_value": 0.5200476297705094,
+        "n_clusters": 10
+      },
+      "c2": {
+        "n_obs": 242,
+        "n_coaches": 81,
+        "repeatability_median": 0.5167361128986113,
+        "hdi_low": 0.39250992556233577,
+        "hdi_high": 0.6498562277817422,
+        "r_hat": 1.0004674931179838,
+        "ess_bulk": 3098.059895003459
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.0705,
+        "repeat_minus_h2_median": 0.3769516657688684,
+        "repeat_minus_h2_hdi": [
+          -0.16819410471293528,
+          0.8044003821865995
+        ]
+      }
+    },
+    "shotgun": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.4539419825625725,
+        "h2_mean": 0.4550176191011793,
+        "hdi_low": 0.27450078970007225,
+        "hdi_high": 0.6475351621919623,
+        "p_positive": 1.0,
+        "raw_latent_slope_median": 0.6228277521609478,
+        "mentor_repeatability_median": 0.7360525872445882,
+        "r_hat": 1.0020487547461612,
+        "ess_bulk": 3233.488067541299
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.45802229391597926,
+        "h2_mean": 0.4591308047256683,
+        "hdi_low": 0.2721551466861629,
+        "hdi_high": 0.6359543614944797,
+        "p_positive": 1.0,
+        "raw_latent_slope_median": 0.6294025539332455,
+        "mentor_repeatability_median": 0.7336132552122313,
+        "r_hat": 1.000669823321196,
+        "ess_bulk": 5385.339387344472
+      },
+      "c1_freq_clustered": {
+        "slope": 0.4743414457726157,
+        "std_error": 0.08085501415329789,
+        "p_value": 1.5977234082420466e-06,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.4308575459670113,
+        "hdi_low": 0.33991561355631117,
+        "hdi_high": 0.5189524102366296,
+        "r_hat": 1.000710376348536,
+        "ess_bulk": 3083.1474108986677
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.58775,
+        "repeat_minus_h2_median": -0.023012685943250066,
+        "repeat_minus_h2_hdi": [
+          -0.23612962433049728,
+          0.18006023258220002
+        ]
+      }
+    }
+  },
+  "composites": {
+    "aggression": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": -0.15160821684610318,
+        "h2_mean": -0.15267330410333904,
+        "hdi_low": -0.45646023524449786,
+        "hdi_high": 0.1249666224612251,
+        "p_positive": 0.142,
+        "raw_latent_slope_median": -0.29938677306822187,
+        "mentor_repeatability_median": 0.5223547445303904,
+        "r_hat": 1.0018699148456087,
+        "ess_bulk": 1705.8667243962648
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": -0.14991309404754047,
+        "h2_mean": -0.1499251520154998,
+        "hdi_low": -0.44674355395309784,
+        "hdi_high": 0.15621292073250273,
+        "p_positive": 0.1645,
+        "raw_latent_slope_median": -0.3004534527199837,
+        "mentor_repeatability_median": 0.5219362514768923,
+        "r_hat": 1.0025047639322722,
+        "ess_bulk": 1135.058863121538
+      },
+      "c1_freq_clustered": {
+        "slope": -0.0291999529829334,
+        "std_error": 0.1478778694025013,
+        "p_value": 0.8447165803866943,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.40360969134799285,
+        "hdi_low": 0.2825730320502793,
+        "hdi_high": 0.5192628259167134,
+        "r_hat": 1.0009916054028993,
+        "ess_bulk": 2171.589694920662
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.00075,
+        "repeat_minus_h2_median": 0.5533915785520502,
+        "repeat_minus_h2_hdi": [
+          0.23986605976019504,
+          0.8684934724527769
+        ]
+      }
+    },
+    "tempo": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.1943838918095757,
+        "h2_mean": 0.19570766601750147,
+        "hdi_low": -0.02403612111716134,
+        "hdi_high": 0.41466550950380715,
+        "p_positive": 0.9585,
+        "raw_latent_slope_median": 0.3437837736293638,
+        "mentor_repeatability_median": 0.5736250623960044,
+        "r_hat": 1.0008097650983867,
+        "ess_bulk": 2124.3947136162446
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.21934004675447993,
+        "h2_mean": 0.22045478739109564,
+        "hdi_low": -0.0020630133534827433,
+        "hdi_high": 0.46183204891590895,
+        "p_positive": 0.97075,
+        "raw_latent_slope_median": 0.3872758732547884,
+        "mentor_repeatability_median": 0.5762744517132387,
+        "r_hat": 1.0045038856527955,
+        "ess_bulk": 2084.321830512547
+      },
+      "c1_freq_clustered": {
+        "slope": 0.22613091782516553,
+        "std_error": 0.1712622964427787,
+        "p_value": 0.19607558267355119,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.4548739770844061,
+        "hdi_low": 0.35944024316578155,
+        "hdi_high": 0.548509306935488,
+        "r_hat": 1.000330883678713,
+        "ess_bulk": 2909.4209214762914
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.0195,
+        "repeat_minus_h2_median": 0.25886409546394756,
+        "repeat_minus_h2_hdi": [
+          0.01825619782545712,
+          0.4986079968454625
+        ]
+      }
+    },
+    "defensive": {
+      "c1": {
+        "n_proteges": 17,
+        "n_mentors": 13,
+        "n_mentor_seasons": 40,
+        "n_protege_seasons": 47,
+        "h2_median": 0.49358122756018014,
+        "h2_mean": 0.4942596393647902,
+        "hdi_low": 0.12860379081468082,
+        "hdi_high": 0.8459056289532024,
+        "p_positive": 0.99475,
+        "raw_latent_slope_median": 0.6629131370578617,
+        "mentor_repeatability_median": 0.7619698240674951,
+        "r_hat": 1.0008340700501173,
+        "ess_bulk": 3002.1551726451585
+      },
+      "c1_mentor_re": {
+        "n_proteges": 17,
+        "n_mentors": 13,
+        "n_mentor_seasons": 40,
+        "n_protege_seasons": 47,
+        "h2_median": 0.4895177921951273,
+        "h2_mean": 0.4878479659939451,
+        "hdi_low": 0.10315384080717807,
+        "hdi_high": 0.8607521795731435,
+        "p_positive": 0.99175,
+        "raw_latent_slope_median": 0.6579595241669893,
+        "mentor_repeatability_median": 0.7603431931577904,
+        "r_hat": 1.0014529884562131,
+        "ess_bulk": 3419.8429018485367
+      },
+      "c1_freq_clustered": {
+        "slope": 0.6115976898438541,
+        "std_error": 0.24445641943985985,
+        "p_value": 0.029408566374902634,
+        "n_clusters": 13
+      },
+      "c2": {
+        "n_obs": 310,
+        "n_coaches": 95,
+        "repeatability_median": 0.3688667180682319,
+        "hdi_low": 0.23614398459796626,
+        "hdi_high": 0.51268629174563,
+        "r_hat": 1.0003429426860728,
+        "ess_bulk": 2649.0209381100826
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.746,
+        "repeat_minus_h2_median": -0.12743183539464598,
+        "repeat_minus_h2_hdi": [
+          -0.5182863941316205,
+          0.2556336532385619
+        ]
+      }
+    },
+    "shotgun": {
+      "c1": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.4539419825625725,
+        "h2_mean": 0.4550176191011793,
+        "hdi_low": 0.27450078970007225,
+        "hdi_high": 0.6475351621919623,
+        "p_positive": 1.0,
+        "raw_latent_slope_median": 0.6228277521609478,
+        "mentor_repeatability_median": 0.7360525872445882,
+        "r_hat": 1.0020487547461612,
+        "ess_bulk": 3233.488067541299
+      },
+      "c1_mentor_re": {
+        "n_proteges": 40,
+        "n_mentors": 34,
+        "n_mentor_seasons": 90,
+        "n_protege_seasons": 142,
+        "h2_median": 0.45802229391597926,
+        "h2_mean": 0.4591308047256683,
+        "hdi_low": 0.2721551466861629,
+        "hdi_high": 0.6359543614944797,
+        "p_positive": 1.0,
+        "raw_latent_slope_median": 0.6294025539332455,
+        "mentor_repeatability_median": 0.7336132552122313,
+        "r_hat": 1.000669823321196,
+        "ess_bulk": 5385.339387344472
+      },
+      "c1_freq_clustered": {
+        "slope": 0.4743414457726157,
+        "std_error": 0.08085501415329789,
+        "p_value": 1.5977234082420466e-06,
+        "n_clusters": 34
+      },
+      "c2": {
+        "n_obs": 646,
+        "n_coaches": 140,
+        "repeatability_median": 0.4308575459670113,
+        "hdi_low": 0.33991561355631117,
+        "hdi_high": 0.5189524102366296,
+        "r_hat": 1.000710376348536,
+        "ess_bulk": 3083.1474108986677
+      },
+      "h2_gt_repeat": {
+        "p_h2_gt_repeat": 0.58775,
+        "repeat_minus_h2_median": -0.023012685943250066,
+        "repeat_minus_h2_hdi": [
+          -0.23612962433049728,
+          0.18006023258220002
+        ]
+      }
+    }
+  },
+  "meta": {
+    "draws": 2000,
+    "tune": 2000,
+    "chains": 4,
+    "protocol": "osf.io/y2kr5"
+  }
+}

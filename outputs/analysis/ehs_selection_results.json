@@ -1,0 +1,135 @@
+{
+  "subtraits": {
+    "fourth_down": {
+      "S": 0.04391629408168721,
+      "ci_low": -0.05396099818369337,
+      "ci_high": 0.13335799443848678,
+      "p_bootstrap": 0.3465,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": 0.04391629408168721
+    },
+    "pass_heavy": {
+      "S": 0.16354929688209238,
+      "ci_low": 0.044046358500979245,
+      "ci_high": 0.2687554383046901,
+      "p_bootstrap": 0.0055,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": 0.16354929688209238
+    },
+    "deep_pass": {
+      "S": 0.0868558217569917,
+      "ci_low": 0.0019428855347603333,
+      "ci_high": 0.17478398225523467,
+      "p_bootstrap": 0.0445,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": 0.0868558217569917
+    },
+    "two_point": {
+      "S": -0.019725858059454995,
+      "ci_low": -0.1108358554149776,
+      "ci_high": 0.06863885571302972,
+      "p_bootstrap": 0.635,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": -0.019725858059454995
+    },
+    "no_huddle": {
+      "S": -0.018478501699065647,
+      "ci_low": -0.10634971216999531,
+      "ci_high": 0.08129043064769531,
+      "p_bootstrap": 0.7315,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": -0.018478501699065647
+    },
+    "pace": {
+      "S": 0.07269505185961342,
+      "ci_low": -0.04496924878625671,
+      "ci_high": 0.1890358550580105,
+      "p_bootstrap": 0.248,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": 0.07269505185961342
+    },
+    "box_stacking": {
+      "S": 0.05932024879027259,
+      "ci_low": -0.041819310510218956,
+      "ci_high": 0.16451756647410776,
+      "p_bootstrap": 0.264,
+      "n": 288,
+      "n_coaches": 79,
+      "S_shared_estimator": 0.05932024879027259
+    },
+    "pass_rush": {
+      "S": 0.16736628046496438,
+      "ci_low": 0.04138568636657761,
+      "ci_high": 0.29145734196608036,
+      "p_bootstrap": 0.011,
+      "n": 288,
+      "n_coaches": 79,
+      "S_shared_estimator": 0.16736628046496438
+    },
+    "man_coverage": {
+      "S": 0.13152801799590463,
+      "ci_low": -0.010830720661919233,
+      "ci_high": 0.2757162142349632,
+      "p_bootstrap": 0.0725,
+      "n": 224,
+      "n_coaches": 67,
+      "S_shared_estimator": 0.13152801799590463
+    },
+    "shotgun": {
+      "S": 0.0755847110723429,
+      "ci_low": -0.02766170902050049,
+      "ci_high": 0.16630025762382183,
+      "p_bootstrap": 0.1385,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": 0.0755847110723429
+    }
+  },
+  "composites": {
+    "aggression": {
+      "S": 0.17939289499533892,
+      "ci_low": 0.07848133211829819,
+      "ci_high": 0.2717378212231828,
+      "p_bootstrap": 0.0005,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": 0.17939289499533892
+    },
+    "tempo": {
+      "S": 0.028385010736307205,
+      "ci_low": -0.06799302610888436,
+      "ci_high": 0.1375497442689787,
+      "p_bootstrap": 0.589,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": 0.028385010736307205
+    },
+    "defensive": {
+      "S": 0.15004179948159527,
+      "ci_low": 0.03355220763957467,
+      "ci_high": 0.26703269764527326,
+      "p_bootstrap": 0.0125,
+      "n": 288,
+      "n_coaches": 79,
+      "S_shared_estimator": 0.15004179948159527
+    },
+    "shotgun": {
+      "S": 0.0755847110723429,
+      "ci_low": -0.02766170902050049,
+      "ci_high": 0.16630025762382183,
+      "p_bootstrap": 0.1385,
+      "n": 607,
+      "n_coaches": 123,
+      "S_shared_estimator": 0.0755847110723429
+    }
+  },
+  "estimator": "era-adjusted inverse-variance-weighted coach-clustered Pearson r",
+  "war_pin": "Coach_WAR dffe2f1",
+  "n_boot": 4000
+}
