@@ -169,6 +169,25 @@ shotgun-oriented play than context predicts. This residual construction isolates
 strategic tendency from forced circumstance: a coach who goes for it often only
 because he is always trailing is not thereby aggressive.
 
+The ten sub-traits are the residuals of ten play-level models (Table~\ref{tab:traits}):
+four offensive-aggression decisions (going for it on fourth down, passing versus
+running in neutral situations, targeting beyond versus short of the first-down
+marker, and attempting a two-point conversion), two tempo behaviors (no-huddle use
+and seconds between snaps), three defensive behaviors (defenders in the box, number
+of pass rushers, and man versus zone coverage), and shotgun formation use. Each is a
+gradient-boosted model on pre-play context (down, distance, field position, score,
+clock, and environment), a classifier for the discrete decisions and a regressor for
+the continuous ones (pace, box count, rushers). Situational context explains most of
+the variance in each decision, leaving the residual we read as tendency: out of
+sample the classifiers range from man coverage (AUC 0.71) and pass targeting (0.73)
+up to fourth-down decisions (0.98), and the regressors explain from very little of
+pass-rusher counts (R$^2$ 0.06, most of which is therefore left to tendency) to a
+substantial share of pace and box count (R$^2$ 0.43). Candidate feature sets are
+pruned by stability selection, and the categorical encoders, imputer, and dimension
+reduction are fit on the training split only, so each coach-season is scored in
+exactly the feature space the model learned rather than one re-estimated on its own
+plays.
+
 Every play is attributed to the head coach who led the team for that game, so a
 within-season head-coaching change splits the season between the two coaches at the
 game of the change. Coordinators are not assigned their own phenotype; the
@@ -326,20 +345,74 @@ carries substantial stable between-coach signal net of measurement noise. This i
 the quantitative-genetics prerequisite for a meaningful heritability: a trait must
 be repeatable before it can be transmissible.
 
-Three companion analyses corroborate that the genes belong to the coach. A one-way
-variance decomposition attributes far more of each gene's variance to coach
-identity than to team identity (for composite offensive aggression, 0.50 versus
-0.14; against a cardinality-matched permutation null the coach excess is about 0.29
-and the team excess about 0.08, so the coach signal is roughly three times larger).
-When coaches change teams their tendencies travel with them (composite offensive
-aggression across-team $r=0.55$, 95\% CI $[0.29,0.73]$, on the era-adjusted gene;
-in a mover regression the coach's prior-team gene carries $\beta=0.54$,
-$[0.26,0.88]$, alongside the destination's pre-arrival identity). A coach's
-aggression also persists year to year ($r=0.50$ between consecutive seasons). And
-career-average gene leaders match public reputation (the most aggressive coaches by
-career composite are Brandon Staley and Doug Pederson; tempo is led by Chip Kelly
-and Kliff Kingsbury). Together with the repeatabilities, these establish the
-phenotype.
+Three companion analyses corroborate that the genes belong to the coach rather than
+the team or its roster (Table~\ref{tab:validity}). First, a one-way variance
+decomposition attributes far more of each gene's variance to coach identity than to
+team identity (for composite offensive aggression, 0.50 versus 0.14). Because
+$\eta^2$ inflates mechanically with the number of groups, and a coach maps to far
+more levels than a team, we benchmark each against a cardinality-matched
+label-permutation null: the coach excess over its null is about 0.29 against 0.08 for
+team, so the coach signal is roughly three times larger, and the same ordering holds
+for every gene. Second, when coaches change teams their tendencies travel with them:
+across the 32 coaches who moved, composite offensive aggression at the new team
+tracks the gene they showed at the old one ($r=0.55$, 95\% CI $[0.29,0.73]$, on the
+era-adjusted gene), and in a mover regression the coach's prior-team gene carries
+$\beta=0.54$ ($[0.26,0.88]$) net of the destination's pre-arrival identity. Third,
+the genes persist from season to season (composite offensive aggression lag-1
+$r=0.50$, with its four components between 0.43 and 0.55). At only 32 movers the
+travel test is imprecise for any single gene, which is why the composite, which
+averages out component sampling noise, travels most cleanly.
+
+\begin{table}[t]
+\centering
+\caption{The offensive genes are coach traits. One-way variance shares (coach, team,
+season; marginal $\eta^2$, which need not sum to one because coach and team are
+confounded), cross-team travel (era-adjusted across-team correlation among the 32
+movers, 95\% CI), and year-to-year persistence (lag-1 correlation between consecutive
+coach-seasons; computed for the aggression genes).}
+\label{tab:validity}
+\begin{tabular}{lccccc}
+\toprule
+Gene & coach $\eta^2$ & team $\eta^2$ & season $\eta^2$ & travel $r$ [95\% CI] & persist.\ $r$ \\
+\midrule
+Composite offensive aggression & 0.50 & 0.14 & 0.18 & 0.55 $[0.29,0.73]$ & 0.50 \\
+\quad fourth-down & 0.51 & 0.07 & 0.26 & 0.09 $[-0.24,0.42]$ & 0.53 \\
+\quad pass-heavy  & 0.49 & 0.18 & 0.08 & 0.32 $[-0.03,0.60]$ & 0.55 \\
+\quad deep-pass   & 0.44 & 0.12 & 0.05 & 0.17 $[-0.20,0.51]$ & 0.46 \\
+\quad two-point   & 0.44 & 0.09 & 0.17 & 0.30 $[0.04,0.60]$ & 0.43 \\
+Shotgun & 0.57 & 0.12 & 0.48 & 0.28 $[-0.18,0.68]$ & -- \\
+Tempo   & 0.52 & 0.11 & 0.07 & 0.48 $[-0.11,0.82]$ & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Finally, career-average gene leaders match public reputation
+(Table~\ref{tab:facevalidity}): the most aggressive coaches by career composite are
+Brandon Staley and Doug Pederson, fourth-down aggression is led by Dan Campbell,
+shotgun by Nick Sirianni and Chip Kelly, and tempo by Chip Kelly, each two to seven
+standard deviations from the average coach and each a name a knowledgeable observer
+would supply. Together with the repeatabilities, these four lines establish that the
+phenotypes are stable properties of the coach.
+
+\begin{table}[t]
+\centering
+\caption{Face validity: career-average gene leaders and laggards (coaches with
+$\geq 3$ seasons, $n=89$; $z$ = standard deviations from the average qualifying
+coach).}
+\label{tab:facevalidity}
+\small
+\begin{tabular}{lll}
+\toprule
+Gene & Most ($z$) & Least ($z$) \\
+\midrule
+Comp.\ offensive aggression & Staley (+2.7), Pederson (+2.6), Koetter (+2.3) & Jauron ($-$2.1), Childress ($-$2.0), Ryan ($-$1.8) \\
+Fourth-down & Campbell (+3.2), LaFleur (+3.1), Staley (+2.9) & Holmgren ($-$1.4), Dungy ($-$1.3), McCoy ($-$1.3) \\
+Shotgun & Sirianni (+2.4), Kingsbury (+2.4), Kelly (+2.3) & Holmgren ($-$3.1), Nolan ($-$2.3), Marinelli ($-$1.9) \\
+Tempo & Kelly (+6.7), Kingsbury (+3.1), Spagnuolo (+1.5) & Nolan ($-$1.4), LaFleur ($-$1.3), Gailey ($-$1.3) \\
+Defensive aggression & Arians (+2.0), Daboll (+1.9), Flores (+1.8) & Lynn ($-$2.5), Reich ($-$1.8), LaFleur ($-$1.4) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Transmissibility and selection come apart}
 Table~\ref{tab:main} reports, for each trait, the preregistered transmissibility
@@ -433,19 +506,65 @@ that occupies the both corner and is chiefly responsible for the absence of a cl
 negative relationship.
 
 \subsection{Exploratory: network signal and reproductive success}
-On the mentor network, within-era Moran's $I$ shows positive phylogenetic signal
-for the schematic and defensive genes and none for offensive aggression (defensive
-$I=0.21$, permutation $p=0.002$; tempo $0.12$, $p=0.008$; shotgun $0.08$, $p=0.04$;
-offensive aggression $-0.01$, $p=0.52$). Under the exploratory Benjamini--Hochberg
-correction the defensive and tempo signals survive. Reproductive success (distinct
-head-coaching proteges) is heavy-tailed (Gini $0.66$; the top decile of mentors
-produced 43\% of all head-coaching descendants; Bill Belichick and Andy Reid lead).
-It tracks career WAR ($r=0.36$), but the link runs through longevity, not
-per-season quality: offspring count correlates $0.71$ with seasons coached, and net
-of tenure the exposure-normalized rate is essentially unrelated to quality (partial
-$r=0.09$). Coaches shape the league less by winning in any given season than by
-lasting long enough to send many descendants into head-coaching chairs, carrying
-their schematic identity with them.
+Two exploratory analyses, corrected among themselves under a Benjamini--Hochberg
+false-discovery rate, round out the picture; neither is confirmatory.
+
+First, phylogenetic signal on the mentor network (Table~\ref{tab:moran}). Moran's
+$I$, the network analog of the tendency of related individuals to resemble one
+another, is positive for the schematic and defensive genes and essentially zero for
+offensive aggression (defensive aggression $I=0.21$, within-era permutation
+$p=0.002$; tempo $0.12$, $p=0.008$; shotgun $0.08$, $p=0.04$; offensive aggression
+$-0.01$, $p=0.52$). Under the exploratory correction the defensive and tempo signals
+survive. The pattern mirrors the transmission results exactly: network-adjacent
+coaches resemble one another in the traits that transmit and not in the trait that
+does not, a second and independent line of evidence for the same decoupling.
+
+\begin{table}[t]
+\centering
+\caption{Within-era phylogenetic signal on the mentor network (Moran's $I$ on a
+row-normalized, undirected adjacency of mentor--protege ties; one-sided permutation
+$p$ from within-career-midpoint-era label shuffles). $E[I]=-1/(N-1)$ is the
+no-signal expectation.}
+\label{tab:moran}
+\begin{tabular}{lcccccc}
+\toprule
+Gene & $I$ & $E[I]$ & $z$ & $p$ & $N$ & edges \\
+\midrule
+Offensive aggression & $-0.01$ & $-0.01$ & $-0.04$ & 0.52 & 139 & 440 \\
+Shotgun & $+0.08$ & $-0.01$ & $+1.77$ & 0.04 & 139 & 440 \\
+Tempo & $+0.12$ & $-0.01$ & $+2.63$ & 0.008 & 139 & 440 \\
+Defensive aggression & $+0.21$ & $-0.01$ & $+3.03$ & 0.002 & 95 & 216 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Second, reproductive success, the other face of fitness (Figure~\ref{fig:repro}).
+Counting a mentor's distinct proteges who themselves became head coaches, the
+distribution is heavy-tailed: across 463 head coaches the Gini coefficient is 0.66
+and the most prolific decile produced 43\% of all head-coaching descendants, with
+Marty Schottenheimer and Bill Parcells (13 each), Bill Belichick (12), and Andy Reid
+(11) at the top. Reproductive success tracks career WAR ($r=0.36$), but the link runs
+through longevity rather than per-season quality: offspring count correlates 0.71
+with seasons coached, and net of tenure the exposure-normalized rate (offspring per
+head-coaching season) is essentially unrelated to quality (partial $r=0.09$). A
+coach's ecological fitness (winning) and reproductive fitness (descendants) are thus
+only weakly linked, and through survival: coaches shape the league less by winning in
+any given season than by lasting long enough to send many proteges into
+head-coaching chairs, carrying their schematic identity, though not their competitive
+edge, with them.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{../../visualizations/performance/reproductive_fitness.png}
+\caption{Two fitnesses of NFL head coaches. Left: the distribution of reproductive
+fitness (number of head-coaching proteges) is heavy-tailed (Gini 0.66; top decile
+produces 43\% of all descendants). Right: ecological fitness (career mean WAR per
+season) versus reproductive fitness, point size proportional to seasons coached; the
+positive raw association ($r=0.36$) is carried by tenure (offspring versus seasons
+coached $r=0.71$), and net of tenure quality barely predicts offspring (partial
+$r=0.09$).}
+\label{fig:repro}
+\end{figure}
 
 %% ----------------------------------------------------------------------------
 \section{Discussion}
