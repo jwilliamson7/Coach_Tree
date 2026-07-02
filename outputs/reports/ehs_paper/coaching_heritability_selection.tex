@@ -225,15 +225,11 @@ of pass rushers, and man versus zone coverage), and shotgun formation use. Each 
 gradient-boosted model on pre-play context (down, distance, field position, score,
 clock, and environment), a classifier for the discrete decisions and a regressor for
 the continuous ones (pace, box count, rushers). Situational context explains most of
-the variance in each decision, leaving the residual we read as tendency: out of
-sample the classifiers range from man coverage (AUC 0.71) and pass targeting (0.73)
-up to fourth-down decisions (0.98), and the regressors explain from very little of
-pass-rusher counts (R$^2$ 0.06, most of which is therefore left to tendency) to a
-substantial share of pace and box count (R$^2$ 0.43). Candidate feature sets are
-pruned by stability selection, and the categorical encoders, imputer, and dimension
-reduction are fit on the training split only, so each coach-season is scored in
-exactly the feature space the model learned rather than one re-estimated on its own
-plays.
+the variance in each decision, leaving the smaller, coach-specific residual we read
+as tendency; each model's type and out-of-sample performance are given in
+Table~\ref{tab:traits}. The expectation models, the leakage controls that keep a
+coach's own tendencies out of the yardstick that measures them, and the reliability
+weighting are detailed in the next two subsections.
 
 Every play is attributed to the head coach who led the team for that game, so a
 within-season head-coaching change splits the season between the two coaches at the
@@ -251,18 +247,87 @@ independent points in the cross-trait test.
 
 \begin{table}[t]
 \centering
-\caption{The ten frozen sub-traits and their four gene-level composites. The two
-families are approach-to-scenarios (aggression) and schematic identity.}
+\caption{The ten frozen sub-traits: gene-level composite and family, the play-level
+expectation model whose residual defines the phenotype and its out-of-sample
+performance (AUC for classifiers, $R^2$ for regressors, under grouped resampling
+that holds out whole team-years), and the data window. All transitions tested are
+offensive-coordinator-to-head-coach except the three defensive traits, which are
+defensive-coordinator-to-head-coach.}
 \label{tab:traits}
-\begin{tabular}{lll}
+\begin{tabular}{lllll}
 \toprule
-Composite (family) & Sub-traits & Data window \\
+Sub-trait & Composite (family) & Model & Perf. & Window \\
 \midrule
-Offensive aggression (approach) & fourth-down, pass-heavy, deep-pass, two-point & 2006--2024 \\
-Tempo (identity)                & no-huddle, pace                              & 2006--2024 \\
-Defensive aggression (approach) & box-stacking, pass-rush                      & 2016--2024 \\
-                                & man-coverage                                 & 2018--2024 \\
-Shotgun (identity)              & shotgun                                      & 2006--2024 \\
+Fourth-down  & Offensive aggression (approach) & classifier & AUC 0.98 & 2006--2024 \\
+Pass-heavy   & Offensive aggression (approach) & classifier & AUC 0.78 & 2006--2024 \\
+Deep-pass    & Offensive aggression (approach) & classifier & AUC 0.73 & 2006--2024 \\
+Two-point    & Offensive aggression (approach) & classifier & AUC 0.93 & 2006--2024 \\
+No-huddle    & Tempo (identity)                & classifier & AUC 0.87 & 2006--2024 \\
+Pace         & Tempo (identity)                & regressor  & $R^2$ 0.43 & 2006--2024 \\
+Box-stacking & Defensive aggression (approach) & regressor  & $R^2$ 0.43 & 2016--2024 \\
+Pass-rush    & Defensive aggression (approach) & regressor  & $R^2$ 0.06 & 2016--2024 \\
+Man-coverage & Defensive aggression (approach) & classifier & AUC 0.71 & 2018--2024 \\
+Shotgun      & Shotgun (identity)              & classifier & AUC 0.82 & 2006--2024 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Expectation models, leakage control, and feature selection}
+Each of the ten expectation models is a gradient-boosted tree ensemble, consistently
+the strongest model class for tabular, point-in-time prediction of this kind
+\citep{chen2016}; the residual definition of a gene is identical whether the model
+is a classifier or a regressor. Three safeguards make the residuals trustworthy as
+coach phenotypes.
+
+First, leakage-free scoring. Because a gene is a residual against a model's
+prediction, it is meaningful only if a coach-season is scored in exactly the feature
+space the model was trained in. We fit every preprocessing step, the categorical
+encoders, the median imputer, and a truncated-SVD reduction, on the training split
+alone, persist them, and apply them in transform-only mode when scoring the full
+play-by-play record; this removes a train/serve mismatch that would otherwise place
+genes in a different space than the one the models learned. Coach identity, season,
+and week are excluded as predictors, so no model can recover a coach from a name or
+the calendar, and every split is made at the team-year group level so that no team
+or coach appears in both training and evaluation.
+
+Second, coach-held-out cross-fitting. A model trained on a coach's own plays would
+partly fit that coach's tendencies and shrink the very residual we want to measure.
+The predictions used to compute a gene are therefore out-of-fold, from a group
+$k$-fold that leaves out whole coaches (offensive genes) or whole coach-defenses
+(defensive genes), reusing the tuned hyperparameters, with folds balanced across
+eras (stratified by career midpoint). Each coach-season is scored by a model that
+never saw that coach, so the residual reflects deviation from a coach-blind
+baseline. Model performance (Table~\ref{tab:traits}) is estimated under the same
+grouped resampling, with Nadeau--Bengio corrected resampled intervals
+\citep{nadeau2003} that account for the overlap among resampled training sets.
+
+Third, feature selection and calibration. Features are not hand-curated. A
+pre-specified core of fine-grained game-state fields (down, distance, field
+position, score margin, clock, and timeouts) is always retained; the remaining
+context variables (Table~\ref{tab:features}) are chosen by stability selection
+\citep{meinshausen2010}, keeping only features selected in at least 60\% of
+team-year subsamples, which prunes collinear inputs without materially changing
+accuracy. Because the classifier genes are residuals from predicted probabilities,
+we confirmed the classifiers are well-calibrated out-of-fold (expected calibration
+error at most 0.03), so the residuals are not artifacts of miscalibration.
+
+\begin{table}[t]
+\centering
+\caption{Candidate feature pool for the expectation models. The game-state core is
+always retained; the remaining categories are subject to stability selection.
+Offensive models draw on up to 26 candidates (21 for two-point, which omits field
+position); defensive models add the two observed pre-snap indicators.}
+\label{tab:features}
+\begin{tabular}{@{}l p{0.62\textwidth}@{}}
+\toprule
+Category & Fields \\
+\midrule
+Game state (core) & down, distance, yard line, score differential, quarter, seconds remaining, timeouts (both teams) \\
+Field position & goal-to-go, side of field \\
+Environment & home/away, division game, roof, surface, temperature, wind \\
+Drive context & drive play count, drive first downs, net yards \\
+Betting market & spread, total \\
+Pre-snap (defensive models) & observed shotgun, observed no-huddle \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -278,14 +343,27 @@ or era term enters the models. Coach WAR is already a within-season,
 replacement-relative quantity (about 3\% between-season variance) and receives no
 further adjustment.
 
-\subsection{Measurement error and reliability}
-Each coach-season phenotype is an estimate with a known sampling variance, computed
-per sub-trait from the play-level variance divided by the squared play count and
-rescaled to the standardized scale. This per-observation variance is carried
-explicitly in the heritability (C1) and repeatability (C2) models, so both are
-estimated for the latent trait rather than its noisy observation. Composite genes
-propagate their components' sampling variance; component reliabilities are estimated
-with a DerSimonian--Laird random-effects decomposition \citep{dersimonian1986}.
+\subsection{Reliability and measurement error}
+Each coach-season phenotype is an estimate with a known sampling variance. For a
+probability sub-trait, a coach-season residual $\theta_i$ has sampling variance
+$v_i = \sum \hat{p}(1-\hat{p})/n_i^2$ over its $n_i$ plays (with the analogous
+residual-variance form for the regression sub-traits); we estimate the
+between-coach-season variance $\hat{\tau}^2$ with the DerSimonian--Laird
+random-effects estimator \citep{dersimonian1986}. Each coach-season enters its
+composite with weight equal to its reliability,
+\begin{equation}
+  \mathrm{rel}_i = \frac{\hat{\tau}^2}{\hat{\tau}^2 + v_i},
+\end{equation}
+so a component measured from few plays contributes less; the single-component
+shotgun gene uses the analogous empirical-Bayes shrinkage toward the league mean.
+The same per-observation sampling variance, rescaled to the standardized scale, is
+carried explicitly as a measurement-error level in the heritability (C1) and
+repeatability (C2) models, so both are estimated for the latent trait rather than
+its noisy observation, and composites propagate their components' sampling variance.
+Reliabilities vary across sub-traits (for example the offensive-aggression
+components run from about 0.65 for fourth-down to 0.91 for pass-heavy), which is why
+carrying measurement error, rather than treating every phenotype as equally precise,
+matters for the cross-trait comparison in C3.
 
 \subsection{C1: transmissibility ($h^{2}$)}
 A coordinator-to-head-coach transition pairs two different coaches. The outcome is
@@ -651,9 +729,11 @@ offensive-coordinator apprenticeship: it carries the high $h^{2}$ and the positi
 phylogenetic signal (Table~\ref{tab:moran}, Supplementary material) that vertical
 transmission produces. Offensive aggression, lacking a vertical channel
 ($h^{2}\approx0$, no network autocorrelation), spread \emph{horizontally}. Its
-league mean climbed from below the time-invariant baseline in the late 2000s to
-clearly above it by the early 2020s (Figure~\ref{fig:adoption}), the classic
-profile of a payoff-driven innovation copied among contemporaries.
+league mean climbed from below the time-invariant, season-agnostic baseline in the
+late 2000s to clearly above it by the early 2020s, the classic profile of a
+payoff-driven innovation copied among contemporaries. Because the expectation model
+excludes season, that drift is a horizontal-transmission signal rather than a
+modeling artifact.
 
 This is where the study rejoins its predecessor. \citet{mesoudi2020} showed that a
 successful football tactic spreads horizontally, adopted by managers from their
@@ -668,19 +748,6 @@ tree would conclude aggression is absent from coaching culture; a study looking 
 at league-wide diffusion would miss that scheme is inherited. Read together, the two
 channels partition the strategic repertoire, and the era structure we remove as a
 statistical confounder is, substantively, the horizontal channel itself.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.82\textwidth]{../../visualizations/performance/aggression_adoption_curve.png}
-\caption{Horizontal diffusion of offensive aggression, 2006--2024. The league-mean
-composite gene (deviation from the time-invariant, season-agnostic expectation)
-rises from below the baseline in the late 2000s to above it by the early 2020s, the
-profile of a payoff-driven tactic copied among contemporaries. Because the
-expectation model excludes season, this drift is a horizontal-transmission signal
-rather than a modeling artifact; it is the same signal the contemporary-group
-adjustment removes in the confirmatory tests.}
-\label{fig:adoption}
-\end{figure}
 
 \subsection{Defensive aggression: attitude and scheme entangled}
 Defensive aggression is the one composite that both transmits ($h^{2}=0.49$) and
@@ -790,6 +857,11 @@ Process}. University of Chicago Press.
 Cavalli-Sforza, L. L., \& Feldman, M. W. (1981). \textit{Cultural Transmission and
 Evolution: A Quantitative Approach}. Princeton University Press.
 
+\bibitem[Chen and Guestrin(2016)]{chen2016}
+Chen, T., \& Guestrin, C. (2016). XGBoost: A scalable tree boosting system. In
+\textit{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge
+Discovery and Data Mining} (pp. 785--794).
+
 \bibitem[DerSimonian and Laird(1986)]{dersimonian1986}
 DerSimonian, R., \& Laird, N. (1986). Meta-analysis in clinical trials.
 \textit{Controlled Clinical Trials}, 7(3), 177--188.
@@ -816,6 +888,10 @@ Kruuk, L. E. B., Clutton-Brock, T. H., Slate, J., Pemberton, J. M., Brotherstone
 S., \& Guinness, F. E. (2000). Heritability of fitness in a wild mammal population.
 \textit{Proceedings of the National Academy of Sciences}, 97(2), 698--703.
 
+\bibitem[Meinshausen and B\"uhlmann(2010)]{meinshausen2010}
+Meinshausen, N., \& B\"uhlmann, P. (2010). Stability selection. \textit{Journal of
+the Royal Statistical Society: Series B (Statistical Methodology)}, 72(4), 417--473.
+
 \bibitem[Mesoudi(2020)]{mesoudi2020}
 Mesoudi, A. (2020). Cultural evolution of football tactics: strategic social
 learning in managers' choice of formation. \textit{Evolutionary Human Sciences},
@@ -828,6 +904,10 @@ Moran, P. A. P. (1950). Notes on continuous stochastic phenomena.
 \bibitem[Mousseau and Roff(1987)]{mousseauroff1987}
 Mousseau, T. A., \& Roff, D. A. (1987). Natural selection and the heritability of
 fitness components. \textit{Heredity}, 59(2), 181--197.
+
+\bibitem[Nadeau and Bengio(2003)]{nadeau2003}
+Nadeau, C., \& Bengio, Y. (2003). Inference for the generalization error.
+\textit{Machine Learning}, 52(3), 239--281.
 
 \bibitem[Nakagawa and Schielzeth(2010)]{nakagawa2010}
 Nakagawa, S., \& Schielzeth, H. (2010). Repeatability for Gaussian and non-Gaussian
