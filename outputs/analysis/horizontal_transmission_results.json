@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "draws": 1000,
+    "tune": 1000,
+    "chains": 4,
+    "phenotype": "absolute (z-scored over window, NOT era-demeaned)",
+    "model": "z_next ~ a_p + u_{coach,pheno} + phi_p z_now + kappa_p Mloo",
+    "kappa_meaning": "frequency-biased convergence on the league level; >0 = conformist horizontal transmission",
+    "multiplicity": "partial pooling of kappa across the 10 sub-traits regularizes; reported by posterior HDI / P(kappa>0), a separate family from the era/network exploratory tests",
+    "pooled_over": [
+      "fourth_down",
+      "pass_heavy",
+      "deep_pass",
+      "two_point",
+      "no_huddle",
+      "pace",
+      "box_stacking",
+      "pass_rush",
+      "man_coverage",
+      "shotgun"
+    ]
+  },
+  "pooled": {
+    "mu_kappa_median": 0.220924037404985,
+    "hdi_low": 0.02295368112763387,
+    "hdi_high": 0.40313229260584726,
+    "p_positive": 0.98,
+    "r_hat": 1.0042890140188254,
+    "ess_bulk": 1341.643140591349,
+    "n_transitions": 3844,
+    "n_phenotypes": 10
+  },
+  "pooled_detrended_robustness": {
+    "mu_kappa_median": 0.05194991863890376,
+    "hdi_low": -0.09922480755494345,
+    "hdi_high": 0.20501289111971122,
+    "p_positive": 0.766,
+    "r_hat": 1.001300502805531,
+    "ess_bulk": 2186.946276509762,
+    "n_transitions": 3844,
+    "n_phenotypes": 10
+  },
+  "per_phenotype": {
+    "fourth_down": {
+      "kappa_median": 0.5682908966989764,
+      "hdi_low": 0.3972393425067035,
+      "hdi_high": 0.7494730941651166,
+      "p_positive": 1.0,
+      "n_transitions": 468,
+      "n_coaches": 104,
+      "r_hat": 0.9997580192672534,
+      "ess_bulk": 4059.1867793209008,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": 0.5411866717056238,
+        "p_value": 6.240739036655896e-09,
+        "n": 453,
+        "n_coaches": 89
+      },
+      "label": "Fourth down",
+      "family": "approach",
+      "is_composite": false
+    },
+    "pass_heavy": {
+      "kappa_median": 0.13285719158541343,
+      "hdi_low": -0.11328438388096546,
+      "hdi_high": 0.3480130130253341,
+      "p_positive": 0.8695,
+      "n_transitions": 468,
+      "n_coaches": 104,
+      "r_hat": 1.0015178129223994,
+      "ess_bulk": 5330.904460144911,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": 0.023084797839862822,
+        "p_value": 0.8429866641080994,
+        "n": 453,
+        "n_coaches": 89
+      },
+      "label": "Pass-heavy",
+      "family": "approach",
+      "is_composite": false
+    },
+    "deep_pass": {
+      "kappa_median": 0.31467401585766647,
+      "hdi_low": 0.04077791682472538,
+      "hdi_high": 0.5979883011911525,
+      "p_positive": 0.98775,
+      "n_transitions": 468,
+      "n_coaches": 104,
+      "r_hat": 1.0003631920497273,
+      "ess_bulk": 6552.2770030798765,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": 0.3955144195363731,
+        "p_value": 0.0038049301587177453,
+        "n": 453,
+        "n_coaches": 89
+      },
+      "label": "Deep pass",
+      "family": "approach",
+      "is_composite": false
+    },
+    "two_point": {
+      "kappa_median": 0.4428613341755091,
+      "hdi_low": 0.2423188028854745,
+      "hdi_high": 0.641247812117398,
+      "p_positive": 1.0,
+      "n_transitions": 468,
+      "n_coaches": 104,
+      "r_hat": 1.0004096648354939,
+      "ess_bulk": 5156.734457602262,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": 0.4446988415395172,
+        "p_value": 0.0004988284022804379,
+        "n": 453,
+        "n_coaches": 89
+      },
+      "label": "Two-point",
+      "family": "approach",
+      "is_composite": false
+    },
+    "no_huddle": {
+      "kappa_median": 0.07838147933336773,
+      "hdi_low": -0.1353694133481599,
+      "hdi_high": 0.30956612395019467,
+      "p_positive": 0.75775,
+      "n_transitions": 468,
+      "n_coaches": 104,
+      "r_hat": 1.0002143298221178,
+      "ess_bulk": 5292.576953307849,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": 0.042910692696092684,
+        "p_value": 0.7248969113071215,
+        "n": 453,
+        "n_coaches": 89
+      },
+      "label": "No-huddle",
+      "family": "identity",
+      "is_composite": false
+    },
+    "pace": {
+      "kappa_median": 0.048537966611328226,
+      "hdi_low": -0.19619656872871605,
+      "hdi_high": 0.27468931522749457,
+      "p_positive": 0.656,
+      "n_transitions": 468,
+      "n_coaches": 104,
+      "r_hat": 1.0004872189672678,
+      "ess_bulk": 5679.953244998881,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": -0.018519020916461206,
+        "p_value": 0.8741429077853735,
+        "n": 453,
+        "n_coaches": 89
+      },
+      "label": "Pace",
+      "family": "identity",
+      "is_composite": false
+    },
+    "box_stacking": {
+      "kappa_median": 0.3029237651245368,
+      "hdi_low": -0.06599427498550273,
+      "hdi_high": 0.7299752387971842,
+      "p_positive": 0.94275,
+      "n_transitions": 207,
+      "n_coaches": 62,
+      "r_hat": 1.0001551896658447,
+      "ess_bulk": 4853.970426422054,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": 0.433418054017187,
+        "p_value": 0.16260433668261465,
+        "n": 192,
+        "n_coaches": 47
+      },
+      "label": "Box stacking",
+      "family": "approach",
+      "is_composite": false
+    },
+    "pass_rush": {
+      "kappa_median": 0.13086678004838148,
+      "hdi_low": -0.36951972614917966,
+      "hdi_high": 0.547360011862637,
+      "p_positive": 0.71375,
+      "n_transitions": 207,
+      "n_coaches": 62,
+      "r_hat": 1.0000008478196927,
+      "ess_bulk": 4679.064450418048,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": -0.1492965268256785,
+        "p_value": 0.6762090951432191,
+        "n": 192,
+        "n_coaches": 47
+      },
+      "label": "Pass rush",
+      "family": "approach",
+      "is_composite": false
+    },
+    "man_coverage": {
+      "kappa_median": 0.09508077418958427,
+      "hdi_low": -0.23527281018472013,
+      "hdi_high": 0.4175817509856189,
+      "p_positive": 0.70975,
+      "n_transitions": 154,
+      "n_coaches": 52,
+      "r_hat": 0.9995436825730961,
+      "ess_bulk": 5336.37502484106,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": -0.02925005385278423,
+        "p_value": 0.9185689617683797,
+        "n": 144,
+        "n_coaches": 42
+      },
+      "label": "Man coverage",
+      "family": "approach",
+      "is_composite": false
+    },
+    "shotgun": {
+      "kappa_median": 0.1978021942275502,
+      "hdi_low": 0.09066747640486815,
+      "hdi_high": 0.29677294581368224,
+      "p_positive": 1.0,
+      "n_transitions": 468,
+      "n_coaches": 104,
+      "r_hat": 0.9999706085924223,
+      "ess_bulk": 2900.2193474751125,
+      "source": "pooled_shrunk",
+      "freq": {
+        "M_crowd_beta": 0.1397650368622793,
+        "p_value": 0.00031635562912857296,
+        "n": 453,
+        "n_coaches": 89
+      },
+      "label": "Shotgun",
+      "family": "identity",
+      "is_composite": false
+    },
+    "composite_aggression": {
+      "kappa_median": 0.3709739813919021,
+      "hdi_low": 0.1591186816950305,
+      "hdi_high": 0.5689346356068415,
+      "p_positive": 0.99975,
+      "n_transitions": 468,
+      "n_coaches": 104,
+      "r_hat": 1.0007182182039156,
+      "ess_bulk": 3773.027493355127,
+      "source": "single",
+      "freq": {
+        "M_crowd_beta": 0.2787254523726464,
+        "p_value": 0.021630852970902392,
+        "n": 453,
+        "n_coaches": 89
+      },
+      "label": "Offensive aggression",
+      "family": "approach",
+      "is_composite": true
+    },
+    "composite_tempo": {
+      "kappa_median": -0.031280693364451134,
+      "hdi_low": -0.24719695523943397,
+      "hdi_high": 0.204451630781154,
+      "p_positive": 0.3845,
+      "n_transitions": 468,
+      "n_coaches": 104,
+      "r_hat": 1.001275527477072,
+      "ess_bulk": 4263.996534889052,
+      "source": "single",
+      "freq": {
+        "M_crowd_beta": -0.010867106337856994,
+        "p_value": 0.9281624835450886,
+        "n": 453,
+        "n_coaches": 89
+      },
+      "label": "Tempo",
+      "family": "identity",
+      "is_composite": true
+    },
+    "composite_defensive": {
+      "kappa_median": -0.26576210566326786,
+      "hdi_low": -0.7767470248879667,
+      "hdi_high": 0.19959906926044824,
+      "p_positive": 0.15275,
+      "n_transitions": 207,
+      "n_coaches": 62,
+      "r_hat": 1.0017944783873542,
+      "ess_bulk": 5451.630321964011,
+      "source": "single",
+      "freq": {
+        "M_crowd_beta": -0.23560434982242418,
+        "p_value": 0.3571494999521212,
+        "n": 192,
+        "n_coaches": 47
+      },
+      "label": "Defensive aggression",
+      "family": "approach",
+      "is_composite": true
+    }
+  }
+}

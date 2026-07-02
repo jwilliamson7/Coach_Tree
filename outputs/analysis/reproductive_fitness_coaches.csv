@@ -3,462 +3,264 @@ marty_schottenheimer,Marty Schottenheimer,1985,20,13,Bill Cowher; Brian Schotten
 bill_parcells,Bill Parcells,1983,19,13,Al Groh; Anthony Lynn; Bill Belichick; Chris Palmer; Freddie Kitchens; Mike Zimmer; Ray Handley; Romeo Crennel; Sean Payton; Todd Bowles; Todd Haley; Tom Coughlin; Tony Sparano,bill parcells,0.08365947403656805,1.589530006694793,19.0,0.673800004784931,-1.934067008301041,-0.5299067462733886,
 bill_belichick,Bill Belichick,1991,29,12,Al Groh; Bill O'Brien; Brian Daboll; Brian Flores; Eric Mangini; Jerod Mayo; Joe Judge; Josh McDaniels; Matt Patricia; Nick Saban; Rick Venturi; Romeo Crennel,bill belichick,0.0732886343692911,2.125370396709442,29.0,0.06604502239239968,-0.048929503299755255,0.9186710283744609,0.009967548064168663
 andy_reid,Andy Reid,1999,27,11,Brad Childress; David Culley; Doug Pederson; John Harbaugh; Leslie Frazier; Matt Nagy; Pat Shurmur; Ron Rivera; Sean McDermott; Steve Spagnuolo; Todd Bowles,andy reid,0.049772026179386995,1.294072680664062,26.0,0.3053204440541137,0.5095266316548805,-0.24202910727076588,0.5912157940155995
-weeb_ewbank,Weeb Ewbank,1954,13,9,Buddy Ryan; Charley Winner; Don McCafferty; Ed Biles; Joe Thomas; John Sandusky; Ken Meyer; Mike Holovak; Walt Michaels,weeb ewbank,-0.0896310433745384,-0.3585241734981536,4.0,,,,
-don_shula,Don Shula,1963,33,9,Bill Arnsparger; Charley Winner; Chuck Noll; Dan Henning; David Shula; Don McCafferty; Howard Schnellenberger; John Sandusky; Monte Clark,don shula,0.12521754582845246,3.2556561915397637,26.0,,,,
 bill_cowher,Bill Cowher,1992,15,9,Bruce Arians; Chan Gailey; David Culley; Dick LeBeau; Dom Capers; Jim Haslett; Ken Whisenhunt; Marvin Lewis; Mike Mularkey,bill cowher,0.04301134005864461,0.6451701008796692,15.0,0.0589481563800523,-0.1148843101444336,-0.6639439425720274,
-george_allen,George Allen,1966,12,9,Dick Vermeil; Howard Schnellenberger; Jack Patera; Joe Walton; Marion Campbell; Marv Levy; Mike McCormack; Pete McCulley; Ted Marchibroda,george allen,0.05411818416118619,0.4329454732894895,8.0,,,,
-brian_billick,Brian Billick,1999,9,8,Jack Del Rio; Marvin Lewis; Mike Nolan; Mike Pettine; Mike Singletary; Mike Smith; Rex Ryan; Vic Fangio,brian billick,-0.016273415750927375,-0.1464607417583464,9.0,0.0022531733459208447,-0.7563853491032471,-1.3918286125961483,
 mike_holmgren,Mike Holmgren,1992,17,8,Andy Reid; Dick Jauron; Jim Zorn; Jon Gruden; Marty Mornhinweg; Mike Sherman; Ray Rhodes; Steve Mariucci,mike holmgren,0.04014090580098767,0.6823953986167904,17.0,-0.4091115935483836,-2.5819803391075435,0.28228028390706433,
-bud_grant,Bud Grant,1967,18,8,Bob Hollway; Buddy Ryan; Jack Patera; Jerry Burns; Les Steckel; Marc Trestman; Neill Armstrong; Pete Carroll,bud grant,0.032451863044102976,0.4867779456615446,15.0,,,,
 forrest_gregg,Forrest Gregg,1975,11,8,Bruce Coslet; Dick Jauron; Dick LeBeau; Frank Gansz; Hank Bullough; Lindy Infante; Raymond Berry; Tom Coughlin,forrest gregg,0.049707745699449024,0.5467852026939393,11.0,,,,
-jon_gruden,Jon Gruden,1998,15,7,Bill Callahan; Brian Callahan; Gus Bradley; Marc Trestman; Mike Tomlin; Raheem Morris; Rod Marinelli,jon gruden,-0.030815340677897145,-0.46223011016845716,15.0,-0.9385281157415888,-0.6093902298748625,-0.3000716575210897,-0.3640782581646606
-tom_coughlin,Tom Coughlin,1995,20,7,Ben McAdoo; Bobby Petrino; Chris Palmer; Dick Jauron; Kevin Gilbride; Steve Spagnuolo; Tony Sparano,tom coughlin,-0.0102427527308464,-0.204855054616928,20.0,-0.2786917287198539,-0.43082344039784576,-0.3553689964855908,
+brian_billick,Brian Billick,1999,9,8,Jack Del Rio; Marvin Lewis; Mike Nolan; Mike Pettine; Mike Singletary; Mike Smith; Rex Ryan; Vic Fangio,brian billick,-0.016273415750927375,-0.1464607417583464,9.0,0.0022531733459208447,-0.7563853491032471,-1.3918286125961483,
 bill_walsh,Bill Walsh,1979,10,7,Bruce Coslet; Dennis Green; George Seifert; Mike Holmgren; Mike White; Ray Rhodes; Sam Wyche,bill walsh,-0.019171128635406487,-0.19171128635406487,10.0,,,,
+tom_coughlin,Tom Coughlin,1995,20,7,Ben McAdoo; Bobby Petrino; Chris Palmer; Dick Jauron; Kevin Gilbride; Steve Spagnuolo; Tony Sparano,tom coughlin,-0.0102427527308464,-0.204855054616928,20.0,-0.2786917287198539,-0.43082344039784576,-0.3553689964855908,
+jon_gruden,Jon Gruden,1998,15,7,Bill Callahan; Brian Callahan; Gus Bradley; Marc Trestman; Mike Tomlin; Raheem Morris; Rod Marinelli,jon gruden,-0.030815340677897145,-0.46223011016845716,15.0,-0.9385281157415888,-0.6093902298748625,-0.3000716575210897,-0.3640782581646606
 norv_turner,Norv Turner,1994,15,7,Cam Cameron; Chuck Pagano; Mike Martz; Mike Nolan; Rob Chudzinski; Ron Rivera; Steve Wilks,norv turner,-0.069209796368281,-1.0381469455242152,15.0,-0.2153190114932064,-0.99885137920928,-0.9677037489839583,
-chuck_fairbanks,Chuck Fairbanks,1973,6,6,Hank Bullough; Ray Perkins; Raymond Berry; Red Miller; Ron Erhardt; Sam Rutigliano,chuck fairbanks,0.059558389015992454,0.35735033409595474,6.0,,,,
 mike_shanahan,Mike Shanahan,1988,20,6,Art Shell; Gary Kubiak; Kyle Shanahan; Matt LaFleur; Mike McDaniel; Sean McVay,mike shanahan,-6.217658519746538e-05,-0.0012435317039493077,20.0,-0.38966988804943303,-0.8052150314155159,-0.5874654629382603,
 chuck_knox,Chuck Knox,1973,22,6,Dick Vermeil; Kay Stephenson; Ken Meyer; Leeman Bennett; Mike Martz; Ray Malavasi,chuck knox,0.03385913327390497,0.7449009320259093,22.0,,,,
-charley_winner,Charley Winner,1966,7,6,Buddy Ryan; Leeman Bennett; Mike Holovak; Red Miller; Rick Forzano; Sam Rutigliano,charley winner,0.0007357543468475327,0.002207263040542598,3.0,,,,
-jack_pardee,Jack Pardee,1975,11,6,Chris Palmer; Gregg Williams; Jeff Fisher; Joe Walton; Kevin Gilbride; Richie Petitbon,jack pardee,0.007487643185528836,0.08236407504081719,11.0,,,,
+chuck_fairbanks,Chuck Fairbanks,1973,6,6,Hank Bullough; Ray Perkins; Raymond Berry; Red Miller; Ron Erhardt; Sam Rutigliano,chuck fairbanks,0.059558389015992454,0.35735033409595474,6.0,,,,
 don_coryell,Don Coryell,1973,14,6,Al Saunders; Gunther Cunningham; Jim Hanifan; Jim Mora Jr; Joe Gibbs; Rod Dowhower,don coryell,0.05405277022215035,0.7026860128879545,13.0,,,,
-tom_landry,Tom Landry,1960,29,6,Dan Reeves; Dick Nolan; Gene Stallings; John Mackovic; Mike Ditka; Raymond Berry,tom landry,0.05400052493496941,1.0260099737644188,19.0,,,,
-george_halas,George Halas,1922,38,6,Abe Gibron; Gene Ronzani; George Allen; George Wilson; Hunk Anderson; Jim Dooley,george halas,,,,,,,
 george_seifert,George Seifert,1989,11,6,Gary Kubiak; Jeff Fisher; Marc Trestman; Mike Holmgren; Mike McCoy; Ray Rhodes,george seifert,0.020998163656754918,0.2309798002243041,11.0,,,,
+jack_pardee,Jack Pardee,1975,11,6,Chris Palmer; Gregg Williams; Jeff Fisher; Joe Walton; Kevin Gilbride; Richie Petitbon,jack pardee,0.007487643185528836,0.08236407504081719,11.0,,,,
 john_harbaugh,John Harbaugh,2008,18,6,Chuck Pagano; Hue Jackson; Mike Macdonald; Mike Pettine; Rex Ryan; Vic Fangio,john harbaugh,0.04583550341129301,0.7792035579919813,17.0,0.07327123614890073,0.620464494295237,0.25545352951721817,0.7907960668640386
-john_fox,John Fox,2002,16,6,Adam Gase; Brandon Staley; Dennis Allen; Jack Del Rio; Mike McCoy; Vic Fangio,john fox,0.015563600696623318,0.2490176111459731,16.0,-1.1271507958760498,-0.3409511625288302,0.4959377122476422,-1.8716125170438267
 tony_dungy,Tony Dungy,1996,13,6,Herm Edwards; Jim Caldwell; Leslie Frazier; Lovie Smith; Mike Tomlin; Rod Marinelli,tony dungy,0.017549663782119748,0.2281456291675567,13.0,0.4911551144527029,-0.47379546706930276,0.7677261421187106,
-vince_lombardi,Vince Lombardi,1959,10,6,Bill Austin; Jerry Burns; Mike McCormack; Norb Hecker; Phil Bengtson; Tom Fears,vince lombardi,,,,,,,
-art_shell,Art Shell,1989,7,5,Chuck Pagano; Gunther Cunningham; Jim Haslett; John Fox; Mike White,art shell,0.054097577929496744,0.3245854675769805,6.0,-0.7498166589499642,-2.301022894812715,-0.5324822910286263,
-ray_perkins,Ray Perkins,1979,8,5,Bill Belichick; Bill Parcells; Marc Trestman; Richard Williamson; Romeo Crennel,ray perkins,-0.01066651701033115,-0.0853321360826492,8.0,,,,
-ray_rhodes,Ray Rhodes,1995,5,5,Bill Callahan; John Harbaugh; Jon Gruden; Mike McCarthy; Sean Payton,ray rhodes,0.010446991195678716,0.05223495597839358,5.0,,,,
-sam_wyche,Sam Wyche,1984,12,5,Bruce Coslet; David Culley; David Shula; Dick LeBeau; Mike Mularkey,sam wyche,0.009017986591656993,0.10821583909988391,12.0,,,,
-sid_gillman,Sid Gillman,1955,8,5,Bob Waterfield; Bum Phillips; Ed Biles; George Allen; Joe Thomas,sid gillman,-0.030517745018005346,-0.06103549003601069,2.0,,,,
-jim_mora_sr,Jim Mora Sr,1986,15,5,Bruce Arians; Dom Capers; Jim Haslett; Jim Mora Jr; Vic Fangio,jim mora sr,0.02616684158643087,0.39250262379646306,15.0,,,,
-dick_nolan,Dick Nolan,1968,11,5,Ed Hughes; Ken Meyer; Mike Holovak; Paul Wiggin; Rich Brooks,dick nolan,-0.003209031656053333,-0.028881284904479998,9.0,,,,
+john_fox,John Fox,2002,16,6,Adam Gase; Brandon Staley; Dennis Allen; Jack Del Rio; Mike McCoy; Vic Fangio,john fox,0.015563600696623318,0.2490176111459731,16.0,-1.1271507958760498,-0.3409511625288302,0.4959377122476422,-1.8716125170438267
 don_mccafferty,Don McCafferty,1970,4,5,Hank Bullough; John Sandusky; Raymond Berry; Red Miller; Rick Forzano,don mccafferty,-0.06882708966732025,-0.275308358669281,4.0,,,,
-sean_mcvay,Sean McVay,2017,9,5,Brandon Staley; Kevin O'Connell; Liam Coen; Matt LaFleur; Zac Taylor,sean mcvay,0.0290870733737945,0.232696586990356,8.0,0.3618795615191692,-0.6497235544122615,0.5689992071528318,-0.47738487983293004
-dan_reeves,Dan Reeves,1981,23,5,Chan Gailey; Mike Nolan; Mike Shanahan; Rod Dowhower; Wade Phillips,dan reeves,0.027829083175244535,0.6400689130306243,23.0,,,,
-marvin_lewis,Marvin Lewis,2003,16,5,Hue Jackson; Jay Gruden; Leslie Frazier; Mike Zimmer; Vance Joseph,marvin lewis,-0.021767866173386552,-0.34828585877418483,16.0,-0.4290574706190127,-0.4048298578164506,0.023207111463742863,-0.651068316353032
-ted_marchibroda,Ted Marchibroda,1975,12,5,Ken Whisenhunt; Marvin Lewis; Pete McCulley; Rick Venturi; Vince Tobin,ted marchibroda,-0.011792567729949943,-0.1415108127593993,12.0,,,,
+jim_mora_sr,Jim Mora Sr,1986,15,5,Bruce Arians; Dom Capers; Jim Haslett; Jim Mora Jr; Vic Fangio,jim mora sr,0.02616684158643087,0.39250262379646306,15.0,,,,
 jimmy_johnson,Jimmy Johnson,1989,9,5,Butch Davis; Dave Campo; Dave Wannstedt; David Shula; Norv Turner,jimmy johnson,0.0592337366607454,0.5331036299467086,9.0,,,,
-pete_carroll,Pete Carroll,1994,19,4,Brian Schottenheimer; Dan Quinn; Dave Canales; Gus Bradley,pete carroll,0.02961010896099936,0.5329819612979885,18.0,-0.0032919687957697935,0.4805510625421912,0.11250821838127648,-0.3035496517028447
-paul_brown,Paul Brown,1950,19,4,Bill Johnson; Bill Walsh; Blanton Collier; Weeb Ewbank,paul brown,-0.0367568378051122,-0.2205410268306732,6.0,,,,
+sean_mcvay,Sean McVay,2017,9,5,Brandon Staley; Kevin O'Connell; Liam Coen; Matt LaFleur; Zac Taylor,sean mcvay,0.0290870733737945,0.232696586990356,8.0,0.3618795615191692,-0.6497235544122615,0.5689992071528318,-0.47738487983293004
+marvin_lewis,Marvin Lewis,2003,16,5,Hue Jackson; Jay Gruden; Leslie Frazier; Mike Zimmer; Vance Joseph,marvin lewis,-0.021767866173386552,-0.34828585877418483,16.0,-0.4290574706190127,-0.4048298578164506,0.023207111463742863,-0.651068316353032
+ray_rhodes,Ray Rhodes,1995,5,5,Bill Callahan; John Harbaugh; Jon Gruden; Mike McCarthy; Sean Payton,ray rhodes,0.010446991195678716,0.05223495597839358,5.0,,,,
+ray_perkins,Ray Perkins,1979,8,5,Bill Belichick; Bill Parcells; Marc Trestman; Richard Williamson; Romeo Crennel,ray perkins,-0.01066651701033115,-0.0853321360826492,8.0,,,,
+dan_reeves,Dan Reeves,1981,23,5,Chan Gailey; Mike Nolan; Mike Shanahan; Rod Dowhower; Wade Phillips,dan reeves,0.027829083175244535,0.6400689130306243,23.0,,,,
+art_shell,Art Shell,1989,7,5,Chuck Pagano; Gunther Cunningham; Jim Haslett; John Fox; Mike White,art shell,0.054097577929496744,0.3245854675769805,6.0,-0.7498166589499642,-2.301022894812715,-0.5324822910286263,
+ted_marchibroda,Ted Marchibroda,1975,12,5,Ken Whisenhunt; Marvin Lewis; Pete McCulley; Rick Venturi; Vince Tobin,ted marchibroda,-0.011792567729949943,-0.1415108127593993,12.0,,,,
+sam_wyche,Sam Wyche,1984,12,5,Bruce Coslet; David Culley; David Shula; Dick LeBeau; Mike Mularkey,sam wyche,0.009017986591656993,0.10821583909988391,12.0,,,,
+butch_davis,Butch Davis,2001,4,4,Bruce Arians; Chuck Pagano; Rob Chudzinski; Todd Bowles,butch davis,-0.065432342839241,-0.261729371356964,4.0,,,,
+bum_phillips,Bum Phillips,1975,11,4,Ed Biles; Joe Bugel; Richie Petitbon; Wade Phillips,bum phillips,0.07237114054506472,0.7960825459957119,11.0,,,,
 mike_ditka,Mike Ditka,1982,14,4,Buddy Ryan; Dave McGinnis; Hank Kuhlmann; Vince Tobin,mike ditka,0.015220599879537307,0.2130883983135223,14.0,,,,
-eric_mangini,Eric Mangini,2006,5,4,Brian Daboll; Brian Schottenheimer; Dan Quinn; Matt Eberflus,eric mangini,-0.03905195593833924,-0.1952597796916962,5.0,-0.8809687850223027,-0.4761557860105664,0.9121797406279647,
-tom_fears,Tom Fears,1967,4,4,Ed Biles; Ed Khayat; J.D. Roberts; Jerry Smith,tom fears,,,,,,,
-sean_payton,Sean Payton,2006,18,4,Aaron Glenn; Dan Campbell; Dennis Allen; Doug Marrone,sean payton,0.04831320731499616,0.8213245243549346,17.0,0.03146503939361373,-0.4442476300282636,-0.3391274503600857,0.6259745628860574
-al_groh,Al Groh,2000,1,4,Ken Whisenhunt; Mike Nolan; Todd Bowles; Todd Haley,al groh,0.093655526638031,0.093655526638031,1.0,,,,
 mike_mccarthy,Mike McCarthy,2006,18,4,Ben McAdoo; Brian Schottenheimer; Joe Philbin; Kellen Moore,mike mccarthy,0.017725952006710892,0.31906713612079607,18.0,0.6071150652206992,0.21566573304320744,0.4803682560802265,0.6436516434474231
-mike_nolan,Mike Nolan,2005,4,4,Jim Tomsula; Mike McCarthy; Mike Singletary; Vance Joseph,mike nolan,-0.11597262157201763,-0.4638904862880705,4.0,-0.7907781936316476,-1.9334744939373945,-1.0897184151179602,
-bobby_ross,Bobby Ross,1992,9,4,Gary Moeller; Jim Zorn; John Fox; Marc Trestman,bobby ross,0.008995534377627899,0.08095980939865109,9.0,,,,
+buddy_ryan,Buddy Ryan,1986,7,4,Jeff Fisher; Rex Ryan; Rich Kotite; Wade Phillips,buddy ryan,-0.025307965551103855,-0.177155758857727,7.0,,,,
+eric_mangini,Eric Mangini,2006,5,4,Brian Daboll; Brian Schottenheimer; Dan Quinn; Matt Eberflus,eric mangini,-0.03905195593833924,-0.1952597796916962,5.0,-0.8809687850223027,-0.4761557860105664,0.9121797406279647,
 frank_kush,Frank Kush,1982,3,4,Bud Carson; Gunther Cunningham; Hal Hunter; Rick Venturi,frank kush,-0.03217796053886413,-0.0965338816165924,3.0,,,,
 tommy_prothro,Tommy Prothro,1971,7,4,Bill Walsh; Dick Vermeil; Ray Perkins; Rich Brooks,tommy prothro,-0.0232509459768023,-0.1627566218376161,7.0,,,,
-wade_phillips,Wade Phillips,1993,9,4,Jason Garrett; Jim Fassel; Todd Bowles; Tony Sparano,wade phillips,-0.010043902529610535,-0.0903951227664948,9.0,-0.3958683780398539,-0.683020857186494,-0.6788707216423653,
-butch_davis,Butch Davis,2001,4,4,Bruce Arians; Chuck Pagano; Rob Chudzinski; Todd Bowles,butch davis,-0.065432342839241,-0.261729371356964,4.0,,,,
-buddy_parker,Buddy Parker,1949,15,4,Bill McPeak; George Wilson; Harry Gilmer; Nick Skorich,buddy parker,,,,,,,
 john_madden,John Madden,1970,9,4,John Robinson; Mike Holovak; Ray Malavasi; Tom Flores,john madden,0.1298319693671332,1.168487724304199,9.0,,,,
-buddy_ryan,Buddy Ryan,1986,7,4,Jeff Fisher; Rex Ryan; Rich Kotite; Wade Phillips,buddy ryan,-0.025307965551103855,-0.177155758857727,7.0,,,,
-bum_phillips,Bum Phillips,1975,11,4,Ed Biles; Joe Bugel; Richie Petitbon; Wade Phillips,bum phillips,0.07237114054506472,0.7960825459957119,11.0,,,,
+sean_payton,Sean Payton,2006,18,4,Aaron Glenn; Dan Campbell; Dennis Allen; Doug Marrone,sean payton,0.04831320731499616,0.8213245243549346,17.0,0.03146503939361373,-0.4442476300282636,-0.3391274503600857,0.6259745628860574
 romeo_crennel,Romeo Crennel,2005,5,4,Anthony Lynn; Brian Daboll; Nick Sirianni; Rob Chudzinski,romeo crennel,-0.10478110313415523,-0.5239055156707761,5.0,-1.0303044435328512,-0.8598889731063629,-0.44683633631203007,0.3556476087265158
-jim_lee_howell,Jim Lee Howell,1954,7,4,Allie Sherman; Harland Svare; Tom Landry; Vince Lombardi,jim lee howell,,,,,,,
 jeff_fisher,Jeff Fisher,1995,21,4,Brian Schottenheimer; Gregg Williams; Jim Schwartz; Mike Munchak,jeff fisher,0.009230402889705839,0.19383846068382263,21.0,-0.6096981044654224,-0.6730833724415356,-0.47301120700560484,0.7479546460027491
-chuck_noll,Chuck Noll,1969,23,4,Bud Carson; John Fox; Rod Rust; Tony Dungy,chuck noll,0.04811655580997464,1.058564227819442,22.0,,,,
-ron_meyer,Ron Meyer,1982,9,3,Jim Mora Sr; Rick Venturi; Rod Rust,ron meyer,0.030554749515652624,0.244437996125221,8.0,,,,
-vince_tobin,Vince Tobin,1996,5,3,Dave McGinnis; Jim Fassel; Marc Trestman,vince tobin,-0.001827489004135159,-0.009137445020675795,5.0,,,,
-ray_handley,Ray Handley,1991,2,3,Al Groh; Jim Fassel; Romeo Crennel,ray handley,-0.05749668180942534,-0.11499336361885068,2.0,,,,
-pete_mcculley,Pete McCulley,1978,1,3,Frank Gansz; Les Steckel; Mike White,pete mcculley,-0.1135143519878387,-0.1135143519878387,1.0,,,,
-nick_saban,Nick Saban,2005,2,3,Dan Quinn; Jason Garrett; Scott Linehan,nick saban,-0.0064918100833893,-0.0129836201667786,2.0,-0.1901914541094784,0.3197058037711293,0.4775889568487175,
-allie_sherman,Allie Sherman,1961,8,3,Alex Webster; Harland Svare; Jack Patera,allie sherman,,,,,,,
-ron_rivera,Ron Rivera,2011,13,3,Rob Chudzinski; Sean McDermott; Steve Wilks,ron rivera,0.03735773949256308,0.48565061340332005,13.0,0.46243630265492175,0.9794393780003745,-0.19423455643917398,0.35863807823734856
-barry_switzer,Barry Switzer,1994,4,3,Butch Davis; Dave Campo; Mike Zimmer,barry switzer,0.0343358591198921,0.1373434364795684,4.0,,,,
-tony_sparano,Tony Sparano,2008,4,3,Brian Daboll; Dan Campbell; Todd Bowles,tony sparano,-0.0230925029039383,-0.0923700116157532,4.0,-0.6763310033064255,-1.0174097061321552,-0.25443146018262,
-frank_reich,Frank Reich,2018,6,3,Jonathan Gannon; Matt Eberflus; Nick Sirianni,frank reich,-0.0378957004626592,-0.22737420277595521,6.0,0.032553440778056476,0.9242608315545294,-0.05040604129548714,-1.1894581171922063
-tommy_hudspeth,Tommy Hudspeth,1976,2,3,Bill Belichick; Jerry Glanville; Joe Bugel,tommy hudspeth,-0.0035727752685547,-0.0035727752685547,1.0,,,,
-harland_svare,Harland Svare,1962,7,3,Bill Austin; Jack Patera; Ron Waller,harland svare,-0.09545407526493065,-0.1909081505298613,2.0,,,,
-joe_gibbs,Joe Gibbs,1981,16,3,Joe Bugel; Richie Petitbon; Steve Wilks,joe gibbs,0.05292546859085557,0.8468074974536891,16.0,-0.682176236689695,-1.4542545565992813,-0.4127738133642077,
-jack_del_rio,Jack Del Rio,2003,12,3,Anthony Lynn; Dirk Koetter; Mike Smith,jack del rio,-0.0138226484100024,-0.1658717809200288,12.0,-0.5094301374786299,-0.45864850165749105,-0.6022258436376339,0.07988681936600805
-jerry_glanville,Jerry Glanville,1986,8,3,June Jones; Kevin Gilbride; Nick Saban,jerry glanville,0.014278494566679002,0.11422795653343201,8.0,,,,
-dennis_green,Dennis Green,1992,13,3,Brian Billick; Mike Tice; Tony Dungy,dennis green,0.04477028705890361,0.5820137317657469,13.0,-1.6893544247281391,-1.3997014943499375,-0.7030836272300651,
-sam_rutigliano,Sam Rutigliano,1978,7,3,Dick MacPherson; Marty Schottenheimer; Rich Kotite,sam rutigliano,-0.05974831929888043,-0.418238235092163,7.0,,,,
-ron_erhardt,Ron Erhardt,1979,3,3,Bill Parcells; Hank Bullough; Raymond Berry,ron erhardt,-0.03984961907068891,-0.11954885721206672,3.0,,,,
-rick_venturi,Rick Venturi,1996,1,3,Bruce Arians; Jim Haslett; Jim Mora Jr,rick venturi,,,,,,,
-rex_ryan,Rex Ryan,2009,8,3,Anthony Lynn; Brian Schottenheimer; Mike Pettine,rex ryan,-0.018494429385662092,-0.14795543508529674,8.0,-1.2843935305605456,0.09614042513592819,-0.20515211343344644,-1.502821222685926
-rick_forzano,Rick Forzano,1974,3,3,Jerry Glanville; Joe Bugel; Raymond Berry,rick forzano,-0.11990982294082643,-0.3597294688224793,3.0,,,,
-joe_stydahar,Joe Stydahar,1950,5,3,Hampton Pool; Ray Richards; Red Hickey,joe stydahar,,,,,,,
-joe_schmidt,Joe Schmidt,1967,6,3,Chuck Knox; John North; Leeman Bennett,joe schmidt,0.00016762482325230013,0.0005028744697569004,3.0,,,,
-john_mackovic,John Mackovic,1983,4,3,Bud Carson; Frank Gansz; Richard Williamson,john mackovic,-0.06270688772201535,-0.2508275508880614,4.0,,,,
-joe_philbin,Joe Philbin,2012,4,3,Ben Johnson; Dan Campbell; Zac Taylor,joe philbin,-0.062466464936733246,-0.24986585974693298,4.0,1.031663976504031,0.9773552789594211,0.11033463588414119,-0.6783965814336466
-mike_mccoy,Mike McCoy,2013,4,3,Frank Reich; Nick Sirianni; Shane Steichen,mike mccoy,-0.010736621916294098,-0.04294648766517639,4.0,-0.8251816493105953,0.9214395962312251,0.37526989913781084,-0.079450518918351
-ken_whisenhunt,Ken Whisenhunt,2007,8,3,Frank Reich; Freddie Kitchens; Todd Haley,ken whisenhunt,-0.02291862728893756,-0.18334901831150047,8.0,0.13186534684119258,-0.14030087706651362,-0.31585861104824087,
-kyle_shanahan,Kyle Shanahan,2017,9,3,DeMeco Ryans; Mike McDaniel; Robert Saleh,kyle shanahan,0.09435514418184753,0.7548411534547802,8.0,-0.7104966581913831,-0.15071046358494117,-0.80603490022171,-0.0183769391837304
-lovie_smith,Lovie Smith,2004,12,3,Dirk Koetter; Ron Rivera; Steve Wilks,lovie smith,-0.03631516161362331,-0.43578193936347975,12.0,-0.061531724143964274,-1.2385941055827376,-0.13100358107485452,-0.7746134811005937
-chris_palmer,Chris Palmer,1999,2,3,Ken Whisenhunt; Romeo Crennel; Tony Sparano,chris palmer,-0.16657373309135437,-0.33314746618270874,2.0,,,,
-josh_mcdaniels,Josh McDaniels,2009,4,3,Adam Gase; Antonio Pierce; Mike McCoy,josh mcdaniels,-0.06513145526647564,-0.26052582106590255,4.0,0.12380864037253068,-0.32647187840429226,-0.3734824374436939,-0.14403807199707586
-marv_levy,Marv Levy,1978,17,3,Bobby Ross; Frank Gansz; Rod Rust,marv levy,0.020685832202434525,0.3309733152389524,16.0,,,,
-nick_sirianni,Nick Sirianni,2021,5,3,Jonathan Gannon; Kellen Moore; Shane Steichen,nick sirianni,0.08913382703065867,0.3565353081226347,4.0,0.6418104146562164,1.9894152320881882,0.9283548451471734,-0.03693739970052633
-dave_wannstedt,Dave Wannstedt,1993,11,3,Dave McGinnis; Greg Schiano; Marc Trestman,dave wannstedt,-0.01647124671069058,-0.18118371381759638,11.0,,,,
+bobby_ross,Bobby Ross,1992,9,4,Gary Moeller; Jim Zorn; John Fox; Marc Trestman,bobby ross,0.008995534377627899,0.08095980939865109,9.0,,,,
+al_groh,Al Groh,2000,1,4,Ken Whisenhunt; Mike Nolan; Todd Bowles; Todd Haley,al groh,0.093655526638031,0.093655526638031,1.0,,,,
+pete_carroll,Pete Carroll,1994,19,4,Brian Schottenheimer; Dan Quinn; Dave Canales; Gus Bradley,pete carroll,0.02961010896099936,0.5329819612979885,18.0,-0.0032919687957697935,0.4805510625421912,0.11250821838127648,-0.3035496517028447
+wade_phillips,Wade Phillips,1993,9,4,Jason Garrett; Jim Fassel; Todd Bowles; Tony Sparano,wade phillips,-0.010043902529610535,-0.0903951227664948,9.0,-0.3958683780398539,-0.683020857186494,-0.6788707216423653,
+mike_nolan,Mike Nolan,2005,4,4,Jim Tomsula; Mike McCarthy; Mike Singletary; Vance Joseph,mike nolan,-0.11597262157201763,-0.4638904862880705,4.0,-0.7907781936316476,-1.9334744939373945,-1.0897184151179602,
 lou_saban,Lou Saban,1970,7,3,Dick MacPherson; Jim Ringo; Sam Rutigliano,lou saban,0.04513729852267674,0.3159610896587372,7.0,,,,
-marion_campbell,Marion Campbell,1975,8,3,Al Groh; Frank Gansz; Tom Coughlin,marion campbell,-0.07457150853872295,-0.5965720683097836,8.0,,,,
+marv_levy,Marv Levy,1978,17,3,Bobby Ross; Frank Gansz; Rod Rust,marv levy,0.020685832202434525,0.3309733152389524,16.0,,,,
+frank_reich,Frank Reich,2018,6,3,Jonathan Gannon; Matt Eberflus; Nick Sirianni,frank reich,-0.0378957004626592,-0.22737420277595521,6.0,0.032553440778056476,0.9242608315545294,-0.05040604129548714,-1.1894581171922063
 mike_pettine,Mike Pettine,2014,2,3,Kevin O'Connell; Kyle Shanahan; Mike McDaniel,mike pettine,-0.08763022720813746,-0.1752604544162749,2.0,0.28868597133421114,-0.18034617045659945,0.4528330806627936,
+mike_mccoy,Mike McCoy,2013,4,3,Frank Reich; Nick Sirianni; Shane Steichen,mike mccoy,-0.010736621916294098,-0.04294648766517639,4.0,-0.8251816493105953,0.9214395962312251,0.37526989913781084,-0.079450518918351
+lovie_smith,Lovie Smith,2004,12,3,Dirk Koetter; Ron Rivera; Steve Wilks,lovie smith,-0.03631516161362331,-0.43578193936347975,12.0,-0.061531724143964274,-1.2385941055827376,-0.13100358107485452,-0.7746134811005937
+marion_campbell,Marion Campbell,1975,8,3,Al Groh; Frank Gansz; Tom Coughlin,marion campbell,-0.07457150853872295,-0.5965720683097836,8.0,,,,
+dennis_green,Dennis Green,1992,13,3,Brian Billick; Mike Tice; Tony Dungy,dennis green,0.04477028705890361,0.5820137317657469,13.0,-1.6893544247281391,-1.3997014943499375,-0.7030836272300651,
+nick_sirianni,Nick Sirianni,2021,5,3,Jonathan Gannon; Kellen Moore; Shane Steichen,nick sirianni,0.08913382703065867,0.3565353081226347,4.0,0.6418104146562164,1.9894152320881882,0.9283548451471734,-0.03693739970052633
+rex_ryan,Rex Ryan,2009,8,3,Anthony Lynn; Brian Schottenheimer; Mike Pettine,rex ryan,-0.018494429385662092,-0.14795543508529674,8.0,-1.2843935305605456,0.09614042513592819,-0.20515211343344644,-1.502821222685926
+rick_venturi,Rick Venturi,1996,1,3,Bruce Arians; Jim Haslett; Jim Mora Jr,rick venturi,,,,,,,
+pete_mcculley,Pete McCulley,1978,1,3,Frank Gansz; Les Steckel; Mike White,pete mcculley,-0.1135143519878387,-0.1135143519878387,1.0,,,,
+ray_handley,Ray Handley,1991,2,3,Al Groh; Jim Fassel; Romeo Crennel,ray handley,-0.05749668180942534,-0.11499336361885068,2.0,,,,
+rick_forzano,Rick Forzano,1974,3,3,Jerry Glanville; Joe Bugel; Raymond Berry,rick forzano,-0.11990982294082643,-0.3597294688224793,3.0,,,,
+vince_tobin,Vince Tobin,1996,5,3,Dave McGinnis; Jim Fassel; Marc Trestman,vince tobin,-0.001827489004135159,-0.009137445020675795,5.0,,,,
+sam_rutigliano,Sam Rutigliano,1978,7,3,Dick MacPherson; Marty Schottenheimer; Rich Kotite,sam rutigliano,-0.05974831929888043,-0.418238235092163,7.0,,,,
+barry_switzer,Barry Switzer,1994,4,3,Butch Davis; Dave Campo; Mike Zimmer,barry switzer,0.0343358591198921,0.1373434364795684,4.0,,,,
+ron_rivera,Ron Rivera,2011,13,3,Rob Chudzinski; Sean McDermott; Steve Wilks,ron rivera,0.03735773949256308,0.48565061340332005,13.0,0.46243630265492175,0.9794393780003745,-0.19423455643917398,0.35863807823734856
+ron_meyer,Ron Meyer,1982,9,3,Jim Mora Sr; Rick Venturi; Rod Rust,ron meyer,0.030554749515652624,0.244437996125221,8.0,,,,
+ron_erhardt,Ron Erhardt,1979,3,3,Bill Parcells; Hank Bullough; Raymond Berry,ron erhardt,-0.03984961907068891,-0.11954885721206672,3.0,,,,
 jim_mora_jr,Jim Mora Jr,2004,4,3,Dan Quinn; Gus Bradley; Tom Cable,jim mora jr,-0.08724474906921385,-0.3489789962768554,4.0,-0.004226666495196901,-0.7503442877354053,0.317829964893225,
-bill_mcpeak,Bill McPeak,1961,5,3,Abe Gibron; Ed Hughes; Ted Marchibroda,bill mcpeak,,,,,,,
-red_miller,Red Miller,1977,4,2,Bill Belichick; Rod Dowhower,red miller,0.10008545717000959,0.40034182868003837,4.0,,,,
-mike_singletary,Mike Singletary,2009,2,2,Jim Tomsula; Vance Joseph,mike singletary,-0.19826951346397395,-0.3965390269279479,2.0,-0.7068435347118847,-0.9134809660253099,-0.6773983819401536,
-neill_armstrong,Neill Armstrong,1978,4,2,Buddy Ryan; Hank Kuhlmann,neill armstrong,-0.010485328733921051,-0.041941314935684204,4.0,,,,
-walt_kiesling,Walt Kiesling,1939,9,2,Bill McPeak; Nick Skorich,walt kiesling,,,,,,,
-ray_mclean,Ray McLean,1953,2,2,Chuck Drulis; Nick Skorich,ray mclean,,,,,,,
-chan_gailey,Chan Gailey,1998,5,2,Dave Campo; Mike Zimmer,chan gailey,-0.0410510957241058,-0.205255478620529,5.0,-0.6583767982059942,0.1392045651818698,-1.0444736435624231,
+jerry_glanville,Jerry Glanville,1986,8,3,June Jones; Kevin Gilbride; Nick Saban,jerry glanville,0.014278494566679002,0.11422795653343201,8.0,,,,
+tony_sparano,Tony Sparano,2008,4,3,Brian Daboll; Dan Campbell; Todd Bowles,tony sparano,-0.0230925029039383,-0.0923700116157532,4.0,-0.6763310033064255,-1.0174097061321552,-0.25443146018262,
+joe_philbin,Joe Philbin,2012,4,3,Ben Johnson; Dan Campbell; Zac Taylor,joe philbin,-0.062466464936733246,-0.24986585974693298,4.0,1.031663976504031,0.9773552789594211,0.11033463588414119,-0.6783965814336466
+tommy_hudspeth,Tommy Hudspeth,1976,2,3,Bill Belichick; Jerry Glanville; Joe Bugel,tommy hudspeth,-0.0035727752685547,-0.0035727752685547,1.0,,,,
+jack_del_rio,Jack Del Rio,2003,12,3,Anthony Lynn; Dirk Koetter; Mike Smith,jack del rio,-0.0138226484100024,-0.1658717809200288,12.0,-0.5094301374786299,-0.45864850165749105,-0.6022258436376339,0.07988681936600805
+john_mackovic,John Mackovic,1983,4,3,Bud Carson; Frank Gansz; Richard Williamson,john mackovic,-0.06270688772201535,-0.2508275508880614,4.0,,,,
+joe_gibbs,Joe Gibbs,1981,16,3,Joe Bugel; Richie Petitbon; Steve Wilks,joe gibbs,0.05292546859085557,0.8468074974536891,16.0,-0.682176236689695,-1.4542545565992813,-0.4127738133642077,
+josh_mcdaniels,Josh McDaniels,2009,4,3,Adam Gase; Antonio Pierce; Mike McCoy,josh mcdaniels,-0.06513145526647564,-0.26052582106590255,4.0,0.12380864037253068,-0.32647187840429226,-0.3734824374436939,-0.14403807199707586
+kyle_shanahan,Kyle Shanahan,2017,9,3,DeMeco Ryans; Mike McDaniel; Robert Saleh,kyle shanahan,0.09435514418184753,0.7548411534547802,8.0,-0.7104966581913831,-0.15071046358494117,-0.80603490022171,-0.0183769391837304
+ken_whisenhunt,Ken Whisenhunt,2007,8,3,Frank Reich; Freddie Kitchens; Todd Haley,ken whisenhunt,-0.02291862728893756,-0.18334901831150047,8.0,0.13186534684119258,-0.14030087706651362,-0.31585861104824087,
+chris_palmer,Chris Palmer,1999,2,3,Ken Whisenhunt; Romeo Crennel; Tony Sparano,chris palmer,-0.16657373309135437,-0.33314746618270874,2.0,,,,
+dave_wannstedt,Dave Wannstedt,1993,11,3,Dave McGinnis; Greg Schiano; Marc Trestman,dave wannstedt,-0.01647124671069058,-0.18118371381759638,11.0,,,,
+nick_saban,Nick Saban,2005,2,3,Dan Quinn; Jason Garrett; Scott Linehan,nick saban,-0.0064918100833893,-0.0129836201667786,2.0,-0.1901914541094784,0.3197058037711293,0.4775889568487175,
 walt_michaels,Walt Michaels,1977,6,2,Dan Henning; Joe Walton,walt michaels,0.021057657253742215,0.1263459435224533,6.0,,,,
-pop_ivy,Pop Ivy,1958,4,2,Ray Prochaska; Ray Willsey,pop ivy,,,,,,,
-anthony_lynn,Anthony Lynn,2017,4,2,Nick Sirianni; Shane Steichen,anthony lynn,-0.04391393065452577,-0.17565572261810308,4.0,0.6612657546682581,0.6676294309200662,-0.7301220069928503,-1.6738958564994835
-red_hickey,Red Hickey,1959,5,2,Bill Johnson; Jack Christiansen,red hickey,,,,,,,
+red_miller,Red Miller,1977,4,2,Bill Belichick; Rod Dowhower,red miller,0.10008545717000959,0.40034182868003837,4.0,,,,
+neill_armstrong,Neill Armstrong,1978,4,2,Buddy Ryan; Hank Kuhlmann,neill armstrong,-0.010485328733921051,-0.041941314935684204,4.0,,,,
+adam_gase,Adam Gase,2016,5,2,Ben Johnson; Vance Joseph,adam gase,0.04668399393558502,0.2334199696779251,5.0,-0.6561233744889111,0.39628361616616464,-0.4513247579737317,0.09902300071634706
 rod_dowhower,Rod Dowhower,1985,2,2,Brad Childress; Rick Venturi,rod dowhower,-0.108987919986248,-0.217975839972496,2.0,,,,
-doug_marrone,Doug Marrone,2013,6,2,Mike Pettine; Nathaniel Hackett,doug marrone,-0.06614209214846291,-0.3968525528907775,6.0,0.04462557263559387,0.6461110804831891,0.5913613827674633,0.5426361437447079
 dick_vermeil,Dick Vermeil,1976,15,2,Mike Martz; Rod Rust,dick vermeil,-0.027340888827641806,-0.4101133324146271,15.0,,,,
-mike_nixon,Mike Nixon,1959,3,2,Abe Gibron; Ernie Hefferle,mike nixon,,,,,,,
-bruce_arians,Bruce Arians,2013,8,2,Freddie Kitchens; Todd Bowles,bruce arians,0.06781938251852986,0.5425550601482388,8.0,1.3895767667703924,-0.373949548370507,-0.1951078619660962,1.431534210206012
-brad_childress,Brad Childress,2006,5,2,Leslie Frazier; Mike Tomlin,brad childress,-0.0828269863128662,-0.414134931564331,5.0,-1.4185435065827832,-1.1190970974681078,-0.8866880567768473,
+dennis_erickson,Dennis Erickson,1995,6,2,Dan Quinn; Jim Mora Jr,dennis erickson,-0.030018823842207564,-0.18011294305324538,6.0,,,,
+mike_vrabel,Mike Vrabel,2018,7,2,Arthur Smith; Matt LaFleur,mike vrabel,0.0893695836226145,0.536217501735687,6.0,-0.674516905379397,-0.4860712704273588,-0.04043863303828412,-0.5445126082403019
+chuck_pagano,Chuck Pagano,2012,6,2,Brian Schottenheimer; Bruce Arians,chuck pagano,0.10099691649278002,0.6059814989566801,6.0,0.6046351850146752,-0.12270085190350688,0.16892268372049388,-0.4298914740924237
 dan_campbell,Dan Campbell,2021,5,2,Aaron Glenn; Ben Johnson,dan campbell,0.03299525525569913,0.13198102102279652,4.0,0.23294902403312806,0.045480341642997614,-0.2137287720120901,1.0854169504039688
 dan_devine,Dan Devine,1971,4,2,Bart Starr; Hank Kuhlmann,dan devine,0.020657521152496347,0.08263008460998539,4.0,,,,
-dennis_erickson,Dennis Erickson,1995,6,2,Dan Quinn; Jim Mora Jr,dennis erickson,-0.030018823842207564,-0.18011294305324538,6.0,,,,
 dan_henning,Dan Henning,1983,7,2,Gunther Cunningham; Jim Mora Jr,dan henning,-0.05114985482352118,-0.3580489837646483,7.0,,,,
 dan_quinn,Dan Quinn,2015,8,2,Kyle Shanahan; Matt LaFleur,dan quinn,-0.09143215609959195,-0.6400250926971436,7.0,0.7070737517688467,-0.17447014261542515,0.6465094871517097,-0.044472720690631275
-bruce_coslet,Bruce Coslet,1990,8,2,Dick LeBeau; Pete Carroll,bruce coslet,-0.13030563294887537,-1.042445063591003,8.0,,,,
-mike_vrabel,Mike Vrabel,2018,7,2,Arthur Smith; Matt LaFleur,mike vrabel,0.0893695836226145,0.536217501735687,6.0,-0.674516905379397,-0.4860712704273588,-0.04043863303828412,-0.5445126082403019
-otto_graham,Otto Graham,1966,3,2,Ed Hughes; Mike McCormack,otto graham,,,,,,,
-bobby_petrino,Bobby Petrino,2007,1,2,Hue Jackson; Mike Zimmer,bobby petrino,-0.1592690972805023,-0.1592690972805023,1.0,-1.3717897234663536,0.2997256622174546,-0.1635225698329933,
-norm_van_brocklin,Norm Van Brocklin,1961,13,2,Harry Gilmer; Marion Campbell,norm van brocklin,-0.008164011106491061,-0.0408200555324553,5.0,,,,
-buck_shaw,Buck Shaw,1950,8,2,Jerry Williams; Nick Skorich,buck shaw,,,,,,,
-pete_cawthon,Pete Cawthon,1943,2,2,Aldo Donelli; Frank Bridges,pete cawthon,,,,,,,
-nick_skorich,Nick Skorich,1961,7,2,Forrest Gregg; Jerry Williams,nick skorich,0.034805452656745894,0.13922181062698358,4.0,,,,
-matt_nagy,Matt Nagy,2018,4,2,Brandon Staley; Vic Fangio,matt nagy,0.05898611659407613,0.2359444663763045,4.0,0.8119095809017862,1.0917080056587114,-0.09575238374935754,-0.844669497333551
-jock_sutherland,Jock Sutherland,1940,4,2,Joe Kuharich; John Michelosen,jock sutherland,,,,,,,
-mike_mccormack,Mike McCormack,1973,6,2,Dick LeBeau; Walt Michaels,mike mccormack,-0.07537203696250913,-0.3768601848125457,5.0,,,,
-john_sandusky,John Sandusky,1972,1,2,Hank Bullough; Red Miller,john sandusky,,,,,,,
-kay_stephenson,Kay Stephenson,1983,3,2,Hank Bullough; Pete Carroll,kay stephenson,-0.10895488162835437,-0.3268646448850631,3.0,,,,
-clark_shaughnessy,Clark Shaughnessy,1948,2,2,Joe Stydahar; Red Hickey,clark shaughnessy,,,,,,,
-chuck_pagano,Chuck Pagano,2012,6,2,Brian Schottenheimer; Bruce Arians,chuck pagano,0.10099691649278002,0.6059814989566801,6.0,0.6046351850146752,-0.12270085190350688,0.16892268372049388,-0.4298914740924237
-mike_holovak,Mike Holovak,1976,1,2,Dan Henning; Walt Michaels,mike holovak,,,,,,,
-gus_bradley,Gus Bradley,2013,4,2,Nathaniel Hackett; Robert Saleh,gus bradley,-0.10108339911103242,-0.4043335964441297,4.0,0.37327125689014656,0.44611723149159477,0.6830740719585883,-0.0392071257542899
-gene_ronzani,Gene Ronzani,1950,4,2,Chuck Drulis; Ray McLean,gene ronzani,,,,,,,
-john_mcvay,John McVay,1976,3,2,Lindy Infante; Marty Schottenheimer,john mcvay,0.0688154498815536,0.1376308997631072,2.0,,,,
-jay_gruden,Jay Gruden,2014,6,2,Kevin O'Connell; Sean McVay,jay gruden,-0.02639170349438984,-0.15835022096633905,6.0,-0.3272960264640836,0.06360771168647385,-0.2929578406513348,0.2543914120488568
-joe_walton,Joe Walton,1983,7,2,Bud Carson; Rich Kotite,joe walton,-0.0137735303878784,-0.0964147127151488,7.0,,,,
-john_robinson,John Robinson,1983,9,2,Jeff Fisher; Norv Turner,john robinson,-0.001994592282507165,-0.017951330542564488,9.0,,,,
-jerry_burns,Jerry Burns,1986,6,2,Marc Trestman; Pete Carroll,jerry burns,-0.030429082187016815,-0.1825744931221009,6.0,,,,
-john_mckay,John McKay,1976,9,2,Joe Gibbs; Wayne Fontes,john mckay,-0.08432981546190049,-0.7589683391571044,9.0,,,,
-jim_dooley,Jim Dooley,1968,4,2,Abe Gibron; Jim Ringo,jim dooley,0.0716331021547317,0.1432662043094634,2.0,,,,
-hampton_pool,Hampton Pool,1952,3,2,Bob Waterfield; Red Hickey,hampton pool,,,,,,,
-hal_hunter,Hal Hunter,1984,1,2,Gunther Cunningham; Rick Venturi,hal hunter,,,,,,,
-jim_harbaugh,Jim Harbaugh,2011,6,2,Jim Tomsula; Vic Fangio,jim harbaugh,0.03523276250839234,0.1761638125419617,5.0,-0.03421602638648249,0.0028533377941654114,-0.5353797007456611,-0.7371375389371392
-jason_garrett,Jason Garrett,2011,9,2,Kellen Moore; Matt Eberflus,jason garrett,0.0266275405883789,0.2396478652954101,9.0,-0.645282967421658,-0.29254219544283816,-0.3585517162771852,-0.7893765525662706
-jim_fassel,Jim Fassel,1997,7,2,John Fox; Sean Payton,jim fassel,-0.05716122781208582,-0.4001285946846007,7.0,,,,
 gary_kubiak,Gary Kubiak,2006,10,2,Kyle Shanahan; Vance Joseph,gary kubiak,0.02067873073101044,0.2067873073101044,10.0,-0.4577782671688134,-1.4228424477317632,-0.3474291714043897,1.807641851716112
+gus_bradley,Gus Bradley,2013,4,2,Nathaniel Hackett; Robert Saleh,gus bradley,-0.10108339911103242,-0.4043335964441297,4.0,0.37327125689014656,0.44611723149159477,0.6830740719585883,-0.0392071257542899
+hal_hunter,Hal Hunter,1984,1,2,Gunther Cunningham; Rick Venturi,hal hunter,,,,,,,
 hank_stram,Hank Stram,1970,7,2,Rich Kotite; Sam Rutigliano,hank stram,-0.03312716738837103,-0.23189017171859722,7.0,,,,
-frankie_albert,Frankie Albert,1956,3,2,Bill Johnson; Phil Bengtson,frankie albert,,,,,,,
-bill_callahan,Bill Callahan,2002,2,2,Jim Harbaugh; Marc Trestman,bill callahan,-0.04274870455265045,-0.0854974091053009,2.0,-0.0650660728707406,0.2954161212123443,-0.8726592286335432,-1.095468746689589
-harry_gilmer,Harry Gilmer,1965,2,2,Joe Schmidt; John North,harry gilmer,,,,,,,
-todd_bowles,Todd Bowles,2015,8,2,Dave Canales; Liam Coen,todd bowles,-0.0032504332814897847,-0.022753032970428494,7.0,-0.054635524939394435,0.18947468022082656,-0.29607730814131483,0.9219609039746303
+mike_mccormack,Mike McCormack,1973,6,2,Dick LeBeau; Walt Michaels,mike mccormack,-0.07537203696250913,-0.3768601848125457,5.0,,,,
+mike_singletary,Mike Singletary,2009,2,2,Jim Tomsula; Vance Joseph,mike singletary,-0.19826951346397395,-0.3965390269279479,2.0,-0.7068435347118847,-0.9134809660253099,-0.6773983819401536,
+matt_nagy,Matt Nagy,2018,4,2,Brandon Staley; Vic Fangio,matt nagy,0.05898611659407613,0.2359444663763045,4.0,0.8119095809017862,1.0917080056587114,-0.09575238374935754,-0.844669497333551
+mike_holovak,Mike Holovak,1976,1,2,Dan Henning; Walt Michaels,mike holovak,,,,,,,
+chan_gailey,Chan Gailey,1998,5,2,Dave Campo; Mike Zimmer,chan gailey,-0.0410510957241058,-0.205255478620529,5.0,-0.6583767982059942,0.1392045651818698,-1.0444736435624231,
+kay_stephenson,Kay Stephenson,1983,3,2,Hank Bullough; Pete Carroll,kay stephenson,-0.10895488162835437,-0.3268646448850631,3.0,,,,
+doug_marrone,Doug Marrone,2013,6,2,Mike Pettine; Nathaniel Hackett,doug marrone,-0.06614209214846291,-0.3968525528907775,6.0,0.04462557263559387,0.6461110804831891,0.5913613827674633,0.5426361437447079
+john_sandusky,John Sandusky,1972,1,2,Hank Bullough; Red Miller,john sandusky,,,,,,,
+john_robinson,John Robinson,1983,9,2,Jeff Fisher; Norv Turner,john robinson,-0.001994592282507165,-0.017951330542564488,9.0,,,,
+joe_walton,Joe Walton,1983,7,2,Bud Carson; Rich Kotite,joe walton,-0.0137735303878784,-0.0964147127151488,7.0,,,,
+john_mcvay,John McVay,1976,3,2,Lindy Infante; Marty Schottenheimer,john mcvay,0.0688154498815536,0.1376308997631072,2.0,,,,
+john_mckay,John McKay,1976,9,2,Joe Gibbs; Wayne Fontes,john mckay,-0.08432981546190049,-0.7589683391571044,9.0,,,,
+jason_garrett,Jason Garrett,2011,9,2,Kellen Moore; Matt Eberflus,jason garrett,0.0266275405883789,0.2396478652954101,9.0,-0.645282967421658,-0.29254219544283816,-0.3585517162771852,-0.7893765525662706
+jay_gruden,Jay Gruden,2014,6,2,Kevin O'Connell; Sean McVay,jay gruden,-0.02639170349438984,-0.15835022096633905,6.0,-0.3272960264640836,0.06360771168647385,-0.2929578406513348,0.2543914120488568
+jim_fassel,Jim Fassel,1997,7,2,John Fox; Sean Payton,jim fassel,-0.05716122781208582,-0.4001285946846007,7.0,,,,
+jerry_burns,Jerry Burns,1986,6,2,Marc Trestman; Pete Carroll,jerry burns,-0.030429082187016815,-0.1825744931221009,6.0,,,,
+jim_harbaugh,Jim Harbaugh,2011,6,2,Jim Tomsula; Vic Fangio,jim harbaugh,0.03523276250839234,0.1761638125419617,5.0,-0.03421602638648249,0.0028533377941654114,-0.5353797007456611,-0.7371375389371392
+al_saunders,Al Saunders,1986,3,2,Gunther Cunningham; Jim Mora Jr,al saunders,0.1367101011514663,0.2734202023029326,2.0,,,,
 steve_spurrier,Steve Spurrier,2002,2,2,Hue Jackson; Marvin Lewis,steve spurrier,-0.07308331131935114,-0.14616662263870228,2.0,,,,
+todd_bowles,Todd Bowles,2015,8,2,Dave Canales; Liam Coen,todd bowles,-0.0032504332814897847,-0.022753032970428494,7.0,-0.054635524939394435,0.18947468022082656,-0.29607730814131483,0.9219609039746303
 sean_mcdermott,Sean McDermott,2017,9,2,Brian Daboll; David Culley,sean mcdermott,0.02987420948147774,0.2389936758518219,8.0,1.1791778103815653,0.5103580795465584,0.2981998088798562,-0.1760426043104378
 steve_mariucci,Steve Mariucci,1997,9,2,Jim Mora Jr; Marty Mornhinweg,steve mariucci,-0.01797194455994499,-0.16174750103950492,9.0,,,,
-adam_gase,Adam Gase,2016,5,2,Ben Johnson; Vance Joseph,adam gase,0.04668399393558502,0.2334199696779251,5.0,-0.6561233744889111,0.39628361616616464,-0.4513247579737317,0.09902300071634706
-al_saunders,Al Saunders,1986,3,2,Gunther Cunningham; Jim Mora Jr,al saunders,0.1367101011514663,0.2734202023029326,2.0,,,,
-zac_taylor,Zac Taylor,2019,7,1,Brian Callahan,zac taylor,-0.02064732321898141,-0.12388393931388847,6.0,0.9080223277786444,1.2642841940290945,-0.5636221147107012,0.21323801961598757
-bill_arnsparger,Bill Arnsparger,1974,2,1,Marty Schottenheimer,bill arnsparger,-0.06368476152420043,-0.1910542845726013,3.0,,,,
-rod_marinelli,Rod Marinelli,2006,3,1,Adam Gase,rod marinelli,-0.15020655592282608,-0.4506196677684783,3.0,0.07908747637569058,-1.617355692450232,-0.3141093005674543,
-raymond_berry,Raymond Berry,1984,6,1,Rod Rust,raymond berry,0.0726800476646423,0.3634002383232115,5.0,,,,
-rich_brooks,Rich Brooks,1995,2,1,Mike Martz,rich brooks,-0.06902697682380675,-0.1380539536476135,2.0,,,,
-ray_richards,Ray Richards,1955,3,1,Chuck Drulis,ray richards,,,,,,,
-monte_clark,Monte Clark,1976,8,1,Marty Schottenheimer,monte clark,-0.014297381773591028,-0.11437905418872822,8.0,,,,
-mike_sherman,Mike Sherman,2000,6,1,Joe Philbin,mike sherman,0.051065395275751733,0.3063923716545104,6.0,,,,
-mike_smith,Mike Smith,2008,7,1,Dirk Koetter,mike smith,0.0011967292853764006,0.008377104997634804,7.0,0.08369060090948612,-0.601759144853334,0.13129647911772233,
-mike_tice,Mike Tice,2002,4,1,Scott Linehan,mike tice,-0.05708594620227812,-0.2283437848091125,4.0,,,,
-mike_tomlin,Mike Tomlin,2007,19,1,Bruce Arians,mike tomlin,0.05762444507545893,1.0372400113582607,18.0,0.38916577333547386,0.5715603346983112,-0.06676999258445265,0.10512038128250187
-herm_edwards,Herm Edwards,2001,8,1,Doug Marrone,herm edwards,-0.08836104348301882,-0.7068883478641506,8.0,-0.37345807363548283,-0.8519330769352598,-0.19997957120824794,
-homer_rice,Homer Rice,1978,2,1,Frank Gansz,homer rice,-0.1550010740756988,-0.1550010740756988,1.0,,,,
-hue_jackson,Hue Jackson,2011,4,1,Freddie Kitchens,hue jackson,-0.17823233455419543,-0.7129293382167817,4.0,0.22510900407340456,-0.030848916334814055,0.42127205463298584,0.44396051111896323
-hugh_campbell,Hugh Campbell,1984,2,1,Jerry Glanville,hugh campbell,-0.09668754537105556,-0.19337509074211112,2.0,,,,
-howard_schnellenberger,Howard Schnellenberger,1973,2,1,Pete McCulley,howard schnellenberger,-0.10772266652584075,-0.2154453330516815,2.0,,,,
-bill_o'brien,Bill O'Brien,2014,7,1,Mike Vrabel,bill o brien,0.02121853402682713,0.14852973818778992,7.0,-0.07803740109815535,0.6050790046389577,0.37381367787966546,0.42276243985789835
+bruce_arians,Bruce Arians,2013,8,2,Freddie Kitchens; Todd Bowles,bruce arians,0.06781938251852986,0.5425550601482388,8.0,1.3895767667703924,-0.373949548370507,-0.1951078619660962,1.431534210206012
+bruce_coslet,Bruce Coslet,1990,8,2,Dick LeBeau; Pete Carroll,bruce coslet,-0.13030563294887537,-1.042445063591003,8.0,,,,
+brad_childress,Brad Childress,2006,5,2,Leslie Frazier; Mike Tomlin,brad childress,-0.0828269863128662,-0.414134931564331,5.0,-1.4185435065827832,-1.1190970974681078,-0.8866880567768473,
+bobby_petrino,Bobby Petrino,2007,1,2,Hue Jackson; Mike Zimmer,bobby petrino,-0.1592690972805023,-0.1592690972805023,1.0,-1.3717897234663536,0.2997256622174546,-0.1635225698329933,
+bill_callahan,Bill Callahan,2002,2,2,Jim Harbaugh; Marc Trestman,bill callahan,-0.04274870455265045,-0.0854974091053009,2.0,-0.0650660728707406,0.2954161212123443,-0.8726592286335432,-1.095468746689589
+anthony_lynn,Anthony Lynn,2017,4,2,Nick Sirianni; Shane Steichen,anthony lynn,-0.04391393065452577,-0.17565572261810308,4.0,0.6612657546682581,0.6676294309200662,-0.7301220069928503,-1.6738958564994835
 bart_starr,Bart Starr,1975,9,1,Dick LeBeau,bart starr,0.035134204583697835,0.3162078412532805,9.0,,,,
-david_shula,David Shula,1992,5,1,Gary Moeller,david shula,-0.14533833066940302,-0.7266916533470151,5.0,,,,
-curly_lambeau,Curly Lambeau,1922,32,1,Cecil Isbell,curly lambeau,,,,,,,
-darryl_rogers,Darryl Rogers,1985,4,1,Wayne Fontes,darryl rogers,-0.042930910348892196,-0.17172364139556878,4.0,,,,
-dave_campo,Dave Campo,2000,3,1,Mike Zimmer,dave campo,-0.0586232542991638,-0.1758697628974914,3.0,,,,
-mike_zimmer,Mike Zimmer,2014,8,1,Kevin Stefanski,mike zimmer,0.004356279885768911,0.034850239086151286,8.0,-0.4903692414022193,-0.27223877613667863,0.13759297248331576,-0.05990019255463009
+bill_o'brien,Bill O'Brien,2014,7,1,Mike Vrabel,bill o brien,0.02121853402682713,0.14852973818778992,7.0,-0.07803740109815535,0.6050790046389577,0.37381367787966546,0.42276243985789835
+bill_peterson,Bill Peterson,1972,2,1,Dan Henning,bill peterson,-0.1187156149029731,-0.2374312298059462,2.0,,,,
+bill_arnsparger,Bill Arnsparger,1974,2,1,Marty Schottenheimer,bill arnsparger,-0.06368476152420043,-0.1910542845726013,3.0,,,,
+ron_waller,Ron Waller,1973,1,1,Forrest Gregg,ron waller,,,,,,,
+bud_wilkinson,Bud Wilkinson,1978,2,1,Jim Hanifan,bud wilkinson,-0.1046803458690643,-0.2093606917381286,2.0,,,,
 bud_carson,Bud Carson,1989,2,1,Marc Trestman,bud carson,-0.03959188592433925,-0.0791837718486785,2.0,,,,
-bob_snyder,Bob Snyder,1947,1,1,Joe Stydahar,bob snyder,,,,,,,
-bob_waterfield,Bob Waterfield,1960,3,1,Tom Fears,bob waterfield,,,,,,,
 brandon_staley,Brandon Staley,2021,3,1,Kellen Moore,brandon staley,-0.026688825384775797,-0.0800664761543274,3.0,1.9803770820717765,0.354749685401935,0.7977338411200976,-0.0648751717937225
-norb_hecker,Norb Hecker,1966,3,1,Tom Fears,norb hecker,,,,,,,
-mike_white,Mike White,1995,2,1,John Fox,mike white,-0.03641666471958165,-0.0728333294391633,2.0,,,,
+bob_hollway,Bob Hollway,1971,2,1,Leeman Bennett,bob hollway,-0.05234596297740935,-0.1046919259548187,2.0,,,,
 matt_lafleur,Matt LaFleur,2019,7,1,Nathaniel Hackett,matt lafleur,0.03765096315542857,0.2259057789325714,6.0,1.334403804848259,0.7098420538683655,-1.0757786387876564,-0.926612690280991
 matt_patricia,Matt Patricia,2018,3,1,Ben Johnson,matt patricia,-0.020303992462158166,-0.0609119773864745,3.0,0.11681079530340739,0.4016983627070316,-0.19451245373283146,-0.6577497416337951
-dudley_degroot,Dudley DeGroot,1944,2,1,Turk Edwards,dudley degroot,,,,,,,
-dutch_bergman,Dutch Bergman,1943,1,1,Turk Edwards,dutch bergman,,,,,,,
-ed_khayat,Ed Khayat,1971,2,1,Walt Michaels,ed khayat,-0.103780849123001,-0.103780849123001,1.0,,,,
-doug_pederson,Doug Pederson,2016,8,1,Frank Reich,doug pederson,-0.006751076394319527,-0.05400861115455621,8.0,1.8895652916489165,1.0208631763604386,-0.0938472829711594,0.4321507071315094
-clive_rush,Clive Rush,1970,1,1,John Mazur,clive rush,-0.0850493361711502,-0.0850493361711502,1.0,,,,
-charlie_waller,Charlie Waller,1970,1,1,Bum Phillips,charlie waller,-0.0800508625030517,-0.0800508625030517,1.0,,,,
-mike_martz,Mike Martz,2000,6,1,Lovie Smith,mike martz,0.08923630317052204,0.5354178190231322,6.0,,,,
-clem_crowe,Clem Crowe,1950,1,1,Wayne Millner,clem crowe,,,,,,,
-dick_jauron,Dick Jauron,1999,9,1,Todd Haley,dick jauron,-0.004186242204242279,-0.03767617983818051,9.0,-1.5326995372987273,-0.37937919307311446,0.3022970470978481,
-george_wilson,George Wilson,1957,8,1,Don Shula,george wilson,,,,,,,
-greasy_neale,Greasy Neale,1941,10,1,Charley Ewart,greasy neale,,,,,,,
-jim_caldwell,Jim Caldwell,2009,7,1,Brian Callahan,jim caldwell,0.0024127704756600594,0.016889393329620417,7.0,0.34269950634157187,0.6151907613671285,0.7506273293120016,0.21850425900679316
-jim_hanifan,Jim Hanifan,1980,6,1,Rod Dowhower,jim hanifan,0.049483411995569854,0.2969004719734191,6.0,,,,
+darryl_rogers,Darryl Rogers,1985,4,1,Wayne Fontes,darryl rogers,-0.042930910348892196,-0.17172364139556878,4.0,,,,
+monte_clark,Monte Clark,1976,8,1,Marty Schottenheimer,monte clark,-0.014297381773591028,-0.11437905418872822,8.0,,,,
+mike_white,Mike White,1995,2,1,John Fox,mike white,-0.03641666471958165,-0.0728333294391633,2.0,,,,
+steve_spagnuolo,Steve Spagnuolo,2009,3,1,Pat Shurmur,steve spagnuolo,-0.18538903196652726,-0.5561670958995818,3.0,-0.4768493933119453,-0.17771407657445323,1.285458268769816,-0.6395661725010542
+rod_marinelli,Rod Marinelli,2006,3,1,Adam Gase,rod marinelli,-0.15020655592282608,-0.4506196677684783,3.0,0.07908747637569058,-1.617355692450232,-0.3141093005674543,
 jim_haslett,Jim Haslett,2000,6,1,Mike McCarthy,jim haslett,-0.07109740873177842,-0.4265844523906705,6.0,-0.657361684152546,-0.7520307973163778,-0.0804913937224107,
 jack_patera,Jack Patera,1976,7,1,Jim Mora Sr,jack patera,-0.1651164165564946,-1.155814915895462,7.0,,,,
-dom_capers,Dom Capers,1995,8,1,Vic Fangio,dom capers,-0.08170631527900696,-0.6536505222320557,8.0,,,,
-jerry_williams,Jerry Williams,1969,3,1,Marv Levy,jerry williams,-0.32284756004810333,-0.6456951200962067,2.0,,,,
-harvey_johnson,Harvey Johnson,1971,1,1,Tom Flores,harvey johnson,-0.0912640707254409,-0.0912640707254409,1.0,,,,
-gus_henderson,Gus Henderson,1939,1,1,Hunk Anderson,gus henderson,,,,,,,
-guy_chamberlin,Guy Chamberlin,1922,6,1,Swede Youngstrom,guy chamberlin,,,,,,,
-mike_mularkey,Mike Mularkey,2004,5,1,Arthur Smith,mike mularkey,-0.06568399071693418,-0.3284199535846709,5.0,0.46258459632295634,-0.16129566021466643,-0.3382653682386545,0.44408288624215336
-mike_munchak,Mike Munchak,2011,3,1,Arthur Smith,mike munchak,-0.042926937341690036,-0.1287808120250701,3.0,-0.19563819391937165,-0.4108510812717263,0.14657032729521433,
-keith_molesworth,Keith Molesworth,1953,1,1,Ray Richards,keith molesworth,,,,,,,
-lane_kiffin,Lane Kiffin,2007,2,1,Tom Cable,lane kiffin,-0.1320208311080932,-0.2640416622161864,2.0,-1.3498712806454702,-1.5699762169010198,-1.193116152795671,
-leeman_bennett,Leeman Bennett,1977,8,1,Jerry Glanville,leeman bennett,-0.03988071933686734,-0.31904575469493873,8.0,,,,
-les_steckel,Les Steckel,1984,1,1,Jerry Burns,les steckel,-0.076060950756073,-0.076060950756073,1.0,,,,
-lindy_infante,Lindy Infante,1988,6,1,Dick Jauron,lindy infante,-0.04653833309809363,-0.2792299985885618,6.0,,,,
-joe_bach,Joe Bach,1935,4,1,Keith Molesworth,joe bach,,,,,,,
-joe_kuharich,Joe Kuharich,1952,11,1,Mike Nixon,joe kuharich,,,,,,,
-jim_trimble,Jim Trimble,1952,4,1,Chuck Drulis,jim trimble,,,,,,,
-john_mazur,John Mazur,1971,2,1,Sam Rutigliano,john mazur,0.030189631068706504,0.06037926213741301,2.0,,,,
-john_michelosen,John Michelosen,1948,4,1,Mike Nixon,john michelosen,,,,,,,
-john_rauch,John Rauch,1970,1,1,Ray Malavasi,john rauch,-0.0476473867893219,-0.0476473867893219,1.0,,,,
-joe_thomas,Joe Thomas,1974,1,1,Pete McCulley,joe thomas,,,,,,,
-frank_gansz,Frank Gansz,1987,2,1,Rod Rust,frank gansz,-0.0962830887317657,-0.1925661774635314,2.0,,,,
-jack_christiansen,Jack Christiansen,1963,5,1,Bill Johnson,jack christiansen,,,,,,,
-gary_moeller,Gary Moeller,2000,1,1,Jim Zorn,gary moeller,,,,,,,
-gene_stallings,Gene Stallings,1986,4,1,Hank Kuhlmann,gene stallings,0.14111024168729774,0.564440966749191,4.0,,,,
-adam_walsh,Adam Walsh,1945,2,1,Bob Snyder,adam walsh,,,,,,,
-walt_koppisch,Walt Koppisch,1925,1,1,Swede Youngstrom,walt koppisch,,,,,,,
-wayne_fontes,Wayne Fontes,1989,8,1,June Jones,wayne fontes,0.002692881971597661,0.02154305577278129,8.0,,,,
-wayne_millner,Wayne Millner,1951,1,1,Jim Trimble,wayne millner,,,,,,,
+jim_caldwell,Jim Caldwell,2009,7,1,Brian Callahan,jim caldwell,0.0024127704756600594,0.016889393329620417,7.0,0.34269950634157187,0.6151907613671285,0.7506273293120016,0.21850425900679316
+hue_jackson,Hue Jackson,2011,4,1,Freddie Kitchens,hue jackson,-0.17823233455419543,-0.7129293382167817,4.0,0.22510900407340456,-0.030848916334814055,0.42127205463298584,0.44396051111896323
+hugh_campbell,Hugh Campbell,1984,2,1,Jerry Glanville,hugh campbell,-0.09668754537105556,-0.19337509074211112,2.0,,,,
 vic_fangio,Vic Fangio,2019,3,1,Brandon Staley,vic fangio,0.0519361605008443,0.1558084815025329,3.0,-0.19901494391161223,-0.0313834805018714,-0.4794716270235404,-0.919681874857697
-ray_flaherty,Ray Flaherty,1936,7,1,Turk Edwards,ray flaherty,,,,,,,
-ray_malavasi,Ray Malavasi,1978,5,1,Bud Carson,ray malavasi,0.03971819156646726,0.19859095783233632,5.0,,,,
-phil_bengtson,Phil Bengtson,1968,4,1,Sam Rutigliano,phil bengtson,0.00075216755867,0.00075216755867,1.0,,,,
-bud_wilkinson,Bud Wilkinson,1978,2,1,Jim Hanifan,bud wilkinson,-0.1046803458690643,-0.2093606917381286,2.0,,,,
-tom_flores,Tom Flores,1979,12,1,Art Shell,tom flores,0.020331084207693733,0.24397301049232478,12.0,,,,
-bill_peterson,Bill Peterson,1972,2,1,Dan Henning,bill peterson,-0.1187156149029731,-0.2374312298059462,2.0,,,,
-bo_mcmillin,Bo McMillin,1948,4,1,George Wilson,bo mcmillin,,,,,,,
-bob_hollway,Bob Hollway,1971,2,1,Leeman Bennett,bob hollway,-0.05234596297740935,-0.1046919259548187,2.0,,,,
-bill_austin,Bill Austin,1966,4,1,Mike McCormack,bill austin,-0.0902001990318298,-0.0902001990318298,1.0,,,,
-ron_waller,Ron Waller,1973,1,1,Forrest Gregg,ron waller,,,,,,,
-turk_edwards,Turk Edwards,1946,3,1,Wayne Millner,turk edwards,,,,,,,
 urban_meyer,Urban Meyer,2021,1,1,Brian Schottenheimer,urban meyer,-0.115309308719635,-0.115309308719635,1.0,-0.1330339994678745,0.1058678008064731,-0.004569817754873,0.4598319784218178
+tom_flores,Tom Flores,1979,12,1,Art Shell,tom flores,0.020331084207693733,0.24397301049232478,12.0,,,,
 tom_cable,Tom Cable,2009,2,1,Hue Jackson,tom cable,0.0444072633981704,0.0888145267963408,2.0,-0.6454004485012387,-1.298164763721069,-0.5818395931779924,
-steve_spagnuolo,Steve Spagnuolo,2009,3,1,Pat Shurmur,steve spagnuolo,-0.18538903196652726,-0.5561670958995818,3.0,-0.4768493933119453,-0.17771407657445323,1.285458268769816,-0.6395661725010542
-alex_webster,Alex Webster,1969,5,1,Joe Walton,alex webster,-0.021257586365938174,-0.0850303454637527,4.0,,,,
-steve_owen,Steve Owen,1931,23,1,Allie Sherman,steve owen,,,,,,,
-al_cornsweet,Al Cornsweet,1931,1,0,,al cornsweet,,,,,,,
-al_jolley,Al Jolley,1929,2,0,,al jolley,,,,,,,
-al_nesser,Al Nesser,1926,1,0,,al nesser,,,,,,,
-aldo_donelli,Aldo Donelli,1944,1,0,,aldo donelli,,,,,,,
-alfred_mcgall,Alfred McGall,1930,1,0,,alfred mcgall,,,,,,,
-algy_clark,Algy Clark,1934,1,0,,algy clark,,,,,,,
-steve_wilks,Steve Wilks,2018,1,0,,steve wilks,-0.0332214534282684,-0.0332214534282684,1.0,-0.9148655963568202,0.1053552952679946,-0.5567342586518234,0.8465232835797982
-swede_youngstrom,Swede Youngstrom,1927,1,0,,swede youngstrom,,,,,,,
-tex_grigg,Tex Grigg,1925,1,0,,tex grigg,,,,,,,
-scott_linehan,Scott Linehan,2006,3,0,,scott linehan,-0.16214879353841144,-0.4864463806152343,3.0,-0.19511132225995706,-1.0821974254969993,-0.36450218328796985,
-scotty_bierce,Scotty Bierce,1925,1,0,,scotty bierce,,,,,,,
-shane_steichen,Shane Steichen,2023,3,0,,shane steichen,0.02799673378467555,0.0559934675693511,2.0,0.3508722241552589,1.99206845978898,0.647490947853787,-0.7728245234941009
-shorty_barr,Shorty Barr,1926,1,0,,shorty barr,,,,,,,
-roy_andrews,Roy Andrews,1924,8,0,,roy andrews,,,,,,,
-tut_imlay,Tut Imlay,1926,1,0,,tut imlay,,,,,,,
-untz_brewer,Untz Brewer,1922,1,0,,untz brewer,,,,,,,
-todd_haley,Todd Haley,2009,3,0,,todd haley,-0.06931517971356713,-0.20794553914070138,3.0,-0.925059874062839,-0.7449660018382575,0.9141658351123366,
-blanton_collier,Blanton Collier,1963,8,0,,blanton collier,-0.0579205155372619,-0.0579205155372619,1.0,,,,
-bo_hanley,Bo Hanley,1924,1,0,,bo hanley,,,,,,,
-bob_folwell,Bob Folwell,1925,1,0,,bob folwell,,,,,,,
-cecil_isbell,Cecil Isbell,1951,1,0,,cecil isbell,,,,,,,
-charley_ewart,Charley Ewart,1949,1,0,,charley ewart,,,,,,,
-budge_garrett,Budge Garrett,1922,1,0,,budge garrett,,,,,,,
-bull_behman,Bull Behman,1929,3,0,,bull behman,,,,,,,
-bull_karcis,Bull Karcis,1942,1,0,,bull karcis,,,,,,,
-brian_daboll,Brian Daboll,2022,4,0,,brian daboll,-0.014173121229807536,-0.04251936368942261,3.0,0.05887286686882631,0.8428662378256505,-0.05647633576265868,1.324311842790159
-brian_flores,Brian Flores,2019,3,0,,brian flores,0.03809960982004797,0.1142988294601439,3.0,1.1410090701486333,1.1695205367896078,0.28496218933311673,1.2622038838489018
-brian_schottenheimer,Brian Schottenheimer,2025,1,0,,brian schottenheimer,,,,,,,
-pete_henry,Pete Henry,1926,2,0,,pete henry,,,,,,,
-pete_stinchcomb,Pete Stinchcomb,1923,1,0,,pete stinchcomb,,,,,,,
-phil_handler,Phil Handler,1943,5,0,,phil handler,,,,,,,
-potsy_clark,Potsy Clark,1931,10,0,,potsy clark,,,,,,,
-punk_berryman,Punk Berryman,1924,2,0,,punk berryman,,,,,,,
-wayne_brenkert,Wayne Brenkert,1923,2,0,,wayne brenkert,,,,,,,
-vance_joseph,Vance Joseph,2017,2,0,,vance joseph,-0.04846805334091185,-0.0969361066818237,2.0,-0.3827575371763515,0.17585377738154112,0.03500886256914495,1.2015446303800459
-wally_hess,Wally Hess,1922,3,0,,wally hess,,,,,,,
-wally_lemm,Wally Lemm,1962,5,0,,wally lemm,-0.1627869606018066,-0.1627869606018066,1.0,,,,
-wally_mcilwain,Wally McIlwain,1926,1,0,,wally mcilwain,,,,,,,
-tommy_hughitt,Tommy Hughitt,1922,3,0,,tommy hughitt,,,,,,,
+jim_hanifan,Jim Hanifan,1980,6,1,Rod Dowhower,jim hanifan,0.049483411995569854,0.2969004719734191,6.0,,,,
+leeman_bennett,Leeman Bennett,1977,8,1,Jerry Glanville,leeman bennett,-0.03988071933686734,-0.31904575469493873,8.0,,,,
+lindy_infante,Lindy Infante,1988,6,1,Dick Jauron,lindy infante,-0.04653833309809363,-0.2792299985885618,6.0,,,,
+les_steckel,Les Steckel,1984,1,1,Jerry Burns,les steckel,-0.076060950756073,-0.076060950756073,1.0,,,,
+dom_capers,Dom Capers,1995,8,1,Vic Fangio,dom capers,-0.08170631527900696,-0.6536505222320557,8.0,,,,
+john_rauch,John Rauch,1970,1,1,Ray Malavasi,john rauch,-0.0476473867893219,-0.0476473867893219,1.0,,,,
+doug_pederson,Doug Pederson,2016,8,1,Frank Reich,doug pederson,-0.006751076394319527,-0.05400861115455621,8.0,1.8895652916489165,1.0208631763604386,-0.0938472829711594,0.4321507071315094
+ed_khayat,Ed Khayat,1971,2,1,Walt Michaels,ed khayat,-0.103780849123001,-0.103780849123001,1.0,,,,
+lane_kiffin,Lane Kiffin,2007,2,1,Tom Cable,lane kiffin,-0.1320208311080932,-0.2640416622161864,2.0,-1.3498712806454702,-1.5699762169010198,-1.193116152795671,
+john_mazur,John Mazur,1971,2,1,Sam Rutigliano,john mazur,0.030189631068706504,0.06037926213741301,2.0,,,,
+joe_thomas,Joe Thomas,1974,1,1,Pete McCulley,joe thomas,,,,,,,
+howard_schnellenberger,Howard Schnellenberger,1973,2,1,Pete McCulley,howard schnellenberger,-0.10772266652584075,-0.2154453330516815,2.0,,,,
+harvey_johnson,Harvey Johnson,1971,1,1,Tom Flores,harvey johnson,-0.0912640707254409,-0.0912640707254409,1.0,,,,
+gene_stallings,Gene Stallings,1986,4,1,Hank Kuhlmann,gene stallings,0.14111024168729774,0.564440966749191,4.0,,,,
+gary_moeller,Gary Moeller,2000,1,1,Jim Zorn,gary moeller,,,,,,,
+frank_gansz,Frank Gansz,1987,2,1,Rod Rust,frank gansz,-0.0962830887317657,-0.1925661774635314,2.0,,,,
+clive_rush,Clive Rush,1970,1,1,John Mazur,clive rush,-0.0850493361711502,-0.0850493361711502,1.0,,,,
+herm_edwards,Herm Edwards,2001,8,1,Doug Marrone,herm edwards,-0.08836104348301882,-0.7068883478641506,8.0,-0.37345807363548283,-0.8519330769352598,-0.19997957120824794,
+mike_mularkey,Mike Mularkey,2004,5,1,Arthur Smith,mike mularkey,-0.06568399071693418,-0.3284199535846709,5.0,0.46258459632295634,-0.16129566021466643,-0.3382653682386545,0.44408288624215336
+mike_martz,Mike Martz,2000,6,1,Lovie Smith,mike martz,0.08923630317052204,0.5354178190231322,6.0,,,,
+mike_munchak,Mike Munchak,2011,3,1,Arthur Smith,mike munchak,-0.042926937341690036,-0.1287808120250701,3.0,-0.19563819391937165,-0.4108510812717263,0.14657032729521433,
+dave_campo,Dave Campo,2000,3,1,Mike Zimmer,dave campo,-0.0586232542991638,-0.1758697628974914,3.0,,,,
+david_shula,David Shula,1992,5,1,Gary Moeller,david shula,-0.14533833066940302,-0.7266916533470151,5.0,,,,
+dick_jauron,Dick Jauron,1999,9,1,Todd Haley,dick jauron,-0.004186242204242279,-0.03767617983818051,9.0,-1.5326995372987273,-0.37937919307311446,0.3022970470978481,
+wayne_fontes,Wayne Fontes,1989,8,1,June Jones,wayne fontes,0.002692881971597661,0.02154305577278129,8.0,,,,
+ray_malavasi,Ray Malavasi,1978,5,1,Bud Carson,ray malavasi,0.03971819156646726,0.19859095783233632,5.0,,,,
+rich_brooks,Rich Brooks,1995,2,1,Mike Martz,rich brooks,-0.06902697682380675,-0.1380539536476135,2.0,,,,
+zac_taylor,Zac Taylor,2019,7,1,Brian Callahan,zac taylor,-0.02064732321898141,-0.12388393931388847,6.0,0.9080223277786444,1.2642841940290945,-0.5636221147107012,0.21323801961598757
+raymond_berry,Raymond Berry,1984,6,1,Rod Rust,raymond berry,0.0726800476646423,0.3634002383232115,5.0,,,,
+mike_zimmer,Mike Zimmer,2014,8,1,Kevin Stefanski,mike zimmer,0.004356279885768911,0.034850239086151286,8.0,-0.4903692414022193,-0.27223877613667863,0.13759297248331576,-0.05990019255463009
+mike_tomlin,Mike Tomlin,2007,19,1,Bruce Arians,mike tomlin,0.05762444507545893,1.0372400113582607,18.0,0.38916577333547386,0.5715603346983112,-0.06676999258445265,0.10512038128250187
+charlie_waller,Charlie Waller,1970,1,1,Bum Phillips,charlie waller,-0.0800508625030517,-0.0800508625030517,1.0,,,,
+homer_rice,Homer Rice,1978,2,1,Frank Gansz,homer rice,-0.1550010740756988,-0.1550010740756988,1.0,,,,
+mike_tice,Mike Tice,2002,4,1,Scott Linehan,mike tice,-0.05708594620227812,-0.2283437848091125,4.0,,,,
+mike_smith,Mike Smith,2008,7,1,Dirk Koetter,mike smith,0.0011967292853764006,0.008377104997634804,7.0,0.08369060090948612,-0.601759144853334,0.13129647911772233,
+mike_sherman,Mike Sherman,2000,6,1,Joe Philbin,mike sherman,0.051065395275751733,0.3063923716545104,6.0,,,,
+antonio_pierce,Antonio Pierce,2024,1,0,,antonio pierce,-0.0300659880161285,-0.0300659880161285,1.0,-0.48461923918129235,0.31666261617467867,-0.08700090138865899,-0.35864824218361224
+arthur_smith,Arthur Smith,2021,3,0,,arthur smith,-0.06412451175053917,-0.1923735352516175,3.0,-0.13814495087245876,0.664718873676069,0.1564850278033213,-0.2619267720663399
 ben_johnson,Ben Johnson,2025,1,0,,ben johnson,,,,,,,
 ben_mcadoo,Ben McAdoo,2016,2,0,,ben mcadoo,-0.0673490045309067,-0.1346980090618134,2.0,0.2864646038411375,0.6600236349955793,2.7961274637842815,-0.3773862336137146
-benny_friedman,Benny Friedman,1930,2,0,,benny friedman,,,,,,,
-bert_bell,Bert Bell,1936,6,0,,bert bell,,,,,,,
-greg_schiano,Greg Schiano,2012,2,0,,greg schiano,-0.1746915578842163,-0.3493831157684326,2.0,0.21621199857860884,-0.689075338839094,-0.4771042535893151,
-gregg_williams,Gregg Williams,2001,3,0,,gregg williams,-0.04753214120864866,-0.142596423625946,3.0,3.080409620628656,0.1139709524118298,-0.8249911848269182,1.8875700708247651
-guil_falcon,Guil Falcon,1922,2,0,,guil falcon,,,,,,,
-gunther_cunningham,Gunther Cunningham,1999,2,0,,gunther cunningham,-0.08254191279411315,-0.1650838255882263,2.0,,,,
-gus_dorais,Gus Dorais,1943,5,0,,gus dorais,,,,,,,
-george_gibson,George Gibson,1930,1,0,,george gibson,,,,,,,
-frank_nied,Frank Nied,1926,1,0,,frank nied,,,,,,,
-jerod_mayo,Jerod Mayo,2024,1,0,,jerod mayo,-0.0543219789981841,-0.0543219789981841,1.0,-0.6800871173776303,0.8784546011365657,-0.2682864881181377,-0.1511944225305365
-jack_chevigny,Jack Chevigny,1932,1,0,,jack chevigny,,,,,,,
-jack_depler,Jack Depler,1929,3,0,,jack depler,,,,,,,
-jack_fish,Jack Fish,1930,1,0,,jack fish,,,,,,,
-jack_heldt,Jack Heldt,1926,1,0,,jack heldt,,,,,,,
-jack_keogh,Jack Keogh,1926,1,0,,jack keogh,,,,,,,
-john_north,John North,1973,3,0,,john north,-0.027952550363540635,-0.0838576510906219,3.0,,,,
-john_ralston,John Ralston,1972,5,0,,john ralston,0.13583724631309504,0.6791862315654752,5.0,,,,
-joey_sternaman,Joey Sternaman,1923,1,0,,joey sternaman,,,,,,,
-john_armstrong,John Armstrong,1924,1,0,,john armstrong,,,,,,,
-joe_bugel,Joe Bugel,1990,5,0,,joe bugel,-0.06821869015693663,-0.34109345078468317,5.0,,,,
-joe_judge,Joe Judge,2020,2,0,,joe judge,-0.0947479330062866,-0.1894958660125732,2.0,0.32166672952205966,0.41002447933351255,0.7781874667051922,-1.6786096881382009
-jim_thorpe,Jim Thorpe,1922,2,0,,jim thorpe,,,,,,,
-jim_tomsula,Jim Tomsula,2015,1,0,,jim tomsula,0.0184333026409149,0.0184333026409149,1.0,0.33685019456752724,-0.08592553942253614,0.034731083883142555,
-jim_zorn,Jim Zorn,2008,2,0,,jim zorn,-0.16662293672561646,-0.3332458734512329,2.0,-1.3589558742823873,-1.2531453186482817,-0.3679661073844068,
-jimmy_conzelman,Jimmy Conzelman,1922,14,0,,jimmy conzelman,,,,,,,
-jimmy_phelan,Jimmy Phelan,1951,2,0,,jimmy phelan,,,,,,,
+bill_johnson,Bill Johnson,1976,3,0,,bill johnson,-0.0799504198392232,-0.23985125951766958,3.0,,,,
+jim_ringo,Jim Ringo,1976,2,0,,jim ringo,-0.1155716843128204,-0.1155716843128204,1.0,,,,
+jim_schwartz,Jim Schwartz,2009,5,0,,jim schwartz,-0.13542509675025935,-0.6771254837512968,5.0,-0.30255467870846486,0.6815642927503404,0.11618866642260542,
+todd_haley,Todd Haley,2009,3,0,,todd haley,-0.06931517971356713,-0.20794553914070138,3.0,-0.925059874062839,-0.7449660018382575,0.9141658351123366,
+rod_rust,Rod Rust,1990,1,0,,rod rust,-0.1924485564231872,-0.1924485564231872,1.0,,,,
+brian_callahan,Brian Callahan,2024,2,0,,brian callahan,-0.0780724213123321,-0.0780724213123321,1.0,-0.9249126659133576,1.1564102219229342,-1.0804564835946184,-0.7575874175784217
+shane_steichen,Shane Steichen,2023,3,0,,shane steichen,0.02799673378467555,0.0559934675693511,2.0,0.3508722241552589,1.99206845978898,0.647490947853787,-0.7728245234941009
+scott_linehan,Scott Linehan,2006,3,0,,scott linehan,-0.16214879353841144,-0.4864463806152343,3.0,-0.19511132225995706,-1.0821974254969993,-0.36450218328796985,
+ernie_hefferle,Ernie Hefferle,1975,1,0,,ernie hefferle,,,,,,,
+ed_hughes,Ed Hughes,1971,1,0,,ed hughes,-0.0238758193016052,-0.0238758193016052,1.0,,,,
+ed_biles,Ed Biles,1981,3,0,,ed biles,-0.11556502287387847,-0.3466950686216354,3.0,,,,
+lou_holtz,Lou Holtz,1976,1,0,,lou holtz,0.0459313513517379,0.0459313513517379,1.0,,,,
+dirk_koetter,Dirk Koetter,2016,3,0,,dirk koetter,-0.07118015487988787,-0.21354046463966359,3.0,1.6462429199625415,-0.516642219472213,0.34314930697682366,-0.24176007745315012
+kliff_kingsbury,Kliff Kingsbury,2019,4,0,,kliff kingsbury,0.02655837326049805,0.1062334930419922,4.0,0.8074457257612625,1.9862731953399415,2.5777919326791046,1.0773404242522968
 leslie_frazier,Leslie Frazier,2011,3,0,,leslie frazier,-0.08095119673411054,-0.2428535902023316,3.0,-0.9646688766287094,-1.1836810417071035,-0.3221454677559109,
 liam_coen,Liam Coen,2025,1,0,,liam coen,,,,,,,
-lisle_blackbourn,Lisle Blackbourn,1954,4,0,,lisle blackbourn,,,,,,,
-lone_star_dietz,Lone Star Dietz,1933,2,0,,lone star dietz,,,,,,,
-lou_holtz,Lou Holtz,1976,1,0,,lou holtz,0.0459313513517379,0.0459313513517379,1.0,,,,
-lou_mahrt,Lou Mahrt,1927,1,0,,lou mahrt,,,,,,,
-kevin_stefanski,Kevin Stefanski,2020,6,0,,kevin stefanski,0.10543406600952147,0.5271703300476074,5.0,0.9028277771653892,0.20831002415156513,-0.1462744504689005,0.39780145483986845
-kliff_kingsbury,Kliff Kingsbury,2019,4,0,,kliff kingsbury,0.02655837326049805,0.1062334930419922,4.0,0.8074457257612625,1.9862731953399415,2.5777919326791046,1.0773404242522968
 larry_wilson,Larry Wilson,1979,1,0,,larry wilson,,,,,,,
-lenny_sachs,Lenny Sachs,1926,1,0,,lenny sachs,,,,,,,
-leo_lyons,Leo Lyons,1923,2,0,,leo lyons,,,,,,,
+jonathan_gannon,Jonathan Gannon,2023,3,0,,jonathan gannon,0.03073577655553815,0.0614715531110763,2.0,0.7553464228901443,0.7371184985988659,-0.42222017874214285,-1.221220378938895
 june_jones,June Jones,1994,3,0,,june jones,-0.0081773300965627,-0.0245319902896881,3.0,,,,
 kellen_moore,Kellen Moore,2025,1,0,,kellen moore,,,,,,,
 ken_meyer,Ken Meyer,1977,1,0,,ken meyer,-0.0785536269187927,-0.0785536269187927,1.0,,,,
 kevin_gilbride,Kevin Gilbride,1997,2,0,,kevin gilbride,-0.0578481676340103,-0.1156963352680206,2.0,,,,
 kevin_o'connell,Kevin O'Connell,2022,4,0,,kevin o connell,0.14151792724927267,0.424553781747818,3.0,1.0298227551271995,-0.05490379108699726,0.7244722491725478,-0.08261280805875443
-john_whelchel,John Whelchel,1949,1,0,,john whelchel,,,,,,,
-johnny_blood,Johnny Blood,1937,3,0,,johnny blood,,,,,,,
-johnny_bryan,Johnny Bryan,1925,2,0,,johnny bryan,,,,,,,
-johnny_murphy,Johnny Murphy,1924,1,0,,johnny murphy,,,,,,,
-jonathan_gannon,Jonathan Gannon,2023,3,0,,jonathan gannon,0.03073577655553815,0.0614715531110763,2.0,0.7553464228901443,0.7371184985988659,-0.42222017874214285,-1.221220378938895
-mike_mcdaniel,Mike McDaniel,2022,4,0,,mike mcdaniel,0.11345804678599032,0.340374140357971,3.0,0.877330028324976,1.0832792089953258,-0.6809506254714877,0.7512050972340769
-harry_robb,Harry Robb,1925,2,0,,harry robb,,,,,,,
-herb_dell,Herb Dell,1922,1,0,,herb dell,,,,,,,
-gus_tebell,Gus Tebell,1923,1,0,,gus tebell,,,,,,,
-hal_erickson,Hal Erickson,1924,1,0,,hal erickson,,,,,,,
-hal_griffen,Hal Griffen,1930,1,0,,hal griffen,,,,,,,
-hal_hanson,Hal Hanson,1932,1,0,,hal hanson,,,,,,,
-jim_kendrick,Jim Kendrick,1923,2,0,,jim kendrick,,,,,,,
-jim_laird,Jim Laird,1926,1,0,,jim laird,,,,,,,
-jim_leonard,Jim Leonard,1945,1,0,,jim leonard,,,,,,,
-jim_ringo,Jim Ringo,1976,2,0,,jim ringo,-0.1155716843128204,-0.1155716843128204,1.0,,,,
-jim_schwartz,Jim Schwartz,2009,5,0,,jim schwartz,-0.13542509675025935,-0.6771254837512968,5.0,-0.30255467870846486,0.6815642927503404,0.11618866642260542,
+kevin_stefanski,Kevin Stefanski,2020,6,0,,kevin stefanski,0.10543406600952147,0.5271703300476074,5.0,0.9028277771653892,0.20831002415156513,-0.1462744504689005,0.39780145483986845
+jim_zorn,Jim Zorn,2008,2,0,,jim zorn,-0.16662293672561646,-0.3332458734512329,2.0,-1.3589558742823873,-1.2531453186482817,-0.3679661073844068,
+john_north,John North,1973,3,0,,john north,-0.027952550363540635,-0.0838576510906219,3.0,,,,
+joe_bugel,Joe Bugel,1990,5,0,,joe bugel,-0.06821869015693663,-0.34109345078468317,5.0,,,,
+joe_judge,Joe Judge,2020,2,0,,joe judge,-0.0947479330062866,-0.1894958660125732,2.0,0.32166672952205966,0.41002447933351255,0.7781874667051922,-1.6786096881382009
+jim_tomsula,Jim Tomsula,2015,1,0,,jim tomsula,0.0184333026409149,0.0184333026409149,1.0,0.33685019456752724,-0.08592553942253614,0.034731083883142555,
+john_ralston,John Ralston,1972,5,0,,john ralston,0.13583724631309504,0.6791862315654752,5.0,,,,
+brian_schottenheimer,Brian Schottenheimer,2025,1,0,,brian schottenheimer,,,,,,,
+brian_flores,Brian Flores,2019,3,0,,brian flores,0.03809960982004797,0.1142988294601439,3.0,1.1410090701486333,1.1695205367896078,0.28496218933311673,1.2622038838489018
+brian_daboll,Brian Daboll,2022,4,0,,brian daboll,-0.014173121229807536,-0.04251936368942261,3.0,0.05887286686882631,0.8428662378256505,-0.05647633576265868,1.324311842790159
+steve_wilks,Steve Wilks,2018,1,0,,steve wilks,-0.0332214534282684,-0.0332214534282684,1.0,-0.9148655963568202,0.1053552952679946,-0.5567342586518234,0.8465232835797982
+j.d._roberts,J.D. Roberts,1970,3,0,,j d roberts,-0.14373406216303503,-0.4312021864891051,3.0,,,,
+vance_joseph,Vance Joseph,2017,2,0,,vance joseph,-0.04846805334091185,-0.0969361066818237,2.0,-0.3827575371763515,0.17585377738154112,0.03500886256914495,1.2015446303800459
 jerry_smith,Jerry Smith,1971,1,0,,jerry smith,,,,,,,
-jap_douds,Jap Douds,1933,1,0,,jap douds,,,,,,,
-doc_alexander,Doc Alexander,1922,2,0,,doc alexander,,,,,,,
-doc_young,Doc Young,1925,2,0,,doc young,,,,,,,
-dewey_scanlon,Dewey Scanlon,1924,4,0,,dewey scanlon,,,,,,,
-dick_lebeau,Dick LeBeau,2001,2,0,,dick lebeau,-0.010423690080642693,-0.020847380161285387,2.0,,,,
-dick_macpherson,Dick MacPherson,1991,2,0,,dick macpherson,-0.0395499169826508,-0.0790998339653016,2.0,,,,
-dick_rauch,Dick Rauch,1925,5,0,,dick rauch,,,,,,,
-dick_todd,Dick Todd,1951,1,0,,dick todd,,,,,,,
-mike_palm,Mike Palm,1933,1,0,,mike palm,,,,,,,
-matt_rhule,Matt Rhule,2020,3,0,,matt rhule,-0.0244392568747203,-0.0733177706241609,3.0,0.5938941148108359,0.16422603636948954,-0.2614192783082406,0.11842101146709443
-mike_getto,Mike Getto,1942,1,0,,mike getto,,,,,,,
-mike_macdonald,Mike Macdonald,2024,2,0,,mike macdonald,0.0972176463127135,0.0972176463127135,1.0,0.2913387264463545,1.2981875848435405,0.7786499285726025,0.3211084988804754
-marty_mornhinweg,Marty Mornhinweg,2001,2,0,,marty mornhinweg,-0.1576302796602249,-0.3152605593204498,2.0,,,,
-clipper_smith,Clipper Smith,1947,2,0,,clipper smith,,,,,,,
-charley_moran,Charley Moran,1927,1,0,,charley moran,,,,,,,
-charley_rogers,Charley Rogers,1927,1,0,,charley rogers,,,,,,,
-chile_walsh,Chile Walsh,1934,1,0,,chile walsh,,,,,,,
-chip_kelly,Chip Kelly,2013,4,0,,chip kelly,-0.07622056603431696,-0.3048822641372678,4.0,-0.4369634724198651,1.9071733907573092,5.624735507849739,-0.5019749672608169
-chuck_drulis,Chuck Drulis,1961,1,0,,chuck drulis,,,,,,,
-earl_potteiger,Earl Potteiger,1924,3,0,,earl potteiger,,,,,,,
-ed_biles,Ed Biles,1981,3,0,,ed biles,-0.11556502287387847,-0.3466950686216354,3.0,,,,
-ed_hughes,Ed Hughes,1971,1,0,,ed hughes,-0.0238758193016052,-0.0238758193016052,1.0,,,,
-ed_kubale,Ed Kubale,1944,1,0,,ed kubale,,,,,,,
-ed_robinson,Ed Robinson,1931,1,0,,ed robinson,,,,,,,
-ed_weir,Ed Weir,1927,2,0,,ed weir,,,,,,,
-eddie_casey,Eddie Casey,1935,1,0,,eddie casey,,,,,,,
-doug_wycoff,Doug Wycoff,1929,2,0,,doug wycoff,,,,,,,
-dutch_clark,Dutch Clark,1937,6,0,,dutch clark,,,,,,,
-dutch_hendrian,Dutch Hendrian,1923,1,0,,dutch hendrian,,,,,,,
-dim_batterson,Dim Batterson,1927,1,0,,dim batterson,,,,,,,
-dirk_koetter,Dirk Koetter,2016,3,0,,dirk koetter,-0.07118015487988787,-0.21354046463966359,3.0,1.6462429199625415,-0.516642219472213,0.34314930697682366,-0.24176007745315012
-matt_eberflus,Matt Eberflus,2022,3,0,,matt eberflus,-0.18132705955505365,-0.5439811786651609,3.0,0.1712085770861637,0.9340610003186791,-0.010057406690427614,-0.6298135933928553
-luby_dimeolo,Luby DiMeolo,1934,1,0,,luby dimeolo,,,,,,,
-lud_wray,Lud Wray,1932,4,0,,lud wray,,,,,,,
-luke_johnsos,Luke Johnsos,1942,4,0,,luke johnsos,,,,,,,
+jerod_mayo,Jerod Mayo,2024,1,0,,jerod mayo,-0.0543219789981841,-0.0543219789981841,1.0,-0.6800871173776303,0.8784546011365657,-0.2682864881181377,-0.1511944225305365
 marc_trestman,Marc Trestman,2013,2,0,,marc trestman,-0.05197723209857935,-0.1039544641971587,2.0,0.5800392157568074,0.353600254980165,-1.1050080611705417,
-marty_brill,Marty Brill,1931,1,0,,marty brill,,,,,,,
-paddy_driscoll,Paddy Driscoll,1922,3,0,,paddy driscoll,,,,,,,
-pat_peppler,Pat Peppler,1976,1,0,,pat peppler,,,,,,,
-pat_shurmur,Pat Shurmur,2011,4,0,,pat shurmur,-0.20721963793039316,-0.8288785517215727,4.0,0.03381219633139434,0.17373521321226135,0.547802954175648,0.1018728089396078
-paul_schissler,Paul Schissler,1933,4,0,,paul schissler,,,,,,,
-paul_wiggin,Paul Wiggin,1975,3,0,,paul wiggin,-0.16208474171956377,-0.4862542251586913,3.0,,,,
-norm_barry,Norm Barry,1925,2,0,,norm barry,,,,,,,
-ollie_kraehe,Ollie Kraehe,1923,1,0,,ollie kraehe,,,,,,,
-brick_muller,Brick Muller,1926,1,0,,brick muller,,,,,,,
-brian_callahan,Brian Callahan,2024,2,0,,brian callahan,-0.0780724213123321,-0.0780724213123321,1.0,-0.9249126659133576,1.1564102219229342,-1.0804564835946184,-0.7575874175784217
-dave_canales,Dave Canales,2024,2,0,,dave canales,-0.0242754384517669,-0.0242754384517669,1.0,0.6460602389869886,0.3391599645659885,-0.9277197216610332,-0.2079258862655564
-dave_mcginnis,Dave McGinnis,2001,3,0,,dave mcginnis,-0.0510937124490738,-0.1532811373472214,3.0,,,,
+matt_eberflus,Matt Eberflus,2022,3,0,,matt eberflus,-0.18132705955505365,-0.5439811786651609,3.0,0.1712085770861637,0.9340610003186791,-0.010057406690427614,-0.6298135933928553
+chip_kelly,Chip Kelly,2013,4,0,,chip kelly,-0.07622056603431696,-0.3048822641372678,4.0,-0.4369634724198651,1.9071733907573092,5.624735507849739,-0.5019749672608169
+cam_cameron,Cam Cameron,2007,1,0,,cam cameron,-0.199984610080719,-0.199984610080719,1.0,0.6982611194536421,-1.2329138610589725,-0.477778740528573,
+mike_riley,Mike Riley,1999,3,0,,mike riley,-0.051380495230356836,-0.1541414856910705,3.0,,,,
+mike_mcdaniel,Mike McDaniel,2022,4,0,,mike mcdaniel,0.11345804678599032,0.340374140357971,3.0,0.877330028324976,1.0832792089953258,-0.6809506254714877,0.7512050972340769
+mike_macdonald,Mike Macdonald,2024,2,0,,mike macdonald,0.0972176463127135,0.0972176463127135,1.0,0.2913387264463545,1.2981875848435405,0.7786499285726025,0.3211084988804754
+matt_rhule,Matt Rhule,2020,3,0,,matt rhule,-0.0244392568747203,-0.0733177706241609,3.0,0.5938941148108359,0.16422603636948954,-0.2614192783082406,0.11842101146709443
+marty_mornhinweg,Marty Mornhinweg,2001,2,0,,marty mornhinweg,-0.1576302796602249,-0.3152605593204498,2.0,,,,
+freddie_kitchens,Freddie Kitchens,2019,1,0,,freddie kitchens,-0.0830887556076049,-0.0830887556076049,1.0,1.2283065947469036,0.5814960335333649,-0.7984495743008158,0.4931481833254167
+hank_bullough,Hank Bullough,1986,1,0,,hank bullough,-0.1122174027442932,-0.1122174027442932,1.0,,,,
+gunther_cunningham,Gunther Cunningham,1999,2,0,,gunther cunningham,-0.08254191279411315,-0.1650838255882263,2.0,,,,
+gregg_williams,Gregg Williams,2001,3,0,,gregg williams,-0.04753214120864866,-0.142596423625946,3.0,3.080409620628656,0.1139709524118298,-0.8249911848269182,1.8875700708247651
+greg_schiano,Greg Schiano,2012,2,0,,greg schiano,-0.1746915578842163,-0.3493831157684326,2.0,0.21621199857860884,-0.689075338839094,-0.4771042535893151,
+hank_kuhlmann,Hank Kuhlmann,1989,1,0,,hank kuhlmann,,,,,,,
+dennis_allen,Dennis Allen,2012,6,0,,dennis allen,-0.10044254268805182,-0.602655256128311,6.0,-0.758569728254091,0.09309360574999336,0.11454172691195613,0.14817001390479503
 david_culley,David Culley,2021,1,0,,david culley,-0.1190360531330108,-0.1190360531330108,1.0,-1.6584420162226297,0.2432592460427888,-0.2625114790023335,-0.8183629131951421
 demeco_ryans,DeMeco Ryans,2023,3,0,,demeco ryans,0.04196756787300105,0.0839351357460021,2.0,1.2127297631297242,0.013469785688925949,-0.34172394900567665,0.23346047484282062
-dennis_allen,Dennis Allen,2012,6,0,,dennis allen,-0.10044254268805182,-0.602655256128311,6.0,-0.758569728254091,0.09309360574999336,0.11454172691195613,0.14817001390479503
-bill_edwards,Bill Edwards,1941,2,0,,bill edwards,,,,,,,
-bill_johnson,Bill Johnson,1976,3,0,,bill johnson,-0.0799504198392232,-0.23985125951766958,3.0,,,,
-babe_ruetz,Babe Ruetz,1922,3,0,,babe ruetz,,,,,,,
-fred_gillies,Fred Gillies,1928,1,0,,fred gillies,,,,,,,
-freddie_kitchens,Freddie Kitchens,2019,1,0,,freddie kitchens,-0.0830887556076049,-0.0830887556076049,1.0,1.2283065947469036,0.5814960335333649,-0.7984495743008158,0.4931481833254167
-fritz_pollard,Fritz Pollard,1925,1,0,,fritz pollard,,,,,,,
-ernie_hefferle,Ernie Hefferle,1975,1,0,,ernie hefferle,,,,,,,
-ernie_nevers,Ernie Nevers,1927,4,0,,ernie nevers,,,,,,,
-fay_abbott,Fay Abbott,1928,2,0,,fay abbott,,,,,,,
-forrest_douds,Forrest Douds,1933,1,0,,forrest douds,,,,,,,
-frank_bridges,Frank Bridges,1944,1,0,,frank bridges,,,,,,,
-frank_fausch,Frank Fausch,1922,1,0,,frank fausch,,,,,,,
-hubert_wiggs,Hubert Wiggs,1922,1,0,,hubert wiggs,,,,,,,
-hugh_devore,Hugh Devore,1953,3,0,,hugh devore,,,,,,,
-hugo_bezdek,Hugo Bezdek,1937,2,0,,hugo bezdek,,,,,,,
-hunk_anderson,Hunk Anderson,1942,4,0,,hunk anderson,,,,,,,
-j.d._roberts,J.D. Roberts,1970,3,0,,j d roberts,-0.14373406216303503,-0.4312021864891051,3.0,,,,
-herb_joesting,Herb Joesting,1929,1,0,,herb joesting,,,,,,,
-herb_kopf,Herb Kopf,1944,3,0,,herb kopf,,,,,,,
-herb_sies,Herb Sies,1923,1,0,,herb sies,,,,,,,
-herman_ball,Herman Ball,1949,3,0,,herman ball,,,,,,,
-hinkey_haines,Hinkey Haines,1931,1,0,,hinkey haines,,,,,,,
-hoge_workman,Hoge Workman,1931,1,0,,hoge workman,,,,,,,
-hank_bullough,Hank Bullough,1986,1,0,,hank bullough,-0.1122174027442932,-0.1122174027442932,1.0,,,,
-hank_kuhlmann,Hank Kuhlmann,1989,1,0,,hank kuhlmann,,,,,,,
-milan_creighton,Milan Creighton,1935,4,0,,milan creighton,,,,,,,
 nathaniel_hackett,Nathaniel Hackett,2022,1,0,,nathaniel hackett,-0.1169178183555603,-0.1169178183555603,1.0,0.4026487699421395,0.5286898694385618,0.3996929860881874,-1.5799531714959476
-mike_riley,Mike Riley,1999,3,0,,mike riley,-0.051380495230356836,-0.1541414856910705,3.0,,,,
-red_weaver,Red Weaver,1924,2,0,,red weaver,,,,,,,
+dick_macpherson,Dick MacPherson,1991,2,0,,dick macpherson,-0.0395499169826508,-0.0790998339653016,2.0,,,,
+dick_lebeau,Dick LeBeau,2001,2,0,,dick lebeau,-0.010423690080642693,-0.020847380161285387,2.0,,,,
+dave_canales,Dave Canales,2024,2,0,,dave canales,-0.0242754384517669,-0.0242754384517669,1.0,0.6460602389869886,0.3391599645659885,-0.9277197216610332,-0.2079258862655564
+dave_mcginnis,Dave McGinnis,2001,3,0,,dave mcginnis,-0.0510937124490738,-0.1532811373472214,3.0,,,,
+paul_wiggin,Paul Wiggin,1975,3,0,,paul wiggin,-0.16208474171956377,-0.4862542251586913,3.0,,,,
+raheem_morris,Raheem Morris,2009,5,0,,raheem morris,-0.04851490483283992,-0.19405961933135968,4.0,-0.08933009536499661,-0.18838624882415572,-0.43992562370204097,0.17822516215167428
+pat_peppler,Pat Peppler,1976,1,0,,pat peppler,,,,,,,
 rich_kotite,Rich Kotite,1991,6,0,,rich kotite,-0.07604932288328808,-0.4562959372997285,6.0,,,,
+pat_shurmur,Pat Shurmur,2011,4,0,,pat shurmur,-0.20721963793039316,-0.8288785517215727,4.0,0.03381219633139434,0.17373521321226135,0.547802954175648,0.1018728089396078
 richard_williamson,Richard Williamson,1990,2,0,,richard williamson,-0.1012982130050659,-0.1012982130050659,1.0,,,,
 richie_petitbon,Richie Petitbon,1993,1,0,,richie petitbon,-0.1234912574291229,-0.1234912574291229,1.0,,,,
-ray_prochaska,Ray Prochaska,1961,1,0,,ray prochaska,,,,,,,
-ray_willsey,Ray Willsey,1961,1,0,,ray willsey,,,,,,,
-red_strader,Red Strader,1950,2,0,,red strader,,,,,,,
-raheem_morris,Raheem Morris,2009,5,0,,raheem morris,-0.04851490483283992,-0.19405961933135968,4.0,-0.08933009536499661,-0.18838624882415572,-0.43992562370204097,0.17822516215167428
-ralph_jones,Ralph Jones,1930,3,0,,ralph jones,,,,,,,
-ralph_scott,Ralph Scott,1927,1,0,,ralph scott,,,,,,,
-rube_ursella,Rube Ursella,1925,1,0,,rube ursella,,,,,,,
-russ_daugherty,Russ Daugherty,1927,1,0,,russ daugherty,,,,,,,
-russell_tollefson,Russell Tollefson,1922,1,0,,russell tollefson,,,,,,,
-rob_chudzinski,Rob Chudzinski,2013,1,0,,rob chudzinski,-0.0678592920303344,-0.0678592920303344,1.0,1.067222588940646,0.2546125308196496,0.2794216731603454,
 robert_saleh,Robert Saleh,2021,4,0,,robert saleh,-0.0011021357417106744,-0.004408542966842698,4.0,0.41821996831181774,0.6663749255381654,-0.25876143771036475,-0.8309867342131074
-rod_rust,Rod Rust,1990,1,0,,rod rust,-0.1924485564231872,-0.1924485564231872,1.0,,,,
-cam_cameron,Cam Cameron,2007,1,0,,cam cameron,-0.199984610080719,-0.199984610080719,1.0,0.6982611194536421,-1.2329138610589725,-0.477778740528573,
-cap_edwards,Cap Edwards,1923,2,0,,cap edwards,,,,,,,
-cap_mcewan,Cap McEwan,1933,2,0,,cap mcewan,,,,,,,
-carl_storck,Carl Storck,1922,5,0,,carl storck,,,,,,,
-andy_salata,Andy Salata,1930,1,0,,andy salata,,,,,,,
+rob_chudzinski,Rob Chudzinski,2013,1,0,,rob chudzinski,-0.0678592920303344,-0.0678592920303344,1.0,1.067222588940646,0.2546125308196496,0.2794216731603454,
 aaron_glenn,Aaron Glenn,2025,1,0,,aaron glenn,,,,,,,
-antonio_pierce,Antonio Pierce,2024,1,0,,antonio pierce,-0.0300659880161285,-0.0300659880161285,1.0,-0.48461923918129235,0.31666261617467867,-0.08700090138865899,-0.35864824218361224
-archie_golembeski,Archie Golembeski,1925,1,0,,archie golembeski,,,,,,,
-arnie_horween,Arnie Horween,1923,2,0,,arnie horween,,,,,,,
-art_lewis,Art Lewis,1938,1,0,,art lewis,,,,,,,
 abe_gibron,Abe Gibron,1972,3,0,,abe gibron,-0.1212746357440948,-0.3638239072322844,3.0,,,,
-arthur_smith,Arthur Smith,2021,3,0,,arthur smith,-0.06412451175053917,-0.1923735352516175,3.0,-0.13814495087245876,0.664718873676069,0.1564850278033213,-0.2619267720663399
