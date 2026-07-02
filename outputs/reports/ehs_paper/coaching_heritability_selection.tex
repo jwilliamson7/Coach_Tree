@@ -103,15 +103,20 @@ heavily on that pedigree logic, on the assumption that working under a successfu
 coach transfers both winning approaches and strategic expertise.
 
 Recent work has begun to treat sport tactics as a cultural-evolutionary system.
-\citet{mesoudi2020} analyzed the cultural evolution of association-football
-formations and showed that managers' choices spread through strategic social
-learning, while explicitly naming transmission along mentor--protege lineages as
-open work. That gap motivates the present study. Cultural transmission theory
-distinguishes \emph{vertical} transmission, from a parent-like model to a learner,
-from \emph{horizontal} transmission, the spread of behavior among contemporaries
-\citep{cavallisforza1981, boydricherson1985}. A coaching tree is a natural
-substrate for measuring the vertical channel directly, because both the mentor's
-and the protege's behavior are observed on the field.
+\citet{mesoudi2020}, in this journal, analyzed the cultural evolution of
+association-football formations and showed that a managerial innovation spread
+through strategic social learning among contemporaries, a \emph{horizontal}
+diffusion that accelerated as the tactic proved successful. That study measured
+transmission among peers and explicitly named transmission along mentor--protege
+lineages, the \emph{vertical} channel, as open work. The present paper takes up
+exactly that question, for a different sport. Cultural transmission theory
+distinguishes vertical transmission, from a parent-like model to a learner, from
+horizontal transmission among contemporaries, and the two need not carry the same
+traits \citep{cavallisforza1981, boydricherson1985}. A coaching tree is an
+unusually direct substrate for the vertical channel, because both the mentor's and
+the protege's on-field behavior are observed and dated. As we will show, the
+vertical and horizontal channels in coaching turn out to move \emph{different}
+strategic traits, so the two studies are complementary halves of one picture.
 
 We borrow the two central quantities of quantitative genetics and apply them to a
 cultural system. The first is transmissibility, the cultural analog of heritability
@@ -386,33 +391,9 @@ Tempo   & 0.52 & 0.11 & 0.07 & 0.48 $[-0.11,0.82]$ & -- \\
 \end{tabular}
 \end{table}
 
-Finally, career-average gene leaders match public reputation
-(Table~\ref{tab:facevalidity}): the most aggressive coaches by career composite are
-Brandon Staley and Doug Pederson, fourth-down aggression is led by Dan Campbell,
-shotgun by Nick Sirianni and Chip Kelly, and tempo by Chip Kelly, each two to seven
-standard deviations from the average coach and each a name a knowledgeable observer
-would supply. Together with the repeatabilities, these four lines establish that the
-phenotypes are stable properties of the coach.
-
-\begin{table}[t]
-\centering
-\caption{Face validity: career-average gene leaders and laggards (coaches with
-$\geq 3$ seasons, $n=89$; $z$ = standard deviations from the average qualifying
-coach).}
-\label{tab:facevalidity}
-\small
-\begin{tabular}{lll}
-\toprule
-Gene & Most ($z$) & Least ($z$) \\
-\midrule
-Comp.\ offensive aggression & Staley (+2.7), Pederson (+2.6), Koetter (+2.3) & Jauron ($-$2.1), Childress ($-$2.0), Ryan ($-$1.8) \\
-Fourth-down & Campbell (+3.2), LaFleur (+3.1), Staley (+2.9) & Holmgren ($-$1.4), Dungy ($-$1.3), McCoy ($-$1.3) \\
-Shotgun & Sirianni (+2.4), Kingsbury (+2.4), Kelly (+2.3) & Holmgren ($-$3.1), Nolan ($-$2.3), Marinelli ($-$1.9) \\
-Tempo & Kelly (+6.7), Kingsbury (+3.1), Spagnuolo (+1.5) & Nolan ($-$1.4), LaFleur ($-$1.3), Gailey ($-$1.3) \\
-Defensive aggression & Arians (+2.0), Daboll (+1.9), Flores (+1.8) & Lynn ($-$2.5), Reich ($-$1.8), LaFleur ($-$1.4) \\
-\bottomrule
-\end{tabular}
-\end{table}
+Together with the repeatabilities, these lines establish that the phenotypes are
+stable properties of the coach rather than artifacts of a roster, the prerequisite
+for treating them as heritable-eligible traits.
 
 \subsection{Transmissibility and selection come apart}
 Table~\ref{tab:main} reports, for each trait, the preregistered transmissibility
@@ -428,6 +409,25 @@ while the identity genes do not (shotgun $0.08$, $[-0.03,0.17]$; tempo $0.03$). 
 frequentist mentor-clustered slopes and the mentor varying-intercept refits agree
 with the Bayesian $h^{2}$ (for example shotgun clustered slope $0.47$, $p<0.001$;
 defensive $0.61$, $p=0.03$; offensive aggression $-0.03$, $p=0.85$).
+Figure~\ref{fig:forest} plots each trait's $h^{2}$ against its repeatability ceiling
+and makes the pattern legible at a glance.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{../../visualizations/performance/ehs_heritability_forest.png}
+\caption{Transmissibility ($h^{2}$, filled points with 95\% HDIs) against its
+repeatability ceiling (open diamond, median; gray band, repeatability 95\% HDI) for
+every trait, grouped by gene and colored by family. A heritability cannot exceed its
+repeatability in the population; because $h^{2}$ and repeatability are estimated from
+separate models with wide posteriors, their medians can cross for traits that
+transmit near the ceiling, but every $h^{2}$ point falls within the repeatability's
+credible interval (the posterior contrast $P(h^{2}>\text{repeatability})$ is 0.5 to
+0.75 for these, that is $h^{2}\approx$ repeatability). Offensive aggression and its
+components are repeatable but have $h^{2}$ indistinguishable from zero, a clean gap
+($P=0.00$), the preregistered repeatable-but-not-heritable pattern (H2); schematic
+identity and the defensive front transmit near their ceiling.}
+\label{fig:forest}
+\end{figure}
 
 \begin{table}[t]
 \centering
@@ -480,8 +480,15 @@ The three preregistered decision rules resolve as follows.
 
 \textbf{H2 is supported.} Offensive aggression is repeatable ($0.40$) but not
 heritable ($h^{2}=-0.15$); the preregistered contrast, repeatability minus $h^{2}$,
-is $0.55$ with a 95\% HDI of $[0.24,0.87]$, excluding zero. Offensive aggression is
-a real, stable, personal trait that does not pass down the tree.
+is $0.55$ with a 95\% HDI of $[0.24,0.87]$, excluding zero, and $P(h^{2}>\text{
+repeatability})=0.00$. Offensive aggression is a real, stable, personal trait that
+does not pass down the tree. The contrast behaves as the prereg intended
+elsewhere too: for the traits that transmit near their ceiling (shotgun, defensive
+aggression, box-stacking, pass-rush) $h^{2}$ and repeatability are statistically
+indistinguishable ($P(h^{2}>\text{repeatability})$ between 0.5 and 0.75, each
+$h^{2}$ inside the repeatability's credible interval), so the apparent crossings in
+Figure~\ref{fig:forest} are estimation noise near the ceiling, not violations of the
+bound.
 
 \textbf{H1 is not supported as a conjunction, though its selection half holds.} The
 approach family is more selected than the identity family (mean-$S$ difference
@@ -493,10 +500,23 @@ highly heritable ($h^{2}=0.49$), so the approach family does not have uniformly 
 transmissibility.
 
 \textbf{H3 is not supported.} Across the ten sub-traits the Spearman correlation
-between $h^{2}$ and $S$ is $+0.32$ with a 95\% bootstrap interval of $[-0.54,0.69]$:
-the point estimate is positive, the opposite of the predicted negative trade-off,
-and the interval spans zero. The biological heritability-fitness trade-off does not
-replicate here.
+between $h^{2}$ and $S$ is $+0.32$ with a 95\% bootstrap interval of $[-0.54,0.69]$
+(Figure~\ref{fig:scatter}): the point estimate is positive, the opposite of the
+predicted negative trade-off, and the interval spans zero. The biological
+heritability-fitness trade-off does not replicate here.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{../../visualizations/performance/ehs_cross_trait_h2_S.png}
+\caption{The cross-trait heritability-fitness relationship, the cultural analog of
+the wild-population test of \citet{mousseauroff1987} and \citet{kruuk2000}: each of
+the ten sub-traits placed by transmissibility $h^{2}$ and selection $S$, with 95\%
+intervals (a single colour throughout; the approach-versus-identity contrast is
+drawn in the text, not by segmenting the figure). The Spearman rank correlation (H3)
+is $+0.32$ ($[-0.54,0.69]$), not the predicted negative, so the two axes are
+decoupled rather than traded off.}
+\label{fig:scatter}
+\end{figure}
 
 Taken together, the verdicts describe a \emph{decoupling} rather than a trade-off.
 Transmission and selection are close to independent across coaching traits, with
@@ -509,7 +529,8 @@ negative relationship.
 Two exploratory analyses, corrected among themselves under a Benjamini--Hochberg
 false-discovery rate, round out the picture; neither is confirmatory.
 
-First, phylogenetic signal on the mentor network (Table~\ref{tab:moran}). Moran's
+First, phylogenetic signal on the mentor network (Table~\ref{tab:moran},
+Supplementary material). Moran's
 $I$, the network analog of the tendency of related individuals to resemble one
 another, is positive for the schematic and defensive genes and essentially zero for
 offensive aggression (defensive aggression $I=0.21$, within-era permutation
@@ -518,25 +539,6 @@ $-0.01$, $p=0.52$). Under the exploratory correction the defensive and tempo sig
 survive. The pattern mirrors the transmission results exactly: network-adjacent
 coaches resemble one another in the traits that transmit and not in the trait that
 does not, a second and independent line of evidence for the same decoupling.
-
-\begin{table}[t]
-\centering
-\caption{Within-era phylogenetic signal on the mentor network (Moran's $I$ on a
-row-normalized, undirected adjacency of mentor--protege ties; one-sided permutation
-$p$ from within-career-midpoint-era label shuffles). $E[I]=-1/(N-1)$ is the
-no-signal expectation.}
-\label{tab:moran}
-\begin{tabular}{lcccccc}
-\toprule
-Gene & $I$ & $E[I]$ & $z$ & $p$ & $N$ & edges \\
-\midrule
-Offensive aggression & $-0.01$ & $-0.01$ & $-0.04$ & 0.52 & 139 & 440 \\
-Shotgun & $+0.08$ & $-0.01$ & $+1.77$ & 0.04 & 139 & 440 \\
-Tempo & $+0.12$ & $-0.01$ & $+2.63$ & 0.008 & 139 & 440 \\
-Defensive aggression & $+0.21$ & $-0.01$ & $+3.03$ & 0.002 & 95 & 216 \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 Second, reproductive success, the other face of fitness (Figure~\ref{fig:repro}).
 Counting a mentor's distinct proteges who themselves became head coaches, the
@@ -588,37 +590,88 @@ characteristic that does not pass down. This last pattern is the preregistered H
 and it is the sharpest single result: a trait can be a stable individual property
 (repeatability $0.40$) and predict success and still not be inherited.
 
-\subsection{Why the trade-off is absent: two channels of transmission}
-The classical heritability-fitness trade-off assumes a single inheritance channel
-along which selection erodes heritable variance. Two features of the coaching case
-break that assumption. First, the fitness-linked trait, offensive aggression, has
-essentially \emph{no} vertical transmission, so there is no heritable variance for
-lineage selection to erode; the trade-off cannot arise where the adaptive trait is
-not inherited. Yet offensive aggression nonetheless swept the league over our
-window, its mean rising and its spread across coaches widening. The resolution is
-that coaching traits move through two channels, not one \citep{cavallisforza1981,
+We preregistered a negative relationship and did not find one, and we report that
+plainly; the value of registering H1--H3 in advance is that the null on the
+trade-off is a result rather than a quiet omission. It also invites a sharper
+reading through the breeder's equation, $R=h^{2}S$, which gives a trait's
+per-generation response to selection along a lineage. For offensive aggression the
+lineage prediction is essentially nil ($R\approx h^{2}S\approx 0\times 0.18=0$),
+because the trait is not transmitted, and yet its league-wide mean rose steadily
+over our window. A quantity that the breeder's equation says should barely change
+down the tree changed markedly across the population, the empirical signature that a
+second, non-vertical channel is at work.
+
+\subsection{Two channels: vertical down the tree, horizontal across the league}
+The classical trade-off assumes a single inheritance channel along which selection
+erodes heritable variance. Coaching has two \citep{cavallisforza1981,
 boydricherson1985}. Schematic identity spreads \emph{vertically}, down the
-offensive-coordinator apprenticeship. Offensive aggression, lacking a vertical
-channel, spread \emph{horizontally}, coaches copying a winning tactic from their
-contemporaries rather than their mentors. A purely vertical, coaching-tree lens
-would have missed that diffusion entirely, and the era structure we treat as a
-confounder for inference is, read substantively, the horizontal-transmission
-signal. Second, defensive aggression occupies the adaptive-and-heritable corner
-that a strict trade-off forbids, and it is largely why the cross-trait relationship
-comes out flat-to-positive rather than negative.
+offensive-coordinator apprenticeship: it carries the high $h^{2}$ and the positive
+phylogenetic signal (Table~\ref{tab:moran}, Supplementary material) that vertical
+transmission produces. Offensive aggression, lacking a vertical channel
+($h^{2}\approx0$, no network autocorrelation), spread \emph{horizontally}. Its
+league mean climbed from below the time-invariant baseline in the late 2000s to
+clearly above it by the early 2020s (Figure~\ref{fig:adoption}), the classic
+profile of a payoff-driven innovation copied among contemporaries.
+
+This is where the study rejoins its predecessor. \citet{mesoudi2020} showed that a
+successful football tactic spreads horizontally, adopted by managers from their
+peers as its advantage becomes evident, and left vertical lineage transmission as
+open work. The NFL supplies the complementary half, and the two halves interlock.
+The trait that Mesoudi's horizontal lens would track, the fitness-linked one, is
+exactly the trait our vertical lens finds absent from the coaching tree; the trait
+our vertical lens finds transmitting, schematic identity, is not the one that sweeps
+the league on a fitness gradient. Vertical transmission carries system identity;
+horizontal transmission carries the winning tactic. A study looking only down the
+tree would conclude aggression is absent from coaching culture; a study looking only
+at league-wide diffusion would miss that scheme is inherited. Read together, the two
+channels partition the strategic repertoire, and the era structure we remove as a
+statistical confounder is, substantively, the horizontal channel itself.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\textwidth]{../../visualizations/performance/aggression_adoption_curve.png}
+\caption{Horizontal diffusion of offensive aggression, 2006--2024. The league-mean
+composite gene (deviation from the time-invariant, season-agnostic expectation)
+rises from below the baseline in the late 2000s to above it by the early 2020s, the
+profile of a payoff-driven tactic copied among contemporaries. Because the
+expectation model excludes season, this drift is a horizontal-transmission signal
+rather than a modeling artifact; it is the same signal the contemporary-group
+adjustment removes in the confirmatory tests.}
+\label{fig:adoption}
+\end{figure}
+
+\subsection{Defensive aggression: attitude and scheme entangled}
+Defensive aggression is the one composite that both transmits ($h^{2}=0.49$) and
+predicts winning ($S=0.15$), and it is chiefly why the cross-trait relationship is
+not cleanly negative. It is best read not as a counterexample but as a reminder that
+our two-family taxonomy, approach versus identity, is cleaner on offense than on
+defense. ``Aggression'' on defense bundles two dimensions the offensive split holds
+apart. One is genuine attitude, how much risk a defense takes: loading the box,
+sending extra rushers. The other is schematic, which system a defense runs: man
+versus zone coverage is a system choice as much as operating from shotgun is,
+closer to a formation than to a fourth-down gamble. A composite that mixes an
+attitudinal dimension with a schematic one inherits some of the transmissibility of
+scheme and some of the fitness link of attitude, which is precisely the both-corner
+position it occupies. The sub-traits bear this out: box-stacking and pass-rush
+transmit strongly ($h^{2}\approx0.43$), like schematic identity, while man coverage
+transmits weakly ($h^{2}=0.14$); even within defensive aggression the components do
+not behave alike. The organizing distinction is therefore attitude versus scheme,
+not offense versus defense, and a cleaner future decomposition would separate a
+defense's risk posture from its coverage system.
 
 \subsection{Coaching lineages transmit systems, not success}
 The pedigree logic that drives NFL hiring finds little support for its strongest
 claim. Working under a successful mentor does not, in these data, predict a
-protege's own success, and the in-game risk tendency that does predict success is
-not passed down. What coaching trees reliably transmit is schematic system:
-formation and, to a lesser degree, tempo identity, and specifically through the
-coordinator who would actually install it. Organizations can far more confidently
-predict the \emph{system} a coordinator will bring than whether he will win, and
-the system itself is not the edge. This reframes the coaching tree as a conduit for
-heritable-but-neutral cultural markers, legible precisely because they track
-apprenticeship rather than performance, with defensive scheme the one domain where
-what is inherited also helps win.
+protege's own success (mentor-protege WAR resemblance near zero), and the in-game
+risk tendency that does predict success is not passed down. What coaching trees
+reliably transmit is schematic system, formation and tempo identity, and
+specifically through the coordinator who would install it. There is a labor-market
+reading of this asymmetry: an organization can observe and verify the system a
+coordinator runs far more readily than whether he will win, so hiring on visible
+schematic pedigree is hiring on the trait that transmits, not the trait that drives
+value. What is legible (system) and what is decisive (in-game approach) come apart,
+and only the former leaves a lineage to point to. We offer this as interpretation
+rather than a tested claim; the confirmatory result is the decoupling itself.
 
 \subsection{Limitations}
 The transmission samples are small (about 40 offensive and 12--17 defensive
@@ -650,6 +703,29 @@ aggression alone both transmits and wins. The negative heritability-fitness
 relationship of biological populations does not appear; transmission and selection
 are instead decoupled, and the fitness-linked behavior spreads horizontally rather
 than down the lineage. Coaching trees, in the end, propagate systems, not success.
+
+%% ----------------------------------------------------------------------------
+\section*{Supplementary material}
+
+\begin{table}[h]
+\centering
+\caption{Within-era phylogenetic signal on the mentor network (Moran's $I$ on a
+row-normalized, undirected adjacency of mentor--protege ties; one-sided permutation
+$p$ from within-career-midpoint-era label shuffles). $E[I]=-1/(N-1)$ is the
+no-signal expectation. Under the exploratory Benjamini--Hochberg correction the
+defensive-aggression and tempo signals survive.}
+\label{tab:moran}
+\begin{tabular}{lcccccc}
+\toprule
+Gene & $I$ & $E[I]$ & $z$ & $p$ & $N$ & edges \\
+\midrule
+Offensive aggression & $-0.01$ & $-0.01$ & $-0.04$ & 0.52 & 139 & 440 \\
+Shotgun & $+0.08$ & $-0.01$ & $+1.77$ & 0.04 & 139 & 440 \\
+Tempo & $+0.12$ & $-0.01$ & $+2.63$ & 0.008 & 139 & 440 \\
+Defensive aggression & $+0.21$ & $-0.01$ & $+3.03$ & 0.002 & 95 & 216 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 %% ----------------------------------------------------------------------------
 \section*{Acknowledgments}

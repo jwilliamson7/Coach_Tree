@@ -175,11 +175,6 @@ def create_map(rows):
     ax.set_title('Heritability $\\times$ Selection Map of Coaching Genes',
                  fontsize=17, fontweight='bold', pad=34)
 
-    # Subtitle.
-    ax.text(0.5, 1.022,
-            'What wins is not what is inherited: the two axes are nearly orthogonal',
-            transform=ax.transAxes, ha='center', fontsize=12, style='italic')
-
     ax.grid(True, alpha=0.25, ls=':', zorder=0)
     ax.tick_params(labelsize=12)
 
