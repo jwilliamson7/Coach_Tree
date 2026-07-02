@@ -10,6 +10,7 @@ through mentor-protege ties and how they relate to coaching performance (Coach W
 Confirmatory heritability and selection analyses are preregistered on the Open Science Framework:
 
 - Registration: https://osf.io/y2kr5/ (registered 2026-07-01)
+- DOI: https://doi.org/10.17605/OSF.IO/Y2KR5
 - Protocol: `outputs/reports/EHS_preregistration.pdf` (source: `outputs/reports/EHS_preregistration.tex`)
 
 The WAR phenotype is drawn from the sibling repository

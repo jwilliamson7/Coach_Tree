@@ -4,125 +4,125 @@
     "n_coaches": 89,
     "top": [
       {
-        "coach": "Doug Pederson",
-        "gene": 0.0438,
-        "z": 2.73,
-        "seasons": 8
-      },
-      {
         "coach": "Brandon Staley",
-        "gene": 0.0415,
-        "z": 2.57,
+        "gene": 0.0433,
+        "z": 2.72,
         "seasons": 3
       },
       {
+        "coach": "Doug Pederson",
+        "gene": 0.0414,
+        "z": 2.6,
+        "seasons": 8
+      },
+      {
         "coach": "Dirk Koetter",
-        "gene": 0.0345,
-        "z": 2.11,
+        "gene": 0.0365,
+        "z": 2.26,
         "seasons": 3
       },
       {
         "coach": "Bruce Arians",
-        "gene": 0.0316,
+        "gene": 0.0312,
         "z": 1.91,
         "seasons": 8
       },
       {
         "coach": "Matt LaFleur",
-        "gene": 0.0286,
-        "z": 1.71,
+        "gene": 0.0301,
+        "z": 1.83,
         "seasons": 6
       },
       {
         "coach": "Sean McDermott",
-        "gene": 0.0278,
-        "z": 1.66,
+        "gene": 0.0269,
+        "z": 1.62,
         "seasons": 8
       },
       {
         "coach": "Brian Flores",
-        "gene": 0.0254,
-        "z": 1.5,
+        "gene": 0.0261,
+        "z": 1.56,
         "seasons": 3
+      },
+      {
+        "coach": "Joe Philbin",
+        "gene": 0.0239,
+        "z": 1.41,
+        "seasons": 5
       },
       {
         "coach": "Kevin O'Connell",
-        "gene": 0.0254,
-        "z": 1.49,
+        "gene": 0.0238,
+        "z": 1.41,
         "seasons": 3
       },
       {
-        "coach": "Mike McDaniel",
-        "gene": 0.0235,
-        "z": 1.37,
-        "seasons": 3
-      },
-      {
-        "coach": "Kevin Stefanski",
-        "gene": 0.0226,
-        "z": 1.31,
-        "seasons": 5
+        "coach": "Zac Taylor",
+        "gene": 0.0213,
+        "z": 1.24,
+        "seasons": 6
       }
     ],
     "bottom": [
       {
         "coach": "Dick Jauron",
-        "gene": -0.0309,
-        "z": -2.27,
+        "gene": -0.0287,
+        "z": -2.13,
         "seasons": 4
       },
       {
         "coach": "Brad Childress",
-        "gene": -0.0268,
-        "z": -1.99,
+        "gene": -0.0263,
+        "z": -1.97,
         "seasons": 5
       },
       {
-        "coach": "John Fox",
-        "gene": -0.0208,
-        "z": -1.59,
-        "seasons": 12
-      },
-      {
         "coach": "Rex Ryan",
-        "gene": -0.0194,
-        "z": -1.5,
+        "gene": -0.0236,
+        "z": -1.79,
         "seasons": 8
       },
       {
-        "coach": "Leslie Frazier",
-        "gene": -0.0175,
-        "z": -1.37,
-        "seasons": 4
+        "coach": "John Fox",
+        "gene": -0.0204,
+        "z": -1.57,
+        "seasons": 12
       },
       {
         "coach": "Romeo Crennel",
-        "gene": -0.0172,
-        "z": -1.35,
+        "gene": -0.0184,
+        "z": -1.44,
         "seasons": 6
       },
       {
-        "coach": "Todd Haley",
-        "gene": -0.0171,
+        "coach": "Leslie Frazier",
+        "gene": -0.017,
         "z": -1.35,
+        "seasons": 4
+      },
+      {
+        "coach": "Jon Gruden",
+        "gene": -0.0165,
+        "z": -1.31,
+        "seasons": 7
+      },
+      {
+        "coach": "Todd Haley",
+        "gene": -0.0162,
+        "z": -1.29,
         "seasons": 3
       },
       {
         "coach": "Eric Mangini",
-        "gene": -0.0168,
-        "z": -1.32,
+        "gene": -0.0153,
+        "z": -1.23,
         "seasons": 5
       },
       {
-        "coach": "Jon Gruden",
-        "gene": -0.0164,
-        "z": -1.3,
-        "seasons": 7
-      },
-      {
-        "coach": "Steve Spagnuolo",
-        "gene": -0.0149,
-        "z": -1.2,
+        "coach": "Mike McCoy",
+        "gene": -0.0142,
+        "z": -1.15,
         "seasons": 4
       }
     ]
@@ -133,124 +133,124 @@
     "top": [
       {
         "coach": "Dan Campbell",
-        "gene": 0.0942,
-        "z": 3.7,
-        "seasons": 4
+        "gene": 0.0782,
+        "z": 3.19,
+        "seasons": 5
       },
       {
         "coach": "Matt LaFleur",
-        "gene": 0.0717,
-        "z": 2.77,
+        "gene": 0.075,
+        "z": 3.06,
         "seasons": 6
       },
       {
         "coach": "Brandon Staley",
-        "gene": 0.0695,
-        "z": 2.68,
+        "gene": 0.0718,
+        "z": 2.92,
         "seasons": 3
       },
       {
         "coach": "Nick Sirianni",
-        "gene": 0.0622,
-        "z": 2.38,
+        "gene": 0.0617,
+        "z": 2.48,
         "seasons": 4
       },
       {
         "coach": "Kevin Stefanski",
-        "gene": 0.055,
-        "z": 2.08,
+        "gene": 0.0549,
+        "z": 2.19,
         "seasons": 5
       },
       {
         "coach": "Anthony Lynn",
-        "gene": 0.0531,
-        "z": 2.0,
+        "gene": 0.0474,
+        "z": 1.87,
         "seasons": 5
       },
       {
         "coach": "Mike McDaniel",
-        "gene": 0.0454,
-        "z": 1.69,
+        "gene": 0.0472,
+        "z": 1.86,
         "seasons": 3
       },
       {
         "coach": "Doug Pederson",
-        "gene": 0.0442,
-        "z": 1.64,
+        "gene": 0.0417,
+        "z": 1.62,
         "seasons": 8
       },
       {
-        "coach": "Matt Eberflus",
-        "gene": 0.0434,
-        "z": 1.6,
-        "seasons": 3
+        "coach": "Kliff Kingsbury",
+        "gene": 0.0399,
+        "z": 1.54,
+        "seasons": 4
       },
       {
-        "coach": "Kliff Kingsbury",
-        "gene": 0.0363,
-        "z": 1.31,
-        "seasons": 4
+        "coach": "Matt Eberflus",
+        "gene": 0.0349,
+        "z": 1.33,
+        "seasons": 3
       }
     ],
     "bottom": [
       {
-        "coach": "Jim Schwartz",
-        "gene": -0.0285,
-        "z": -1.36,
-        "seasons": 5
-      },
-      {
-        "coach": "Mike McCoy",
-        "gene": -0.0279,
-        "z": -1.34,
-        "seasons": 4
+        "coach": "Mike Holmgren",
+        "gene": -0.0274,
+        "z": -1.35,
+        "seasons": 3
       },
       {
         "coach": "Tony Dungy",
+        "gene": -0.0268,
+        "z": -1.32,
+        "seasons": 3
+      },
+      {
+        "coach": "Mike McCoy",
         "gene": -0.0265,
+        "z": -1.31,
+        "seasons": 4
+      },
+      {
+        "coach": "Jim Schwartz",
+        "gene": -0.0258,
         "z": -1.28,
-        "seasons": 3
-      },
-      {
-        "coach": "Jason Garrett",
-        "gene": -0.0262,
-        "z": -1.26,
-        "seasons": 10
-      },
-      {
-        "coach": "Matt Patricia",
-        "gene": -0.0224,
-        "z": -1.11,
-        "seasons": 3
-      },
-      {
-        "coach": "Mike Holmgren",
-        "gene": -0.0217,
-        "z": -1.08,
-        "seasons": 3
-      },
-      {
-        "coach": "Joe Philbin",
-        "gene": -0.0197,
-        "z": -1.0,
         "seasons": 5
       },
       {
-        "coach": "Jim Caldwell",
-        "gene": -0.0197,
-        "z": -1.0,
-        "seasons": 7
+        "coach": "Chuck Pagano",
+        "gene": -0.0251,
+        "z": -1.25,
+        "seasons": 6
+      },
+      {
+        "coach": "Jason Garrett",
+        "gene": -0.0236,
+        "z": -1.19,
+        "seasons": 10
       },
       {
         "coach": "Rex Ryan",
-        "gene": -0.019,
-        "z": -0.97,
+        "gene": -0.0236,
+        "z": -1.19,
         "seasons": 8
       },
       {
+        "coach": "Scott Linehan",
+        "gene": -0.0229,
+        "z": -1.16,
+        "seasons": 3
+      },
+      {
         "coach": "Dirk Koetter",
-        "gene": -0.0178,
-        "z": -0.92,
+        "gene": -0.0186,
+        "z": -0.97,
+        "seasons": 3
+      },
+      {
+        "coach": "Matt Patricia",
+        "gene": -0.018,
+        "z": -0.95,
         "seasons": 3
       }
     ]
@@ -261,125 +261,125 @@
     "top": [
       {
         "coach": "Brandon Staley",
-        "gene": 0.068,
-        "z": 2.28,
+        "gene": 0.0672,
+        "z": 2.25,
         "seasons": 3
       },
       {
         "coach": "Andy Reid",
-        "gene": 0.0642,
+        "gene": 0.0646,
         "z": 2.16,
         "seasons": 19
       },
       {
         "coach": "Zac Taylor",
-        "gene": 0.0595,
-        "z": 2.01,
+        "gene": 0.0588,
+        "z": 1.98,
         "seasons": 6
       },
       {
-        "coach": "Kevin O'Connell",
-        "gene": 0.0539,
-        "z": 1.83,
+        "coach": "Brian Flores",
+        "gene": 0.0533,
+        "z": 1.8,
         "seasons": 3
       },
       {
-        "coach": "Brian Flores",
-        "gene": 0.0503,
-        "z": 1.71,
+        "coach": "Joe Philbin",
+        "gene": 0.0532,
+        "z": 1.8,
+        "seasons": 5
+      },
+      {
+        "coach": "Kevin O'Connell",
+        "gene": 0.0528,
+        "z": 1.78,
         "seasons": 3
       },
       {
         "coach": "Chuck Pagano",
-        "gene": 0.0466,
-        "z": 1.6,
+        "gene": 0.0428,
+        "z": 1.46,
         "seasons": 6
       },
       {
-        "coach": "Mike McCarthy",
-        "gene": 0.0443,
-        "z": 1.52,
-        "seasons": 18
-      },
-      {
         "coach": "Jim Caldwell",
-        "gene": 0.0413,
-        "z": 1.43,
+        "gene": 0.0422,
+        "z": 1.44,
         "seasons": 7
       },
       {
         "coach": "Bruce Arians",
-        "gene": 0.0412,
-        "z": 1.42,
+        "gene": 0.0421,
+        "z": 1.44,
         "seasons": 8
       },
       {
-        "coach": "Joe Philbin",
-        "gene": 0.0384,
-        "z": 1.33,
-        "seasons": 5
+        "coach": "Mike McCarthy",
+        "gene": 0.0412,
+        "z": 1.41,
+        "seasons": 18
       }
     ],
     "bottom": [
       {
         "coach": "Tom Cable",
-        "gene": -0.0767,
-        "z": -2.37,
+        "gene": -0.0733,
+        "z": -2.26,
         "seasons": 3
       },
       {
         "coach": "Rex Ryan",
-        "gene": -0.0691,
-        "z": -2.12,
+        "gene": -0.0702,
+        "z": -2.16,
         "seasons": 8
       },
       {
         "coach": "Todd Haley",
-        "gene": -0.0656,
-        "z": -2.01,
+        "gene": -0.0647,
+        "z": -1.99,
         "seasons": 3
       },
       {
         "coach": "Mike Vrabel",
-        "gene": -0.0591,
-        "z": -1.8,
+        "gene": -0.0628,
+        "z": -1.93,
         "seasons": 6
       },
       {
         "coach": "Arthur Smith",
-        "gene": -0.0578,
+        "gene": -0.0577,
         "z": -1.76,
         "seasons": 3
       },
       {
-        "coach": "Jeff Fisher",
-        "gene": -0.054,
-        "z": -1.64,
-        "seasons": 10
-      },
-      {
-        "coach": "Matt Eberflus",
-        "gene": -0.0517,
-        "z": -1.56,
-        "seasons": 3
-      },
-      {
-        "coach": "Dick Jauron",
-        "gene": -0.0508,
-        "z": -1.53,
-        "seasons": 4
-      },
-      {
         "coach": "Eric Mangini",
-        "gene": -0.0507,
-        "z": -1.53,
+        "gene": -0.0515,
+        "z": -1.56,
         "seasons": 5
       },
       {
         "coach": "Brad Childress",
-        "gene": -0.0488,
-        "z": -1.47,
+        "gene": -0.0497,
+        "z": -1.51,
         "seasons": 5
+      },
+      {
+        "coach": "Dick Jauron",
+        "gene": -0.0492,
+        "z": -1.49,
+        "seasons": 4
+      },
+      {
+        "coach": "Jeff Fisher",
+        "gene": -0.0491,
+        "z": -1.49,
+        "seasons": 10
+      },
+      {
+        "coach": "John Fox",
+        "gene": -0.0486,
+        "z": -1.47,
+        "seasons": 12
       }
     ]
   },
@@ -389,124 +389,124 @@
     "top": [
       {
         "coach": "Dirk Koetter",
-        "gene": 0.114,
-        "z": 4.3,
+        "gene": 0.1158,
+        "z": 4.42,
         "seasons": 3
       },
       {
         "coach": "Bruce Arians",
-        "gene": 0.0708,
-        "z": 2.64,
+        "gene": 0.0704,
+        "z": 2.66,
         "seasons": 8
       },
       {
         "coach": "Scott Linehan",
-        "gene": 0.041,
-        "z": 1.5,
+        "gene": 0.0439,
+        "z": 1.63,
         "seasons": 3
       },
       {
-        "coach": "Tom Cable",
-        "gene": 0.0358,
-        "z": 1.3,
+        "coach": "Mike Holmgren",
+        "gene": 0.0325,
+        "z": 1.19,
         "seasons": 3
       },
       {
         "coach": "Bill O'Brien",
-        "gene": 0.0316,
-        "z": 1.14,
+        "gene": 0.0317,
+        "z": 1.16,
         "seasons": 7
       },
       {
-        "coach": "Tom Coughlin",
+        "coach": "Tom Cable",
         "gene": 0.0314,
-        "z": 1.14,
-        "seasons": 10
-      },
-      {
-        "coach": "Mike Holmgren",
-        "gene": 0.0306,
-        "z": 1.1,
+        "z": 1.15,
         "seasons": 3
-      },
-      {
-        "coach": "Arthur Smith",
-        "gene": 0.0297,
-        "z": 1.07,
-        "seasons": 3
-      },
-      {
-        "coach": "Norv Turner",
-        "gene": 0.0289,
-        "z": 1.04,
-        "seasons": 6
       },
       {
         "coach": "Jim Harbaugh",
-        "gene": 0.0288,
-        "z": 1.03,
+        "gene": 0.0302,
+        "z": 1.1,
         "seasons": 5
+      },
+      {
+        "coach": "Norv Turner",
+        "gene": 0.0294,
+        "z": 1.07,
+        "seasons": 6
+      },
+      {
+        "coach": "Mike Mularkey",
+        "gene": 0.0293,
+        "z": 1.07,
+        "seasons": 4
+      },
+      {
+        "coach": "Tom Coughlin",
+        "gene": 0.0286,
+        "z": 1.04,
+        "seasons": 10
       }
     ],
     "bottom": [
       {
-        "coach": "Dan Campbell",
-        "gene": -0.061,
-        "z": -2.4,
-        "seasons": 4
-      },
-      {
         "coach": "Brian Daboll",
-        "gene": -0.0605,
-        "z": -2.38,
+        "gene": -0.0628,
+        "z": -2.5,
         "seasons": 3
       },
       {
         "coach": "Jon Gruden",
-        "gene": -0.0526,
-        "z": -2.08,
+        "gene": -0.051,
+        "z": -2.04,
         "seasons": 7
       },
       {
         "coach": "Pat Shurmur",
-        "gene": -0.0424,
-        "z": -1.69,
+        "gene": -0.0448,
+        "z": -1.81,
+        "seasons": 5
+      },
+      {
+        "coach": "Dan Campbell",
+        "gene": -0.0444,
+        "z": -1.79,
         "seasons": 5
       },
       {
         "coach": "Dick Jauron",
-        "gene": -0.0402,
-        "z": -1.61,
+        "gene": -0.038,
+        "z": -1.54,
         "seasons": 4
       },
       {
-        "coach": "Mike Singletary",
-        "gene": -0.0361,
-        "z": -1.45,
-        "seasons": 3
-      },
-      {
         "coach": "Mike Zimmer",
-        "gene": -0.036,
-        "z": -1.44,
+        "gene": -0.0363,
+        "z": -1.47,
         "seasons": 8
       },
       {
         "coach": "Brad Childress",
-        "gene": -0.035,
-        "z": -1.41,
+        "gene": -0.0347,
+        "z": -1.42,
         "seasons": 5
       },
       {
+        "coach": "Mike Singletary",
+        "gene": -0.0347,
+        "z": -1.41,
+        "seasons": 3
+      },
+      {
         "coach": "Sean Payton",
-        "gene": -0.0341,
-        "z": -1.37,
+        "gene": -0.0314,
+        "z": -1.29,
         "seasons": 17
       },
       {
         "coach": "Jay Gruden",
-        "gene": -0.0256,
-        "z": -1.05,
+        "gene": -0.0262,
+        "z": -1.09,
         "seasons": 6
       }
     ]
@@ -517,125 +517,125 @@
     "top": [
       {
         "coach": "Doug Pederson",
-        "gene": 0.1228,
-        "z": 3.67,
+        "gene": 0.1199,
+        "z": 3.69,
         "seasons": 8
       },
       {
         "coach": "Brian Daboll",
-        "gene": 0.1051,
-        "z": 3.08,
+        "gene": 0.0986,
+        "z": 2.96,
         "seasons": 3
       },
       {
         "coach": "Kevin Stefanski",
-        "gene": 0.0815,
-        "z": 2.3,
+        "gene": 0.0785,
+        "z": 2.26,
         "seasons": 5
       },
       {
-        "coach": "Robert Saleh",
-        "gene": 0.0765,
-        "z": 2.13,
+        "coach": "Mike Mularkey",
+        "gene": 0.0768,
+        "z": 2.21,
         "seasons": 4
       },
       {
         "coach": "Matt Eberflus",
-        "gene": 0.065,
-        "z": 1.76,
+        "gene": 0.0724,
+        "z": 2.05,
         "seasons": 3
-      },
-      {
-        "coach": "Mike Mularkey",
-        "gene": 0.0635,
-        "z": 1.71,
-        "seasons": 3
-      },
-      {
-        "coach": "Hue Jackson",
-        "gene": 0.0617,
-        "z": 1.65,
-        "seasons": 4
-      },
-      {
-        "coach": "Dan Campbell",
-        "gene": 0.061,
-        "z": 1.63,
-        "seasons": 4
       },
       {
         "coach": "Matt Rhule",
-        "gene": 0.0498,
-        "z": 1.26,
+        "gene": 0.0672,
+        "z": 1.88,
+        "seasons": 3
+      },
+      {
+        "coach": "Robert Saleh",
+        "gene": 0.0551,
+        "z": 1.46,
+        "seasons": 4
+      },
+      {
+        "coach": "Brandon Staley",
+        "gene": 0.0532,
+        "z": 1.39,
+        "seasons": 3
+      },
+      {
+        "coach": "Matt Patricia",
+        "gene": 0.0529,
+        "z": 1.38,
         "seasons": 3
       },
       {
         "coach": "Doug Marrone",
-        "gene": 0.0496,
-        "z": 1.25,
+        "gene": 0.0521,
+        "z": 1.35,
         "seasons": 7
       }
     ],
     "bottom": [
       {
         "coach": "Dennis Allen",
-        "gene": -0.0519,
-        "z": -2.1,
+        "gene": -0.0339,
+        "z": -1.61,
         "seasons": 6
       },
       {
-        "coach": "Rod Marinelli",
-        "gene": -0.0352,
-        "z": -1.55,
-        "seasons": 3
-      },
-      {
-        "coach": "Chan Gailey",
-        "gene": -0.0299,
-        "z": -1.38,
-        "seasons": 3
-      },
-      {
-        "coach": "Bill O'Brien",
-        "gene": -0.0288,
-        "z": -1.34,
-        "seasons": 7
-      },
-      {
         "coach": "Mike McCoy",
-        "gene": -0.0268,
-        "z": -1.27,
+        "gene": -0.0296,
+        "z": -1.46,
         "seasons": 4
       },
       {
         "coach": "Mike Munchak",
-        "gene": -0.0252,
-        "z": -1.22,
+        "gene": -0.0261,
+        "z": -1.34,
         "seasons": 3
       },
       {
-        "coach": "Anthony Lynn",
+        "coach": "Rod Marinelli",
         "gene": -0.025,
+        "z": -1.31,
+        "seasons": 3
+      },
+      {
+        "coach": "Tony Sparano",
+        "gene": -0.0226,
         "z": -1.22,
         "seasons": 5
       },
       {
-        "coach": "Romeo Crennel",
-        "gene": -0.023,
-        "z": -1.15,
-        "seasons": 6
-      },
-      {
         "coach": "Dick Jauron",
-        "gene": -0.0227,
-        "z": -1.14,
+        "gene": -0.0219,
+        "z": -1.2,
         "seasons": 4
       },
       {
-        "coach": "Mike Shanahan",
-        "gene": -0.0225,
-        "z": -1.13,
-        "seasons": 7
+        "coach": "Tom Coughlin",
+        "gene": -0.0214,
+        "z": -1.18,
+        "seasons": 10
+      },
+      {
+        "coach": "Chan Gailey",
+        "gene": -0.0211,
+        "z": -1.17,
+        "seasons": 3
+      },
+      {
+        "coach": "Mike Singletary",
+        "gene": -0.0189,
+        "z": -1.09,
+        "seasons": 3
+      },
+      {
+        "coach": "Romeo Crennel",
+        "gene": -0.0183,
+        "z": -1.07,
+        "seasons": 6
       }
     ]
   },
@@ -645,123 +645,123 @@
     "top": [
       {
         "coach": "Nick Sirianni",
-        "gene": 2.0423,
-        "z": 2.5,
+        "gene": 1.9894,
+        "z": 2.43,
         "seasons": 4
       },
       {
         "coach": "Kliff Kingsbury",
-        "gene": 1.9062,
-        "z": 2.34,
+        "gene": 1.9863,
+        "z": 2.42,
         "seasons": 4
       },
       {
         "coach": "Chip Kelly",
-        "gene": 1.819,
-        "z": 2.23,
+        "gene": 1.9072,
+        "z": 2.33,
         "seasons": 4
       },
       {
         "coach": "Zac Taylor",
-        "gene": 1.1836,
-        "z": 1.46,
+        "gene": 1.2643,
+        "z": 1.55,
         "seasons": 6
       },
       {
         "coach": "Brian Flores",
-        "gene": 1.1801,
-        "z": 1.46,
+        "gene": 1.1695,
+        "z": 1.44,
         "seasons": 3
       },
       {
         "coach": "Matt Nagy",
-        "gene": 1.119,
-        "z": 1.39,
+        "gene": 1.0917,
+        "z": 1.35,
         "seasons": 4
       },
       {
         "coach": "Mike McDaniel",
-        "gene": 1.064,
-        "z": 1.32,
+        "gene": 1.0833,
+        "z": 1.34,
         "seasons": 3
       },
       {
         "coach": "Doug Pederson",
-        "gene": 1.041,
-        "z": 1.29,
+        "gene": 1.0209,
+        "z": 1.26,
         "seasons": 8
       },
       {
         "coach": "Ron Rivera",
-        "gene": 1.0405,
-        "z": 1.29,
+        "gene": 0.9794,
+        "z": 1.21,
         "seasons": 13
       },
       {
-        "coach": "Matt Eberflus",
-        "gene": 0.981,
-        "z": 1.22,
-        "seasons": 3
+        "coach": "Joe Philbin",
+        "gene": 0.9774,
+        "z": 1.21,
+        "seasons": 5
       }
     ],
     "bottom": [
       {
         "coach": "Mike Holmgren",
-        "gene": -2.5807,
-        "z": -3.09,
+        "gene": -2.582,
+        "z": -3.08,
         "seasons": 3
       },
       {
         "coach": "Mike Nolan",
-        "gene": -1.894,
-        "z": -2.26,
+        "gene": -1.9335,
+        "z": -2.3,
         "seasons": 3
       },
       {
         "coach": "Rod Marinelli",
-        "gene": -1.5682,
-        "z": -1.86,
+        "gene": -1.6174,
+        "z": -1.92,
         "seasons": 3
       },
       {
         "coach": "Gary Kubiak",
-        "gene": -1.4858,
-        "z": -1.76,
+        "gene": -1.4228,
+        "z": -1.68,
         "seasons": 10
-      },
-      {
-        "coach": "Scott Linehan",
-        "gene": -1.2587,
-        "z": -1.49,
-        "seasons": 3
       },
       {
         "coach": "Tom Cable",
-        "gene": -1.2405,
-        "z": -1.47,
+        "gene": -1.2982,
+        "z": -1.53,
         "seasons": 3
       },
       {
-        "coach": "Leslie Frazier",
-        "gene": -1.2265,
-        "z": -1.45,
-        "seasons": 4
-      },
-      {
         "coach": "Lovie Smith",
-        "gene": -1.2105,
-        "z": -1.43,
+        "gene": -1.2386,
+        "z": -1.46,
         "seasons": 10
       },
       {
-        "coach": "Tony Sparano",
-        "gene": -1.0997,
-        "z": -1.3,
-        "seasons": 5
+        "coach": "Leslie Frazier",
+        "gene": -1.1837,
+        "z": -1.4,
+        "seasons": 4
       },
       {
         "coach": "Brad Childress",
-        "gene": -1.0248,
+        "gene": -1.1191,
+        "z": -1.32,
+        "seasons": 5
+      },
+      {
+        "coach": "Scott Linehan",
+        "gene": -1.0822,
+        "z": -1.27,
+        "seasons": 3
+      },
+      {
+        "coach": "Tony Sparano",
+        "gene": -1.0174,
         "z": -1.2,
         "seasons": 5
       }
@@ -773,253 +773,253 @@
     "top": [
       {
         "coach": "Chip Kelly",
-        "gene": 5.7227,
-        "z": 6.82,
+        "gene": 5.6247,
+        "z": 6.73,
         "seasons": 4
       },
       {
         "coach": "Kliff Kingsbury",
-        "gene": 2.5469,
-        "z": 3.02,
+        "gene": 2.5778,
+        "z": 3.06,
         "seasons": 4
       },
       {
         "coach": "Steve Spagnuolo",
-        "gene": 1.3257,
-        "z": 1.55,
+        "gene": 1.2855,
+        "z": 1.5,
         "seasons": 4
-      },
-      {
-        "coach": "Eric Mangini",
-        "gene": 0.94,
-        "z": 1.09,
-        "seasons": 5
-      },
-      {
-        "coach": "Bill Belichick",
-        "gene": 0.9305,
-        "z": 1.08,
-        "seasons": 18
-      },
-      {
-        "coach": "Jim Caldwell",
-        "gene": 0.8249,
-        "z": 0.95,
-        "seasons": 7
-      },
-      {
-        "coach": "Brandon Staley",
-        "gene": 0.8162,
-        "z": 0.94,
-        "seasons": 3
-      },
-      {
-        "coach": "Todd Haley",
-        "gene": 0.813,
-        "z": 0.94,
-        "seasons": 3
       },
       {
         "coach": "Nick Sirianni",
-        "gene": 0.7342,
-        "z": 0.85,
+        "gene": 0.9284,
+        "z": 1.07,
         "seasons": 4
       },
       {
-        "coach": "Tony Dungy",
-        "gene": 0.7068,
-        "z": 0.81,
+        "coach": "Bill Belichick",
+        "gene": 0.9187,
+        "z": 1.06,
+        "seasons": 18
+      },
+      {
+        "coach": "Todd Haley",
+        "gene": 0.9142,
+        "z": 1.06,
         "seasons": 3
+      },
+      {
+        "coach": "Eric Mangini",
+        "gene": 0.9122,
+        "z": 1.05,
+        "seasons": 5
+      },
+      {
+        "coach": "Brandon Staley",
+        "gene": 0.7977,
+        "z": 0.92,
+        "seasons": 3
+      },
+      {
+        "coach": "Tony Dungy",
+        "gene": 0.7677,
+        "z": 0.88,
+        "seasons": 3
+      },
+      {
+        "coach": "Jim Caldwell",
+        "gene": 0.7506,
+        "z": 0.86,
+        "seasons": 7
       }
     ],
     "bottom": [
       {
         "coach": "Mike Nolan",
-        "gene": -1.1212,
-        "z": -1.38,
+        "gene": -1.0897,
+        "z": -1.36,
         "seasons": 3
       },
       {
         "coach": "Matt LaFleur",
-        "gene": -1.0793,
-        "z": -1.33,
+        "gene": -1.0758,
+        "z": -1.34,
         "seasons": 6
       },
       {
         "coach": "Chan Gailey",
-        "gene": -0.9802,
-        "z": -1.21,
+        "gene": -1.0445,
+        "z": -1.3,
         "seasons": 3
-      },
-      {
-        "coach": "Brad Childress",
-        "gene": -0.8938,
-        "z": -1.1,
-        "seasons": 5
       },
       {
         "coach": "Norv Turner",
-        "gene": -0.8474,
-        "z": -1.05,
+        "gene": -0.9677,
+        "z": -1.21,
         "seasons": 6
       },
       {
+        "coach": "Brad Childress",
+        "gene": -0.8867,
+        "z": -1.11,
+        "seasons": 5
+      },
+      {
+        "coach": "Kyle Shanahan",
+        "gene": -0.806,
+        "z": -1.02,
+        "seasons": 8
+      },
+      {
+        "coach": "Anthony Lynn",
+        "gene": -0.7301,
+        "z": -0.92,
+        "seasons": 5
+      },
+      {
         "coach": "Mike McDaniel",
-        "gene": -0.7205,
-        "z": -0.9,
+        "gene": -0.681,
+        "z": -0.86,
         "seasons": 3
       },
       {
-        "coach": "Jack Del Rio",
-        "gene": -0.6805,
-        "z": -0.85,
-        "seasons": 9
-      },
-      {
-        "coach": "Mike Shanahan",
-        "gene": -0.6653,
-        "z": -0.83,
-        "seasons": 7
-      },
-      {
         "coach": "Wade Phillips",
-        "gene": -0.6643,
-        "z": -0.83,
+        "gene": -0.6789,
+        "z": -0.86,
         "seasons": 5
       },
       {
         "coach": "Mike Singletary",
-        "gene": -0.6568,
-        "z": -0.82,
+        "gene": -0.6774,
+        "z": -0.86,
         "seasons": 3
       }
     ]
   },
   "Defensive Scheme": {
     "direction_high": "more exotic/aggressive D",
-    "n_coaches": 46,
+    "n_coaches": 47,
     "top": [
       {
         "coach": "Bruce Arians",
-        "gene": 1.384,
-        "z": 1.92,
+        "gene": 1.4315,
+        "z": 2.01,
         "seasons": 5
       },
       {
-        "coach": "Dan Campbell",
-        "gene": 1.3393,
-        "z": 1.86,
-        "seasons": 4
+        "coach": "Brian Daboll",
+        "gene": 1.3243,
+        "z": 1.85,
+        "seasons": 3
       },
       {
         "coach": "Brian Flores",
-        "gene": 1.3244,
-        "z": 1.84,
+        "gene": 1.2622,
+        "z": 1.76,
         "seasons": 3
       },
       {
-        "coach": "Brian Daboll",
-        "gene": 1.2345,
-        "z": 1.71,
-        "seasons": 3
-      },
-      {
-        "coach": "Kliff Kingsbury",
-        "gene": 0.9825,
-        "z": 1.35,
+        "coach": "Dan Campbell",
+        "gene": 1.0854,
+        "z": 1.51,
         "seasons": 4
       },
       {
-        "coach": "Mike McDaniel",
-        "gene": 0.8743,
-        "z": 1.2,
-        "seasons": 3
+        "coach": "Kliff Kingsbury",
+        "gene": 1.0773,
+        "z": 1.5,
+        "seasons": 4
       },
       {
         "coach": "Todd Bowles",
-        "gene": 0.8361,
-        "z": 1.14,
+        "gene": 0.922,
+        "z": 1.27,
         "seasons": 6
       },
       {
         "coach": "John Harbaugh",
-        "gene": 0.7553,
-        "z": 1.03,
+        "gene": 0.7908,
+        "z": 1.08,
         "seasons": 9
       },
       {
-        "coach": "Sean Payton",
-        "gene": 0.7237,
-        "z": 0.99,
+        "coach": "Mike McDaniel",
+        "gene": 0.7512,
+        "z": 1.02,
+        "seasons": 3
+      },
+      {
+        "coach": "Mike McCarthy",
+        "gene": 0.6437,
+        "z": 0.87,
         "seasons": 8
       },
       {
-        "coach": "Andy Reid",
-        "gene": 0.5804,
-        "z": 0.78,
-        "seasons": 9
+        "coach": "Sean Payton",
+        "gene": 0.626,
+        "z": 0.84,
+        "seasons": 8
       }
     ],
     "bottom": [
       {
         "coach": "Anthony Lynn",
-        "gene": -1.6937,
-        "z": -2.43,
-        "seasons": 4
+        "gene": -1.6739,
+        "z": -2.5,
+        "seasons": 5
       },
       {
         "coach": "Frank Reich",
-        "gene": -1.342,
-        "z": -1.94,
+        "gene": -1.1895,
+        "z": -1.8,
+        "seasons": 6
+      },
+      {
+        "coach": "Matt LaFleur",
+        "gene": -0.9266,
+        "z": -1.42,
         "seasons": 6
       },
       {
         "coach": "Vic Fangio",
-        "gene": -1.0172,
-        "z": -1.48,
+        "gene": -0.9197,
+        "z": -1.41,
         "seasons": 3
       },
       {
         "coach": "Matt Nagy",
-        "gene": -0.9264,
-        "z": -1.35,
-        "seasons": 4
-      },
-      {
-        "coach": "Matt LaFleur",
-        "gene": -0.8901,
+        "gene": -0.8447,
         "z": -1.3,
-        "seasons": 6
-      },
-      {
-        "coach": "Matt Eberflus",
-        "gene": -0.8362,
-        "z": -1.22,
-        "seasons": 3
-      },
-      {
-        "coach": "Jason Garrett",
-        "gene": -0.785,
-        "z": -1.15,
         "seasons": 4
-      },
-      {
-        "coach": "Marvin Lewis",
-        "gene": -0.766,
-        "z": -1.12,
-        "seasons": 3
       },
       {
         "coach": "Robert Saleh",
-        "gene": -0.6555,
-        "z": -0.97,
+        "gene": -0.831,
+        "z": -1.28,
         "seasons": 4
       },
       {
-        "coach": "Mike Vrabel",
-        "gene": -0.6181,
-        "z": -0.91,
-        "seasons": 6
+        "coach": "Jason Garrett",
+        "gene": -0.7894,
+        "z": -1.22,
+        "seasons": 4
+      },
+      {
+        "coach": "Matt Patricia",
+        "gene": -0.6577,
+        "z": -1.03,
+        "seasons": 3
+      },
+      {
+        "coach": "Marvin Lewis",
+        "gene": -0.6511,
+        "z": -1.02,
+        "seasons": 3
+      },
+      {
+        "coach": "Matt Eberflus",
+        "gene": -0.6298,
+        "z": -0.99,
+        "seasons": 3
       }
     ]
   }

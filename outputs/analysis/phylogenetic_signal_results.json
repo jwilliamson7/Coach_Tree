@@ -1,0 +1,84 @@
+{
+  "network": {
+    "total_edges": 1287,
+    "edge_types": "position_to_hc + coordinator_to_hc",
+    "directed": false
+  },
+  "genes": {
+    "aggression": {
+      "label": "Composite Aggression",
+      "n_nodes": 139,
+      "n_edges": 440,
+      "morans_I": -0.0102491312935507,
+      "expected_I_null": -0.007246376811594203,
+      "perm_mean": -0.008215487762404381,
+      "perm_sd": 0.05030576551024812,
+      "z_score": -0.04042565520113258,
+      "p_perm_one_sided": 0.521495700859828,
+      "p_perm_two_sided": 0.9478104379124175,
+      "n_perm": 5000,
+      "null": "within-era label permutation (career-midpoint era blocks)",
+      "era_block_counts": {
+        "2006-2011": 42,
+        "2012-2017": 41,
+        "2018-2024": 56
+      }
+    },
+    "shotgun": {
+      "label": "Shotgun Formation",
+      "n_nodes": 139,
+      "n_edges": 440,
+      "morans_I": 0.07942469867181806,
+      "expected_I_null": -0.007246376811594203,
+      "perm_mean": -0.009349276283857464,
+      "perm_sd": 0.05016807506453099,
+      "z_score": 1.7695312176416162,
+      "p_perm_one_sided": 0.03999200159968006,
+      "p_perm_two_sided": 0.08318336332733453,
+      "n_perm": 5000,
+      "null": "within-era label permutation (career-midpoint era blocks)",
+      "era_block_counts": {
+        "2006-2011": 42,
+        "2012-2017": 41,
+        "2018-2024": 56
+      }
+    },
+    "tempo": {
+      "label": "Composite Tempo",
+      "n_nodes": 139,
+      "n_edges": 440,
+      "morans_I": 0.11677543855745207,
+      "expected_I_null": -0.007246376811594203,
+      "perm_mean": -0.008778027024878426,
+      "perm_sd": 0.04777389541408317,
+      "z_score": 2.6280767874189057,
+      "p_perm_one_sided": 0.008198360327934412,
+      "p_perm_two_sided": 0.01199760047990402,
+      "n_perm": 5000,
+      "null": "within-era label permutation (career-midpoint era blocks)",
+      "era_block_counts": {
+        "2006-2011": 42,
+        "2012-2017": 41,
+        "2018-2024": 56
+      }
+    },
+    "defensive_scheme": {
+      "label": "Defensive Scheme",
+      "n_nodes": 95,
+      "n_edges": 216,
+      "morans_I": 0.2048844456458911,
+      "expected_I_null": -0.010638297872340425,
+      "perm_mean": -0.010922881161378684,
+      "perm_sd": 0.07113215648651897,
+      "z_score": 3.0338926509021245,
+      "p_perm_one_sided": 0.001999600079984003,
+      "p_perm_two_sided": 0.002999400119976005,
+      "n_perm": 5000,
+      "null": "within-era label permutation (career-midpoint era blocks)",
+      "era_block_counts": {
+        "2012-2017": 17,
+        "2018-2024": 78
+      }
+    }
+  }
+}
