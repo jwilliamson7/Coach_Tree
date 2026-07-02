@@ -1,11 +1,16 @@
 %%% EHS submission version (Cambridge cup-journal class). Compile with pdflatex + biber.
 %%% cup-journal.cls + cup-logo-new.pdf must be present (from the Cambridge Medium template).
+%%% EHS article type: Original Research Article (select this category in ScholarOne).
+%%%   The cup-journal class only accepts manuscript=article|communication|suppinfo,
+%%%   so the printed type banner reads "Article".
+%%% Double-blind review: \blindtrue (below) hides the author, affiliation, and the
+%%%   identifying data/preregistration links. Set \blindfalse for the camera-ready.
 %%% Social media summary (enter in submission portal, <=120 chars):
 %%%   NFL coaching lineages inherit a mentor's system, not his success: what
 %%%   transmits is largely not what wins.
 \documentclass[
   journal=ehs,
-  manuscript=article-type,
+  manuscript=article,
   year=2026,
   volume=8,
 ]{cup-journal}
@@ -15,11 +20,19 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 
+\newif\ifblind
+\blindtrue   % double-blind review; set \blindfalse for the de-anonymised camera-ready
+
 \title{Heritability and selection of strategic traits in the NFL coaching tree}
 
-\author{Jon Williamson}
-\affiliation{Williamson Consulting Group, USA}
-\email[Jon Williamson]{jonwilliamson@live.com}
+\ifblind
+  \author{Anonymised for review}
+  \affiliation{Affiliation removed for anonymous review}
+\else
+  \author{Jon Williamson}
+  \affiliation{Williamson Consulting Group, USA}
+  \email[Jon Williamson]{jonwilliamson@live.com}
+\fi
 
 \addbibresource{refs.bib}
 
@@ -168,13 +181,22 @@ We construct standardized coach-season phenotypes from play-by-play data for the
 plays). For each strategic decision we train a play-level expectation model
 (gradient-boosted trees) on pre-play game context only, deliberately excluding
 season, week, and coach identity, so the baseline reflects what an average coach
-would do in identical circumstances and is time-invariant. A coach-season
-phenotype is the average deviation of observed behavior from this expectation,
-$\text{mean(actual)} - \text{mean(predicted)}$, standardized (z-scored) across the
-coach-season panel; positive values denote more aggressive, faster, or more
-shotgun-oriented play than context predicts. This residual construction isolates a
-strategic tendency from forced circumstance: a coach who goes for it often only
-because he is always trailing is not thereby aggressive.
+would do in identical circumstances and is time-invariant. A coach-season phenotype
+is the average deviation of observed behavior from this expectation. Writing
+$a_{cj}$ for coach $c$'s action on play $j$ (an indicator for the discrete decisions,
+a continuous value for pace and the box and rusher counts) and $\hat{a}_{cj}$ for the
+model's expectation given that play's pre-snap context, the raw gene is
+\begin{equation}
+  g_c \;=\; \frac{1}{n_c}\sum_{j=1}^{n_c} a_{cj}
+          \;-\; \frac{1}{n_c}\sum_{j=1}^{n_c} \hat{a}_{cj},
+  \label{eq:gene}
+\end{equation}
+and the phenotype is its standardization across coach-seasons,
+$\tilde{g}_c = (g_c - \bar{g})/\mathrm{sd}(g)$; positive values denote more
+aggressive, faster, or more shotgun-oriented play than context predicts. This
+residual construction isolates a strategic tendency from forced circumstance: a
+coach who goes for it often only because he is always trailing is not thereby
+aggressive.
 
 The ten sub-traits are the residuals of ten play-level models (Table~\ref{tab:traits}):
 four offensive-aggression decisions (going for it on fourth down, passing versus
@@ -265,9 +287,18 @@ Third, feature selection and calibration. Features are not hand-curated. A
 pre-specified core of fine-grained game-state fields (down, distance, field
 position, score margin, clock, and timeouts) is always retained; the remaining
 context variables (Table~\ref{tab:features}) are chosen by stability selection
-\parencite{meinshausen2010}, keeping only features selected in at least 60\% of
-team-year subsamples, which prunes collinear inputs without materially changing
-accuracy. Because the classifier genes are residuals from predicted probabilities,
+\parencite{meinshausen2010}. Over $B$ subsamples of team-year groups, letting
+$\hat{S}_K^{(b)}$ be the $K$ highest-importance features in subsample $b$, the
+selection frequency of feature $k$ is
+\begin{equation}
+  \hat{\Pi}_k^{(K)} \;=\; \frac{1}{B}\sum_{b=1}^{B}
+    \mathbf{1}\!\left\{\, k \in \hat{S}_K^{(b)} \,\right\},
+  \label{eq:stability}
+\end{equation}
+and we retain features with $\hat{\Pi}_k^{(K)} \ge \pi$ at threshold $\pi = 0.6$
+(taking the union over shortlist lengths $K$), which prunes collinear inputs without
+materially changing accuracy. Because the classifier genes are residuals from
+predicted probabilities,
 we confirmed the classifiers are well-calibrated out-of-fold (expected calibration
 error at most 0.03), so the residuals are not artifacts of miscalibration.
 
@@ -381,13 +412,23 @@ report $P(h^{2}>\text{repeatability})$ per trait, a value near one flagging a
 specification problem rather than a substantive result.
 
 \subsection{Selection ($S$)}
-Selection $S$ is the era-adjusted, inverse-variance-weighted correlation of a trait
-with Coach WAR: within-season demean the standardized gene and WAR, weight each
-coach-season by its games-based WAR precision, and take the coach-clustered
-weighted correlation. Single-season WAR is noisy, and because mean-zero noise in
-the outcome attenuates a correlation rather than inflating it, this estimate is a
-conservative floor. WAR is drawn from the sibling Coach\_WAR repository at commit
-\texttt{dffe2f1} \parencite{williamson2026war}.
+Coach WAR is our fitness proxy, and it is chosen deliberately. It estimates the wins
+a head coach adds relative to a replacement-level alternative, adjusting for roster
+talent, schedule, and game context, so it credits the coaching contribution rather
+than a strong roster; it is validated out of sample on held-out coaches in companion
+work \parencite{williamson2026war}. Being replacement-relative and computed within
+each season, it is a relative-fitness analog centered near zero (median approximately
+zero) and nearly era-flat (about 3\% between-season variance), so, unlike the genes,
+it needs no separate era adjustment. WAR is taken from a version-pinned companion
+estimator; if that estimator is revised, $S$ is recomputed on the revised version as
+a pre-specified robustness check.
+
+Selection $S$ is then the era-adjusted, inverse-variance-weighted correlation of a
+trait with Coach WAR: within-season demean the standardized gene and WAR, weight each
+coach-season by its games-based WAR precision, and take the coach-clustered weighted
+correlation. Single-season WAR is noisy, and because mean-zero noise in the outcome
+attenuates a correlation rather than inflating it, this estimate is a conservative
+floor.
 
 \subsection{C3 and decision rules}
 For the ten sub-traits we assemble the pair ($h^{2}$, $S$) and compute their
@@ -800,8 +841,8 @@ Defensive aggression & $+0.21$ & $-0.01$ & $+3.03$ & 0.002 & 95 & 216 \\
 
 \paragraph{Acknowledgments}
 This work uses play-by-play data from \texttt{nfl\_data\_py} and coaching histories
-from Pro Football Reference; the WAR phenotype is from the companion Coach\_WAR
-project.
+from Pro Football Reference; the WAR phenotype is from a companion
+wins-above-replacement project.
 
 \paragraph{Funding Statement}
 This research received no specific grant from any funding agency, commercial or
@@ -811,6 +852,13 @@ not-for-profit sectors.
 The author declares none.
 
 \paragraph{Data Availability Statement}
+\ifblind
+The confirmatory analyses (C1--C3, hypotheses H1--H3) were preregistered before any
+confirmatory quantity was computed on the final measurement pipeline. All data and
+analysis code are public and seed-fixed, and the full pipeline runs from a single
+command; the preregistration, data, and code repository links are withheld here to
+preserve author anonymity and will be provided on acceptance.
+\else
 The confirmatory analyses (C1--C3, hypotheses H1--H3) were preregistered before any
 confirmatory quantity was computed on the final measurement pipeline:
 \url{https://doi.org/10.17605/OSF.IO/Y2KR5} (osf.io/y2kr5). All data and analysis
@@ -818,6 +866,7 @@ code are public and seed-fixed, and the full pipeline runs from a single command
 \url{https://github.com/jwilliamson7/Coach_Tree}. The WAR phenotype is drawn from
 the sibling repository \url{https://github.com/jwilliamson7/Coach_WAR}, pinned at
 commit \texttt{dffe2f1}.
+\fi
 
 \paragraph{Ethical Standards}
 The research uses only publicly available data on professional-sport outcomes and
