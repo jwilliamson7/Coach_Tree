@@ -37,6 +37,7 @@ Usage:
     python scripts/analysis/analyze_reproductive_fitness.py
 """
 
+import argparse
 import json
 import logging
 import sys
@@ -74,9 +75,16 @@ GENE_SPECS = {
 # --------------------------------------------------------------------------- #
 # Coaching tree -> reproductive fitness
 # --------------------------------------------------------------------------- #
-def load_hc_first_year():
+def load_hc_first_year(start_year=None):
     """Map coach_id -> first NFL head-coaching season, for every coach with an
-    NFL HC stint in coaches.json (role_category == 'HC', level == 'NFL')."""
+    NFL HC stint in coaches.json (role_category == 'HC', level == 'NFL').
+
+    When start_year is given, restrict the head-coach universe to coaches whose
+    first NFL head-coaching season is in the modern era (>= start_year). Because
+    both mentors and offspring are drawn from this map, the whole reproductive-
+    fitness tree is then confined to the modern era, matching the window over
+    which the genes are measured (offspring postdate the mentor's HC seasons, so
+    a modern mentor can only have modern offspring)."""
     with open(TREE_DIR / "coaches.json") as f:
         coaches = json.load(f)
     first_hc = {}
@@ -87,10 +95,12 @@ def load_hc_first_year():
         hc_years = [int(y) for y, info in c["career"].items()
                     if info.get("role_category") == "HC"
                     and info.get("level") == "NFL"]
-        if hc_years:
+        if hc_years and (start_year is None or min(hc_years) >= start_year):
             first_hc[cid] = min(hc_years)
             n_hc_seasons[cid] = len(hc_years)
-    logger.info("NFL head coaches in tree: %d", len(first_hc))
+    logger.info("NFL head coaches in tree%s: %d",
+                "" if start_year is None else f" (first HC season >= {start_year})",
+                len(first_hc))
     return first_hc, id_to_name, n_hc_seasons
 
 
@@ -204,7 +214,15 @@ def gini(values):
 # Main
 # --------------------------------------------------------------------------- #
 def main():
-    first_hc, id_to_name, n_hc_seasons = load_hc_first_year()
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--start_year", type=int, default=1970,
+                    help="restrict the head-coach tree to coaches whose first NFL "
+                         "HC season is >= this year (default 1970, the post-merger "
+                         "modern era; pass 0 for all-time).")
+    args = ap.parse_args()
+    start_year = args.start_year if args.start_year and args.start_year > 0 else None
+
+    first_hc, id_to_name, n_hc_seasons = load_hc_first_year(start_year)
     repro = compute_reproductive_fitness(first_hc, id_to_name, n_hc_seasons)
     repro["coach_canon"] = repro["coach_name"].map(canonicalize_coach_name)
 
@@ -316,6 +334,9 @@ def main():
             }
 
     results = {
+        "era": ("all-time" if start_year is None
+                else f"modern era, first HC season >= {start_year}"),
+        "start_year": start_year,
         "definition": ("reproductive fitness R_i = number of distinct proteges "
                        "who served under head coach i and later became NFL head "
                        "coaches (first HC season after first shared season).edges "

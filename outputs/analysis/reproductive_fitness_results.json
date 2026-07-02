@@ -1,19 +1,21 @@
 {
+  "era": "modern era, first HC season >= 1970",
+  "start_year": 1970,
   "definition": "reproductive fitness R_i = number of distinct proteges who served under head coach i and later became NFL head coaches (first HC season after first shared season).edges from relationships.csv parent_role=Head Coach.",
   "censoring_caveat": "mentors active recently are right-censored: their proteges may not yet have become head coaches, so their R is a lower bound. The tenure control and career-mean (vs total) WAR partly absorb this.",
   "distribution": {
-    "n_mentors": 463,
-    "n_mentors_with_offspring": 255,
-    "pct_with_offspring": 55.0755939524838,
-    "total_offspring_edges": 707,
-    "mean": 1.5269978401727862,
+    "n_mentors": 265,
+    "n_mentors_with_offspring": 189,
+    "pct_with_offspring": 71.32075471698113,
+    "total_offspring_edges": 540,
+    "mean": 2.0377358490566038,
     "median": 1.0,
     "max": 13,
-    "std": 2.1489011220767833,
-    "cv": 1.407271880511387,
-    "gini": 0.6637482014168711,
-    "top_decile_share_of_offspring": 0.42998585572843,
-    "top_decile_n_mentors": 46
+    "std": 2.2942803069654922,
+    "cv": 1.1258968173071398,
+    "gini": 0.5587840670859539,
+    "top_decile_share_of_offspring": 0.35,
+    "top_decile_n_mentors": 26
   },
   "supersires": [
     {
@@ -41,34 +43,10 @@
       "offspring": "Brad Childress; David Culley; Doug Pederson; John Harbaugh; Leslie Frazier; Matt Nagy; Pat Shurmur; Ron Rivera; Sean McDermott; Steve Spagnuolo; Todd Bowles"
     },
     {
-      "coach": "Weeb Ewbank",
-      "repro_fitness": 9,
-      "first_hc_year": 1954,
-      "offspring": "Buddy Ryan; Charley Winner; Don McCafferty; Ed Biles; Joe Thomas; John Sandusky; Ken Meyer; Mike Holovak; Walt Michaels"
-    },
-    {
-      "coach": "Don Shula",
-      "repro_fitness": 9,
-      "first_hc_year": 1963,
-      "offspring": "Bill Arnsparger; Charley Winner; Chuck Noll; Dan Henning; David Shula; Don McCafferty; Howard Schnellenberger; John Sandusky; Monte Clark"
-    },
-    {
       "coach": "Bill Cowher",
       "repro_fitness": 9,
       "first_hc_year": 1992,
       "offspring": "Bruce Arians; Chan Gailey; David Culley; Dick LeBeau; Dom Capers; Jim Haslett; Ken Whisenhunt; Marvin Lewis; Mike Mularkey"
-    },
-    {
-      "coach": "George Allen",
-      "repro_fitness": 9,
-      "first_hc_year": 1966,
-      "offspring": "Dick Vermeil; Howard Schnellenberger; Jack Patera; Joe Walton; Marion Campbell; Marv Levy; Mike McCormack; Pete McCulley; Ted Marchibroda"
-    },
-    {
-      "coach": "Brian Billick",
-      "repro_fitness": 8,
-      "first_hc_year": 1999,
-      "offspring": "Jack Del Rio; Marvin Lewis; Mike Nolan; Mike Pettine; Mike Singletary; Mike Smith; Rex Ryan; Vic Fangio"
     },
     {
       "coach": "Mike Holmgren",
@@ -77,22 +55,22 @@
       "offspring": "Andy Reid; Dick Jauron; Jim Zorn; Jon Gruden; Marty Mornhinweg; Mike Sherman; Ray Rhodes; Steve Mariucci"
     },
     {
-      "coach": "Bud Grant",
-      "repro_fitness": 8,
-      "first_hc_year": 1967,
-      "offspring": "Bob Hollway; Buddy Ryan; Jack Patera; Jerry Burns; Les Steckel; Marc Trestman; Neill Armstrong; Pete Carroll"
-    },
-    {
       "coach": "Forrest Gregg",
       "repro_fitness": 8,
       "first_hc_year": 1975,
       "offspring": "Bruce Coslet; Dick Jauron; Dick LeBeau; Frank Gansz; Hank Bullough; Lindy Infante; Raymond Berry; Tom Coughlin"
     },
     {
-      "coach": "Jon Gruden",
+      "coach": "Brian Billick",
+      "repro_fitness": 8,
+      "first_hc_year": 1999,
+      "offspring": "Jack Del Rio; Marvin Lewis; Mike Nolan; Mike Pettine; Mike Singletary; Mike Smith; Rex Ryan; Vic Fangio"
+    },
+    {
+      "coach": "Bill Walsh",
       "repro_fitness": 7,
-      "first_hc_year": 1998,
-      "offspring": "Bill Callahan; Brian Callahan; Gus Bradley; Marc Trestman; Mike Tomlin; Raheem Morris; Rod Marinelli"
+      "first_hc_year": 1979,
+      "offspring": "Bruce Coslet; Dennis Green; George Seifert; Mike Holmgren; Mike White; Ray Rhodes; Sam Wyche"
     },
     {
       "coach": "Tom Coughlin",
@@ -101,71 +79,95 @@
       "offspring": "Ben McAdoo; Bobby Petrino; Chris Palmer; Dick Jauron; Kevin Gilbride; Steve Spagnuolo; Tony Sparano"
     },
     {
-      "coach": "Bill Walsh",
+      "coach": "Jon Gruden",
       "repro_fitness": 7,
-      "first_hc_year": 1979,
-      "offspring": "Bruce Coslet; Dennis Green; George Seifert; Mike Holmgren; Mike White; Ray Rhodes; Sam Wyche"
+      "first_hc_year": 1998,
+      "offspring": "Bill Callahan; Brian Callahan; Gus Bradley; Marc Trestman; Mike Tomlin; Raheem Morris; Rod Marinelli"
+    },
+    {
+      "coach": "Norv Turner",
+      "repro_fitness": 7,
+      "first_hc_year": 1994,
+      "offspring": "Cam Cameron; Chuck Pagano; Mike Martz; Mike Nolan; Rob Chudzinski; Ron Rivera; Steve Wilks"
+    },
+    {
+      "coach": "Mike Shanahan",
+      "repro_fitness": 6,
+      "first_hc_year": 1988,
+      "offspring": "Art Shell; Gary Kubiak; Kyle Shanahan; Matt LaFleur; Mike McDaniel; Sean McVay"
+    },
+    {
+      "coach": "Chuck Knox",
+      "repro_fitness": 6,
+      "first_hc_year": 1973,
+      "offspring": "Dick Vermeil; Kay Stephenson; Ken Meyer; Leeman Bennett; Mike Martz; Ray Malavasi"
+    },
+    {
+      "coach": "Chuck Fairbanks",
+      "repro_fitness": 6,
+      "first_hc_year": 1973,
+      "offspring": "Hank Bullough; Ray Perkins; Raymond Berry; Red Miller; Ron Erhardt; Sam Rutigliano"
     }
   ],
   "winning_begets_offspring": {
-    "n_coaches_with_war": 269,
+    "n_coaches_with_war": 248,
     "repro_vs_career_mean_war": {
-      "r": 0.3593887247772131,
-      "ci_low": 0.26153169592168707,
-      "ci_high": 0.4485171635312178,
+      "r": 0.3484753132581653,
+      "ci_low": 0.2529133103848953,
+      "ci_high": 0.4351559552134271,
       "p_bootstrap": 0.0,
-      "n": 269,
-      "n_clusters": 269,
+      "n": 248,
+      "n_clusters": 248,
       "n_boot": 2000
     },
     "repro_vs_career_total_war": {
-      "r": 0.48441636425390205,
-      "ci_low": 0.31462270922077634,
-      "ci_high": 0.607292560650074,
+      "r": 0.4714230563643913,
+      "ci_low": 0.2631793283356226,
+      "ci_high": 0.6232701455293762,
       "p_bootstrap": 0.0,
-      "n": 269,
-      "n_clusters": 269,
+      "n": 248,
+      "n_clusters": 248,
       "n_boot": 2000
     },
     "repro_vs_n_hc_seasons": {
-      "r": 0.7112031550275485,
-      "ci_low": 0.6234824837356553,
-      "ci_high": 0.7821798217846333,
+      "r": 0.7382577512424617,
+      "ci_low": 0.6541873180258903,
+      "ci_high": 0.8044541985099446,
       "p_bootstrap": 0.0,
-      "n": 269,
-      "n_clusters": 269,
+      "n": 248,
+      "n_clusters": 248,
       "n_boot": 2000
     },
     "repro_vs_mean_war_partial_tenure": {
-      "r": 0.08555616279560334,
-      "n": 269
+      "r": 0.07551228632677227,
+      "n": 248
     },
     "note": "career-mean WAR is quality (tenure-adjusted); total WAR and tenure both grow mechanically with seasons coached, so the partial correlation of R on mean WAR net of tenure isolates whether winning per se -- not merely lasting -- begets offspring."
   },
   "reproductive_rate": {
     "definition": "HC offspring per head-coaching season; exposure = number of NFL head-coaching seasons (the coordinator-slot exposure that generates future-HC proteges).",
     "exposure_floor_hc_seasons": 3,
-    "n_mentors_over_floor": 268,
-    "mean_rate": 0.29909173103766806,
-    "median_rate": 0.25,
+    "n_mentors_over_floor": 184,
+    "mean_rate": 0.3267621832935229,
+    "median_rate": 0.2857142857142857,
     "rate_vs_career_mean_war": {
-      "r": 0.07778707990420494,
-      "ci_low": -0.0615028215929775,
-      "ci_high": 0.21211501547161618,
-      "p_bootstrap": 0.271,
-      "n": 205,
-      "n_clusters": 205,
+      "r": 0.07130828902707982,
+      "ci_low": -0.08248741429215645,
+      "ci_high": 0.2251337250731781,
+      "p_bootstrap": 0.349,
+      "n": 184,
+      "n_clusters": 184,
       "n_boot": 2000
     },
     "rate_vs_mean_war_partial_exposure": {
-      "r": 0.07789238589937049,
-      "n": 205
+      "r": 0.06552791305409827,
+      "n": 184
     },
     "note": "exposure-normalized reproductive rate; the quality test is net of exposure (partial correlation controlling HC seasons)."
   },
   "gene_vs_reproductive_fitness": {
     "aggression": {
-      "r": -0.14183026625817186,
+      "r": -0.14183026625817188,
       "ci_low": -0.2808795140551857,
       "ci_high": 0.006638133849261215,
       "p_bootstrap": 0.058,
@@ -173,7 +175,7 @@
       "n_clusters": 126,
       "n_boot": 2000,
       "label": "Composite Aggression",
-      "partial_tenure_r": -0.10386532173304693,
+      "partial_tenure_r": -0.10386532173304695,
       "partial_tenure_n": 126
     },
     "shotgun": {
@@ -185,11 +187,11 @@
       "n_clusters": 126,
       "n_boot": 2000,
       "label": "Shotgun Formation",
-      "partial_tenure_r": -0.2844071828465795,
+      "partial_tenure_r": -0.28440718284657956,
       "partial_tenure_n": 126
     },
     "tempo": {
-      "r": -0.12517504798506413,
+      "r": -0.12517504798506415,
       "ci_low": -0.25501946449347296,
       "ci_high": 0.04996868198356236,
       "p_bootstrap": 0.124,
@@ -201,7 +203,7 @@
       "partial_tenure_n": 126
     },
     "defensive_scheme": {
-      "r": -0.02859634475905834,
+      "r": -0.028596344759058354,
       "ci_low": -0.23544559595838363,
       "ci_high": 0.1551941575125423,
       "p_bootstrap": 0.774,
@@ -209,7 +211,7 @@
       "n_clusters": 84,
       "n_boot": 2000,
       "label": "Defensive Scheme",
-      "partial_tenure_r": -0.23098817455143927,
+      "partial_tenure_r": -0.23098817455143938,
       "partial_tenure_n": 84
     }
   }

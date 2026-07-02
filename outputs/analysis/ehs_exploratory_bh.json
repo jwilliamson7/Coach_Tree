@@ -1,9 +1,10 @@
 {
   "q": 0.05,
-  "n_tests": 11,
-  "bh_cutoff_p": 0.008198360327934412,
-  "n_significant": 5,
-  "family": "exploratory only (Moran's I + reproductive-fitness rate/correlations)",
+  "n_tests": 5,
+  "n_significant": 2,
+  "largest_rejected_p": 0.008198360327934412,
+  "largest_rejected_p_note": "BH is a step-up procedure that rejects every test up to the highest rank whose p-value clears its step-up bound. This is the LARGEST p-value among the rejected tests, not an alpha threshold; it can sit well below q when the p-values have a gap (the next-smallest p fails its own bound, so the step-up stops early).",
+  "family": "exploratory only (Moran's I per gene + reproductive-rate quality test)",
   "tests": [
     {
       "name": "moransI:aggression",
@@ -26,38 +27,8 @@
       "bh_significant": true
     },
     {
-      "name": "repro:R_vs_mean_war",
-      "p": 0.0,
-      "bh_significant": true
-    },
-    {
-      "name": "repro:R_vs_total_war",
-      "p": 0.0,
-      "bh_significant": true
-    },
-    {
       "name": "repro:rate_vs_mean_war",
-      "p": 0.271,
-      "bh_significant": false
-    },
-    {
-      "name": "repro:gene_aggression_vs_R",
-      "p": 0.058,
-      "bh_significant": false
-    },
-    {
-      "name": "repro:gene_shotgun_vs_R",
-      "p": 0.0,
-      "bh_significant": true
-    },
-    {
-      "name": "repro:gene_tempo_vs_R",
-      "p": 0.124,
-      "bh_significant": false
-    },
-    {
-      "name": "repro:gene_defensive_scheme_vs_R",
-      "p": 0.774,
+      "p": 0.349,
       "bh_significant": false
     }
   ]

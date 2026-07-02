@@ -69,9 +69,9 @@ def main():
         # repeatability ceiling: 95% HDI band (behind) + median diamond. Shown with
         # its uncertainty so that h2 medians which cross the ceiling are visibly
         # inside the repeatability's credible interval (h2 ~ repeatability, not > it).
-        ax.plot([rl, rh], [y, y], color="gray", lw=6, alpha=0.16, zorder=2,
+        ax.plot([rl, rh], [y, y], color="#6f6f6f", lw=9, alpha=0.32, zorder=2,
                 solid_capstyle="round")
-        ax.plot(rep, y, "D", ms=8, mfc="white", mec="gray", mew=1.4, zorder=4)
+        ax.plot(rep, y, "D", ms=8.5, mfc="white", mec="#4d4d4d", mew=1.8, zorder=4)
         # h2 point + HDI
         ax.plot([hl, hh], [y, y], color=col, lw=2.4, alpha=0.85, zorder=3,
                 solid_capstyle="round")

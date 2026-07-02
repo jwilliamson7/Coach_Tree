@@ -126,27 +126,11 @@ def create_map(rows):
     xpad = 0.12 * (max(xs) - min(xs)); ypad = 0.18 * (max(ys) - min(ys))
     xlim = (min(xs) - xpad, max(xs) + xpad)
     ylim = (min(ys) - ypad, max(ys) + ypad)
-    zx = (0 - xlim[0]) / (xlim[1] - xlim[0])   # fraction of x-axis where h2 = 0
-
-    # Quadrant shading (very light).
-    ax.axhspan(0, ylim[1], xmin=zx, xmax=1.0, color='#2E86AB', alpha=0.05, zorder=0)
-    ax.axhspan(ylim[0], 0, xmin=zx, xmax=1.0, color='#6A4C93', alpha=0.05, zorder=0)
-    ax.axhspan(0, ylim[1], xmin=0.0, xmax=zx, color='#C1272D', alpha=0.05, zorder=0)
-    ax.axhspan(ylim[0], 0, xmin=0.0, xmax=zx, color='gray', alpha=0.05, zorder=0)
-
-    # Zero reference lines (neutral on each axis).
+    # Zero reference lines (neutral on each axis). Quadrant shading and labels are
+    # intentionally omitted; the archetype reading is made in the text, not by
+    # coloring the figure.
     ax.axhline(0, color='gray', lw=1.2, ls='-', alpha=0.6, zorder=1)
     ax.axvline(0, color='gray', lw=1.2, ls='-', alpha=0.6, zorder=1)
-
-    quad_labels = [
-        (xlim[1] - 0.01, ylim[1] - 0.004, 'ADAPTIVE AND HERITABLE', 'right', 'top', '#1B5E7A'),
-        (xlim[1] - 0.01, ylim[0] + 0.006, 'HERITABLE BUT NEUTRAL', 'right', 'bottom', '#4A3568'),
-        (xlim[0] + 0.01, ylim[1] - 0.004, 'ADAPTIVE BUT PERSONAL', 'left', 'top', '#8A1B20'),
-        (xlim[0] + 0.01, ylim[0] + 0.006, 'NEITHER (DRIFT)', 'left', 'bottom', '#666666'),
-    ]
-    for x, y, txt, ha, va, c in quad_labels:
-        ax.text(x, y, txt, ha=ha, va=va, fontsize=11.5, fontweight='bold',
-                color=c, alpha=0.55, style='italic', zorder=1)
 
     # Plot each gene with asymmetric CI error bars.
     for r in rows:
@@ -173,7 +157,7 @@ def create_map(rows):
     ax.set_ylabel('Selection  $S$  (gene $\\rightarrow$ WAR $r$, era-adjusted IVW)',
                   fontsize=14, fontweight='bold')
     ax.set_title('Heritability $\\times$ Selection Map of Coaching Genes',
-                 fontsize=17, fontweight='bold', pad=34)
+                 fontsize=17, fontweight='bold', pad=16)
 
     ax.grid(True, alpha=0.25, ls=':', zorder=0)
     ax.tick_params(labelsize=12)

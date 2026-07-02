@@ -8,9 +8,11 @@ Runs, in dependency order:
   3. ehs_cross_trait.py       C3 Spearman(h^2,S) + H1/H2/H3 decision rules
   4. analyze_phylogenetic_signal.py   exploratory within-era Moran's I
   5. analyze_reproductive_fitness.py  exploratory exposure-normalized rate
-  6. ehs_exploratory_bh.py    BH-FDR across the exploratory family only
-  7. visualize_gene_fitness_heritability.py   h^2 x S map figure
-  8. visualize_reproductive_fitness.py         reproductive-fitness figure
+  6. analyze_horizontal_transmission.py  exploratory conformist convergence (Bayesian)
+  7. ehs_exploratory_bh.py    BH-FDR across the (network + reproductive) family only
+  8. visualize_gene_fitness_heritability.py   h^2 x S map figure
+  9. visualize_reproductive_fitness.py         reproductive-fitness figure
+ 10. visualize_horizontal_transmission.py       horizontal-transmission forest figure
 
 --skip_heritability reuses the cached posterior draws (steps 1 is the only slow
 one; the Bayesian fits take ~25 min). ASCII only.
@@ -49,9 +51,12 @@ def main():
     run(ANALYSIS / "ehs_cross_trait.py")
     run(ANALYSIS / "analyze_phylogenetic_signal.py")
     run(ANALYSIS / "analyze_reproductive_fitness.py")
+    run(ANALYSIS / "analyze_horizontal_transmission.py",
+        ["--draws", str(args.draws), "--tune", str(args.tune)])
     run(ANALYSIS / "ehs_exploratory_bh.py")
     run(VIZ / "visualize_gene_fitness_heritability.py")
     run(VIZ / "visualize_reproductive_fitness.py")
+    run(VIZ / "visualize_horizontal_transmission.py")
     print("\nEHS bundle complete.")
 
 
