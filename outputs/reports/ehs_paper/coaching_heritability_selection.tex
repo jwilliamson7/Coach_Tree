@@ -102,6 +102,18 @@ the Belichick tree much as a breeder speaks of a bloodline, and NFL hiring leans
 heavily on that pedigree logic, on the assumption that working under a successful
 coach transfers both winning approaches and strategic expertise.
 
+Cultural evolution treats socially learned behavior as a second inheritance system,
+one that, like the genetic system, is transmitted, varies, and is subject to
+selection \citep{cavallisforza1981, boydricherson1985, henrich2016}. Much of the
+human capital that distinguishes experts, from surgeons to craftspeople to coaches,
+is acquired by working under a more accomplished practitioner rather than from
+books, so expertise descends along chains of apprenticeship. Measuring vertical
+transmission in such chains is nonetheless hard: it requires observing the same
+behavior in both teacher and learner, on a comparable scale, with the genealogy
+known, and human pedigrees of behavior are seldom that legible. Professional sport
+is an exception, because the record of who coached under whom is public and the
+behavior itself, every play call, is logged.
+
 Recent work has begun to treat sport tactics as a cultural-evolutionary system.
 \citet{mesoudi2020}, in this journal, analyzed the cultural evolution of
 association-football formations and showed that a managerial innovation spread
@@ -118,18 +130,47 @@ the protege's on-field behavior are observed and dated. As we will show, the
 vertical and horizontal channels in coaching turn out to move \emph{different}
 strategic traits, so the two studies are complementary halves of one picture.
 
-We borrow the two central quantities of quantitative genetics and apply them to a
-cultural system. The first is transmissibility, the cultural analog of heritability
-$h^{2}$: how strongly a protege's own head-coaching style resembles the style of
-the coach they apprenticed under. The second is selection $S$: how strongly a trait
-covaries with success, measured here as a coach's context-adjusted wins above
-replacement (WAR). In biological populations these two quantities are famously in
-tension. Traits most closely tied to fitness tend to have \emph{lower}
-heritability, because directional selection erodes additive genetic variance, a
-pattern documented across many species and formalized as a negative cross-trait
-relationship between heritability and fitness \citep{mousseauroff1987, kruuk2000}.
-Whether an analogous tension arises in a cultural transmission system, where the
-inheritance is social learning rather than meiosis, is unknown.
+To ask how faithfully behavior descends such a pedigree, we borrow the toolkit
+quantitative genetics built for that decomposition. Two quantities anchor it.
+Repeatability is the share of a trait's variance that is a stable property of the
+individual rather than occasion-to-occasion noise, and it sets an upper bound on how
+much of the trait can be transmitted at all. Heritability is the share actually
+passed to descendants; in a parent-offspring design it is read directly from the
+resemblance between parent and offspring phenotypes, with no need for an assumed
+relatedness matrix \citep{falconermackay1996}. The same variance-partitioning logic
+extends from classical pedigrees to repeated measures through the mixed-model animal
+model \citep{wilson2010, nakagawa2010}, and dual-inheritance theory has long held
+that it applies to culturally transmitted traits as well as genetic ones
+\citep{cavallisforza1981}. What has been missing for culture is a system in which
+both the pedigree and the phenotype are observed directly rather than inferred; the
+coaching tree supplies one.
+
+We use these tools to place each trait on two axes. The first is transmissibility,
+the cultural analog of heritability $h^{2}$: how strongly a protege's own
+head-coaching style resembles the style of the coach they apprenticed under. The
+second is selection $S$: how strongly a trait covaries with success, measured here
+as a coach's context-adjusted wins above replacement (WAR). In biological
+populations the two are famously in tension. Fisher's fundamental theorem implies
+that selection consumes the additive genetic variance of the traits most closely
+tied to fitness, so those traits should be the \emph{least} heritable
+\citep{fisher1930}. The prediction holds across taxa: \citet{mousseauroff1987}
+found life-history traits, those nearest fitness, markedly less heritable than
+morphological ones, and \citet{kruuk2000} report a rank correlation near $-0.8$
+between the heritability of a suite of red-deer traits and their association with
+fitness. Whether an analogous tension arises in a cultural system, where
+inheritance is social learning rather than meiosis and the variance-depleting logic
+of Fisher's theorem need not apply, is unknown.
+
+The coaching tree is a favorable model system for the question. Every offensive and
+defensive decision is recorded play by play, so a coach's tendencies can be measured
+as deviations from what the game situation demands; the mentor-protege genealogy is
+documented, so vertical transmission can be traced from a coach's coordinator
+apprenticeship to their own head-coaching tenure; and coaching success has a
+context-adjusted measure, wins above replacement, that separates a coach's
+contribution from roster talent. Because a coordinator's later head-coaching behavior
+is observed after and apart from the mentor's, the design is a genuine
+between-person parent-offspring comparison rather than a coach correlated with
+himself.
 
 We ask a single organizing question: in the NFL coaching tree, are the strategic
 traits that transmit the same traits that win? We separate strategy into two
@@ -138,8 +179,9 @@ attacks game situations (going for it on fourth down, passing in neutral
 situations, throwing beyond the first-down marker, attempting two-point
 conversions, and on defense loading the box, sending extra rushers, and playing man
 coverage). \emph{Schematic-identity} traits describe the formational signature of a
-team (how much it operates from shotgun, and how fast it plays). Our preregistered
-hypotheses were:
+team (how much it operates from shotgun, and how fast it plays). The split is
+cleanest on offense; as we find, defensive ``aggression'' mixes an attitudinal and a
+schematic component (Discussion). Our preregistered hypotheses were:
 \begin{itemize}
   \item[H1.] Approach traits are more strongly \emph{selected} (predict WAR), while
   identity traits are more strongly \emph{inherited} (transmit down the tree).
@@ -755,6 +797,15 @@ DerSimonian, R., \& Laird, N. (1986). Meta-analysis in clinical trials.
 \bibitem[Falconer and Mackay(1996)]{falconermackay1996}
 Falconer, D. S., \& Mackay, T. F. C. (1996). \textit{Introduction to Quantitative
 Genetics} (4th ed.). Longman.
+
+\bibitem[Fisher(1930)]{fisher1930}
+Fisher, R. A. (1930). \textit{The Genetical Theory of Natural Selection}. Clarendon
+Press.
+
+\bibitem[Henrich(2016)]{henrich2016}
+Henrich, J. (2016). \textit{The Secret of Our Success: How Culture Is Driving Human
+Evolution, Domesticating Our Species, and Making Us Smarter}. Princeton University
+Press.
 
 \bibitem[Kimura(1968)]{kimura1968}
 Kimura, M. (1968). Evolutionary rate at the molecular level. \textit{Nature},
