@@ -28,7 +28,7 @@
     },
     {
       "name": "repro:rate_vs_mean_war",
-      "p": 0.349,
+      "p": 0.341,
       "bh_significant": false
     }
   ]

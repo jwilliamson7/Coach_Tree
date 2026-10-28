@@ -9,7 +9,8 @@ identical estimator already used for the composites and defensive components
 (utils.war_noise.war_noise_robustness -> r_ivw_eradj); here it is applied to each
 of the ten frozen sub-traits and the four gene-level composites.
 
-Coach WAR is pinned at Coach_WAR commit dffe2f1 (Section 5). Writes
+Coach WAR is pinned at Coach_WAR commit 78267b5 (the preregistered pin, dffe2f1,
+still carried pre-leakage-fix trajectories; Section 5). Writes
 outputs/analysis/ehs_selection_results.json and ehs_selection_draws.npz (coach-
 block bootstrap draw vectors, consumed by the H1 family-contrast step). ASCII only.
 """
@@ -118,7 +119,7 @@ def main():
     war = load_war()
     results = {"subtraits": {}, "composites": {},
                "estimator": "era-adjusted inverse-variance-weighted coach-clustered Pearson r",
-               "war_pin": "Coach_WAR dffe2f1", "n_boot": N_BOOT}
+               "war_pin": "Coach_WAR 78267b5", "n_boot": N_BOOT}
     draws_store = {}
 
     logger.info("=== component-level selection S (sub-traits) ===")

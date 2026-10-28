@@ -1,88 +1,88 @@
 {
   "overall": {
-    "n": 192,
-    "correlation": 0.12380809458707279,
-    "p_value": 0.08709556910707993,
-    "ci_low": -0.013476876052064057,
-    "ci_high": 0.260921466533755,
-    "p_bootstrap_mentor_clustered": 0.074,
-    "n_mentors": 87,
-    "mentor_war_mean": -0.0009647444154378347,
-    "mentor_war_std": 0.07342312355671529,
-    "protege_war_mean": -0.040682581369612836,
-    "protege_war_std": 0.07717390386602464
+    "n": 193,
+    "correlation": 0.10569591523711935,
+    "p_value": 0.14348463751968146,
+    "ci_low": -0.03640540935451187,
+    "ci_high": 0.24814907909249737,
+    "p_bootstrap_mentor_clustered": 0.142,
+    "n_mentors": 88,
+    "mentor_war_mean": 0.00023503550413986603,
+    "mentor_war_std": 0.07317299377673603,
+    "protege_war_mean": -0.03923930731106977,
+    "protege_war_std": 0.07702988207276099
   },
   "regression": {
-    "slope": 0.13013276372147156,
-    "intercept": -0.04055703651254706,
-    "r_squared": 0.015328444285281576,
-    "p_value": 0.08709556910707948,
-    "std_err": 0.07566699889056597
+    "slope": 0.11126705996381354,
+    "intercept": -0.03926545902060252,
+    "r_squared": 0.011171626497812311,
+    "p_value": 0.14348463751968168,
+    "std_err": 0.07574468872402912
   },
   "by_coordinator_type": {
     "Offensive Coordinator": {
       "n": 101,
-      "correlation": 0.08717788111660107,
-      "p_value": 0.38601134843357743,
-      "ci_low": -0.1345014217359875,
-      "ci_high": 0.30274375455901603,
-      "p_bootstrap_mentor_clustered": 0.45,
+      "correlation": 0.04955179051236554,
+      "p_value": 0.622653467687933,
+      "ci_low": -0.18335972558188884,
+      "ci_high": 0.2906192271383834,
+      "p_bootstrap_mentor_clustered": 0.667,
       "n_mentors": 64,
       "small_cluster": false,
       "p_wild_cluster": null,
-      "mentor_war_mean": -0.014015358777608575,
-      "protege_war_mean": -0.038562503022144985
+      "mentor_war_mean": -0.011400096147101461,
+      "protege_war_mean": -0.037416247194160285
     },
     "Defensive Coordinator": {
-      "n": 89,
-      "correlation": 0.19046712503911548,
-      "p_value": 0.07379744455807533,
-      "ci_low": 0.005779122581939737,
-      "ci_high": 0.37426802695443134,
-      "p_bootstrap_mentor_clustered": 0.045,
-      "n_mentors": 55,
+      "n": 90,
+      "correlation": 0.18316877249979785,
+      "p_value": 0.08397859320789505,
+      "ci_low": -0.005004600086491483,
+      "ci_high": 0.3650122071028473,
+      "p_bootstrap_mentor_clustered": 0.061,
+      "n_mentors": 56,
       "small_cluster": false,
       "p_wild_cluster": null,
-      "mentor_war_mean": 0.012116742582496377,
-      "protege_war_mean": -0.043453150428472226
+      "mentor_war_mean": 0.011642084544977692,
+      "protege_war_mean": -0.04178136986070905
     }
   },
   "by_era": {
     "2010-2019": {
       "n": 100,
-      "correlation": 0.13215346004631712,
-      "p_value": 0.189967126118774,
-      "p_bootstrap_mentor_clustered": 0.115,
+      "correlation": 0.11817811698034245,
+      "p_value": 0.2415858974691005,
+      "p_bootstrap_mentor_clustered": 0.167,
       "n_mentors": 55,
       "small_cluster": false,
       "p_wild_cluster": null
     },
     "2000-2009": {
-      "n": 53,
-      "correlation": 0.01195303088018776,
-      "p_value": 0.9323032362684367,
-      "p_bootstrap_mentor_clustered": 0.876,
-      "n_mentors": 37,
+      "n": 54,
+      "correlation": 0.00059241715366657,
+      "p_value": 0.9966078092720522,
+      "p_bootstrap_mentor_clustered": 0.98,
+      "n_mentors": 38,
       "small_cluster": true,
-      "p_wild_cluster": 0.9345
+      "p_wild_cluster": 0.996
     },
     "Pre-2000": {
       "n": 12,
-      "correlation": -0.1510547362394294,
-      "p_value": 0.6393434713179064,
-      "p_bootstrap_mentor_clustered": 0.545,
+      "correlation": -0.17061828021649006,
+      "p_value": 0.5959952921623556,
+      "p_bootstrap_mentor_clustered": 0.464,
       "n_mentors": 11,
       "small_cluster": true,
-      "p_wild_cluster": 0.472
+      "p_wild_cluster": 0.3385
     },
     "2020+": {
       "n": 27,
-      "correlation": 0.3755898235948209,
-      "p_value": 0.05352874957110573,
-      "p_bootstrap_mentor_clustered": 0.067,
+      "correlation": 0.3947903454164413,
+      "p_value": 0.041554794386459856,
+      "p_bootstrap_mentor_clustered": 0.042,
       "n_mentors": 22,
       "small_cluster": true,
-      "p_wild_cluster": 0.1035
+      "p_wild_cluster": 0.0965
     }
   }
 }
