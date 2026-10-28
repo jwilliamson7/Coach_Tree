@@ -112,18 +112,18 @@
   "winning_begets_offspring": {
     "n_coaches_with_war": 248,
     "repro_vs_career_mean_war": {
-      "r": 0.3484753132581653,
-      "ci_low": 0.2529133103848953,
-      "ci_high": 0.4351559552134271,
+      "r": 0.3525506624666524,
+      "ci_low": 0.2568310696981967,
+      "ci_high": 0.43489170583999254,
       "p_bootstrap": 0.0,
       "n": 248,
       "n_clusters": 248,
       "n_boot": 2000
     },
     "repro_vs_career_total_war": {
-      "r": 0.4714230563643913,
-      "ci_low": 0.2631793283356226,
-      "ci_high": 0.6232701455293762,
+      "r": 0.4567548366039155,
+      "ci_low": 0.2479272262529217,
+      "ci_high": 0.6062295761264259,
       "p_bootstrap": 0.0,
       "n": 248,
       "n_clusters": 248,
@@ -139,7 +139,7 @@
       "n_boot": 2000
     },
     "repro_vs_mean_war_partial_tenure": {
-      "r": 0.07551228632677227,
+      "r": 0.08618275391557736,
       "n": 248
     },
     "note": "career-mean WAR is quality (tenure-adjusted); total WAR and tenure both grow mechanically with seasons coached, so the partial correlation of R on mean WAR net of tenure isolates whether winning per se -- not merely lasting -- begets offspring."
@@ -151,16 +151,16 @@
     "mean_rate": 0.3267621832935229,
     "median_rate": 0.2857142857142857,
     "rate_vs_career_mean_war": {
-      "r": 0.07130828902707982,
-      "ci_low": -0.08248741429215645,
-      "ci_high": 0.2251337250731781,
-      "p_bootstrap": 0.349,
+      "r": 0.07405619214862157,
+      "ci_low": -0.08280874050986688,
+      "ci_high": 0.22460148487300913,
+      "p_bootstrap": 0.341,
       "n": 184,
       "n_clusters": 184,
       "n_boot": 2000
     },
     "rate_vs_mean_war_partial_exposure": {
-      "r": 0.06552791305409827,
+      "r": 0.06838291425131945,
       "n": 184
     },
     "note": "exposure-normalized reproductive rate; the quality test is net of exposure (partial correlation controlling HC seasons)."
