@@ -130,6 +130,6 @@
     }
   },
   "estimator": "era-adjusted inverse-variance-weighted coach-clustered Pearson r",
-  "war_pin": "Coach_WAR 78267b5",
+  "war_pin": "Coach_WAR 23e3a21",
   "n_boot": 4000
 }

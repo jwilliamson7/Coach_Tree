@@ -14,9 +14,9 @@ Confirmatory heritability and selection analyses are preregistered on the Open S
 - Protocol: `outputs/reports/EHS_preregistration.pdf` (source: `outputs/reports/EHS_preregistration.tex`)
 
 The WAR phenotype is drawn from the sibling repository
-https://github.com/jwilliamson7/Coach_WAR, pinned at commit `78267b5`. The preregistration pinned
-`dffe2f1`, whose trajectory file still carried WAR from before Coach_WAR's imputation-leakage fix;
-`78267b5` rebuilt that file from the corrected estimates.
+https://github.com/jwilliamson7/Coach_WAR, pinned at commit `23e3a21`. The preregistration pinned
+`dffe2f1` (`394c550` since Coach_WAR's history was rewritten; see its README), whose trajectory file still carried WAR from before Coach_WAR's imputation-leakage fix;
+`23e3a21` rebuilt that file from the corrected estimates.
 
 ## Repository layout
 
